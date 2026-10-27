@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "signs": [
+    { "id": "aries", "index": 0, "element": "fire", "palette": [ {"name": "Coral", "hex": "#FF7F6E"}, {"name": "Rose", "hex": "#F4A6B7"}, {"name": "Apricot", "hex": "#FFBE98"}, {"name": "Cream", "hex": "#FFF3E0"} ] },
+    { "id": "taurus", "index": 1, "element": "earth", "palette": [ {"name": "Sage", "hex": "#A8C3A0"}, {"name": "Blush", "hex": "#F6C9D0"}, {"name": "Oat", "hex": "#E8DCC4"}, {"name": "Moss", "hex": "#8FAE8B"} ] },
+    { "id": "gemini", "index": 2, "element": "air", "palette": [ {"name": "Butter", "hex": "#FFF0A8"}, {"name": "Sky", "hex": "#B9DDF5"}, {"name": "Mint", "hex": "#BDEBD6"}, {"name": "Lilac", "hex": "#D7C6F0"} ] },
+    { "id": "cancer", "index": 3, "element": "water", "palette": [ {"name": "Pearl", "hex": "#F2EEF7"}, {"name": "Seafoam", "hex": "#B6E3DA"}, {"name": "Mist", "hex": "#C9D8F0"}, {"name": "Silver", "hex": "#D6D9E0"} ] },
+    { "id": "leo", "index": 4, "element": "fire", "palette": [ {"name": "Honey", "hex": "#FFD27A"}, {"name": "Peach", "hex": "#FFC4A3"}, {"name": "Marigold", "hex": "#FFB347"}, {"name": "Sunrise", "hex": "#FFE3B3"} ] },
+    { "id": "virgo", "index": 5, "element": "earth", "palette": [ {"name": "Fern", "hex": "#B5D6A7"}, {"name": "Sand", "hex": "#EADFC8"}, {"name": "Clay", "hex": "#D9B8A0"}, {"name": "Olive", "hex": "#C5CC9A"} ] },
+    { "id": "libra", "index": 6, "element": "air", "palette": [ {"name": "Petal", "hex": "#F9D1DF"}, {"name": "Powder", "hex": "#CFE3F7"}, {"name": "Lavender", "hex": "#D9CCF2"}, {"name": "Buttercup", "hex": "#FFF2B8"} ] },
+    { "id": "scorpio", "index": 7, "element": "water", "palette": [ {"name": "Plum", "hex": "#8E6AA8"}, {"name": "Berry", "hex": "#C26A8D"}, {"name": "Midnight", "hex": "#5B6A9A"}, {"name": "Orchid", "hex": "#CBA3DC"} ] },
+    { "id": "sagittarius", "index": 8, "element": "fire", "palette": [ {"name": "Tangerine", "hex": "#FFA96B"}, {"name": "Sunbeam", "hex": "#FFE08A"}, {"name": "Sky", "hex": "#A8D4F5"}, {"name": "Rosewater", "hex": "#F7BFC8"} ] },
+    { "id": "capricorn", "index": 9, "element": "earth", "palette": [ {"name": "Cocoa", "hex": "#B79A8A"}, {"name": "Pine", "hex": "#7FA58D"}, {"name": "Stone", "hex": "#CFC8C0"}, {"name": "Dusty Rose", "hex": "#DDB1B6"} ] },
+    { "id": "aquarius", "index": 10, "element": "air", "palette": [ {"name": "Aqua", "hex": "#A9E4EA"}, {"name": "Periwinkle", "hex": "#B7BFF2"}, {"name": "Lemon", "hex": "#FFF5A5"}, {"name": "Cloud", "hex": "#E6EEF8"} ] },
+    { "id": "pisces", "index": 11, "element": "water", "palette": [ {"name": "Sea Glass", "hex": "#A7DCCB"}, {"name": "Lilac Mist", "hex": "#CFC2EE"}, {"name": "Bluebell", "hex": "#A9C0EE"}, {"name": "Shell Pink", "hex": "#F8D3DD"} ] }
+  ]
+}

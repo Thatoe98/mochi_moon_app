@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "quotes": [
+    {
+      "id": "q_0001",
+      "text": {
+        "en": "I am allowed to take up space."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0002",
+      "text": {
+        "en": "I am worthy of the love I give to others."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0003",
+      "text": {
+        "en": "I am enough, exactly as I am today."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0004",
+      "text": {
+        "en": "I choose to speak to myself like someone I love."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0005",
+      "text": {
+        "en": "My voice matters and I am proud to use it."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0006",
+      "text": {
+        "en": "I can do hard things, one soft step at a time."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "tired",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0007",
+      "text": {
+        "en": "I trust myself to figure it out."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0008",
+      "text": {
+        "en": "I am growing, and that is something to celebrate."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0009",
+      "text": {
+        "en": "It is okay to rest. Healing is not a race."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0010",
+      "text": {
+        "en": "My feelings are valid, and they will pass like clouds."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0011",
+      "text": {
+        "en": "I forgive myself for what I did not know yet."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0012",
+      "text": {
+        "en": "I am gentle with the girl I used to be."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0013",
+      "text": {
+        "en": "I do my best, and my best is allowed to change each day."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0014",
+      "text": {
+        "en": "I can take breaks without losing my progress."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0015",
+      "text": {
+        "en": "My worth is not measured by my productivity."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0016",
+      "text": {
+        "en": "My body carries me through every day, and I thank it."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0017",
+      "text": {
+        "en": "I nourish myself with kindness first."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0018",
+      "text": {
+        "en": "I breathe in softly and let the day settle."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0019",
+      "text": {
+        "en": "This moment is safe, and I am right here in it."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0020",
+      "text": {
+        "en": "I am loved, I am held, I am home in myself."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "in_love",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    }
+  ]
+}

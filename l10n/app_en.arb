@@ -1,0 +1,22 @@
+{
+  "@@locale": "en",
+  "appName": "Mochi Moon",
+  "@appName": { "description": "App name shown in the app bar and launcher." },
+  "tabDeck": "Deck",
+  "tabCosmic": "Cosmic",
+  "tabMe": "Me",
+  "deckPlaceholderTitle": "Your self-love deck",
+  "deckPlaceholderBody": "Soft little reminders are on their way.",
+  "cosmicPlaceholderTitle": "Cosmic you",
+  "cosmicPlaceholderBody": "Your stars are warming up.",
+  "mePlaceholderTitle": "Just you",
+  "mePlaceholderBody": "Your journal and settings will live here.",
+  "readAloudHint": "Read it out loud ✨",
+  "entertainmentNote": "For entertainment and self-reflection",
+  "stateLoading": "Gathering a little magic…",
+  "stateErrorTitle": "Something wobbled",
+  "stateErrorBody": "Let's try that again.",
+  "stateRetry": "Try again",
+  "stateOffline": "You're offline. Showing what we saved for you.",
+  "stateEmptyTitle": "Nothing here yet"
+}

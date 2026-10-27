@@ -1,0 +1,21 @@
+{
+  "@@locale": "my",
+  "appName": "Mochi Moon",
+  "tabDeck": "ကတ်များ",
+  "tabCosmic": "စကြဝဠာ",
+  "tabMe": "ကျွန်မ",
+  "deckPlaceholderTitle": "ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း ကတ်များ",
+  "deckPlaceholderBody": "နူးညံ့သော သတိပေးစကားလေးများ လာနေပါပြီ။",
+  "cosmicPlaceholderTitle": "သင့်စကြဝဠာ",
+  "cosmicPlaceholderBody": "သင့်ကြယ်များ ပြင်ဆင်နေပါသည်။",
+  "mePlaceholderTitle": "သင်တစ်ယောက်တည်း",
+  "mePlaceholderBody": "သင့်မှတ်တမ်းနှင့် ဆက်တင်များ ဤနေရာတွင် ရှိပါမည်။",
+  "readAloudHint": "အသံထွက်ဖတ်ပါ ✨",
+  "entertainmentNote": "ဖျော်ဖြေရေးနှင့် ကိုယ်ကိုယ်ပြန်စဉ်းစားရန်အတွက်သာ",
+  "stateLoading": "မှော်ပညာလေး စုနေပါသည်…",
+  "stateErrorTitle": "တစ်ခုခု မှားသွားပါသည်",
+  "stateErrorBody": "ထပ်ကြိုးစားကြည့်ကြစို့။",
+  "stateRetry": "ထပ်ကြိုးစားမည်",
+  "stateOffline": "အော့ဖ်လိုင်းဖြစ်နေပါသည်။ သိမ်းထားသည့်အရာများကို ပြထားပါသည်။",
+  "stateEmptyTitle": "ဤနေရာတွင် မရှိသေးပါ"
+}
