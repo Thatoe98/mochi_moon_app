@@ -60,3 +60,6 @@ firebase_options*.dart
 
 # graphify output
 graphify-out/
+
+# Gradle reports
+android/build/
