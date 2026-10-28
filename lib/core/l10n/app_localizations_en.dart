@@ -78,6 +78,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deckIllustrationSemantics => 'A soft moon illustration';
 
   @override
+  String get shareFailed => 'Couldn\'t open the share sheet. Please try again.';
+
+  @override
   String get categorySelfLove => 'Self-love';
 
   @override

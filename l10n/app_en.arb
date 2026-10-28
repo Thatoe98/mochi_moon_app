@@ -20,6 +20,7 @@
   "deckTimerSemantics": "Read-aloud timer",
   "deckTimerReady": "Ready to swipe",
   "deckIllustrationSemantics": "A soft moon illustration",
+  "shareFailed": "Couldn't open the share sheet. Please try again.",
   "categorySelfLove": "Self-love",
   "categoryConfidence": "Confidence",
   "categoryHealing": "Healing",

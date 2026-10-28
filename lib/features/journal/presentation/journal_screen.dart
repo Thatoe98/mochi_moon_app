@@ -7,6 +7,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 
 /// Saved cards, newest first, filterable by category (PRD §6.3).
@@ -43,9 +44,20 @@ class _JournalScreenState extends ConsumerState<JournalScreen> {
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(l10n.journalClose),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton.icon(
+                    onPressed: () => shareQuote(this.context, ref, item.quote),
+                    icon: const Icon(Icons.ios_share_rounded),
+                    label: Text(l10n.deckActionShare),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(l10n.journalClose),
+                  ),
+                ],
               ),
             ],
           ),

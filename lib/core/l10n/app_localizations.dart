@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'A soft moon illustration'**
   String get deckIllustrationSemantics;
 
+  /// No description provided for @shareFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the share sheet. Please try again.'**
+  String get shareFailed;
+
   /// No description provided for @categorySelfLove.
   ///
   /// In en, this message translates to:

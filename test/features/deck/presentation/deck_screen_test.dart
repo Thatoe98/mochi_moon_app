@@ -7,11 +7,13 @@ import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 
 import '../support/fake_deck_repository.dart';
+import '../support/fake_image_sharer.dart';
 
 /// Two words, so the lock is the 3 s minimum.
 List<Quote> quotes(int count) => [
@@ -23,6 +25,7 @@ const lock = Duration(seconds: 3, milliseconds: 100);
 
 Widget app({
   required FakeDeckRepository repo,
+  FakeImageSharer? sharer,
   Future<List<Quote>> Function()? loadQuotes,
   int limit = 10,
   bool reduceMotion = false,
@@ -30,6 +33,7 @@ Widget app({
 }) => ProviderScope(
   overrides: [
     deckRepositoryProvider.overrideWithValue(repo),
+    imageSharerProvider.overrideWithValue(sharer ?? FakeImageSharer()),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
     randomProvider.overrideWithValue(Random(1)),
     dailyCardLimitProvider.overrideWithValue(limit),
@@ -161,6 +165,86 @@ void main() {
       ]) {
         expect(onPressedOf(tester, icon), isNotNull);
       }
+    });
+  });
+
+  group('sharing', () {
+    /// Rendering needs a real event loop and a pumped frame.
+    Future<void> waitForShare(WidgetTester tester, FakeImageSharer sharer) =>
+        tester.runAsync(() async {
+          for (var i = 0; i < 50 && sharer.shared.isEmpty; i++) {
+            await Future<void>.delayed(const Duration(milliseconds: 20));
+            await tester.pump();
+          }
+        });
+
+    testWidgets('swiping up shares the card as an image', (tester) async {
+      final repo = FakeDeckRepository();
+      final sharer = FakeImageSharer();
+      await tester.pumpWidget(app(repo: repo, sharer: sharer));
+      await load(tester);
+      await tester.pump(lock);
+
+      await tester.drag(find.byType(QuoteCard).last, const Offset(0, -500));
+      await tester.pumpAndSettle();
+      await waitForShare(tester, sharer);
+
+      expect(repo.events.single.action, DeckAction.shared);
+      expect(sharer.shared, hasLength(1));
+      expect(sharer.shared.single.png.take(4), [0x89, 0x50, 0x4E, 0x47]);
+    });
+
+    testWidgets('the share button shares too', (tester) async {
+      final repo = FakeDeckRepository();
+      final sharer = FakeImageSharer();
+      await tester.pumpWidget(app(repo: repo, sharer: sharer));
+      await load(tester);
+      await tester.pump(lock);
+
+      await tester.tap(find.byTooltip('Share'));
+      await tester.pumpAndSettle();
+      await waitForShare(tester, sharer);
+
+      expect(sharer.shared, hasLength(1));
+    });
+
+    testWidgets('saving and skipping do not share', (tester) async {
+      final repo = FakeDeckRepository();
+      final sharer = FakeImageSharer();
+      await tester.pumpWidget(app(repo: repo, sharer: sharer));
+      await load(tester);
+      await tester.pump(lock);
+
+      await tester.tap(find.byTooltip('This is me'));
+      await tester.pumpAndSettle();
+
+      expect(sharer.shared, isEmpty);
+    });
+
+    testWidgets('a failing share sheet still records the card', (tester) async {
+      final repo = FakeDeckRepository();
+      await tester.pumpWidget(
+        app(
+          repo: repo,
+          sharer: FakeImageSharer(error: Exception('nope')),
+        ),
+      );
+      await load(tester);
+      await tester.pump(lock);
+
+      await tester.tap(find.byTooltip('Share'));
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 300));
+        await tester.pump();
+      });
+      await tester.pump();
+
+      expect(repo.events.single.action, DeckAction.shared);
+      expect(
+        find.textContaining("Couldn't open the share sheet"),
+        findsOneWidget,
+      );
     });
   });
 

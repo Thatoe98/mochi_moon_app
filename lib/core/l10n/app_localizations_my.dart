@@ -76,6 +76,9 @@ class AppLocalizationsMy extends AppLocalizations {
   String get deckIllustrationSemantics => 'နူးညံ့သော လပုံ ပုံဆွဲ';
 
   @override
+  String get shareFailed => 'မျှဝေရန် မဖွင့်နိုင်ပါ။ ထပ်မံကြိုးစားကြည့်ပါ။';
+
+  @override
   String get categorySelfLove => 'ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း';
 
   @override

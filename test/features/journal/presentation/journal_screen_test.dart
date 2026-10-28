@@ -4,10 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/journal/domain/journal_repository.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 
+import '../../deck/support/fake_image_sharer.dart';
 import '../support/fake_journal_repository.dart';
 
 const _quotes = [
@@ -21,10 +23,12 @@ JournalEntry _entry(String id, int day) =>
 
 Widget _app(
   FakeJournalRepository repo, {
+  FakeImageSharer? sharer,
   Future<List<Quote>> Function()? loadQuotes,
 }) => ProviderScope(
   overrides: [
     journalRepositoryProvider.overrideWithValue(repo),
+    imageSharerProvider.overrideWithValue(sharer ?? FakeImageSharer()),
     quotesProvider.overrideWith(
       (ref) => loadQuotes?.call() ?? Future.value(_quotes),
     ),
@@ -153,6 +157,28 @@ void main() {
     await tester.tap(find.text('Close'));
     await tester.pumpAndSettle();
     expect(find.byType(Dialog), findsNothing);
+  });
+
+  testWidgets('the full card can be reshared', (tester) async {
+    final sharer = FakeImageSharer();
+    await tester.pumpWidget(
+      _app(FakeJournalRepository([_entry('a', 1)]), sharer: sharer),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byType(ListTile));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Share'));
+    await tester.runAsync(() async {
+      for (var i = 0; i < 50 && sharer.shared.isEmpty; i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        await tester.pump();
+      }
+    });
+
+    expect(sharer.shared.single.fileName, 'mochi_moon_a.png');
+    // The card stays open so she can share again or close it.
+    expect(find.byType(Dialog), findsOneWidget);
   });
 
   testWidgets('long-press asks before removing, then removes', (tester) async {

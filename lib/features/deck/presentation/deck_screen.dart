@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/sparkle.dart';
@@ -16,6 +17,7 @@ import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/domain/read_aloud_gate.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
 
 /// The home tab: a swipe deck where each card stays locked until the timer
 /// ring has filled (PRD §6.2).
@@ -72,13 +74,20 @@ class _DeckScreenState extends ConsumerState<DeckScreen> {
 
     // Backstop for the gate: refuse anything that is not an unlocked card.
     var accepted = false;
+    Quote? swiped;
     if (action != null && deck != null && !deck.isDone) {
-      if (_read.contains(deck.cards[deck.position].id)) {
+      swiped = deck.cards[deck.position];
+      if (_read.contains(swiped.id)) {
         await ref.read(deckProvider.notifier).complete(action);
         accepted = true;
       }
     }
-    if (mounted) setState(() => _busy = false);
+    if (!mounted) return accepted;
+    setState(() => _busy = false);
+    if (accepted && action == DeckAction.shared) {
+      // Not awaited: the card should fly off while the image renders.
+      unawaited(shareQuote(context, ref, swiped!));
+    }
     return accepted;
   }
 

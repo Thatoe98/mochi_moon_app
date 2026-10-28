@@ -121,9 +121,9 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 ### 6.4 Share as image (Free)
 
-- [ ] Generates a 1080×1920 PNG story image: card illustration, text, subtle "Mochi Moon" wordmark and handle.
-- [ ] Uses the system share sheet (`share_plus`). No social SDKs.
-- [ ] Rendering works in all three scripts with correct fonts.
+- [x] Generates a 1080×1920 PNG story image: card illustration, text, subtle "Mochi Moon" wordmark and handle. — *handle comes from `--dart-define=SHARE_HANDLE`, omitted until set; illustration is the placeholder*
+- [x] Uses the system share sheet (`share_plus`). No social SDKs.
+- [ ] Rendering works in all three scripts with correct fonts. — *blocked on bundling fonts (M0 leftover); Burmese renders through the `Noto Sans Myanmar` fallback once bundled*
 
 ### 6.5 Home-screen widget (Free)
 
@@ -565,7 +565,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 ### M1 — Self-love deck (Android closed test)
 - [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), midnight reset while open, premium-quote filtering, `my` strings need native review*
 - [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), real illustration thumbnails (placeholder until assets exist), entry to the journal from the Deck header, `my` strings need native review*
-- [ ] Share as image (§6.4)
+- [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), real illustration, share handle value, share-sheet position origin for iPad*
 - [ ] Daily reminder notification
 - [ ] Home-screen widget (§6.5)
 - [ ] Sample-cards-before-sign-in flow
