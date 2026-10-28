@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/features/settings/presentation/reminder_section.dart';
 
 /// Hub for the journal today; profile, premium and settings join it later
 /// (PRD M2/M4).
@@ -24,6 +25,7 @@ class MeScreen extends StatelessWidget {
             trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () => context.push(AppRoutes.journal),
           ),
+          const ReminderSection(),
         ],
       ),
     );

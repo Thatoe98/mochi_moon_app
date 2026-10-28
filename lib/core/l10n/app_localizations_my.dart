@@ -138,6 +138,43 @@ class AppLocalizationsMy extends AppLocalizations {
   String get journalClose => 'ပိတ်မည်';
 
   @override
+  String get reminderTitle => 'နေ့စဉ် သတိပေးချက်';
+
+  @override
+  String get reminderSubtitle => 'သတိပေးချက်တွင် နူးညံ့သော ကတ်တစ်ကတ်';
+
+  @override
+  String get reminderTimeLabel => 'သတိပေးချိန်';
+
+  @override
+  String get reminderPrePromptTitle =>
+      'နေ့စဉ် နူးညံ့သော သတိပေးချက် လိုချင်ပါသလား။';
+
+  @override
+  String get reminderPrePromptBody =>
+      'Mochi Moon က သင်ရွေးသော အချိန်တွင် တစ်ရက်လျှင် ကတ်တစ်ကတ် ပို့ပေးနိုင်ပါသည်။ ထိုသို့ပြုရန် သင့်ဖုန်းက အသိပေးချက်များ ခွင့်ပြုရန် မေးပါမည်။';
+
+  @override
+  String get reminderPrePromptAllow => 'ကောင်းပါပြီ';
+
+  @override
+  String get reminderPrePromptLater => 'ယခု မလိုပါ';
+
+  @override
+  String get reminderPermissionDenied =>
+      'Mochi Moon အတွက် အသိပေးချက်များ ပိတ်ထားပါသည်။ ဖုန်း၏ ဆက်တင်များတွင် ဖွင့်နိုင်ပါသည်။';
+
+  @override
+  String get reminderNotificationTitle => 'သင့် Mochi Moon ကတ် ✨';
+
+  @override
+  String get reminderChannelName => 'နေ့စဉ် သတိပေးချက်';
+
+  @override
+  String get reminderChannelDescription =>
+      'သင်ရွေးသော အချိန်တွင် နေ့စဉ် နူးညံ့သော ကတ်တစ်ကတ်။';
+
+  @override
   String get readAloudHint => 'အသံထွက်ဖတ်ပါ ✨';
 
   @override

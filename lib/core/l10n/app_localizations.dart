@@ -320,6 +320,72 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get journalClose;
 
+  /// No description provided for @reminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reminder'**
+  String get reminderTitle;
+
+  /// No description provided for @reminderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'One gentle card in your notifications'**
+  String get reminderSubtitle;
+
+  /// No description provided for @reminderTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder time'**
+  String get reminderTimeLabel;
+
+  /// No description provided for @reminderPrePromptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle daily nudge?'**
+  String get reminderPrePromptTitle;
+
+  /// No description provided for @reminderPrePromptBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Moon can send you one soft card a day at a time you pick. To do that, your phone will ask to allow notifications.'**
+  String get reminderPrePromptBody;
+
+  /// No description provided for @reminderPrePromptAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds good'**
+  String get reminderPrePromptAllow;
+
+  /// No description provided for @reminderPrePromptLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get reminderPrePromptLater;
+
+  /// No description provided for @reminderPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are off for Mochi Moon. You can turn them on in your phone\'s settings.'**
+  String get reminderPermissionDenied;
+
+  /// No description provided for @reminderNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Mochi Moon card ✨'**
+  String get reminderNotificationTitle;
+
+  /// No description provided for @reminderChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily reminder'**
+  String get reminderChannelName;
+
+  /// No description provided for @reminderChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'One gentle card each day at the time you choose.'**
+  String get reminderChannelDescription;
+
   /// No description provided for @readAloudHint.
   ///
   /// In en, this message translates to:

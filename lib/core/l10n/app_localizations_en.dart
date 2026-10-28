@@ -140,6 +140,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journalClose => 'Close';
 
   @override
+  String get reminderTitle => 'Daily reminder';
+
+  @override
+  String get reminderSubtitle => 'One gentle card in your notifications';
+
+  @override
+  String get reminderTimeLabel => 'Reminder time';
+
+  @override
+  String get reminderPrePromptTitle => 'A gentle daily nudge?';
+
+  @override
+  String get reminderPrePromptBody =>
+      'Mochi Moon can send you one soft card a day at a time you pick. To do that, your phone will ask to allow notifications.';
+
+  @override
+  String get reminderPrePromptAllow => 'Sounds good';
+
+  @override
+  String get reminderPrePromptLater => 'Not now';
+
+  @override
+  String get reminderPermissionDenied =>
+      'Notifications are off for Mochi Moon. You can turn them on in your phone\'s settings.';
+
+  @override
+  String get reminderNotificationTitle => 'Your Mochi Moon card ✨';
+
+  @override
+  String get reminderChannelName => 'Daily reminder';
+
+  @override
+  String get reminderChannelDescription =>
+      'One gentle card each day at the time you choose.';
+
+  @override
   String get readAloudHint => 'Read it out loud ✨';
 
   @override

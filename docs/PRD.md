@@ -133,10 +133,10 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 ### 6.6 Notifications (Free)
 
-- [ ] Daily reminder at the chosen time with today's card first line (scheduled locally).
+- [x] Daily reminder at the chosen time with today's card first line (scheduled locally). — *set from a tile on the Me tab until onboarding exists; the next 14 days are scheduled and rebuilt on each app open; inexact alarms, so it can drift a few minutes*
 - [ ] Retrograde alerts: 1 day before a station and on the station day, scheduled locally from the computed calendar (§9.5) for Mercury (default on), Venus and Mars (default off).
 - [ ] FCM topic `announcements` for rare app news (default on, can be turned off).
-- [ ] Android 13+ notification permission requested after onboarding with a pre-prompt explaining why.
+- [x] Android 13+ notification permission requested after onboarding with a pre-prompt explaining why. — *pre-prompt and request are in place, triggered from the Me tile; moving the trigger to the end of onboarding is part of the onboarding item*
 
 ### 6.7 Cosmic — Today (Free; personalized layer Premium)
 
@@ -566,7 +566,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), midnight reset while open, premium-quote filtering, `my` strings need native review*
 - [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), real illustration thumbnails (placeholder until assets exist), entry to the journal from the Deck header, `my` strings need native review*
 - [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), real illustration, share handle value, share-sheet position origin for iPad*
-- [ ] Daily reminder notification
+- [x] Daily reminder notification (§6.6, first box; retrograde alerts and FCM are separate)
 - [ ] Home-screen widget (§6.5)
 - [ ] Sample-cards-before-sign-in flow
 
