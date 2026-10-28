@@ -22,10 +22,78 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tabMe => 'Me';
 
   @override
-  String get deckPlaceholderTitle => 'Your self-love deck';
+  String get deckTitle => 'Your self-love deck';
 
   @override
-  String get deckPlaceholderBody => 'Soft little reminders are on their way.';
+  String get deckEmptyBody => 'Soft little reminders are on their way.';
+
+  @override
+  String deckStreakSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count day streak',
+      one: '1 day streak',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String deckCardsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cards left today',
+      one: '1 card left today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get deckLimitTitle => 'You\'re glowing ✨';
+
+  @override
+  String get deckLimitBody =>
+      'You\'ve finished today\'s cards. Come back tomorrow for more.';
+
+  @override
+  String get deckActionSkip => 'Next card';
+
+  @override
+  String get deckActionSave => 'This is me';
+
+  @override
+  String get deckActionShare => 'Share';
+
+  @override
+  String get deckActionUndo => 'Undo';
+
+  @override
+  String get deckTimerSemantics => 'Read-aloud timer';
+
+  @override
+  String get deckTimerReady => 'Ready to swipe';
+
+  @override
+  String get deckIllustrationSemantics => 'A soft moon illustration';
+
+  @override
+  String get categorySelfLove => 'Self-love';
+
+  @override
+  String get categoryConfidence => 'Confidence';
+
+  @override
+  String get categoryHealing => 'Healing';
+
+  @override
+  String get categoryStudyWork => 'Study & work';
+
+  @override
+  String get categoryBodyKindness => 'Body kindness';
+
+  @override
+  String get categoryCalm => 'Calm';
 
   @override
   String get cosmicPlaceholderTitle => 'Cosmic you';

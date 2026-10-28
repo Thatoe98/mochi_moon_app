@@ -22,10 +22,76 @@ class AppLocalizationsMy extends AppLocalizations {
   String get tabMe => 'ကျွန်မ';
 
   @override
-  String get deckPlaceholderTitle => 'ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း ကတ်များ';
+  String get deckTitle => 'ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း ကတ်များ';
 
   @override
-  String get deckPlaceholderBody => 'နူးညံ့သော သတိပေးစကားလေးများ လာနေပါပြီ။';
+  String get deckEmptyBody => 'နူးညံ့သော သတိပေးစကားလေးများ လာနေပါပြီ။';
+
+  @override
+  String deckStreakSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ဆက်တိုက် $count ရက်',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String deckCardsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ယနေ့ ကတ် $count ကတ် ကျန်ပါသေးသည်',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get deckLimitTitle => 'သင်တောက်ပနေပါပြီ ✨';
+
+  @override
+  String get deckLimitBody =>
+      'ယနေ့ကတ်များ ပြီးဆုံးပါပြီ။ နောက်ထပ်ကတ်များအတွက် မနက်ဖြန် ပြန်လာခဲ့ပါ။';
+
+  @override
+  String get deckActionSkip => 'နောက်ကတ်';
+
+  @override
+  String get deckActionSave => 'ဒါ ကျွန်မပါ';
+
+  @override
+  String get deckActionShare => 'မျှဝေမည်';
+
+  @override
+  String get deckActionUndo => 'နောက်ပြန်';
+
+  @override
+  String get deckTimerSemantics => 'အသံထွက်ဖတ်ချိန် တိုင်မာ';
+
+  @override
+  String get deckTimerReady => 'ပွတ်ဆွဲနိုင်ပါပြီ';
+
+  @override
+  String get deckIllustrationSemantics => 'နူးညံ့သော လပုံ ပုံဆွဲ';
+
+  @override
+  String get categorySelfLove => 'ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း';
+
+  @override
+  String get categoryConfidence => 'ယုံကြည်မှု';
+
+  @override
+  String get categoryHealing => 'ကုစားခြင်း';
+
+  @override
+  String get categoryStudyWork => 'ပညာရေးနှင့် အလုပ်';
+
+  @override
+  String get categoryBodyKindness => 'ကိုယ်ခန္ဓာကို ကြင်နာခြင်း';
+
+  @override
+  String get categoryCalm => 'ငြိမ်သက်ခြင်း';
 
   @override
   String get cosmicPlaceholderTitle => 'သင့်စကြဝဠာ';

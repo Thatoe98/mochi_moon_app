@@ -122,17 +122,119 @@ abstract class AppLocalizations {
   /// **'Me'**
   String get tabMe;
 
-  /// No description provided for @deckPlaceholderTitle.
+  /// No description provided for @deckTitle.
   ///
   /// In en, this message translates to:
   /// **'Your self-love deck'**
-  String get deckPlaceholderTitle;
+  String get deckTitle;
 
-  /// No description provided for @deckPlaceholderBody.
+  /// No description provided for @deckEmptyBody.
   ///
   /// In en, this message translates to:
   /// **'Soft little reminders are on their way.'**
-  String get deckPlaceholderBody;
+  String get deckEmptyBody;
+
+  /// No description provided for @deckStreakSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day streak} other{{count} day streak}}'**
+  String deckStreakSemantics(int count);
+
+  /// No description provided for @deckCardsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 card left today} other{{count} cards left today}}'**
+  String deckCardsLeft(int count);
+
+  /// No description provided for @deckLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re glowing ✨'**
+  String get deckLimitTitle;
+
+  /// No description provided for @deckLimitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve finished today\'s cards. Come back tomorrow for more.'**
+  String get deckLimitBody;
+
+  /// No description provided for @deckActionSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Next card'**
+  String get deckActionSkip;
+
+  /// No description provided for @deckActionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'This is me'**
+  String get deckActionSave;
+
+  /// No description provided for @deckActionShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get deckActionShare;
+
+  /// No description provided for @deckActionUndo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get deckActionUndo;
+
+  /// No description provided for @deckTimerSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Read-aloud timer'**
+  String get deckTimerSemantics;
+
+  /// No description provided for @deckTimerReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to swipe'**
+  String get deckTimerReady;
+
+  /// No description provided for @deckIllustrationSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'A soft moon illustration'**
+  String get deckIllustrationSemantics;
+
+  /// No description provided for @categorySelfLove.
+  ///
+  /// In en, this message translates to:
+  /// **'Self-love'**
+  String get categorySelfLove;
+
+  /// No description provided for @categoryConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence'**
+  String get categoryConfidence;
+
+  /// No description provided for @categoryHealing.
+  ///
+  /// In en, this message translates to:
+  /// **'Healing'**
+  String get categoryHealing;
+
+  /// No description provided for @categoryStudyWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Study & work'**
+  String get categoryStudyWork;
+
+  /// No description provided for @categoryBodyKindness.
+  ///
+  /// In en, this message translates to:
+  /// **'Body kindness'**
+  String get categoryBodyKindness;
+
+  /// No description provided for @categoryCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm'**
+  String get categoryCalm;
 
   /// No description provided for @cosmicPlaceholderTitle.
   ///

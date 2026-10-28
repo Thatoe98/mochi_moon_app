@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+
+import '../features/deck/support/fake_deck_repository.dart';
 
 const _quote = Quote(
   id: 'q_test',
@@ -13,6 +16,7 @@ const _quote = Quote(
 
 Widget _app({Future<List<Quote>> Function()? quotes}) => ProviderScope(
   overrides: [
+    deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
     quotesProvider.overrideWith(
       (ref) => quotes?.call() ?? Future.value([_quote]),
     ),

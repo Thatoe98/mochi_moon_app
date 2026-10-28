@@ -563,7 +563,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Content loader for `quotes.json` and `signs.json` with 20 sample quotes — *quotes are en only; my/th text pending*
 
 ### M1 — Self-love deck (Android closed test)
-- [ ] Deck with timer gate (§6.2) and tests
+- [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), midnight reset while open, premium-quote filtering, `my` strings need native review*
 - [ ] Journal (local first)
 - [ ] Share as image (§6.4)
 - [ ] Daily reminder notification
