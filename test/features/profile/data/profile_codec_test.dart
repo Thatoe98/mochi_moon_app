@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/features/profile/data/profile_codec.dart';
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
 void main() {
@@ -19,6 +20,7 @@ void main() {
         'birthDate': '1998-02-04',
         'birthTime': '07:05',
         'timeKnown': true,
+        'place': null,
         'focusAreas': ['calm', 'study_work'],
       },
     });
@@ -57,6 +59,71 @@ void main() {
         },
       }),
       const UserProfile(focusAreas: [FocusArea.calm]),
+    );
+  });
+
+  const bangkok = BirthPlace(
+    name: 'Bangkok',
+    region: 'Bangkok',
+    countryCode: 'TH',
+    lat: 13.754,
+    lng: 100.5014,
+    tzId: 'Asia/Bangkok',
+  );
+
+  test('writes the birthplace in the PRD 8.1 shape', () {
+    final map = profileToMap(const UserProfile(birthPlace: bangkok));
+
+    final profile = map['profile']! as Map<String, Object?>;
+    expect(profile['place'], {
+      'name': 'Bangkok',
+      'region': 'Bangkok',
+      'countryCode': 'TH',
+      'lat': 13.754,
+      'lng': 100.5014,
+      'tzId': 'Asia/Bangkok',
+    });
+  });
+
+  test('reads the birthplace back, including whole-number coordinates', () {
+    expect(
+      profileFromMap(profileToMap(const UserProfile(birthPlace: bangkok))),
+      const UserProfile(birthPlace: bangkok),
+    );
+    final map = profileToMap(const UserProfile(birthPlace: bangkok));
+    final place =
+        (map['profile']! as Map<String, Object?>)['place']!
+            as Map<String, Object?>;
+    place['lat'] = 14;
+    place['lng'] = 100;
+
+    expect(profileFromMap(map).birthPlace?.lat, 14.0);
+  });
+
+  test('a birthplace missing its zone or coordinates is dropped', () {
+    Map<String, Object?> withPlace(Map<String, Object?> place) => {
+      'profile': {'place': place},
+    };
+    final full = {
+      'name': 'Bangkok',
+      'region': 'Bangkok',
+      'countryCode': 'TH',
+      'lat': 13.754,
+      'lng': 100.5014,
+      'tzId': 'Asia/Bangkok',
+    };
+
+    expect(profileFromMap(withPlace(full)).birthPlace, isNotNull);
+    for (final key in ['name', 'countryCode', 'lat', 'lng', 'tzId']) {
+      expect(
+        profileFromMap(withPlace({...full}..remove(key))).birthPlace,
+        isNull,
+        reason: 'without $key',
+      );
+    }
+    expect(
+      profileFromMap(withPlace({...full}..remove('region'))).birthPlace?.region,
+      '',
     );
   });
 

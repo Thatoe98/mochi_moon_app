@@ -320,6 +320,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileBirthTimeNone => 'No birth time. That\'s okay.';
 
   @override
+  String get profileBirthPlaceTitle => 'Where were you born?';
+
+  @override
+  String get profileBirthPlaceBodyRequired =>
+      'We read your birth time in the time zone of this place.';
+
+  @override
+  String get profileBirthPlaceBodyOptional =>
+      'This is optional. Search for the nearest city, or skip it.';
+
+  @override
+  String get profileBirthPlaceLabel => 'Search for a city';
+
+  @override
+  String get profileBirthPlaceNoMatches =>
+      'No places found. Try a bigger city nearby.';
+
+  @override
+  String get profileBirthPlaceLoadFailed =>
+      'The list of places couldn\'t be loaded.';
+
+  @override
+  String profileBirthPlaceChosen(String place) {
+    return 'Born in $place';
+  }
+
+  @override
+  String get profileBirthPlaceChange => 'Choose a different place';
+
+  @override
   String get profileReminderTitle => 'A daily nudge?';
 
   @override

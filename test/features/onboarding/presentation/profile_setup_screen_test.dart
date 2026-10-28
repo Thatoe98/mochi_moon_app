@@ -8,8 +8,13 @@ import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
+import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
 import 'package:mochi_moon/features/onboarding/presentation/profile_setup_screen.dart';
+import 'package:mochi_moon/features/places/application/places_providers.dart';
+import 'package:mochi_moon/features/places/domain/city.dart';
+import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
@@ -17,6 +22,29 @@ import '../../auth/support/fake_auth_repository.dart';
 import '../../profile/support/fake_profile.dart';
 import '../../settings/support/fake_reminder.dart';
 import '../support/fake_onboarding_repository.dart';
+
+const _cities = [
+  City(
+    name: 'Bangkok',
+    asciiName: 'Bangkok',
+    region: 'Bangkok',
+    countryCode: 'TH',
+    countryName: 'Thailand',
+    lat: 13.7540,
+    lng: 100.5014,
+    population: 5104476,
+  ),
+  City(
+    name: 'Yangon',
+    asciiName: 'Yangon',
+    region: 'Yangon',
+    countryCode: 'MM',
+    countryName: 'Myanmar',
+    lat: 16.8053,
+    lng: 96.1561,
+    population: 4477638,
+  ),
+];
 
 const _account = AuthUser(uid: 'uid_1', displayName: 'Mochi');
 
@@ -45,6 +73,7 @@ class _Harness {
       reminderSchedulerProvider.overrideWithValue(scheduler),
       reminderLanguageProvider.overrideWithValue('en'),
       clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
+      cityIndexProvider.overrideWith((ref) async => CityIndex(_cities)),
       quotesProvider.overrideWith(
         (ref) async => [
           const Quote(id: 'q', text: {'en': 'Soft moon'}, category: 'calm'),
@@ -96,7 +125,7 @@ int _progressSteps(WidgetTester tester) =>
                   find.byType(LinearProgressIndicator),
                 )
                 .value! *
-            5)
+            ProfileStep.values.length)
         .round();
 
 FilledButton _mainButton(WidgetTester tester) =>
@@ -174,6 +203,87 @@ void main() {
     expect(find.text("No birth time. That's okay."), findsOneWidget);
   });
 
+  testWidgets('the birthplace is optional without a birth time', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_Harness().build());
+    await tester.pumpAndSettle();
+    await _toBirthTime(tester);
+    await _tap(tester, 'Continue');
+
+    expect(find.text('Where were you born?'), findsOneWidget);
+    expect(find.textContaining('optional'), findsOneWidget);
+    expect(_mainButton(tester).onPressed, isNotNull);
+  });
+
+  testWidgets('the birthplace is required once a birth time is given', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_Harness().build());
+    await tester.pumpAndSettle();
+    await _toBirthTime(tester);
+    await _tap(tester, 'Choose a time');
+    await _tap(tester, 'OK');
+    await _tap(tester, 'Continue');
+
+    expect(find.text('Where were you born?'), findsOneWidget);
+    expect(_mainButton(tester).onPressed, isNull);
+
+    await tester.enterText(find.byType(TextField), 'bang');
+    await tester.pumpAndSettle();
+    await _tap(tester, 'Bangkok, Bangkok, Thailand');
+
+    expect(find.text('Born in Bangkok, Bangkok, Thailand'), findsOneWidget);
+    expect(_mainButton(tester).onPressed, isNotNull);
+  });
+
+  testWidgets('a chosen place gets its time zone and can be changed', (
+    tester,
+  ) async {
+    final harness = _Harness();
+    await tester.pumpWidget(harness.build());
+    await tester.pumpAndSettle();
+    await _toBirthTime(tester);
+    await _tap(tester, 'Continue');
+
+    await tester.enterText(find.byType(TextField), 'YANGON');
+    await tester.pumpAndSettle();
+    await _tap(tester, 'Yangon, Yangon, Myanmar');
+    await _tap(tester, 'Choose a different place');
+    expect(find.widgetWithText(TextField, ''), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'bangkok');
+    await tester.pumpAndSettle();
+    await _tap(tester, 'Bangkok, Bangkok, Thailand');
+    await _tap(tester, 'Continue');
+    await _tap(tester, 'Skip for now');
+    await _finish(tester);
+
+    expect(
+      harness.profiles.profile?.birthPlace,
+      const BirthPlace(
+        name: 'Bangkok',
+        region: 'Bangkok',
+        countryCode: 'TH',
+        lat: 13.7540,
+        lng: 100.5014,
+        tzId: 'Asia/Bangkok',
+      ),
+    );
+  });
+
+  testWidgets('says so when nothing matches', (tester) async {
+    await tester.pumpWidget(_Harness().build());
+    await tester.pumpAndSettle();
+    await _toBirthTime(tester);
+    await _tap(tester, 'Continue');
+
+    await tester.enterText(find.byType(TextField), 'zzzz');
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('No places found'), findsOneWidget);
+  });
+
   testWidgets('back keeps every answer', (tester) async {
     await tester.pumpWidget(_Harness().build());
     await tester.pumpAndSettle();
@@ -209,6 +319,7 @@ void main() {
     await tester.pumpAndSettle();
     await _toBirthTime(tester);
     await _tap(tester, 'Continue');
+    await _tap(tester, 'Continue');
     await _tap(tester, 'Skip for now');
     expect(find.text('What would you like more of?'), findsOneWidget);
 
@@ -230,6 +341,7 @@ void main() {
     await tester.pumpWidget(harness.build());
     await tester.pumpAndSettle();
     await _toBirthTime(tester);
+    await _tap(tester, 'Continue');
     await _tap(tester, 'Continue');
 
     expect(find.text('A daily nudge?'), findsOneWidget);
@@ -256,6 +368,7 @@ void main() {
     await tester.pumpAndSettle();
     await _toBirthTime(tester);
     await _tap(tester, 'Continue');
+    await _tap(tester, 'Continue');
     await _tap(tester, 'Skip for now');
     await _finish(tester);
 
@@ -270,6 +383,7 @@ void main() {
     await tester.pumpWidget(harness.build());
     await tester.pumpAndSettle();
     await _toBirthTime(tester);
+    await _tap(tester, 'Continue');
     await _tap(tester, 'Continue');
     await _tap(tester, 'Skip for now');
 
@@ -296,6 +410,8 @@ void main() {
     await _tap(tester, 'Continue');
     expect(tester.takeException(), isNull);
     await _pickBirthday(tester);
+    await _tap(tester, 'Continue');
+    expect(tester.takeException(), isNull);
     await _tap(tester, 'Continue');
     expect(tester.takeException(), isNull);
     await _tap(tester, 'Continue');

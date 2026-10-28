@@ -9,7 +9,7 @@ import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
 import 'package:mochi_moon/features/onboarding/presentation/profile_steps.dart';
 
 /// The profile steps after sign-in (PRD §6.1): name, birth date, birth time,
-/// reminder, focus areas. One screen, so back moves between steps and keeps
+/// birthplace, reminder, focus areas. One screen, so back moves between steps and keeps
 /// every answer; finishing ends the first-run flow and the router takes over.
 class ProfileSetupScreen extends ConsumerWidget {
   const ProfileSetupScreen({super.key});

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 
 part 'user_profile.freezed.dart';
 
@@ -32,8 +33,7 @@ enum FocusArea {
 
 /// What the user told us about themselves.
 ///
-/// Birth place and the sun/moon/rising signs join this once the cities list
-/// and the astro engine land.
+/// The sun/moon/rising signs join this once the astro engine lands.
 @freezed
 abstract class UserProfile with _$UserProfile {
   const factory UserProfile({
@@ -45,6 +45,9 @@ abstract class UserProfile with _$UserProfile {
     /// Minutes since midnight, local to the birthplace. Null means the user
     /// does not know the birth time.
     int? birthMinutes,
+
+    /// Required in the first-run flow when the birth time is known.
+    BirthPlace? birthPlace,
     @Default(<FocusArea>[]) List<FocusArea> focusAreas,
   }) = _UserProfile;
 

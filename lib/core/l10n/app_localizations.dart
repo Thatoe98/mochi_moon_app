@@ -626,6 +626,54 @@ abstract class AppLocalizations {
   /// **'No birth time. That\'s okay.'**
   String get profileBirthTimeNone;
 
+  /// No description provided for @profileBirthPlaceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where were you born?'**
+  String get profileBirthPlaceTitle;
+
+  /// No description provided for @profileBirthPlaceBodyRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'We read your birth time in the time zone of this place.'**
+  String get profileBirthPlaceBodyRequired;
+
+  /// No description provided for @profileBirthPlaceBodyOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'This is optional. Search for the nearest city, or skip it.'**
+  String get profileBirthPlaceBodyOptional;
+
+  /// No description provided for @profileBirthPlaceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a city'**
+  String get profileBirthPlaceLabel;
+
+  /// No description provided for @profileBirthPlaceNoMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No places found. Try a bigger city nearby.'**
+  String get profileBirthPlaceNoMatches;
+
+  /// No description provided for @profileBirthPlaceLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The list of places couldn\'t be loaded.'**
+  String get profileBirthPlaceLoadFailed;
+
+  /// No description provided for @profileBirthPlaceChosen.
+  ///
+  /// In en, this message translates to:
+  /// **'Born in {place}'**
+  String profileBirthPlaceChosen(String place);
+
+  /// No description provided for @profileBirthPlaceChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a different place'**
+  String get profileBirthPlaceChange;
+
   /// No description provided for @profileReminderTitle.
   ///
   /// In en, this message translates to:

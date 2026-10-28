@@ -10,6 +10,8 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
+import 'package:mochi_moon/features/places/application/places_providers.dart';
+import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
@@ -50,6 +52,7 @@ Widget _app({
     ),
     reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
     widgetPublisherProvider.overrideWithValue(FakeWidgetPublisher()),
+    cityIndexProvider.overrideWith((ref) async => CityIndex(const [])),
     quotesProvider.overrideWith(
       (ref) => quotes?.call() ?? Future.value([_quote]),
     ),
@@ -220,6 +223,11 @@ void main() {
 
       // Birth time is optional.
       expect(find.text('What time were you born?'), findsOneWidget);
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+
+      // So is the birthplace, when there is no birth time.
+      expect(find.text('Where were you born?'), findsOneWidget);
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 

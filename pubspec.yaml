@@ -55,5 +55,6 @@ flutter:
     - assets/content/quotes/
     - assets/content/signs/
     - assets/content/fallback_readings/
+    - assets/content/cities/
     - assets/illustrations/
     - assets/lottie/

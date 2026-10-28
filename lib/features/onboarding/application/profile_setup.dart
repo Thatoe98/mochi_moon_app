@@ -2,7 +2,10 @@ import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
+import 'package:mochi_moon/features/places/application/places_providers.dart';
+import 'package:mochi_moon/features/places/domain/city.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/settings/domain/reminder.dart';
@@ -29,6 +32,7 @@ class ProfileSetup extends _$ProfileSetup {
           : accountName ?? '',
       birthDate: saved?.birthDate,
       birthMinutes: saved?.birthMinutes,
+      birthPlace: saved?.birthPlace,
       focusAreas: saved?.focusAreas ?? const [],
     );
   }
@@ -44,6 +48,28 @@ class ProfileSetup extends _$ProfileSetup {
   /// Pass null for "I don't know".
   void setBirthMinutes(int? minutes) =>
       state = state.copyWith(birthMinutes: minutes);
+
+  /// Picks [city] as the birthplace and looks up its time zone. Pass null to
+  /// clear it.
+  void setBirthCity(City? city) {
+    if (city == null) {
+      state = state.copyWith(birthPlace: null);
+      return;
+    }
+    final tzId = ref
+        .read(timeZoneResolverProvider)
+        .resolve(lat: city.lat, lng: city.lng);
+    state = state.copyWith(
+      birthPlace: BirthPlace(
+        name: city.name,
+        region: city.region,
+        countryCode: city.countryCode,
+        lat: city.lat,
+        lng: city.lng,
+        tzId: tzId,
+      ),
+    );
+  }
 
   void setReminderEnabled({required bool enabled}) =>
       state = state.copyWith(reminderEnabled: enabled);

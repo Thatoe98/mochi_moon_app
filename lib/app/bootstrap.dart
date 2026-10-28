@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/app/flavors.dart';
+import 'package:mochi_moon/core/content/content_licenses.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/data/prefs_onboarding_repository.dart';
@@ -14,6 +15,7 @@ final flavorConfigProvider = Provider<FlavorConfig>(
 
 Future<void> bootstrap(FlavorConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
+  registerContentLicenses();
   final firebaseReady = await _initFirebase();
   runApp(
     ProviderScope(

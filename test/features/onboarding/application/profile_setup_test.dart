@@ -8,7 +8,9 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/profile_setup.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
+import 'package:mochi_moon/features/places/domain/city.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/settings/domain/reminder.dart';
@@ -17,6 +19,17 @@ import '../../auth/support/fake_auth_repository.dart';
 import '../../profile/support/fake_profile.dart';
 import '../../settings/support/fake_reminder.dart';
 import '../support/fake_onboarding_repository.dart';
+
+const _bangkok = City(
+  name: 'Bangkok',
+  asciiName: 'Bangkok',
+  region: 'Bangkok',
+  countryCode: 'TH',
+  countryName: 'Thailand',
+  lat: 13.7540,
+  lng: 100.5014,
+  population: 5104476,
+);
 
 const _quote = Quote(id: 'q1', text: {'en': 'I am enough.'}, category: 'calm');
 
@@ -62,6 +75,7 @@ class _Setup {
       ..setName(' Mochi ')
       ..next()
       ..setBirthDate(DateTime(1998, 2, 4))
+      ..next()
       ..next()
       ..next()
       ..next()
@@ -157,6 +171,68 @@ void main() {
 
     expect(setup.state.birthMinutes, isNull);
     expect(setup.state.toProfile().timeKnown, isFalse);
+  });
+
+  test('the birthplace is only needed when the birth time is known', () {
+    final setup = _Setup();
+    final today = DateTime(2026, 10, 28);
+    setup.notifier
+      ..setName('Mochi')
+      ..next()
+      ..setBirthDate(DateTime(1998, 2, 4))
+      ..next()
+      ..next();
+    expect(setup.state.step, ProfileStep.birthPlace);
+    expect(setup.state.canContinue(today), isTrue);
+
+    setup.notifier.setBirthMinutes(450);
+    expect(setup.state.canContinue(today), isFalse);
+    setup.notifier.next();
+    expect(setup.state.step, ProfileStep.birthPlace);
+
+    setup.notifier.setBirthCity(_bangkok);
+    expect(setup.state.canContinue(today), isTrue);
+    setup.notifier.next();
+    expect(setup.state.step, ProfileStep.reminder);
+  });
+
+  test('a picked city is stored with its time zone', () {
+    final setup = _Setup();
+
+    setup.notifier.setBirthCity(_bangkok);
+
+    expect(
+      setup.state.toProfile().birthPlace,
+      const BirthPlace(
+        name: 'Bangkok',
+        region: 'Bangkok',
+        countryCode: 'TH',
+        lat: 13.7540,
+        lng: 100.5014,
+        tzId: 'Asia/Bangkok',
+      ),
+    );
+
+    setup.notifier.setBirthCity(null);
+    expect(setup.state.birthPlace, isNull);
+  });
+
+  test('a saved birthplace is kept when the flow starts again', () async {
+    const place = BirthPlace(
+      name: 'Yangon',
+      region: 'Yangon',
+      countryCode: 'MM',
+      lat: 16.8053,
+      lng: 96.1561,
+      tzId: 'Asia/Yangon',
+    );
+    final setup = _Setup(
+      saved: const UserProfile(displayName: 'Mo', birthPlace: place),
+    );
+    await setup.container.read(profileControllerProvider.future);
+    setup.container.invalidate(profileSetupProvider);
+
+    expect(setup.state.birthPlace, place);
   });
 
   test('picks at most three focus areas', () {

@@ -1,3 +1,4 @@
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
 /// Converts a [UserProfile] to and from the shape used in Firestore
@@ -14,6 +15,16 @@ Map<String, Object?> profileToMap(UserProfile profile) => {
         ? null
         : formatMinutes(profile.birthMinutes!),
     'timeKnown': profile.timeKnown,
+    'place': profile.birthPlace == null
+        ? null
+        : {
+            'name': profile.birthPlace!.name,
+            'region': profile.birthPlace!.region,
+            'countryCode': profile.birthPlace!.countryCode,
+            'lat': profile.birthPlace!.lat,
+            'lng': profile.birthPlace!.lng,
+            'tzId': profile.birthPlace!.tzId,
+          },
     'focusAreas': [for (final area in profile.focusAreas) area.id],
   },
 };
@@ -39,12 +50,40 @@ UserProfile profileFromMap(Map<String, Object?> map) {
       final String text => parseMinutes(text),
       _ => null,
     },
+    birthPlace: switch (profile['place']) {
+      final Map<Object?, Object?> place => _placeFromMap(place),
+      _ => null,
+    },
     focusAreas: [
       if (focus is List<Object?>)
         for (final id in focus)
           if (id is String && FocusArea.fromId(id) != null)
             FocusArea.fromId(id)!,
     ],
+  );
+}
+
+/// A place with a missing name, coordinate or zone is dropped as a whole: a
+/// half-known place would put the birth time in the wrong zone.
+BirthPlace? _placeFromMap(Map<Object?, Object?> map) {
+  final name = map['name'];
+  final countryCode = map['countryCode'];
+  final lat = map['lat'];
+  final lng = map['lng'];
+  final tzId = map['tzId'];
+  if (name is! String || name.isEmpty) return null;
+  if (countryCode is! String || tzId is! String || tzId.isEmpty) return null;
+  if (lat is! num || lng is! num) return null;
+  return BirthPlace(
+    name: name,
+    region: switch (map['region']) {
+      final String region => region,
+      _ => '',
+    },
+    countryCode: countryCode,
+    lat: lat.toDouble(),
+    lng: lng.toDouble(),
+    tzId: tzId,
   );
 }
 

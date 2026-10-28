@@ -4,6 +4,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/onboarding/application/profile_setup.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
+import 'package:mochi_moon/features/onboarding/presentation/birth_place_field.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/settings/domain/reminder.dart';
 
@@ -50,6 +51,16 @@ class ProfileStepBody extends StatelessWidget {
         child: _BirthTime(
           minutes: setup.birthMinutes,
           onChanged: notifier.setBirthMinutes,
+        ),
+      ),
+      ProfileStep.birthPlace => _Step(
+        title: l10n.profileBirthPlaceTitle,
+        body: setup.birthMinutes == null
+            ? l10n.profileBirthPlaceBodyOptional
+            : l10n.profileBirthPlaceBodyRequired,
+        child: BirthPlaceField(
+          chosen: setup.birthPlace,
+          onChosen: notifier.setBirthCity,
         ),
       ),
       ProfileStep.reminder => _Step(

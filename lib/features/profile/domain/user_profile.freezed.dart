@@ -18,7 +18,8 @@ mixin _$UserProfile {
  String get displayName;/// Date only; the time part is ignored.
  DateTime? get birthDate;/// Minutes since midnight, local to the birthplace. Null means the user
 /// does not know the birth time.
- int? get birthMinutes; List<FocusArea> get focusAreas;
+ int? get birthMinutes;/// Required in the first-run flow when the birth time is known.
+ BirthPlace? get birthPlace; List<FocusArea> get focusAreas;
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +31,20 @@ $UserProfileCopyWith<UserProfile> get copyWith => _$UserProfileCopyWithImpl<User
 @override
 bool operator ==(Object other) {
   final _this = this as UserProfile;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfile&&(identical(other.displayName, _this.displayName) || other.displayName == _this.displayName)&&(identical(other.birthDate, _this.birthDate) || other.birthDate == _this.birthDate)&&(identical(other.birthMinutes, _this.birthMinutes) || other.birthMinutes == _this.birthMinutes)&&const DeepCollectionEquality().equals(other.focusAreas, _this.focusAreas));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfile&&(identical(other.displayName, _this.displayName) || other.displayName == _this.displayName)&&(identical(other.birthDate, _this.birthDate) || other.birthDate == _this.birthDate)&&(identical(other.birthMinutes, _this.birthMinutes) || other.birthMinutes == _this.birthMinutes)&&(identical(other.birthPlace, _this.birthPlace) || other.birthPlace == _this.birthPlace)&&const DeepCollectionEquality().equals(other.focusAreas, _this.focusAreas));
 }
 
 
 @override
 int get hashCode {
   final _this = this as UserProfile;
-  return Object.hash(runtimeType,_this.displayName,_this.birthDate,_this.birthMinutes,const DeepCollectionEquality().hash(_this.focusAreas));
+  return Object.hash(runtimeType,_this.displayName,_this.birthDate,_this.birthMinutes,_this.birthPlace,const DeepCollectionEquality().hash(_this.focusAreas));
 }
 
 @override
 String toString() {
   final _this = this as UserProfile;
-  return 'UserProfile(displayName: ${_this.displayName}, birthDate: ${_this.birthDate}, birthMinutes: ${_this.birthMinutes}, focusAreas: ${_this.focusAreas})';
+  return 'UserProfile(displayName: ${_this.displayName}, birthDate: ${_this.birthDate}, birthMinutes: ${_this.birthMinutes}, birthPlace: ${_this.birthPlace}, focusAreas: ${_this.focusAreas})';
 }
 
 
@@ -54,11 +55,11 @@ abstract mixin class $UserProfileCopyWith<$Res>  {
   factory $UserProfileCopyWith(UserProfile value, $Res Function(UserProfile) _then) = _$UserProfileCopyWithImpl;
 @useResult
 $Res call({
- String displayName, DateTime? birthDate, int? birthMinutes, List<FocusArea> focusAreas
+ String displayName, DateTime? birthDate, int? birthMinutes, BirthPlace? birthPlace, List<FocusArea> focusAreas
 });
 
 
-
+$BirthPlaceCopyWith<$Res>? get birthPlace;
 
 }
 /// @nodoc
@@ -71,16 +72,29 @@ class _$UserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? displayName = null,Object? birthDate = freezed,Object? birthMinutes = freezed,Object? focusAreas = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? displayName = null,Object? birthDate = freezed,Object? birthMinutes = freezed,Object? birthPlace = freezed,Object? focusAreas = null,}) {
   return _then(UserProfile(
 displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,birthMinutes: freezed == birthMinutes ? _self.birthMinutes : birthMinutes // ignore: cast_nullable_to_non_nullable
-as int?,focusAreas: null == focusAreas ? _self.focusAreas : focusAreas // ignore: cast_nullable_to_non_nullable
+as int?,birthPlace: freezed == birthPlace ? _self.birthPlace : birthPlace // ignore: cast_nullable_to_non_nullable
+as BirthPlace?,focusAreas: null == focusAreas ? _self.focusAreas : focusAreas // ignore: cast_nullable_to_non_nullable
 as List<FocusArea>,
   ));
 }
+/// Create a copy of UserProfile
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BirthPlaceCopyWith<$Res>? get birthPlace {
+    if (_self.birthPlace == null) {
+    return null;
+  }
 
+  return $BirthPlaceCopyWith<$Res>(_self.birthPlace!, (value) {
+    return _then(_self.copyWith(birthPlace: value));
+  });
+}
 }
 
 
@@ -162,10 +176,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String displayName,  DateTime? birthDate,  int? birthMinutes,  List<FocusArea> focusAreas)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String displayName,  DateTime? birthDate,  int? birthMinutes,  BirthPlace? birthPlace,  List<FocusArea> focusAreas)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserProfile() when $default != null:
-return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.focusAreas);case _:
+return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.birthPlace,_that.focusAreas);case _:
   return orElse();
 
 }
@@ -183,10 +197,10 @@ return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.focus
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String displayName,  DateTime? birthDate,  int? birthMinutes,  List<FocusArea> focusAreas)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String displayName,  DateTime? birthDate,  int? birthMinutes,  BirthPlace? birthPlace,  List<FocusArea> focusAreas)  $default,) {final _that = this;
 switch (_that) {
 case _UserProfile():
-return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.focusAreas);case _:
+return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.birthPlace,_that.focusAreas);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +217,10 @@ return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.focus
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String displayName,  DateTime? birthDate,  int? birthMinutes,  List<FocusArea> focusAreas)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String displayName,  DateTime? birthDate,  int? birthMinutes,  BirthPlace? birthPlace,  List<FocusArea> focusAreas)?  $default,) {final _that = this;
 switch (_that) {
 case _UserProfile() when $default != null:
-return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.focusAreas);case _:
+return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.birthPlace,_that.focusAreas);case _:
   return null;
 
 }
@@ -218,7 +232,7 @@ return $default(_that.displayName,_that.birthDate,_that.birthMinutes,_that.focus
 
 
 class _UserProfile extends UserProfile {
-  const _UserProfile({this.displayName = '', this.birthDate, this.birthMinutes,  List<FocusArea> focusAreas = const <FocusArea>[]}): _focusAreas = focusAreas,super._();
+  const _UserProfile({this.displayName = '', this.birthDate, this.birthMinutes, this.birthPlace,  List<FocusArea> focusAreas = const <FocusArea>[]}): _focusAreas = focusAreas,super._();
   
 
 @override@JsonKey() final  String displayName;
@@ -227,6 +241,8 @@ class _UserProfile extends UserProfile {
 /// Minutes since midnight, local to the birthplace. Null means the user
 /// does not know the birth time.
 @override final  int? birthMinutes;
+/// Required in the first-run flow when the birth time is known.
+@override final  BirthPlace? birthPlace;
  final  List<FocusArea> _focusAreas;
 @override@JsonKey() List<FocusArea> get focusAreas {
   if (_focusAreas is EqualUnmodifiableListView) return _focusAreas;
@@ -245,18 +261,18 @@ _$UserProfileCopyWith<_UserProfile> get copyWith => __$UserProfileCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfile&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.birthMinutes, birthMinutes) || other.birthMinutes == birthMinutes)&&const DeepCollectionEquality().equals(other.focusAreas, _focusAreas));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfile&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.birthMinutes, birthMinutes) || other.birthMinutes == birthMinutes)&&(identical(other.birthPlace, birthPlace) || other.birthPlace == birthPlace)&&const DeepCollectionEquality().equals(other.focusAreas, _focusAreas));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,displayName,birthDate,birthMinutes,const DeepCollectionEquality().hash(_focusAreas));
+    return Object.hash(runtimeType,displayName,birthDate,birthMinutes,birthPlace,const DeepCollectionEquality().hash(_focusAreas));
 }
 
 @override
 String toString() {
-    return 'UserProfile(displayName: $displayName, birthDate: $birthDate, birthMinutes: $birthMinutes, focusAreas: $focusAreas)';
+    return 'UserProfile(displayName: $displayName, birthDate: $birthDate, birthMinutes: $birthMinutes, birthPlace: $birthPlace, focusAreas: $focusAreas)';
 }
 
 
@@ -267,11 +283,11 @@ abstract mixin class _$UserProfileCopyWith<$Res> implements $UserProfileCopyWith
   factory _$UserProfileCopyWith(_UserProfile value, $Res Function(_UserProfile) _then) = __$UserProfileCopyWithImpl;
 @override @useResult
 $Res call({
- String displayName, DateTime? birthDate, int? birthMinutes, List<FocusArea> focusAreas
+ String displayName, DateTime? birthDate, int? birthMinutes, BirthPlace? birthPlace, List<FocusArea> focusAreas
 });
 
 
-
+@override $BirthPlaceCopyWith<$Res>? get birthPlace;
 
 }
 /// @nodoc
@@ -284,17 +300,30 @@ class __$UserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? displayName = null,Object? birthDate = freezed,Object? birthMinutes = freezed,Object? focusAreas = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? displayName = null,Object? birthDate = freezed,Object? birthMinutes = freezed,Object? birthPlace = freezed,Object? focusAreas = null,}) {
   return _then(_UserProfile(
 displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,birthMinutes: freezed == birthMinutes ? _self.birthMinutes : birthMinutes // ignore: cast_nullable_to_non_nullable
-as int?,focusAreas: null == focusAreas ? _self._focusAreas : focusAreas // ignore: cast_nullable_to_non_nullable
+as int?,birthPlace: freezed == birthPlace ? _self.birthPlace : birthPlace // ignore: cast_nullable_to_non_nullable
+as BirthPlace?,focusAreas: null == focusAreas ? _self._focusAreas : focusAreas // ignore: cast_nullable_to_non_nullable
 as List<FocusArea>,
   ));
 }
 
+/// Create a copy of UserProfile
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BirthPlaceCopyWith<$Res>? get birthPlace {
+    if (_self.birthPlace == null) {
+    return null;
+  }
 
+  return $BirthPlaceCopyWith<$Res>(_self.birthPlace!, (value) {
+    return _then(_self.copyWith(birthPlace: value));
+  });
+}
 }
 
 // dart format on
