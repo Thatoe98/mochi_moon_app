@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "mochi-moon-dev",
+    "dev": "mochi-moon-dev"
+  }
+}

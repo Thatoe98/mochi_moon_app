@@ -66,3 +66,6 @@ android/build/
 
 # Reference and source art, kept local
 /art/
+
+# Image-generation prompts, kept local
+/prompts/
