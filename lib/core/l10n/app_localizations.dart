@@ -254,11 +254,65 @@ abstract class AppLocalizations {
   /// **'Just you'**
   String get mePlaceholderTitle;
 
-  /// No description provided for @mePlaceholderBody.
+  /// No description provided for @journalTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your journal and settings will live here.'**
-  String get mePlaceholderBody;
+  /// **'Your journal'**
+  String get journalTitle;
+
+  /// No description provided for @meJournalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards that feel like you'**
+  String get meJournalSubtitle;
+
+  /// No description provided for @journalEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing saved yet'**
+  String get journalEmptyTitle;
+
+  /// No description provided for @journalEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe right on the cards you love and they\'ll live here.'**
+  String get journalEmptyBody;
+
+  /// No description provided for @journalFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get journalFilterAll;
+
+  /// No description provided for @journalRemoveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from your journal?'**
+  String get journalRemoveTitle;
+
+  /// No description provided for @journalRemoveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This card will leave your journal. You can always save it again.'**
+  String get journalRemoveBody;
+
+  /// No description provided for @journalRemoveConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get journalRemoveConfirm;
+
+  /// No description provided for @journalKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it'**
+  String get journalKeep;
+
+  /// No description provided for @journalClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get journalClose;
 
   /// No description provided for @readAloudHint.
   ///

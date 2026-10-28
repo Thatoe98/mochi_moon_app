@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
-import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/core/theme/app_spacing.dart';
 
-/// Placeholder until Journal and Settings land (PRD M1/M2).
+/// Hub for the journal today; profile, premium and settings join it later
+/// (PRD M2/M4).
 class MeScreen extends StatelessWidget {
   const MeScreen({super.key});
 
@@ -11,9 +14,17 @@ class MeScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.mePlaceholderTitle)),
-      body: EmptyState(
-        title: l10n.mePlaceholderTitle,
-        body: l10n.mePlaceholderBody,
+      body: ListView(
+        children: [
+          ListTile(
+            minTileHeight: AppSpacing.minTouchTarget,
+            leading: const Icon(Icons.favorite_rounded),
+            title: Text(l10n.journalTitle),
+            subtitle: Text(l10n.meJournalSubtitle),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => context.push(AppRoutes.journal),
+          ),
+        ],
       ),
     );
   }

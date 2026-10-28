@@ -17,7 +17,7 @@ class QuoteCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          const Expanded(flex: 6, child: _IllustrationPlaceholder()),
+          const Expanded(flex: 6, child: IllustrationPlaceholder()),
           Expanded(
             flex: 4,
             child: Padding(
@@ -58,8 +58,10 @@ class QuoteCard extends StatelessWidget {
 }
 
 /// Stands in until the illustration assets exist (PRD §8.4).
-class _IllustrationPlaceholder extends StatelessWidget {
-  const _IllustrationPlaceholder();
+class IllustrationPlaceholder extends StatelessWidget {
+  const IllustrationPlaceholder({this.iconSize = AppSpacing.xxl, super.key});
+
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,7 @@ class _IllustrationPlaceholder extends StatelessWidget {
           child: Center(
             child: Icon(
               Icons.nightlight_round,
-              size: AppSpacing.xxl,
+              size: iconSize,
               color: scheme.primary,
             ),
           ),

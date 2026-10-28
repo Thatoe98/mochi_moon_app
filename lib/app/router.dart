@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/shell_scaffold.dart';
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
+import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,6 +12,7 @@ abstract final class AppRoutes {
   static const deck = '/deck';
   static const cosmic = '/cosmic';
   static const me = '/me';
+  static const journal = '/me/journal';
 }
 
 @Riverpod(keepAlive: true)
@@ -43,6 +45,12 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: AppRoutes.me,
                 builder: (context, state) => const MeScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'journal',
+                    builder: (context, state) => const JournalScreen(),
+                  ),
+                ],
               ),
             ],
           ),

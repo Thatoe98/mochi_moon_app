@@ -103,8 +103,36 @@ class AppLocalizationsMy extends AppLocalizations {
   String get mePlaceholderTitle => 'သင်တစ်ယောက်တည်း';
 
   @override
-  String get mePlaceholderBody =>
-      'သင့်မှတ်တမ်းနှင့် ဆက်တင်များ ဤနေရာတွင် ရှိပါမည်။';
+  String get journalTitle => 'ကျွန်မ၏ မှတ်တမ်း';
+
+  @override
+  String get meJournalSubtitle => 'ကျွန်မနှင့် တူသော ကတ်များ';
+
+  @override
+  String get journalEmptyTitle => 'ဘာမှ မသိမ်းရသေးပါ';
+
+  @override
+  String get journalEmptyBody =>
+      'ကြိုက်သော ကတ်များကို ညာဘက်သို့ ပွတ်ဆွဲပါ။ ဤနေရာတွင် သိမ်းထားပါမည်။';
+
+  @override
+  String get journalFilterAll => 'အားလုံး';
+
+  @override
+  String get journalRemoveTitle => 'မှတ်တမ်းမှ ဖယ်ရှားမလား။';
+
+  @override
+  String get journalRemoveBody =>
+      'ဤကတ်သည် မှတ်တမ်းမှ ထွက်သွားပါမည်။ နောက်မှ ပြန်သိမ်းနိုင်ပါသည်။';
+
+  @override
+  String get journalRemoveConfirm => 'ဖယ်ရှားမည်';
+
+  @override
+  String get journalKeep => 'ဆက်သိမ်းမည်';
+
+  @override
+  String get journalClose => 'ပိတ်မည်';
 
   @override
   String get readAloudHint => 'အသံထွက်ဖတ်ပါ ✨';

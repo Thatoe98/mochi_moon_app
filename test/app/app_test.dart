@@ -5,8 +5,10 @@ import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 
 import '../features/deck/support/fake_deck_repository.dart';
+import '../features/journal/support/fake_journal_repository.dart';
 
 const _quote = Quote(
   id: 'q_test',
@@ -17,6 +19,7 @@ const _quote = Quote(
 Widget _app({Future<List<Quote>> Function()? quotes}) => ProviderScope(
   overrides: [
     deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
+    journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
     quotesProvider.overrideWith(
       (ref) => quotes?.call() ?? Future.value([_quote]),
     ),
@@ -75,9 +78,18 @@ void main() {
 
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    expect(
-      find.text('Your journal and settings will live here.'),
-      findsOneWidget,
-    );
+    expect(find.text('Your journal'), findsOneWidget);
+  });
+
+  testWidgets('Me opens the journal', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Your journal'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Nothing saved yet'), findsOneWidget);
   });
 }

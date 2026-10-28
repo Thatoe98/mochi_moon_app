@@ -105,7 +105,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mePlaceholderTitle => 'Just you';
 
   @override
-  String get mePlaceholderBody => 'Your journal and settings will live here.';
+  String get journalTitle => 'Your journal';
+
+  @override
+  String get meJournalSubtitle => 'Cards that feel like you';
+
+  @override
+  String get journalEmptyTitle => 'Nothing saved yet';
+
+  @override
+  String get journalEmptyBody =>
+      'Swipe right on the cards you love and they\'ll live here.';
+
+  @override
+  String get journalFilterAll => 'All';
+
+  @override
+  String get journalRemoveTitle => 'Remove from your journal?';
+
+  @override
+  String get journalRemoveBody =>
+      'This card will leave your journal. You can always save it again.';
+
+  @override
+  String get journalRemoveConfirm => 'Remove';
+
+  @override
+  String get journalKeep => 'Keep it';
+
+  @override
+  String get journalClose => 'Close';
 
   @override
   String get readAloudHint => 'Read it out loud ✨';

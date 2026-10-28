@@ -115,9 +115,9 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 ### 6.3 Journal (Free)
 
-- [ ] Lists saved cards newest first with illustration thumbnails; tap opens full card; long-press to remove.
+- [x] Lists saved cards newest first with illustration thumbnails; tap opens full card; long-press to remove.
 - [ ] Filter by category. Synced via Firestore so it survives reinstall.
-- [ ] Empty state with the mascot and a prompt to swipe right on cards she loves.
+- [x] Empty state with the mascot and a prompt to swipe right on cards she loves. — *generic moon icon until the mascot art exists*
 
 ### 6.4 Share as image (Free)
 
@@ -564,7 +564,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 ### M1 — Self-love deck (Android closed test)
 - [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), midnight reset while open, premium-quote filtering, `my` strings need native review*
-- [ ] Journal (local first)
+- [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), real illustration thumbnails (placeholder until assets exist), entry to the journal from the Deck header, `my` strings need native review*
 - [ ] Share as image (§6.4)
 - [ ] Daily reminder notification
 - [ ] Home-screen widget (§6.5)
