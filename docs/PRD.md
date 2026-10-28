@@ -80,16 +80,16 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - As a user, I can say "I don't know my birth time" and still continue.
 
 **AC**
-- [x] 3 sample cards work without network or account; the timer gate applies. — *shown after a welcome screen; the "save your cards" step is inline and has only Continue until Google sign-in lands in M2*
-- [ ] Google sign-in via Firebase Auth; on success a `users/{uid}` doc is created (§8.1).
-- [ ] Birth date is required (date picker; year range 1940–current year; no future dates).
-- [ ] Birth time is optional; "I don't know" sets `timeKnown = false`.
+- [x] 3 sample cards work without network or account; the timer gate applies. — *shown after a welcome screen; the "save your cards" step is the Google sign-in button*
+- [x] Google sign-in via Firebase Auth; on success a `users/{uid}` doc is created (§8.1). — *verified on the Android emulator against the dev project (`mochi-moon-dev`): the Auth user is created, the profile steps run, and `users/{uid}` appears in Firestore with name, locale, profile and settings. Sign-in waits up to 10 s for the first Firestore read when the network is slow. Without Firebase config the button carries on signed out. An account that already has a complete `users/{uid}` profile skips the profile steps.*
+- [x] Birth date is required (date picker; year range 1940–current year; no future dates).
+- [x] Birth time is optional; "I don't know" sets `timeKnown = false`.
 - [ ] Birthplace is required when birth time is given, optional otherwise. Search is offline over the bundled cities list (§8.5), showing "City, Region, Country".
 - [ ] On save, the app computes and stores sun sign (always), moon sign (always; flagged approximate when time unknown), rising sign (only when time known).
-- [ ] Reminder time defaults to 08:00 local; user can skip.
-- [ ] Focus areas: Self-love, Confidence, Healing, Study & work, Body kindness, Calm (multi-select, up to 3).
-- [ ] The whole flow works in en/th/my and respects text scaling.
-- [ ] Back navigation never loses entered data within the flow.
+- [x] Reminder time defaults to 08:00 local; user can skip.
+- [x] Focus areas: Self-love, Confidence, Healing, Study & work, Body kindness, Calm (multi-select, up to 3).
+- [ ] The whole flow works in en/th/my and respects text scaling. — *text scaling 1.3× is tested; the new profile strings are English only (`my` falls back to English, `th` is deferred)*
+- [x] Back navigation never loses entered data within the flow.
 
 ### 6.2 Self-love deck (Free with daily limit)
 
@@ -238,7 +238,7 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 - [ ] Language: System / English / ไทย / မြန်မာ.
 - [ ] Notifications: reminder time, retrograde alerts per planet, announcements.
 - [ ] Show Thai colors toggle. Reduce motion toggle (also follows system).
-- [ ] Edit birth data. Manage partners.
+- [ ] Edit profile from the Me tab: name, birthday, birth time (and later birthplace) and focus areas, reusing the onboarding profile steps. Manage partners. — *requested during M2; the profile steps and `ProfileController.save` already exist, so this is a presentation task for this phase, not before.*
 - [ ] Privacy policy, Terms, "About readings" (entertainment notice), licenses.
 - [ ] Analytics consent toggle (default off until the consent prompt is answered).
 - [ ] **Delete account**: confirmation dialog → calls `DELETE /v1/account` → server deletes Firestore data, reports, and the Auth user → app clears local DB and signs out. A web deletion page (`https://<domain>/delete-account`) offers the same.
@@ -571,7 +571,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Sample-cards-before-sign-in flow — *deferred: Google sign-in and profile steps (M2), mascot art, Burmese strings; sample swipes count toward the day's 10 cards*
 
 ### M2 — Accounts and Cosmic basics
-- [ ] Firebase project, Google sign-in, onboarding (§6.1)
+- [ ] Firebase project, Google sign-in, onboarding (§6.1) — *code done and tested with fakes: sign-in, local-first profile (drift) with Firestore sync, name / birth date / birth time / reminder / focus steps. Done: dev Firebase project (`mochi-moon-dev`), `google-services.json` for dev, SHA-1, Google sign-in enabled, real sign-in tried on the emulator. Firestore database (`asia-southeast1`) created, rules from §8.1 deployed to dev, and the profile document confirmed in the console. Still open: a prod project with its own `google-services.json` and release SHA-1. Deferred to later M2 items: birthplace, sun/moon/rising signs, `firestore.rules` and emulator tests.*
 - [ ] Firestore sync for profile, Journal, deck counters; security rules + emulator tests
 - [ ] Cities dataset + birthplace search + time zone resolution
 - [ ] Astro engine: Sun/Moon/planets + sun/moon sign (§9.1–9.2)

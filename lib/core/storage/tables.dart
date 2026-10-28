@@ -43,6 +43,17 @@ class JournalCache extends Table {
   Set<Column<Object>> get primaryKey => {quoteId};
 }
 
+/// Single-row table (id = 0): the user's profile as JSON, in the same shape as
+/// the Firestore document.
+class ProfileCache extends Table {
+  IntColumn get id => integer()();
+  TextColumn get json => text()();
+  DateTimeColumn get updatedAt => dateTime()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
 class RetroCalendar extends Table {
   TextColumn get planet => text()();
   IntColumn get year => integer()();

@@ -1841,6 +1841,252 @@ class PreferenceVectorCompanion extends UpdateCompanion<PreferenceVectorData> {
   }
 }
 
+class $ProfileCacheTable extends ProfileCache
+    with TableInfo<$ProfileCacheTable, ProfileCacheData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ProfileCacheTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _jsonMeta = const VerificationMeta('json');
+  @override
+  late final GeneratedColumn<String> json = GeneratedColumn<String>(
+    'json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, json, updatedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'profile_cache';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ProfileCacheData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('json')) {
+      context.handle(
+        _jsonMeta,
+        json.isAcceptableOrUnknown(data['json']!, _jsonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_jsonMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ProfileCacheData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ProfileCacheData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      json: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}json'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $ProfileCacheTable createAlias(String alias) {
+    return $ProfileCacheTable(attachedDatabase, alias);
+  }
+}
+
+class ProfileCacheData extends DataClass
+    implements Insertable<ProfileCacheData> {
+  final int id;
+  final String json;
+  final DateTime updatedAt;
+  const ProfileCacheData({
+    required this.id,
+    required this.json,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['json'] = Variable<String>(json);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  ProfileCacheCompanion toCompanion(bool nullToAbsent) {
+    return ProfileCacheCompanion(
+      id: Value(id),
+      json: Value(json),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory ProfileCacheData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ProfileCacheData(
+      id: serializer.fromJson<int>(json['id']),
+      json: serializer.fromJson<String>(json['json']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'json': serializer.toJson<String>(json),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  ProfileCacheData copyWith({int? id, String? json, DateTime? updatedAt}) =>
+      ProfileCacheData(
+        id: id ?? this.id,
+        json: json ?? this.json,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  ProfileCacheData copyWithCompanion(ProfileCacheCompanion data) {
+    return ProfileCacheData(
+      id: data.id.present ? data.id.value : this.id,
+      json: data.json.present ? data.json.value : this.json,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProfileCacheData(')
+          ..write('id: $id, ')
+          ..write('json: $json, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, json, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ProfileCacheData &&
+          other.id == this.id &&
+          other.json == this.json &&
+          other.updatedAt == this.updatedAt);
+}
+
+class ProfileCacheCompanion extends UpdateCompanion<ProfileCacheData> {
+  final Value<int> id;
+  final Value<String> json;
+  final Value<DateTime> updatedAt;
+  const ProfileCacheCompanion({
+    this.id = const Value.absent(),
+    this.json = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+  });
+  ProfileCacheCompanion.insert({
+    this.id = const Value.absent(),
+    required String json,
+    required DateTime updatedAt,
+  }) : json = Value(json),
+       updatedAt = Value(updatedAt);
+  static Insertable<ProfileCacheData> custom({
+    Expression<int>? id,
+    Expression<String>? json,
+    Expression<DateTime>? updatedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (json != null) 'json': json,
+      if (updatedAt != null) 'updated_at': updatedAt,
+    });
+  }
+
+  ProfileCacheCompanion copyWith({
+    Value<int>? id,
+    Value<String>? json,
+    Value<DateTime>? updatedAt,
+  }) {
+    return ProfileCacheCompanion(
+      id: id ?? this.id,
+      json: json ?? this.json,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (json.present) {
+      map['json'] = Variable<String>(json.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ProfileCacheCompanion(')
+          ..write('id: $id, ')
+          ..write('json: $json, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1852,6 +2098,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $PreferenceVectorTable preferenceVector = $PreferenceVectorTable(
     this,
   );
+  late final $ProfileCacheTable profileCache = $ProfileCacheTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1863,6 +2110,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     journalCache,
     retroCalendar,
     preferenceVector,
+    profileCache,
   ];
 }
 
@@ -3012,6 +3260,166 @@ typedef $$PreferenceVectorTableProcessedTableManager =
       PreferenceVectorData,
       PrefetchHooks Function()
     >;
+typedef $$ProfileCacheTableCreateCompanionBuilder =
+    ProfileCacheCompanion Function({
+      Value<int> id,
+      required String json,
+      required DateTime updatedAt,
+    });
+typedef $$ProfileCacheTableUpdateCompanionBuilder =
+    ProfileCacheCompanion Function({
+      Value<int> id,
+      Value<String> json,
+      Value<DateTime> updatedAt,
+    });
+
+class $$ProfileCacheTableFilterComposer
+    extends Composer<_$AppDatabase, $ProfileCacheTable> {
+  $$ProfileCacheTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ProfileCacheTableOrderingComposer
+    extends Composer<_$AppDatabase, $ProfileCacheTable> {
+  $$ProfileCacheTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ProfileCacheTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ProfileCacheTable> {
+  $$ProfileCacheTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get json =>
+      $composableBuilder(column: $table.json, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$ProfileCacheTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ProfileCacheTable,
+          ProfileCacheData,
+          $$ProfileCacheTableFilterComposer,
+          $$ProfileCacheTableOrderingComposer,
+          $$ProfileCacheTableAnnotationComposer,
+          $$ProfileCacheTableCreateCompanionBuilder,
+          $$ProfileCacheTableUpdateCompanionBuilder,
+          (
+            ProfileCacheData,
+            BaseReferences<_$AppDatabase, $ProfileCacheTable, ProfileCacheData>,
+          ),
+          ProfileCacheData,
+          PrefetchHooks Function()
+        > {
+  $$ProfileCacheTableTableManager(_$AppDatabase db, $ProfileCacheTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ProfileCacheTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ProfileCacheTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ProfileCacheTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> json = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+          }) => ProfileCacheCompanion(id: id, json: json, updatedAt: updatedAt),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String json,
+                required DateTime updatedAt,
+              }) => ProfileCacheCompanion.insert(
+                id: id,
+                json: json,
+                updatedAt: updatedAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ProfileCacheTable, ProfileCacheData>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $ProfileCacheTable,
+                    ProfileCacheData
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ProfileCacheTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ProfileCacheTable,
+      ProfileCacheData,
+      $$ProfileCacheTableFilterComposer,
+      $$ProfileCacheTableOrderingComposer,
+      $$ProfileCacheTableAnnotationComposer,
+      $$ProfileCacheTableCreateCompanionBuilder,
+      $$ProfileCacheTableUpdateCompanionBuilder,
+      (
+        ProfileCacheData,
+        BaseReferences<_$AppDatabase, $ProfileCacheTable, ProfileCacheData>,
+      ),
+      ProfileCacheData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3028,6 +3436,8 @@ class $AppDatabaseManager {
       $$RetroCalendarTableTableManager(_db, _db.retroCalendar);
   $$PreferenceVectorTableTableManager get preferenceVector =>
       $$PreferenceVectorTableTableManager(_db, _db.preferenceVector);
+  $$ProfileCacheTableTableManager get profileCache =>
+      $$ProfileCacheTableTableManager(_db, _db.profileCache);
 }
 
 // **************************************************************************

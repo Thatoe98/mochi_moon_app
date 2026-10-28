@@ -13,6 +13,7 @@ class OnboardingPage extends StatelessWidget {
     required this.body,
     required this.buttonLabel,
     required this.onPressed,
+    this.busy = false,
     super.key,
   });
 
@@ -22,6 +23,9 @@ class OnboardingPage extends StatelessWidget {
   final String body;
   final String buttonLabel;
   final VoidCallback onPressed;
+
+  /// Disables the button and shows a spinner in it, for work in progress.
+  final bool busy;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,15 @@ class OnboardingPage extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           SizedBox(
             width: double.infinity,
-            child: FilledButton(onPressed: onPressed, child: Text(buttonLabel)),
+            child: FilledButton(
+              onPressed: busy ? null : onPressed,
+              child: busy
+                  ? const SizedBox.square(
+                      dimension: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Text(buttonLabel),
+            ),
           ),
         ],
       ),

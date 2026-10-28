@@ -4,6 +4,13 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Firebase config is per flavor (src/dev, src/prod) and never committed. Without
+// any of it the app still builds and runs signed out; with it, add one for every
+// flavor you build.
+if (listOf("", "src/dev/", "src/prod/").any { file("${it}google-services.json").exists() }) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
     namespace = "com.mochimoon.mochi_moon"
     compileSdk = flutter.compileSdkVersion

@@ -5,16 +5,20 @@ import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
+import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
+import '../features/auth/support/fake_auth_repository.dart';
 import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
+import '../features/profile/support/fake_profile.dart';
 import '../features/settings/support/fake_reminder.dart';
 import '../features/widget_bridge/support/fake_widget_publisher.dart';
 
@@ -24,26 +28,34 @@ const _quote = Quote(
   category: 'self_love',
 );
 
-Widget _app({Future<List<Quote>> Function()? quotes, bool onboarded = true}) =>
-    ProviderScope(
-      overrides: [
-        initialOnboardingCompleteProvider.overrideWithValue(onboarded),
-        onboardingRepositoryProvider.overrideWithValue(
-          FakeOnboardingRepository(complete: onboarded),
-        ),
-        deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
-        journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
-        reminderSettingsRepositoryProvider.overrideWithValue(
-          FakeReminderSettingsRepository(),
-        ),
-        reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
-        widgetPublisherProvider.overrideWithValue(FakeWidgetPublisher()),
-        quotesProvider.overrideWith(
-          (ref) => quotes?.call() ?? Future.value([_quote]),
-        ),
-      ],
-      child: const MochiMoonApp(),
-    );
+Widget _app({
+  Future<List<Quote>> Function()? quotes,
+  bool onboarded = true,
+  FakeProfileRepository? profiles,
+}) => ProviderScope(
+  overrides: [
+    initialOnboardingCompleteProvider.overrideWithValue(onboarded),
+    onboardingRepositoryProvider.overrideWithValue(
+      FakeOnboardingRepository(complete: onboarded),
+    ),
+    authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
+    profileRepositoryProvider.overrideWithValue(
+      profiles ?? FakeProfileRepository(),
+    ),
+    profileRemoteProvider.overrideWithValue(null),
+    deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
+    journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
+    reminderSettingsRepositoryProvider.overrideWithValue(
+      FakeReminderSettingsRepository(),
+    ),
+    reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
+    widgetPublisherProvider.overrideWithValue(FakeWidgetPublisher()),
+    quotesProvider.overrideWith(
+      (ref) => quotes?.call() ?? Future.value([_quote]),
+    ),
+  ],
+  child: const MochiMoonApp(),
+);
 
 void main() {
   testWidgets('opens on the deck tab and shows a quote', (tester) async {
@@ -165,9 +177,12 @@ void main() {
       expect(find.text('Nothing saved yet'), findsNothing);
     });
 
-    testWidgets('welcome, three cards, then the deck', (tester) async {
+    testWidgets('welcome, three cards, sign-in, profile, then the deck', (
+      tester,
+    ) async {
+      final profiles = FakeProfileRepository();
       await tester.pumpWidget(
-        _app(onboarded: false, quotes: () async => cards),
+        _app(onboarded: false, quotes: () async => cards, profiles: profiles),
       );
       await tester.pumpAndSettle();
 
@@ -182,14 +197,44 @@ void main() {
         await tester.pump(const Duration(milliseconds: 500));
         await tester.pumpAndSettle();
       }
-      expect(find.text('Continue'), findsOneWidget);
+      await tester.tap(find.text('Continue with Google'));
+      await tester.pumpAndSettle();
 
+      // Name: filled in from the Google account.
+      expect(find.text('What should we call you?'), findsOneWidget);
       await tester.tap(find.text('Continue'));
-      await tester.pump();
-      await tester.pump();
+      await tester.pumpAndSettle();
+
+      // Birth date: Continue stays off until a day is picked.
+      expect(find.text('When is your birthday?'), findsOneWidget);
+      expect(
+        tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
+        isNull,
+      );
+      await tester.tap(find.text('1998'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+
+      // Birth time is optional.
+      expect(find.text('What time were you born?'), findsOneWidget);
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('A daily nudge?'), findsOneWidget);
+      await tester.tap(find.text('Skip for now'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('What would you like more of?'), findsOneWidget);
+      await tester.tap(find.text("Let's go"));
+      await tester.pumpAndSettle();
 
       expect(find.text('Deck'), findsOneWidget);
       expect(find.text('Welcome to Mochi Moon'), findsNothing);
+      expect(profiles.profile?.displayName, 'Mochi');
+      expect(profiles.profile?.birthDate, DateTime(1998, 1, 15));
     });
   });
 }

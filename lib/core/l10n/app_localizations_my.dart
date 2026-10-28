@@ -256,4 +256,108 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get illustrationRest =>
       'Mochi the moon bunny sleeping on a soft cloud under a crescent moon';
+
+  @override
+  String get signInGoogle => 'Continue with Google';
+
+  @override
+  String get signInFailed => 'Couldn\'t sign in. Please try again.';
+
+  @override
+  String get signInOffline =>
+      'You seem to be offline. Check your connection and try again.';
+
+  @override
+  String profileStepProgress(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get profileBack => 'Back';
+
+  @override
+  String get profileNameTitle => 'What should we call you?';
+
+  @override
+  String get profileNameBody => 'A first name or a nickname is perfect.';
+
+  @override
+  String get profileNameLabel => 'Your name';
+
+  @override
+  String get profileBirthDateTitle => 'When is your birthday?';
+
+  @override
+  String get profileBirthDateBody =>
+      'Your sun sign and your cosmic reading start here.';
+
+  @override
+  String profileBirthDateChosen(String date) {
+    return 'Born $date';
+  }
+
+  @override
+  String get profileBirthTimeTitle => 'What time were you born?';
+
+  @override
+  String get profileBirthTimeBody =>
+      'This is optional. It sharpens your moon and rising signs.';
+
+  @override
+  String get profileBirthTimeChoose => 'Choose a time';
+
+  @override
+  String get profileBirthTimeChange => 'Change the time';
+
+  @override
+  String get profileBirthTimeUnknown => 'I don\'t know';
+
+  @override
+  String profileBirthTimeChosen(String time) {
+    return 'Born at $time';
+  }
+
+  @override
+  String get profileBirthTimeNone => 'No birth time. That\'s okay.';
+
+  @override
+  String get profileReminderTitle => 'A daily nudge?';
+
+  @override
+  String get profileReminderBody =>
+      'One soft card a day. You can change this any time.';
+
+  @override
+  String profileReminderAt(String time) {
+    return 'Remind me at $time';
+  }
+
+  @override
+  String get profileReminderChange => 'Change the time';
+
+  @override
+  String get profileReminderOn => 'Remind me';
+
+  @override
+  String get profileReminderSkip => 'Skip for now';
+
+  @override
+  String get profileFocusTitle => 'What would you like more of?';
+
+  @override
+  String profileFocusBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Pick up to $count.',
+      one: 'Pick up to 1.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileFinish => 'Let\'s go';
+
+  @override
+  String get profileSaveFailed => 'Couldn\'t save that. Please try again.';
 }

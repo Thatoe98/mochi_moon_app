@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/app/flavors.dart';
+import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/data/prefs_onboarding_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,10 +14,12 @@ final flavorConfigProvider = Provider<FlavorConfig>(
 
 Future<void> bootstrap(FlavorConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
+  final firebaseReady = await _initFirebase();
   runApp(
     ProviderScope(
       overrides: [
         flavorConfigProvider.overrideWithValue(config),
+        firebaseReadyProvider.overrideWithValue(firebaseReady),
         initialOnboardingCompleteProvider.overrideWithValue(
           await _readOnboardingComplete(),
         ),
@@ -33,6 +37,18 @@ Future<bool> _readOnboardingComplete() async {
         .isComplete();
   } on Exception catch (error) {
     debugPrint('Could not read the onboarding flag: $error');
+    return false;
+  }
+}
+
+/// Starts Firebase. A build with no Firebase config (an early dev build) still
+/// runs, signed out; sign-in then reports that it is unavailable.
+Future<bool> _initFirebase() async {
+  try {
+    await Firebase.initializeApp();
+    return true;
+  } on Exception catch (error) {
+    debugPrint('Firebase is not available: $error');
     return false;
   }
 }

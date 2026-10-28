@@ -10,6 +10,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
+import 'package:mochi_moon/features/onboarding/application/sign_in_step.dart';
 import 'package:mochi_moon/features/onboarding/presentation/onboarding_page.dart';
 
 /// The three sample cards, then the "save your cards" screen (PRD §6.1). The
@@ -28,9 +29,27 @@ class _SampleCardsScreenState extends ConsumerState<SampleCardsScreen> {
   Future<void> _onAction(DeckAction action, Quote quote) =>
       ref.read(sampleDeckProvider.notifier).complete(action);
 
-  Future<void> _finish() async {
-    await ref.read(onboardingCompleteProvider.notifier).complete();
-    if (mounted) context.go(AppRoutes.deck);
+  /// Signs in with Google, then goes on to the profile steps, or straight to
+  /// the deck when the account already has a profile. A build without
+  /// Firebase config carries on signed out.
+  Future<void> _signIn() async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final outcome = await ref.read(signInStepProvider.notifier).signIn();
+    if (!mounted) return;
+    switch (outcome) {
+      case SignInOutcome.signedIn || SignInOutcome.unavailable:
+        context.go(AppRoutes.welcomeProfile);
+      case SignInOutcome.restored:
+        await ref.read(onboardingCompleteProvider.notifier).complete();
+        if (mounted) context.go(AppRoutes.deck);
+      case SignInOutcome.cancelled:
+        break;
+      case SignInOutcome.offline:
+        messenger.showSnackBar(SnackBar(content: Text(l10n.signInOffline)));
+      case SignInOutcome.failed:
+        messenger.showSnackBar(SnackBar(content: Text(l10n.signInFailed)));
+    }
   }
 
   @override
@@ -53,8 +72,7 @@ class _SampleCardsScreenState extends ConsumerState<SampleCardsScreen> {
     );
   }
 
-  /// Shown after the last sample card. Google sign-in and the profile steps
-  /// join this screen in M2; until then it leads on to the deck.
+  /// Shown after the last sample card: sign in, then the profile steps.
   Widget _buildPitch() {
     final l10n = AppLocalizations.of(context);
     return OnboardingPage(
@@ -62,8 +80,9 @@ class _SampleCardsScreenState extends ConsumerState<SampleCardsScreen> {
       illustrationLabel: l10n.illustrationOnboardingSave,
       title: l10n.onboardingSaveTitle,
       body: l10n.onboardingSaveBody,
-      buttonLabel: l10n.onboardingContinue,
-      onPressed: _finish,
+      buttonLabel: l10n.signInGoogle,
+      busy: ref.watch(signInStepProvider),
+      onPressed: _signIn,
     );
   }
 

@@ -7,6 +7,7 @@ import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/domain/onboarding_repository.dart';
+import 'package:mochi_moon/features/onboarding/presentation/profile_setup_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/sample_cards_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,6 +21,7 @@ abstract final class AppRoutes {
   static const journal = '/me/journal';
   static const welcome = '/welcome';
   static const welcomeCards = '/welcome/cards';
+  static const welcomeProfile = '/welcome/profile';
 }
 
 @Riverpod(keepAlive: true)
@@ -51,6 +53,10 @@ GoRouter router(Ref ref) {
           GoRoute(
             path: 'cards',
             builder: (context, state) => const SampleCardsScreen(),
+          ),
+          GoRoute(
+            path: 'profile',
+            builder: (context, state) => const ProfileSetupScreen(),
           ),
         ],
       ),

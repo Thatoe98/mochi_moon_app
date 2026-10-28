@@ -517,6 +517,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mochi the moon bunny sleeping on a soft cloud under a crescent moon'**
   String get illustrationRest;
+
+  /// No description provided for @signInGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get signInGoogle;
+
+  /// No description provided for @signInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t sign in. Please try again.'**
+  String get signInFailed;
+
+  /// No description provided for @signInOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'You seem to be offline. Check your connection and try again.'**
+  String get signInOffline;
+
+  /// No description provided for @profileStepProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String profileStepProgress(int current, int total);
+
+  /// No description provided for @profileBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get profileBack;
+
+  /// No description provided for @profileNameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What should we call you?'**
+  String get profileNameTitle;
+
+  /// No description provided for @profileNameBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A first name or a nickname is perfect.'**
+  String get profileNameBody;
+
+  /// No description provided for @profileNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get profileNameLabel;
+
+  /// No description provided for @profileBirthDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When is your birthday?'**
+  String get profileBirthDateTitle;
+
+  /// No description provided for @profileBirthDateBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your sun sign and your cosmic reading start here.'**
+  String get profileBirthDateBody;
+
+  /// No description provided for @profileBirthDateChosen.
+  ///
+  /// In en, this message translates to:
+  /// **'Born {date}'**
+  String profileBirthDateChosen(String date);
+
+  /// No description provided for @profileBirthTimeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What time were you born?'**
+  String get profileBirthTimeTitle;
+
+  /// No description provided for @profileBirthTimeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is optional. It sharpens your moon and rising signs.'**
+  String get profileBirthTimeBody;
+
+  /// No description provided for @profileBirthTimeChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a time'**
+  String get profileBirthTimeChoose;
+
+  /// No description provided for @profileBirthTimeChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change the time'**
+  String get profileBirthTimeChange;
+
+  /// No description provided for @profileBirthTimeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t know'**
+  String get profileBirthTimeUnknown;
+
+  /// No description provided for @profileBirthTimeChosen.
+  ///
+  /// In en, this message translates to:
+  /// **'Born at {time}'**
+  String profileBirthTimeChosen(String time);
+
+  /// No description provided for @profileBirthTimeNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No birth time. That\'s okay.'**
+  String get profileBirthTimeNone;
+
+  /// No description provided for @profileReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A daily nudge?'**
+  String get profileReminderTitle;
+
+  /// No description provided for @profileReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'One soft card a day. You can change this any time.'**
+  String get profileReminderBody;
+
+  /// No description provided for @profileReminderAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind me at {time}'**
+  String profileReminderAt(String time);
+
+  /// No description provided for @profileReminderChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change the time'**
+  String get profileReminderChange;
+
+  /// No description provided for @profileReminderOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind me'**
+  String get profileReminderOn;
+
+  /// No description provided for @profileReminderSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip for now'**
+  String get profileReminderSkip;
+
+  /// No description provided for @profileFocusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What would you like more of?'**
+  String get profileFocusTitle;
+
+  /// No description provided for @profileFocusBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Pick up to 1.} other{Pick up to {count}.}}'**
+  String profileFocusBody(int count);
+
+  /// No description provided for @profileFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s go'**
+  String get profileFinish;
+
+  /// No description provided for @profileSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save that. Please try again.'**
+  String get profileSaveFailed;
 }
 
 class _AppLocalizationsDelegate

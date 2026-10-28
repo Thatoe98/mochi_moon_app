@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/presentation/sample_cards_screen.dart';
+import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
+import '../../auth/support/fake_auth_repository.dart';
 import '../../deck/support/fake_deck_repository.dart';
+import '../../profile/support/fake_profile.dart';
 import '../support/fake_onboarding_repository.dart';
 
 /// Two words each, so the lock is the 3 s minimum. One card per category, as
@@ -23,21 +31,46 @@ List<Quote> quotes() => const [
 
 const lock = Duration(seconds: 3, milliseconds: 100);
 
+const continueWithGoogle = 'Continue with Google';
+
+/// What the pitch's sign-in lands on.
+const profileRoute = 'profile steps';
+const deckRoute = 'the deck';
+
+/// Three saved cards from an earlier run, so the pitch is already showing.
+List<DeckEvent> allCardsSeen() => [
+  for (final id in ['q0', 'q1', 'q2'])
+    DeckEvent(
+      id: 1,
+      quoteId: id,
+      action: DeckAction.saved,
+      at: DateTime(2026, 10, 28, 9),
+    ),
+];
+
 Widget app({
   required FakeDeckRepository repo,
   Future<List<Quote>> Function()? loadQuotes,
   double textScale = 1,
+  FakeAuthRepository? auth,
+  FakeProfileRemote? remote,
+  FakeOnboardingRepository? onboarding,
 }) => ProviderScope(
   overrides: [
     initialOnboardingCompleteProvider.overrideWithValue(false),
-    onboardingRepositoryProvider.overrideWithValue(FakeOnboardingRepository()),
+    onboardingRepositoryProvider.overrideWithValue(
+      onboarding ?? FakeOnboardingRepository(),
+    ),
     deckRepositoryProvider.overrideWithValue(repo),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
     quotesProvider.overrideWith(
       (ref) => loadQuotes?.call() ?? Future.value(quotes()),
     ),
+    authRepositoryProvider.overrideWithValue(auth ?? FakeAuthRepository()),
+    profileRepositoryProvider.overrideWithValue(FakeProfileRepository()),
+    profileRemoteProvider.overrideWithValue(remote ?? FakeProfileRemote()),
   ],
-  child: MaterialApp(
+  child: MaterialApp.router(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
     builder: (context, child) => MediaQuery(
@@ -45,7 +78,16 @@ Widget app({
           .copyWith(textScaler: TextScaler.linear(textScale)),
       child: child!,
     ),
-    home: const SampleCardsScreen(),
+    routerConfig: GoRouter(
+      routes: [
+        GoRoute(path: '/', builder: (_, _) => const SampleCardsScreen()),
+        GoRoute(
+          path: AppRoutes.welcomeProfile,
+          builder: (_, _) => const Text(profileRoute),
+        ),
+        GoRoute(path: AppRoutes.deck, builder: (_, _) => const Text(deckRoute)),
+      ],
+    ),
   ),
 );
 
@@ -134,24 +176,16 @@ void main() {
 
     expect(repo.events, hasLength(3));
     expect(find.text('Save your cards and get your cosmic reading'), findsOne);
-    expect(find.text('Continue'), findsOneWidget);
+    expect(find.text(continueWithGoogle), findsOneWidget);
     expect(find.byType(QuoteCard), findsNothing);
   });
 
   testWidgets('cards from an earlier run are not dealt again', (tester) async {
-    final repo = FakeDeckRepository([
-      for (final id in ['q0', 'q1', 'q2'])
-        DeckEvent(
-          id: 1,
-          quoteId: id,
-          action: DeckAction.saved,
-          at: DateTime(2026, 10, 28, 9),
-        ),
-    ]);
+    final repo = FakeDeckRepository(allCardsSeen());
     await tester.pumpWidget(app(repo: repo));
     await load(tester);
 
-    expect(find.text('Continue'), findsOneWidget);
+    expect(find.text(continueWithGoogle), findsOneWidget);
   });
 
   testWidgets('goes straight to the pitch when there is no content', (
@@ -162,7 +196,113 @@ void main() {
     );
     await load(tester);
 
-    expect(find.text('Continue'), findsOneWidget);
+    expect(find.text(continueWithGoogle), findsOneWidget);
+  });
+
+  group('signing in from the pitch', () {
+    Future<void> tapSignIn(WidgetTester tester) async {
+      await tester.tap(find.text(continueWithGoogle));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('a new account goes on to the profile steps', (tester) async {
+      final auth = FakeAuthRepository();
+      await tester.pumpWidget(
+        app(repo: FakeDeckRepository(allCardsSeen()), auth: auth),
+      );
+      await load(tester);
+
+      await tapSignIn(tester);
+
+      expect(auth.signInCalls, 1);
+      expect(find.text(profileRoute), findsOneWidget);
+    });
+
+    testWidgets('without Firebase it carries on to the profile steps', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        app(
+          repo: FakeDeckRepository(allCardsSeen()),
+          auth: FakeAuthRepository(signInError: const UnavailableFailure()),
+        ),
+      );
+      await load(tester);
+
+      await tapSignIn(tester);
+
+      expect(find.text(profileRoute), findsOneWidget);
+    });
+
+    testWidgets('an account with a profile skips straight to the deck', (
+      tester,
+    ) async {
+      final onboarding = FakeOnboardingRepository();
+      await tester.pumpWidget(
+        app(
+          repo: FakeDeckRepository(allCardsSeen()),
+          onboarding: onboarding,
+          remote: FakeProfileRemote({
+            'uid_1': UserProfile(
+              displayName: 'Mochi',
+              birthDate: DateTime(1998, 2, 4),
+            ),
+          }),
+        ),
+      );
+      await load(tester);
+
+      await tapSignIn(tester);
+
+      expect(find.text(deckRoute), findsOneWidget);
+      expect(onboarding.complete, isTrue);
+    });
+
+    testWidgets('closing the account picker changes nothing', (tester) async {
+      final auth = FakeAuthRepository(signInError: const CancelledFailure());
+      await tester.pumpWidget(
+        app(repo: FakeDeckRepository(allCardsSeen()), auth: auth),
+      );
+      await load(tester);
+
+      await tapSignIn(tester);
+
+      expect(auth.signInCalls, 1);
+      expect(find.text(continueWithGoogle), findsOneWidget);
+      expect(find.byType(SnackBar), findsNothing);
+    });
+
+    testWidgets('being offline says so and stays on the pitch', (tester) async {
+      await tester.pumpWidget(
+        app(
+          repo: FakeDeckRepository(allCardsSeen()),
+          auth: FakeAuthRepository(signInError: const NetworkFailure()),
+        ),
+      );
+      await load(tester);
+
+      await tapSignIn(tester);
+
+      expect(find.textContaining('offline'), findsOneWidget);
+      expect(find.text(continueWithGoogle), findsOneWidget);
+    });
+
+    testWidgets('another failure says so and stays on the pitch', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        app(
+          repo: FakeDeckRepository(allCardsSeen()),
+          auth: FakeAuthRepository(signInError: const UnknownFailure()),
+        ),
+      );
+      await load(tester);
+
+      await tapSignIn(tester);
+
+      expect(find.text("Couldn't sign in. Please try again."), findsOneWidget);
+      expect(find.text(continueWithGoogle), findsOneWidget);
+    });
   });
 
   testWidgets('shows a loading state while quotes load', (tester) async {
