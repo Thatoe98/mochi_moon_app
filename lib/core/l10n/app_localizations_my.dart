@@ -73,9 +73,6 @@ class AppLocalizationsMy extends AppLocalizations {
   String get deckTimerReady => 'ပွတ်ဆွဲနိုင်ပါပြီ';
 
   @override
-  String get deckIllustrationSemantics => 'နူးညံ့သော လပုံ ပုံဆွဲ';
-
-  @override
   String get shareFailed => 'မျှဝေရန် မဖွင့်နိုင်ပါ။ ထပ်မံကြိုးစားကြည့်ပါ။';
 
   @override
@@ -239,4 +236,24 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get illustrationEmptyDeck =>
       'Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart';
+
+  @override
+  String get illustrationCalm =>
+      'Mochi the moon bunny sitting peacefully with eyes closed among floating petals and stars';
+
+  @override
+  String get illustrationConfidence =>
+      'Mochi the moon bunny standing proudly with hands on hips on a glowing crescent moon';
+
+  @override
+  String get illustrationHealing =>
+      'Mochi the moon bunny wrapped in a starry blanket, smiling over a warm cup of tea';
+
+  @override
+  String get illustrationSelfWorth =>
+      'Mochi the moon bunny holding up a hand mirror that shows a glowing heart';
+
+  @override
+  String get illustrationRest =>
+      'Mochi the moon bunny sleeping on a soft cloud under a crescent moon';
 }

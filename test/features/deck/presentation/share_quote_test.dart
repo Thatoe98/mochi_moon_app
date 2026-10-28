@@ -77,7 +77,11 @@ void main() {
         tester,
         () => renderShareImage(
           context,
-          const ShareCardImage(text: 'I am enough', wordmark: 'Mochi Moon'),
+          const ShareCardImage(
+            text: 'I am enough',
+            category: 'self_love',
+            wordmark: 'Mochi Moon',
+          ),
         ),
       );
       final image = (await tester.runAsync(() => _decode(png)))!;
@@ -103,6 +107,7 @@ void main() {
             text:
                 'A very long affirmation that keeps going and going '
                 'so that the text has to shrink to fit the image',
+            category: 'self_love',
             wordmark: 'Mochi Moon',
             categoryLabel: 'Self-love',
             handle: '@mochimoon',
@@ -196,6 +201,7 @@ void main() {
         home: Material(
           child: ShareCardImage(
             text: 'Soft moon',
+            category: 'calm',
             wordmark: 'Mochi Moon',
             categoryLabel: 'Calm',
           ),

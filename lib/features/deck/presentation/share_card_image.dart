@@ -13,6 +13,7 @@ const shareImagePixelRatio = 3.0;
 class ShareCardImage extends StatelessWidget {
   const ShareCardImage({
     required this.text,
+    required this.category,
     required this.wordmark,
     this.categoryLabel,
     this.handle,
@@ -20,6 +21,7 @@ class ShareCardImage extends StatelessWidget {
   });
 
   final String text;
+  final String category;
   final String wordmark;
   final String? categoryLabel;
   final String? handle;
@@ -41,14 +43,14 @@ class ShareCardImage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: AppSpacing.xl),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               child: SizedBox(
                 height: 330,
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: AppRadii.cardRadius,
-                  child: IllustrationPlaceholder(iconSize: 72),
+                  child: QuoteIllustration(category: category),
                 ),
               ),
             ),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 
 Widget host(Widget child, {double textScale = 1}) => MaterialApp(
   localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -22,6 +24,68 @@ void main() {
     for (final asset in AppIllustrations.all) {
       expect(File(asset).existsSync(), isTrue, reason: asset);
     }
+  });
+
+  group('forCategory', () {
+    test('every category in the content is mapped on purpose', () {
+      final json = jsonDecode(
+        File('assets/content/quotes/quotes.json').readAsStringSync(),
+      ) as Map<String, dynamic>;
+      final categories = {
+        for (final q in json['quotes'] as List<dynamic>)
+          (q as Map<String, dynamic>)['category'] as String,
+      };
+
+      // A new category must be given art in forCategory and added here, not
+      // left to the calm fallback.
+      expect(categories, isNotEmpty);
+      expect(
+        categories.difference(const {
+          'calm',
+          'confidence',
+          'healing',
+          'self_love',
+          'body_kindness',
+          'study_work',
+        }),
+        isEmpty,
+      );
+    });
+
+    test('maps the categories as designed', () {
+      expect(AppIllustrations.forCategory('calm'), AppIllustrations.calm);
+      expect(
+        AppIllustrations.forCategory('confidence'),
+        AppIllustrations.confidence,
+      );
+      expect(AppIllustrations.forCategory('healing'), AppIllustrations.healing);
+      expect(
+        AppIllustrations.forCategory('self_love'),
+        AppIllustrations.selfWorth,
+      );
+      expect(
+        AppIllustrations.forCategory('body_kindness'),
+        AppIllustrations.selfWorth,
+      );
+      expect(AppIllustrations.forCategory('study_work'), AppIllustrations.rest);
+    });
+
+    test('falls back to calm for an unknown category', () {
+      expect(AppIllustrations.forCategory('whatever'), AppIllustrations.calm);
+    });
+  });
+
+  testWidgets('a quote card wears the art for its category', (tester) async {
+    await tester.pumpWidget(
+      host(const QuoteCard(text: 'Rest is allowed', category: 'study_work')),
+    );
+    await tester.pump();
+
+    final image = tester.widget<Image>(find.byType(Image));
+    expect(
+      image.semanticLabel,
+      'Mochi the moon bunny sleeping on a soft cloud under a crescent moon',
+    );
   });
 
   testWidgets('empty state shows the art with its label', (tester) async {

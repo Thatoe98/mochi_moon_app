@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(
       const Directionality(
         textDirection: TextDirection.ltr,
-        child: Center(child: WidgetThumbnail()),
+        child: Center(child: WidgetThumbnail(category: 'calm')),
       ),
     );
 

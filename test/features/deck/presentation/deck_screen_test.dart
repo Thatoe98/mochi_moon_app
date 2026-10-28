@@ -397,7 +397,12 @@ void main() {
       await load(tester);
 
       expect(find.bySemanticsLabel('Read-aloud timer'), findsOneWidget);
-      expect(find.bySemanticsLabel('A soft moon illustration'), findsWidgets);
+      expect(
+        find.bySemanticsLabel(
+          'Mochi the moon bunny holding up a hand mirror that shows a glowing heart',
+        ),
+        findsWidgets,
+      );
       await tester.pumpAndSettle();
     });
   });

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_theme.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/deck/presentation/share_card_image.dart';
@@ -21,6 +22,12 @@ Future<void> shareQuote(
   final sharer = ref.read(imageSharerProvider);
   final handle = ref.read(shareHandleProvider);
   try {
+    // The art decodes asynchronously; without this the capture can be blank.
+    await precacheImage(
+      AssetImage(AppIllustrations.forCategory(quote.category)),
+      context,
+    );
+    if (!context.mounted) return;
     final png = await renderShareImage(
       context,
       // Always the light theme, so a shared image looks the same for everyone.
@@ -28,6 +35,7 @@ Future<void> shareQuote(
         data: AppTheme.light,
         child: ShareCardImage(
           text: quote.textFor(lang),
+          category: quote.category,
           categoryLabel: categoryLabel(l10n, quote.category),
           wordmark: l10n.appName,
           handle: handle,

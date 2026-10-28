@@ -40,6 +40,7 @@ class _JournalScreenState extends ConsumerState<JournalScreen> {
                   aspectRatio: 3 / 4,
                   child: QuoteCard(
                     text: item.quote.textFor(lang),
+                    category: item.quote.category,
                     categoryLabel: categoryLabel(l10n, item.quote.category),
                   ),
                 ),
@@ -205,11 +206,11 @@ class _JournalTile extends StatelessWidget {
     final lang = Localizations.localeOf(context).languageCode;
     return ListTile(
       minTileHeight: AppSpacing.minTouchTarget + AppSpacing.md,
-      leading: const SizedBox.square(
+      leading: SizedBox.square(
         dimension: AppSpacing.minTouchTarget + AppSpacing.sm,
         child: ClipRRect(
           borderRadius: AppRadii.chipRadius,
-          child: IllustrationPlaceholder(iconSize: AppSpacing.lg),
+          child: QuoteIllustration(category: item.quote.category),
         ),
       ),
       title: Text(

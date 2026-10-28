@@ -19,7 +19,6 @@
   "deckActionUndo": "Undo",
   "deckTimerSemantics": "Read-aloud timer",
   "deckTimerReady": "Ready to swipe",
-  "deckIllustrationSemantics": "A soft moon illustration",
   "shareFailed": "Couldn't open the share sheet. Please try again.",
   "categorySelfLove": "Self-love",
   "categoryConfidence": "Confidence",
@@ -70,5 +69,10 @@
   "stateEmptyTitle": "Nothing here yet",
   "illustrationOnboardingWelcome": "Mochi the moon bunny waving from a glowing crescent moon in a lavender night sky",
   "illustrationOnboardingSave": "Mochi the moon bunny hugging a small stack of glowing cards",
-  "illustrationEmptyDeck": "Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart"
+  "illustrationEmptyDeck": "Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart",
+  "illustrationCalm": "Mochi the moon bunny sitting peacefully with eyes closed among floating petals and stars",
+  "illustrationConfidence": "Mochi the moon bunny standing proudly with hands on hips on a glowing crescent moon",
+  "illustrationHealing": "Mochi the moon bunny wrapped in a starry blanket, smiling over a warm cup of tea",
+  "illustrationSelfWorth": "Mochi the moon bunny holding up a hand mirror that shows a glowing heart",
+  "illustrationRest": "Mochi the moon bunny sleeping on a soft cloud under a crescent moon"
 }

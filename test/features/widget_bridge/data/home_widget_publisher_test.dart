@@ -6,9 +6,24 @@ import 'package:mochi_moon/features/widget_bridge/data/home_widget_publisher.dar
 import 'package:mochi_moon/features/widget_bridge/domain/widget_day.dart';
 
 final _days = [
-  WidgetDay(date: DateTime(2026, 10, 28), quoteId: 'q_a', text: 'First.'),
-  WidgetDay(date: DateTime(2026, 10, 29), quoteId: 'q b', text: 'Second.'),
-  WidgetDay(date: DateTime(2026, 10, 30), quoteId: 'q_a', text: 'First.'),
+  WidgetDay(
+    date: DateTime(2026, 10, 28),
+    quoteId: 'q_a',
+    category: 'calm',
+    text: 'First.',
+  ),
+  WidgetDay(
+    date: DateTime(2026, 10, 29),
+    quoteId: 'q b',
+    category: 'healing',
+    text: 'Second.',
+  ),
+  WidgetDay(
+    date: DateTime(2026, 10, 30),
+    quoteId: 'q_a',
+    category: 'calm',
+    text: 'First.',
+  ),
 ];
 
 void main() {
@@ -19,7 +34,7 @@ void main() {
   late List<MethodCall> calls;
   late List<String> rendered;
 
-  Future<String> render(String key) async {
+  Future<String> render(String key, String category) async {
     rendered.add(key);
     return '/files/$key.png';
   }

@@ -15,7 +15,9 @@ const widgetThumbnailPixelRatio = 2.0;
 /// It is rendered outside the app's widget tree, so it brings its own theme,
 /// media query and localizations.
 class WidgetThumbnail extends StatelessWidget {
-  const WidgetThumbnail({super.key});
+  const WidgetThumbnail({required this.category, super.key});
+
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,9 @@ class WidgetThumbnail extends StatelessWidget {
           delegates: AppLocalizations.localizationsDelegates,
           child: SizedBox.fromSize(
             size: widgetThumbnailSize,
-            child: const ClipRRect(
+            child: ClipRRect(
               borderRadius: AppRadii.cardRadius,
-              child: IllustrationPlaceholder(),
+              child: QuoteIllustration(category: category),
             ),
           ),
         ),

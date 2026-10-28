@@ -121,13 +121,13 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 ### 6.4 Share as image (Free)
 
-- [x] Generates a 1080×1920 PNG story image: card illustration, text, subtle "Mochi Moon" wordmark and handle. — *handle comes from `--dart-define=SHARE_HANDLE`, omitted until set; illustration is the placeholder*
+- [x] Generates a 1080×1920 PNG story image: card illustration, text, subtle "Mochi Moon" wordmark and handle. — *handle comes from `--dart-define=SHARE_HANDLE`, omitted until set; the illustration is the card's theme art*
 - [x] Uses the system share sheet (`share_plus`). No social SDKs.
 - [ ] Rendering works in all three scripts with correct fonts. — *blocked on bundling fonts (M0 leftover); Burmese renders through the `Noto Sans Myanmar` fallback once bundled*
 
 ### 6.5 Home-screen widget (Free)
 
-- [x] Android widget (2×2 and 4×2) shows today's card text (short form) and a thumbnail. — *the thumbnail is the placeholder illustration until the art exists; English only; builds and is unit-tested but not yet seen on a device*
+- [x] Android widget (2×2 and 4×2) shows today's card text (short form) and a thumbnail. — *the thumbnail is the card's theme art (decoded before capture, not yet seen on a device); English only; builds and is unit-tested but not yet seen on a device*
 - [x] Updates at local midnight and whenever the deck is opened. — *the app stocks the next 14 days on each open; midnight refreshes are scheduled with `home_widget` (inexact, may drift a few minutes); a 1-hour system refresh is the safety net*
 - [x] Tapping opens the Deck at today's card. — *the launch intent carries `mochimoon://widget/deck`; the deck deals the card of the day first unless it was already completed today*
 
@@ -564,8 +564,8 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 ### M1 — Self-love deck (Android closed test)
 - [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), midnight reset while open, premium-quote filtering, `my` strings need native review*
-- [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), real illustration thumbnails (placeholder until assets exist), entry to the journal from the Deck header, `my` strings need native review*
-- [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), real illustration, share handle value, share-sheet position origin for iPad*
+- [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), per-card art beyond the 5 theme pieces, entry to the journal from the Deck header, `my` strings need native review*
+- [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), share handle value, share-sheet position origin for iPad*
 - [x] Daily reminder notification (§6.6, first box; retrograde alerts and FCM are separate)
 - [x] Home-screen widget (§6.5)
 - [x] Sample-cards-before-sign-in flow — *deferred: Google sign-in and profile steps (M2), mascot art, Burmese strings; sample swipes count toward the day's 10 cards*

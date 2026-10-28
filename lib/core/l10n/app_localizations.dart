@@ -194,12 +194,6 @@ abstract class AppLocalizations {
   /// **'Ready to swipe'**
   String get deckTimerReady;
 
-  /// No description provided for @deckIllustrationSemantics.
-  ///
-  /// In en, this message translates to:
-  /// **'A soft moon illustration'**
-  String get deckIllustrationSemantics;
-
   /// No description provided for @shareFailed.
   ///
   /// In en, this message translates to:
@@ -493,6 +487,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart'**
   String get illustrationEmptyDeck;
+
+  /// No description provided for @illustrationCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny sitting peacefully with eyes closed among floating petals and stars'**
+  String get illustrationCalm;
+
+  /// No description provided for @illustrationConfidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny standing proudly with hands on hips on a glowing crescent moon'**
+  String get illustrationConfidence;
+
+  /// No description provided for @illustrationHealing.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny wrapped in a starry blanket, smiling over a warm cup of tea'**
+  String get illustrationHealing;
+
+  /// No description provided for @illustrationSelfWorth.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny holding up a hand mirror that shows a glowing heart'**
+  String get illustrationSelfWorth;
+
+  /// No description provided for @illustrationRest.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny sleeping on a soft cloud under a crescent moon'**
+  String get illustrationRest;
 }
 
 class _AppLocalizationsDelegate

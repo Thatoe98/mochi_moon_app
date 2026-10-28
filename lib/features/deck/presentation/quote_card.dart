@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 
 /// One affirmation card: illustration on top (~60%), the text, a category chip.
 class QuoteCard extends StatelessWidget {
-  const QuoteCard({required this.text, this.categoryLabel, super.key});
+  const QuoteCard({
+    required this.text,
+    required this.category,
+    this.categoryLabel,
+    super.key,
+  });
 
   final String text;
+
+  /// The category id, which picks the art.
+  final String category;
   final String? categoryLabel;
 
   @override
@@ -17,7 +26,7 @@ class QuoteCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          const Expanded(flex: 6, child: IllustrationPlaceholder()),
+          Expanded(flex: 6, child: QuoteIllustration(category: category)),
           Expanded(
             flex: 4,
             child: Padding(
@@ -57,39 +66,26 @@ class QuoteCard extends StatelessWidget {
   }
 }
 
-/// Stands in until the illustration assets exist (PRD §8.4).
-class IllustrationPlaceholder extends StatelessWidget {
-  const IllustrationPlaceholder({this.iconSize = AppSpacing.xxl, super.key});
+/// The theme art for a card of [category], with its TalkBack label.
+class QuoteIllustration extends StatelessWidget {
+  const QuoteIllustration({required this.category, super.key});
 
-  final double iconSize;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Semantics(
-      image: true,
-      label: AppLocalizations.of(context).deckIllustrationSemantics,
-      child: ExcludeSemantics(
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                scheme.primaryContainer,
-                scheme.tertiary.withValues(alpha: 0.5),
-              ],
-            ),
-          ),
-          child: Center(
-            child: Icon(
-              Icons.nightlight_round,
-              size: iconSize,
-              color: scheme.primary,
-            ),
-          ),
-        ),
-      ),
+    final asset = AppIllustrations.forCategory(category);
+    return MochiIllustration(
+      asset: asset,
+      semanticLabel: _label(AppLocalizations.of(context), asset),
     );
   }
 }
+
+String _label(AppLocalizations l10n, String asset) => switch (asset) {
+  AppIllustrations.confidence => l10n.illustrationConfidence,
+  AppIllustrations.healing => l10n.illustrationHealing,
+  AppIllustrations.selfWorth => l10n.illustrationSelfWorth,
+  AppIllustrations.rest => l10n.illustrationRest,
+  _ => l10n.illustrationCalm,
+};

@@ -10,12 +10,14 @@ class WidgetDay {
   const WidgetDay({
     required this.date,
     required this.quoteId,
+    required this.category,
     required this.text,
   });
 
   /// Local midnight at the start of the day.
   final DateTime date;
   final String quoteId;
+  final String category;
   final String text;
 }
 
@@ -41,6 +43,7 @@ List<WidgetDay> planWidgetDays({
       WidgetDay(
         date: date,
         quoteId: quote.id,
+        category: quote.category,
         text: firstLine(quote.textFor(lang)),
       ),
     );
