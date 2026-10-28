@@ -386,6 +386,48 @@ abstract class AppLocalizations {
   /// **'One gentle card each day at the time you choose.'**
   String get reminderChannelDescription;
 
+  /// No description provided for @onboardingWelcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Mochi Moon'**
+  String get onboardingWelcomeTitle;
+
+  /// No description provided for @onboardingWelcomeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft little cards to remind you how wonderful you are. Read each one out loud, then let it sink in.'**
+  String get onboardingWelcomeBody;
+
+  /// No description provided for @onboardingTryCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Try {count} cards'**
+  String onboardingTryCards(int count);
+
+  /// No description provided for @onboardingCardProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Card {current} of {total}'**
+  String onboardingCardProgress(int current, int total);
+
+  /// No description provided for @onboardingSaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your cards and get your cosmic reading'**
+  String get onboardingSaveTitle;
+
+  /// No description provided for @onboardingSaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The cards you loved are waiting in your journal. Your cosmic reading is on its way.'**
+  String get onboardingSaveBody;
+
+  /// No description provided for @onboardingContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get onboardingContinue;
+
   /// No description provided for @readAloudHint.
   ///
   /// In en, this message translates to:

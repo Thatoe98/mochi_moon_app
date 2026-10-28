@@ -1,9 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/shell_scaffold.dart';
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
+import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
+import 'package:mochi_moon/features/onboarding/domain/onboarding_repository.dart';
+import 'package:mochi_moon/features/onboarding/presentation/sample_cards_screen.dart';
+import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -13,13 +18,42 @@ abstract final class AppRoutes {
   static const cosmic = '/cosmic';
   static const me = '/me';
   static const journal = '/me/journal';
+  static const welcome = '/welcome';
+  static const welcomeCards = '/welcome/cards';
 }
 
 @Riverpod(keepAlive: true)
 GoRouter router(Ref ref) {
+  // Finishing the first-run flow re-runs the redirect; the router itself must
+  // not be rebuilt, or it would lose its place.
+  final firstRun = ValueNotifier(ref.read(onboardingCompleteProvider));
+  ref
+    ..listen(
+      onboardingCompleteProvider,
+      (_, complete) => firstRun.value = complete,
+    )
+    ..onDispose(firstRun.dispose);
+
   return GoRouter(
     initialLocation: AppRoutes.deck,
+    refreshListenable: firstRun,
+    redirect: (context, state) => onboardingRedirect(
+      complete: ref.read(onboardingCompleteProvider),
+      location: state.matchedLocation,
+      welcomeRoute: AppRoutes.welcome,
+      homeRoute: AppRoutes.deck,
+    ),
     routes: [
+      GoRoute(
+        path: AppRoutes.welcome,
+        builder: (context, state) => const WelcomeScreen(),
+        routes: [
+          GoRoute(
+            path: 'cards',
+            builder: (context, state) => const SampleCardsScreen(),
+          ),
+        ],
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) =>
             ShellScaffold(navigationShell: shell),

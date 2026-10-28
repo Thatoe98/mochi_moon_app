@@ -175,6 +175,34 @@ class AppLocalizationsMy extends AppLocalizations {
       'သင်ရွေးသော အချိန်တွင် နေ့စဉ် နူးညံ့သော ကတ်တစ်ကတ်။';
 
   @override
+  String get onboardingWelcomeTitle => 'Welcome to Mochi Moon';
+
+  @override
+  String get onboardingWelcomeBody =>
+      'Soft little cards to remind you how wonderful you are. Read each one out loud, then let it sink in.';
+
+  @override
+  String onboardingTryCards(int count) {
+    return 'Try $count cards';
+  }
+
+  @override
+  String onboardingCardProgress(int current, int total) {
+    return 'Card $current of $total';
+  }
+
+  @override
+  String get onboardingSaveTitle =>
+      'Save your cards and get your cosmic reading';
+
+  @override
+  String get onboardingSaveBody =>
+      'The cards you loved are waiting in your journal. Your cosmic reading is on its way.';
+
+  @override
+  String get onboardingContinue => 'Continue';
+
+  @override
   String get readAloudHint => 'အသံထွက်ဖတ်ပါ ✨';
 
   @override

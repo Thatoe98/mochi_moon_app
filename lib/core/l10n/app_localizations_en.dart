@@ -176,6 +176,34 @@ class AppLocalizationsEn extends AppLocalizations {
       'One gentle card each day at the time you choose.';
 
   @override
+  String get onboardingWelcomeTitle => 'Welcome to Mochi Moon';
+
+  @override
+  String get onboardingWelcomeBody =>
+      'Soft little cards to remind you how wonderful you are. Read each one out loud, then let it sink in.';
+
+  @override
+  String onboardingTryCards(int count) {
+    return 'Try $count cards';
+  }
+
+  @override
+  String onboardingCardProgress(int current, int total) {
+    return 'Card $current of $total';
+  }
+
+  @override
+  String get onboardingSaveTitle =>
+      'Save your cards and get your cosmic reading';
+
+  @override
+  String get onboardingSaveBody =>
+      'The cards you loved are waiting in your journal. Your cosmic reading is on its way.';
+
+  @override
+  String get onboardingContinue => 'Continue';
+
+  @override
   String get readAloudHint => 'Read it out loud ✨';
 
   @override

@@ -80,7 +80,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - As a user, I can say "I don't know my birth time" and still continue.
 
 **AC**
-- [ ] 3 sample cards work without network or account; the timer gate applies.
+- [x] 3 sample cards work without network or account; the timer gate applies. — *shown after a welcome screen; the "save your cards" step is inline and has only Continue until Google sign-in lands in M2*
 - [ ] Google sign-in via Firebase Auth; on success a `users/{uid}` doc is created (§8.1).
 - [ ] Birth date is required (date picker; year range 1940–current year; no future dates).
 - [ ] Birth time is optional; "I don't know" sets `timeKnown = false`.
@@ -568,7 +568,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), real illustration, share handle value, share-sheet position origin for iPad*
 - [x] Daily reminder notification (§6.6, first box; retrograde alerts and FCM are separate)
 - [x] Home-screen widget (§6.5)
-- [ ] Sample-cards-before-sign-in flow
+- [x] Sample-cards-before-sign-in flow — *deferred: Google sign-in and profile steps (M2), mascot art, Burmese strings; sample swipes count toward the day's 10 cards*
 
 ### M2 — Accounts and Cosmic basics
 - [ ] Firebase project, Google sign-in, onboarding (§6.1)

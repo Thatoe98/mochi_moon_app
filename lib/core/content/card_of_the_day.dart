@@ -4,17 +4,22 @@ import 'package:mochi_moon/core/content/quote.dart';
 /// show only this short form of a card.
 String firstLine(String text) => text.split('\n').first.trim();
 
-/// The card of [date]: the free cards (those with English text, the source of
-/// truth) sorted by id and indexed by the local date, so a date always gets the
-/// same card whatever the time, the language or the order of [quotes].
+/// The cards free users can be shown: not premium and with English text (the
+/// source of truth), sorted by id so the order never depends on the content
+/// file.
+List<Quote> freeCards(List<Quote> quotes) => [
+  for (final quote in quotes)
+    if (!quote.premium && firstLine(quote.textFor('en')).isNotEmpty) quote,
+]..sort((a, b) => a.id.compareTo(b.id));
+
+/// The card of [date], indexed by the local date over [freeCards], so a date
+/// always gets the same card whatever the time, the language or the order of
+/// [quotes].
 ///
 /// Returns null when there is no free card. Reminders, the home-screen widget
 /// and the deck all use this, so they agree on today's card.
 Quote? cardOfTheDay(List<Quote> quotes, DateTime date) {
-  final cards = [
-    for (final quote in quotes)
-      if (!quote.premium && firstLine(quote.textFor('en')).isNotEmpty) quote,
-  ]..sort((a, b) => a.id.compareTo(b.id));
+  final cards = freeCards(quotes);
   if (cards.isEmpty) return null;
 
   final dayNumber = DateTime.utc(
