@@ -88,6 +88,38 @@ void main() {
     );
   });
 
+  testWidgets('a long affirmation shrinks to fit inside the card', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      host(
+        const Center(
+          child: SizedBox(
+            width: 290,
+            height: 435,
+            child: QuoteCard(
+              text:
+                  'I choose to speak to myself like someone I love, and I '
+                  'give myself the same patience I would give a dear friend '
+                  'on a hard day.',
+              category: 'self_love',
+              categoryLabel: 'Self-love',
+            ),
+          ),
+        ),
+        textScale: 1.3,
+      ),
+    );
+    await tester.pump();
+
+    final card = tester.getRect(find.byType(QuoteCard));
+    final text = tester.getRect(find.textContaining('I choose to speak'));
+    expect(card.contains(text.topLeft), isTrue);
+    expect(card.contains(text.bottomRight), isTrue);
+    final chip = tester.getRect(find.text('Self-love'));
+    expect(text.bottom, lessThanOrEqualTo(chip.top));
+  });
+
   testWidgets('empty state shows the art with its label', (tester) async {
     await tester.pumpWidget(
       host(

@@ -4,7 +4,7 @@ import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 
-/// One affirmation card: illustration on top (~60%), the text, a category chip.
+/// One affirmation card: illustration on top (~55%), the text, a category chip.
 class QuoteCard extends StatelessWidget {
   const QuoteCard({
     required this.text,
@@ -26,20 +26,27 @@ class QuoteCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          Expanded(flex: 6, child: QuoteIllustration(category: category)),
+          Expanded(flex: 11, child: QuoteIllustration(category: category)),
           Expanded(
-            flex: 4,
+            flex: 9,
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Column(
                 children: [
                   Expanded(
-                    child: Center(
-                      child: SingleChildScrollView(
-                        child: Text(
-                          text,
-                          style: theme.textTheme.titleLarge,
-                          textAlign: TextAlign.center,
+                    // A long affirmation shrinks to fit rather than hiding words.
+                    child: LayoutBuilder(
+                      builder: (context, constraints) => Center(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: SizedBox(
+                            width: constraints.maxWidth,
+                            child: Text(
+                              text,
+                              style: theme.textTheme.titleLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                         ),
                       ),
                     ),

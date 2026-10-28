@@ -37,7 +37,7 @@ class _JournalScreenState extends ConsumerState<JournalScreen> {
               // Flexible lets the card shrink on short (landscape) screens.
               Flexible(
                 child: AspectRatio(
-                  aspectRatio: 3 / 4,
+                  aspectRatio: 2 / 3,
                   child: QuoteCard(
                     text: item.quote.textFor(lang),
                     category: item.quote.category,
