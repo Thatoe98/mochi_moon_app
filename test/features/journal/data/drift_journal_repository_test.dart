@@ -4,6 +4,7 @@ import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/deck/data/drift_deck_repository.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/journal/data/drift_journal_repository.dart';
+import 'package:mochi_moon/features/journal/domain/journal_repository.dart';
 
 void main() {
   late AppDatabase db;
@@ -48,6 +49,36 @@ void main() {
     await journal.remove('missing');
 
     expect(await journal.entries(), hasLength(1));
+  });
+
+  test('addMissing adds new cards and keeps the date of saved ones', () async {
+    await deck.record('q1', DeckAction.saved, DateTime(2026, 10, 26));
+
+    await journal.addMissing([
+      JournalEntry(quoteId: 'q1', savedAt: DateTime(2026, 10, 3)),
+      JournalEntry(quoteId: 'q2', savedAt: DateTime(2026, 10, 2)),
+    ]);
+
+    final entries = await journal.entries();
+    expect(entries.map((e) => e.quoteId), ['q1', 'q2']);
+    expect(entries.first.savedAt, DateTime(2026, 10, 26));
+    expect(entries.last.savedAt, DateTime(2026, 10, 2));
+  });
+
+  test('watch emits again after a save and a removal', () async {
+    final seen = <String>[];
+    final sub = journal.watch().listen(
+      (entries) => seen.add(entries.map((e) => e.quoteId).join(',')),
+    );
+    addTearDown(sub.cancel);
+
+    await pumpEventQueue();
+    await deck.record('q1', DeckAction.saved, DateTime(2026, 10, 26));
+    await pumpEventQueue();
+    await journal.remove('q1');
+    await pumpEventQueue();
+
+    expect(seen, ['', 'q1', '']);
   });
 
   test('saving a removed card again brings it back', () async {

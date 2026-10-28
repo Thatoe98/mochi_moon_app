@@ -21,6 +21,22 @@ void main() {
     expect(await repo.history(), isEmpty);
   });
 
+  test('watchHistory emits the history again after each change', () async {
+    final seen = <int>[];
+    final sub = repo.watchHistory().listen((events) => seen.add(events.length));
+    addTearDown(sub.cancel);
+
+    await pumpEventQueue();
+    final event = await repo.record('q1', DeckAction.skipped, DateTime(2026));
+    await pumpEventQueue();
+    await repo.undo(event);
+    await pumpEventQueue();
+
+    expect(seen.first, 0);
+    expect(seen, contains(1));
+    expect(seen.last, 0);
+  });
+
   test('record returns the stored event and history is oldest first', () async {
     final later = await repo.record(
       'q2',

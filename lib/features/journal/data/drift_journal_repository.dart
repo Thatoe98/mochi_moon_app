@@ -7,16 +7,17 @@ class DriftJournalRepository implements JournalRepository {
 
   final AppDatabase _db;
 
+  SimpleSelectStatement<$JournalCacheTable, JournalCacheData> get _newestFirst =>
+      _db.select(_db.journalCache)
+        ..orderBy([(t) => OrderingTerm.desc(t.savedAt)]);
+
   @override
-  Future<List<JournalEntry>> entries() async {
-    final rows = await (_db.select(
-      _db.journalCache,
-    )..orderBy([(t) => OrderingTerm.desc(t.savedAt)])).get();
-    return [
-      for (final row in rows)
-        JournalEntry(quoteId: row.quoteId, savedAt: row.savedAt),
-    ];
-  }
+  Future<List<JournalEntry>> entries() async =>
+      (await _newestFirst.get()).map(_toEntry).toList();
+
+  @override
+  Stream<List<JournalEntry>> watch() =>
+      _newestFirst.watch().map((rows) => rows.map(_toEntry).toList());
 
   @override
   Future<void> remove(String quoteId) async {
@@ -24,4 +25,20 @@ class DriftJournalRepository implements JournalRepository {
       _db.journalCache,
     )..where((t) => t.quoteId.equals(quoteId))).go();
   }
+
+  @override
+  Future<void> addMissing(List<JournalEntry> entries) async {
+    await _db.batch((batch) {
+      batch.insertAll(_db.journalCache, [
+        for (final entry in entries)
+          JournalCacheCompanion.insert(
+            quoteId: entry.quoteId,
+            savedAt: entry.savedAt,
+          ),
+      ], mode: InsertMode.insertOrIgnore);
+    });
+  }
+
+  JournalEntry _toEntry(JournalCacheData row) =>
+      JournalEntry(quoteId: row.quoteId, savedAt: row.savedAt);
 }

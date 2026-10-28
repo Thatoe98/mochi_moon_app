@@ -5,6 +5,9 @@ abstract interface class DeckRepository {
   /// Every completed card, oldest first.
   Future<List<DeckEvent>> history();
 
+  /// [history], emitted again after every change.
+  Stream<List<DeckEvent>> watchHistory();
+
   /// Records a completed card. A [DeckAction.saved] card also lands in the
   /// journal. Returns the new event.
   Future<DeckEvent> record(String quoteId, DeckAction action, DateTime at);

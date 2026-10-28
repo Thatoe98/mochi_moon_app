@@ -9,7 +9,12 @@ service cloud.firestore {
         && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['entitlement']);
       allow delete: if false;   // deletion goes through the server
 
-      match /journal/{id}  { allow read, write: if request.auth.uid == uid; }
+      match /journal/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['savedAt'])
+          && request.resource.data.savedAt is timestamp;
+      }
       match /partners/{id} { allow read, write: if request.auth.uid == uid; }
       match /reports/{id}  { allow read: if request.auth.uid == uid; allow write: if false; }
     }

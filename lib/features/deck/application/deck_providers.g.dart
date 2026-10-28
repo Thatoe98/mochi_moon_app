@@ -50,6 +50,106 @@ final class DeckRepositoryProvider
 
 String _$deckRepositoryHash() => r'27c8bf1978599c28271faf7eed30e061aa8524e3';
 
+/// Where the counters are copied to, or null when Firebase did not start.
+
+@ProviderFor(deckCountersRemote)
+final deckCountersRemoteProvider = DeckCountersRemoteProvider._();
+
+/// Where the counters are copied to, or null when Firebase did not start.
+
+final class DeckCountersRemoteProvider
+    extends
+        $FunctionalProvider<
+          DeckCountersRemote?,
+          DeckCountersRemote?,
+          DeckCountersRemote?
+        >
+    with $Provider<DeckCountersRemote?> {
+  /// Where the counters are copied to, or null when Firebase did not start.
+  DeckCountersRemoteProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'deckCountersRemoteProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$deckCountersRemoteHash();
+
+  @$internal
+  @override
+  $ProviderElement<DeckCountersRemote?> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  DeckCountersRemote? create(Ref ref) {
+    return deckCountersRemote(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DeckCountersRemote? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DeckCountersRemote?>(value),
+    );
+  }
+}
+
+String _$deckCountersRemoteHash() =>
+    r'9c6c3e34e8cf842f6130a6ae93309c67e909058d';
+
+/// Copies the streak and today's count to Firestore while someone is signed
+/// in: once when the app opens and again after every swipe or undo. The local
+/// history stays the source of truth. A failed upload is retried with the next
+/// change. Watched from the app root.
+
+@ProviderFor(deckSync)
+final deckSyncProvider = DeckSyncProvider._();
+
+/// Copies the streak and today's count to Firestore while someone is signed
+/// in: once when the app opens and again after every swipe or undo. The local
+/// history stays the source of truth. A failed upload is retried with the next
+/// change. Watched from the app root.
+
+final class DeckSyncProvider
+    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
+    with $FutureModifier<void>, $FutureProvider<void> {
+  /// Copies the streak and today's count to Firestore while someone is signed
+  /// in: once when the app opens and again after every swipe or undo. The local
+  /// history stays the source of truth. A failed upload is retried with the next
+  /// change. Watched from the app root.
+  DeckSyncProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'deckSyncProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$deckSyncHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<void> create(Ref ref) {
+    return deckSync(ref);
+  }
+}
+
+String _$deckSyncHash() => r'5a8bd1d5a5f55aa0524bff5342726046e781f239';
+
 /// Current time; overridden in tests.
 
 @ProviderFor(clock)

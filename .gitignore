@@ -69,3 +69,6 @@ android/build/
 
 # Image-generation prompts, kept local
 /prompts/
+
+# Firestore rules tests (Node)
+node_modules/

@@ -1,11 +1,16 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
+import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/data/drift_deck_repository.dart';
+import 'package:mochi_moon/features/deck/data/firestore_deck_counters_remote.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
+import 'package:mochi_moon/features/deck/domain/deck_counters.dart';
 import 'package:mochi_moon/features/deck/domain/deck_planner.dart';
 import 'package:mochi_moon/features/deck/domain/deck_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,6 +20,55 @@ part 'deck_providers.g.dart';
 @Riverpod(keepAlive: true)
 DeckRepository deckRepository(Ref ref) =>
     DriftDeckRepository(ref.watch(appDatabaseProvider));
+
+/// Where the counters are copied to, or null when Firebase did not start.
+@Riverpod(keepAlive: true)
+DeckCountersRemote? deckCountersRemote(Ref ref) =>
+    ref.watch(firebaseReadyProvider) ? FirestoreDeckCountersRemote() : null;
+
+/// Copies the streak and today's count to Firestore while someone is signed
+/// in: once when the app opens and again after every swipe or undo. The local
+/// history stays the source of truth. A failed upload is retried with the next
+/// change. Watched from the app root.
+@Riverpod(keepAlive: true)
+Future<void> deckSync(Ref ref) async {
+  final user = await ref.watch(authUserProvider.future);
+  final remote = ref.watch(deckCountersRemoteProvider);
+  if (user == null || remote == null) return;
+  final repository = ref.watch(deckRepositoryProvider);
+  final clock = ref.watch(clockProvider);
+
+  DeckCounters? sent;
+  var busy = false;
+  var again = false;
+  Future<void> push() async {
+    // One upload at a time; a change that arrives meanwhile is sent by the
+    // pass that follows.
+    if (busy) {
+      again = true;
+      return;
+    }
+    busy = true;
+    try {
+      do {
+        again = false;
+        final counters = DeckCounters.from(await repository.history(), clock());
+        if (counters == sent) continue;
+        try {
+          await remote.put(user.uid, counters);
+          sent = counters;
+        } on AppFailure catch (error) {
+          debugPrint('Could not save the deck counters to Firestore: $error');
+        }
+      } while (again);
+    } finally {
+      busy = false;
+    }
+  }
+
+  final subscription = repository.watchHistory().listen((_) => push());
+  ref.onDispose(subscription.cancel);
+}
 
 /// Current time; overridden in tests.
 @Riverpod(keepAlive: true)

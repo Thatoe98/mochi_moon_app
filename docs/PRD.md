@@ -108,7 +108,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 **AC**
 - [ ] Swipe attempts before the timer completes are cancelled and the card springs back.
 - [ ] After the timer completes, all three swipe directions work, plus button equivalents for accessibility.
-- [ ] The daily counter resets at local midnight; it is stored locally and synced to Firestore.
+- [ ] The daily counter resets at local midnight; it is stored locally and synced to Firestore. — *synced since M2 (`users/{uid}.deck`); the reset while the app stays open past midnight is still deferred*
 - [ ] "Reduce motion" disables tilt and sparkle animations but keeps the ring.
 - [ ] Works offline using bundled quotes.
 - [ ] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header.
@@ -116,7 +116,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 ### 6.3 Journal (Free)
 
 - [x] Lists saved cards newest first with illustration thumbnails; tap opens full card; long-press to remove.
-- [ ] Filter by category. Synced via Firestore so it survives reinstall.
+- [ ] Filter by category. Synced via Firestore so it survives reinstall. — *sync is done (`users/{uid}/journal/{quoteId}`); the category filter is not*
 - [x] Empty state with the mascot and a prompt to swipe right on cards she loves. — *uses `ill_empty_deck.webp`*
 
 ### 6.4 Share as image (Free)
@@ -572,7 +572,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 ### M2 — Accounts and Cosmic basics
 - [ ] Firebase project, Google sign-in, onboarding (§6.1) — *code done and tested with fakes: sign-in, local-first profile (drift) with Firestore sync, name / birth date / birth time / reminder / focus steps. Done: dev Firebase project (`mochi-moon-dev`), `google-services.json` for dev, SHA-1, Google sign-in enabled, real sign-in tried on the emulator. Firestore database (`asia-southeast1`) created, rules from §8.1 deployed to dev, and the profile document confirmed in the console. Still open: a prod project with its own `google-services.json` and release SHA-1. Deferred to later M2 items: birthplace, sun/moon/rising signs, `firestore.rules` and emulator tests.*
-- [ ] Firestore sync for profile, Journal, deck counters; security rules + emulator tests
+- [x] Firestore sync for profile, Journal, deck counters; security rules + emulator tests — *the device stays the source of truth: the journal and the counters (streak, last day, today's count) are mirrored to Firestore while signed in, and cards that only Firestore has are added back on start. Rules tests run with `scripts/test_rules.ps1` (or `.sh`; needs Node, Java, Firebase CLI). Deferred: restoring the streak and today's count after a reinstall (the history is not synced), a removal made offline comes back on the next start (no tombstones), the tightened journal rule is not yet deployed to `mochi-moon-dev`, no prod project.*
 - [ ] Cities dataset + birthplace search + time zone resolution
 - [ ] Astro engine: Sun/Moon/planets + sun/moon sign (§9.1–9.2)
 - [ ] Cosmic Today with bundled fallback texts, lucky colors, Thai colors toggle

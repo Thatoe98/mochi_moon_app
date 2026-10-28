@@ -8,16 +8,19 @@ class DriftDeckRepository implements DeckRepository {
 
   final AppDatabase _db;
 
+  SimpleSelectStatement<$DeckHistoryTable, DeckHistoryData> get _oldestFirst =>
+      _db.select(_db.deckHistory)..orderBy([
+        (t) => OrderingTerm.asc(t.at),
+        (t) => OrderingTerm.asc(t.id),
+      ]);
+
   @override
-  Future<List<DeckEvent>> history() async {
-    final rows =
-        await (_db.select(_db.deckHistory)..orderBy([
-              (t) => OrderingTerm.asc(t.at),
-              (t) => OrderingTerm.asc(t.id),
-            ]))
-            .get();
-    return rows.map(_toEvent).toList();
-  }
+  Future<List<DeckEvent>> history() async =>
+      (await _oldestFirst.get()).map(_toEvent).toList();
+
+  @override
+  Stream<List<DeckEvent>> watchHistory() =>
+      _oldestFirst.watch().map((rows) => rows.map(_toEvent).toList());
 
   @override
   Future<DeckEvent> record(String quoteId, DeckAction action, DateTime at) {
