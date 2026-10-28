@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirror lib/core/theme/app_colors.dart: night raised surface and ink. -->
+    <color name="widget_background">#2B2035</color>
+    <color name="widget_text">#F4ECFA</color>
+</resources>

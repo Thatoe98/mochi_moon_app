@@ -7,10 +7,12 @@ import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
+import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
 import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/settings/support/fake_reminder.dart';
+import '../features/widget_bridge/support/fake_widget_publisher.dart';
 
 const _quote = Quote(
   id: 'q_test',
@@ -26,6 +28,7 @@ Widget _app({Future<List<Quote>> Function()? quotes}) => ProviderScope(
       FakeReminderSettingsRepository(),
     ),
     reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
+    widgetPublisherProvider.overrideWithValue(FakeWidgetPublisher()),
     quotesProvider.overrideWith(
       (ref) => quotes?.call() ?? Future.value([_quote]),
     ),

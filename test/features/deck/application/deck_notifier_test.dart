@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
@@ -80,6 +81,42 @@ void main() {
 
     expect(state.cards, isEmpty);
     expect(state.isDone, isTrue);
+  });
+
+  group("today's card of the day", () {
+    final cardId = cardOfTheDay([
+      for (var i = 0; i < 20; i++) quote('q$i'),
+    ], now)!.id;
+
+    test('is dealt first, matching the widget and the reminder', () async {
+      final container = makeContainer();
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards.first.id, cardId);
+      expect(state.cards.map((q) => q.id).toSet(), hasLength(10));
+    });
+
+    test('is not dealt again once completed today', () async {
+      final repo = FakeDeckRepository([
+        DeckEvent(
+          id: 1,
+          quoteId: cardId,
+          action: DeckAction.saved,
+          at: DateTime(2026, 10, 28, 8),
+        ),
+      ]);
+      final container = makeContainer(repo: repo);
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards.map((q) => q.id), isNot(contains(cardId)));
+    });
+
+    test('still respects the daily limit', () async {
+      final container = makeContainer(limit: 1);
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards.map((q) => q.id), [cardId]);
+    });
   });
 
   test('never deals more cards than exist', () async {

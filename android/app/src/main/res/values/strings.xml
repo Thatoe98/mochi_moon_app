@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_label_small">Mochi Moon card</string>
+    <string name="widget_label_wide">Mochi Moon card (wide)</string>
+    <string name="widget_description">Today\'s affirmation from Mochi Moon.</string>
+    <string name="widget_fallback_text">Open Mochi Moon for today\'s card</string>
+    <string name="widget_thumbnail_description">Illustration for today\'s card</string>
+</resources>

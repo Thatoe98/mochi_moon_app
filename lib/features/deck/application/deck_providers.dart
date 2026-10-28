@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
@@ -84,16 +85,33 @@ class Deck extends _$Deck {
       now: now,
       random: ref.watch(randomProvider),
     );
+    final pinned = _pinCardOfTheDay(plan, quotes, now);
     final completed = completedOnDay(_history, now);
     final left = (limit - completed).clamp(0, plan.length);
 
     return DeckState(
-      cards: [for (final id in plan.take(left)) byId[id]!],
+      cards: [for (final id in pinned.take(left)) byId[id]!],
       position: 0,
       completedToday: completed,
       streak: currentStreak(_history, now),
       canUndo: false,
     );
+  }
+
+  /// Moves today's [cardOfTheDay] to the front of [plan] (the card the widget
+  /// and the reminder show), unless it was already completed today.
+  List<String> _pinCardOfTheDay(
+    List<String> plan,
+    List<Quote> quotes,
+    DateTime now,
+  ) {
+    final card = cardOfTheDay(quotes, now);
+    if (card == null || !plan.contains(card.id)) return plan;
+    final seenToday = _history.any(
+      (e) => e.quoteId == card.id && completedOnDay([e], now) > 0,
+    );
+    if (seenToday) return plan;
+    return [card.id, ...plan.where((id) => id != card.id)];
   }
 
   /// Records the top card as completed with [action].

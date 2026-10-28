@@ -210,7 +210,7 @@ final class DeckProvider extends $AsyncNotifierProvider<Deck, DeckState> {
   Deck create() => Deck();
 }
 
-String _$deckHash() => r'af15ea9bb7b7403200434a2f17b5114c3d1a36a6';
+String _$deckHash() => r'd342e32cb89fc0e501672dbc1641babddc861350';
 
 abstract class _$Deck extends $AsyncNotifier<DeckState> {
   FutureOr<DeckState> build();

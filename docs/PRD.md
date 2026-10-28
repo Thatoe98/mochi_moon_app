@@ -127,9 +127,9 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 ### 6.5 Home-screen widget (Free)
 
-- [ ] Android widget (2×2 and 4×2) shows today's card text (short form) and a thumbnail.
-- [ ] Updates at local midnight and whenever the deck is opened.
-- [ ] Tapping opens the Deck at today's card.
+- [x] Android widget (2×2 and 4×2) shows today's card text (short form) and a thumbnail. — *the thumbnail is the placeholder illustration until the art exists; English only; builds and is unit-tested but not yet seen on a device*
+- [x] Updates at local midnight and whenever the deck is opened. — *the app stocks the next 14 days on each open; midnight refreshes are scheduled with `home_widget` (inexact, may drift a few minutes); a 1-hour system refresh is the safety net*
+- [x] Tapping opens the Deck at today's card. — *the launch intent carries `mochimoon://widget/deck`; the deck deals the card of the day first unless it was already completed today*
 
 ### 6.6 Notifications (Free)
 
@@ -567,7 +567,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), real illustration thumbnails (placeholder until assets exist), entry to the journal from the Deck header, `my` strings need native review*
 - [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), real illustration, share handle value, share-sheet position origin for iPad*
 - [x] Daily reminder notification (§6.6, first box; retrograde alerts and FCM are separate)
-- [ ] Home-screen widget (§6.5)
+- [x] Home-screen widget (§6.5)
 - [ ] Sample-cards-before-sign-in flow
 
 ### M2 — Accounts and Cosmic basics

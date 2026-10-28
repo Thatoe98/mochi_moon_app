@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 
 part 'reminder.freezed.dart';
@@ -80,8 +81,7 @@ abstract interface class ReminderScheduler {
 /// Reminders for the next [days] days at [time], starting today when that time
 /// is still ahead of [now] and tomorrow otherwise.
 ///
-/// Each day carries a fixed "card of the day": the free quotes sorted by id,
-/// indexed by the local date, so the same date always gets the same card.
+/// Each day carries that date's [cardOfTheDay], shown in [lang].
 List<PlannedReminder> planReminders({
   required DateTime now,
   required ReminderTime time,
@@ -89,13 +89,6 @@ List<PlannedReminder> planReminders({
   required String lang,
   int days = reminderWindowDays,
 }) {
-  final cards = [
-    for (final quote in quotes)
-      if (!quote.premium && _firstLine(quote.textFor(lang)).isNotEmpty) quote,
-  ]..sort((a, b) => a.id.compareTo(b.id));
-  if (cards.isEmpty) return const [];
-
-  final epoch = DateTime.utc(1970);
   var day = DateTime(now.year, now.month, now.day);
   if (!DateTime(
     day.year,
@@ -110,12 +103,8 @@ List<PlannedReminder> planReminders({
   final reminders = <PlannedReminder>[];
   for (var i = 0; i < days; i++) {
     final date = DateTime(day.year, day.month, day.day + i);
-    final dayNumber = DateTime.utc(
-      date.year,
-      date.month,
-      date.day,
-    ).difference(epoch).inDays;
-    final quote = cards[dayNumber % cards.length];
+    final quote = cardOfTheDay(quotes, date);
+    if (quote == null) return const [];
     reminders.add(
       PlannedReminder(
         fireAt: DateTime(
@@ -126,11 +115,9 @@ List<PlannedReminder> planReminders({
           time.minute,
         ),
         quoteId: quote.id,
-        body: _firstLine(quote.textFor(lang)),
+        body: firstLine(quote.textFor(lang)),
       ),
     );
   }
   return reminders;
 }
-
-String _firstLine(String text) => text.split('\n').first.trim();

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mirror lib/core/theme/app_colors.dart: cream and plum, light mode. -->
+    <color name="widget_background">#FFF8EE</color>
+    <color name="widget_text">#3E2A4F</color>
+</resources>
