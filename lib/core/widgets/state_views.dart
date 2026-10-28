@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 
 class _CenteredMessage extends StatelessWidget {
   const _CenteredMessage({
@@ -8,6 +10,7 @@ class _CenteredMessage extends StatelessWidget {
     this.body,
     this.icon,
     this.action,
+    this.illustration,
   });
 
   final String title;
@@ -15,16 +18,22 @@ class _CenteredMessage extends StatelessWidget {
   final IconData? icon;
   final Widget? action;
 
+  /// Replaces [icon] when set.
+  final Widget? illustration;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Center(
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (icon != null) ...[
+            if (illustration != null) ...[
+              illustration!,
+              const SizedBox(height: AppSpacing.md),
+            ] else if (icon != null) ...[
               ExcludeSemantics(
                 child: Icon(icon, size: 48, color: theme.colorScheme.primary),
               ),
@@ -87,14 +96,45 @@ class ErrorView extends StatelessWidget {
 }
 
 class EmptyState extends StatelessWidget {
-  const EmptyState({required this.title, this.body, super.key});
+  const EmptyState({
+    required this.title,
+    this.body,
+    this.illustration,
+    this.illustrationLabel,
+    super.key,
+  }) : assert(
+         illustration == null || illustrationLabel != null,
+         'Art needs a semantic label',
+       );
 
   final String title;
   final String? body;
 
+  /// Asset path of mascot art shown above the text.
+  final String? illustration;
+  final String? illustrationLabel;
+
   @override
-  Widget build(BuildContext context) =>
-      _CenteredMessage(icon: Icons.nightlight_round, title: title, body: body);
+  Widget build(BuildContext context) => _CenteredMessage(
+    icon: Icons.nightlight_round,
+    title: title,
+    body: body,
+    illustration: illustration == null
+        ? null
+        : ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 280),
+            child: AspectRatio(
+              aspectRatio: 3 / 4,
+              child: ClipRRect(
+                borderRadius: AppRadii.cardRadius,
+                child: MochiIllustration(
+                  asset: illustration!,
+                  semanticLabel: illustrationLabel!,
+                ),
+              ),
+            ),
+          ),
+  );
 }
 
 /// Banner shown above cached/fallback content when the device is offline.

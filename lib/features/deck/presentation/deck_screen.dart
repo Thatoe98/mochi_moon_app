@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
@@ -79,6 +80,8 @@ class _DeckScreenState extends ConsumerState<DeckScreen> {
         return EmptyState(
           title: l10n.stateEmptyTitle,
           body: l10n.deckEmptyBody,
+          illustration: AppIllustrations.emptyDeck,
+          illustrationLabel: l10n.illustrationEmptyDeck,
         );
       }
       return _LimitCard(

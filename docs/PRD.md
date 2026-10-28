@@ -117,7 +117,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 - [x] Lists saved cards newest first with illustration thumbnails; tap opens full card; long-press to remove.
 - [ ] Filter by category. Synced via Firestore so it survives reinstall.
-- [x] Empty state with the mascot and a prompt to swipe right on cards she loves. — *generic moon icon until the mascot art exists*
+- [x] Empty state with the mascot and a prompt to swipe right on cards she loves. — *uses `ill_empty_deck.webp`*
 
 ### 6.4 Share as image (Free)
 

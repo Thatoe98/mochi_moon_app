@@ -5,6 +5,7 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
@@ -57,6 +58,8 @@ class _SampleCardsScreenState extends ConsumerState<SampleCardsScreen> {
   Widget _buildPitch() {
     final l10n = AppLocalizations.of(context);
     return OnboardingPage(
+      illustration: AppIllustrations.onboardingSave,
+      illustrationLabel: l10n.illustrationOnboardingSave,
       title: l10n.onboardingSaveTitle,
       body: l10n.onboardingSaveBody,
       buttonLabel: l10n.onboardingContinue,

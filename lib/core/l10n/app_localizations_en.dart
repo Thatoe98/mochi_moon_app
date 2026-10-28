@@ -226,4 +226,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get stateEmptyTitle => 'Nothing here yet';
+
+  @override
+  String get illustrationOnboardingWelcome =>
+      'Mochi the moon bunny waving from a glowing crescent moon in a lavender night sky';
+
+  @override
+  String get illustrationOnboardingSave =>
+      'Mochi the moon bunny hugging a small stack of glowing cards';
+
+  @override
+  String get illustrationEmptyDeck =>
+      'Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart';
 }

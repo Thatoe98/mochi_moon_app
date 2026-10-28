@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
-import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 
 /// One full-screen step of the first-run flow: art, a heading, a line of text
 /// and a single button.
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({
+    required this.illustration,
+    required this.illustrationLabel,
     required this.title,
     required this.body,
     required this.buttonLabel,
@@ -14,6 +16,8 @@ class OnboardingPage extends StatelessWidget {
     super.key,
   });
 
+  final String illustration;
+  final String illustrationLabel;
   final String title;
   final String body;
   final String buttonLabel;
@@ -26,11 +30,14 @@ class OnboardingPage extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.lg),
       child: Column(
         children: [
-          const Expanded(
+          Expanded(
             child: ClipRRect(
               borderRadius: AppRadii.cardRadius,
               child: SizedBox.expand(
-                child: IllustrationPlaceholder(iconSize: 96),
+                child: MochiIllustration(
+                  asset: illustration,
+                  semanticLabel: illustrationLabel,
+                ),
               ),
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
@@ -108,6 +109,8 @@ class _JournalScreenState extends ConsumerState<JournalScreen> {
             return EmptyState(
               title: l10n.journalEmptyTitle,
               body: l10n.journalEmptyBody,
+              illustration: AppIllustrations.emptyDeck,
+              illustrationLabel: l10n.illustrationEmptyDeck,
             );
           }
           final categories = {for (final i in items) i.quote.category}.toList();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/features/onboarding/domain/sample_cards.dart';
 import 'package:mochi_moon/features/onboarding/presentation/onboarding_page.dart';
 
@@ -16,6 +17,8 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: OnboardingPage(
+          illustration: AppIllustrations.onboardingWelcome,
+          illustrationLabel: l10n.illustrationOnboardingWelcome,
           title: l10n.onboardingWelcomeTitle,
           body: l10n.onboardingWelcomeBody,
           buttonLabel: l10n.onboardingTryCards(sampleCardCount),

@@ -67,5 +67,8 @@
   "stateErrorBody": "Let's try that again.",
   "stateRetry": "Try again",
   "stateOffline": "You're offline. Showing what we saved for you.",
-  "stateEmptyTitle": "Nothing here yet"
+  "stateEmptyTitle": "Nothing here yet",
+  "illustrationOnboardingWelcome": "Mochi the moon bunny waving from a glowing crescent moon in a lavender night sky",
+  "illustrationOnboardingSave": "Mochi the moon bunny hugging a small stack of glowing cards",
+  "illustrationEmptyDeck": "Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart"
 }

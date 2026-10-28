@@ -475,6 +475,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing here yet'**
   String get stateEmptyTitle;
+
+  /// No description provided for @illustrationOnboardingWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny waving from a glowing crescent moon in a lavender night sky'**
+  String get illustrationOnboardingWelcome;
+
+  /// No description provided for @illustrationOnboardingSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny hugging a small stack of glowing cards'**
+  String get illustrationOnboardingSave;
+
+  /// No description provided for @illustrationEmptyDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart'**
+  String get illustrationEmptyDeck;
 }
 
 class _AppLocalizationsDelegate
