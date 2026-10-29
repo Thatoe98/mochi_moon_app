@@ -9,6 +9,7 @@ import 'package:mochi_moon/core/theme/app_theme.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/daily_reading.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/daily_reading_repository.dart';
@@ -18,6 +19,7 @@ import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
 import '../../../../support/disk_bundle.dart';
 import '../../../profile/support/fake_profile.dart';
+import '../../retrograde/support/periods.dart';
 import '../support/fake_thai_colors_setting.dart';
 
 class _FailingReadings implements DailyReadingRepository {
@@ -55,6 +57,7 @@ Widget _host({
       thai ?? FakeThaiColorsSettingRepository(),
     ),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 29, 12)),
+    retrogradeCalendarSourceProvider.overrideWithValue(fakeCalendar),
     if (readings != null)
       dailyReadingRepositoryProvider.overrideWithValue(readings),
   ],
@@ -105,6 +108,7 @@ void main() {
     );
     expect(find.textContaining('Scorpio'), findsWidgets);
     expect(find.textContaining('Moon in'), findsOneWidget);
+    expect(find.text('Mercury is retrograde until Nov 13'), findsOneWidget);
     expect(find.text('Your depth is a superpower'), findsOneWidget);
     expect(find.text("Today's energy"), findsOneWidget);
     expect(find.text('Love'), findsOneWidget);

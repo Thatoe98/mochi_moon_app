@@ -907,6 +907,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pisces'**
   String get signPisces;
+
+  /// No description provided for @retroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrogrades'**
+  String get retroTitle;
+
+  /// No description provided for @retroMercury.
+  ///
+  /// In en, this message translates to:
+  /// **'Mercury'**
+  String get retroMercury;
+
+  /// No description provided for @retroVenus.
+  ///
+  /// In en, this message translates to:
+  /// **'Venus'**
+  String get retroVenus;
+
+  /// No description provided for @retroMars.
+  ///
+  /// In en, this message translates to:
+  /// **'Mars'**
+  String get retroMars;
+
+  /// No description provided for @retroJupiter.
+  ///
+  /// In en, this message translates to:
+  /// **'Jupiter'**
+  String get retroJupiter;
+
+  /// No description provided for @retroSaturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturn'**
+  String get retroSaturn;
+
+  /// No description provided for @retroStatusRetrograde.
+  ///
+  /// In en, this message translates to:
+  /// **'{planet} is retrograde until {date}'**
+  String retroStatusRetrograde(String planet, String date);
+
+  /// No description provided for @retroStatusNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next {planet} retrograde: {date}'**
+  String retroStatusNext(String planet, String date);
+
+  /// No description provided for @retroStartsToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Starts today'**
+  String get retroStartsToday;
+
+  /// No description provided for @retroStartsTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Starts tomorrow'**
+  String get retroStartsTomorrow;
+
+  /// No description provided for @retroStartsInDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Starts in {days} days'**
+  String retroStartsInDays(int days);
+
+  /// No description provided for @retroCardHint.
+  ///
+  /// In en, this message translates to:
+  /// **'See all retrogrades'**
+  String get retroCardHint;
+
+  /// No description provided for @retroLegendPreShadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-shadow'**
+  String get retroLegendPreShadow;
+
+  /// No description provided for @retroLegendRetrograde.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrograde'**
+  String get retroLegendRetrograde;
+
+  /// No description provided for @retroLegendPostShadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-shadow'**
+  String get retroLegendPostShadow;
+
+  /// No description provided for @retroShadowNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadows are the weeks just before and after, when a planet is slowing down or catching up.'**
+  String get retroShadowNote;
+
+  /// No description provided for @retroPeriodRetrograde.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrograde {start} to {end}'**
+  String retroPeriodRetrograde(String start, String end);
+
+  /// No description provided for @retroPeriodShadows.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadows {start} to {end}'**
+  String retroPeriodShadows(String start, String end);
+
+  /// No description provided for @retroYearHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'{year}'**
+  String retroYearHeader(String year);
+
+  /// No description provided for @retroNoneThisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'No retrogrades this year'**
+  String get retroNoneThisYear;
+
+  /// No description provided for @retroMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More planets'**
+  String get retroMore;
+
+  /// No description provided for @retroTipsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle tips'**
+  String get retroTipsTitle;
+
+  /// No description provided for @retroTipMercury.
+  ///
+  /// In en, this message translates to:
+  /// **'A lovely time to revisit, rest and re-read. Double-check your plans, save your photos, and give messages a little extra time.'**
+  String get retroTipMercury;
+
+  /// No description provided for @retroTipVenus.
+  ///
+  /// In en, this message translates to:
+  /// **'A tender season to reflect on what you value in love and friendship. Notice what feels true before starting something new.'**
+  String get retroTipVenus;
+
+  /// No description provided for @retroTipMars.
+  ///
+  /// In en, this message translates to:
+  /// **'Your energy may feel slower. Choose rest over rushing, and let small, steady steps count.'**
+  String get retroTipMars;
+
+  /// No description provided for @retroTipJupiter.
+  ///
+  /// In en, this message translates to:
+  /// **'A slower season for growth. Savor what you have learned and let your dreams take shape at their own pace.'**
+  String get retroTipJupiter;
+
+  /// No description provided for @retroTipSaturn.
+  ///
+  /// In en, this message translates to:
+  /// **'A quiet time to review your routines and boundaries, with kindness toward yourself.'**
+  String get retroTipSaturn;
 }
 
 class _AppLocalizationsDelegate

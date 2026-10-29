@@ -487,4 +487,103 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get signPisces => 'မိန်ရာသီ';
+
+  @override
+  String get retroTitle => 'နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်များ';
+
+  @override
+  String get retroMercury => 'ဗုဒ္ဓဟူးဂြိုဟ်';
+
+  @override
+  String get retroVenus => 'သောကြာဂြိုဟ်';
+
+  @override
+  String get retroMars => 'အင်္ဂါဂြိုဟ်';
+
+  @override
+  String get retroJupiter => 'ကြာသပတေးဂြိုဟ်';
+
+  @override
+  String get retroSaturn => 'စနေဂြိုဟ်';
+
+  @override
+  String retroStatusRetrograde(String planet, String date) {
+    return '$planet က $date အထိ နောက်ပြန်လှည့်နေပါတယ်';
+  }
+
+  @override
+  String retroStatusNext(String planet, String date) {
+    return 'နောက်တစ်ကြိမ် $planet နောက်ပြန်လှည့်မယ့်ရက်: $date';
+  }
+
+  @override
+  String get retroStartsToday => 'ဒီနေ့ စတင်ပါတယ်';
+
+  @override
+  String get retroStartsTomorrow => 'မနက်ဖြန် စတင်ပါတယ်';
+
+  @override
+  String retroStartsInDays(int days) {
+    return 'နောက် $days ရက်အကြာမှာ စတင်ပါတယ်';
+  }
+
+  @override
+  String get retroCardHint => 'နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်အားလုံးကို ကြည့်မယ်';
+
+  @override
+  String get retroLegendPreShadow => 'ကြိုတင်အရိပ်ကာလ';
+
+  @override
+  String get retroLegendRetrograde => 'နောက်ပြန်လှည့်ကာလ';
+
+  @override
+  String get retroLegendPostShadow => 'နောက်ဆက်တွဲအရိပ်ကာလ';
+
+  @override
+  String get retroShadowNote =>
+      'အရိပ်ကာလတွေက ဂြိုဟ်တစ်လုံး အရှိန်လျှော့တာ ဒါမှမဟုတ် အရှိန်ပြန်ရလာတာ ဖြစ်နေတဲ့၊ နောက်ပြန်လှည့်မှုမတိုင်ခင်နဲ့ ပြီးနောက်က ရက်သတ္တပတ်တွေပါ။';
+
+  @override
+  String retroPeriodRetrograde(String start, String end) {
+    return 'နောက်ပြန်လှည့်ကာလ $start မှ $end အထိ';
+  }
+
+  @override
+  String retroPeriodShadows(String start, String end) {
+    return 'အရိပ်ကာလ $start မှ $end အထိ';
+  }
+
+  @override
+  String retroYearHeader(String year) {
+    return '$year ခုနှစ်';
+  }
+
+  @override
+  String get retroNoneThisYear => 'ဒီနှစ်မှာ ဂြိုဟ်နောက်ပြန်လှည့်မှု မရှိပါဘူး';
+
+  @override
+  String get retroMore => 'ဂြိုဟ်တွေ ထပ်ကြည့်မယ်';
+
+  @override
+  String get retroTipsTitle => 'နူးညံ့တဲ့ အကြံပြုချက်များ';
+
+  @override
+  String get retroTipMercury =>
+      'ပြန်ကြည့်၊ အနားယူ၊ ထပ်ဖတ်ဖို့ သင့်တော်တဲ့ အချိန်လေးပါ။ အစီအစဉ်တွေကို တစ်ခေါက်ထပ်စစ်ပြီး ဓာတ်ပုံတွေကို သိမ်းထားပါ၊ စာတွေကို အဖြေပြန်ဖို့လည်း အချိန်နည်းနည်းပိုပေးလိုက်ပါ။';
+
+  @override
+  String get retroTipVenus =>
+      'အချစ်နဲ့ ခင်မင်မှုမှာ ကိုယ်တန်ဖိုးထားတာတွေကို ပြန်စဉ်းစားကြည့်ဖို့ နူးညံ့တဲ့ကာလလေးပါ။ အသစ်တစ်ခု မစခင် ကိုယ့်အတွက် ဘယ်အရာက အမှန်တကယ်ခံစားရလဲဆိုတာ သတိထားကြည့်ပါ။';
+
+  @override
+  String get retroTipMars =>
+      'ကိုယ့်ရဲ့ စွမ်းအင်က ပုံမှန်ထက် နှေးနေသလို ခံစားရနိုင်ပါတယ်။ အလောတကြီးလုပ်တာထက် အနားယူဖို့ ရွေးပြီး တဖြည်းဖြည်း လုပ်ဆောင်တဲ့ ခြေလှမ်းသေးသေးလေးတွေကိုလည်း တန်ဖိုးထားပါ။';
+
+  @override
+  String get retroTipJupiter =>
+      'ကြီးထွားတိုးတက်မှုအတွက် အရှိန်နည်းနည်းနှေးတဲ့ ကာလလေးပါ။ သင်ယူခဲ့တာတွေကို အရသာခံပြီး ကိုယ့်အိပ်မက်တွေကို ကိုယ့်အရှိန်နဲ့ ပုံဖော်ခွင့်ပေးလိုက်ပါ။';
+
+  @override
+  String get retroTipSaturn =>
+      'ကိုယ့်ကိုယ်ကိုယ် ကြင်နာရင်း နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တွေနဲ့ ကိုယ့်စည်းမျဉ်းတွေကို ပြန်လည်သုံးသပ်ဖို့ တိတ်ဆိတ်အေးချမ်းတဲ့ အချိန်လေးပါ။';
 }

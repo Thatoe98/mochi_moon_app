@@ -484,4 +484,103 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signPisces => 'Pisces';
+
+  @override
+  String get retroTitle => 'Retrogrades';
+
+  @override
+  String get retroMercury => 'Mercury';
+
+  @override
+  String get retroVenus => 'Venus';
+
+  @override
+  String get retroMars => 'Mars';
+
+  @override
+  String get retroJupiter => 'Jupiter';
+
+  @override
+  String get retroSaturn => 'Saturn';
+
+  @override
+  String retroStatusRetrograde(String planet, String date) {
+    return '$planet is retrograde until $date';
+  }
+
+  @override
+  String retroStatusNext(String planet, String date) {
+    return 'Next $planet retrograde: $date';
+  }
+
+  @override
+  String get retroStartsToday => 'Starts today';
+
+  @override
+  String get retroStartsTomorrow => 'Starts tomorrow';
+
+  @override
+  String retroStartsInDays(int days) {
+    return 'Starts in $days days';
+  }
+
+  @override
+  String get retroCardHint => 'See all retrogrades';
+
+  @override
+  String get retroLegendPreShadow => 'Pre-shadow';
+
+  @override
+  String get retroLegendRetrograde => 'Retrograde';
+
+  @override
+  String get retroLegendPostShadow => 'Post-shadow';
+
+  @override
+  String get retroShadowNote =>
+      'Shadows are the weeks just before and after, when a planet is slowing down or catching up.';
+
+  @override
+  String retroPeriodRetrograde(String start, String end) {
+    return 'Retrograde $start to $end';
+  }
+
+  @override
+  String retroPeriodShadows(String start, String end) {
+    return 'Shadows $start to $end';
+  }
+
+  @override
+  String retroYearHeader(String year) {
+    return '$year';
+  }
+
+  @override
+  String get retroNoneThisYear => 'No retrogrades this year';
+
+  @override
+  String get retroMore => 'More planets';
+
+  @override
+  String get retroTipsTitle => 'Gentle tips';
+
+  @override
+  String get retroTipMercury =>
+      'A lovely time to revisit, rest and re-read. Double-check your plans, save your photos, and give messages a little extra time.';
+
+  @override
+  String get retroTipVenus =>
+      'A tender season to reflect on what you value in love and friendship. Notice what feels true before starting something new.';
+
+  @override
+  String get retroTipMars =>
+      'Your energy may feel slower. Choose rest over rushing, and let small, steady steps count.';
+
+  @override
+  String get retroTipJupiter =>
+      'A slower season for growth. Savor what you have learned and let your dreams take shape at their own pace.';
+
+  @override
+  String get retroTipSaturn =>
+      'A quiet time to review your routines and boundaries, with kindness toward yourself.';
 }

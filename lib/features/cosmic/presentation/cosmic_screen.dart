@@ -5,6 +5,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_art.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_status_card.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/color_swatch_tile.dart';
@@ -66,6 +67,7 @@ class _TodayView extends ConsumerWidget {
           style: theme.textTheme.bodyMedium,
         ),
         const SizedBox(height: AppSpacing.md),
+        const RetrogradeStatusCard(),
         _Block(
           children: [
             Text(reading.headline, style: theme.textTheme.titleLarge),
