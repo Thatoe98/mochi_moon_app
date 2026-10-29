@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/data/local_notifications_reminder_scheduler.dart';
 import 'package:mochi_moon/features/settings/data/prefs_reminder_settings_repository.dart';
 import 'package:mochi_moon/features/settings/domain/reminder.dart';
@@ -19,11 +20,9 @@ ReminderSettingsRepository reminderSettingsRepository(Ref ref) =>
 ReminderScheduler reminderScheduler(Ref ref) =>
     LocalNotificationsReminderScheduler();
 
-/// Language of the notification text: Burmese when the device uses it,
-/// English otherwise. Overridden in tests.
+/// Language of the notification text: the app language. Overridden in tests.
 @Riverpod(keepAlive: true)
-String reminderLanguage(Ref ref) =>
-    PlatformDispatcher.instance.locale.languageCode == 'my' ? 'my' : 'en';
+String reminderLanguage(Ref ref) => ref.watch(effectiveLanguageProvider);
 
 /// The user's reminder choice, kept in sync with what is scheduled.
 @Riverpod(keepAlive: true)
@@ -82,7 +81,11 @@ class ReminderController extends _$ReminderController {
   }
 }
 
-/// Re-plans the reminder window once per app run; watched from the app root.
+/// Re-plans the reminder window once per app run and again when the app
+/// language changes, so the notification text follows it. Watched from the
+/// app root.
 @Riverpod(keepAlive: true)
-Future<void> reminderSync(Ref ref) =>
-    ref.read(reminderControllerProvider.notifier).resync();
+Future<void> reminderSync(Ref ref) {
+  ref.watch(reminderLanguageProvider);
+  return ref.read(reminderControllerProvider.notifier).resync();
+}

@@ -439,6 +439,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Show your birthday color and today\'s color on Cosmic you';
 
   @override
+  String get languageTitle => 'Language';
+
+  @override
+  String get languageSystem => 'Same as my phone';
+
+  @override
   String get signAries => 'Aries';
 
   @override

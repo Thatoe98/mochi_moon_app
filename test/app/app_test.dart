@@ -14,6 +14,7 @@ import 'package:mochi_moon/features/onboarding/application/onboarding_providers.
 import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
@@ -23,6 +24,7 @@ import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/profile/support/fake_profile.dart';
+import '../features/settings/support/fake_app_language.dart';
 import '../features/settings/support/fake_reminder.dart';
 import '../features/widget_bridge/support/fake_widget_publisher.dart';
 
@@ -49,6 +51,9 @@ Widget _app({
     profileRemoteProvider.overrideWithValue(null),
     deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
     journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
+    appLanguageRepositoryProvider.overrideWithValue(
+      FakeAppLanguageRepository(),
+    ),
     reminderSettingsRepositoryProvider.overrideWithValue(
       FakeReminderSettingsRepository(),
     ),

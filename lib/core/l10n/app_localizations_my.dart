@@ -442,6 +442,12 @@ class AppLocalizationsMy extends AppLocalizations {
       'သင့်စကြဝဠာမှာ မွေးနေ့အရောင်နဲ့ ဒီနေ့ရဲ့အရောင်ကို ပြပါ';
 
   @override
+  String get languageTitle => 'ဘာသာစကား';
+
+  @override
+  String get languageSystem => 'ဖုန်းရဲ့ ဘာသာစကားအတိုင်း';
+
+  @override
   String get signAries => 'မိဿရာသီ';
 
   @override

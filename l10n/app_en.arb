@@ -133,6 +133,14 @@
   "cosmicDisclaimer": "For entertainment and self-reflection",
   "thaiColorsSettingTitle": "Thai day colors",
   "thaiColorsSettingSubtitle": "Show your birthday color and today's color on Cosmic you",
+  "languageTitle": "Language",
+  "@languageTitle": {
+    "description": "Settings row and sheet title for choosing the app language"
+  },
+  "languageSystem": "Same as my phone",
+  "@languageSystem": {
+    "description": "Language option that follows the device language"
+  },
   "signAries": "Aries",
   "signTaurus": "Taurus",
   "signGemini": "Gemini",

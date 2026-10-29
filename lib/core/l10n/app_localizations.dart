@@ -818,6 +818,18 @@ abstract class AppLocalizations {
   /// **'Show your birthday color and today\'s color on Cosmic you'**
   String get thaiColorsSettingSubtitle;
 
+  /// Settings row and sheet title for choosing the app language
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageTitle;
+
+  /// Language option that follows the device language
+  ///
+  /// In en, this message translates to:
+  /// **'Same as my phone'**
+  String get languageSystem;
+
   /// No description provided for @signAries.
   ///
   /// In en, this message translates to:

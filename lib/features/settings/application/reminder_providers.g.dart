@@ -105,20 +105,17 @@ final class ReminderSchedulerProvider
 
 String _$reminderSchedulerHash() => r'a6e729e7974386505e81d2b0c35b7d39e324905b';
 
-/// Language of the notification text: Burmese when the device uses it,
-/// English otherwise. Overridden in tests.
+/// Language of the notification text: the app language. Overridden in tests.
 
 @ProviderFor(reminderLanguage)
 final reminderLanguageProvider = ReminderLanguageProvider._();
 
-/// Language of the notification text: Burmese when the device uses it,
-/// English otherwise. Overridden in tests.
+/// Language of the notification text: the app language. Overridden in tests.
 
 final class ReminderLanguageProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  /// Language of the notification text: Burmese when the device uses it,
-  /// English otherwise. Overridden in tests.
+  /// Language of the notification text: the app language. Overridden in tests.
   ReminderLanguageProvider._()
     : super(
         from: null,
@@ -152,7 +149,7 @@ final class ReminderLanguageProvider
   }
 }
 
-String _$reminderLanguageHash() => r'4582c502da162bf21e826f4c8a87709e490ffb53';
+String _$reminderLanguageHash() => r'05260ffcd08b12946d91b7195cc7387bad03caa4';
 
 /// The user's reminder choice, kept in sync with what is scheduled.
 
@@ -206,17 +203,23 @@ abstract class _$ReminderController extends $AsyncNotifier<ReminderSettings> {
   }
 }
 
-/// Re-plans the reminder window once per app run; watched from the app root.
+/// Re-plans the reminder window once per app run and again when the app
+/// language changes, so the notification text follows it. Watched from the
+/// app root.
 
 @ProviderFor(reminderSync)
 final reminderSyncProvider = ReminderSyncProvider._();
 
-/// Re-plans the reminder window once per app run; watched from the app root.
+/// Re-plans the reminder window once per app run and again when the app
+/// language changes, so the notification text follows it. Watched from the
+/// app root.
 
 final class ReminderSyncProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
-  /// Re-plans the reminder window once per app run; watched from the app root.
+  /// Re-plans the reminder window once per app run and again when the app
+  /// language changes, so the notification text follows it. Watched from the
+  /// app root.
   ReminderSyncProvider._()
     : super(
         from: null,
@@ -242,4 +245,4 @@ final class ReminderSyncProvider
   }
 }
 
-String _$reminderSyncHash() => r'5bf8b18a125c11af96d3dc43d4b25f9de84acc62';
+String _$reminderSyncHash() => r'a78a6008704b86f721998167158eef484d5aac65';
