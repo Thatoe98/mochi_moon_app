@@ -169,32 +169,32 @@ class AppLocalizationsMy extends AppLocalizations {
       'သင်ရွေးသော အချိန်တွင် နေ့စဉ် နူးညံ့သော ကတ်တစ်ကတ်။';
 
   @override
-  String get onboardingWelcomeTitle => 'Welcome to Mochi Moon';
+  String get onboardingWelcomeTitle => 'Mochi Moon မှ ကြိုဆိုပါတယ်';
 
   @override
   String get onboardingWelcomeBody =>
-      'Soft little cards to remind you how wonderful you are. Read each one out loud, then let it sink in.';
+      'သင်ဟာ ဘယ်လောက်အံ့ဩစရာကောင်းတဲ့သူလဲဆိုတာ သတိရစေမယ့် နူးညံ့တဲ့ ကတ်လေးတွေပါ။ ကတ်တစ်ကတ်စီကို အသံထွက်ဖတ်ပြီး အဲဒီစကားလေးတွေကို စိတ်ထဲမှာ ခံစားကြည့်ပါ။';
 
   @override
   String onboardingTryCards(int count) {
-    return 'Try $count cards';
+    return 'ကတ် $count ကတ်ကို စမ်းကြည့်ပါ';
   }
 
   @override
   String onboardingCardProgress(int current, int total) {
-    return 'Card $current of $total';
+    return 'ကတ် $current / $total';
   }
 
   @override
   String get onboardingSaveTitle =>
-      'Save your cards and get your cosmic reading';
+      'သင့်ကတ်တွေကို သိမ်းပြီး စကြဝဠာဖတ်ရှုချက် ရယူလိုက်ပါ';
 
   @override
   String get onboardingSaveBody =>
-      'The cards you loved are waiting in your journal. Your cosmic reading is on its way.';
+      'သင်နှစ်သက်တဲ့ ကတ်တွေကို မှတ်တမ်းထဲမှာ စောင့်နေပါတယ်။ သင့်စကြဝဠာဖတ်ရှုချက်လည်း မကြာခင် ရောက်လာတော့မှာပါ။';
 
   @override
-  String get onboardingContinue => 'Continue';
+  String get onboardingContinue => 'ဆက်လုပ်မယ်';
 
   @override
   String get readAloudHint => 'အသံထွက်ဖတ်ပါ ✨';
@@ -224,169 +224,169 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get illustrationOnboardingWelcome =>
-      'Mochi the moon bunny waving from a glowing crescent moon in a lavender night sky';
+      'လာဗင်ဒါရောင် ညကောင်းကင်ထဲက တောက်ပနေတဲ့ လခြမ်းပေါ်မှာ လက်ပြနှုတ်ဆက်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationOnboardingSave =>
-      'Mochi the moon bunny hugging a small stack of glowing cards';
+      'တောက်ပနေတဲ့ ကတ်လေးတွေ စုပုံကို ဖက်ထားတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationEmptyDeck =>
-      'Mochi the moon bunny sitting on a sleepy crescent moon, looking at a glowing heart';
+      'အိပ်ချင်နေတဲ့ လခြမ်းပေါ်မှာ ထိုင်ပြီး တောက်ပနေတဲ့ နှလုံးသားလေးကို ကြည့်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationCalm =>
-      'Mochi the moon bunny sitting peacefully with eyes closed among floating petals and stars';
+      'လွင့်မျောနေတဲ့ ပန်းဖတ်လေးတွေနဲ့ ကြယ်တွေအကြားမှာ မျက်လုံးမှိတ်ပြီး ငြိမ်းငြိမ်းချမ်းချမ်း ထိုင်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationConfidence =>
-      'Mochi the moon bunny standing proudly with hands on hips on a glowing crescent moon';
+      'တောက်ပနေတဲ့ လခြမ်းပေါ်မှာ လက်ကို တင်ပါးပေါ်တင်ပြီး ဂုဏ်ယူစွာ မတ်တပ်ရပ်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationHealing =>
-      'Mochi the moon bunny wrapped in a starry blanket, smiling over a warm cup of tea';
+      'ကြယ်လေးတွေပါတဲ့ စောင်ခြုံထားပြီး လက်ဖက်ရည်ပူပူတစ်ခွက်ကို ပြုံးရင်း ကိုင်ထားတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationSelfWorth =>
-      'Mochi the moon bunny holding up a hand mirror that shows a glowing heart';
+      'တောက်ပနေတဲ့ နှလုံးသားလေးကို ပြထားတဲ့ လက်ကိုင်မှန်လေးကို ကိုင်ထားတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationRest =>
-      'Mochi the moon bunny sleeping on a soft cloud under a crescent moon';
+      'လခြမ်းအောက်က နူးညံ့တဲ့ တိမ်ပေါ်မှာ အိပ်ပျော်နေတဲ့ လယုန်လေး Mochi';
 
   @override
-  String get signInGoogle => 'Continue with Google';
+  String get signInGoogle => 'Google နဲ့ ဆက်လုပ်မယ်';
 
   @override
-  String get signInFailed => 'Couldn\'t sign in. Please try again.';
+  String get signInFailed => 'ဝင်လို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
   String get signInOffline =>
-      'You seem to be offline. Check your connection and try again.';
+      'အင်တာနက်ချိတ်ဆက်မှု မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
   String profileStepProgress(int current, int total) {
-    return 'Step $current of $total';
+    return 'အဆင့် $current / $total';
   }
 
   @override
-  String get profileBack => 'Back';
+  String get profileBack => 'နောက်သို့';
 
   @override
-  String get profileNameTitle => 'What should we call you?';
+  String get profileNameTitle => 'ဘယ်လိုခေါ်ရမလဲ။';
 
   @override
-  String get profileNameBody => 'A first name or a nickname is perfect.';
+  String get profileNameBody =>
+      'နာမည်အရင်း ဒါမှမဟုတ် ချစ်စနိုးနာမည်လေး ပေးလို့ရပါတယ်။';
 
   @override
-  String get profileNameLabel => 'Your name';
+  String get profileNameLabel => 'သင့်နာမည်';
 
   @override
-  String get profileBirthDateTitle => 'When is your birthday?';
+  String get profileBirthDateTitle => 'မွေးနေ့က ဘယ်နေ့လဲ။';
 
   @override
   String get profileBirthDateBody =>
-      'Your sun sign and your cosmic reading start here.';
+      'သင့်နေရာသီခွင်နဲ့ စကြဝဠာဖတ်ရှုချက်တို့ရဲ့ အစက ဒီမှာပါ။';
 
   @override
   String profileBirthDateChosen(String date) {
-    return 'Born $date';
+    return 'မွေးနေ့ $date';
   }
 
   @override
-  String get profileBirthTimeTitle => 'What time were you born?';
+  String get profileBirthTimeTitle => 'ဘယ်အချိန်မှာ မွေးဖွားခဲ့တာလဲ။';
 
   @override
   String get profileBirthTimeBody =>
-      'This is optional. It sharpens your moon and rising signs.';
+      'ဒါက မဖြစ်မနေ မဟုတ်ပါဘူး။ မွေးချိန်သိရင် လရာသီခွင်နဲ့ အတက်ရာသီခွင်ကို ပိုတိကျစေပါတယ်။';
 
   @override
-  String get profileBirthTimeChoose => 'Choose a time';
+  String get profileBirthTimeChoose => 'အချိန်ရွေးမယ်';
 
   @override
-  String get profileBirthTimeChange => 'Change the time';
+  String get profileBirthTimeChange => 'အချိန်ပြောင်းမယ်';
 
   @override
-  String get profileBirthTimeUnknown => 'I don\'t know';
+  String get profileBirthTimeUnknown => 'မသိပါဘူး';
 
   @override
   String profileBirthTimeChosen(String time) {
-    return 'Born at $time';
+    return '$time မှာ မွေးဖွားခဲ့ပါတယ်';
   }
 
   @override
-  String get profileBirthTimeNone => 'No birth time. That\'s okay.';
+  String get profileBirthTimeNone => 'မွေးချိန်မသိလည်း ရပါတယ်။';
 
   @override
-  String get profileBirthPlaceTitle => 'Where were you born?';
+  String get profileBirthPlaceTitle => 'ဘယ်နေရာမှာ မွေးဖွားခဲ့တာလဲ။';
 
   @override
   String get profileBirthPlaceBodyRequired =>
-      'We read your birth time in the time zone of this place.';
+      'ဒီနေရာရဲ့ အချိန်ဇုန်အတိုင်း သင့်မွေးချိန်ကို တွက်ချက်ပေးမှာပါ။';
 
   @override
   String get profileBirthPlaceBodyOptional =>
-      'This is optional. Search for the nearest city, or skip it.';
+      'မဖြစ်မနေ မဟုတ်ပါဘူး။ အနီးဆုံးမြို့ကို ရှာပါ၊ ဒါမှမဟုတ် ကျော်သွားလို့ရပါတယ်။';
 
   @override
-  String get profileBirthPlaceLabel => 'Search for a city';
+  String get profileBirthPlaceLabel => 'မြို့တစ်မြို့ ရှာပါ';
 
   @override
   String get profileBirthPlaceNoMatches =>
-      'No places found. Try a bigger city nearby.';
+      'နေရာမတွေ့ပါဘူး။ အနီးအနားက မြို့ကြီးတစ်မြို့ကို ရှာကြည့်ပါ။';
 
   @override
-  String get profileBirthPlaceLoadFailed =>
-      'The list of places couldn\'t be loaded.';
+  String get profileBirthPlaceLoadFailed => 'နေရာစာရင်းကို ရယူလို့မရပါဘူး။';
 
   @override
   String profileBirthPlaceChosen(String place) {
-    return 'Born in $place';
+    return '$place မှာ မွေးဖွားခဲ့ပါတယ်';
   }
 
   @override
-  String get profileBirthPlaceChange => 'Choose a different place';
+  String get profileBirthPlaceChange => 'တခြားနေရာတစ်ခု ရွေးမယ်';
 
   @override
-  String get profileReminderTitle => 'A daily nudge?';
+  String get profileReminderTitle => 'နေ့စဉ် သတိပေးချက်လေး လိုချင်လား။';
 
   @override
   String get profileReminderBody =>
-      'One soft card a day. You can change this any time.';
+      'တစ်နေ့ကို နူးညံ့တဲ့ ကတ်လေးတစ်ကတ်ပါ။ အချိန်မရွေး ပြောင်းလို့ရပါတယ်။';
 
   @override
   String profileReminderAt(String time) {
-    return 'Remind me at $time';
+    return '$time မှာ သတိပေးပါ';
   }
 
   @override
-  String get profileReminderChange => 'Change the time';
+  String get profileReminderChange => 'အချိန်ပြောင်းမယ်';
 
   @override
-  String get profileReminderOn => 'Remind me';
+  String get profileReminderOn => 'သတိပေးပါ';
 
   @override
-  String get profileReminderSkip => 'Skip for now';
+  String get profileReminderSkip => 'အခုတော့ ကျော်မယ်';
 
   @override
-  String get profileFocusTitle => 'What would you like more of?';
+  String get profileFocusTitle => 'ဘယ်အရာတွေကို ပိုလိုချင်လဲ။';
 
   @override
   String profileFocusBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Pick up to $count.',
-      one: 'Pick up to 1.',
+      other: '$count ခုအထိ ရွေးပါ။',
     );
     return '$_temp0';
   }
 
   @override
-  String get profileFinish => 'Let\'s go';
+  String get profileFinish => 'စလိုက်ကြစို့';
 
   @override
-  String get profileSaveFailed => 'Couldn\'t save that. Please try again.';
+  String get profileSaveFailed =>
+      'သိမ်းဆည်းလို့ မရပါဘူး။ ထပ်ကြိုးစားကြည့်ပါနော်။';
 
   @override
   String get cosmicNeedsBirthDateTitle =>

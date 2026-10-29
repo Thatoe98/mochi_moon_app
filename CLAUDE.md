@@ -192,7 +192,7 @@ docs/
 - Burmese text must be **Unicode**, never Zawgyi.
 - Content JSON is loaded through a `ContentRepository`; never `rootBundle.loadString` from widgets.
 - **Translations are generated with OpenAI, not by Claude.** Burmese strings and content texts come from `tool/translate_content.dart`, a dev-time script (plain `dart:io` HTTP, no new app dependency). Claude Code writes and runs the tool but does not hand-write `my` text itself. Only Burmese is generated and shipped for now; Thai is not generated until the owner asks.
-  - The English files are the only source: `app_en.arb`, `assets/content/fallback_readings/en.json`, and the quote texts. Output goes to `app_my.arb` and the per-language content JSON (`my.json`).
+  - The English files are the only source: `app_en.arb`, `assets/content/fallback_readings/en.json`, and the quote texts. Output goes to `app_my.arb`, `assets/content/fallback_readings/my.json`, and the `text.my` field of each quote in `quotes.json`.
   - Model: `gpt-6-luna` with high reasoning effort (defaults in the tool; `OPENAI_MODEL` overrides). The key is `OPENAI_API_KEY`, read from the environment or from a local `.env` in the project root (gitignored). Never put the key in the repo, a commit, a log, or chat.
   - Only app copy and content texts are sent. Never send birth data, profile data, journal entries, partner names, or user ids.
   - The prompt demands Unicode (never Zawgyi), the soft, warm, never-fatalistic tone, and no predictions about health, death, pregnancy, money outcomes, or legal matters.
