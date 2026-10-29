@@ -146,6 +146,8 @@ class _LimitCard extends StatelessWidget {
           child: EmptyState(
             title: l10n.deckLimitTitle,
             body: l10n.deckLimitBody,
+            illustration: AppIllustrations.emptyDeck,
+            illustrationLabel: l10n.illustrationEmptyDeck,
           ),
         ),
         TextButton.icon(

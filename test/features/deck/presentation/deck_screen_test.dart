@@ -315,6 +315,10 @@ void main() {
 
       expect(find.text("You're glowing ✨"), findsOneWidget);
       expect(find.byType(QuoteCard), findsNothing);
+      expect(
+        tester.widget<Image>(find.byType(Image)).semanticLabel,
+        contains('Mochi the moon bunny'),
+      );
     });
 
     testWidgets('starts on the glowing card when today is already done', (
