@@ -512,6 +512,12 @@ abstract class AppLocalizations {
   /// **'Mochi the moon bunny sleeping on a soft cloud under a crescent moon'**
   String get illustrationRest;
 
+  /// No description provided for @illustrationZodiac.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny in a {sign} costume under a glowing {sign} constellation'**
+  String illustrationZodiac(String sign);
+
   /// No description provided for @signInGoogle.
   ///
   /// In en, this message translates to:

@@ -74,6 +74,8 @@
   "illustrationHealing": "Mochi the moon bunny wrapped in a starry blanket, smiling over a warm cup of tea",
   "illustrationSelfWorth": "Mochi the moon bunny holding up a hand mirror that shows a glowing heart",
   "illustrationRest": "Mochi the moon bunny sleeping on a soft cloud under a crescent moon",
+  "illustrationZodiac": "Mochi the moon bunny in a {sign} costume under a glowing {sign} constellation",
+  "@illustrationZodiac": { "placeholders": { "sign": { "type": "String" } } },
   "signInGoogle": "Continue with Google",
   "signInFailed": "Couldn't sign in. Please try again.",
   "signInOffline": "You seem to be offline. Check your connection and try again.",

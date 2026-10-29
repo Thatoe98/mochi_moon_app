@@ -255,6 +255,11 @@ class AppLocalizationsMy extends AppLocalizations {
       'လခြမ်းအောက်က နူးညံ့တဲ့ တိမ်ပေါ်မှာ အိပ်ပျော်နေတဲ့ လယုန်လေး Mochi';
 
   @override
+  String illustrationZodiac(String sign) {
+    return 'တောက်ပနေတဲ့ $sign ရာသီခွင် ကြယ်စုအောက်မှာ $sign ရာသီခွင် ဝတ်စုံ ဝတ်ထားတဲ့ လယုန်လေး Mochi';
+  }
+
+  @override
   String get signInGoogle => 'Google နဲ့ ဆက်လုပ်မယ်';
 
   @override

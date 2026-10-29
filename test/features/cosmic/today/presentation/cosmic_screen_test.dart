@@ -90,9 +90,19 @@ void main() {
   });
 
   testWidgets('shows today for the sun sign', (tester) async {
+    // Tall enough that the whole list is built, so the art above does not
+    // push the first blocks out of the lazy list.
+    tester.view
+      ..physicalSize = const Size(800, 3000)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
     await tester.pumpWidget(_host(profile: _scorpio));
     await tester.pumpAndSettle();
 
+    expect(
+      tester.widget<Image>(find.byType(Image)).semanticLabel,
+      contains('Scorpio costume'),
+    );
     expect(find.textContaining('Scorpio'), findsWidgets);
     expect(find.textContaining('Moon in'), findsOneWidget);
     expect(find.text('Your depth is a superpower'), findsOneWidget);
@@ -150,6 +160,10 @@ void main() {
       _host(profile: _scorpio, locale: const Locale('th')),
     );
     await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Your depth is a superpower'),
+      300,
+    );
     expect(find.text('Your depth is a superpower'), findsOneWidget);
   });
 

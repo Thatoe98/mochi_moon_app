@@ -254,6 +254,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Mochi the moon bunny sleeping on a soft cloud under a crescent moon';
 
   @override
+  String illustrationZodiac(String sign) {
+    return 'Mochi the moon bunny in a $sign costume under a glowing $sign constellation';
+  }
+
+  @override
   String get signInGoogle => 'Continue with Google';
 
   @override

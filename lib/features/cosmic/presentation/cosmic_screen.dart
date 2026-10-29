@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/presentation/zodiac_art.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
@@ -21,9 +22,8 @@ class CosmicScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.cosmicTitle)),
       body: today.when(
         loading: () => const LoadingView(),
-        error: (error, stack) => ErrorView(
-          onRetry: () => ref.invalidate(cosmicTodayProvider(lang)),
-        ),
+        error: (error, stack) =>
+            ErrorView(onRetry: () => ref.invalidate(cosmicTodayProvider(lang))),
         data: (data) => data == null
             ? EmptyState(
                 title: l10n.cosmicNeedsBirthDateTitle,
@@ -52,6 +52,8 @@ class _TodayView extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.md),
       children: [
+        ZodiacArt(sign: today.sign),
+        const SizedBox(height: AppSpacing.md),
         Semantics(
           header: true,
           child: Text(
