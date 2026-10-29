@@ -249,7 +249,8 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 
 ### 7.1 Server-generated readings
 
-- A nightly job on the VPS generates, for each of the 12 signs × 3 languages, the daily reading for **today and tomorrow** (to cover all time zones) via a small LLM through OpenRouter.
+- A nightly job on the VPS generates, for each of the 12 signs × each shipped language (`en` and `my` for now; `th` joins when it ships), the daily reading for **today and tomorrow** (to cover all time zones) with OpenAI `gpt-6-luna` at high reasoning effort, called directly through the OpenAI API (OpenRouter is no longer used).
+- The API key lives only in the VPS environment (`OPENAI_API_KEY`); it is never in the app, the repo or a client request. The model ID is a server setting so it can change without an app release.
 - Inputs to the prompt are computed facts only (sign, Moon sign and phase, active retrogrades, notable transits to the sign), plus the style guide.
 - Personal reports (natal, compatibility) are generated on request from **placements only** (no birth date/time/place), then cached.
 - Output is strict JSON matching §8.2 schemas; invalid output is retried once, then the bundled fallback is served.
@@ -260,6 +261,15 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 - No fear language ("danger", "curse", "bad luck") and no absolute claims ("will", "definitely").
 - Suggest small, kind actions.
 - Native-quality Thai and Burmese (Unicode). First batches of each language are human-reviewed before launch.
+
+### 7.1a Translation of static content (build time)
+
+Burmese UI strings, bundled fallback readings and quote texts are generated from the English source by an OpenAI model (`gpt-6-luna`, high reasoning effort), run by the developer through `tool/translate_content.dart`. This is a dev-time step, separate from §7.1, and the app never calls it.
+
+- The key is read from `OPENAI_API_KEY` (environment or a gitignored local `.env`); `OPENAI_MODEL` overrides the default model. Neither is stored in the repo.
+- Only app copy and content texts are sent; no user, birth or journal data.
+- The style guide in §7.1 applies, plus Unicode Burmese (never Zawgyi). The tool checks keys, placeholders, JSON shape, word counts and Zawgyi before writing files.
+- Output is **unreviewed machine translation**. A native reviewer must approve each batch before it counts as shipped (see §7.1 and §13). Only Burmese is generated and shipped for now; Thai is not generated or shipped until a reviewer exists.
 
 ### 7.2 Embeddings for the For You deck
 
@@ -575,8 +585,10 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Firestore sync for profile, Journal, deck counters; security rules + emulator tests — *the device stays the source of truth: the journal and the counters (streak, last day, today's count) are mirrored to Firestore while signed in, and cards that only Firestore has are added back on start. Rules tests run with `scripts/test_rules.ps1` (or `.sh`; needs Node, Java, Firebase CLI). Deferred: restoring the streak and today's count after a reinstall (the history is not synced), a removal made offline comes back on the next start (no tombstones), the tightened journal rule is not yet deployed to `mochi-moon-dev`, no prod project.*
 - [x] Cities dataset + birthplace search + time zone resolution — *`assets/content/cities/` is built from GeoNames `cities15000` by `tool/build_cities.dart` (34,191 cities, English names only). Search is offline, ignores case and accents, ranks prefix matches first and then by population, and can be narrowed by region or country ("springfield illinois"). The zone comes from `lat_lng_to_timezone` when the city is picked and is stored as `tzId`; a test checks that those ids exist in the `timezone` data. GeoNames (CC BY 4.0) is credited on Flutter's licenses page; there is no Settings licenses screen yet. Deferred: Thai and Burmese alternate names (the dump has no language tags, and Thai waits for a reviewer), editing the birthplace from the Me tab, and the tz database is not initialised at start-up (the astro engine item will do it).*
 - [x] Astro engine: Sun/Moon/planets + sun/moon sign (§9.1–9.2) — *`lib/features/cosmic/astro/`: `planetPositions(utc)` (Sun from VSOP87, Moon from Meeus ch. 47 plus nutation, planets with light-time, Pluto precessed from J2000), speed and retrograde flag, `birthInstantUtc` (local time + `tzId` to UTC, noon when unknown; initialises the tz database on first use) and `sunMoonSigns`. `test/features/cosmic/astro/golden_positions.json` holds 23 instants x 10 bodies from JPL Horizons; the worst error is 0.012° (Moon), the rest under 0.007°. Deferred: the Ascendant and `golden_charts.json` with birth data (M3, §9.3 and §9.7), annual aberration (about 20", left out on purpose), ΔT (TT is taken as UT, §9.1), and wiring the signs into the profile on save (see §6.1).*
-- [ ] Cosmic Today with bundled fallback texts, lucky colors, Thai colors toggle
+- [x] Cosmic Today with bundled fallback texts, lucky colors, Thai colors toggle (§6.7) — *the Cosmic tab shows the Sun sign, "Moon in X", a headline and text, energy, love, lucky colors (one from the sign palette, one from the element of the Moon's sign), lucky number, three things to avoid, and the disclaimer. Texts are bundled (`assets/content/fallback_readings/en.json`, two per sign, rotated by day of year) behind a `DailyReadingRepository` so the Readings API can replace them. Thai colors (birthday color and today's color) are off unless switched on in Me, and default on for the `th` locale. Without a birth date the tab asks for one. Deferred: Burmese and Thai texts and strings (`TODO_CONTENT`; English is shown instead), color names in English only, the Sun sign uses UTC when no birthplace was given (can be wrong for a birth within a day of a sign change), signs are computed on the fly and not stored on save (§6.1), the "Today's energy" daily-mix card (§6.10), and Premium personalized text.*
+- [ ] Cosmic Today from the Readings API with drift cache and language refetch (§6.7, §8.2) — *needs the M4 server; the screen already reads through `DailyReadingRepository`, so only a new implementation and the cache are missing.*
 - [x] Retrograde calendar + moon phase engine (§9.5) — *`retrogrades(year)` gives every Mercury, Venus, Mars, Jupiter and Saturn period whose shadows touch the year: both stations (bisected to 1 hour), pre- and post-shadow edges, and the station longitudes. `moonPhase(utc)` gives elongation, illumination, one of eight names, the Moon sign and the next new and full moon (to 1 minute). Checked against hourly JPL Horizons data for 2026–2027 (`golden_events.json`): stations within 2.7 h, shadow edges within 1.8 h, new and full moons within 105 s; the three published Mercury windows match. The scan margin is wider than the 2 months above (120 days for Mercury up to 400 for Jupiter and Saturn), because the slow planets' shadows reach about 3 months past the station. `retrogrades()` takes about 2 s for one year in the test VM; not yet timed on a phone. Outer planets (Uranus to Pluto) are not in the calendar.*
+- [ ] Translation tool for Burmese/Thai strings and readings via OpenAI (§7.1a) — *`tool/translate_content.dart` with validation; Burmese only; Thai is not generated or shipped. Model `gpt-6-luna`, high reasoning. Needs `OPENAI_API_KEY` from the owner.*
 - [ ] Retrograde alerts (local notifications), status card, timeline and tips (§6.6, §6.8) — *the engine above is ready; these need Cosmic Today and the notification setup. Also open: showing dates in the user's local time zone and pairing moon phases with affirmations.*
 - [ ] Account deletion (in-app + web page)
 
@@ -611,5 +623,5 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 - Domain name and API host (`api.<domain>`).
 - Final price points per region (set in Play Console; suggested anchors: yearly ≈ 6× monthly).
-- Who reviews Thai content (native reviewer needed).
+- Who reviews Thai content (native reviewer needed), and who reviews the OpenAI-generated Burmese (§7.1a).
 - Whether to register a Play **organization** account (needs business verification but skips the closed-testing requirement) or a personal one.

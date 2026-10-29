@@ -48,9 +48,8 @@ void main(List<String> args) {
   rows.sort((a, b) => a[0].compareTo(b[0]));
 
   final out = Directory('assets/content/cities')..createSync(recursive: true);
-  File('${out.path}/cities.tsv').writeAsStringSync(
-    '${rows.map((r) => r.join('\t')).join('\n')}\n',
-  );
+  File('${out.path}/cities.tsv')
+      .writeAsStringSync('${rows.map((r) => r.join('\t')).join('\n')}\n');
   final used = {for (final r in rows) r[3]};
   File('${out.path}/countries.tsv').writeAsStringSync(
     '${[for (final code in used.toList()..sort()) '$code\t${countries[code] ?? code}'].join('\n')}\n',

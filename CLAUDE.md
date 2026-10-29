@@ -191,6 +191,13 @@ docs/
 - **Thai (`th`) is implemented last**, once a native reviewer exists. Until then do not add `app_th.arb`, Thai quote text, or Thai fonts/fallbacks; ship `en` and `my` only.
 - Burmese text must be **Unicode**, never Zawgyi.
 - Content JSON is loaded through a `ContentRepository`; never `rootBundle.loadString` from widgets.
+- **Translations are generated with OpenAI, not by Claude.** Burmese strings and content texts come from `tool/translate_content.dart`, a dev-time script (plain `dart:io` HTTP, no new app dependency). Claude Code writes and runs the tool but does not hand-write `my` text itself. Only Burmese is generated and shipped for now; Thai is not generated until the owner asks.
+  - The English files are the only source: `app_en.arb`, `assets/content/fallback_readings/en.json`, and the quote texts. Output goes to `app_my.arb` and the per-language content JSON (`my.json`).
+  - Model: `gpt-6-luna` with high reasoning effort (defaults in the tool; `OPENAI_MODEL` overrides). The key is `OPENAI_API_KEY`, read from the environment or from a local `.env` in the project root (gitignored). Never put the key in the repo, a commit, a log, or chat.
+  - Only app copy and content texts are sent. Never send birth data, profile data, journal entries, partner names, or user ids.
+  - The prompt demands Unicode (never Zawgyi), the soft, warm, never-fatalistic tone, and no predictions about health, death, pregnancy, money outcomes, or legal matters.
+  - The tool validates its output: same keys as English, `{placeholders}` and JSON shape intact, no Zawgyi, 30–120 words for readings, and three `avoid` items. It skips strings already translated unless `--force` is passed.
+  - Machine-translated text is **unreviewed** until a native reviewer signs off; note that in `docs/PRD.md` §12.
 - Readings from the server carry a `lang`; if the requested language is missing, fall back to English, then to bundled fallback readings.
 
 ---
@@ -247,6 +254,7 @@ docs/
 - Add AGPL/GPL dependencies.
 - Hardcode strings, colors, or secrets.
 - Send raw birth data to the Readings API or any third party.
+- Commit or print the OpenAI key, or send anything but app copy and content texts to OpenAI.
 - Use sidereal/Vedic calculations.
 - Put business logic in widgets.
 - Mark a task complete with failing tests or analyzer warnings.
