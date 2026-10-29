@@ -55,6 +55,13 @@ List<Placement> planetPositions(DateTime utc) {
   ];
 }
 
+/// Apparent geocentric ecliptic longitude of [body] at [utc], in [0, 360).
+double longitudeAt(Body body, DateTime utc) =>
+    _longitude(body, julianDay(utc));
+
+/// Degrees per day [body]'s longitude is changing at [utc].
+double speedAt(Body body, DateTime utc) => _speed(body, julianDay(utc));
+
 /// Apparent geocentric ecliptic longitude of date in degrees, [0, 360).
 double _longitude(Body body, double jde) {
   final radians = switch (body) {
@@ -70,12 +77,7 @@ double _longitude(Body body, double jde) {
 double _speed(Body body, double jde) {
   final before = _longitude(body, jde - _halfSpeedWindowDays);
   final after = _longitude(body, jde + _halfSpeedWindowDays);
-  return _signedDifference(after, before) / (2 * _halfSpeedWindowDays);
-}
-
-/// [to] minus [from] in degrees, unwrapped across 0°/360° into [-180, 180).
-double _signedDifference(double to, double from) {
-  return (to - from + 540) % 360 - 180;
+  return signedAngleDifference(after, before) / (2 * _halfSpeedWindowDays);
 }
 
 /// Meeus ch. 33: iterate the light-time so the planet is seen where it was

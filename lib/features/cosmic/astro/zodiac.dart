@@ -24,6 +24,11 @@ double normalizeDegrees(double degrees) {
   return wrapped >= 360 ? 0 : wrapped;
 }
 
+/// [to] minus [from] in degrees, unwrapped across 0°/360° into [-180, 180).
+double signedAngleDifference(double to, double from) {
+  return (to - from + 540) % 360 - 180;
+}
+
 /// The sign that ecliptic [longitude] falls in.
 ZodiacSign signOfLongitude(double longitude) {
   final index = normalizeDegrees(longitude) ~/ degreesPerSign;
