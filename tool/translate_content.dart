@@ -8,8 +8,9 @@
 // Options:
 //   --arb          translate missing strings of l10n/app_en.arb
 //   --readings     translate assets/content/fallback_readings/en.json
-//                  (with neither flag, both run)
-//   --only REGEX   only ARB keys that match REGEX
+//   --quotes       add a Burmese text to assets/content/quotes/quotes.json
+//                  (with none of the three flags, all run)
+//   --only REGEX   only ARB keys (or quote ids) that match REGEX
 //   --force        translate again even if a translation exists
 //   --batch-size N ARB strings per request (default 25)
 //   --dry-run      show what would be sent; make no request, write nothing
@@ -25,18 +26,20 @@ import 'dart:io';
 
 import 'translate/arb_batch.dart';
 import 'translate/openai_chat.dart';
+import 'translate/quotes_batch.dart';
 import 'translate/readings_batch.dart';
 
 const _enArb = 'l10n/app_en.arb';
 const _myArb = 'l10n/app_my.arb';
 const _enReadings = 'assets/content/fallback_readings/en.json';
 const _myReadings = 'assets/content/fallback_readings/my.json';
+const _quotes = 'assets/content/quotes/quotes.json';
 
 Future<void> main(List<String> args) async {
   final options = _Options.parse(args);
   if (options == null) {
     stderr.writeln(
-      'usage: dart run tool/translate_content.dart [--arb] [--readings] '
+      'usage: dart run tool/translate_content.dart [--arb] [--readings] [--quotes] '
       '[--only REGEX] [--force] [--batch-size N] [--dry-run]',
     );
     exit(64);
@@ -65,6 +68,7 @@ Future<void> main(List<String> args) async {
   try {
     if (options.arb) failures += await _runArb(options, chat);
     if (options.readings) failures += await _runReadings(options, chat);
+    if (options.quotes) failures += await _runQuotes(options, chat);
   } on OpenAiException catch (e) {
     stderr.writeln(e);
     exit(1);
@@ -156,6 +160,44 @@ Future<int> _runReadings(_Options options, ChatCall? chat) async {
   return failures;
 }
 
+Future<int> _runQuotes(_Options options, ChatCall? chat) async {
+  final json = _readJson(_quotes)!;
+  final quotes = json['quotes']! as List<Object?>;
+  final ids = pendingQuotes(
+    quotes,
+    only: options.only == null ? null : RegExp(options.only!),
+    force: options.force,
+  );
+  stdout.writeln('Quotes: ${ids.length} quote(s) to translate.');
+  if (ids.isEmpty) return 0;
+  if (chat == null) {
+    stdout.writeln('  would send: ${ids.join(', ')}');
+    return 0;
+  }
+
+  final source = quoteSource(quotes);
+  final done = <String, String>{};
+  var failures = 0;
+  for (var i = 0; i < ids.length; i += options.batchSize) {
+    final batch = ids.sublist(i, (i + options.batchSize).clamp(0, ids.length));
+    stdout.writeln('  ${batch.length} quote(s)…');
+    final result = await translateArb(
+      chat: chat,
+      en: source,
+      my: const {},
+      keys: batch,
+    );
+    done.addAll(result.done);
+    File(_quotes)
+        .writeAsStringSync(encodeQuotes(json, mergeQuotes(quotes, done)));
+    for (final entry in result.failed.entries) {
+      failures++;
+      stderr.writeln('    FAILED ${entry.key}: ${entry.value.join('; ')}');
+    }
+  }
+  return failures;
+}
+
 Map<String, Object?>? _readJson(String path) {
   final file = File(path);
   if (!file.existsSync()) return null;
@@ -166,6 +208,7 @@ class _Options {
   _Options({
     required this.arb,
     required this.readings,
+    required this.quotes,
     required this.only,
     required this.force,
     required this.batchSize,
@@ -174,6 +217,7 @@ class _Options {
 
   final bool arb;
   final bool readings;
+  final bool quotes;
   final String? only;
   final bool force;
   final int batchSize;
@@ -182,6 +226,7 @@ class _Options {
   static _Options? parse(List<String> args) {
     var arb = false;
     var readings = false;
+    var quotes = false;
     var force = false;
     var dryRun = false;
     String? only;
@@ -192,6 +237,8 @@ class _Options {
           arb = true;
         case '--readings':
           readings = true;
+        case '--quotes':
+          quotes = true;
         case '--force':
           force = true;
         case '--dry-run':
@@ -208,13 +255,15 @@ class _Options {
           return null;
       }
     }
-    if (!arb && !readings) {
+    if (!arb && !readings && !quotes) {
       arb = true;
       readings = true;
+      quotes = true;
     }
     return _Options(
       arb: arb,
       readings: readings,
+      quotes: quotes,
       only: only,
       force: force,
       batchSize: batchSize,
