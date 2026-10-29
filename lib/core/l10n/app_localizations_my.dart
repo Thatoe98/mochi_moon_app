@@ -531,40 +531,6 @@ class AppLocalizationsMy extends AppLocalizations {
   String get retroCardHint => 'နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်အားလုံးကို ကြည့်မယ်';
 
   @override
-  String get retroLegendPreShadow => 'ကြိုတင်အရိပ်ကာလ';
-
-  @override
-  String get retroLegendRetrograde => 'နောက်ပြန်လှည့်ကာလ';
-
-  @override
-  String get retroLegendPostShadow => 'နောက်ဆက်တွဲအရိပ်ကာလ';
-
-  @override
-  String get retroShadowNote =>
-      'အရိပ်ကာလတွေက ဂြိုဟ်တစ်လုံး အရှိန်လျှော့တာ ဒါမှမဟုတ် အရှိန်ပြန်ရလာတာ ဖြစ်နေတဲ့၊ နောက်ပြန်လှည့်မှုမတိုင်ခင်နဲ့ ပြီးနောက်က ရက်သတ္တပတ်တွေပါ။';
-
-  @override
-  String retroPeriodRetrograde(String start, String end) {
-    return 'နောက်ပြန်လှည့်ကာလ $start မှ $end အထိ';
-  }
-
-  @override
-  String retroPeriodShadows(String start, String end) {
-    return 'အရိပ်ကာလ $start မှ $end အထိ';
-  }
-
-  @override
-  String retroYearHeader(String year) {
-    return '$year ခုနှစ်';
-  }
-
-  @override
-  String get retroNoneThisYear => 'ဒီနှစ်မှာ ဂြိုဟ်နောက်ပြန်လှည့်မှု မရှိပါဘူး';
-
-  @override
-  String get retroMore => 'ဂြိုဟ်တွေ ထပ်ကြည့်မယ်';
-
-  @override
   String get retroTipsTitle => 'နူးညံ့တဲ့ အကြံပြုချက်များ';
 
   @override
@@ -586,6 +552,93 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get retroTipSaturn =>
       'ကိုယ့်ကိုယ်ကိုယ် ကြင်နာရင်း နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တွေနဲ့ ကိုယ့်စည်းမျဉ်းတွေကို ပြန်လည်သုံးသပ်ဖို့ တိတ်ဆိတ်အေးချမ်းတဲ့ အချိန်လေးပါ။';
+
+  @override
+  String get retroNowTitle => 'အခုလောလောဆယ်';
+
+  @override
+  String get retroCalmTitle => 'ဂြိုဟ်အားလုံး ပုံမှန်လည်ပတ်နေပါတယ်';
+
+  @override
+  String get retroCalmBody =>
+      'လောလောဆယ် နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်မရှိပါဘူး၊ အရာရာ ချောချောမွေ့မွေ့ စီးဆင်းနေတာကို ခံစားလိုက်ပါ။';
+
+  @override
+  String get retroTipMercury1 =>
+      'ဓာတ်ပုံတွေကို အရန်သိမ်းထားပြီး စာတွေမပို့ခင် ပြန်ဖတ်ကြည့်ပါ။';
+
+  @override
+  String get retroTipMercury2 =>
+      'အစီအစဉ်တွေနဲ့ ခရီးတွေအတွက် အချိန်နည်းနည်းပိုပေးထားပါ။';
+
+  @override
+  String get retroTipMercury3 =>
+      'လွမ်းနေတဲ့သူတစ်ယောက် ဒါမှမဟုတ် အရာတစ်ခုခုနဲ့ နူးနူးညံ့ညံ့ ပြန်ဆက်သွယ်ကြည့်ပါ။';
+
+  @override
+  String get retroTipVenus1 =>
+      'အချစ်ရေး ဒါမှမဟုတ် စတိုင်နဲ့ပတ်သက်ပြီး အရေးကြီးတဲ့ ရွေးချယ်မှုတွေ မလုပ်ခင် အချိန်ယူပါ။';
+
+  @override
+  String get retroTipVenus2 =>
+      'ကိုယ့်ကိုယ်ကိုယ် လှပတယ်လို့ ခံစားရစေမယ့်အရာတစ်ခုခုကို အကြောင်းပြချက်မလိုဘဲ လုပ်ကြည့်ပါ။';
+
+  @override
+  String get retroTipVenus3 =>
+      'ဘယ်သူတွေနဲ့ အတူရှိရင် သက်သောင့်သက်သာနဲ့ နွေးထွေးတယ်လို့ ခံစားရလဲ သတိထားကြည့်ပါ။';
+
+  @override
+  String get retroTipMars1 =>
+      'ကိုယ့်ကိုယ်ကိုယ် အတင်းတွန်းအားပေးတာထက် နူးညံ့တဲ့ လှုပ်ရှားမှုလေးတွေကို ရွေးပါ။';
+
+  @override
+  String get retroTipMars2 =>
+      'လုပ်စရာသေးသေးလေးတစ်ခုကို ရွေးပြီး ဒီနေ့အတွက် အဲဒါလောက်နဲ့ပဲ လုံလောက်တယ်လို့ သတ်မှတ်လိုက်ပါ။';
+
+  @override
+  String get retroTipMars3 =>
+      'စိတ်တိုလာတဲ့အခါ ချက်ချင်းမတုံ့ပြန်ခင် ခဏရပ်ပြီး အသက်ရှူပါ။';
+
+  @override
+  String get retroTipJupiter1 => 'ဒီအထိ ရောက်လာနိုင်ခဲ့တာကို ဂုဏ်ပြုလိုက်ပါ။';
+
+  @override
+  String get retroTipJupiter2 =>
+      'အိပ်မက်တစ်ခုဆီ ပြန်လှည့်ကြည့်ပြီး ဖြည်းဖြည်းချင်း ကြီးထွားလာခွင့်ပေးပါ။';
+
+  @override
+  String get retroTipJupiter3 =>
+      'သင်ယူနေခဲ့တာတွေအပေါ် စူးစမ်းလိုစိတ်ရှိနေပါစေ။';
+
+  @override
+  String get retroTipSaturn1 =>
+      'ကိုယ်နဲ့ အဆင်မပြေတော့တဲ့ နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တစ်ခုကို ပြင်ဆင်ကြည့်ပါ။';
+
+  @override
+  String get retroTipSaturn2 =>
+      'လေးစားလိုက်နာချင်တဲ့ ကိုယ့်စည်းမျဉ်းတစ်ခုကို သတိထားမိအောင်ကြည့်ပြီး နူးနူးညံ့ညံ့ လိုက်နာပါ။';
+
+  @override
+  String get retroTipSaturn3 =>
+      'တစ်စိုက်မတ်မတ် ကြိုးစားပေးခဲ့တဲ့ ကိုယ့်ကိုယ်ကိုယ် ကျေးဇူးတင်လိုက်ပါ။';
+
+  @override
+  String get retroCalendarTitle => 'ဂြိုဟ်နောက်ပြန်လှည့်မှု ပြက္ခဒိန်';
+
+  @override
+  String get retroCalendarSubtitle =>
+      'အရောင်ခြယ်ထားတဲ့ရက်တွေက ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်နေတဲ့အချိန်ကို ပြထားပါတယ်။';
+
+  @override
+  String get retroCalendarPrevious => 'ပြီးခဲ့တဲ့လ';
+
+  @override
+  String get retroCalendarNext => 'နောက်လ';
+
+  @override
+  String retroCalendarDay(String date, String planets) {
+    return '$date: $planets နောက်ပြန်လှည့်နေပါတယ်';
+  }
 
   @override
   String get retroAlertsTitle =>
@@ -633,4 +686,35 @@ class AppLocalizationsMy extends AppLocalizations {
   String retroAlertEndsToday(String planet) {
     return '$planet ဒီနေ့ ပုံမှန်လည်ပတ်မှု ပြန်ဝင်ပါပြီ။ လတ်ဆတ်ပြီး တည်ငြိမ်တဲ့ အရှိန်သစ်လေးကို ကြိုဆိုလိုက်ပါ။';
   }
+
+  @override
+  String get accountDeleteTitle => 'ကျွန်မရဲ့ အကောင့်ကို ဖျက်မယ်';
+
+  @override
+  String get accountDeleteSubtitle =>
+      'သင့်ပရိုဖိုင်၊ သိမ်းထားတဲ့ကတ်တွေနဲ့ တိုးတက်မှုတွေကို ဖျက်ပြီး အစကနေ ပြန်စလိုက်ပါ';
+
+  @override
+  String get accountDeleteConfirmTitle => 'သင့်အကောင့်ကို ဖျက်မလား။';
+
+  @override
+  String get accountDeleteConfirmBody =>
+      'ဒီဖုန်းထဲကရော Mochi Moon ထဲကပါ သင့်ပရိုဖိုင်၊ သိမ်းထားတဲ့ကတ်တွေ၊ တိုးတက်မှုနဲ့ အကောင့်ဝင်ရန် အချက်အလက်တွေကို အပြီးတိုင် ဖျက်ပစ်ပါမယ်။ ပြန်ပြင်လို့ မရပါဘူး။';
+
+  @override
+  String get accountDeleteConfirmAction => 'ဖျက်မယ်';
+
+  @override
+  String get accountDeleteKeep => 'အကောင့်ကို ဆက်ထားမယ်';
+
+  @override
+  String get accountDeleteDeleting => 'သင့်အကောင့်ကို ဖျက်နေပါတယ်...';
+
+  @override
+  String get accountDeleteOffline =>
+      'အင်တာနက်ချိတ်ဆက်မှု မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။';
+
+  @override
+  String get accountDeleteFailed =>
+      'တစ်ခုခု အဆင်မပြေဖြစ်သွားပြီး ဘာမှ မဖျက်ခဲ့ပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 }

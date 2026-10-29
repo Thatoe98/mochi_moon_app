@@ -24,6 +24,23 @@ class RetrogradeOverview {
   final Map<Body, List<RetrogradePeriod>> periods;
 
   List<RetrogradePeriod> of(Body body) => periods[body] ?? const [];
+
+  /// The planets that are retrograde at [now], in [retrogradeBodies] order.
+  List<Body> get retrogradeNow => [
+    for (final body in retrogradeBodies)
+      if (retrogradeStatus(body, now, of(body)) is IsRetrograde) body,
+  ];
+
+  /// The planets that are retrograde during the local calendar day of [day],
+  /// in [retrogradeBodies] order. A day counts by its local noon, so a station
+  /// late in the evening belongs to the day after.
+  List<Body> retrogradeOn(DateTime day) {
+    final noon = DateTime(day.year, day.month, day.day, 12).toUtc();
+    return [
+      for (final body in retrogradeBodies)
+        if (of(body).any((period) => period.isRetrogradeAt(noon))) body,
+    ];
+  }
 }
 
 /// Where one planet stands: turned back, or waiting for its next retrograde.

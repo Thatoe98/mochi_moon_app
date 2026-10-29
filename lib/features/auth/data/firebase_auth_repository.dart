@@ -59,6 +59,47 @@ class FirebaseAuthRepository implements AuthRepository {
     }
   }
 
+  @override
+  Future<void> deleteAccount() async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+    try {
+      try {
+        await user.delete();
+      } on FirebaseAuthException catch (error) {
+        if (error.code != 'requires-recent-login') rethrow;
+        await user.reauthenticateWithCredential(await _googleCredential());
+        await user.delete();
+      }
+    } on GoogleSignInException catch (error) {
+      throw switch (error.code) {
+        GoogleSignInExceptionCode.canceled ||
+        GoogleSignInExceptionCode.interrupted => const CancelledFailure(),
+        _ => UnknownFailure(error),
+      };
+    } on FirebaseAuthException catch (error) {
+      throw error.code == 'network-request-failed'
+          ? const NetworkFailure()
+          : UnknownFailure(error);
+    }
+    // The Auth user is gone; clear the Google session so the account picker
+    // shows again on the next sign-in.
+    try {
+      await (_googleReady ??= _google.initialize());
+      await _google.signOut();
+    } on GoogleSignInException {
+      // Nothing left to protect; a stale Google session is harmless.
+    }
+  }
+
+  Future<AuthCredential> _googleCredential() async {
+    await (_googleReady ??= _google.initialize());
+    final account = await _google.authenticate();
+    final idToken = account.authentication.idToken;
+    if (idToken == null) throw const UnknownFailure('Google sent no id token');
+    return GoogleAuthProvider.credential(idToken: idToken);
+  }
+
   static AuthUser? _toUser(User? user) => user == null
       ? null
       : AuthUser(uid: user.uid, displayName: user.displayName);

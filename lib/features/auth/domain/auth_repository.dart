@@ -21,4 +21,25 @@ abstract interface class AuthRepository {
   Future<AuthUser> signInWithGoogle();
 
   Future<void> signOut();
+
+  /// Deletes the signed-in Auth user and signs out. Does nothing when signed
+  /// out.
+  ///
+  /// May ask the user to confirm their Google account again when the sign-in
+  /// is too old; throws a `CancelledFailure` if they back out, a
+  /// `NetworkFailure` when offline, and another `AppFailure` otherwise.
+  Future<void> deleteAccount();
+}
+
+/// Removes a user's data from the Mochi Moon service (Firestore).
+abstract interface class AccountRemote {
+  /// Deletes everything stored under [uid], profile last so a failed run can
+  /// be retried. Throws a `NetworkFailure` when offline.
+  Future<void> deleteUserData(String uid);
+}
+
+/// Wipes everything this phone stores about the user: the local database and
+/// the small preference flags.
+abstract interface class LocalDataEraser {
+  Future<void> eraseAll();
 }

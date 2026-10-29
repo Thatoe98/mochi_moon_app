@@ -980,60 +980,6 @@ abstract class AppLocalizations {
   /// **'See all retrogrades'**
   String get retroCardHint;
 
-  /// No description provided for @retroLegendPreShadow.
-  ///
-  /// In en, this message translates to:
-  /// **'Pre-shadow'**
-  String get retroLegendPreShadow;
-
-  /// No description provided for @retroLegendRetrograde.
-  ///
-  /// In en, this message translates to:
-  /// **'Retrograde'**
-  String get retroLegendRetrograde;
-
-  /// No description provided for @retroLegendPostShadow.
-  ///
-  /// In en, this message translates to:
-  /// **'Post-shadow'**
-  String get retroLegendPostShadow;
-
-  /// No description provided for @retroShadowNote.
-  ///
-  /// In en, this message translates to:
-  /// **'Shadows are the weeks just before and after, when a planet is slowing down or catching up.'**
-  String get retroShadowNote;
-
-  /// No description provided for @retroPeriodRetrograde.
-  ///
-  /// In en, this message translates to:
-  /// **'Retrograde {start} to {end}'**
-  String retroPeriodRetrograde(String start, String end);
-
-  /// No description provided for @retroPeriodShadows.
-  ///
-  /// In en, this message translates to:
-  /// **'Shadows {start} to {end}'**
-  String retroPeriodShadows(String start, String end);
-
-  /// No description provided for @retroYearHeader.
-  ///
-  /// In en, this message translates to:
-  /// **'{year}'**
-  String retroYearHeader(String year);
-
-  /// No description provided for @retroNoneThisYear.
-  ///
-  /// In en, this message translates to:
-  /// **'No retrogrades this year'**
-  String get retroNoneThisYear;
-
-  /// No description provided for @retroMore.
-  ///
-  /// In en, this message translates to:
-  /// **'More planets'**
-  String get retroMore;
-
   /// No description provided for @retroTipsTitle.
   ///
   /// In en, this message translates to:
@@ -1069,6 +1015,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A quiet time to review your routines and boundaries, with kindness toward yourself.'**
   String get retroTipSaturn;
+
+  /// No description provided for @retroNowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Right now'**
+  String get retroNowTitle;
+
+  /// No description provided for @retroCalmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All planets are moving forward'**
+  String get retroCalmTitle;
+
+  /// No description provided for @retroCalmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is retrograde at the moment, so enjoy the smooth flow.'**
+  String get retroCalmBody;
+
+  /// No description provided for @retroTipMercury1.
+  ///
+  /// In en, this message translates to:
+  /// **'Back up your photos and re-read messages before you send them.'**
+  String get retroTipMercury1;
+
+  /// No description provided for @retroTipMercury2.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave a little extra time for plans and trips.'**
+  String get retroTipMercury2;
+
+  /// No description provided for @retroTipMercury3.
+  ///
+  /// In en, this message translates to:
+  /// **'Reconnect softly with someone or something you have missed.'**
+  String get retroTipMercury3;
+
+  /// No description provided for @retroTipVenus1.
+  ///
+  /// In en, this message translates to:
+  /// **'Take your time before big choices about love or style.'**
+  String get retroTipVenus1;
+
+  /// No description provided for @retroTipVenus2.
+  ///
+  /// In en, this message translates to:
+  /// **'Do something that makes you feel lovely, just because.'**
+  String get retroTipVenus2;
+
+  /// No description provided for @retroTipVenus3.
+  ///
+  /// In en, this message translates to:
+  /// **'Notice who feels easy and warm to be around.'**
+  String get retroTipVenus3;
+
+  /// No description provided for @retroTipMars1.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose gentle movement over pushing hard.'**
+  String get retroTipMars1;
+
+  /// No description provided for @retroTipMars2.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick one small task and let that be enough today.'**
+  String get retroTipMars2;
+
+  /// No description provided for @retroTipMars3.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause and breathe before reacting when you feel frustrated.'**
+  String get retroTipMars3;
+
+  /// No description provided for @retroTipJupiter1.
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrate how far you have already come.'**
+  String get retroTipJupiter1;
+
+  /// No description provided for @retroTipJupiter2.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to a dream and let it grow slowly.'**
+  String get retroTipJupiter2;
+
+  /// No description provided for @retroTipJupiter3.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay curious about what you have been learning.'**
+  String get retroTipJupiter3;
+
+  /// No description provided for @retroTipSaturn1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tidy one routine that no longer fits you.'**
+  String get retroTipSaturn1;
+
+  /// No description provided for @retroTipSaturn2.
+  ///
+  /// In en, this message translates to:
+  /// **'Notice a boundary you would like to honor, and honor it kindly.'**
+  String get retroTipSaturn2;
+
+  /// No description provided for @retroTipSaturn3.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank yourself for your steady effort.'**
+  String get retroTipSaturn3;
+
+  /// No description provided for @retroCalendarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrograde calendar'**
+  String get retroCalendarTitle;
+
+  /// No description provided for @retroCalendarSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Colored days show when a planet is retrograde.'**
+  String get retroCalendarSubtitle;
+
+  /// No description provided for @retroCalendarPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous month'**
+  String get retroCalendarPrevious;
+
+  /// No description provided for @retroCalendarNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next month'**
+  String get retroCalendarNext;
+
+  /// No description provided for @retroCalendarDay.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}: {planets} retrograde'**
+  String retroCalendarDay(String date, String planets);
 
   /// No description provided for @retroAlertsTitle.
   ///
@@ -1135,6 +1219,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{planet} turns direct today. Welcome the fresh, steady momentum.'**
   String retroAlertEndsToday(String planet);
+
+  /// No description provided for @accountDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account'**
+  String get accountDeleteTitle;
+
+  /// No description provided for @accountDeleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Erase your profile, saved cards and progress, and start over'**
+  String get accountDeleteSubtitle;
+
+  /// No description provided for @accountDeleteConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your account?'**
+  String get accountDeleteConfirmTitle;
+
+  /// No description provided for @accountDeleteConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently erases your profile, saved cards, progress and sign-in, both on this phone and from Mochi Moon. It cannot be undone.'**
+  String get accountDeleteConfirmBody;
+
+  /// No description provided for @accountDeleteConfirmAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get accountDeleteConfirmAction;
+
+  /// No description provided for @accountDeleteKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep my account'**
+  String get accountDeleteKeep;
+
+  /// No description provided for @accountDeleteDeleting.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleting your account...'**
+  String get accountDeleteDeleting;
+
+  /// No description provided for @accountDeleteOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'You seem to be offline. Please connect and try again.'**
+  String get accountDeleteOffline;
+
+  /// No description provided for @accountDeleteFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong and nothing was deleted. Please try again.'**
+  String get accountDeleteFailed;
 }
 
 class _AppLocalizationsDelegate

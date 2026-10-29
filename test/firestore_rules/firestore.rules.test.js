@@ -139,9 +139,10 @@ describe('users/{uid}', () => {
     );
   });
 
-  test('the document cannot be deleted from the app', async () => {
+  test('the owner can delete their own document, nobody else can', async () => {
     await seed('users/alice', { displayName: 'Alice' });
-    await assertFails(deleteDoc(doc(alice(), 'users/alice')));
+    await assertFails(deleteDoc(doc(bob(), 'users/alice')));
+    await assertSucceeds(deleteDoc(doc(alice(), 'users/alice')));
   });
 });
 

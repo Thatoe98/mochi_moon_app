@@ -4,12 +4,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_theme.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_screen.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_status_card.dart';
-import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_timeline.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
+import '../../../settings/support/fake_reminder.dart';
+import '../support/fake_alerts.dart';
 import '../support/periods.dart';
 
 Widget _host(
@@ -22,6 +25,14 @@ Widget _host(
   overrides: [
     clockProvider.overrideWithValue(() => now ?? DateTime(2026, 10, 29, 12)),
     retrogradeCalendarSourceProvider.overrideWithValue(source),
+    retrogradeAlertSettingsRepositoryProvider.overrideWithValue(
+      FakeRetrogradeAlertSettingsRepository(),
+    ),
+    retrogradeAlertSchedulerProvider.overrideWithValue(
+      FakeRetrogradeAlertScheduler(),
+    ),
+    reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
+    reminderLanguageProvider.overrideWithValue('en'),
   ],
   child: MaterialApp(
     theme: AppTheme.light,
@@ -53,41 +64,69 @@ void main() {
       await tester.pumpAndSettle();
     });
 
-    testWidgets('lists the planets with status, dates, tips and the note', (
+    testWidgets('shows only what is retrograde now, with the gentle tips', (
       tester,
     ) async {
       _tallView(tester);
       await tester.pumpWidget(_host(const RetrogradeScreen()));
       await tester.pumpAndSettle();
 
-      expect(find.text('Retrogrades'), findsOneWidget);
+      expect(find.text('Right now'), findsOneWidget);
       expect(find.text('Mercury is retrograde until Nov 13'), findsOneWidget);
-      expect(find.text('Next Venus retrograde: Dec 20'), findsOneWidget);
-      expect(find.text('Starts in 52 days'), findsOneWidget);
+      expect(find.text('Gentle tips'), findsOneWidget);
+      expect(find.textContaining('A lovely time to revisit'), findsOneWidget);
       expect(
-        find.text('Retrograde Oct 9, 2026 to Nov 13, 2026'),
+        find.text(
+          'Back up your photos and re-read messages before you send them.',
+        ),
         findsOneWidget,
       );
-      expect(find.text('No retrogrades this year'), findsOneWidget);
-      expect(find.textContaining('A lovely time to revisit'), findsOneWidget);
-      expect(find.byType(RetrogradeTimeline), findsWidgets);
-      expect(find.text('Pre-shadow'), findsOneWidget);
+      // Planets that are moving forward, and every date list, are gone.
+      expect(find.textContaining('Next Venus'), findsNothing);
+      expect(find.textContaining('Shadows'), findsNothing);
+      expect(find.textContaining('Retrograde Oct'), findsNothing);
       expect(
         find.text('For entertainment and self-reflection'),
         findsOneWidget,
       );
     });
 
-    testWidgets('keeps Jupiter and Saturn under More planets', (tester) async {
+    testWidgets('says so when every planet is moving forward', (tester) async {
+      _tallView(tester);
+      await tester.pumpWidget(
+        _host(const RetrogradeScreen(), now: DateTime(2026, 12, 1, 12)),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('All planets are moving forward'), findsOneWidget);
+      expect(find.text('Gentle tips'), findsNothing);
+    });
+
+    testWidgets('shows a card for each planet that is retrograde', (
+      tester,
+    ) async {
+      _tallView(tester);
+      await tester.pumpWidget(
+        _host(const RetrogradeScreen(), now: DateTime(2026, 11, 5, 12)),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Gentle tips'), findsOneWidget);
+
+      await tester.pumpWidget(
+        _host(const RetrogradeScreen(), now: DateTime(2026, 12, 25, 12)),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Venus'), findsWidgets);
+      expect(find.text('Venus is retrograde until Jan 31'), findsOneWidget);
+    });
+
+    testWidgets('keeps the heads-up switches on this screen', (tester) async {
       _tallView(tester);
       await tester.pumpWidget(_host(const RetrogradeScreen()));
       await tester.pumpAndSettle();
 
-      expect(find.text('Jupiter'), findsNothing);
-      await tester.tap(find.text('More planets'));
-      await tester.pumpAndSettle();
-      expect(find.text('Jupiter'), findsOneWidget);
-      expect(find.text('Saturn'), findsOneWidget);
+      expect(find.text('Retrograde heads-ups'), findsOneWidget);
+      expect(find.byType(SwitchListTile), findsNWidgets(3));
     });
 
     testWidgets('shows an error with a retry that tries again', (tester) async {

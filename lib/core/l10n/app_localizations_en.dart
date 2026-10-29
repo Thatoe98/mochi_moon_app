@@ -528,40 +528,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retroCardHint => 'See all retrogrades';
 
   @override
-  String get retroLegendPreShadow => 'Pre-shadow';
-
-  @override
-  String get retroLegendRetrograde => 'Retrograde';
-
-  @override
-  String get retroLegendPostShadow => 'Post-shadow';
-
-  @override
-  String get retroShadowNote =>
-      'Shadows are the weeks just before and after, when a planet is slowing down or catching up.';
-
-  @override
-  String retroPeriodRetrograde(String start, String end) {
-    return 'Retrograde $start to $end';
-  }
-
-  @override
-  String retroPeriodShadows(String start, String end) {
-    return 'Shadows $start to $end';
-  }
-
-  @override
-  String retroYearHeader(String year) {
-    return '$year';
-  }
-
-  @override
-  String get retroNoneThisYear => 'No retrogrades this year';
-
-  @override
-  String get retroMore => 'More planets';
-
-  @override
   String get retroTipsTitle => 'Gentle tips';
 
   @override
@@ -583,6 +549,88 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get retroTipSaturn =>
       'A quiet time to review your routines and boundaries, with kindness toward yourself.';
+
+  @override
+  String get retroNowTitle => 'Right now';
+
+  @override
+  String get retroCalmTitle => 'All planets are moving forward';
+
+  @override
+  String get retroCalmBody =>
+      'Nothing is retrograde at the moment, so enjoy the smooth flow.';
+
+  @override
+  String get retroTipMercury1 =>
+      'Back up your photos and re-read messages before you send them.';
+
+  @override
+  String get retroTipMercury2 =>
+      'Leave a little extra time for plans and trips.';
+
+  @override
+  String get retroTipMercury3 =>
+      'Reconnect softly with someone or something you have missed.';
+
+  @override
+  String get retroTipVenus1 =>
+      'Take your time before big choices about love or style.';
+
+  @override
+  String get retroTipVenus2 =>
+      'Do something that makes you feel lovely, just because.';
+
+  @override
+  String get retroTipVenus3 => 'Notice who feels easy and warm to be around.';
+
+  @override
+  String get retroTipMars1 => 'Choose gentle movement over pushing hard.';
+
+  @override
+  String get retroTipMars2 =>
+      'Pick one small task and let that be enough today.';
+
+  @override
+  String get retroTipMars3 =>
+      'Pause and breathe before reacting when you feel frustrated.';
+
+  @override
+  String get retroTipJupiter1 => 'Celebrate how far you have already come.';
+
+  @override
+  String get retroTipJupiter2 => 'Return to a dream and let it grow slowly.';
+
+  @override
+  String get retroTipJupiter3 =>
+      'Stay curious about what you have been learning.';
+
+  @override
+  String get retroTipSaturn1 => 'Tidy one routine that no longer fits you.';
+
+  @override
+  String get retroTipSaturn2 =>
+      'Notice a boundary you would like to honor, and honor it kindly.';
+
+  @override
+  String get retroTipSaturn3 => 'Thank yourself for your steady effort.';
+
+  @override
+  String get retroCalendarTitle => 'Retrograde calendar';
+
+  @override
+  String get retroCalendarSubtitle =>
+      'Colored days show when a planet is retrograde.';
+
+  @override
+  String get retroCalendarPrevious => 'Previous month';
+
+  @override
+  String get retroCalendarNext => 'Next month';
+
+  @override
+  String retroCalendarDay(String date, String planets) {
+    return '$date: $planets retrograde';
+  }
 
   @override
   String get retroAlertsTitle => 'Retrograde heads-ups';
@@ -627,4 +675,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String retroAlertEndsToday(String planet) {
     return '$planet turns direct today. Welcome the fresh, steady momentum.';
   }
+
+  @override
+  String get accountDeleteTitle => 'Delete my account';
+
+  @override
+  String get accountDeleteSubtitle =>
+      'Erase your profile, saved cards and progress, and start over';
+
+  @override
+  String get accountDeleteConfirmTitle => 'Delete your account?';
+
+  @override
+  String get accountDeleteConfirmBody =>
+      'This permanently erases your profile, saved cards, progress and sign-in, both on this phone and from Mochi Moon. It cannot be undone.';
+
+  @override
+  String get accountDeleteConfirmAction => 'Delete';
+
+  @override
+  String get accountDeleteKeep => 'Keep my account';
+
+  @override
+  String get accountDeleteDeleting => 'Deleting your account...';
+
+  @override
+  String get accountDeleteOffline =>
+      'You seem to be offline. Please connect and try again.';
+
+  @override
+  String get accountDeleteFailed =>
+      'Something went wrong and nothing was deleted. Please try again.';
 }

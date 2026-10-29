@@ -101,4 +101,37 @@ void main() {
 
     expect(merged, [earlier, current, later]);
   });
+
+  group('RetrogradeOverview', () {
+    final venus = period(
+      Body.venus,
+      start: DateTime.utc(2026, 10, 20),
+      end: DateTime.utc(2026, 12),
+    );
+    RetrogradeOverview overview(DateTime at) => RetrogradeOverview(
+      now: at,
+      periods: {
+        Body.mercury: [earlier, current, later],
+        Body.venus: [venus],
+      },
+    );
+
+    test('retrogradeNow lists every planet that has turned back', () {
+      expect(overview(now).retrogradeNow, [Body.mercury, Body.venus]);
+      expect(overview(DateTime.utc(2026, 11, 20)).retrogradeNow, [Body.venus]);
+      expect(overview(DateTime.utc(2026, 12, 20)).retrogradeNow, isEmpty);
+    });
+
+    test('retrogradeOn names the planets retrograde on a local day', () {
+      final data = overview(now);
+
+      expect(data.retrogradeOn(DateTime(2026, 10, 8)), isEmpty);
+      expect(data.retrogradeOn(DateTime(2026, 10, 25)), [
+        Body.mercury,
+        Body.venus,
+      ]);
+      expect(data.retrogradeOn(DateTime(2026, 11, 20)), [Body.venus]);
+      expect(data.retrogradeOn(DateTime(2027, 2, 20)), [Body.mercury]);
+    });
+  });
 }

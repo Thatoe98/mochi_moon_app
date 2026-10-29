@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/app/app.dart';
+import 'package:mochi_moon/app/app_restart.dart';
 import 'package:mochi_moon/app/flavors.dart';
 import 'package:mochi_moon/core/content/content_licenses.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
@@ -17,16 +18,24 @@ Future<void> bootstrap(FlavorConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
   registerContentLicenses();
   final firebaseReady = await _initFirebase();
+  final onboardingComplete = await _readOnboardingComplete();
   runApp(
-    ProviderScope(
-      overrides: [
-        flavorConfigProvider.overrideWithValue(config),
-        firebaseReadyProvider.overrideWithValue(firebaseReady),
-        initialOnboardingCompleteProvider.overrideWithValue(
-          await _readOnboardingComplete(),
-        ),
-      ],
-      child: const MochiMoonApp(),
+    AppRestart(
+      builder: (context, generation, restart) => ProviderScope(
+        // A new key throws the old provider tree away, so a restart begins
+        // with nothing remembered. Everything saved was wiped before it, and
+        // the first-run flag is no longer worth re-reading.
+        key: ValueKey(generation),
+        overrides: [
+          flavorConfigProvider.overrideWithValue(config),
+          firebaseReadyProvider.overrideWithValue(firebaseReady),
+          initialOnboardingCompleteProvider.overrideWithValue(
+            generation == 0 && onboardingComplete,
+          ),
+          appRestartProvider.overrideWithValue(restart),
+        ],
+        child: const MochiMoonApp(),
+      ),
     ),
   );
 }

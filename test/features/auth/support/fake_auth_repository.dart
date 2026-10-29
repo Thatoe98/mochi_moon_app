@@ -43,4 +43,16 @@ class FakeAuthRepository implements AuthRepository {
     _current = null;
     _changes.add(null);
   }
+
+  /// When set, `deleteAccount` throws it and keeps the user signed in.
+  Exception? deleteError;
+  int deleteCalls = 0;
+
+  @override
+  Future<void> deleteAccount() async {
+    deleteCalls++;
+    if (deleteError case final error?) throw error;
+    _current = null;
+    _changes.add(null);
+  }
 }

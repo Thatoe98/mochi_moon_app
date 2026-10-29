@@ -7,7 +7,9 @@ service cloud.firestore {
         && !('entitlement' in request.resource.data);
       allow update: if request.auth.uid == uid
         && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['entitlement']);
-      allow delete: if false;   // deletion goes through the server
+      // Settings -> Delete my account removes the whole document. The server's
+      // DELETE /v1/account will take over once it exists (PRD 6.14).
+      allow delete: if request.auth.uid == uid;
 
       match /journal/{id} {
         allow read, delete: if request.auth.uid == uid;
