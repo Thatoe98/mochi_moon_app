@@ -165,10 +165,10 @@ Shows for the user's local date:
 ### 6.8 Cosmic — Retrogrades and Moon (Free)
 
 **Retrogrades**
-- [ ] Status card: "Mercury is retrograde until Nov 13" style, or "Next Mercury retrograde: Feb 9" with a countdown.
-- [ ] Timeline for the current and next year for Mercury, Venus, Mars (and Jupiter–Saturn under "More"): pre-shadow, retrograde, post-shadow bands.
-- [ ] Each period has short evergreen tips per planet (bundled content).
-- [ ] Dates computed on-device (§9.5) and displayed in the user's local time zone.
+- [x] Status card: "Mercury is retrograde until Nov 13" style, or "Next Mercury retrograde: Feb 9" with a countdown.
+- [x] Timeline for the current and next year for Mercury, Venus, Mars (and Jupiter–Saturn under "More"): pre-shadow, retrograde, post-shadow bands.
+- [x] Each period has short evergreen tips per planet (bundled content). — *one tip per planet, in the ARB files, shown on each planet's card rather than on each period.*
+- [x] Dates computed on-device (§9.5) and displayed in the user's local time zone.
 
 **Moon**
 - [ ] Current phase name, illumination %, moon sign, next new and full moon dates.
@@ -589,7 +589,8 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [ ] Cosmic Today from the Readings API with drift cache and language refetch (§6.7, §8.2) — *needs the M4 server; the screen already reads through `DailyReadingRepository`, so only a new implementation and the cache are missing.*
 - [x] Retrograde calendar + moon phase engine (§9.5) — *`retrogrades(year)` gives every Mercury, Venus, Mars, Jupiter and Saturn period whose shadows touch the year: both stations (bisected to 1 hour), pre- and post-shadow edges, and the station longitudes. `moonPhase(utc)` gives elongation, illumination, one of eight names, the Moon sign and the next new and full moon (to 1 minute). Checked against hourly JPL Horizons data for 2026–2027 (`golden_events.json`): stations within 2.7 h, shadow edges within 1.8 h, new and full moons within 105 s; the three published Mercury windows match. The scan margin is wider than the 2 months above (120 days for Mercury up to 400 for Jupiter and Saturn), because the slow planets' shadows reach about 3 months past the station. `retrogrades()` takes about 2 s for one year in the test VM; not yet timed on a phone. Outer planets (Uranus to Pluto) are not in the calendar.*
 - [x] Translation tool for Burmese strings and readings via OpenAI (§7.1a) — *`tool/translate_content.dart` with validation; Burmese only; Thai is not generated or shipped. Model `gpt-6-luna`, high reasoning. Run on 2026-10-29: all 78 ARB strings in `app_my.arb`, the 12 fallback readings in `my.json`, and the 20 quotes (`text.my` in `quotes.json`, via `--quotes`). **Unreviewed machine translation; the owner reviews the Burmese.** Reviewer notes: `cosmicHeader` appends "ရက်နေ့" after the date; readings use informal "မင်း" while ARB strings mix polite and informal registers; quotes use the feminine "ကျွန်မ" for "I". Strings added to `app_en.arb` later need another run.*
-- [ ] Retrograde alerts (local notifications), status card, timeline and tips (§6.6, §6.8) — *the engine above is ready; these need Cosmic Today and the notification setup. Also open: showing dates in the user's local time zone and pairing moon phases with affirmations.*
+- [x] Retrograde status card, timeline and tips (§6.8) — *the Cosmic tab shows Mercury's status card ("Mercury is retrograde until Nov 13" or "Next Mercury retrograde: Feb 9" with a countdown) that opens `/cosmic/retrogrades`: a card per planet (Mercury, Venus, Mars; Jupiter and Saturn under "More planets") with the status, a year bar for this year and the next showing pre-shadow, retrograde and post-shadow bands and today, the dates as text, and an evergreen tip. Dates are shown in the local time zone. The calendar is computed in an isolate behind `retrogradeCalendarSourceProvider`, so the Cosmic tab shows the card a couple of seconds after it opens. Burmese strings are generated and unreviewed (§12 translation note). Deferred: caching the calendar between launches, the Moon block (§6.8), and per-period tips.*
+- [ ] Retrograde alerts (local notifications, §6.6) — *needs the notification setup per planet (Mercury on by default, Venus and Mars off), scheduled 1 day before and on each station from the calendar above. Also open: pairing moon phases with affirmations.*
 - [ ] Account deletion (in-app + web page)
 
 ### M3 — Charts and compatibility
