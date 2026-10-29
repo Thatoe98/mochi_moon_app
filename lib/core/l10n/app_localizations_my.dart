@@ -586,4 +586,51 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get retroTipSaturn =>
       'ကိုယ့်ကိုယ်ကိုယ် ကြင်နာရင်း နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တွေနဲ့ ကိုယ့်စည်းမျဉ်းတွေကို ပြန်လည်သုံးသပ်ဖို့ တိတ်ဆိတ်အေးချမ်းတဲ့ အချိန်လေးပါ။';
+
+  @override
+  String get retroAlertsTitle =>
+      'ဂြိုဟ်နောက်ပြန်လှည့်မှု ကြိုတင်အသိပေးချက်များ';
+
+  @override
+  String get retroAlertsSubtitle =>
+      'ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်မယ့်နေ့မတိုင်ခင်နဲ့ အဲဒီနေ့မှာ နူးညံ့တဲ့ အသိပေးချက်လေးတစ်ခု';
+
+  @override
+  String get retroAlertsPrePromptTitle =>
+      'စကြဝဠာဆီက နူးညံ့တဲ့ အသိပေးချက်လေး လိုချင်လား။';
+
+  @override
+  String get retroAlertsPrePromptBody =>
+      'Mochi Moon က ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်တာ ဒါမှမဟုတ် ပုံမှန်လည်ပတ်မှု ပြန်ဝင်တဲ့နေ့မတိုင်ခင်တစ်ရက်နဲ့ အဲဒီနေ့မှာ နူးညံ့တဲ့ အသိပေးချက်လေး ပို့ပေးနိုင်ပါတယ်။ အဲဒီလိုလုပ်ဖို့ သင့်ဖုန်းက အသိပေးချက်တွေ ခွင့်ပြုမလားလို့ မေးပါလိမ့်မယ်။';
+
+  @override
+  String get retroAlertNotificationTitle => 'စကြဝဠာရဲ့ အသိပေးချက်လေး 🌙';
+
+  @override
+  String get retroAlertChannelName =>
+      'ဂြိုဟ်နောက်ပြန်လှည့်မှု ကြိုတင်အသိပေးချက်များ';
+
+  @override
+  String get retroAlertChannelDescription =>
+      'ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်တာ ဒါမှမဟုတ် ပုံမှန်လည်ပတ်မှု ပြန်ဝင်တဲ့ရက်တွေမှာ နူးညံ့တဲ့ အသိပေးချက်လေးတစ်ခု။';
+
+  @override
+  String retroAlertStartsTomorrow(String planet) {
+    return '$planet မနက်ဖြန် နောက်ပြန်လှည့်တော့မှာပါ။ ဖြည်းဖြည်းလုပ်ပြီး ကိုယ့်ကိုယ်ကိုယ် ကြင်နာပေးဖို့ လှပတဲ့အချိန်လေးပါ။';
+  }
+
+  @override
+  String retroAlertStartsToday(String planet) {
+    return '$planet ဒီနေ့ နောက်ပြန်လှည့်နေပါတယ်။ ဖြည်းဖြည်းလေးနဲ့ ကိုယ့်အရှိန်ကို ယုံကြည်လိုက်ပါ။';
+  }
+
+  @override
+  String retroAlertEndsTomorrow(String planet) {
+    return '$planet မနက်ဖြန် ပုံမှန်လည်ပတ်မှု ပြန်ဝင်တော့မှာပါ။ အရာတွေကလည်း ရှေ့ကို ပြန်လည်စီးဆင်းလာတော့မှာပါ။';
+  }
+
+  @override
+  String retroAlertEndsToday(String planet) {
+    return '$planet ဒီနေ့ ပုံမှန်လည်ပတ်မှု ပြန်ဝင်ပါပြီ။ လတ်ဆတ်ပြီး တည်ငြိမ်တဲ့ အရှိန်သစ်လေးကို ကြိုဆိုလိုက်ပါ။';
+  }
 }

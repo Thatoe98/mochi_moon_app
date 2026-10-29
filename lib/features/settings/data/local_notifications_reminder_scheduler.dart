@@ -9,6 +9,17 @@ const _channelId = 'daily_reminder';
 const _idBase = 1000;
 const _idRange = 100;
 
+/// Plugin setup shared by every local notification the app schedules. No
+/// permission is asked at initialization; features ask when the user opts in.
+const notificationInitSettings = InitializationSettings(
+  android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+  iOS: DarwinInitializationSettings(
+    requestAlertPermission: false,
+    requestSoundPermission: false,
+    requestBadgePermission: false,
+  ),
+);
+
 /// Schedules reminders with `flutter_local_notifications`.
 ///
 /// Each reminder is an absolute instant: the local time is converted to UTC and
@@ -22,16 +33,8 @@ class LocalNotificationsReminderScheduler implements ReminderScheduler {
   final FlutterLocalNotificationsPlugin _plugin;
   Future<void>? _initialized;
 
-  Future<void> _init() => _initialized ??= _plugin.initialize(
-    settings: const InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-      iOS: DarwinInitializationSettings(
-        requestAlertPermission: false,
-        requestSoundPermission: false,
-        requestBadgePermission: false,
-      ),
-    ),
-  );
+  Future<void> _init() =>
+      _initialized ??= _plugin.initialize(settings: notificationInitSettings);
 
   AndroidFlutterLocalNotificationsPlugin? get _android => _plugin
       .resolvePlatformSpecificImplementation<

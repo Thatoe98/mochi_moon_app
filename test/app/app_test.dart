@@ -6,6 +6,8 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
@@ -19,6 +21,8 @@ import 'package:mochi_moon/features/settings/application/reminder_providers.dart
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
 import '../features/auth/support/fake_auth_repository.dart';
+import '../features/cosmic/retrograde/support/fake_alerts.dart';
+import '../features/cosmic/retrograde/support/periods.dart';
 import '../features/cosmic/today/support/fake_thai_colors_setting.dart';
 import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
@@ -58,6 +62,13 @@ Widget _app({
       FakeReminderSettingsRepository(),
     ),
     reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
+    retrogradeAlertSettingsRepositoryProvider.overrideWithValue(
+      FakeRetrogradeAlertSettingsRepository(),
+    ),
+    retrogradeAlertSchedulerProvider.overrideWithValue(
+      FakeRetrogradeAlertScheduler(),
+    ),
+    retrogradeCalendarSourceProvider.overrideWithValue(fakeCalendar),
     widgetPublisherProvider.overrideWithValue(FakeWidgetPublisher()),
     thaiColorsSettingRepositoryProvider.overrideWithValue(
       FakeThaiColorsSettingRepository(),

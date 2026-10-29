@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_alerts_section.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/thai_colors_section.dart';
 import 'package:mochi_moon/features/settings/presentation/language_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reminder_section.dart';
@@ -29,6 +30,7 @@ class MeScreen extends StatelessWidget {
           ),
           const LanguageSection(),
           const ReminderSection(),
+          const RetrogradeAlertsSection(),
           const ThaiColorsSection(),
         ],
       ),

@@ -583,4 +583,48 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get retroTipSaturn =>
       'A quiet time to review your routines and boundaries, with kindness toward yourself.';
+
+  @override
+  String get retroAlertsTitle => 'Retrograde heads-ups';
+
+  @override
+  String get retroAlertsSubtitle =>
+      'A gentle note the day before and the day a planet turns';
+
+  @override
+  String get retroAlertsPrePromptTitle => 'A soft cosmic heads-up?';
+
+  @override
+  String get retroAlertsPrePromptBody =>
+      'Mochi Moon can send a gentle note the day before and the day a planet turns retrograde or direct. To do that, your phone will ask to allow notifications.';
+
+  @override
+  String get retroAlertNotificationTitle => 'Cosmic heads-up 🌙';
+
+  @override
+  String get retroAlertChannelName => 'Retrograde heads-ups';
+
+  @override
+  String get retroAlertChannelDescription =>
+      'A gentle note around the days a planet turns retrograde or direct.';
+
+  @override
+  String retroAlertStartsTomorrow(String planet) {
+    return '$planet turns retrograde tomorrow. A lovely moment to slow down and be kind to yourself.';
+  }
+
+  @override
+  String retroAlertStartsToday(String planet) {
+    return '$planet turns retrograde today. Take it softly and trust your own pace.';
+  }
+
+  @override
+  String retroAlertEndsTomorrow(String planet) {
+    return '$planet turns direct tomorrow. Things start to flow forward again.';
+  }
+
+  @override
+  String retroAlertEndsToday(String planet) {
+    return '$planet turns direct today. Welcome the fresh, steady momentum.';
+  }
 }

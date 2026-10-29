@@ -1069,6 +1069,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A quiet time to review your routines and boundaries, with kindness toward yourself.'**
   String get retroTipSaturn;
+
+  /// No description provided for @retroAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrograde heads-ups'**
+  String get retroAlertsTitle;
+
+  /// No description provided for @retroAlertsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle note the day before and the day a planet turns'**
+  String get retroAlertsSubtitle;
+
+  /// No description provided for @retroAlertsPrePromptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A soft cosmic heads-up?'**
+  String get retroAlertsPrePromptTitle;
+
+  /// No description provided for @retroAlertsPrePromptBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Moon can send a gentle note the day before and the day a planet turns retrograde or direct. To do that, your phone will ask to allow notifications.'**
+  String get retroAlertsPrePromptBody;
+
+  /// No description provided for @retroAlertNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cosmic heads-up 🌙'**
+  String get retroAlertNotificationTitle;
+
+  /// No description provided for @retroAlertChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrograde heads-ups'**
+  String get retroAlertChannelName;
+
+  /// No description provided for @retroAlertChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle note around the days a planet turns retrograde or direct.'**
+  String get retroAlertChannelDescription;
+
+  /// No description provided for @retroAlertStartsTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'{planet} turns retrograde tomorrow. A lovely moment to slow down and be kind to yourself.'**
+  String retroAlertStartsTomorrow(String planet);
+
+  /// No description provided for @retroAlertStartsToday.
+  ///
+  /// In en, this message translates to:
+  /// **'{planet} turns retrograde today. Take it softly and trust your own pace.'**
+  String retroAlertStartsToday(String planet);
+
+  /// No description provided for @retroAlertEndsTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'{planet} turns direct tomorrow. Things start to flow forward again.'**
+  String retroAlertEndsTomorrow(String planet);
+
+  /// No description provided for @retroAlertEndsToday.
+  ///
+  /// In en, this message translates to:
+  /// **'{planet} turns direct today. Welcome the fresh, steady momentum.'**
+  String retroAlertEndsToday(String planet);
 }
 
 class _AppLocalizationsDelegate
