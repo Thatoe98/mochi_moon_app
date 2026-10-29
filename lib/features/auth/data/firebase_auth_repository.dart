@@ -60,6 +60,27 @@ class FirebaseAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<void> confirmIdentity() async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+    try {
+      await user.reauthenticateWithCredential(
+        await _googleCredential(preferSilent: true),
+      );
+    } on GoogleSignInException catch (error) {
+      throw switch (error.code) {
+        GoogleSignInExceptionCode.canceled ||
+        GoogleSignInExceptionCode.interrupted => const CancelledFailure(),
+        _ => UnknownFailure(error),
+      };
+    } on FirebaseAuthException catch (error) {
+      throw error.code == 'network-request-failed'
+          ? const NetworkFailure()
+          : UnknownFailure(error);
+    }
+  }
+
+  @override
   Future<void> deleteAccount() async {
     final user = _auth.currentUser;
     if (user == null) return;
@@ -92,9 +113,19 @@ class FirebaseAuthRepository implements AuthRepository {
     }
   }
 
-  Future<AuthCredential> _googleCredential() async {
+  /// With [preferSilent], reuses the Google account already on the phone
+  /// without showing the picker, and only asks when that is not possible.
+  Future<AuthCredential> _googleCredential({bool preferSilent = false}) async {
     await (_googleReady ??= _google.initialize());
-    final account = await _google.authenticate();
+    GoogleSignInAccount? account;
+    if (preferSilent) {
+      try {
+        account = await _google.attemptLightweightAuthentication();
+      } on GoogleSignInException {
+        // Fall through to the picker.
+      }
+    }
+    account ??= await _google.authenticate();
     final idToken = account.authentication.idToken;
     if (idToken == null) throw const UnknownFailure('Google sent no id token');
     return GoogleAuthProvider.credential(idToken: idToken);

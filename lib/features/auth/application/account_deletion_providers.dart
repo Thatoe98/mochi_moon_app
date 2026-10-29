@@ -25,7 +25,8 @@ enum AccountDeletionOutcome {
   /// Everything is gone; the app should start over.
   deleted,
 
-  /// The user backed out of confirming their Google account. Nothing to say.
+  /// The user backed out of confirming their Google account. Nothing was
+  /// touched and they are still signed in.
   cancelled,
 
   /// No connection, so the cloud copy could not be removed. Nothing local was
@@ -39,8 +40,9 @@ enum AccountDeletionOutcome {
 /// Deletes the account from Mochi Moon and wipes this phone. The state is
 /// whether a deletion is running.
 ///
-/// The order matters: cloud data first (the rules need the user signed in),
-/// then the Auth user, then the local data. The sync providers stop once the
+/// The order matters: confirm the Google account first, so backing out of it
+/// leaves everything as it was; then cloud data (the rules need the user
+/// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
 @Riverpod(keepAlive: true)
@@ -54,6 +56,7 @@ class AccountDeletion extends _$AccountDeletion {
     try {
       final auth = ref.read(authRepositoryProvider);
       if (auth.currentUser case final user?) {
+        await auth.confirmIdentity();
         await ref.read(accountRemoteProvider).deleteUserData(user.uid);
         await auth.deleteAccount();
       }

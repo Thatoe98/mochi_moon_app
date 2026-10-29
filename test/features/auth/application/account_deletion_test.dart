@@ -66,6 +66,7 @@ void main() {
     expect(outcome, AccountDeletionOutcome.deleted);
     expect(remote.deleted, isEmpty);
     expect(auth.deleteCalls, 0);
+    expect(auth.confirmCalls, 0);
     expect(eraser.erased, 1);
   });
 
@@ -80,13 +81,23 @@ void main() {
     expect(reminders.cancels, 0);
   });
 
-  test('backing out of the Google confirmation keeps the local data', () async {
-    auth.deleteError = const CancelledFailure();
+  test('backing out of the Google confirmation changes nothing', () async {
+    auth.confirmError = const CancelledFailure();
 
     final outcome = await delete(container());
 
     expect(outcome, AccountDeletionOutcome.cancelled);
+    expect(remote.deleted, isEmpty);
+    expect(auth.deleteCalls, 0);
+    expect(auth.currentUser, isNotNull);
     expect(eraser.erased, 0);
+    expect(reminders.cancels, 0);
+  });
+
+  test('confirms the Google account before erasing anything', () async {
+    await delete(container());
+
+    expect(auth.confirmCalls, 1);
   });
 
   test('any other failure is reported and the phone is left alone', () async {

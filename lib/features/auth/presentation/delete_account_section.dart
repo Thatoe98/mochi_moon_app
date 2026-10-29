@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/app/app_restart.dart';
@@ -35,35 +37,52 @@ class DeleteAccountSection extends ConsumerWidget {
   Future<void> _confirmAndDelete(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.accountDeleteConfirmTitle),
-        content: Text(l10n.accountDeleteConfirmBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.accountDeleteKeep),
-          ),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
-              foregroundColor: Theme.of(context).colorScheme.onError,
+    final navigator = Navigator.of(context, rootNavigator: true);
+    final first = await _ask(
+      context,
+      title: l10n.accountDeleteConfirmTitle,
+      body: l10n.accountDeleteConfirmBody,
+      keep: l10n.accountDeleteKeep,
+      confirm: l10n.accountDeleteConfirmAction,
+    );
+    if (!first || !context.mounted) return;
+    final sure = await _ask(
+      context,
+      title: l10n.accountDeleteFinalTitle,
+      body: l10n.accountDeleteFinalBody,
+      keep: l10n.accountDeleteKeep,
+      confirm: l10n.accountDeleteFinalAction,
+    );
+    if (!sure || !context.mounted) return;
+
+    // Hold the screen still while the account goes, then start over.
+    unawaited(
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => PopScope(
+          canPop: false,
+          child: AlertDialog(
+            content: Row(
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(child: Text(l10n.accountDeleteDeleting)),
+              ],
             ),
-            onPressed: () => Navigator.pop(context, true),
-            child: Text(l10n.accountDeleteConfirmAction),
           ),
-        ],
+        ),
       ),
     );
-    if (confirmed != true) return;
-
     final outcome = await ref.read(accountDeletionProvider.notifier).delete();
+    if (navigator.mounted) navigator.pop();
     switch (outcome) {
       case AccountDeletionOutcome.deleted:
         ref.read(appRestartProvider)();
       case AccountDeletionOutcome.cancelled:
-        break;
+        messenger.showSnackBar(
+          SnackBar(content: Text(l10n.accountDeleteCancelled)),
+        );
       case AccountDeletionOutcome.offline:
         messenger.showSnackBar(
           SnackBar(content: Text(l10n.accountDeleteOffline)),
@@ -73,5 +92,38 @@ class DeleteAccountSection extends ConsumerWidget {
           SnackBar(content: Text(l10n.accountDeleteFailed)),
         );
     }
+  }
+
+  /// A destructive yes/no dialog; true only when the user confirms.
+  Future<bool> _ask(
+    BuildContext context, {
+    required String title,
+    required String body,
+    required String keep,
+    required String confirm,
+  }) async {
+    final scheme = Theme.of(context).colorScheme;
+    final answer = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(body),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(keep),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: scheme.error,
+              foregroundColor: scheme.onError,
+            ),
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(confirm),
+          ),
+        ],
+      ),
+    );
+    return answer ?? false;
   }
 }

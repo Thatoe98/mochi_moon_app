@@ -18,15 +18,22 @@ typedef RetrogradeCalendarSource = Future<RetrogradeCalendar> Function(
 RetrogradeCalendarSource retrogradeCalendarSource(Ref ref) =>
     (year) => Isolate.run(() => retrogrades(year));
 
+/// The retrograde periods of [year] and the next, merged. Kept for the whole
+/// session: the scan is slow, and scrolling away from a screen that shows it
+/// must not throw the result away.
+@Riverpod(keepAlive: true)
+Future<List<RetrogradePeriod>> retrogradePeriods(Ref ref, int year) async {
+  final source = ref.watch(retrogradeCalendarSourceProvider);
+  final calendars = await Future.wait([source(year), source(year + 1)]);
+  return mergePeriods([for (final calendar in calendars) ...calendar.periods]);
+}
+
 /// Every planet's retrograde periods for this year and the next, as of now.
+/// Cheap once `retrogradePeriods` is loaded, so it can follow the clock.
 @riverpod
 Future<RetrogradeOverview> retrogradeOverview(Ref ref) async {
   final now = ref.watch(clockProvider)();
-  final source = ref.watch(retrogradeCalendarSourceProvider);
-  final calendars = await Future.wait([source(now.year), source(now.year + 1)]);
-  final merged = mergePeriods([
-    for (final calendar in calendars) ...calendar.periods,
-  ]);
+  final merged = await ref.watch(retrogradePeriodsProvider(now.year).future);
   return RetrogradeOverview(
     now: now,
     periods: {

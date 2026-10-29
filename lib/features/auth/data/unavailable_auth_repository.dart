@@ -20,5 +20,8 @@ class UnavailableAuthRepository implements AuthRepository {
   Future<void> signOut() async {}
 
   @override
+  Future<void> confirmIdentity() async {}
+
+  @override
   Future<void> deleteAccount() async {}
 }

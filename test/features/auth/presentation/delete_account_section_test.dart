@@ -71,6 +71,24 @@ void main() {
     expect(restarts, 0);
   });
 
+  testWidgets('keeping the account at the last question changes nothing', (
+    tester,
+  ) async {
+    await tester.pumpWidget(host());
+
+    await tester.tap(find.text('Delete my account'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Delete'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Keep my account'));
+    await tester.pumpAndSettle();
+
+    expect(remote.deleted, isEmpty);
+    expect(auth.confirmCalls, 0);
+    expect(eraser.erased, 0);
+    expect(restarts, 0);
+  });
+
   testWidgets('confirming deletes everything and restarts the app', (
     tester,
   ) async {
@@ -79,6 +97,10 @@ void main() {
     await tester.tap(find.text('Delete my account'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Delete'));
+    await tester.pumpAndSettle();
+    expect(find.text('Are you completely sure?'), findsOneWidget);
+    expect(remote.deleted, isEmpty);
+    await tester.tap(find.text('Yes, erase everything'));
     await tester.pumpAndSettle();
 
     expect(remote.deleted, ['uid_1']);
@@ -97,6 +119,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Delete'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Yes, erase everything'));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('offline'), findsOneWidget);
     expect(restarts, 0);
@@ -111,21 +135,30 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Delete'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Yes, erase everything'));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('nothing was deleted'), findsOneWidget);
     expect(restarts, 0);
   });
 
-  testWidgets('backing out of the Google check says nothing', (tester) async {
-    auth.deleteError = const CancelledFailure();
+  testWidgets('backing out of the Google check changes nothing', (
+    tester,
+  ) async {
+    auth.confirmError = const CancelledFailure();
     await tester.pumpWidget(host());
 
     await tester.tap(find.text('Delete my account'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Delete'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('Yes, erase everything'));
+    await tester.pumpAndSettle();
 
-    expect(find.byType(SnackBar), findsNothing);
+    expect(find.textContaining('Nothing was deleted'), findsOneWidget);
+    expect(remote.deleted, isEmpty);
+    expect(auth.currentUser, isNotNull);
+    expect(eraser.erased, 0);
     expect(restarts, 0);
   });
 

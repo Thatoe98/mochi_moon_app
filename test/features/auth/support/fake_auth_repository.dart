@@ -44,6 +44,16 @@ class FakeAuthRepository implements AuthRepository {
     _changes.add(null);
   }
 
+  /// When set, `confirmIdentity` throws it.
+  Exception? confirmError;
+  int confirmCalls = 0;
+
+  @override
+  Future<void> confirmIdentity() async {
+    confirmCalls++;
+    if (confirmError case final error?) throw error;
+  }
+
   /// When set, `deleteAccount` throws it and keeps the user signed in.
   Exception? deleteError;
   int deleteCalls = 0;

@@ -1268,6 +1268,42 @@ abstract class AppLocalizations {
   /// **'You seem to be offline. Please connect and try again.'**
   String get accountDeleteOffline;
 
+  /// No description provided for @accountDeleteFinalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you completely sure?'**
+  String get accountDeleteFinalTitle;
+
+  /// No description provided for @accountDeleteFinalBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is your last chance. Everything will be erased for good and Mochi Moon will start over as if you had just installed it.'**
+  String get accountDeleteFinalBody;
+
+  /// No description provided for @accountDeleteFinalAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, erase everything'**
+  String get accountDeleteFinalAction;
+
+  /// No description provided for @cosmicSignPickerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a sign to read'**
+  String get cosmicSignPickerLabel;
+
+  /// No description provided for @cosmicSignPickerYou.
+  ///
+  /// In en, this message translates to:
+  /// **'{sign} (you)'**
+  String cosmicSignPickerYou(String sign);
+
+  /// No description provided for @accountDeleteCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was deleted. You are still signed in.'**
+  String get accountDeleteCancelled;
+
   /// No description provided for @accountDeleteFailed.
   ///
   /// In en, this message translates to:

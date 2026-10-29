@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/presentation/sign_picker.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_art.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
-import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_status_card.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_button.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/color_swatch_tile.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// The Cosmic tab: today's guidance for the user's sun sign (PRD §6.7).
 class CosmicScreen extends ConsumerWidget {
@@ -19,9 +22,21 @@ class CosmicScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final lang = Localizations.localeOf(context).languageCode;
     final today = ref.watch(cosmicTodayProvider(lang));
+    // Start the slow retrograde scan now so the Retrogrades screen is ready by
+    // the time the button is tapped.
+    ref.watch(retrogradeOverviewProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.cosmicTitle)),
+      appBar: AppBar(
+        title: Text(l10n.cosmicTitle),
+        actions: const [
+          RetrogradeButton(),
+          SizedBox(width: AppSpacing.sm),
+        ],
+      ),
       body: today.when(
+        // Choosing another sign reloads the page; keep the old one on screen
+        // until the new one is ready instead of flashing a loader.
+        skipLoadingOnReload: true,
         loading: () => const LoadingView(),
         error: (error, stack) =>
             ErrorView(onRetry: () => ref.invalidate(cosmicTodayProvider(lang))),
@@ -53,6 +68,10 @@ class _TodayView extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.md),
       children: [
+        if (ref.watch(hasPremiumProvider)) ...[
+          SignPicker(shown: today.sign),
+          const SizedBox(height: AppSpacing.md),
+        ],
         ZodiacArt(sign: today.sign),
         const SizedBox(height: AppSpacing.md),
         Semantics(
@@ -67,7 +86,6 @@ class _TodayView extends ConsumerWidget {
           style: theme.textTheme.bodyMedium,
         ),
         const SizedBox(height: AppSpacing.md),
-        const RetrogradeStatusCard(),
         _Block(
           children: [
             Text(reading.headline, style: theme.textTheme.titleLarge),

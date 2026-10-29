@@ -255,14 +255,82 @@ final class UserSunSignProvider
 
 String _$userSunSignHash() => r'f2f075daae31446718a4f741731f4777ac4ca27b';
 
-/// Today's page for the user in [lang], or null until the profile has a birth
-/// date. Rebuilds when the language or the profile changes.
+/// The sign whose page the Cosmic tab shows instead of the user's own, or
+/// null for their own. Premium; ignored without it. Starts over each time the
+/// Cosmic tab is left.
+
+@ProviderFor(ViewedSign)
+final viewedSignProvider = ViewedSignProvider._();
+
+/// The sign whose page the Cosmic tab shows instead of the user's own, or
+/// null for their own. Premium; ignored without it. Starts over each time the
+/// Cosmic tab is left.
+final class ViewedSignProvider
+    extends $NotifierProvider<ViewedSign, ZodiacSign?> {
+  /// The sign whose page the Cosmic tab shows instead of the user's own, or
+  /// null for their own. Premium; ignored without it. Starts over each time the
+  /// Cosmic tab is left.
+  ViewedSignProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'viewedSignProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$viewedSignHash();
+
+  @$internal
+  @override
+  ViewedSign create() => ViewedSign();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ZodiacSign? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ZodiacSign?>(value),
+    );
+  }
+}
+
+String _$viewedSignHash() => r'25cbb21ce36040a0ca3ea7dd75e7dfdf7447fd4c';
+
+/// The sign whose page the Cosmic tab shows instead of the user's own, or
+/// null for their own. Premium; ignored without it. Starts over each time the
+/// Cosmic tab is left.
+
+abstract class _$ViewedSign extends $Notifier<ZodiacSign?> {
+  ZodiacSign? build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<ZodiacSign?, ZodiacSign?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<ZodiacSign?, ZodiacSign?>,
+              ZodiacSign?,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+/// Today's page in [lang] for the sign being viewed, the user's own unless
+/// they chose another, or null until there is a sign (the profile has a birth
+/// date). Rebuilds when the language, the profile or the chosen sign changes.
 
 @ProviderFor(cosmicToday)
 final cosmicTodayProvider = CosmicTodayFamily._();
 
-/// Today's page for the user in [lang], or null until the profile has a birth
-/// date. Rebuilds when the language or the profile changes.
+/// Today's page in [lang] for the sign being viewed, the user's own unless
+/// they chose another, or null until there is a sign (the profile has a birth
+/// date). Rebuilds when the language, the profile or the chosen sign changes.
 
 final class CosmicTodayProvider
     extends
@@ -272,8 +340,9 @@ final class CosmicTodayProvider
           FutureOr<CosmicToday?>
         >
     with $FutureModifier<CosmicToday?>, $FutureProvider<CosmicToday?> {
-  /// Today's page for the user in [lang], or null until the profile has a birth
-  /// date. Rebuilds when the language or the profile changes.
+  /// Today's page in [lang] for the sign being viewed, the user's own unless
+  /// they chose another, or null until there is a sign (the profile has a birth
+  /// date). Rebuilds when the language, the profile or the chosen sign changes.
   CosmicTodayProvider._({
     required CosmicTodayFamily super.from,
     required String super.argument,
@@ -318,10 +387,11 @@ final class CosmicTodayProvider
   }
 }
 
-String _$cosmicTodayHash() => r'73872ef98070527ac3e3fd85566c293fcf1993d2';
+String _$cosmicTodayHash() => r'69f58db3a39b58cd676acdccb0024ffe3ed74a61';
 
-/// Today's page for the user in [lang], or null until the profile has a birth
-/// date. Rebuilds when the language or the profile changes.
+/// Today's page in [lang] for the sign being viewed, the user's own unless
+/// they chose another, or null until there is a sign (the profile has a birth
+/// date). Rebuilds when the language, the profile or the chosen sign changes.
 
 final class CosmicTodayFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<CosmicToday?>, String> {
@@ -334,8 +404,9 @@ final class CosmicTodayFamily extends $Family
         isAutoDispose: true,
       );
 
-  /// Today's page for the user in [lang], or null until the profile has a birth
-  /// date. Rebuilds when the language or the profile changes.
+  /// Today's page in [lang] for the sign being viewed, the user's own unless
+  /// they chose another, or null until there is a sign (the profile has a birth
+  /// date). Rebuilds when the language, the profile or the chosen sign changes.
 
   CosmicTodayProvider call(String lang) =>
       CosmicTodayProvider._(argument: lang, from: this);

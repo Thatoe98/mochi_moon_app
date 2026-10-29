@@ -95,8 +95,9 @@ String _$localDataEraserHash() => r'7b931eca00a168d45439d815e728829bb1a958ce';
 /// Deletes the account from Mochi Moon and wipes this phone. The state is
 /// whether a deletion is running.
 ///
-/// The order matters: cloud data first (the rules need the user signed in),
-/// then the Auth user, then the local data. The sync providers stop once the
+/// The order matters: confirm the Google account first, so backing out of it
+/// leaves everything as it was; then cloud data (the rules need the user
+/// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
 
@@ -106,8 +107,9 @@ final accountDeletionProvider = AccountDeletionProvider._();
 /// Deletes the account from Mochi Moon and wipes this phone. The state is
 /// whether a deletion is running.
 ///
-/// The order matters: cloud data first (the rules need the user signed in),
-/// then the Auth user, then the local data. The sync providers stop once the
+/// The order matters: confirm the Google account first, so backing out of it
+/// leaves everything as it was; then cloud data (the rules need the user
+/// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
 final class AccountDeletionProvider
@@ -115,8 +117,9 @@ final class AccountDeletionProvider
   /// Deletes the account from Mochi Moon and wipes this phone. The state is
   /// whether a deletion is running.
   ///
-  /// The order matters: cloud data first (the rules need the user signed in),
-  /// then the Auth user, then the local data. The sync providers stop once the
+  /// The order matters: confirm the Google account first, so backing out of it
+  /// leaves everything as it was; then cloud data (the rules need the user
+  /// signed in), then the Auth user, then the local data. The sync providers stop once the
   /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
   /// only the local wipe runs, which makes this a full reset for testing.
   AccountDeletionProvider._()
@@ -146,13 +149,14 @@ final class AccountDeletionProvider
   }
 }
 
-String _$accountDeletionHash() => r'080da0dfed944aa3056cfee31f787e5e01c5bd17';
+String _$accountDeletionHash() => r'35f00d08e71e39447029f41c54a141958b2611ce';
 
 /// Deletes the account from Mochi Moon and wipes this phone. The state is
 /// whether a deletion is running.
 ///
-/// The order matters: cloud data first (the rules need the user signed in),
-/// then the Auth user, then the local data. The sync providers stop once the
+/// The order matters: confirm the Google account first, so backing out of it
+/// leaves everything as it was; then cloud data (the rules need the user
+/// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
 

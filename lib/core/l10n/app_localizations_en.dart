@@ -704,6 +704,28 @@ class AppLocalizationsEn extends AppLocalizations {
       'You seem to be offline. Please connect and try again.';
 
   @override
+  String get accountDeleteFinalTitle => 'Are you completely sure?';
+
+  @override
+  String get accountDeleteFinalBody =>
+      'This is your last chance. Everything will be erased for good and Mochi Moon will start over as if you had just installed it.';
+
+  @override
+  String get accountDeleteFinalAction => 'Yes, erase everything';
+
+  @override
+  String get cosmicSignPickerLabel => 'Choose a sign to read';
+
+  @override
+  String cosmicSignPickerYou(String sign) {
+    return '$sign (you)';
+  }
+
+  @override
+  String get accountDeleteCancelled =>
+      'Nothing was deleted. You are still signed in.';
+
+  @override
   String get accountDeleteFailed =>
       'Something went wrong and nothing was deleted. Please try again.';
 }

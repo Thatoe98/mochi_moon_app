@@ -195,5 +195,11 @@
   "accountDeleteKeep": "အကောင့်ကို ဆက်ထားမယ်",
   "accountDeleteDeleting": "သင့်အကောင့်ကို ဖျက်နေပါတယ်...",
   "accountDeleteOffline": "အင်တာနက်ချိတ်ဆက်မှု မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။",
+  "accountDeleteFinalTitle": "သေချာဆုံးဖြတ်ပြီးပြီလား။",
+  "accountDeleteFinalBody": "ဒါက နောက်ဆုံးအခွင့်အရေးပါ။ အရာအားလုံးကို အပြီးတိုင် ဖျက်ပစ်ပြီး Mochi Moon ကို အခုမှ ထည့်သွင်းထားသလို အစကနေ ပြန်စပါမယ်။",
+  "accountDeleteFinalAction": "ဟုတ်ကဲ့၊ အားလုံးကို ဖျက်မယ်",
+  "cosmicSignPickerLabel": "ဖတ်ဖို့ ရာသီခွင်တစ်ခု ရွေးပါ",
+  "cosmicSignPickerYou": "{sign} (သင်)",
+  "accountDeleteCancelled": "ဘာမှ မဖျက်ခဲ့ပါဘူး။ အကောင့်ထဲမှာ ဆက်ဝင်ထားပါတယ်။",
   "accountDeleteFailed": "တစ်ခုခု အဆင်မပြေဖြစ်သွားပြီး ဘာမှ မဖျက်ခဲ့ပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။"
 }

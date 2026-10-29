@@ -715,6 +715,28 @@ class AppLocalizationsMy extends AppLocalizations {
       'အင်တာနက်ချိတ်ဆက်မှု မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
+  String get accountDeleteFinalTitle => 'သေချာဆုံးဖြတ်ပြီးပြီလား။';
+
+  @override
+  String get accountDeleteFinalBody =>
+      'ဒါက နောက်ဆုံးအခွင့်အရေးပါ။ အရာအားလုံးကို အပြီးတိုင် ဖျက်ပစ်ပြီး Mochi Moon ကို အခုမှ ထည့်သွင်းထားသလို အစကနေ ပြန်စပါမယ်။';
+
+  @override
+  String get accountDeleteFinalAction => 'ဟုတ်ကဲ့၊ အားလုံးကို ဖျက်မယ်';
+
+  @override
+  String get cosmicSignPickerLabel => 'ဖတ်ဖို့ ရာသီခွင်တစ်ခု ရွေးပါ';
+
+  @override
+  String cosmicSignPickerYou(String sign) {
+    return '$sign (သင်)';
+  }
+
+  @override
+  String get accountDeleteCancelled =>
+      'ဘာမှ မဖျက်ခဲ့ပါဘူး။ အကောင့်ထဲမှာ ဆက်ဝင်ထားပါတယ်။';
+
+  @override
   String get accountDeleteFailed =>
       'တစ်ခုခု အဆင်မပြေဖြစ်သွားပြီး ဘာမှ မဖျက်ခဲ့ပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 }

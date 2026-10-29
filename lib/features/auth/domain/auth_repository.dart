@@ -22,6 +22,15 @@ abstract interface class AuthRepository {
 
   Future<void> signOut();
 
+  /// Confirms the Google account again, so the deletion that follows is not
+  /// refused for an old sign-in. It reuses the account on the phone without a
+  /// picker when it can. Run it before anything is erased. Does nothing when
+  /// signed out.
+  ///
+  /// Throws a `CancelledFailure` if they back out, a `NetworkFailure` when
+  /// offline, and another `AppFailure` otherwise.
+  Future<void> confirmIdentity();
+
   /// Deletes the signed-in Auth user and signs out. Does nothing when signed
   /// out.
   ///

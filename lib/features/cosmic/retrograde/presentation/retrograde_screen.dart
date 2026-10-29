@@ -25,7 +25,9 @@ class RetrogradeScreen extends ConsumerWidget {
       body: overview.when(
         loading: () => const LoadingView(),
         error: (error, stack) => ErrorView(
-          onRetry: () => ref.invalidate(retrogradeOverviewProvider),
+          onRetry: () => ref
+            ..invalidate(retrogradePeriodsProvider)
+            ..invalidate(retrogradeOverviewProvider),
         ),
         data: (data) => _Overview(overview: data),
       ),

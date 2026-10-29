@@ -1,13 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_theme.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/astro/retrogrades.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
+import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_button.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_screen.dart';
-import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_status_card.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
@@ -171,39 +174,53 @@ void main() {
     });
   });
 
-  group('RetrogradeStatusCard', () {
-    testWidgets('says when Mercury turns direct', (tester) async {
-      await tester.pumpWidget(
-        _host(const Scaffold(body: RetrogradeStatusCard())),
-      );
-      await tester.pumpAndSettle();
-
-      expect(find.text('Mercury is retrograde until Nov 13'), findsOneWidget);
-    });
-
-    testWidgets('counts down to the next Mercury retrograde', (tester) async {
+  group('RetrogradeButton', () {
+    testWidgets('is there before the calendar has loaded', (tester) async {
+      final slow = Completer<RetrogradeCalendar>();
       await tester.pumpWidget(
         _host(
-          const Scaffold(body: RetrogradeStatusCard()),
-          now: DateTime(2026, 11, 20, 12),
+          const Scaffold(body: Center(child: RetrogradeButton())),
+          source: (year) => slow.future,
         ),
       );
-      await tester.pumpAndSettle();
 
-      expect(find.text('Next Mercury retrograde: Feb 9'), findsOneWidget);
-      expect(find.text('Starts in 81 days'), findsOneWidget);
+      expect(find.text('Retrogrades'), findsOneWidget);
     });
 
-    testWidgets('shows nothing when the calendar fails', (tester) async {
+    testWidgets('is still there when the calendar fails', (tester) async {
       await tester.pumpWidget(
         _host(
-          const Scaffold(body: RetrogradeStatusCard()),
+          const Scaffold(body: Center(child: RetrogradeButton())),
           source: (year) async => throw StateError('scan failed'),
         ),
       );
       await tester.pumpAndSettle();
 
-      expect(find.byType(Card), findsNothing);
+      expect(find.text('Retrogrades'), findsOneWidget);
+    });
+  });
+
+  group('retrogradeOverviewProvider', () {
+    test('scans once and reuses the result', () async {
+      var scans = 0;
+      final container = ProviderContainer(
+        overrides: [
+          clockProvider.overrideWithValue(() => DateTime(2026, 10, 29, 12)),
+          retrogradeCalendarSourceProvider.overrideWithValue((year) {
+            scans++;
+            return fakeCalendar(year);
+          }),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      container.listen(retrogradeOverviewProvider, (_, _) {}).close();
+      await container.read(retrogradeOverviewProvider.future);
+      container.invalidate(retrogradeOverviewProvider);
+      await container.read(retrogradeOverviewProvider.future);
+
+      // Two years per scan, once.
+      expect(scans, 2);
     });
   });
 }

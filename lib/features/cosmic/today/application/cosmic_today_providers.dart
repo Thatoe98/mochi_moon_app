@@ -10,6 +10,7 @@ import 'package:mochi_moon/features/cosmic/today/domain/daily_reading_repository
 import 'package:mochi_moon/features/cosmic/today/domain/lucky_picks.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/thai_colors_setting.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,12 +58,31 @@ Future<ZodiacSign?> userSunSign(Ref ref) async {
   ).sun;
 }
 
-/// Today's page for the user in [lang], or null until the profile has a birth
-/// date. Rebuilds when the language or the profile changes.
+/// The sign whose page the Cosmic tab shows instead of the user's own, or
+/// null for their own. Premium; ignored without it. Starts over each time the
+/// Cosmic tab is left.
+@riverpod
+class ViewedSign extends _$ViewedSign {
+  @override
+  ZodiacSign? build() => null;
+
+  // A method, not a setter: callers read it as an action ("choose a sign").
+  // ignore: use_setters_to_change_properties
+  void choose(ZodiacSign? sign) => state = sign;
+}
+
+/// Today's page in [lang] for the sign being viewed, the user's own unless
+/// they chose another, or null until there is a sign (the profile has a birth
+/// date). Rebuilds when the language, the profile or the chosen sign changes.
 @riverpod
 Future<CosmicToday?> cosmicToday(Ref ref, String lang) async {
-  final sun = await ref.watch(userSunSignProvider.future);
+  final own = await ref.watch(userSunSignProvider.future);
+  final chosen = ref.watch(hasPremiumProvider)
+      ? ref.watch(viewedSignProvider)
+      : null;
+  final sun = chosen ?? own;
   if (sun == null) return null;
+  final viewingOther = chosen != null && chosen != own;
   final profile = ref.watch(profileControllerProvider).value;
   final now = ref.watch(clockProvider)();
   final date = DateTime(now.year, now.month, now.day);
@@ -89,7 +109,8 @@ Future<CosmicToday?> cosmicToday(Ref ref, String lang) async {
     thaiColors: thaiColors(
       colors: colors,
       date: date,
-      birthDate: profile?.birthDate,
+      // The birthday color belongs to the user, not to the sign on screen.
+      birthDate: viewingOther ? null : profile?.birthDate,
     ),
   );
 }
