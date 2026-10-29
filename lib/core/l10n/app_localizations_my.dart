@@ -389,89 +389,91 @@ class AppLocalizationsMy extends AppLocalizations {
   String get profileSaveFailed => 'Couldn\'t save that. Please try again.';
 
   @override
-  String get cosmicNeedsBirthDateTitle => 'Your stars need a date';
+  String get cosmicNeedsBirthDateTitle =>
+      'သင့်ကြယ်တွေအတွက် မွေးနေ့ရက်စွဲလေး လိုပါတယ်';
 
   @override
   String get cosmicNeedsBirthDateBody =>
-      'Share your birth date and your daily guidance will appear here.';
+      'မွေးနေ့ရက်စွဲလေးကို မျှဝေပေးရင် နေ့စဉ်လမ်းညွှန်ချက်လေးကို ဒီမှာ ဖော်ပြပေးပါမယ်။';
 
   @override
   String cosmicHeader(String sign, String date) {
-    return '$sign · $date';
+    return '$sign · $date ရက်နေ့';
   }
 
   @override
   String cosmicMoonIn(String sign) {
-    return 'Moon in $sign';
+    return 'လ $sign မှာ';
   }
 
   @override
-  String get cosmicEnergyTitle => 'Today\'s energy';
+  String get cosmicEnergyTitle => 'ဒီနေ့ရဲ့ စွမ်းအင်';
 
   @override
-  String get cosmicLoveTitle => 'Love';
+  String get cosmicLoveTitle => 'အချစ်';
 
   @override
-  String get cosmicLuckyColorsTitle => 'Lucky colors';
+  String get cosmicLuckyColorsTitle => 'ကံကောင်းစေမယ့် အရောင်များ';
 
   @override
-  String get cosmicLuckyNumberTitle => 'Lucky number';
+  String get cosmicLuckyNumberTitle => 'ကံကောင်းစေမယ့် ဂဏန်း';
 
   @override
-  String get cosmicAvoidTitle => 'Things to avoid';
+  String get cosmicAvoidTitle => 'ရှောင်သင့်တာများ';
 
   @override
-  String get cosmicThaiColorsTitle => 'Thai colors';
+  String get cosmicThaiColorsTitle => 'ထိုင်းရိုးရာ အရောင်များ';
 
   @override
-  String get cosmicThaiBirthdayColor => 'Your birthday color';
+  String get cosmicThaiBirthdayColor => 'သင့်မွေးနေ့အရောင်';
 
   @override
-  String get cosmicThaiTodayColor => 'Today\'s color';
+  String get cosmicThaiTodayColor => 'ဒီနေ့ရဲ့ အရောင်';
 
   @override
-  String get cosmicDisclaimer => 'For entertainment and self-reflection';
+  String get cosmicDisclaimer =>
+      'ဖျော်ဖြေရေးနှင့် ကိုယ်ကိုယ်ပြန်စဉ်းစားရန်အတွက်သာ';
 
   @override
-  String get thaiColorsSettingTitle => 'Thai day colors';
+  String get thaiColorsSettingTitle => 'ထိုင်းရိုးရာ နေ့အလိုက် အရောင်များ';
 
   @override
   String get thaiColorsSettingSubtitle =>
-      'Show your birthday color and today\'s color on Cosmic you';
+      'သင့်စကြဝဠာမှာ မွေးနေ့အရောင်နဲ့ ဒီနေ့ရဲ့အရောင်ကို ပြပါ';
 
   @override
-  String get signAries => 'Aries';
+  String get signAries => 'မိဿရာသီ';
 
   @override
-  String get signTaurus => 'Taurus';
+  String get signTaurus => 'ပြိဿရာသီ';
 
   @override
-  String get signGemini => 'Gemini';
+  String get signGemini => 'မေထုန်ရာသီ';
 
   @override
-  String get signCancer => 'Cancer';
+  String get signCancer => 'ကရကဋ်ရာသီ';
 
   @override
-  String get signLeo => 'Leo';
+  String get signLeo => 'သိဟ်ရာသီ';
 
   @override
-  String get signVirgo => 'Virgo';
+  String get signVirgo => 'ကန်ရာသီ';
 
   @override
-  String get signLibra => 'Libra';
+  String get signLibra => 'တူရာသီ';
 
   @override
-  String get signScorpio => 'Scorpio';
+  String get signScorpio => 'ဗြိစ္ဆာရာသီ';
 
   @override
-  String get signSagittarius => 'Sagittarius';
+  String get signSagittarius => 'ဓနုရာသီ';
 
   @override
-  String get signCapricorn => 'Capricorn';
+  String get signCapricorn => 'မကာရရာသီ';
 
   @override
-  String get signAquarius => 'Aquarius';
+  String get signAquarius => 'ကုမ်ရာသီ';
 
   @override
-  String get signPisces => 'Pisces';
+  String get signPisces => 'မိန်ရာသီ';
 }

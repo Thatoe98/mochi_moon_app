@@ -147,7 +147,7 @@ void main() {
 
   testWidgets('shows English text when the language has none', (tester) async {
     await tester.pumpWidget(
-      _host(profile: _scorpio, locale: const Locale('my')),
+      _host(profile: _scorpio, locale: const Locale('th')),
     );
     await tester.pumpAndSettle();
     expect(find.text('Your depth is a superpower'), findsOneWidget);

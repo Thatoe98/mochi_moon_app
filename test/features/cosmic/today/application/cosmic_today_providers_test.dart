@@ -162,9 +162,9 @@ void main() {
       expect(nextDay, isNot(morning));
     });
 
-    test('uses English text for a language with none', () async {
+    test('uses English text for a language with none (Thai)', () async {
       final container = _container(profile: scorpio);
-      final today = (await _load(container, cosmicTodayProvider('my')))!;
+      final today = (await _load(container, cosmicTodayProvider('th')))!;
       expect(today.reading.lang, 'en');
       expect(today.reading.isFallback, isTrue);
     });

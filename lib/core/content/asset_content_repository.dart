@@ -17,9 +17,9 @@ class AssetContentRepository implements ContentRepository {
   static const dayColorsPath = 'assets/content/signs/day_colors.json';
   static const fallbackReadingsDir = 'assets/content/fallback_readings';
 
-  /// Languages with a file in [fallbackReadingsDir]. Burmese joins once its
-  /// texts are written and reviewed; Thai waits for a native reviewer.
-  static const fallbackReadingLanguages = ['en'];
+  /// Languages with a file in [fallbackReadingsDir]. Burmese is machine
+  /// translated (PRD §7.1a) and awaits review; Thai waits for a native reviewer.
+  static const fallbackReadingLanguages = ['en', 'my'];
 
   final AssetBundle _bundle;
 

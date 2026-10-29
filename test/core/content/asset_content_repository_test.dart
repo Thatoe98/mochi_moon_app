@@ -78,8 +78,24 @@ void main() {
       }
     });
 
+    test('Burmese covers every sign and variant with three things to avoid',
+        () async {
+      final en = await repo.loadFallbackReadings('en');
+      final my = await repo.loadFallbackReadings('my');
+      expect(my!.keys, unorderedEquals(en!.keys));
+      for (final id in en.keys) {
+        expect(my[id]!.length, en[id]!.length, reason: id);
+        for (final text in my[id]!) {
+          expect(text.headline, isNotEmpty);
+          expect(text.body, isNotEmpty);
+          expect(text.energy, isNotEmpty);
+          expect(text.love, isNotEmpty);
+          expect(text.avoid, hasLength(3));
+        }
+      }
+    });
+
     test('are null for a language with no file', () async {
-      expect(await repo.loadFallbackReadings('my'), isNull);
       expect(await repo.loadFallbackReadings('th'), isNull);
     });
 
