@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "lang": "en",
+  "readings": {
+    "aries": [
+      {
+        "headline": "Your spark is enough today",
+        "body": "You do not need a grand plan to begin. One small, brave step is plenty, and your natural courage will carry it further than you expect. If you feel rushed, slow your breath first and let the next move come from calm instead of hurry. You are allowed to start before you feel ready.",
+        "energy": "Start small, stay brave.",
+        "love": "Say the kind thing out loud. Warmth lands best when it is simple and sincere.",
+        "avoid": ["Rushing to prove yourself", "Snapping when you are tired", "Skipping lunch for a to-do list"]
+      },
+      {
+        "headline": "Soft strength looks good on you",
+        "body": "Being bold does not mean being loud. Today your strength shows up in how gently you treat yourself when things are not perfect. Finish one thing you began, then celebrate it. Let the rest wait without guilt. Your energy is a gift, so spend it where it feels good.",
+        "energy": "Gentle fire.",
+        "love": "Be curious about how someone else feels before you share your own. You may be surprised.",
+        "avoid": ["Starting five things at once", "Winning every argument", "Ignoring a nap when you need one"]
+      }
+    ],
+    "taurus": [
+      {
+        "headline": "Comfort is a kind of wisdom",
+        "body": "You know what feels good and safe for you, and today that knowledge is worth trusting. Make your space cozy, eat something you love, and move through your tasks at your own pace. Steady is not slow. It is how lasting things get built, one calm moment at a time.",
+        "energy": "Slow and sweet.",
+        "love": "Show care with small rituals: a warm drink, a message, a hand held a little longer.",
+        "avoid": ["Holding on to a plan that no longer fits", "Scrolling instead of resting", "Comparing your pace to anyone else's"]
+      },
+      {
+        "headline": "You are allowed to enjoy this",
+        "body": "Pleasure is not something to earn. Notice a soft blanket, a good song, the smell of something nice. Those little moments fill you up so that you can give from a full cup. If a change arrives, take a breath and let it show you its gentler side before you decide.",
+        "energy": "Savor it.",
+        "love": "Let yourself receive. You do not have to give back right away.",
+        "avoid": ["Saying yes out of habit", "Skipping a treat to be good", "Digging in your heels before listening"]
+      }
+    ],
+    "gemini": [
+      {
+        "headline": "Your curious mind is a gift",
+        "body": "Ideas are bouncing around today, and that is lovely. Jot them down so your head can rest. Pick one thing to follow all the way through, even for ten minutes, and notice how good focus feels. Talking with someone you trust can help you hear what you already know.",
+        "energy": "Bright and chatty.",
+        "love": "Ask a question you have never asked before. Real interest is very attractive.",
+        "avoid": ["Doomscrolling before bed", "Saying yes to everything", "Judging yourself for changing your mind"]
+      },
+      {
+        "headline": "Listen to yourself for a moment",
+        "body": "You are good at hearing everyone else's side. Today, give your own voice a turn. Write a few honest lines, just for you. You may find that what feels scattered is really several good ideas waiting for a little room. Be patient with yourself while they settle.",
+        "energy": "Quiet the noise.",
+        "love": "Share one true feeling instead of a funny deflection. It is safe to be a little soft.",
+        "avoid": ["Filling every silence", "Opening twenty tabs", "Gossip that leaves you feeling heavy"]
+      }
+    ],
+    "cancer": [
+      {
+        "headline": "Your heart knows the way home",
+        "body": "You feel things deeply, and that is a strength, not a weakness. Today, make a little nest for yourself with a favorite blanket, a gentle playlist, and a kind word. Your feelings are visitors. Let them come, let them be heard, and let them go when they are ready.",
+        "energy": "Cozy and tender.",
+        "love": "Tell someone you miss them. A small message can open a big warm door.",
+        "avoid": ["Reading silence as rejection", "Carrying everyone's worries", "Staying in clothes that feel scratchy"]
+      },
+      {
+        "headline": "You are your own safe place",
+        "body": "You are so good at caring for others. Today, turn some of that tenderness toward yourself. Ask what you need, then try to give it, even in a small way. A warm meal, an early night, a soft song. The people who love you want you to be gentle with yourself too.",
+        "energy": "Soft and steady.",
+        "love": "It is okay to ask for the hug. You do not have to guess whether you are wanted.",
+        "avoid": ["Hiding how you feel to keep the peace", "Replaying an old conversation", "Putting yourself last on the list"]
+      }
+    ],
+    "leo": [
+      {
+        "headline": "Let yourself be seen",
+        "body": "Your warmth lights up a room, and today it is welcome. Share something you made, wear the color you love, or say the thing you are proud of. You do not have to shrink to be liked. The right people feel brighter when you are fully yourself.",
+        "energy": "Warm and golden.",
+        "love": "Offer a sincere compliment. Generosity comes back to you in surprising ways.",
+        "avoid": ["Waiting for applause before you begin", "Hiding your good news", "Taking a joke too personally"]
+      },
+      {
+        "headline": "Your kindness is your crown",
+        "body": "Real confidence is quiet as well as bright. Today, notice how good it feels to lift someone else, and then lift yourself just as kindly. If you stumble, you are still wonderful. Take a breath, smile, and try again. Your heart does the shining without any effort.",
+        "energy": "Radiant and humble.",
+        "love": "Let someone else lead the plan for once. Being cared for is lovely too.",
+        "avoid": ["Needing to be the center of attention", "Holding a grudge about a small thing", "Doubting how much you matter"]
+      }
+    ],
+    "virgo": [
+      {
+        "headline": "Good enough is truly good",
+        "body": "You notice every detail, and that care makes things better. Today, practice stopping when something is good enough. Put the checklist down, look at what you have done, and let yourself feel proud. Nobody needs you to be perfect. They need you to be you.",
+        "energy": "Tidy heart, gentle mind.",
+        "love": "Show love by helping in a small, practical way, then sit down and simply enjoy their company.",
+        "avoid": ["Re-reading a message ten times", "Criticizing yourself for a tiny slip", "Cleaning when you want to rest"]
+      },
+      {
+        "headline": "Rest is part of the plan",
+        "body": "Your helpful nature makes you reliable, and reliable people need real breaks. Add a pause to your day and keep it as carefully as you keep your appointments. A walk, a stretch, a quiet cup of tea. You work better, and feel better, when you are cared for too.",
+        "energy": "Calm and capable.",
+        "love": "Say what you appreciate about someone. They may not know how closely you notice.",
+        "avoid": ["Taking on a task that is not yours", "Worrying about things you cannot change", "Skipping a break to catch up"]
+      }
+    ],
+    "libra": [
+      {
+        "headline": "Balance begins with you",
+        "body": "You work so hard to keep things fair and peaceful for everyone. Today, include yourself in the picture. Notice what you want, even in small choices like what to eat or which song to play. Your preferences matter, and the people who care about you will welcome hearing them.",
+        "energy": "Harmony with a voice.",
+        "love": "Share an honest opinion in a gentle way. Kindness and honesty can sit side by side.",
+        "avoid": ["Agreeing just to avoid tension", "Spending an hour choosing", "Letting a small disagreement spoil the day"]
+      },
+      {
+        "headline": "Beauty is already around you",
+        "body": "Look for something lovely today: light on a wall, a flower, a friendly smile. Surrounding yourself with beauty calms your mind and helps you decide what matters. When a choice feels hard, pick the one that lets you breathe more easily. You can always adjust later.",
+        "energy": "Soft and graceful.",
+        "love": "Plan something simple and pretty together. Shared little moments build warmth.",
+        "avoid": ["Putting off a small decision", "Apologizing for taking up space", "Comparing your life to a perfect photo"]
+      }
+    ],
+    "scorpio": [
+      {
+        "headline": "Your depth is a superpower",
+        "body": "You feel things fully, and you see what is beneath the surface. Today, trust that sense about people and about yourself. You do not have to explain every feeling to anyone. Give yourself the privacy to understand it first, then share what feels safe to share.",
+        "energy": "Deep and calm.",
+        "love": "Let one person see a little more of you. Trust grows in small, brave steps.",
+        "avoid": ["Testing people to see if they care", "Holding everything in until it is heavy", "Going over an old hurt again"]
+      },
+      {
+        "headline": "Change can be gentle",
+        "body": "You are good at letting go of what has finished its work. Today, release one small thing, such as an old worry, a cluttered corner, or a harsh thought about yourself. Make room for something lighter. Transformation does not have to hurt. It can feel like a deep, quiet exhale.",
+        "energy": "Renewing and still.",
+        "love": "Be open about what you need. People cannot read your mind, however much you wish they could.",
+        "avoid": ["Keeping score", "Shutting someone out to feel safe", "Believing the worst before you know"]
+      }
+    ],
+    "sagittarius": [
+      {
+        "headline": "Wander a little today",
+        "body": "Your spirit loves room to explore, so give it some. Take a new route, try a new snack, learn one new thing. Curiosity keeps you glowing. Share your honesty kindly, because the truth feels best when it comes wrapped in care. Keep your optimism close. It lights up your path.",
+        "energy": "Open skies.",
+        "love": "Invite someone on a small adventure, even just a walk somewhere you have never been.",
+        "avoid": ["Saying the first thing that comes to mind when you are upset", "Promising more than you can do", "Skipping the small joys while chasing big ones"]
+      },
+      {
+        "headline": "You are on your own path",
+        "body": "You do not have to follow anyone else's timeline. Today, listen for what makes your heart feel big and free, and take one step toward it. Mistakes are just stories you will tell later. Stay hopeful, stay kind, and let yourself laugh at the little surprises.",
+        "energy": "Light and hopeful.",
+        "love": "Be present with someone, with your phone away. Full attention is the best gift.",
+        "avoid": ["Running from a hard feeling", "Taking on too many plans", "Making a joke to avoid being vulnerable"]
+      }
+    ],
+    "capricorn": [
+      {
+        "headline": "You have already come far",
+        "body": "You work steadily toward what matters, and it is worth pausing to notice how much you have already done. Today, write down three things you are proud of. Your goals will wait while you breathe. Success feels sweeter when you are kind to yourself on the way there.",
+        "energy": "Steady and proud.",
+        "love": "Let someone care for you today. Being supported does not make you any less strong.",
+        "avoid": ["Measuring yourself by your to-do list", "Saying you are fine when you are not", "Working through every break"]
+      },
+      {
+        "headline": "Soft is not the same as weak",
+        "body": "You are dependable, and people trust you. Today, let a gentle moment into your schedule. Laugh at something silly, stretch, look at the sky. The discipline you have built is a strong foundation, and a foundation is meant to hold a warm, lived-in home too.",
+        "energy": "Grounded and warm.",
+        "love": "Share a small worry with someone who cares. You do not have to carry it alone.",
+        "avoid": ["Believing rest is laziness", "Putting off joy until everything is done", "Being harder on yourself than on anyone else"]
+      }
+    ],
+    "aquarius": [
+      {
+        "headline": "Your difference is your charm",
+        "body": "You see the world a little differently, and that is exactly what makes your ideas special. Today, share one of them, even if it feels odd. Someone nearby has been waiting to hear it. Make time to be with friends who let you be yourself, and let the rest go.",
+        "energy": "Original and bright.",
+        "love": "Share something you love that no one else knows about. Real friendships start there.",
+        "avoid": ["Pulling away when you feel misunderstood", "Hiding your quirks to fit in", "Staying in your head all day"]
+      },
+      {
+        "headline": "Connection is a gentle gift",
+        "body": "You care about people in a big, wide way. Today, bring that care closer to home. A message to one friend, a kind word to someone nearby, or a quiet moment of listening. Small, personal acts of warmth balance the big ideas and make you feel less alone.",
+        "energy": "Friendly and free.",
+        "love": "Let someone know they matter to you in a clear, simple sentence.",
+        "avoid": ["Going quiet instead of saying how you feel", "Overthinking a small message", "Waiting for the perfect moment to reach out"]
+      }
+    ],
+    "pisces": [
+      {
+        "headline": "Trust your gentle heart",
+        "body": "You feel what others feel, and your intuition is a quiet, helpful guide. Today, listen to it, and give yourself time to dream. Draw, write, or just look out of the window. You do not have to fix everything around you. Your presence is already a comfort to others.",
+        "energy": "Dreamy and tender.",
+        "love": "Say how you really feel, even if it is only a little. Honesty is a soft kind of courage.",
+        "avoid": ["Absorbing everyone else's moods", "Saying yes when you mean no", "Escaping into daydreams instead of resting"]
+      },
+      {
+        "headline": "You can set a soft boundary",
+        "body": "Kindness and boundaries go together. Today, practice a gentle no, or a small pause before you agree. You are not any less loving for looking after your own energy. Fill your cup with something you enjoy, like music, water, art, or a quiet moment, and let it overflow naturally.",
+        "energy": "Calm waters.",
+        "love": "Let yourself be cared for the way you care for others. You deserve the same tenderness.",
+        "avoid": ["Giving until you are empty", "Waiting for someone to rescue you", "Telling yourself your feelings are too much"]
+      }
+    ]
+  }
+}

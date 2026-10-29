@@ -96,10 +96,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoryCalm => 'Calm';
 
   @override
-  String get cosmicPlaceholderTitle => 'Cosmic you';
-
-  @override
-  String get cosmicPlaceholderBody => 'Your stars are warming up.';
+  String get cosmicTitle => 'Cosmic you';
 
   @override
   String get mePlaceholderTitle => 'Just you';
@@ -389,4 +386,91 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileSaveFailed => 'Couldn\'t save that. Please try again.';
+
+  @override
+  String get cosmicNeedsBirthDateTitle => 'Your stars need a date';
+
+  @override
+  String get cosmicNeedsBirthDateBody =>
+      'Share your birth date and your daily guidance will appear here.';
+
+  @override
+  String cosmicHeader(String sign, String date) {
+    return '$sign · $date';
+  }
+
+  @override
+  String cosmicMoonIn(String sign) {
+    return 'Moon in $sign';
+  }
+
+  @override
+  String get cosmicEnergyTitle => 'Today\'s energy';
+
+  @override
+  String get cosmicLoveTitle => 'Love';
+
+  @override
+  String get cosmicLuckyColorsTitle => 'Lucky colors';
+
+  @override
+  String get cosmicLuckyNumberTitle => 'Lucky number';
+
+  @override
+  String get cosmicAvoidTitle => 'Things to avoid';
+
+  @override
+  String get cosmicThaiColorsTitle => 'Thai colors';
+
+  @override
+  String get cosmicThaiBirthdayColor => 'Your birthday color';
+
+  @override
+  String get cosmicThaiTodayColor => 'Today\'s color';
+
+  @override
+  String get cosmicDisclaimer => 'For entertainment and self-reflection';
+
+  @override
+  String get thaiColorsSettingTitle => 'Thai day colors';
+
+  @override
+  String get thaiColorsSettingSubtitle =>
+      'Show your birthday color and today\'s color on Cosmic you';
+
+  @override
+  String get signAries => 'Aries';
+
+  @override
+  String get signTaurus => 'Taurus';
+
+  @override
+  String get signGemini => 'Gemini';
+
+  @override
+  String get signCancer => 'Cancer';
+
+  @override
+  String get signLeo => 'Leo';
+
+  @override
+  String get signVirgo => 'Virgo';
+
+  @override
+  String get signLibra => 'Libra';
+
+  @override
+  String get signScorpio => 'Scorpio';
+
+  @override
+  String get signSagittarius => 'Sagittarius';
+
+  @override
+  String get signCapricorn => 'Capricorn';
+
+  @override
+  String get signAquarius => 'Aquarius';
+
+  @override
+  String get signPisces => 'Pisces';
 }

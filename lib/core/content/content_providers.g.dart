@@ -133,3 +133,41 @@ final class SignsProvider
 }
 
 String _$signsHash() => r'5231c159b27af0a616fae8de4902f786c4c08246';
+
+@ProviderFor(dayColors)
+final dayColorsProvider = DayColorsProvider._();
+
+final class DayColorsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<DayColors>,
+          DayColors,
+          FutureOr<DayColors>
+        >
+    with $FutureModifier<DayColors>, $FutureProvider<DayColors> {
+  DayColorsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dayColorsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$dayColorsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<DayColors> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<DayColors> create(Ref ref) {
+    return dayColors(ref);
+  }
+}
+
+String _$dayColorsHash() => r'ade792ca4b6fcf96a6c79077a00f7df7d5cf0df7';

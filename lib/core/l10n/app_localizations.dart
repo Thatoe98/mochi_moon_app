@@ -236,17 +236,11 @@ abstract class AppLocalizations {
   /// **'Calm'**
   String get categoryCalm;
 
-  /// No description provided for @cosmicPlaceholderTitle.
+  /// No description provided for @cosmicTitle.
   ///
   /// In en, this message translates to:
   /// **'Cosmic you'**
-  String get cosmicPlaceholderTitle;
-
-  /// No description provided for @cosmicPlaceholderBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Your stars are warming up.'**
-  String get cosmicPlaceholderBody;
+  String get cosmicTitle;
 
   /// No description provided for @mePlaceholderTitle.
   ///
@@ -733,6 +727,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t save that. Please try again.'**
   String get profileSaveFailed;
+
+  /// No description provided for @cosmicNeedsBirthDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your stars need a date'**
+  String get cosmicNeedsBirthDateTitle;
+
+  /// No description provided for @cosmicNeedsBirthDateBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your birth date and your daily guidance will appear here.'**
+  String get cosmicNeedsBirthDateBody;
+
+  /// No description provided for @cosmicHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'{sign} · {date}'**
+  String cosmicHeader(String sign, String date);
+
+  /// No description provided for @cosmicMoonIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Moon in {sign}'**
+  String cosmicMoonIn(String sign);
+
+  /// No description provided for @cosmicEnergyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s energy'**
+  String get cosmicEnergyTitle;
+
+  /// No description provided for @cosmicLoveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Love'**
+  String get cosmicLoveTitle;
+
+  /// No description provided for @cosmicLuckyColorsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lucky colors'**
+  String get cosmicLuckyColorsTitle;
+
+  /// No description provided for @cosmicLuckyNumberTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lucky number'**
+  String get cosmicLuckyNumberTitle;
+
+  /// No description provided for @cosmicAvoidTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Things to avoid'**
+  String get cosmicAvoidTitle;
+
+  /// No description provided for @cosmicThaiColorsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Thai colors'**
+  String get cosmicThaiColorsTitle;
+
+  /// No description provided for @cosmicThaiBirthdayColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Your birthday color'**
+  String get cosmicThaiBirthdayColor;
+
+  /// No description provided for @cosmicThaiTodayColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s color'**
+  String get cosmicThaiTodayColor;
+
+  /// No description provided for @cosmicDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'For entertainment and self-reflection'**
+  String get cosmicDisclaimer;
+
+  /// No description provided for @thaiColorsSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Thai day colors'**
+  String get thaiColorsSettingTitle;
+
+  /// No description provided for @thaiColorsSettingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show your birthday color and today\'s color on Cosmic you'**
+  String get thaiColorsSettingSubtitle;
+
+  /// No description provided for @signAries.
+  ///
+  /// In en, this message translates to:
+  /// **'Aries'**
+  String get signAries;
+
+  /// No description provided for @signTaurus.
+  ///
+  /// In en, this message translates to:
+  /// **'Taurus'**
+  String get signTaurus;
+
+  /// No description provided for @signGemini.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini'**
+  String get signGemini;
+
+  /// No description provided for @signCancer.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancer'**
+  String get signCancer;
+
+  /// No description provided for @signLeo.
+  ///
+  /// In en, this message translates to:
+  /// **'Leo'**
+  String get signLeo;
+
+  /// No description provided for @signVirgo.
+  ///
+  /// In en, this message translates to:
+  /// **'Virgo'**
+  String get signVirgo;
+
+  /// No description provided for @signLibra.
+  ///
+  /// In en, this message translates to:
+  /// **'Libra'**
+  String get signLibra;
+
+  /// No description provided for @signScorpio.
+  ///
+  /// In en, this message translates to:
+  /// **'Scorpio'**
+  String get signScorpio;
+
+  /// No description provided for @signSagittarius.
+  ///
+  /// In en, this message translates to:
+  /// **'Sagittarius'**
+  String get signSagittarius;
+
+  /// No description provided for @signCapricorn.
+  ///
+  /// In en, this message translates to:
+  /// **'Capricorn'**
+  String get signCapricorn;
+
+  /// No description provided for @signAquarius.
+  ///
+  /// In en, this message translates to:
+  /// **'Aquarius'**
+  String get signAquarius;
+
+  /// No description provided for @signPisces.
+  ///
+  /// In en, this message translates to:
+  /// **'Pisces'**
+  String get signPisces;
 }
 
 class _AppLocalizationsDelegate

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "elements": {
+    "fire": [
+      { "name": "Cherry", "hex": "#F28B82" },
+      { "name": "Tangerine", "hex": "#FFAB76" },
+      { "name": "Ember", "hex": "#F4A261" },
+      { "name": "Sunset", "hex": "#FF9F9F" }
+    ],
+    "earth": [
+      { "name": "Sage", "hex": "#A8C3A0" },
+      { "name": "Moss", "hex": "#8FAE8B" },
+      { "name": "Cocoa", "hex": "#B79A8A" },
+      { "name": "Clay", "hex": "#D9B8A0" }
+    ],
+    "air": [
+      { "name": "Butter", "hex": "#FFF0A8" },
+      { "name": "Sky", "hex": "#B9DDF5" },
+      { "name": "Lemon", "hex": "#FFF5A5" },
+      { "name": "Cloud Blue", "hex": "#CFE3F7" }
+    ],
+    "water": [
+      { "name": "Sea Glass", "hex": "#A7DCCB" },
+      { "name": "Bluebell", "hex": "#A9C0EE" },
+      { "name": "Lagoon", "hex": "#8FCFD6" },
+      { "name": "Mist", "hex": "#C9D8F0" }
+    ]
+  },
+  "thaiDays": [
+    { "weekday": 7, "name": "Red", "hex": "#F28B82" },
+    { "weekday": 1, "name": "Yellow", "hex": "#FFE08A" },
+    { "weekday": 2, "name": "Pink", "hex": "#F7B2C4" },
+    { "weekday": 3, "name": "Green", "hex": "#A8D5A2" },
+    { "weekday": 4, "name": "Orange", "hex": "#FFB37A" },
+    { "weekday": 5, "name": "Blue", "hex": "#9CC3EE" },
+    { "weekday": 6, "name": "Purple", "hex": "#C3A6E6" }
+  ]
+}

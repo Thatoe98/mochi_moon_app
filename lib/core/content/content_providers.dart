@@ -1,5 +1,6 @@
 import 'package:mochi_moon/core/content/asset_content_repository.dart';
 import 'package:mochi_moon/core/content/content_repository.dart';
+import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,3 +17,7 @@ Future<List<Quote>> quotes(Ref ref) =>
 @Riverpod(keepAlive: true)
 Future<List<SignInfo>> signs(Ref ref) =>
     ref.watch(contentRepositoryProvider).loadSigns();
+
+@Riverpod(keepAlive: true)
+Future<DayColors> dayColors(Ref ref) =>
+    ref.watch(contentRepositoryProvider).loadDayColors();

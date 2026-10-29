@@ -6,6 +6,7 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
+import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
@@ -17,6 +18,7 @@ import 'package:mochi_moon/features/settings/application/reminder_providers.dart
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
 import '../features/auth/support/fake_auth_repository.dart';
+import '../features/cosmic/today/support/fake_thai_colors_setting.dart';
 import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
@@ -52,6 +54,9 @@ Widget _app({
     ),
     reminderSchedulerProvider.overrideWithValue(FakeReminderScheduler()),
     widgetPublisherProvider.overrideWithValue(FakeWidgetPublisher()),
+    thaiColorsSettingRepositoryProvider.overrideWithValue(
+      FakeThaiColorsSettingRepository(),
+    ),
     cityIndexProvider.overrideWith((ref) async => CityIndex(const [])),
     quotesProvider.overrideWith(
       (ref) => quotes?.call() ?? Future.value([_quote]),
@@ -107,7 +112,7 @@ void main() {
 
     await tester.tap(find.text('Cosmic'));
     await tester.pumpAndSettle();
-    expect(find.text('Your stars are warming up.'), findsOneWidget);
+    expect(find.text('Your stars need a date'), findsOneWidget);
 
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();

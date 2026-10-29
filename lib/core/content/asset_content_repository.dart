@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:mochi_moon/core/content/content_repository.dart';
+import 'package:mochi_moon/core/content/day_colors.dart';
+import 'package:mochi_moon/core/content/fallback_reading.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
 
@@ -11,6 +13,13 @@ class AssetContentRepository implements ContentRepository {
 
   static const quotesPath = 'assets/content/quotes/quotes.json';
   static const signsPath = 'assets/content/signs/signs.json';
+
+  static const dayColorsPath = 'assets/content/signs/day_colors.json';
+  static const fallbackReadingsDir = 'assets/content/fallback_readings';
+
+  /// Languages with a file in [fallbackReadingsDir]. Burmese joins once its
+  /// texts are written and reviewed; Thai waits for a native reviewer.
+  static const fallbackReadingLanguages = ['en'];
 
   final AssetBundle _bundle;
 
@@ -33,5 +42,25 @@ class AssetContentRepository implements ContentRepository {
     return (json['signs'] as List<dynamic>)
         .map((e) => SignInfo.fromJson(e as Map<String, dynamic>))
         .toList(growable: false);
+  }
+
+  @override
+  Future<DayColors> loadDayColors() async =>
+      DayColors.fromJson(await _loadJson(dayColorsPath));
+
+  @override
+  Future<Map<String, List<FallbackReading>>?> loadFallbackReadings(
+    String lang,
+  ) async {
+    if (!fallbackReadingLanguages.contains(lang)) return null;
+    final json = await _loadJson('$fallbackReadingsDir/$lang.json');
+    final readings = json['readings'] as Map<String, dynamic>;
+    return {
+      for (final entry in readings.entries)
+        entry.key: [
+          for (final reading in entry.value as List<dynamic>)
+            FallbackReading.fromJson(reading as Map<String, dynamic>),
+        ],
+    };
   }
 }
