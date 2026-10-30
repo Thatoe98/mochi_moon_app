@@ -513,6 +513,13 @@ class AppLocalizationsMy extends AppLocalizations {
       'ငါ အနားယူတယ်၊ စိတ်ကို ပျော့ပျောင်းစေတယ်၊ အသစ်စဖို့ နေရာလေး ဖန်တီးတယ်။';
 
   @override
+  String get reduceMotionTitle => 'Reduce motion';
+
+  @override
+  String get reduceMotionSubtitle =>
+      'Calmer cards: no tilting or sparkles. Already on if your phone removes animations';
+
+  @override
   String get thaiColorsSettingTitle => 'ထိုင်းရိုးရာ နေ့အလိုက်အရောင်များ';
 
   @override

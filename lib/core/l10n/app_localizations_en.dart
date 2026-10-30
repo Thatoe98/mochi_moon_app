@@ -511,6 +511,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'I rest, I soften, and I make room for a fresh start.';
 
   @override
+  String get reduceMotionTitle => 'Reduce motion';
+
+  @override
+  String get reduceMotionSubtitle =>
+      'Calmer cards: no tilting or sparkles. Already on if your phone removes animations';
+
+  @override
   String get thaiColorsSettingTitle => 'Thai day colors';
 
   @override

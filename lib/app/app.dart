@@ -9,6 +9,7 @@ import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
+import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
@@ -29,6 +30,8 @@ class MochiMoonApp extends ConsumerWidget {
       ..watch(journalSyncProvider)
       ..watch(partnerSyncProvider)
       ..watch(deckSyncProvider);
+    final reduceMotion =
+        ref.watch(reduceMotionControllerProvider).value ?? false;
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appName,
       theme: AppTheme.light,
@@ -37,6 +40,15 @@ class MochiMoonApp extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: ref.watch(appLocaleProvider),
       routerConfig: ref.watch(routerProvider),
+      // The in-app switch speaks to every screen the way the system's
+      // "remove animations" setting does, which the widgets already respect.
+      builder: (context, child) {
+        if (!reduceMotion) return child!;
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(disableAnimations: true),
+          child: child!,
+        );
+      },
     );
   }
 }

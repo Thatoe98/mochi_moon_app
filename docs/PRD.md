@@ -109,7 +109,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [ ] Swipe attempts before the timer completes are cancelled and the card springs back.
 - [ ] After the timer completes, all three swipe directions work, plus button equivalents for accessibility.
 - [ ] The daily counter resets at local midnight; it is stored locally and synced to Firestore. — *synced since M2 (`users/{uid}.deck`); the reset while the app stays open past midnight is still deferred*
-- [ ] "Reduce motion" disables tilt and sparkle animations but keeps the ring.
+- [x] "Reduce motion" disables tilt and sparkle animations but keeps the ring. — *follows the system setting and the new Me-tab switch (tested)*
 - [ ] Works offline using bundled quotes.
 - [ ] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header.
 
@@ -240,7 +240,7 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 
 - [x] Language: System / English / ไทย / မြန်မာ. Done as System / English / မြန်မာ (Me tab → Language); Thai joins when it has a native reviewer.
 - [ ] Notifications: reminder time, retrograde alerts per planet, announcements.
-- [ ] Show Thai colors toggle. Reduce motion toggle (also follows system).
+- [x] Show Thai colors toggle. Reduce motion toggle (also follows system). — *the switch speaks to every screen as the system "remove animations" signal; Burmese text is machine-translated and unreviewed*
 - [x] Edit profile from the Me tab: name, birthday, birth time (and later birthplace) and focus areas, reusing the onboarding profile steps. Manage partners. — *requested during M2; done as `/me/profile` (name, birthday, birth time with "I don't know", birthplace, focus areas; Save is off until the form is valid and changed). Partners are managed from the Me tab too. The Burmese strings for it are machine-translated and unreviewed.*
 - [ ] Privacy policy, Terms, "About readings" (entertainment notice), licenses.
 - [ ] Analytics consent toggle (default off until the consent prompt is answered).

@@ -18,6 +18,7 @@ import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
+import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
@@ -31,6 +32,7 @@ import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
 import '../features/settings/support/fake_app_language.dart';
+import '../features/settings/support/fake_reduce_motion.dart';
 import '../features/settings/support/fake_reminder.dart';
 import '../features/widget_bridge/support/fake_widget_publisher.dart';
 
@@ -44,6 +46,7 @@ Widget _app({
   Future<List<Quote>> Function()? quotes,
   bool onboarded = true,
   FakeProfileRepository? profiles,
+  bool reduceMotion = false,
 }) => ProviderScope(
   overrides: [
     initialOnboardingCompleteProvider.overrideWithValue(onboarded),
@@ -61,6 +64,9 @@ Widget _app({
     partnerRemoteProvider.overrideWithValue(null),
     appLanguageRepositoryProvider.overrideWithValue(
       FakeAppLanguageRepository(),
+    ),
+    reduceMotionSettingRepositoryProvider.overrideWithValue(
+      FakeReduceMotionSettingRepository(saved: reduceMotion),
     ),
     reminderSettingsRepositoryProvider.overrideWithValue(
       FakeReminderSettingsRepository(),
@@ -85,7 +91,26 @@ Widget _app({
   child: const MochiMoonApp(),
 );
 
+bool _motionReduced(WidgetTester tester) =>
+    MediaQuery.disableAnimationsOf(tester.element(find.byType(Scaffold).first));
+
 void main() {
+  testWidgets('animations stay on unless reduce motion is switched on', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    expect(_motionReduced(tester), isFalse);
+  });
+
+  testWidgets('the Reduce motion switch calms every screen', (tester) async {
+    await tester.pumpWidget(_app(reduceMotion: true));
+    await tester.pumpAndSettle();
+
+    expect(_motionReduced(tester), isTrue);
+  });
+
   testWidgets('opens on the deck tab and shows a quote', (tester) async {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
