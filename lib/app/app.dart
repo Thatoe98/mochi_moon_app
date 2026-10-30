@@ -8,6 +8,7 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/settings/application/announcements_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
@@ -20,11 +21,12 @@ class MochiMoonApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Each time the app opens, re-plan the next two weeks of reminders and
     // the coming retrograde alerts, restock the home-screen widget, retry any
-    // unsent profile and keep the journal, partners and deck counters in
+    // unsent profile, match the app-news topic to its switch and keep the journal, partners and deck counters in
     // Firestore up to date.
     ref
       ..watch(reminderSyncProvider)
       ..watch(retrogradeAlertSyncProvider)
+      ..watch(announcementsSyncProvider)
       ..watch(widgetSyncProvider)
       ..watch(profileSyncProvider)
       ..watch(journalSyncProvider)

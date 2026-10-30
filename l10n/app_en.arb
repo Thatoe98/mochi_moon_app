@@ -331,6 +331,8 @@
   "analyticsConsentDecline": "No thanks",
   "analyticsSettingTitle": "Share anonymous usage",
   "analyticsSettingSubtitle": "Simple counts like cards completed. Never birthdays, names, journal or card text",
+  "announcementsTitle": "App news",
+  "announcementsSubtitle": "A rare note when something new comes to Mochi Moon",
   "meAboutSubtitle": "How readings work, and open-source licenses",
   "aboutTitle": "About",
   "aboutReadingsTitle": "About readings",

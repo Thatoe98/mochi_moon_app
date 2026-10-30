@@ -135,7 +135,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 - [x] Daily reminder at the chosen time with today's card first line (scheduled locally). — *set from a tile on the Me tab until onboarding exists; the next 14 days are scheduled and rebuilt on each app open; inexact alarms, so it can drift a few minutes*
 - [x] Retrograde alerts: 1 day before a station and on the station day, scheduled locally from the computed calendar (§9.5) for Mercury (default on), Venus and Mars (default off).
-- [ ] FCM topic `announcements` for rare app news (default on, can be turned off).
+- [x] FCM topic `announcements` for rare app news (default on, can be turned off). — *done: an "App news" switch on the Me tab (on by default, saved locally as `announcements`) joins or leaves the `announcements` topic through `firebase_messaging`, and the app matches the topic to the switch on every open, so a change made offline is retried. Without Firebase (an early dev build) the choice is saved and no topic is touched. Not yet tried on a device: nothing sends to the topic until the owner's Firebase project does (a server or console message to `/topics/announcements`). Burmese is machine-translated and unreviewed.*
 - [x] Android 13+ notification permission requested after onboarding with a pre-prompt explaining why. — *pre-prompt and request are in place, triggered from the Me tile; moving the trigger to the end of onboarding is part of the onboarding item*
 
 ### 6.7 Cosmic — Today (Free; personalized layer Premium)
@@ -162,7 +162,7 @@ Shows for the user's local date:
 
 **AC**
 - [x] Text comes from the Readings API (§8.2), cached per date/sign/lang; offline falls back to cache, then bundled fallback text. — *client, drift cache and fallback order are done and tested; the app uses them once `READINGS_API_URL` is set, so real calls wait for the server (repo `mochi-moon-api`). Premium endpoints come later.*
-- [ ] Every reading block shows the note "For entertainment and self-reflection".
+- [x] Every reading block shows the note "For entertainment and self-reflection". — *checked: it shows on Cosmic Today, Retrogrades, the birth chart, the compatibility result and About, each with a widget test. Premium report screens (M4) must add it too.*
 - [x] Changing app language refetches in the new language.
 
 ### 6.8 Cosmic — Retrogrades and Moon (Free)
@@ -239,7 +239,7 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 ### 6.14 Settings and account
 
 - [x] Language: System / English / ไทย / မြန်မာ. Done as System / English / မြန်မာ (Me tab → Language); Thai joins when it has a native reviewer.
-- [ ] Notifications: reminder time, retrograde alerts per planet, announcements.
+- [x] Notifications: reminder time, retrograde alerts per planet, announcements. — *all three are on the Me tab (reminder time, retrograde alerts for Mercury/Venus/Mars, and App news; see §6.6).*
 - [x] Show Thai colors toggle. Reduce motion toggle (also follows system). — *the switch speaks to every screen as the system "remove animations" signal; Burmese text is machine-translated and unreviewed*
 - [x] Edit profile from the Me tab: name, birthday, birth time (and later birthplace) and focus areas, reusing the onboarding profile steps. Manage partners. — *requested during M2; done as `/me/profile` (name, birthday, birth time with "I don't know", birthplace, focus areas; Save is off until the form is valid and changed). Partners are managed from the Me tab too. The Burmese strings for it are machine-translated and unreviewed.*
 - [ ] Privacy policy, Terms, "About readings" (entertainment notice), licenses. — *"About readings" and the open-source licenses are done (Me → About, `/me/about`; Burmese is machine-translated and unreviewed). Privacy policy and Terms are open: they need the policy text, a URL on the owner's domain, and a way to open links (`url_launcher` is not in the approved stack, so ask first).*

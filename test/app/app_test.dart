@@ -18,6 +18,7 @@ import 'package:mochi_moon/features/partners/application/partner_providers.dart'
 import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/settings/application/announcements_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
@@ -33,6 +34,7 @@ import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
 import '../features/settings/support/fake_analytics_consent.dart';
+import '../features/settings/support/fake_announcements.dart';
 import '../features/settings/support/fake_app_language.dart';
 import '../features/settings/support/fake_reduce_motion.dart';
 import '../features/settings/support/fake_reminder.dart';
@@ -71,6 +73,10 @@ Widget _app({
     reduceMotionSettingRepositoryProvider.overrideWithValue(
       FakeReduceMotionSettingRepository(saved: reduceMotion),
     ),
+    announcementsSettingRepositoryProvider.overrideWithValue(
+      FakeAnnouncementsSettingRepository(),
+    ),
+    announcementsTopicProvider.overrideWithValue(FakeAnnouncementsTopic()),
     analyticsConsentRepositoryProvider.overrideWithValue(
       FakeAnalyticsConsentRepository(saved: analyticsConsent),
     ),

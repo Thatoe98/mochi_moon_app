@@ -1069,6 +1069,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Simple counts like cards completed. Never birthdays, names, journal or card text';
 
   @override
+  String get announcementsTitle => 'App news';
+
+  @override
+  String get announcementsSubtitle =>
+      'A rare note when something new comes to Mochi Moon';
+
+  @override
   String get meAboutSubtitle => 'How readings work, and open-source licenses';
 
   @override

@@ -1862,6 +1862,18 @@ abstract class AppLocalizations {
   /// **'Simple counts like cards completed. Never birthdays, names, journal or card text'**
   String get analyticsSettingSubtitle;
 
+  /// No description provided for @announcementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App news'**
+  String get announcementsTitle;
+
+  /// No description provided for @announcementsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A rare note when something new comes to Mochi Moon'**
+  String get announcementsSubtitle;
+
   /// No description provided for @meAboutSubtitle.
   ///
   /// In en, this message translates to:

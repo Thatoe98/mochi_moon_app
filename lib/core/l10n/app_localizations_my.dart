@@ -1079,6 +1079,13 @@ class AppLocalizationsMy extends AppLocalizations {
       'ပြီးသွားတဲ့ကတ်အရေအတွက်လို ရိုးရိုးရေတွက်ချက်တွေပါ။ မွေးနေ့၊ နာမည်၊ မှတ်တမ်း ဒါမှမဟုတ် ကတ်ပေါ်ကစာတွေကို ဘယ်တော့မှ မပါဝင်ပါဘူး။';
 
   @override
+  String get announcementsTitle => 'app သတင်းလေးတွေ';
+
+  @override
+  String get announcementsSubtitle =>
+      'Mochi Moon မှာ အသစ်တစ်ခုခု ရောက်လာတဲ့အခါ တစ်ခါတလေ ပို့ပေးမယ့် မှတ်စုလေး';
+
+  @override
   String get meAboutSubtitle =>
       'ဖတ်ရှုချက်တွေ ဘယ်လိုလုပ်ဆောင်လဲ၊ Open-source လိုင်စင်များ';
 
