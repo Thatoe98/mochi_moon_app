@@ -156,7 +156,8 @@ void main() {
       RetrogradeAlertKind.startsToday,
     );
     expect(message, isNot(contains('{planet}')));
-    expect(message, isNot(contains('Mercury')));
+    // Planet names stay in English; the rest of the message is Burmese.
+    expect(message, contains(RegExp('[က-႟]')));
   });
 
   test('the sync provider survives a calendar failure', () async {

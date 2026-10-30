@@ -49,9 +49,22 @@ void main() {
     test('rejects empty text and text with no Burmese in it', () {
       expect(checkBurmese('Thank you', '  '), ['empty']);
       expect(
-        checkBurmese('Thank you', 'Thank you'),
+        checkBurmese('Thank you so much for today', 'Thank you so much'),
         contains('has no Burmese characters'),
       );
+    });
+
+    test('lets a short label stay in English', () {
+      expect(checkBurmese('Aries', 'Aries'), isEmpty);
+      expect(checkBurmese('Retrogrades', 'Retrogrades'), isEmpty);
+    });
+
+    test('rejects Burmese digits and accepts 0-9', () {
+      expect(
+        checkBurmese('Pick up to 3 cards today', 'ယနေ့ ကတ် ၃ ကတ်'),
+        contains('uses Burmese digits; write 0-9'),
+      );
+      expect(checkBurmese('Pick up to 3 cards today', 'ယနေ့ ကတ် 3 ကတ်'), isEmpty);
     });
 
     test('rejects Zawgyi', () {

@@ -161,7 +161,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text('နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်များ'), findsOneWidget);
+      expect(find.text('အခုလောလောဆယ်'), findsOneWidget);
       expect(tester.takeException(), isNull);
     });
 

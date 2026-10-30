@@ -114,17 +114,17 @@ void main() {
     test('reports keys that still fail after the retry', () async {
       final chat = _FakeChat([
         'not json',
-        jsonEncode({'hello': 'Hello'}),
+        jsonEncode({'moonIn': 'Moon in {sign}'}),
       ]);
       final result = await translateArb(
         chat: chat.call,
         en: _en,
         my: const {},
-        keys: ['hello'],
+        keys: ['moonIn'],
       );
 
       expect(result.done, isEmpty);
-      expect(result.failed.keys, ['hello']);
+      expect(result.failed.keys, ['moonIn']);
       expect(chat.users, hasLength(2));
     });
   });

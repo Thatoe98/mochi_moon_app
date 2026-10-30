@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
@@ -10,7 +10,7 @@ import '../support/fake_reminder.dart';
 
 const _quote = Quote(
   id: 'q1',
-  text: {'en': 'I am enough.', 'my': 'ကျွန်မ လုံလောက်ပါတယ်'},
+  text: {'en': 'I am enough.', 'my': 'ငါ လုံလောက်ပါတယ်'},
   category: 'self_love',
 );
 
@@ -146,7 +146,7 @@ void main() {
 
     await controller.enable();
 
-    expect(scheduler.scheduled.first.body, 'ကျွန်မ လုံလောက်ပါတယ်');
-    expect(scheduler.texts?.title, 'သင့် Mochi Moon ကတ် ✨');
+    expect(scheduler.scheduled.first.body, 'ငါ လုံလောက်ပါတယ်');
+    expect(scheduler.texts?.title, 'Mochi Moon ကတ်လေး ✨');
   });
 }

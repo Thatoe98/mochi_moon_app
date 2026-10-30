@@ -19,20 +19,21 @@ class AppLocalizationsMy extends AppLocalizations {
   String get tabCosmic => 'စကြဝဠာ';
 
   @override
-  String get tabMe => 'ကျွန်မ';
+  String get tabMe => 'ကိုယ်တိုင်';
 
   @override
-  String get deckTitle => 'ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း ကတ်များ';
+  String get deckTitle => 'သင့် Self Love ကတ်များ';
 
   @override
-  String get deckEmptyBody => 'နူးညံ့သော သတိပေးစကားလေးများ လာနေပါပြီ။';
+  String get deckEmptyBody =>
+      'နူးညံ့တဲ့ သတိပေးစကားလေးတွေ မကြာခင် ရောက်လာတော့မယ်။';
 
   @override
   String deckStreakSemantics(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'ဆက်တိုက် $count ရက်',
+      other: '$count ရက်ဆက်တိုက်',
     );
     return '$_temp0';
   }
@@ -42,142 +43,142 @@ class AppLocalizationsMy extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'ယနေ့ ကတ် $count ကတ် ကျန်ပါသေးသည်',
+      other: 'ဒီနေ့အတွက် ကတ် $count ကတ် ကျန်ပါသေးတယ်',
     );
     return '$_temp0';
   }
 
   @override
-  String get deckLimitTitle => 'သင်တောက်ပနေပါပြီ ✨';
+  String get deckLimitTitle => 'တောက်ပနေပြီ ✨';
 
   @override
   String get deckLimitBody =>
-      'ယနေ့ကတ်များ ပြီးဆုံးပါပြီ။ နောက်ထပ်ကတ်များအတွက် မနက်ဖြန် ပြန်လာခဲ့ပါ။';
+      'ဒီနေ့အတွက် ကတ်တွေ ဖတ်ပြီးပါပြီ။ နောက်ထပ်ကတ်တွေအတွက် မနက်ဖြန် ပြန်လာခဲ့နော်။';
 
   @override
   String get deckActionSkip => 'နောက်ကတ်';
 
   @override
-  String get deckActionSave => 'ဒါ ကျွန်မပါ';
+  String get deckActionSave => 'ဒါက ငါပဲ';
 
   @override
-  String get deckActionShare => 'မျှဝေမည်';
+  String get deckActionShare => 'မျှဝေမယ်';
 
   @override
-  String get deckActionUndo => 'နောက်ပြန်';
+  String get deckActionUndo => 'ပြန်လုပ်မယ်';
 
   @override
-  String get deckTimerSemantics => 'အသံထွက်ဖတ်ချိန် တိုင်မာ';
+  String get deckTimerSemantics => 'အသံထွက်ဖတ်ချိန်တိုင်းကိရိယာ';
 
   @override
-  String get deckTimerReady => 'ပွတ်ဆွဲနိုင်ပါပြီ';
+  String get deckTimerReady => 'ပွတ်ဆွဲဖို့ အသင့်ဖြစ်ပြီ';
 
   @override
-  String get shareFailed => 'မျှဝေရန် မဖွင့်နိုင်ပါ။ ထပ်မံကြိုးစားကြည့်ပါ။';
+  String get shareFailed =>
+      'မျှဝေမှုစာမျက်နှာကို ဖွင့်လို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
-  String get categorySelfLove => 'ကိုယ့်ကိုယ်ကိုယ် ချစ်ခြင်း';
+  String get categorySelfLove => 'Self Love';
 
   @override
-  String get categoryConfidence => 'ယုံကြည်မှု';
+  String get categoryConfidence => 'ကိုယ့်ကိုယ်ကို ယုံကြည်မှု';
 
   @override
-  String get categoryHealing => 'ကုစားခြင်း';
+  String get categoryHealing => 'စိတ်သက်သာရာရခြင်း';
 
   @override
-  String get categoryStudyWork => 'ပညာရေးနှင့် အလုပ်';
+  String get categoryStudyWork => 'စာသင်ခြင်းနဲ့ အလုပ်';
 
   @override
-  String get categoryBodyKindness => 'ကိုယ်ခန္ဓာကို ကြင်နာခြင်း';
+  String get categoryBodyKindness => 'ကိုယ့်ခန္ဓာကိုယ်အပေါ် ကြင်နာမှု';
 
   @override
-  String get categoryCalm => 'ငြိမ်သက်ခြင်း';
+  String get categoryCalm => 'စိတ်အေးချမ်းမှု';
 
   @override
-  String get cosmicTitle => 'သင့်စကြဝဠာ';
+  String get cosmicTitle => 'ကိုယ့်ရဲ့ စကြဝဠာ';
 
   @override
-  String get mePlaceholderTitle => 'သင်တစ်ယောက်တည်း';
+  String get mePlaceholderTitle => 'ကိုယ်တိုင်အတွက်';
 
   @override
-  String get journalTitle => 'ကျွန်မ၏ မှတ်တမ်း';
+  String get journalTitle => 'ကိုယ့်မှတ်တမ်း';
 
   @override
-  String get meJournalSubtitle => 'ကျွန်မနှင့် တူသော ကတ်များ';
+  String get meJournalSubtitle => 'ကိုယ့်စိတ်နဲ့ ကိုက်ညီတဲ့ ကတ်လေးတွေ';
 
   @override
-  String get journalEmptyTitle => 'ဘာမှ မသိမ်းရသေးပါ';
+  String get journalEmptyTitle => 'ဘာမှ မသိမ်းထားရသေးပါဘူး';
 
   @override
   String get journalEmptyBody =>
-      'ကြိုက်သော ကတ်များကို ညာဘက်သို့ ပွတ်ဆွဲပါ။ ဤနေရာတွင် သိမ်းထားပါမည်။';
+      'ကြိုက်တဲ့ကတ်လေးတွေကို ညာဘက်ပွတ်ဆွဲလိုက်ပါ၊ ဒီမှာ သိမ်းထားပေးမယ်နော်။';
 
   @override
   String get journalFilterAll => 'အားလုံး';
 
   @override
-  String get journalRemoveTitle => 'မှတ်တမ်းမှ ဖယ်ရှားမလား။';
+  String get journalRemoveTitle => 'မှတ်တမ်းထဲကနေ ဖယ်မလား။';
 
   @override
   String get journalRemoveBody =>
-      'ဤကတ်သည် မှတ်တမ်းမှ ထွက်သွားပါမည်။ နောက်မှ ပြန်သိမ်းနိုင်ပါသည်။';
+      'ဒီကတ်ကို မှတ်တမ်းထဲကနေ ဖယ်လိုက်ပါမယ်။ နောက်မှလည်း ပြန်သိမ်းနိုင်ပါတယ်။';
 
   @override
-  String get journalRemoveConfirm => 'ဖယ်ရှားမည်';
+  String get journalRemoveConfirm => 'ဖယ်မယ်';
 
   @override
-  String get journalKeep => 'ဆက်သိမ်းမည်';
+  String get journalKeep => 'သိမ်းထားမယ်';
 
   @override
-  String get journalClose => 'ပိတ်မည်';
+  String get journalClose => 'ပိတ်မယ်';
 
   @override
   String get reminderTitle => 'နေ့စဉ် သတိပေးချက်';
 
   @override
-  String get reminderSubtitle => 'သတိပေးချက်တွင် နူးညံ့သော ကတ်တစ်ကတ်';
+  String get reminderSubtitle => 'notifications ထဲမှာ နူးညံ့တဲ့ကတ်လေးတစ်ကတ်';
 
   @override
-  String get reminderTimeLabel => 'သတိပေးချိန်';
+  String get reminderTimeLabel => 'သတိပေးမယ့်အချိန်';
 
   @override
-  String get reminderPrePromptTitle =>
-      'နေ့စဉ် နူးညံ့သော သတိပေးချက် လိုချင်ပါသလား။';
+  String get reminderPrePromptTitle => 'နေ့တိုင်း သတိပေးချက်လေး လိုချင်လား။';
 
   @override
   String get reminderPrePromptBody =>
-      'Mochi Moon က သင်ရွေးသော အချိန်တွင် တစ်ရက်လျှင် ကတ်တစ်ကတ် ပို့ပေးနိုင်ပါသည်။ ထိုသို့ပြုရန် သင့်ဖုန်းက အသိပေးချက်များ ခွင့်ပြုရန် မေးပါမည်။';
+      'Mochi Moon က ကိုယ်ရွေးထားတဲ့အချိန်မှာ နူးညံ့တဲ့ကတ်လေးတစ်ကတ်ကို တစ်နေ့တစ်ခါ ပို့ပေးနိုင်ပါတယ်။ ဒီလိုလုပ်ဖို့ ဖုန်းက notifications ခွင့်ပြုမလားလို့ မေးပါလိမ့်မယ်။';
 
   @override
-  String get reminderPrePromptAllow => 'ကောင်းပါပြီ';
+  String get reminderPrePromptAllow => 'အဆင်ပြေတယ်';
 
   @override
-  String get reminderPrePromptLater => 'ယခု မလိုပါ';
+  String get reminderPrePromptLater => 'အခုတော့ မဟုတ်သေးဘူး';
 
   @override
   String get reminderPermissionDenied =>
-      'Mochi Moon အတွက် အသိပေးချက်များ ပိတ်ထားပါသည်။ ဖုန်း၏ ဆက်တင်များတွင် ဖွင့်နိုင်ပါသည်။';
+      'Mochi Moon အတွက် notifications ပိတ်ထားပါတယ်။ ဖုန်းရဲ့ settings ထဲမှာ ပြန်ဖွင့်နိုင်ပါတယ်။';
 
   @override
-  String get reminderNotificationTitle => 'သင့် Mochi Moon ကတ် ✨';
+  String get reminderNotificationTitle => 'Mochi Moon ကတ်လေး ✨';
 
   @override
   String get reminderChannelName => 'နေ့စဉ် သတိပေးချက်';
 
   @override
   String get reminderChannelDescription =>
-      'သင်ရွေးသော အချိန်တွင် နေ့စဉ် နူးညံ့သော ကတ်တစ်ကတ်။';
+      'ကိုယ်ရွေးထားတဲ့အချိန်မှာ နေ့တိုင်း နူးညံ့တဲ့ကတ်လေးတစ်ကတ်။';
 
   @override
   String get onboardingWelcomeTitle => 'Mochi Moon မှ ကြိုဆိုပါတယ်';
 
   @override
   String get onboardingWelcomeBody =>
-      'သင်ဟာ ဘယ်လောက်အံ့ဩစရာကောင်းတဲ့သူလဲဆိုတာ သတိရစေမယ့် နူးညံ့တဲ့ ကတ်လေးတွေပါ။ ကတ်တစ်ကတ်စီကို အသံထွက်ဖတ်ပြီး အဲဒီစကားလေးတွေကို စိတ်ထဲမှာ ခံစားကြည့်ပါ။';
+      'ကိုယ်က ဘယ်လောက် အံ့ဩစရာကောင်းလဲဆိုတာ သတိရစေမယ့် နူးညံ့တဲ့ကတ်လေးတွေပါ။ တစ်ခုချင်းစီကို အသံထွက်ဖတ်ပြီး စိတ်ထဲ စိမ့်ဝင်လာပါစေ။';
 
   @override
   String onboardingTryCards(int count) {
-    return 'ကတ် $count ကတ်ကို စမ်းကြည့်ပါ';
+    return 'ကတ် $count ကတ် စမ်းကြည့်မယ်';
   }
 
   @override
@@ -187,87 +188,87 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get onboardingSaveTitle =>
-      'သင့်ကတ်တွေကို သိမ်းပြီး စကြဝဠာဖတ်ရှုချက် ရယူလိုက်ပါ';
+      'ကတ်တွေကို သိမ်းထားပြီး စကြဝဠာဖတ်ရှုချက်လေး ရယူလိုက်ပါ';
 
   @override
   String get onboardingSaveBody =>
-      'သင်နှစ်သက်တဲ့ ကတ်တွေကို မှတ်တမ်းထဲမှာ စောင့်နေပါတယ်။ သင့်စကြဝဠာဖတ်ရှုချက်လည်း မကြာခင် ရောက်လာတော့မှာပါ။';
+      'ကြိုက်ခဲ့တဲ့ကတ်တွေက မှတ်တမ်းထဲမှာ စောင့်နေပါတယ်။ စကြဝဠာဖတ်ရှုချက်လေးလည်း မကြာခင် ရောက်လာတော့မယ်။';
 
   @override
   String get onboardingContinue => 'ဆက်လုပ်မယ်';
 
   @override
-  String get readAloudHint => 'အသံထွက်ဖတ်ပါ ✨';
+  String get readAloudHint => 'အသံထွက်ဖတ်ကြည့်ပါ ✨';
 
   @override
   String get entertainmentNote =>
-      'ဖျော်ဖြေရေးနှင့် ကိုယ်ကိုယ်ပြန်စဉ်းစားရန်အတွက်သာ';
+      'ဖျော်ဖြေရေးနဲ့ ကိုယ့်ကိုယ်ကို ပြန်လည်ဆင်ခြင်ဖို့အတွက်';
 
   @override
-  String get stateLoading => 'မှော်ပညာလေး စုနေပါသည်…';
+  String get stateLoading => 'မှော်ဆန်တဲ့အရာလေးတွေ စုဆောင်းနေပါတယ်…';
 
   @override
-  String get stateErrorTitle => 'တစ်ခုခု မှားသွားပါသည်';
+  String get stateErrorTitle => 'တစ်ခုခု လွဲချော်သွားတယ်';
 
   @override
-  String get stateErrorBody => 'ထပ်ကြိုးစားကြည့်ကြစို့။';
+  String get stateErrorBody => 'ပြန်စမ်းကြည့်ရအောင်နော်။';
 
   @override
-  String get stateRetry => 'ထပ်ကြိုးစားမည်';
+  String get stateRetry => 'ထပ်စမ်းကြည့်မယ်';
 
   @override
   String get stateOffline =>
-      'အော့ဖ်လိုင်းဖြစ်နေပါသည်။ သိမ်းထားသည့်အရာများကို ပြထားပါသည်။';
+      'အင်တာနက်မရှိပါဘူး။ သိမ်းထားပေးထားတာတွေကို ပြနေပါတယ်။';
 
   @override
-  String get stateEmptyTitle => 'ဤနေရာတွင် မရှိသေးပါ';
+  String get stateEmptyTitle => 'ဒီမှာ ဘာမှ မရှိသေးဘူး';
 
   @override
   String get illustrationOnboardingWelcome =>
-      'လာဗင်ဒါရောင် ညကောင်းကင်ထဲက တောက်ပနေတဲ့ လခြမ်းပေါ်မှာ လက်ပြနှုတ်ဆက်နေတဲ့ လယုန်လေး Mochi';
+      'လာဗင်ဒါရောင်ညကောင်းကင်အောက်က တောက်ပနေတဲ့ လခြမ်းပေါ်မှာ လက်ပြနေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationOnboardingSave =>
-      'တောက်ပနေတဲ့ ကတ်လေးတွေ စုပုံကို ဖက်ထားတဲ့ လယုန်လေး Mochi';
+      'တောက်ပနေတဲ့ ကတ်လေးတွေကို ပွေ့ဖက်ထားတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationEmptyDeck =>
-      'အိပ်ချင်နေတဲ့ လခြမ်းပေါ်မှာ ထိုင်ပြီး တောက်ပနေတဲ့ နှလုံးသားလေးကို ကြည့်နေတဲ့ လယုန်လေး Mochi';
+      'တောက်ပနေတဲ့ နှလုံးပုံလေးကို ကြည့်နေတဲ့ လယုန်လေး Mochi၊ အိပ်ချင်စရာ လခြမ်းပေါ်မှာ ထိုင်နေတယ်';
 
   @override
   String get illustrationCalm =>
-      'လွင့်မျောနေတဲ့ ပန်းဖတ်လေးတွေနဲ့ ကြယ်တွေအကြားမှာ မျက်လုံးမှိတ်ပြီး ငြိမ်းငြိမ်းချမ်းချမ်း ထိုင်နေတဲ့ လယုန်လေး Mochi';
+      'လွင့်မျောနေတဲ့ ပန်းပွင့်ချပ်လေးတွေနဲ့ ကြယ်တွေကြားမှာ မျက်လုံးမှိတ်ပြီး ငြိမ်းချမ်းစွာ ထိုင်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationConfidence =>
-      'တောက်ပနေတဲ့ လခြမ်းပေါ်မှာ လက်ကို တင်ပါးပေါ်တင်ပြီး ဂုဏ်ယူစွာ မတ်တပ်ရပ်နေတဲ့ လယုန်လေး Mochi';
+      'တောက်ပနေတဲ့ လခြမ်းပေါ်မှာ လက်ကို တင်ပါးပေါ်တင်ပြီး ဂုဏ်ယူစွာ ရပ်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationHealing =>
-      'ကြယ်လေးတွေပါတဲ့ စောင်ခြုံထားပြီး လက်ဖက်ရည်ပူပူတစ်ခွက်ကို ပြုံးရင်း ကိုင်ထားတဲ့ လယုန်လေး Mochi';
+      'ကြယ်လေးတွေပါတဲ့ စောင်ကို ခြုံထားပြီး လက်ဖက်ရည်ပူပူလေးတစ်ခွက်ကို ပြုံးကြည့်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationSelfWorth =>
-      'တောက်ပနေတဲ့ နှလုံးသားလေးကို ပြထားတဲ့ လက်ကိုင်မှန်လေးကို ကိုင်ထားတဲ့ လယုန်လေး Mochi';
+      'တောက်ပနေတဲ့ နှလုံးပုံကို ပြနေတဲ့ လက်ကိုင်မှန်လေးကို ကိုင်ထားတဲ့ လယုန်လေး Mochi';
 
   @override
   String get illustrationRest =>
-      'လခြမ်းအောက်က နူးညံ့တဲ့ တိမ်ပေါ်မှာ အိပ်ပျော်နေတဲ့ လယုန်လေး Mochi';
+      'လခြမ်းအောက်က တိမ်ပျော့ပျော့လေးပေါ်မှာ အိပ်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String illustrationZodiac(String sign) {
-    return 'တောက်ပနေတဲ့ $sign ရာသီခွင် ကြယ်စုအောက်မှာ $sign ရာသီခွင် ဝတ်စုံ ဝတ်ထားတဲ့ လယုန်လေး Mochi';
+    return 'တောက်ပနေတဲ့ $sign ကြယ်စုအောက်မှာ $sign ဝတ်စုံဝတ်ထားတဲ့ လယုန်လေး Mochi';
   }
 
   @override
   String get signInGoogle => 'Google နဲ့ ဆက်လုပ်မယ်';
 
   @override
-  String get signInFailed => 'ဝင်လို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
+  String get signInFailed => 'အကောင့်ဝင်လို့ မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
   String get signInOffline =>
-      'အင်တာနက်ချိတ်ဆက်မှု မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။';
+      'အင်တာနက်မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
   String profileStepProgress(int current, int total) {
@@ -282,67 +283,67 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get profileNameBody =>
-      'နာမည်အရင်း ဒါမှမဟုတ် ချစ်စနိုးနာမည်လေး ပေးလို့ရပါတယ်။';
+      'နာမည် ဒါမှမဟုတ် ချစ်စနိုးခေါ်တဲ့နာမည်လေးဆို အဆင်ပြေပါတယ်။';
 
   @override
-  String get profileNameLabel => 'သင့်နာမည်';
+  String get profileNameLabel => 'နာမည်';
 
   @override
-  String get profileBirthDateTitle => 'မွေးနေ့က ဘယ်နေ့လဲ။';
+  String get profileBirthDateTitle => 'မွေးနေ့က ဘယ်ရက်လဲ။';
 
   @override
   String get profileBirthDateBody =>
-      'သင့်နေရာသီခွင်နဲ့ စကြဝဠာဖတ်ရှုချက်တို့ရဲ့ အစက ဒီမှာပါ။';
+      'သင့် Sun sign နဲ့ စကြဝဠာဖတ်ရှုချက်လေးက ဒီကနေ စပါတယ်။';
 
   @override
   String profileBirthDateChosen(String date) {
-    return 'မွေးနေ့ $date';
+    return '$date မှာ မွေးဖွားခဲ့ပါတယ်';
   }
 
   @override
-  String get profileBirthTimeTitle => 'ဘယ်အချိန်မှာ မွေးဖွားခဲ့တာလဲ။';
+  String get profileBirthTimeTitle => 'ဘယ်အချိန်မှာ မွေးဖွားခဲ့လဲ။';
 
   @override
   String get profileBirthTimeBody =>
-      'ဒါက မဖြစ်မနေ မဟုတ်ပါဘူး။ မွေးချိန်သိရင် လရာသီခွင်နဲ့ အတက်ရာသီခွင်ကို ပိုတိကျစေပါတယ်။';
+      'မဖြည့်လည်းရပါတယ်။ Moon sign နဲ့ rising sign ကို ပိုတိကျစေပါတယ်။';
 
   @override
-  String get profileBirthTimeChoose => 'အချိန်ရွေးမယ်';
+  String get profileBirthTimeChoose => 'အချိန်ရွေးပါ';
 
   @override
   String get profileBirthTimeChange => 'အချိန်ပြောင်းမယ်';
 
   @override
-  String get profileBirthTimeUnknown => 'မသိပါဘူး';
+  String get profileBirthTimeUnknown => 'မသိဘူး';
 
   @override
   String profileBirthTimeChosen(String time) {
-    return '$time မှာ မွေးဖွားခဲ့ပါတယ်';
+    return 'မွေးချိန် $time';
   }
 
   @override
-  String get profileBirthTimeNone => 'မွေးချိန်မသိလည်း ရပါတယ်။';
+  String get profileBirthTimeNone => 'မွေးချိန်မသိလည်း အဆင်ပြေပါတယ်။';
 
   @override
-  String get profileBirthPlaceTitle => 'ဘယ်နေရာမှာ မွေးဖွားခဲ့တာလဲ။';
+  String get profileBirthPlaceTitle => 'ဘယ်နေရာမှာ မွေးဖွားခဲ့လဲ။';
 
   @override
   String get profileBirthPlaceBodyRequired =>
-      'ဒီနေရာရဲ့ အချိန်ဇုန်အတိုင်း သင့်မွေးချိန်ကို တွက်ချက်ပေးမှာပါ။';
+      'ဒီနေရာရဲ့ time zone နဲ့ ကိုက်ညီအောင် မွေးချိန်ကို ဖတ်ရှုပေးပါတယ်။';
 
   @override
   String get profileBirthPlaceBodyOptional =>
-      'မဖြစ်မနေ မဟုတ်ပါဘူး။ အနီးဆုံးမြို့ကို ရှာပါ၊ ဒါမှမဟုတ် ကျော်သွားလို့ရပါတယ်။';
+      'မဖြည့်လည်းရပါတယ်။ အနီးဆုံးမြို့ကို ရှာပါ၊ ဒါမှမဟုတ် ကျော်လိုက်လို့ရပါတယ်။';
 
   @override
-  String get profileBirthPlaceLabel => 'မြို့တစ်မြို့ ရှာပါ';
+  String get profileBirthPlaceLabel => 'မြို့ကို ရှာပါ';
 
   @override
   String get profileBirthPlaceNoMatches =>
       'နေရာမတွေ့ပါဘူး။ အနီးအနားက မြို့ကြီးတစ်မြို့ကို ရှာကြည့်ပါ။';
 
   @override
-  String get profileBirthPlaceLoadFailed => 'နေရာစာရင်းကို ရယူလို့မရပါဘူး။';
+  String get profileBirthPlaceLoadFailed => 'နေရာစာရင်းကို ဖွင့်လို့မရပါဘူး။';
 
   @override
   String profileBirthPlaceChosen(String place) {
@@ -350,14 +351,14 @@ class AppLocalizationsMy extends AppLocalizations {
   }
 
   @override
-  String get profileBirthPlaceChange => 'တခြားနေရာတစ်ခု ရွေးမယ်';
+  String get profileBirthPlaceChange => 'တခြားနေရာတစ်ခု ရွေးပါ';
 
   @override
-  String get profileReminderTitle => 'နေ့စဉ် သတိပေးချက်လေး လိုချင်လား။';
+  String get profileReminderTitle => 'နေ့တိုင်း သတိပေးချက်လေး လိုချင်လား။';
 
   @override
   String get profileReminderBody =>
-      'တစ်နေ့ကို နူးညံ့တဲ့ ကတ်လေးတစ်ကတ်ပါ။ အချိန်မရွေး ပြောင်းလို့ရပါတယ်။';
+      'တစ်နေ့တစ်ခါ နူးညံ့တဲ့ကတ်လေးတစ်ကတ် ပို့ပေးမယ်။ အချိန်မရွေး ပြောင်းနိုင်ပါတယ်။';
 
   @override
   String profileReminderAt(String time) {
@@ -374,32 +375,30 @@ class AppLocalizationsMy extends AppLocalizations {
   String get profileReminderSkip => 'အခုတော့ ကျော်မယ်';
 
   @override
-  String get profileFocusTitle => 'ဘယ်အရာတွေကို ပိုလိုချင်လဲ။';
+  String get profileFocusTitle => 'ဘယ်အရာတွေ ပိုလိုချင်လဲ။';
 
   @override
   String profileFocusBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count ခုအထိ ရွေးပါ။',
+      other: 'အများဆုံး $count ခု ရွေးပါ။',
     );
     return '$_temp0';
   }
 
   @override
-  String get profileFinish => 'စလိုက်ကြစို့';
+  String get profileFinish => 'စကြမယ်';
 
   @override
-  String get profileSaveFailed =>
-      'သိမ်းဆည်းလို့ မရပါဘူး။ ထပ်ကြိုးစားကြည့်ပါနော်။';
+  String get profileSaveFailed => 'သိမ်းလို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
-  String get cosmicNeedsBirthDateTitle =>
-      'သင့်ကြယ်တွေအတွက် မွေးနေ့ရက်စွဲလေး လိုပါတယ်';
+  String get cosmicNeedsBirthDateTitle => 'မွေးနေ့ရက်လေး လိုနေတယ်';
 
   @override
   String get cosmicNeedsBirthDateBody =>
-      'မွေးနေ့ရက်စွဲလေးကို မျှဝေပေးရင် နေ့စဉ်လမ်းညွှန်ချက်လေးကို ဒီမှာ ဖော်ပြပေးပါမယ်။';
+      'မွေးနေ့ရက်ကို မျှဝေပေးရင် နေ့စဉ်လမ်းညွှန်ချက်လေးတွေ ဒီမှာ ပေါ်လာမယ်။';
 
   @override
   String cosmicHeader(String sign, String date) {
@@ -408,7 +407,7 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String cosmicMoonIn(String sign) {
-    return 'လ $sign မှာ';
+    return 'Moon က $sign မှာ';
   }
 
   @override
@@ -418,102 +417,102 @@ class AppLocalizationsMy extends AppLocalizations {
   String get cosmicLoveTitle => 'အချစ်';
 
   @override
-  String get cosmicLuckyColorsTitle => 'ကံကောင်းစေမယ့် အရောင်များ';
+  String get cosmicLuckyColorsTitle => 'ကံကောင်းစေတဲ့အရောင်များ';
 
   @override
-  String get cosmicLuckyNumberTitle => 'ကံကောင်းစေမယ့် ဂဏန်း';
+  String get cosmicLuckyNumberTitle => 'ကံကောင်းစေတဲ့နံပါတ်';
 
   @override
-  String get cosmicAvoidTitle => 'ရှောင်သင့်တာများ';
+  String get cosmicAvoidTitle => 'ရှောင်သင့်တဲ့အရာများ';
 
   @override
-  String get cosmicThaiColorsTitle => 'ထိုင်းရိုးရာ အရောင်များ';
+  String get cosmicThaiColorsTitle => 'ထိုင်းရိုးရာအရောင်များ';
 
   @override
-  String get cosmicThaiBirthdayColor => 'သင့်မွေးနေ့အရောင်';
+  String get cosmicThaiBirthdayColor => 'ကိုယ့်မွေးနေ့အရောင်';
 
   @override
-  String get cosmicThaiTodayColor => 'ဒီနေ့ရဲ့ အရောင်';
+  String get cosmicThaiTodayColor => 'ဒီနေ့အရောင်';
 
   @override
   String get cosmicDisclaimer =>
-      'ဖျော်ဖြေရေးနှင့် ကိုယ်ကိုယ်ပြန်စဉ်းစားရန်အတွက်သာ';
+      'ဖျော်ဖြေရေးနဲ့ ကိုယ့်ကိုယ်ကို ပြန်လည်ဆင်ခြင်ဖို့အတွက်';
 
   @override
-  String get thaiColorsSettingTitle => 'ထိုင်းရိုးရာ နေ့အလိုက် အရောင်များ';
+  String get thaiColorsSettingTitle => 'ထိုင်းရိုးရာ နေ့အလိုက်အရောင်များ';
 
   @override
   String get thaiColorsSettingSubtitle =>
-      'သင့်စကြဝဠာမှာ မွေးနေ့အရောင်နဲ့ ဒီနေ့ရဲ့အရောင်ကို ပြပါ';
+      'ကိုယ့်ရဲ့ စကြဝဠာမှာ မွေးနေ့အရောင်နဲ့ ဒီနေ့အရောင်ကို ပြမယ်';
 
   @override
   String get languageTitle => 'ဘာသာစကား';
 
   @override
-  String get languageSystem => 'ဖုန်းရဲ့ ဘာသာစကားအတိုင်း';
+  String get languageSystem => 'ဖုန်းမှာ သတ်မှတ်ထားတဲ့ ဘာသာစကားအတိုင်း';
 
   @override
-  String get signAries => 'မိဿရာသီ';
+  String get signAries => 'Aries';
 
   @override
-  String get signTaurus => 'ပြိဿရာသီ';
+  String get signTaurus => 'Taurus';
 
   @override
-  String get signGemini => 'မေထုန်ရာသီ';
+  String get signGemini => 'Gemini';
 
   @override
-  String get signCancer => 'ကရကဋ်ရာသီ';
+  String get signCancer => 'Cancer';
 
   @override
-  String get signLeo => 'သိဟ်ရာသီ';
+  String get signLeo => 'Leo';
 
   @override
-  String get signVirgo => 'ကန်ရာသီ';
+  String get signVirgo => 'Virgo';
 
   @override
-  String get signLibra => 'တူရာသီ';
+  String get signLibra => 'Libra';
 
   @override
-  String get signScorpio => 'ဗြိစ္ဆာရာသီ';
+  String get signScorpio => 'Scorpio';
 
   @override
-  String get signSagittarius => 'ဓနုရာသီ';
+  String get signSagittarius => 'Sagittarius';
 
   @override
-  String get signCapricorn => 'မကာရရာသီ';
+  String get signCapricorn => 'Capricorn';
 
   @override
-  String get signAquarius => 'ကုမ်ရာသီ';
+  String get signAquarius => 'Aquarius';
 
   @override
-  String get signPisces => 'မိန်ရာသီ';
+  String get signPisces => 'Pisces';
 
   @override
-  String get retroTitle => 'နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်များ';
+  String get retroTitle => 'retrograde ကာလများ';
 
   @override
-  String get retroMercury => 'ဗုဒ္ဓဟူးဂြိုဟ်';
+  String get retroMercury => 'Mercury';
 
   @override
-  String get retroVenus => 'သောကြာဂြိုဟ်';
+  String get retroVenus => 'Venus';
 
   @override
-  String get retroMars => 'အင်္ဂါဂြိုဟ်';
+  String get retroMars => 'Mars';
 
   @override
-  String get retroJupiter => 'ကြာသပတေးဂြိုဟ်';
+  String get retroJupiter => 'Jupiter';
 
   @override
-  String get retroSaturn => 'စနေဂြိုဟ်';
+  String get retroSaturn => 'Saturn';
 
   @override
   String retroStatusRetrograde(String planet, String date) {
-    return '$planet က $date အထိ နောက်ပြန်လှည့်နေပါတယ်';
+    return '$planet က $date အထိ retrograde ဖြစ်နေပါတယ်';
   }
 
   @override
   String retroStatusNext(String planet, String date) {
-    return 'နောက်တစ်ကြိမ် $planet နောက်ပြန်လှည့်မယ့်ရက်: $date';
+    return 'နောက်လာမယ့် $planet retrograde: $date';
   }
 
   @override
@@ -524,76 +523,76 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String retroStartsInDays(int days) {
-    return 'နောက် $days ရက်အကြာမှာ စတင်ပါတယ်';
+    return 'စတင်ဖို့ $days ရက်လိုပါသေးတယ်';
   }
 
   @override
-  String get retroCardHint => 'နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်အားလုံးကို ကြည့်မယ်';
+  String get retroCardHint => 'retrograde အားလုံးကို ကြည့်မယ်';
 
   @override
-  String get retroTipsTitle => 'နူးညံ့တဲ့ အကြံပြုချက်များ';
+  String get retroTipsTitle => 'နူးညံ့တဲ့ အကြံပြုချက်လေးများ';
 
   @override
   String get retroTipMercury =>
-      'ပြန်ကြည့်၊ အနားယူ၊ ထပ်ဖတ်ဖို့ သင့်တော်တဲ့ အချိန်လေးပါ။ အစီအစဉ်တွေကို တစ်ခေါက်ထပ်စစ်ပြီး ဓာတ်ပုံတွေကို သိမ်းထားပါ၊ စာတွေကို အဖြေပြန်ဖို့လည်း အချိန်နည်းနည်းပိုပေးလိုက်ပါ။';
+      'ပြန်လည်ကြည့်ရှု၊ အနားယူပြီး ထပ်ဖတ်ဖို့ လှပတဲ့အချိန်လေးပါ။ အစီအစဉ်တွေကို သေချာပြန်စစ်၊ ဓာတ်ပုံတွေကို သိမ်းထားပြီး စာတွေကိုလည်း ပို့ဖို့ အချိန်နည်းနည်းပိုပေးပါ။';
 
   @override
   String get retroTipVenus =>
-      'အချစ်နဲ့ ခင်မင်မှုမှာ ကိုယ်တန်ဖိုးထားတာတွေကို ပြန်စဉ်းစားကြည့်ဖို့ နူးညံ့တဲ့ကာလလေးပါ။ အသစ်တစ်ခု မစခင် ကိုယ့်အတွက် ဘယ်အရာက အမှန်တကယ်ခံစားရလဲဆိုတာ သတိထားကြည့်ပါ။';
+      'အချစ်နဲ့ မိတ်ဆွေမှုမှာ ကိုယ်တန်ဖိုးထားတာတွေကို ပြန်စဉ်းစားဖို့ နူးညံ့တဲ့ကာလလေးပါ။ အသစ်တစ်ခု မစခင် ကိုယ့်အတွက် တကယ်မှန်ကန်တယ်လို့ ခံစားရတာကို သတိထားကြည့်ပါ။';
 
   @override
   String get retroTipMars =>
-      'ကိုယ့်ရဲ့ စွမ်းအင်က ပုံမှန်ထက် နှေးနေသလို ခံစားရနိုင်ပါတယ်။ အလောတကြီးလုပ်တာထက် အနားယူဖို့ ရွေးပြီး တဖြည်းဖြည်း လုပ်ဆောင်တဲ့ ခြေလှမ်းသေးသေးလေးတွေကိုလည်း တန်ဖိုးထားပါ။';
+      'ကိုယ့်စွမ်းအင်က ပိုနှေးနေသလို ခံစားရနိုင်တယ်။ အလောတကြီးလုပ်တာထက် အနားယူဖို့ ရွေးပြီး ဖြည်းဖြည်းမှန်မှန် လှမ်းတဲ့ ခြေလှမ်းလေးတွေကိုလည်း တန်ဖိုးထားပါ။';
 
   @override
   String get retroTipJupiter =>
-      'ကြီးထွားတိုးတက်မှုအတွက် အရှိန်နည်းနည်းနှေးတဲ့ ကာလလေးပါ။ သင်ယူခဲ့တာတွေကို အရသာခံပြီး ကိုယ့်အိပ်မက်တွေကို ကိုယ့်အရှိန်နဲ့ ပုံဖော်ခွင့်ပေးလိုက်ပါ။';
+      'တိုးတက်ဖို့ အရှိန်နှေးတဲ့ကာလလေးပါ။ သင်ယူခဲ့တာတွေကို အရသာခံပြီး ကိုယ့်အိပ်မက်တွေကိုလည်း ကိုယ့်အရှိန်နဲ့ကိုယ် ပုံဖော်ခွင့်ပေးပါ။';
 
   @override
   String get retroTipSaturn =>
-      'ကိုယ့်ကိုယ်ကိုယ် ကြင်နာရင်း နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တွေနဲ့ ကိုယ့်စည်းမျဉ်းတွေကို ပြန်လည်သုံးသပ်ဖို့ တိတ်ဆိတ်အေးချမ်းတဲ့ အချိန်လေးပါ။';
+      'ကိုယ့်ရဲ့ နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တွေနဲ့ သတ်မှတ်ထားတဲ့ စည်းမျဉ်းတွေကို ကြင်ကြင်နာနာ ပြန်သုံးသပ်ဖို့ တိတ်ဆိတ်အေးချမ်းတဲ့အချိန်လေးပါ။';
 
   @override
   String get retroNowTitle => 'အခုလောလောဆယ်';
 
   @override
-  String get retroCalmTitle => 'ဂြိုဟ်အားလုံး ပုံမှန်လည်ပတ်နေပါတယ်';
+  String get retroCalmTitle => 'ဂြိုဟ်အားလုံး ရှေ့ကို ရွေ့လျားနေပါတယ်';
 
   @override
   String get retroCalmBody =>
-      'လောလောဆယ် နောက်ပြန်လှည့်နေတဲ့ ဂြိုဟ်မရှိပါဘူး၊ အရာရာ ချောချောမွေ့မွေ့ စီးဆင်းနေတာကို ခံစားလိုက်ပါ။';
+      'လောလောဆယ် ဘယ်ဂြိုဟ်မှ retrograde မဖြစ်နေပါဘူး။ အရာရာ ချောချောမွေ့မွေ့ စီးဆင်းနေတာကို ခံစားလိုက်ပါ။';
 
   @override
   String get retroTipMercury1 =>
-      'ဓာတ်ပုံတွေကို အရန်သိမ်းထားပြီး စာတွေမပို့ခင် ပြန်ဖတ်ကြည့်ပါ။';
+      'ဓာတ်ပုံတွေကို backup လုပ်ထားပြီး မပို့ခင် message တွေကို ပြန်ဖတ်ပါ။';
 
   @override
   String get retroTipMercury2 =>
-      'အစီအစဉ်တွေနဲ့ ခရီးတွေအတွက် အချိန်နည်းနည်းပိုပေးထားပါ။';
+      'အစီအစဉ်တွေနဲ့ ခရီးစဉ်တွေအတွက် အချိန်နည်းနည်းပိုချန်ထားပါ။';
 
   @override
   String get retroTipMercury3 =>
-      'လွမ်းနေတဲ့သူတစ်ယောက် ဒါမှမဟုတ် အရာတစ်ခုခုနဲ့ နူးနူးညံ့ညံ့ ပြန်ဆက်သွယ်ကြည့်ပါ။';
+      'လွမ်းနေခဲ့တဲ့သူတစ်ယောက် ဒါမှမဟုတ် အရာတစ်ခုနဲ့ နူးနူးညံ့ညံ့ ပြန်ဆက်သွယ်ကြည့်ပါ။';
 
   @override
   String get retroTipVenus1 =>
-      'အချစ်ရေး ဒါမှမဟုတ် စတိုင်နဲ့ပတ်သက်ပြီး အရေးကြီးတဲ့ ရွေးချယ်မှုတွေ မလုပ်ခင် အချိန်ယူပါ။';
+      'အချစ်ရေး ဒါမှမဟုတ် style နဲ့ပတ်သက်တဲ့ အရေးကြီးဆုံးဖြတ်ချက်တွေ မချခင် အချိန်ယူပါ။';
 
   @override
   String get retroTipVenus2 =>
-      'ကိုယ့်ကိုယ်ကိုယ် လှပတယ်လို့ ခံစားရစေမယ့်အရာတစ်ခုခုကို အကြောင်းပြချက်မလိုဘဲ လုပ်ကြည့်ပါ။';
+      'အကြောင်းပြချက်မလိုဘဲ ကိုယ့်ကိုယ်ကို လှပတယ်လို့ ခံစားရစေမယ့် အရာလေးတစ်ခု လုပ်ကြည့်ပါ။';
 
   @override
   String get retroTipVenus3 =>
-      'ဘယ်သူတွေနဲ့ အတူရှိရင် သက်သောင့်သက်သာနဲ့ နွေးထွေးတယ်လို့ ခံစားရလဲ သတိထားကြည့်ပါ။';
+      'ဘယ်သူနဲ့အတူရှိရတာ သက်တောင့်သက်သာနဲ့ နွေးထွေးသလဲ သတိထားကြည့်ပါ။';
 
   @override
   String get retroTipMars1 =>
-      'ကိုယ့်ကိုယ်ကိုယ် အတင်းတွန်းအားပေးတာထက် နူးညံ့တဲ့ လှုပ်ရှားမှုလေးတွေကို ရွေးပါ။';
+      'ကိုယ့်ကိုယ်ကို အတင်းတွန်းအားပေးတာထက် ညင်ညင်သာသာ လှုပ်ရှားဖို့ ရွေးပါ။';
 
   @override
   String get retroTipMars2 =>
-      'လုပ်စရာသေးသေးလေးတစ်ခုကို ရွေးပြီး ဒီနေ့အတွက် အဲဒါလောက်နဲ့ပဲ လုံလောက်တယ်လို့ သတ်မှတ်လိုက်ပါ။';
+      'လုပ်စရာလေးတစ်ခုကိုပဲ ရွေးပြီး ဒီနေ့အတွက် အဲဒီလောက်နဲ့ လုံလောက်တယ်လို့ သဘောထားပါ။';
 
   @override
   String get retroTipMars3 =>
@@ -604,30 +603,30 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get retroTipJupiter2 =>
-      'အိပ်မက်တစ်ခုဆီ ပြန်လှည့်ကြည့်ပြီး ဖြည်းဖြည်းချင်း ကြီးထွားလာခွင့်ပေးပါ။';
+      'အိပ်မက်တစ်ခုဆီ ပြန်သွားပြီး ဖြည်းဖြည်းချင်း ကြီးထွားလာခွင့်ပေးပါ။';
 
   @override
   String get retroTipJupiter3 =>
-      'သင်ယူနေခဲ့တာတွေအပေါ် စူးစမ်းလိုစိတ်ရှိနေပါစေ။';
+      'ကိုယ်သင်ယူနေခဲ့တာတွေအပေါ် စူးစမ်းချင်စိတ်ကို ဆက်ထိန်းထားပါ။';
 
   @override
   String get retroTipSaturn1 =>
-      'ကိုယ်နဲ့ အဆင်မပြေတော့တဲ့ နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တစ်ခုကို ပြင်ဆင်ကြည့်ပါ။';
+      'ကိုယ့်နဲ့ အဆင်မပြေတော့တဲ့ နေ့စဉ်လုပ်ရိုးလုပ်စဉ်တစ်ခုကို ပြင်ဆင်ကြည့်ပါ။';
 
   @override
   String get retroTipSaturn2 =>
-      'လေးစားလိုက်နာချင်တဲ့ ကိုယ့်စည်းမျဉ်းတစ်ခုကို သတိထားမိအောင်ကြည့်ပြီး နူးနူးညံ့ညံ့ လိုက်နာပါ။';
+      'လေးစားလိုက်နာချင်တဲ့ စည်းမျဉ်းတစ်ခုကို သတိထားမိအောင် ကြည့်ပြီး ကြင်ကြင်နာနာ လိုက်နာပါ။';
 
   @override
   String get retroTipSaturn3 =>
-      'တစ်စိုက်မတ်မတ် ကြိုးစားပေးခဲ့တဲ့ ကိုယ့်ကိုယ်ကိုယ် ကျေးဇူးတင်လိုက်ပါ။';
+      'ဖြည်းဖြည်းမှန်မှန် ကြိုးစားခဲ့တဲ့ ကိုယ့်ကိုယ်ကို ကျေးဇူးတင်လိုက်ပါ။';
 
   @override
-  String get retroCalendarTitle => 'ဂြိုဟ်နောက်ပြန်လှည့်မှု ပြက္ခဒိန်';
+  String get retroCalendarTitle => 'Retrograde ပြက္ခဒိန်';
 
   @override
   String get retroCalendarSubtitle =>
-      'အရောင်ခြယ်ထားတဲ့ရက်တွေက ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်နေတဲ့အချိန်ကို ပြထားပါတယ်။';
+      'အရောင်ခြယ်ထားတဲ့ရက်တွေက ဂြိုဟ်တစ်လုံး retrograde ဖြစ်နေတဲ့အချိန်ကို ပြပါတယ်။';
 
   @override
   String get retroCalendarPrevious => 'ပြီးခဲ့တဲ့လ';
@@ -637,69 +636,66 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String retroCalendarDay(String date, String planets) {
-    return '$date: $planets နောက်ပြန်လှည့်နေပါတယ်';
+    return '$date: $planets retrograde ဖြစ်နေပါတယ်';
   }
 
   @override
-  String get retroAlertsTitle =>
-      'ဂြိုဟ်နောက်ပြန်လှည့်မှု ကြိုတင်အသိပေးချက်များ';
+  String get retroAlertsTitle => 'Retrograde သတိပေးချက်လေးများ';
 
   @override
   String get retroAlertsSubtitle =>
-      'ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်မယ့်နေ့မတိုင်ခင်နဲ့ အဲဒီနေ့မှာ နူးညံ့တဲ့ အသိပေးချက်လေးတစ်ခု';
+      'ဂြိုဟ်တစ်လုံး retrograde/direct စဝင်မယ့်နေ့မတိုင်ခင်တစ်ရက်နဲ့ အဲဒီနေ့မှာ နူးညံ့တဲ့ သတိပေးချက်လေး ပို့ပေးမယ်';
 
   @override
-  String get retroAlertsPrePromptTitle =>
-      'စကြဝဠာဆီက နူးညံ့တဲ့ အသိပေးချက်လေး လိုချင်လား။';
+  String get retroAlertsPrePromptTitle => 'စကြဝဠာဆီက သတိပေးချက်လေး လိုချင်လား။';
 
   @override
   String get retroAlertsPrePromptBody =>
-      'Mochi Moon က ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်တာ ဒါမှမဟုတ် ပုံမှန်လည်ပတ်မှု ပြန်ဝင်တဲ့နေ့မတိုင်ခင်တစ်ရက်နဲ့ အဲဒီနေ့မှာ နူးညံ့တဲ့ အသိပေးချက်လေး ပို့ပေးနိုင်ပါတယ်။ အဲဒီလိုလုပ်ဖို့ သင့်ဖုန်းက အသိပေးချက်တွေ ခွင့်ပြုမလားလို့ မေးပါလိမ့်မယ်။';
+      'Mochi Moon က ဂြိုဟ်တစ်လုံး retrograde ဒါမှမဟုတ် direct စဝင်မယ့်နေ့မတိုင်ခင်တစ်ရက်နဲ့ အဲဒီနေ့မှာ နူးညံ့တဲ့ သတိပေးချက်လေး ပို့ပေးနိုင်ပါတယ်။ ဒီလိုလုပ်ဖို့ ဖုန်းက notifications ခွင့်ပြုမလားလို့ မေးပါလိမ့်မယ်။';
 
   @override
-  String get retroAlertNotificationTitle => 'စကြဝဠာရဲ့ အသိပေးချက်လေး 🌙';
+  String get retroAlertNotificationTitle => 'စကြဝဠာဆီက သတိပေးချက်လေး 🌙';
 
   @override
-  String get retroAlertChannelName =>
-      'ဂြိုဟ်နောက်ပြန်လှည့်မှု ကြိုတင်အသိပေးချက်များ';
+  String get retroAlertChannelName => 'Retrograde သတိပေးချက်လေးများ';
 
   @override
   String get retroAlertChannelDescription =>
-      'ဂြိုဟ်တစ်လုံး နောက်ပြန်လှည့်တာ ဒါမှမဟုတ် ပုံမှန်လည်ပတ်မှု ပြန်ဝင်တဲ့ရက်တွေမှာ နူးညံ့တဲ့ အသိပေးချက်လေးတစ်ခု။';
+      'ဂြိုဟ်တစ်လုံး retrograde ဒါမှမဟုတ် direct စဝင်မယ့်နေ့ဝန်းကျင်မှာ နူးညံ့တဲ့ သတိပေးချက်လေး ပို့ပေးမယ်။';
 
   @override
   String retroAlertStartsTomorrow(String planet) {
-    return '$planet မနက်ဖြန် နောက်ပြန်လှည့်တော့မှာပါ။ ဖြည်းဖြည်းလုပ်ပြီး ကိုယ့်ကိုယ်ကိုယ် ကြင်နာပေးဖို့ လှပတဲ့အချိန်လေးပါ။';
+    return '$planet က မနက်ဖြန် retrograde စဝင်တော့မယ်။ အရှိန်လျှော့ပြီး ကိုယ့်ကိုယ်ကို ကြင်ကြင်နာနာ ဆက်ဆံဖို့ လှပတဲ့အချိန်လေးပါ။';
   }
 
   @override
   String retroAlertStartsToday(String planet) {
-    return '$planet ဒီနေ့ နောက်ပြန်လှည့်နေပါတယ်။ ဖြည်းဖြည်းလေးနဲ့ ကိုယ့်အရှိန်ကို ယုံကြည်လိုက်ပါ။';
+    return '$planet က ဒီနေ့ retrograde စဝင်ပါတယ်။ ဖြည်းဖြည်းနဲ့ အေးအေးဆေးဆေးနေပြီး ကိုယ့်အရှိန်အတိုင်း သွားပါနော်။';
   }
 
   @override
   String retroAlertEndsTomorrow(String planet) {
-    return '$planet မနက်ဖြန် ပုံမှန်လည်ပတ်မှု ပြန်ဝင်တော့မှာပါ။ အရာတွေကလည်း ရှေ့ကို ပြန်လည်စီးဆင်းလာတော့မှာပါ။';
+    return '$planet က မနက်ဖြန် direct ပြန်ဖြစ်တော့မယ်။ အရာတွေက ရှေ့ကို ပြန်ပြီး စီးဆင်းလာတော့မယ်။';
   }
 
   @override
   String retroAlertEndsToday(String planet) {
-    return '$planet ဒီနေ့ ပုံမှန်လည်ပတ်မှု ပြန်ဝင်ပါပြီ။ လတ်ဆတ်ပြီး တည်ငြိမ်တဲ့ အရှိန်သစ်လေးကို ကြိုဆိုလိုက်ပါ။';
+    return '$planet က ဒီနေ့ direct ပြန်ဖြစ်ပါတယ်။ လန်းဆန်းပြီး တည်ငြိမ်တဲ့ အရှိန်အဟုန်အသစ်ကို ကြိုဆိုလိုက်ပါ။';
   }
 
   @override
-  String get accountDeleteTitle => 'ကျွန်မရဲ့ အကောင့်ကို ဖျက်မယ်';
+  String get accountDeleteTitle => 'အကောင့်ကို ဖျက်မယ်';
 
   @override
   String get accountDeleteSubtitle =>
-      'သင့်ပရိုဖိုင်၊ သိမ်းထားတဲ့ကတ်တွေနဲ့ တိုးတက်မှုတွေကို ဖျက်ပြီး အစကနေ ပြန်စလိုက်ပါ';
+      'profile၊ သိမ်းထားတဲ့ကတ်တွေနဲ့ တိုးတက်မှုမှတ်တမ်းကို ဖျက်ပြီး အစကနေ ပြန်စမယ်';
 
   @override
-  String get accountDeleteConfirmTitle => 'သင့်အကောင့်ကို ဖျက်မလား။';
+  String get accountDeleteConfirmTitle => 'အကောင့်ကို ဖျက်မှာ သေချာပြီလား။';
 
   @override
   String get accountDeleteConfirmBody =>
-      'ဒီဖုန်းထဲကရော Mochi Moon ထဲကပါ သင့်ပရိုဖိုင်၊ သိမ်းထားတဲ့ကတ်တွေ၊ တိုးတက်မှုနဲ့ အကောင့်ဝင်ရန် အချက်အလက်တွေကို အပြီးတိုင် ဖျက်ပစ်ပါမယ်။ ပြန်ပြင်လို့ မရပါဘူး။';
+      'ဒီလုပ်ဆောင်ချက်က profile၊ သိမ်းထားတဲ့ကတ်တွေ၊ တိုးတက်မှုမှတ်တမ်းနဲ့ sign-in အချက်အလက်တွေကို ဒီဖုန်းထဲကရော Mochi Moon ထဲကပါ အပြီးဖျက်ပစ်မှာပါ။ ပြန်ပြင်လို့မရပါဘူး။';
 
   @override
   String get accountDeleteConfirmAction => 'ဖျက်မယ်';
@@ -708,35 +704,35 @@ class AppLocalizationsMy extends AppLocalizations {
   String get accountDeleteKeep => 'အကောင့်ကို ဆက်ထားမယ်';
 
   @override
-  String get accountDeleteDeleting => 'သင့်အကောင့်ကို ဖျက်နေပါတယ်...';
+  String get accountDeleteDeleting => 'အကောင့်ကို ဖျက်နေပါတယ်...';
 
   @override
   String get accountDeleteOffline =>
-      'အင်တာနက်ချိတ်ဆက်မှု မရှိသလိုပါပဲ။ ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်စမ်းကြည့်ပါနော်။';
+      'အင်တာနက်မရှိသလိုပါပဲ။ ချိတ်ဆက်ပြီး ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
-  String get accountDeleteFinalTitle => 'သေချာဆုံးဖြတ်ပြီးပြီလား။';
+  String get accountDeleteFinalTitle => 'တကယ်ပဲ သေချာပြီလား။';
 
   @override
   String get accountDeleteFinalBody =>
-      'ဒါက နောက်ဆုံးအခွင့်အရေးပါ။ အရာအားလုံးကို အပြီးတိုင် ဖျက်ပစ်ပြီး Mochi Moon ကို အခုမှ ထည့်သွင်းထားသလို အစကနေ ပြန်စပါမယ်။';
+      'ဒါက နောက်ဆုံးအခွင့်အရေးပါ။ အရာအားလုံးကို အပြီးတိုင်ဖျက်ပြီး Mochi Moon ကို ခုမှ install လုပ်ထားသလို အစကနေ ပြန်စပါမယ်။';
 
   @override
-  String get accountDeleteFinalAction => 'ဟုတ်ကဲ့၊ အားလုံးကို ဖျက်မယ်';
+  String get accountDeleteFinalAction => 'ဟုတ်ကဲ့၊ အားလုံးဖျက်မယ်';
 
   @override
-  String get cosmicSignPickerLabel => 'ဖတ်ဖို့ ရာသီခွင်တစ်ခု ရွေးပါ';
+  String get cosmicSignPickerLabel => 'ဖတ်ရှုဖို့ ရာသီခွင်တစ်ခု ရွေးပါ';
 
   @override
   String cosmicSignPickerYou(String sign) {
-    return '$sign (သင်)';
+    return '$sign (ကိုယ်တိုင်)';
   }
 
   @override
   String get accountDeleteCancelled =>
-      'ဘာမှ မဖျက်ခဲ့ပါဘူး။ အကောင့်ထဲမှာ ဆက်ဝင်ထားပါတယ်။';
+      'ဘာမှ မဖျက်လိုက်ပါဘူး။ အကောင့်ထဲမှာ ဆက်ဝင်ထားဆဲပါ။';
 
   @override
   String get accountDeleteFailed =>
-      'တစ်ခုခု အဆင်မပြေဖြစ်သွားပြီး ဘာမှ မဖျက်ခဲ့ပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
+      'တစ်ခုခု အဆင်မပြေဖြစ်သွားပြီး ဘာမှ မဖျက်လိုက်ပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 }

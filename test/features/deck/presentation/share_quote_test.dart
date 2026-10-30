@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+﻿import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ import '../support/fake_image_sharer.dart';
 
 const _quote = Quote(
   id: 'q1',
-  text: {'en': 'I am enough', 'my': 'ကျွန်မ လုံလောက်ပါတယ်'},
+  text: {'en': 'I am enough', 'my': 'ငါ လုံလောက်ပါတယ်'},
   category: 'self_love',
 );
 

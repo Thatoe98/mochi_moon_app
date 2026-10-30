@@ -5,6 +5,7 @@
 final _placeholder = RegExp(r'\{(\w+)[,}]');
 final _myanmar = RegExp('[က-႟]');
 final _asciiLetter = RegExp('[A-Za-z]');
+final _burmeseDigit = RegExp('[၀-၉]');
 
 /// Names of the ICU placeholders in [text], for example `count` in
 /// `{count, plural, other{{count} days}}`.
@@ -54,8 +55,14 @@ List<String> checkBurmese(String en, String my) {
   final problems = <String>[];
   if (my.trim().isEmpty) return ['empty'];
 
-  if (_asciiLetter.hasMatch(en) && !_myanmar.hasMatch(my)) {
+  // A one or two word label may stay in English: zodiac signs, planets and
+  // "Retrogrades" are written that way in Burmese too.
+  final isShortLabel = en.trim().split(RegExp(r'\s+')).length <= 2;
+  if (!isShortLabel && _asciiLetter.hasMatch(en) && !_myanmar.hasMatch(my)) {
     problems.add('has no Burmese characters');
+  }
+  if (_burmeseDigit.hasMatch(my)) {
+    problems.add('uses Burmese digits; write 0-9');
   }
   if (looksLikeZawgyi(my)) {
     problems.add('looks like Zawgyi, not Unicode');
