@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/domain/retrograde_status.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_labels.dart';
@@ -46,7 +47,7 @@ class _RetrogradeCalendarState extends State<RetrogradeCalendar> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final dates = MaterialLocalizations.of(context);
+    const dates = englishDates;
     final canGoBack = _month.isAfter(_first);
     final canGoForward = _month.isBefore(_last);
 
@@ -86,7 +87,7 @@ class _RetrogradeCalendarState extends State<RetrogradeCalendar> {
             ),
           ],
         ),
-        _WeekdayRow(dates: dates),
+        const _WeekdayRow(dates: dates),
         for (final week in _weeks(dates))
           Row(
             children: [
@@ -172,7 +173,7 @@ class _DayCell extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    final dates = MaterialLocalizations.of(context);
+    const dates = englishDates;
     final colors = [
       for (final body in planets) retrogradePlanetColor(scheme, body),
     ];

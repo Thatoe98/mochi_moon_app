@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/settings/domain/reminder.dart';
 
@@ -36,7 +37,7 @@ class ReminderSection extends ConsumerWidget {
             leading: const Icon(Icons.schedule_rounded),
             title: Text(l10n.reminderTimeLabel),
             trailing: Text(
-              MaterialLocalizations.of(context).formatTimeOfDay(time),
+              englishDates.formatTimeOfDay(time),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             onTap: () => _pickTime(context, ref, time),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/onboarding/application/profile_setup.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
@@ -178,7 +179,7 @@ class _BirthDatePicker extends StatelessWidget {
         if (chosen != null)
           Text(
             l10n.profileBirthDateChosen(
-              MaterialLocalizations.of(context).formatMediumDate(chosen!),
+              englishDates.formatMediumDate(chosen!),
             ),
             style: Theme.of(context).textTheme.titleMedium,
           ),
@@ -216,7 +217,7 @@ class _BirthTime extends StatelessWidget {
           time == null
               ? l10n.profileBirthTimeNone
               : l10n.profileBirthTimeChosen(
-                  MaterialLocalizations.of(context).formatTimeOfDay(time),
+                  englishDates.formatTimeOfDay(time),
                 ),
           style: theme.textTheme.titleMedium,
         ),
@@ -260,7 +261,7 @@ class _ReminderTime extends StatelessWidget {
       children: [
         Text(
           l10n.profileReminderAt(
-            MaterialLocalizations.of(context).formatTimeOfDay(of),
+            englishDates.formatTimeOfDay(of),
           ),
           style: Theme.of(context).textTheme.titleMedium,
         ),

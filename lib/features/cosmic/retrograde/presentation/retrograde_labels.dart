@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/domain/retrograde_status.dart';
 
@@ -54,7 +55,7 @@ List<String> retrogradeTips(AppLocalizations l10n, Body body) => switch (body) {
   RetrogradeStatus status,
 ) {
   final l10n = AppLocalizations.of(context);
-  final dates = MaterialLocalizations.of(context);
+  const dates = englishDates;
   final planet = retrogradePlanetLabel(l10n, body);
   return switch (status) {
     IsRetrograde(:final until) => (

@@ -78,18 +78,13 @@ Widget _host({
   ),
 );
 
-/// Scrolls the page itself; the sign picker's row is a second scrollable.
 Future<void> _scrollTo(WidgetTester tester, Finder target, double delta) =>
-    tester.scrollUntilVisible(
-      target,
-      delta,
-      scrollable: find
-          .descendant(
-            of: find.byType(ListView),
-            matching: find.byType(Scrollable),
-          )
-          .first,
-    );
+    tester.scrollUntilVisible(target, delta);
+
+Future<void> _openSignPicker(WidgetTester tester) async {
+  await tester.tap(find.byTooltip('Choose a sign to read'));
+  await tester.pumpAndSettle();
+}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -245,6 +240,9 @@ void main() {
       tallView(tester);
       await tester.pumpWidget(_host(profile: _scorpio));
       await tester.pumpAndSettle();
+      expect(find.byType(ChoiceChip), findsNothing);
+
+      await _openSignPicker(tester);
 
       expect(find.byType(ChoiceChip), findsNWidgets(12));
       expect(find.text('Scorpio (you)'), findsOneWidget);
@@ -271,8 +269,11 @@ void main() {
       await tester.pumpAndSettle();
       expect(artLabel(tester), contains('Scorpio'));
 
+      await _openSignPicker(tester);
       await tester.tap(find.widgetWithText(ChoiceChip, 'Leo'));
       await tester.pumpAndSettle();
+      // The sheet closes once a sign is picked.
+      expect(find.byType(ChoiceChip), findsNothing);
 
       expect(artLabel(tester), contains('Leo'));
       expect(find.textContaining('Leo'), findsWidgets);
@@ -281,9 +282,8 @@ void main() {
       await _scrollTo(tester, find.text("Today's color"), 300);
       expect(find.text('Your birthday color'), findsNothing);
 
-      final own = find.widgetWithText(ChoiceChip, 'Scorpio (you)');
-      await _scrollTo(tester, own, -300);
-      await tester.tap(own);
+      await _openSignPicker(tester);
+      await tester.tap(find.widgetWithText(ChoiceChip, 'Scorpio (you)'));
       await tester.pumpAndSettle();
       expect(artLabel(tester), contains('Scorpio'));
     });
@@ -293,7 +293,7 @@ void main() {
       await tester.pumpWidget(_host(profile: _scorpio, premium: false));
       await tester.pumpAndSettle();
 
-      expect(find.byType(ChoiceChip), findsNothing);
+      expect(find.byTooltip('Choose a sign to read'), findsNothing);
       expect(artLabel(tester), contains('Scorpio'));
     });
 

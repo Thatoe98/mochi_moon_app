@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/presentation/sign_picker.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_art.dart';
@@ -25,27 +26,37 @@ class CosmicScreen extends ConsumerWidget {
     // Start the slow retrograde scan now so the Retrogrades screen is ready by
     // the time the button is tapped.
     ref.watch(retrogradeOverviewProvider);
+    final shown = today.value?.sign;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.cosmicTitle),
-        actions: const [
-          RetrogradeButton(),
-          SizedBox(width: AppSpacing.sm),
+        actions: [
+          if (shown != null && ref.watch(hasPremiumProvider))
+            SignPickerButton(shown: shown),
+          const SizedBox(width: AppSpacing.sm),
         ],
       ),
-      body: today.when(
-        // Choosing another sign reloads the page; keep the old one on screen
-        // until the new one is ready instead of flashing a loader.
-        skipLoadingOnReload: true,
-        loading: () => const LoadingView(),
-        error: (error, stack) =>
-            ErrorView(onRetry: () => ref.invalidate(cosmicTodayProvider(lang))),
-        data: (data) => data == null
-            ? EmptyState(
-                title: l10n.cosmicNeedsBirthDateTitle,
-                body: l10n.cosmicNeedsBirthDateBody,
-              )
-            : _TodayView(today: data, lang: lang),
+      body: Column(
+        children: [
+          const RetrogradeButton(),
+          Expanded(
+            child: today.when(
+              // Choosing another sign reloads the page; keep the old one on
+              // screen until the new one is ready instead of flashing a loader.
+              skipLoadingOnReload: true,
+              loading: () => const LoadingView(),
+              error: (error, stack) => ErrorView(
+                onRetry: () => ref.invalidate(cosmicTodayProvider(lang)),
+              ),
+              data: (data) => data == null
+                  ? EmptyState(
+                      title: l10n.cosmicNeedsBirthDateTitle,
+                      body: l10n.cosmicNeedsBirthDateBody,
+                    )
+                  : _TodayView(today: data, lang: lang),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -63,15 +74,11 @@ class _TodayView extends ConsumerWidget {
     final theme = Theme.of(context);
     final reading = today.reading;
     final showThai = ref.watch(showThaiColorsProvider(lang)).value ?? false;
-    final date = MaterialLocalizations.of(context).formatMediumDate(today.date);
+    final date = englishDates.formatMediumDate(today.date);
 
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.md),
       children: [
-        if (ref.watch(hasPremiumProvider)) ...[
-          SignPicker(shown: today.sign),
-          const SizedBox(height: AppSpacing.md),
-        ],
         ZodiacArt(sign: today.sign),
         const SizedBox(height: AppSpacing.md),
         Semantics(
