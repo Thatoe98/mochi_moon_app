@@ -176,16 +176,93 @@ describe('users/{uid}/journal/{quoteId}', () => {
 });
 
 describe('users/{uid}/partners/{id}', () => {
-  test('only the owner can read and write', async () => {
+  const partner = (extra = {}) => ({
+    nickname: 'Moon',
+    birthDate: '1998-05-14',
+    birthTime: null,
+    timeKnown: false,
+    place: null,
+    createdAt: new Date(),
+    ...extra,
+  });
+  const place = {
+    name: 'Bangkok',
+    region: 'Bangkok',
+    countryCode: 'TH',
+    lat: 13.75,
+    lng: 100.52,
+    tzId: 'Asia/Bangkok',
+  };
+
+  test('the owner can add, read, edit and delete a partner', async () => {
+    const ref = doc(alice(), 'users/alice/partners/p1');
+    await assertSucceeds(setDoc(ref, partner()));
+    await assertSucceeds(getDoc(ref));
     await assertSucceeds(
-      setDoc(doc(alice(), 'users/alice/partners/p1'), { nickname: 'Moon' }),
+      setDoc(
+        ref,
+        partner({ nickname: 'Sol', birthTime: '14:30', timeKnown: true, place }),
+      ),
     );
-    await assertSucceeds(getDoc(doc(alice(), 'users/alice/partners/p1')));
-    await assertFails(getDoc(doc(bob(), 'users/alice/partners/p1')));
+    await assertSucceeds(deleteDoc(ref));
+  });
+
+  test('a partner needs a nickname, a birth date and a creation time', async () => {
+    const ref = doc(alice(), 'users/alice/partners/p1');
+    await assertSucceeds(
+      setDoc(ref, {
+        nickname: 'Moon',
+        birthDate: '1998-05-14',
+        createdAt: new Date(),
+      }),
+    );
+    await assertFails(setDoc(ref, { nickname: 'Moon' }));
     await assertFails(
-      setDoc(doc(bob(), 'users/alice/partners/p1'), { nickname: 'X' }),
+      setDoc(ref, { nickname: 'Moon', birthDate: '1998-05-14' }),
     );
-    await assertFails(getDoc(doc(anonymous(), 'users/alice/partners/p1')));
+    await assertFails(
+      setDoc(ref, { birthDate: '1998-05-14', createdAt: new Date() }),
+    );
+  });
+
+  test('rejects a nickname that is empty, too long or not text', async () => {
+    const ref = doc(alice(), 'users/alice/partners/p1');
+    await assertFails(setDoc(ref, partner({ nickname: '' })));
+    await assertFails(setDoc(ref, partner({ nickname: 'x'.repeat(31) })));
+    await assertSucceeds(setDoc(ref, partner({ nickname: 'x'.repeat(30) })));
+    await assertFails(setDoc(ref, partner({ nickname: 7 })));
+  });
+
+  test('rejects fields that are not part of a partner or have the wrong type', async () => {
+    const ref = doc(alice(), 'users/alice/partners/p1');
+    await assertFails(setDoc(ref, partner({ note: 'secret' })));
+    await assertFails(setDoc(ref, partner({ birthDate: new Date() })));
+    await assertFails(setDoc(ref, partner({ createdAt: '2026-10-30' })));
+    await assertFails(setDoc(ref, partner({ birthTime: 1430 })));
+    await assertFails(setDoc(ref, partner({ timeKnown: 'yes' })));
+    await assertFails(setDoc(ref, partner({ place: 'Bangkok' })));
+  });
+
+  test('the owner can delete one partner and the others stay', async () => {
+    await seed('users/alice/partners/p1', partner());
+    await seed('users/alice/partners/p2', partner({ nickname: 'Sol' }));
+    await assertSucceeds(deleteDoc(doc(alice(), 'users/alice/partners/p1')));
+    await assertSucceeds(getDoc(doc(alice(), 'users/alice/partners/p2')));
+  });
+
+  test('someone else cannot read, write or delete a partner', async () => {
+    await seed('users/alice/partners/p1', partner());
+    const ref = doc(bob(), 'users/alice/partners/p1');
+    await assertFails(getDoc(ref));
+    await assertFails(setDoc(ref, partner({ nickname: 'X' })));
+    await assertFails(deleteDoc(ref));
+  });
+
+  test('signed-out visitors cannot read or write a partner', async () => {
+    await seed('users/alice/partners/p1', partner());
+    const ref = doc(anonymous(), 'users/alice/partners/p1');
+    await assertFails(getDoc(ref));
+    await assertFails(setDoc(ref, partner()));
   });
 });
 

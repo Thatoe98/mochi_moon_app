@@ -13,6 +13,7 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
+import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
@@ -27,6 +28,7 @@ import '../features/cosmic/today/support/fake_thai_colors_setting.dart';
 import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
+import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
 import '../features/settings/support/fake_app_language.dart';
 import '../features/settings/support/fake_reminder.dart';
@@ -55,6 +57,8 @@ Widget _app({
     profileRemoteProvider.overrideWithValue(null),
     deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
     journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
+    partnerRepositoryProvider.overrideWithValue(FakePartnerRepository()),
+    partnerRemoteProvider.overrideWithValue(null),
     appLanguageRepositoryProvider.overrideWithValue(
       FakeAppLanguageRepository(),
     ),
@@ -145,6 +149,18 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Nothing saved yet'), findsOneWidget);
+  });
+
+  testWidgets('Me opens the partners list', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Partners'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('No partners yet'), findsOneWidget);
   });
 
   group('first run', () {

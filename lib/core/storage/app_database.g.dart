@@ -2087,6 +2087,266 @@ class ProfileCacheCompanion extends UpdateCompanion<ProfileCacheData> {
   }
 }
 
+class $PartnerCacheTable extends PartnerCache
+    with TableInfo<$PartnerCacheTable, PartnerCacheData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PartnerCacheTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _jsonMeta = const VerificationMeta('json');
+  @override
+  late final GeneratedColumn<String> json = GeneratedColumn<String>(
+    'json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, json, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'partner_cache';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<PartnerCacheData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('json')) {
+      context.handle(
+        _jsonMeta,
+        json.isAcceptableOrUnknown(data['json']!, _jsonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_jsonMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PartnerCacheData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PartnerCacheData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      json: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}json'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  $PartnerCacheTable createAlias(String alias) {
+    return $PartnerCacheTable(attachedDatabase, alias);
+  }
+}
+
+class PartnerCacheData extends DataClass
+    implements Insertable<PartnerCacheData> {
+  final String id;
+  final String json;
+  final DateTime createdAt;
+  const PartnerCacheData({
+    required this.id,
+    required this.json,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['json'] = Variable<String>(json);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  PartnerCacheCompanion toCompanion(bool nullToAbsent) {
+    return PartnerCacheCompanion(
+      id: Value(id),
+      json: Value(json),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory PartnerCacheData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PartnerCacheData(
+      id: serializer.fromJson<String>(json['id']),
+      json: serializer.fromJson<String>(json['json']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'json': serializer.toJson<String>(json),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  PartnerCacheData copyWith({String? id, String? json, DateTime? createdAt}) =>
+      PartnerCacheData(
+        id: id ?? this.id,
+        json: json ?? this.json,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  PartnerCacheData copyWithCompanion(PartnerCacheCompanion data) {
+    return PartnerCacheData(
+      id: data.id.present ? data.id.value : this.id,
+      json: data.json.present ? data.json.value : this.json,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PartnerCacheData(')
+          ..write('id: $id, ')
+          ..write('json: $json, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, json, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PartnerCacheData &&
+          other.id == this.id &&
+          other.json == this.json &&
+          other.createdAt == this.createdAt);
+}
+
+class PartnerCacheCompanion extends UpdateCompanion<PartnerCacheData> {
+  final Value<String> id;
+  final Value<String> json;
+  final Value<DateTime> createdAt;
+  final Value<int> rowid;
+  const PartnerCacheCompanion({
+    this.id = const Value.absent(),
+    this.json = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PartnerCacheCompanion.insert({
+    required String id,
+    required String json,
+    required DateTime createdAt,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       json = Value(json),
+       createdAt = Value(createdAt);
+  static Insertable<PartnerCacheData> custom({
+    Expression<String>? id,
+    Expression<String>? json,
+    Expression<DateTime>? createdAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (json != null) 'json': json,
+      if (createdAt != null) 'created_at': createdAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PartnerCacheCompanion copyWith({
+    Value<String>? id,
+    Value<String>? json,
+    Value<DateTime>? createdAt,
+    Value<int>? rowid,
+  }) {
+    return PartnerCacheCompanion(
+      id: id ?? this.id,
+      json: json ?? this.json,
+      createdAt: createdAt ?? this.createdAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (json.present) {
+      map['json'] = Variable<String>(json.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PartnerCacheCompanion(')
+          ..write('id: $id, ')
+          ..write('json: $json, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2099,6 +2359,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     this,
   );
   late final $ProfileCacheTable profileCache = $ProfileCacheTable(this);
+  late final $PartnerCacheTable partnerCache = $PartnerCacheTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2111,6 +2372,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     retroCalendar,
     preferenceVector,
     profileCache,
+    partnerCache,
   ];
 }
 
@@ -3420,6 +3682,177 @@ typedef $$ProfileCacheTableProcessedTableManager =
       ProfileCacheData,
       PrefetchHooks Function()
     >;
+typedef $$PartnerCacheTableCreateCompanionBuilder =
+    PartnerCacheCompanion Function({
+      required String id,
+      required String json,
+      required DateTime createdAt,
+      Value<int> rowid,
+    });
+typedef $$PartnerCacheTableUpdateCompanionBuilder =
+    PartnerCacheCompanion Function({
+      Value<String> id,
+      Value<String> json,
+      Value<DateTime> createdAt,
+      Value<int> rowid,
+    });
+
+class $$PartnerCacheTableFilterComposer
+    extends Composer<_$AppDatabase, $PartnerCacheTable> {
+  $$PartnerCacheTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$PartnerCacheTableOrderingComposer
+    extends Composer<_$AppDatabase, $PartnerCacheTable> {
+  $$PartnerCacheTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$PartnerCacheTableAnnotationComposer
+    extends Composer<_$AppDatabase, $PartnerCacheTable> {
+  $$PartnerCacheTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get json =>
+      $composableBuilder(column: $table.json, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $$PartnerCacheTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $PartnerCacheTable,
+          PartnerCacheData,
+          $$PartnerCacheTableFilterComposer,
+          $$PartnerCacheTableOrderingComposer,
+          $$PartnerCacheTableAnnotationComposer,
+          $$PartnerCacheTableCreateCompanionBuilder,
+          $$PartnerCacheTableUpdateCompanionBuilder,
+          (
+            PartnerCacheData,
+            BaseReferences<_$AppDatabase, $PartnerCacheTable, PartnerCacheData>,
+          ),
+          PartnerCacheData,
+          PrefetchHooks Function()
+        > {
+  $$PartnerCacheTableTableManager(_$AppDatabase db, $PartnerCacheTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$PartnerCacheTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$PartnerCacheTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$PartnerCacheTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> json = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => PartnerCacheCompanion(
+                id: id,
+                json: json,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String json,
+                required DateTime createdAt,
+                Value<int> rowid = const Value.absent(),
+              }) => PartnerCacheCompanion.insert(
+                id: id,
+                json: json,
+                createdAt: createdAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$PartnerCacheTable, PartnerCacheData>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $PartnerCacheTable,
+                    PartnerCacheData
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$PartnerCacheTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $PartnerCacheTable,
+      PartnerCacheData,
+      $$PartnerCacheTableFilterComposer,
+      $$PartnerCacheTableOrderingComposer,
+      $$PartnerCacheTableAnnotationComposer,
+      $$PartnerCacheTableCreateCompanionBuilder,
+      $$PartnerCacheTableUpdateCompanionBuilder,
+      (
+        PartnerCacheData,
+        BaseReferences<_$AppDatabase, $PartnerCacheTable, PartnerCacheData>,
+      ),
+      PartnerCacheData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3438,6 +3871,8 @@ class $AppDatabaseManager {
       $$PreferenceVectorTableTableManager(_db, _db.preferenceVector);
   $$ProfileCacheTableTableManager get profileCache =>
       $$ProfileCacheTableTableManager(_db, _db.profileCache);
+  $$PartnerCacheTableTableManager get partnerCache =>
+      $$PartnerCacheTableTableManager(_db, _db.partnerCache);
 }
 
 // **************************************************************************

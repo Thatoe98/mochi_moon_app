@@ -54,6 +54,17 @@ class ProfileCache extends Table {
   Set<Column<Object>> get primaryKey => {id};
 }
 
+/// Partners for compatibility (PRD §6.12): [json] is the Firestore shape of
+/// the document, [id] its document id.
+class PartnerCache extends Table {
+  TextColumn get id => text()();
+  TextColumn get json => text()();
+  DateTimeColumn get createdAt => dateTime()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
 class RetroCalendar extends Table {
   TextColumn get planet => text()();
   IntColumn get year => integer()();

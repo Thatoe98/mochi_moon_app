@@ -1048,4 +1048,103 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get chartRisingPisces =>
       'လူတွေက ကိုယ့်ကို နူးညံ့အိပ်မက်ဆန်ပြီး ကြင်နာတတ်သူလို့ မြင်နိုင်တယ်။ ကိုယ့်ရဲ့ နူးညံ့တဲ့အငွေ့အသက်ကြောင့် တခြားသူတွေကို နားလည်ခံစားပေးခံရတယ်လို့ ခံစားရစေတယ်။';
+
+  @override
+  String get mePartnersSubtitle =>
+      'ကိုယ့် birth chart နဲ့ နှိုင်းယှဉ်ကြည့်တဲ့သူတွေ';
+
+  @override
+  String get partnersTitle => 'ပါတနာများ';
+
+  @override
+  String get partnersEmptyTitle => 'ပါတနာ မရှိသေးဘူး';
+
+  @override
+  String get partnersEmptyBody =>
+      'birth chart တွေ ဘယ်လိုလိုက်ဖက်လဲ ကြည့်ဖို့ တစ်ယောက်ယောက်ရဲ့ မွေးနေ့ကို ထည့်လိုက်ပါ။ ပျော်ဖို့နဲ့ ကိုယ့်ကိုယ်ကို ပြန်လည်ဆင်ခြင်ဖို့ သက်သက်ပါ။';
+
+  @override
+  String get partnersAdd => 'ပါတနာ ထည့်မယ်';
+
+  @override
+  String partnersLimitFree(int free, int premium) {
+    return 'Free မှာ partner $free ယောက် ပါဝင်ပါတယ်။ Premium မှာတော့ $premium ယောက်အထိ သိမ်းထားနိုင်ပါတယ်။';
+  }
+
+  @override
+  String partnersLimitPremium(int count) {
+    return 'သိမ်းထားနိုင်တဲ့ အများဆုံး partner အရေအတွက် ($count) ပြည့်သွားပါပြီ။ အသစ်တစ်ယောက် ထည့်ဖို့ တစ်ယောက်ကို ဖျက်လိုက်ပါ။';
+  }
+
+  @override
+  String partnersTileSubtitle(String sign, String date) {
+    return '$sign · မွေးနေ့ $date';
+  }
+
+  @override
+  String partnersDeleteTooltip(String name) {
+    return '$name ကို ဖျက်မယ်';
+  }
+
+  @override
+  String partnersDeleteTitle(String name) {
+    return '$name ကို ဖျက်မှာလား။';
+  }
+
+  @override
+  String get partnersDeleteBody =>
+      'သူ့ရဲ့ မွေးဖွားမှုအချက်အလက်တွေကို ဒီဖုန်းနဲ့ ကိုယ့်အကောင့်ထဲကနေ ဖယ်ရှားပါမယ်။ အချိန်မရွေး ပြန်ထည့်နိုင်ပါတယ်။';
+
+  @override
+  String get partnersDeleteConfirm => 'ဖျက်မယ်';
+
+  @override
+  String get partnersAddTitle => 'ပါတနာ ထည့်မယ်';
+
+  @override
+  String get partnersEditTitle => 'ပါတနာကို ပြင်မယ်';
+
+  @override
+  String get partnersNicknameLabel => 'ချစ်စနိုးနာမည်';
+
+  @override
+  String get partnersNicknameHelper =>
+      'ချစ်စနိုးနာမည်လေးဆို အဆင်ပြေပါတယ်။ ကိုယ်တစ်ယောက်တည်းပဲ မြင်နိုင်ပါတယ်။';
+
+  @override
+  String get partnersBirthDateLabel => 'မွေးနေ့';
+
+  @override
+  String get partnersBirthDateChoose => 'ရက်စွဲရွေးပါ';
+
+  @override
+  String get partnersBirthTimeLabel => 'မွေးချိန် (မဖြည့်လည်းရပါတယ်)';
+
+  @override
+  String get partnersBirthPlaceLabel => 'မွေးဖွားရာနေရာ (မဖြည့်လည်းရပါတယ်)';
+
+  @override
+  String get partnersBirthPlaceNeeded =>
+      'မွေးချိန်ကို မှန်ကန်တဲ့ time zone နဲ့ ဖတ်ရှုနိုင်ဖို့ မွေးဖွားရာနေရာကို ထည့်ပေးပါ။';
+
+  @override
+  String get partnersLightHint =>
+      'မွေးချိန်မရှိရင် အခြေခံဖတ်ရှုချက်လေးကို ရပါမယ်။ ဒါလေးလည်း ကောင်းပါတယ်။';
+
+  @override
+  String get partnersPrivacy =>
+      'ဒါကို ကိုယ်တစ်ယောက်တည်းပဲ မြင်နိုင်ပြီး အချိန်မရွေး ဖျက်နိုင်ပါတယ်။';
+
+  @override
+  String get partnersSave => 'သိမ်းမယ်';
+
+  @override
+  String get partnersSaveFailed =>
+      'ဒါကို သိမ်းလို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
+
+  @override
+  String get partnersLimitReached => 'ပါတနာ အများဆုံးအရေအတွက် ပြည့်သွားပါပြီ။';
+
+  @override
+  String get partnersNotFound => 'ဒီပါတနာကို ရှာမတွေ့ပါဘူး။';
 }

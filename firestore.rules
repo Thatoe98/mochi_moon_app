@@ -17,7 +17,26 @@ service cloud.firestore {
           && request.resource.data.keys().hasOnly(['savedAt'])
           && request.resource.data.savedAt is timestamp;
       }
-      match /partners/{id} { allow read, write: if request.auth.uid == uid; }
+      match /partners/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasAll(['nickname', 'birthDate', 'createdAt'])
+          && request.resource.data.keys().hasOnly(
+            ['nickname', 'birthDate', 'birthTime', 'timeKnown', 'place', 'createdAt'])
+          && request.resource.data.nickname is string
+          && request.resource.data.nickname.size() >= 1
+          && request.resource.data.nickname.size() <= 30
+          && request.resource.data.birthDate is string
+          && request.resource.data.createdAt is timestamp
+          && (!('birthTime' in request.resource.data)
+              || request.resource.data.birthTime == null
+              || request.resource.data.birthTime is string)
+          && (!('timeKnown' in request.resource.data)
+              || request.resource.data.timeKnown is bool)
+          && (!('place' in request.resource.data)
+              || request.resource.data.place == null
+              || request.resource.data.place is map);
+      }
       match /reports/{id}  { allow read: if request.auth.uid == uid; allow write: if false; }
     }
   }

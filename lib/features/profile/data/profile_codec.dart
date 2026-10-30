@@ -17,14 +17,7 @@ Map<String, Object?> profileToMap(UserProfile profile) => {
     'timeKnown': profile.timeKnown,
     'place': profile.birthPlace == null
         ? null
-        : {
-            'name': profile.birthPlace!.name,
-            'region': profile.birthPlace!.region,
-            'countryCode': profile.birthPlace!.countryCode,
-            'lat': profile.birthPlace!.lat,
-            'lng': profile.birthPlace!.lng,
-            'tzId': profile.birthPlace!.tzId,
-          },
+        : birthPlaceToMap(profile.birthPlace!),
     'focusAreas': [for (final area in profile.focusAreas) area.id],
   },
 };
@@ -51,7 +44,7 @@ UserProfile profileFromMap(Map<String, Object?> map) {
       _ => null,
     },
     birthPlace: switch (profile['place']) {
-      final Map<Object?, Object?> place => _placeFromMap(place),
+      final Map<Object?, Object?> place => birthPlaceFromMap(place),
       _ => null,
     },
     focusAreas: [
@@ -63,9 +56,19 @@ UserProfile profileFromMap(Map<String, Object?> map) {
   );
 }
 
+/// The Firestore shape of a birthplace, shared by the profile and partners.
+Map<String, Object?> birthPlaceToMap(BirthPlace place) => {
+  'name': place.name,
+  'region': place.region,
+  'countryCode': place.countryCode,
+  'lat': place.lat,
+  'lng': place.lng,
+  'tzId': place.tzId,
+};
+
 /// A place with a missing name, coordinate or zone is dropped as a whole: a
 /// half-known place would put the birth time in the wrong zone.
-BirthPlace? _placeFromMap(Map<Object?, Object?> map) {
+BirthPlace? birthPlaceFromMap(Map<Object?, Object?> map) {
   final name = map['name'];
   final countryCode = map['countryCode'];
   final lat = map['lat'];

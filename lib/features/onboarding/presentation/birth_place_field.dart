@@ -12,10 +12,15 @@ class BirthPlaceField extends ConsumerStatefulWidget {
   const BirthPlaceField({
     required this.chosen,
     required this.onChosen,
+    this.autofocus = true,
     super.key,
   });
 
   final BirthPlace? chosen;
+
+  /// Whether the search box takes focus when it shows. Off in a longer form,
+  /// where it would pull the keyboard away from the other fields.
+  final bool autofocus;
 
   /// Called with the picked city, or null when the user clears the choice.
   final ValueChanged<City?> onChosen;
@@ -58,7 +63,7 @@ class _BirthPlaceFieldState extends ConsumerState<BirthPlaceField> {
       children: [
         TextField(
           controller: _controller,
-          autofocus: true,
+          autofocus: widget.autofocus,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
             labelText: l10n.profileBirthPlaceLabel,

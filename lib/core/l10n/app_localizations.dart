@@ -1813,6 +1813,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.'**
   String get chartRisingPisces;
+
+  /// No description provided for @mePartnersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'People you compare your chart with'**
+  String get mePartnersSubtitle;
+
+  /// No description provided for @partnersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Partners'**
+  String get partnersTitle;
+
+  /// No description provided for @partnersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No partners yet'**
+  String get partnersEmptyTitle;
+
+  /// No description provided for @partnersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add someone\'s birthday to see how your charts get along. It\'s just for fun and self-reflection.'**
+  String get partnersEmptyBody;
+
+  /// No description provided for @partnersAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a partner'**
+  String get partnersAdd;
+
+  /// No description provided for @partnersLimitFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free includes {free} partner. Premium keeps up to {premium}.'**
+  String partnersLimitFree(int free, int premium);
+
+  /// No description provided for @partnersLimitPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve saved the most partners you can ({count}). Delete one to add someone new.'**
+  String partnersLimitPremium(int count);
+
+  /// No description provided for @partnersTileSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{sign} · Born {date}'**
+  String partnersTileSubtitle(String sign, String date);
+
+  /// No description provided for @partnersDeleteTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {name}'**
+  String partnersDeleteTooltip(String name);
+
+  /// No description provided for @partnersDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {name}?'**
+  String partnersDeleteTitle(String name);
+
+  /// No description provided for @partnersDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Their birth details will be removed from this phone and from your account. You can add them again anytime.'**
+  String get partnersDeleteBody;
+
+  /// No description provided for @partnersDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get partnersDeleteConfirm;
+
+  /// No description provided for @partnersAddTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a partner'**
+  String get partnersAddTitle;
+
+  /// No description provided for @partnersEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit partner'**
+  String get partnersEditTitle;
+
+  /// No description provided for @partnersNicknameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Nickname'**
+  String get partnersNicknameLabel;
+
+  /// No description provided for @partnersNicknameHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'A nickname is perfect. Only you can see it.'**
+  String get partnersNicknameHelper;
+
+  /// No description provided for @partnersBirthDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get partnersBirthDateLabel;
+
+  /// No description provided for @partnersBirthDateChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a date'**
+  String get partnersBirthDateChoose;
+
+  /// No description provided for @partnersBirthTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth time (optional)'**
+  String get partnersBirthTimeLabel;
+
+  /// No description provided for @partnersBirthPlaceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthplace (optional)'**
+  String get partnersBirthPlaceLabel;
+
+  /// No description provided for @partnersBirthPlaceNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a birthplace so we can read the birth time in the right time zone.'**
+  String get partnersBirthPlaceNeeded;
+
+  /// No description provided for @partnersLightHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Without a birth time you\'ll get a light reading, which is still lovely.'**
+  String get partnersLightHint;
+
+  /// No description provided for @partnersPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can see this, and you can delete it anytime.'**
+  String get partnersPrivacy;
+
+  /// No description provided for @partnersSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get partnersSave;
+
+  /// No description provided for @partnersSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t save this. Please try again.'**
+  String get partnersSaveFailed;
+
+  /// No description provided for @partnersLimitReached.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve reached the partner limit.'**
+  String get partnersLimitReached;
+
+  /// No description provided for @partnersNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t find this partner.'**
+  String get partnersNotFound;
 }
 
 class _AppLocalizationsDelegate

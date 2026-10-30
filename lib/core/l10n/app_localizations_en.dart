@@ -1040,4 +1040,101 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get chartRisingPisces =>
       'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.';
+
+  @override
+  String get mePartnersSubtitle => 'People you compare your chart with';
+
+  @override
+  String get partnersTitle => 'Partners';
+
+  @override
+  String get partnersEmptyTitle => 'No partners yet';
+
+  @override
+  String get partnersEmptyBody =>
+      'Add someone\'s birthday to see how your charts get along. It\'s just for fun and self-reflection.';
+
+  @override
+  String get partnersAdd => 'Add a partner';
+
+  @override
+  String partnersLimitFree(int free, int premium) {
+    return 'Free includes $free partner. Premium keeps up to $premium.';
+  }
+
+  @override
+  String partnersLimitPremium(int count) {
+    return 'You\'ve saved the most partners you can ($count). Delete one to add someone new.';
+  }
+
+  @override
+  String partnersTileSubtitle(String sign, String date) {
+    return '$sign · Born $date';
+  }
+
+  @override
+  String partnersDeleteTooltip(String name) {
+    return 'Delete $name';
+  }
+
+  @override
+  String partnersDeleteTitle(String name) {
+    return 'Delete $name?';
+  }
+
+  @override
+  String get partnersDeleteBody =>
+      'Their birth details will be removed from this phone and from your account. You can add them again anytime.';
+
+  @override
+  String get partnersDeleteConfirm => 'Delete';
+
+  @override
+  String get partnersAddTitle => 'Add a partner';
+
+  @override
+  String get partnersEditTitle => 'Edit partner';
+
+  @override
+  String get partnersNicknameLabel => 'Nickname';
+
+  @override
+  String get partnersNicknameHelper =>
+      'A nickname is perfect. Only you can see it.';
+
+  @override
+  String get partnersBirthDateLabel => 'Birthday';
+
+  @override
+  String get partnersBirthDateChoose => 'Choose a date';
+
+  @override
+  String get partnersBirthTimeLabel => 'Birth time (optional)';
+
+  @override
+  String get partnersBirthPlaceLabel => 'Birthplace (optional)';
+
+  @override
+  String get partnersBirthPlaceNeeded =>
+      'Add a birthplace so we can read the birth time in the right time zone.';
+
+  @override
+  String get partnersLightHint =>
+      'Without a birth time you\'ll get a light reading, which is still lovely.';
+
+  @override
+  String get partnersPrivacy =>
+      'Only you can see this, and you can delete it anytime.';
+
+  @override
+  String get partnersSave => 'Save';
+
+  @override
+  String get partnersSaveFailed => 'We couldn\'t save this. Please try again.';
+
+  @override
+  String get partnersLimitReached => 'You\'ve reached the partner limit.';
+
+  @override
+  String get partnersNotFound => 'We couldn\'t find this partner.';
 }
