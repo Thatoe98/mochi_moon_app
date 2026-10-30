@@ -108,7 +108,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 **AC**
 - [x] Swipe attempts before the timer completes are cancelled and the card springs back. — *widget test `a swipe before the timer ends is cancelled`.*
 - [x] After the timer completes, all three swipe directions work, plus button equivalents for accessibility. — *widget tests cover right, left and up, and that the three buttons are disabled until the ring is full and enabled after.*
-- [ ] The daily counter resets at local midnight; it is stored locally and synced to Firestore. — *synced since M2 (`users/{uid}.deck`); the reset while the app stays open past midnight is still deferred*
+- [x] The daily counter resets at local midnight; it is stored locally and synced to Firestore. — *synced since M2 (`users/{uid}.deck`); an open deck is dealt again by a timer at local midnight, and on returning to the app if the day changed meanwhile (unlocked cards are cleared, so the read-aloud timer applies again). The Firestore copy updates with the next swipe, not at midnight itself*
 - [x] "Reduce motion" disables tilt and sparkle animations but keeps the ring. — *follows the system setting and the new Me-tab switch (tested)*
 - [x] Works offline using bundled quotes. — *the deck reads the bundled `quotes.json` and the local drift database; the only network part is the Firestore counter sync, which is local-first and retried later.*
 - [x] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header. — *`deck_planner_test` covers the count (a streak reaching yesterday stays alive until today ends); `the streak shows in the app bar once a card is done` covers the header.*
@@ -578,7 +578,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [x] Content loader for `quotes.json` and `signs.json` with 20 sample quotes — *quotes are en only; my/th text pending*
 
 ### M1 — Self-love deck (Android closed test)
-- [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), midnight reset while open, premium-quote filtering, `my` strings need native review*
+- [x] Deck with timer gate (§6.2) and tests — *deferred: Firestore counter sync (M2), mood check-in, share sheet on swipe-up (§6.4, records `shared` only), heart animation, premium upsell on the limit card (M4), premium-quote filtering, `my` strings need native review*
 - [x] Journal (local first, §6.3) — *deferred: Firestore sync (M2), per-card art beyond the 5 theme pieces, entry to the journal from the Deck header, `my` strings need native review*
 - [x] Share as image (§6.4) — *deferred: font check in all scripts (fonts not bundled), share handle value, share-sheet position origin for iPad*
 - [x] Daily reminder notification (§6.6, first box; retrograde alerts and FCM are separate)

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -122,12 +123,18 @@ class Deck extends _$Deck {
   List<DeckEvent> _history = [];
   DeckEvent? _last;
 
+  /// The local day the current deck was dealt for.
+  DateTime _day = DateTime(0);
+
   @override
   Future<DeckState> build() async {
     final repo = ref.watch(deckRepositoryProvider);
     final now = ref.watch(clockProvider)();
     final quotes = await ref.watch(quotesProvider.future);
     final limit = ref.watch(dailyCardLimitProvider);
+
+    _day = DateTime(now.year, now.month, now.day);
+    _dealAgainAtMidnight(now);
 
     _history = await repo.history();
     _last = null;
@@ -150,6 +157,26 @@ class Deck extends _$Deck {
       streak: currentStreak(_history, now),
       canUndo: false,
     );
+  }
+
+  /// Deals a fresh deck when the local day turns while the app stays open
+  /// (PRD §6.2): the counter starts again and new cards are drawn. The timer
+  /// is cancelled whenever the deck is rebuilt or disposed. Phones can pause
+  /// timers in the background, so [refreshIfNewDay] covers coming back.
+  void _dealAgainAtMidnight(DateTime now) {
+    final midnight = DateTime(now.year, now.month, now.day + 1);
+    // A second of margin, so an early timer never rebuilds the same day.
+    final timer = Timer(
+      midnight.difference(now) + const Duration(seconds: 1),
+      ref.invalidateSelf,
+    );
+    ref.onDispose(timer.cancel);
+  }
+
+  /// Deals a fresh deck if the local day has changed since this one was dealt.
+  void refreshIfNewDay() {
+    final now = ref.read(clockProvider)();
+    if (DateTime(now.year, now.month, now.day) != _day) ref.invalidateSelf();
   }
 
   /// Moves today's [cardOfTheDay] to the front of [plan] (the card the widget

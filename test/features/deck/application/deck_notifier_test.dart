@@ -20,11 +20,12 @@ void main() {
     FakeDeckRepository? repo,
     int limit = 10,
     int quoteCount = 20,
+    DateTime Function()? clock,
   }) {
     final container = ProviderContainer(
       overrides: [
         deckRepositoryProvider.overrideWithValue(repo ?? FakeDeckRepository()),
-        clockProvider.overrideWithValue(() => now),
+        clockProvider.overrideWithValue(clock ?? () => now),
         randomProvider.overrideWithValue(Random(1)),
         dailyCardLimitProvider.overrideWithValue(limit),
         quotesProvider.overrideWith(
@@ -116,6 +117,76 @@ void main() {
       final state = await container.read(deckProvider.future);
 
       expect(state.cards.map((q) => q.id), [cardId]);
+    });
+  });
+
+  group('when the day turns', () {
+    final tonight = DateTime(2026, 10, 28, 23, 59, 30);
+
+    FakeDeckRepository finishedToday() => FakeDeckRepository([
+      for (var i = 0; i < 3; i++)
+        DeckEvent(
+          id: i,
+          quoteId: 'q$i',
+          action: DeckAction.saved,
+          at: DateTime(2026, 10, 28, 20),
+        ),
+    ]);
+
+    test('refreshIfNewDay deals a fresh deck, keeping the streak', () async {
+      var clock = tonight;
+      final container = makeContainer(
+        repo: finishedToday(),
+        limit: 3,
+        clock: () => clock,
+      )..listen(deckProvider, (_, _) {});
+      final before = await container.read(deckProvider.future);
+      expect(before.isDone, isTrue);
+
+      clock = DateTime(2026, 10, 29, 8);
+      container.read(deckProvider.notifier).refreshIfNewDay();
+      final after = await container.read(deckProvider.future);
+
+      expect(after.completedToday, 0);
+      expect(after.cards, hasLength(3));
+      expect(after.streak, 1);
+    });
+
+    test('refreshIfNewDay leaves the same day alone', () async {
+      final container = makeContainer(
+        repo: finishedToday(),
+        limit: 3,
+        clock: () => tonight,
+      )..listen(deckProvider, (_, _) {});
+      final before = await container.read(deckProvider.future);
+
+      container.read(deckProvider.notifier).refreshIfNewDay();
+      final after = await container.read(deckProvider.future);
+
+      expect(identical(after.cards, before.cards), isTrue);
+    });
+
+    testWidgets('a deck left open past midnight is dealt again', (
+      tester,
+    ) async {
+      var clock = tonight;
+      final container = makeContainer(
+        repo: finishedToday(),
+        limit: 3,
+        clock: () => clock,
+      )..listen(deckProvider, (_, _) {});
+      await tester.pump();
+      expect(container.read(deckProvider).value?.completedToday, 3);
+
+      clock = DateTime(2026, 10, 29, 0, 0, 5);
+      await tester.pump(const Duration(seconds: 40));
+      await tester.pump();
+
+      expect(container.read(deckProvider).value?.completedToday, 0);
+      expect(container.read(deckProvider).value?.cards, hasLength(3));
+
+      // The test binding checks for pending timers before the teardown runs.
+      container.dispose();
     });
   });
 

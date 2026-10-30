@@ -22,13 +22,34 @@ class DeckScreen extends ConsumerStatefulWidget {
   ConsumerState<DeckScreen> createState() => _DeckScreenState();
 }
 
-class _DeckScreenState extends ConsumerState<DeckScreen> {
+class _DeckScreenState extends ConsumerState<DeckScreen>
+    with WidgetsBindingObserver {
   /// Cards whose timer has finished, so an undone card stays unlocked even
   /// while the deck is off screen behind the limit card.
   final _read = <String>{};
 
   /// An undo from the limit card is in flight.
   bool _undoing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// A new day may have started while the app was in the background.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ref.read(deckProvider.notifier).refreshIfNewDay();
+    }
+  }
 
   Future<void> _onAction(DeckAction action, Quote quote) async {
     await ref.read(deckProvider.notifier).complete(action);
@@ -49,6 +70,18 @@ class _DeckScreenState extends ConsumerState<DeckScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final deck = ref.watch(deckProvider);
+
+    // A new deal (a new day, or a retry) must not inherit unlocked cards: the
+    // read-aloud timer applies again.
+    ref.listen(deckProvider, (previous, next) {
+      final before = previous?.value;
+      final after = next.value;
+      if (before != null &&
+          after != null &&
+          !identical(before.cards, after.cards)) {
+        setState(_read.clear);
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
