@@ -11,6 +11,8 @@ import 'package:mochi_moon/features/cosmic/chart/presentation/big_three_card.dar
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_labels.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_wheel.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/placements_list.dart';
+import 'package:mochi_moon/features/cosmic/report/presentation/full_reading_card.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// The birth chart: the Big 3 and every placement (PRD §6.11).
 class ChartScreen extends ConsumerWidget {
@@ -37,13 +39,13 @@ class ChartScreen extends ConsumerWidget {
   }
 }
 
-class _ChartView extends StatelessWidget {
+class _ChartView extends ConsumerWidget {
   const _ChartView({required this.chart});
 
   final NatalChart chart;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final rising = chart.ascendantSign;
@@ -81,6 +83,7 @@ class _ChartView extends StatelessWidget {
             ),
           ),
         PlacementsList(chart: chart),
+        if (ref.watch(hasPremiumProvider)) const FullReadingCard(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
           child: Text(

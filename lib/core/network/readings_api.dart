@@ -40,6 +40,23 @@ class ReadingsApi {
     }
   }
 
+  /// A JSON `POST` that answers with a JSON object (200 or 202).
+  Future<Map<String, Object?>> postJson(
+    String path,
+    Map<String, Object?> body,
+  ) async {
+    try {
+      final response = await _dio.post<Object?>(path, data: body);
+      final data = response.data;
+      if (data is Map<String, Object?>) return data;
+      throw const FormatException(
+        'The Readings API sent something else than a JSON object.',
+      );
+    } on DioException catch (error) {
+      throw _translate(error);
+    }
+  }
+
   /// A `DELETE` that answers with no body. [receiveTimeout] is for calls that
   /// do real work on the server before they answer.
   Future<void> delete(String path, {Duration? receiveTimeout}) async {

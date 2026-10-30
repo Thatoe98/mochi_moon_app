@@ -260,6 +260,26 @@
   "accountDeleteFailed": "Something went wrong and nothing was deleted. Please try again.",
   "chartTitle": "Birth chart",
   "chartButtonHint": "See your Sun, Moon and Rising",
+  "chartReportCardTitle": "Your full reading",
+  "chartReportCardBody": "A longer, gentler read about your personality, feelings, love life, work and everyday habits.",
+  "reportTitle": "Your full reading",
+  "reportPreparingTitle": "Writing your reading",
+  "reportPreparingBody": "The first parts take a minute or two. You can leave and come back; it keeps going.",
+  "reportProgress": "{ready} of {total} parts ready · about {minutes} min read",
+  "@reportProgress": {
+    "placeholders": {
+      "ready": { "type": "int" },
+      "total": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "reportWriting": "Writing the next part…",
+  "reportFailedTitle": "Some parts did not finish",
+  "reportFailedBody": "Nothing is lost. Try again to write the missing parts.",
+  "reportBusyBody": "You asked for a lot of readings in a short time. Please try again in a while.",
+  "reportOfflineTitle": "You're offline",
+  "reportOfflineBody": "Your full reading needs a connection the first time. Once it is written, it is saved on your phone.",
+  "reportUnavailableBody": "The full reading is not available in this version yet.",
   "chartBigThreeTitle": "Your Big 3",
   "chartPlacementsTitle": "Placements",
   "chartWheelLabel": "Birth chart wheel. The placements are listed below.",

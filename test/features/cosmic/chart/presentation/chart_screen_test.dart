@@ -89,6 +89,14 @@ void main() {
     expect(find.text('Your Big 3'), findsNothing);
   });
 
+  testWidgets('offers the full reading to Premium users', (tester) async {
+    _tallView(tester);
+    await tester.pumpWidget(_host(profile: _withTime));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your full reading'), findsOneWidget);
+  });
+
   testWidgets('shows an error with a way to retry', (tester) async {
     await tester.pumpWidget(_host(profile: _withTime, failing: true));
     await tester.pumpAndSettle();

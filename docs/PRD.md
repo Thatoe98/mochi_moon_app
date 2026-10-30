@@ -197,7 +197,7 @@ Shows for the user's local date:
 
 **Readings**
 - Free: Big 3 cards (Sun, Moon, Rising) with short bundled texts.
-- Premium: full AI natal report (§8.2 `POST /v1/reports/natal`) with sections: Overview, Core self (Sun), Emotions (Moon), First impression (Rising), Love style (Venus), Drive (Mars), Mind (Mercury), Growth (Jupiter/Saturn). Generated once per user per language and cached; regenerated only if birth data changes.
+- Premium: full AI natal report (§8.2 `POST /v1/reports/natal`) as a 5 to 10 minute read of 13 parts (12 without a birth time): Overview, Core self (Sun), Emotions (Moon), First impression (Rising, needs a birth time), Mind (Mercury), Love (Venus), Drive (Mars), Work (Midheaven, Saturn), Money (values and habits only, never earnings or outcomes), Friends and family, Growth (Jupiter, Saturn), Gentle edges (hard aspects, retrogrades), Self-love ritual. Written part by part, so the screen fills in as the server works. Generated once per chart per language and saved on the device; asked for again only if the birth data changes.
 
 **AC**
 - [x] Unknown birth time: no Ascendant, no houses, Moon marked "approximate"; banner invites adding the time. *(the banner explains why but cannot link anywhere yet: there is no screen to edit birth data)*
@@ -407,7 +407,9 @@ Base: `https://api.<domain>/v1`. Auth: `Authorization: Bearer <Firebase ID token
 }
 ```
 
-Response: `{ "reportId": "...", "lang": "en", "version": 1, "sections": [ { "key": "overview", "title": "...", "body": "..." } ] }`. The server also writes it to `users/{uid}/reports/{reportId}`.
+`midheaven` is sent like `ascendant`; both and every `house` are left out when `timeKnown` is false. Any other field (a birth date, for example) is rejected with 400.
+
+Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generating" | "ready" | "failed", "total": 13, "sections": [ { "key": "overview", "title": "...", "body": "..." } ] }`. The call returns at once: **202** while the server writes the parts in the background, **200** when the report is ready (sending the same chart again finds the same report, no new cost). `GET /reports/natal/{reportId}` returns the same shape; the app polls it every ~3 s and shows the parts as they arrive (`sections` is always an unbroken run from the first). A failed report keeps its finished parts, and posting again writes only the missing ones. 5 new reports an hour per user (429). Reports are kept in the server's SQLite database, owner-only, and erased with the account. The server does not check Premium until purchase verification exists (M4).
 
 **`POST /reports/compatibility` request:** `{ "lang", "partnerId", "a": <placements block>, "b": <placements block>, "score": { "overall", "romance", "emotional", "communication" }, "topAspects": [...] }`.
 
@@ -606,9 +608,9 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 ### M4 — AI and monetization
 - [x] Readings API client + caching (§8.2) — *client, drift cache and fallback order are done and tested; the app uses them once `READINGS_API_URL` is set, so real calls wait for the server (repo `mochi-moon-api`). Premium endpoints come later.*
-- [ ] Server: nightly generation, reports endpoints, purchase verification (separate repo)
+- [ ] Server: nightly generation, reports endpoints, purchase verification (separate repo) — *nightly generation and the natal report endpoints are built (see the next item); the compatibility report and purchase verification are still to do.*
 - [ ] Paywall, Play Billing products, entitlement from Firestore, restore
-- [ ] Full natal and compatibility reports
+- [ ] Full natal and compatibility reports — *the **natal** report is built: server `POST/GET /reports/natal` (13 parts, one OpenAI call each, validated and retried; restart-safe; owner-only; erased with the account) and the app's `features/cosmic/report/` (a "Your full reading" card at the bottom of the birth chart, shown when `hasPremiumProvider` is true, which is a stub that returns true until the paywall; the report screen shows the parts as they arrive with "n of total parts ready, about X min read", then the entertainment note). A finished report is saved in the `CachedReports` table keyed by language and the chart's request, so editing the birth data replaces it and a saved one needs no network. Burmese titles and texts come from the server's prompt and are **unreviewed**. Deferred: the Premium check on the server and the paywall teaser for free users (M4), the compatibility report, and sharing or exporting the reading.*
 - [ ] For You deck with embeddings (§7.2); daily mix card
 - [ ] Analytics with consent, Crashlytics
 

@@ -101,6 +101,7 @@ class EmptyState extends StatelessWidget {
     this.body,
     this.illustration,
     this.illustrationLabel,
+    this.action,
     super.key,
   }) : assert(
          illustration == null || illustrationLabel != null,
@@ -114,11 +115,15 @@ class EmptyState extends StatelessWidget {
   final String? illustration;
   final String? illustrationLabel;
 
+  /// A button under the text, such as "Try again".
+  final Widget? action;
+
   @override
   Widget build(BuildContext context) => _CenteredMessage(
     icon: Icons.nightlight_round,
     title: title,
     body: body,
+    action: action,
     illustration: illustration == null
         ? null
         : ConstrainedBox(

@@ -824,6 +824,53 @@ class AppLocalizationsMy extends AppLocalizations {
   String get chartButtonHint => 'Sun, Moon နဲ့ Rising ကို ကြည့်မယ်';
 
   @override
+  String get chartReportCardTitle => 'အပြည့်အစုံဖတ်ရှုချက်';
+
+  @override
+  String get chartReportCardBody =>
+      'ကိုယ့်ရဲ့ ပင်ကိုယ်စရိုက်၊ ခံစားချက်တွေ၊ အချစ်ရေး၊ အလုပ်နဲ့ နေ့စဉ်အလေ့အကျင့်လေးတွေအကြောင်း ပိုရှည်ပြီး နူးညံ့တဲ့ ဖတ်ရှုချက်လေးပါ။';
+
+  @override
+  String get reportTitle => 'အပြည့်အစုံဖတ်ရှုချက်';
+
+  @override
+  String get reportPreparingTitle => 'ဖတ်ရှုချက်ကို ရေးနေပါတယ်';
+
+  @override
+  String get reportPreparingBody =>
+      'အစပိုင်းလေးတွေ ပြီးဖို့ 1 မိနစ်၊ 2 မိနစ်လောက် ကြာနိုင်ပါတယ်။ ထွက်သွားပြီး နောက်မှပြန်လာလည်း ရပါတယ်။ ဆက်ရေးနေမှာပါ။';
+
+  @override
+  String reportProgress(int ready, int total, int minutes) {
+    return 'အပိုင်း $ready / $total ပြီးပါပြီ · ဖတ်ချိန် $minutes မိနစ်လောက်';
+  }
+
+  @override
+  String get reportWriting => 'နောက်တစ်ပိုင်းကို ရေးနေပါတယ်…';
+
+  @override
+  String get reportFailedTitle => 'တချို့အပိုင်းတွေ မပြီးသေးပါဘူး';
+
+  @override
+  String get reportFailedBody =>
+      'ဘာမှ ပျောက်မသွားပါဘူး။ မပြီးသေးတဲ့အပိုင်းတွေကို ရေးဖို့ ထပ်စမ်းကြည့်ပါနော်။';
+
+  @override
+  String get reportBusyBody =>
+      'အချိန်တိုအတွင်း ဖတ်ရှုချက်တွေ အများကြီး တောင်းထားပါတယ်။ ခဏနေမှ ထပ်စမ်းကြည့်ပါနော်။';
+
+  @override
+  String get reportOfflineTitle => 'အင်တာနက်မရှိပါဘူး';
+
+  @override
+  String get reportOfflineBody =>
+      'အပြည့်အစုံဖတ်ရှုချက်ကို ပထမဆုံးအကြိမ် ရယူဖို့ အင်တာနက်ချိတ်ဆက်မှု လိုပါတယ်။ ရေးပြီးသွားရင် ဖုန်းထဲမှာ သိမ်းထားပေးမှာပါ။';
+
+  @override
+  String get reportUnavailableBody =>
+      'ဒီဗားရှင်းမှာ အပြည့်အစုံဖတ်ရှုချက်ကို မရနိုင်သေးပါဘူး။';
+
+  @override
   String get chartBigThreeTitle => 'ကိုယ့် Big 3';
 
   @override

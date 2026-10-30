@@ -817,6 +817,53 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chartButtonHint => 'See your Sun, Moon and Rising';
 
   @override
+  String get chartReportCardTitle => 'Your full reading';
+
+  @override
+  String get chartReportCardBody =>
+      'A longer, gentler read about your personality, feelings, love life, work and everyday habits.';
+
+  @override
+  String get reportTitle => 'Your full reading';
+
+  @override
+  String get reportPreparingTitle => 'Writing your reading';
+
+  @override
+  String get reportPreparingBody =>
+      'The first parts take a minute or two. You can leave and come back; it keeps going.';
+
+  @override
+  String reportProgress(int ready, int total, int minutes) {
+    return '$ready of $total parts ready · about $minutes min read';
+  }
+
+  @override
+  String get reportWriting => 'Writing the next part…';
+
+  @override
+  String get reportFailedTitle => 'Some parts did not finish';
+
+  @override
+  String get reportFailedBody =>
+      'Nothing is lost. Try again to write the missing parts.';
+
+  @override
+  String get reportBusyBody =>
+      'You asked for a lot of readings in a short time. Please try again in a while.';
+
+  @override
+  String get reportOfflineTitle => 'You\'re offline';
+
+  @override
+  String get reportOfflineBody =>
+      'Your full reading needs a connection the first time. Once it is written, it is saved on your phone.';
+
+  @override
+  String get reportUnavailableBody =>
+      'The full reading is not available in this version yet.';
+
+  @override
   String get chartBigThreeTitle => 'Your Big 3';
 
   @override

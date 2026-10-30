@@ -1454,6 +1454,84 @@ abstract class AppLocalizations {
   /// **'See your Sun, Moon and Rising'**
   String get chartButtonHint;
 
+  /// No description provided for @chartReportCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your full reading'**
+  String get chartReportCardTitle;
+
+  /// No description provided for @chartReportCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A longer, gentler read about your personality, feelings, love life, work and everyday habits.'**
+  String get chartReportCardBody;
+
+  /// No description provided for @reportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your full reading'**
+  String get reportTitle;
+
+  /// No description provided for @reportPreparingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Writing your reading'**
+  String get reportPreparingTitle;
+
+  /// No description provided for @reportPreparingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The first parts take a minute or two. You can leave and come back; it keeps going.'**
+  String get reportPreparingBody;
+
+  /// No description provided for @reportProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{ready} of {total} parts ready · about {minutes} min read'**
+  String reportProgress(int ready, int total, int minutes);
+
+  /// No description provided for @reportWriting.
+  ///
+  /// In en, this message translates to:
+  /// **'Writing the next part…'**
+  String get reportWriting;
+
+  /// No description provided for @reportFailedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Some parts did not finish'**
+  String get reportFailedTitle;
+
+  /// No description provided for @reportFailedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is lost. Try again to write the missing parts.'**
+  String get reportFailedBody;
+
+  /// No description provided for @reportBusyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You asked for a lot of readings in a short time. Please try again in a while.'**
+  String get reportBusyBody;
+
+  /// No description provided for @reportOfflineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re offline'**
+  String get reportOfflineTitle;
+
+  /// No description provided for @reportOfflineBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your full reading needs a connection the first time. Once it is written, it is saved on your phone.'**
+  String get reportOfflineBody;
+
+  /// No description provided for @reportUnavailableBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The full reading is not available in this version yet.'**
+  String get reportUnavailableBody;
+
   /// No description provided for @chartBigThreeTitle.
   ///
   /// In en, this message translates to:
