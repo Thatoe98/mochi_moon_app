@@ -106,12 +106,12 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - Mood check-in (optional) at the top: 6 emoji moods (happy, calm, tired, sad, anxious, in love). Choosing one re-ranks the next cards.
 
 **AC**
-- [ ] Swipe attempts before the timer completes are cancelled and the card springs back.
-- [ ] After the timer completes, all three swipe directions work, plus button equivalents for accessibility.
+- [x] Swipe attempts before the timer completes are cancelled and the card springs back. — *widget test `a swipe before the timer ends is cancelled`.*
+- [x] After the timer completes, all three swipe directions work, plus button equivalents for accessibility. — *widget tests cover right, left and up, and that the three buttons are disabled until the ring is full and enabled after.*
 - [ ] The daily counter resets at local midnight; it is stored locally and synced to Firestore. — *synced since M2 (`users/{uid}.deck`); the reset while the app stays open past midnight is still deferred*
 - [x] "Reduce motion" disables tilt and sparkle animations but keeps the ring. — *follows the system setting and the new Me-tab switch (tested)*
-- [ ] Works offline using bundled quotes.
-- [ ] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header.
+- [x] Works offline using bundled quotes. — *the deck reads the bundled `quotes.json` and the local drift database; the only network part is the Firestore counter sync, which is local-first and retried later.*
+- [x] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header. — *`deck_planner_test` covers the count (a streak reaching yesterday stays alive until today ends); `the streak shows in the app bar once a card is done` covers the header.*
 
 ### 6.3 Journal (Free)
 
@@ -202,7 +202,7 @@ Shows for the user's local date:
 **AC**
 - [x] Unknown birth time: no Ascendant, no houses, Moon marked "approximate"; banner invites adding the time. *(the banner explains why but cannot link anywhere yet: there is no screen to edit birth data)*
 - [ ] Editing birth data recomputes everything and invalidates cached reports. — *on the device the chart, Cosmic Today and compatibility follow a saved edit (tested); invalidating server-side cached reports waits for the Readings API in M4.*
-- [ ] Golden tests pass (§9.7).
+- [x] Golden tests pass (§9.7). — *`golden_charts.json` holds 32 charts (both hemispheres, DST, pre-1970, sign cusps, Bangkok and Yangon, 69.6°N, unknown time); signs of all bodies and the Ascendant match, planets within 0.5° and the Sun within 0.3° (`natal_chart_test.dart`).*
 
 ### 6.12 Love compatibility (score Free; full report Premium or one-off purchase)
 
@@ -616,7 +616,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [ ] 500 quotes and 60–100 illustrations in all languages, human-reviewed
 - [ ] Store listing (self-love first), screenshots in en/th/my, privacy policy, Data safety form
 - [ ] Closed test with ≥ 15 testers for 14+ days (Google Play requires 12 for 14 days on new personal accounts)
-- [ ] Production release timed with a retrograde window (Feb 9, 2027 is the next Mercury retrograde)
+
 
 ### Later
 - [ ] iOS build with Sign in with Apple and self-love-first App Store positioning
