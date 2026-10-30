@@ -1,10 +1,14 @@
 import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/core/network/network_providers.dart';
+import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/cosmic/astro/birth_time.dart';
 import 'package:mochi_moon/features/cosmic/astro/ephemeris.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/astro/sun_moon_signs.dart';
 import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
+import 'package:mochi_moon/features/cosmic/today/data/api_daily_reading_repository.dart';
 import 'package:mochi_moon/features/cosmic/today/data/bundled_daily_reading_repository.dart';
+import 'package:mochi_moon/features/cosmic/today/data/drift_daily_reading_cache.dart';
 import 'package:mochi_moon/features/cosmic/today/data/prefs_thai_colors_setting_repository.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/daily_reading_repository.dart';
@@ -18,9 +22,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'cosmic_today_providers.g.dart';
 
+/// Daily text: the Readings API with the device cache in front when the
+/// build has a server, otherwise the texts bundled with the app. The bundled
+/// texts are also the way out when the server cannot answer.
 @Riverpod(keepAlive: true)
-DailyReadingRepository dailyReadingRepository(Ref ref) =>
-    BundledDailyReadingRepository(ref.watch(contentRepositoryProvider));
+DailyReadingRepository dailyReadingRepository(Ref ref) {
+  final bundled = BundledDailyReadingRepository(
+    ref.watch(contentRepositoryProvider),
+  );
+  final api = ref.watch(readingsApiProvider);
+  if (api == null) return bundled;
+  return ApiDailyReadingRepository(
+    api: api,
+    cache: DriftDailyReadingCache(ref.watch(appDatabaseProvider)),
+    fallback: bundled,
+  );
+}
 
 @Riverpod(keepAlive: true)
 ThaiColorsSettingRepository thaiColorsSettingRepository(Ref ref) =>

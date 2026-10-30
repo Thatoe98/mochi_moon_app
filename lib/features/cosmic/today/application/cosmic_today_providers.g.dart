@@ -8,9 +8,16 @@ part of 'cosmic_today_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Daily text: the Readings API with the device cache in front when the
+/// build has a server, otherwise the texts bundled with the app. The bundled
+/// texts are also the way out when the server cannot answer.
 
 @ProviderFor(dailyReadingRepository)
 final dailyReadingRepositoryProvider = DailyReadingRepositoryProvider._();
+
+/// Daily text: the Readings API with the device cache in front when the
+/// build has a server, otherwise the texts bundled with the app. The bundled
+/// texts are also the way out when the server cannot answer.
 
 final class DailyReadingRepositoryProvider
     extends
@@ -20,6 +27,9 @@ final class DailyReadingRepositoryProvider
           DailyReadingRepository
         >
     with $Provider<DailyReadingRepository> {
+  /// Daily text: the Readings API with the device cache in front when the
+  /// build has a server, otherwise the texts bundled with the app. The bundled
+  /// texts are also the way out when the server cannot answer.
   DailyReadingRepositoryProvider._()
     : super(
         from: null,
@@ -55,7 +65,7 @@ final class DailyReadingRepositoryProvider
 }
 
 String _$dailyReadingRepositoryHash() =>
-    r'3a66dd239a60d79f79291db0fbc893a75dbaa236';
+    r'707b77c67051e26cc65eee5936c33dcf5a0a35f9';
 
 @ProviderFor(thaiColorsSettingRepository)
 final thaiColorsSettingRepositoryProvider =

@@ -5,6 +5,7 @@ import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/app/app_restart.dart';
 import 'package:mochi_moon/app/flavors.dart';
 import 'package:mochi_moon/core/content/content_licenses.dart';
+import 'package:mochi_moon/core/network/network_providers.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/data/prefs_onboarding_repository.dart';
@@ -28,6 +29,9 @@ Future<void> bootstrap(FlavorConfig config) async {
         key: ValueKey(generation),
         overrides: [
           flavorConfigProvider.overrideWithValue(config),
+          readingsApiBaseUrlProvider.overrideWithValue(
+            config.readingsApiBaseUrl,
+          ),
           firebaseReadyProvider.overrideWithValue(firebaseReady),
           initialOnboardingCompleteProvider.overrideWithValue(
             generation == 0 && onboardingComplete,
