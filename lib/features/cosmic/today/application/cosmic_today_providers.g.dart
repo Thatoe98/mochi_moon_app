@@ -253,7 +253,7 @@ final class UserSunSignProvider
   }
 }
 
-String _$userSunSignHash() => r'f2f075daae31446718a4f741731f4777ac4ca27b';
+String _$userSunSignHash() => r'b7ffa05dc11727cec3df6a526f20a862324b63d7';
 
 /// The sign whose page the Cosmic tab shows instead of the user's own, or
 /// null for their own. Premium; ignored without it. Starts over each time the

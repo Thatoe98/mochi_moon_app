@@ -58,3 +58,10 @@ flutter:
     - assets/content/cities/
     - assets/illustrations/
     - assets/lottie/
+    - assets/fonts/MochiSymbols-OFL.txt
+  fonts:
+    # Planet and zodiac glyphs only (Noto Sans Symbols and Symbols 2, OFL 1.1),
+    # so they look the same on every phone and never turn into emoji.
+    - family: Mochi Symbols
+      fonts:
+        - asset: assets/fonts/MochiSymbols.ttf

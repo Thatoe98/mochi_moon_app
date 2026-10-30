@@ -1,4 +1,5 @@
 import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/features/cosmic/astro/birth_time.dart';
 import 'package:mochi_moon/features/cosmic/astro/ephemeris.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/astro/sun_moon_signs.dart';
@@ -16,10 +17,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'cosmic_today_providers.g.dart';
-
-/// The zone used to read a birth date when no birthplace was given. UTC can
-/// put a birth within half a day of a sign change in the neighbouring sign.
-const _noPlaceZone = 'UTC';
 
 @Riverpod(keepAlive: true)
 DailyReadingRepository dailyReadingRepository(Ref ref) =>
@@ -53,7 +50,7 @@ Future<ZodiacSign?> userSunSign(Ref ref) async {
   if (birthDate == null) return null;
   return sunMoonSigns(
     birthDate: birthDate,
-    tzId: profile?.birthPlace?.tzId ?? _noPlaceZone,
+    tzId: profile?.birthPlace?.tzId ?? noPlaceTimeZone,
     birthMinutes: profile?.birthMinutes,
   ).sun;
 }

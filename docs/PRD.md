@@ -200,7 +200,7 @@ Shows for the user's local date:
 - Premium: full AI natal report (§8.2 `POST /v1/reports/natal`) with sections: Overview, Core self (Sun), Emotions (Moon), First impression (Rising), Love style (Venus), Drive (Mars), Mind (Mercury), Growth (Jupiter/Saturn). Generated once per user per language and cached; regenerated only if birth data changes.
 
 **AC**
-- [ ] Unknown birth time: no Ascendant, no houses, Moon marked "approximate"; banner invites adding the time.
+- [x] Unknown birth time: no Ascendant, no houses, Moon marked "approximate"; banner invites adding the time. *(the banner explains why but cannot link anywhere yet: there is no screen to edit birth data)*
 - [ ] Editing birth data recomputes everything and invalidates cached reports.
 - [ ] Golden tests pass (§9.7).
 
@@ -600,7 +600,7 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 ### M3 — Charts and compatibility
 - [x] Ascendant/MC/Whole Sign houses (§9.3–9.4) + golden tests — *`chartAngles` (`astro/angles.dart`) uses the §9.3 formulas with astronomia's apparent sidereal time and true obliquity; `computeNatalChart(BirthData)` (`astro/natal_chart.dart`) returns the ten placements, Ascendant, Midheaven, Whole Sign `houseOf`, `moonIsApproximate` and `risingMayBeUnreliable` (|lat| > 66°). Unknown time or place: no angles or houses. `golden_charts.json` holds 32 charts (both hemispheres, DST, pre-1970, Bangkok and Yangon incl. the +6:30 era, Sun and Ascendant sign-change pairs, Tromsø at 69.6°N, one unknown time). The numbers come from Swiss Ephemeris (pyswisseph, Moshier) run once as a dev-time oracle outside the repo; nothing from it is a dependency. Deferred: the chart wheel and Big 3 UI, writing the signs on profile save (§6.1), aspects.*
-- [ ] Chart wheel and placements list; Big 3 cards
+- [ ] Chart wheel and placements list; Big 3 cards — *half done: the birth chart screen (`/cosmic/chart`, opened by a banner on the Cosmic tab above the Retrogrades banner) shows the Big 3 cards (Sun, Moon, Rising; Rising only with a known time, Moon "approximate" without) and the placements list (glyph, sign, degree like 12°34′, house, "Rx" when retrograde, plus Ascendant and Midheaven), with a banner inviting the birth time when it is unknown, an empty state without a birth date, and the entertainment note. `natalChartProvider` is built from the profile, so a changed profile recomputes it. The Big 3 texts (36, soft, never fatalistic) are in the ARB files like the Moon affirmations rather than in a JSON file; Burmese is generated and **unreviewed**. Glyphs come from a 4 KB bundled font, `assets/fonts/MochiSymbols.ttf` (a subset of Noto Sans Symbols and Symbols 2, OFL, listed on the licenses page), because the system fonts turn them into color emoji or tofu; the retrograde mark is the ASCII "Rx" since ℞ is in neither font. Still open: the wheel (`CustomPainter`) with aspect lines and the §9.6 aspects engine, a screen to edit birth data (so the no-time banner can link to it, and "editing recomputes" can be tried by hand), and the Premium natal report (M4).*
 - [ ] Partners CRUD; compatibility scoring (§9.6) + calibration test; result screen
 
 ### M4 — AI and monetization

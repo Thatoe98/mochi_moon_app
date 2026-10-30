@@ -4,6 +4,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/birth_chart_button.dart';
 import 'package:mochi_moon/features/cosmic/moon/presentation/moon_card.dart';
 import 'package:mochi_moon/features/cosmic/presentation/sign_picker.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_art.dart';
@@ -39,6 +40,7 @@ class CosmicScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
+          const BirthChartButton(),
           const RetrogradeButton(),
           Expanded(
             child: today.when(

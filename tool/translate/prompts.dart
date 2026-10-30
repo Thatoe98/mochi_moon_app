@@ -13,6 +13,7 @@ Rules:
   - "retrograde" (and "direct" when it is the opposite of retrograde);
   - the Moon phase names and the words for them in running text: new moon, full moon, waxing crescent, first quarter, waxing gibbous, waning gibbous, last quarter, waning crescent (keep the capitalization of the English);
   - "Self Love" / "self-love", written "Self Love";
+  - birth chart vocabulary: "Rising" (the Rising sign), "Ascendant", "Midheaven", "Big 3", "house" when it is an astrology house, and "birth chart";
   - other words Burmese people usually say in English in daily life: for example horoscope, birth chart, Premium, widget, app, notification, and similar app or astrology vocabulary. When unsure, prefer the English word if a young Burmese reader would say it in English, and Burmese if the Burmese word is the everyday one.
   Translate everything else into Burmese.
 - Pronouns must be gender neutral. Never use ကျွန်မ, ကျွန်တော်, ကျွန်ုပ်, or gendered sentence endings such as ရှင်, ရှင့်, ခင်ဗျာ, ဗျာ, ကျွန်တော်တို့/ကျွန်မတို့. When the text speaks in the first person (affirmations, quotes, "I am ..."), use ငါ for "I/me/my" and ငါ့ for "my". When the app speaks to the user, drop the subject where Burmese allows it, and otherwise use a neutral, friendly form; do not use a gendered form of address.

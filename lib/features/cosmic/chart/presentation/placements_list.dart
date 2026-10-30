@@ -1,0 +1,155 @@
+import 'package:flutter/material.dart';
+import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/features/cosmic/astro/natal_chart.dart';
+import 'package:mochi_moon/features/cosmic/astro/placement.dart';
+import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/chart_glyphs.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/chart_labels.dart';
+import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
+
+/// Every placement of the chart, one row each: glyph, sign, degree, house and
+/// Rx when retrograde. The Ascendant and Midheaven follow when the birth time
+/// is known (PRD §6.11).
+class PlacementsList extends StatelessWidget {
+  const PlacementsList({required this.chart, super.key});
+
+  final NatalChart chart;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final ascendant = chart.ascendant;
+    final midheaven = chart.midheaven;
+    final rows = <Widget>[
+      for (final placement in chart.placements)
+        _PlacementRow(
+          glyph: bodyGlyph(placement.body),
+          name: bodyLabel(l10n, placement.body),
+          sign: placement.sign,
+          degreeInSign: placement.degreeInSign,
+          house: chart.houseOf(placement.body),
+          retrograde: placement.isRetrograde,
+          approximate: placement.body == Body.moon && chart.moonIsApproximate,
+        ),
+      if (ascendant != null)
+        _PlacementRow(
+          glyph: signGlyph(chart.ascendantSign!),
+          name: l10n.chartBodyAscendant,
+          sign: chart.ascendantSign!,
+          degreeInSign: degreeInSign(ascendant),
+          house: 1,
+        ),
+      if (midheaven != null)
+        _PlacementRow(
+          glyph: signGlyph(chart.midheavenSign!),
+          name: l10n.chartBodyMidheaven,
+          sign: chart.midheavenSign!,
+          degreeInSign: degreeInSign(midheaven),
+          house: chart.houseOfSign(chart.midheavenSign!),
+        ),
+    ];
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Semantics(
+              container: true,
+              header: true,
+              child: Text(
+                l10n.chartPlacementsTitle,
+                style: theme.textTheme.titleMedium,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            ...rows,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PlacementRow extends StatelessWidget {
+  const _PlacementRow({
+    required this.glyph,
+    required this.name,
+    required this.sign,
+    required this.degreeInSign,
+    this.house,
+    this.retrograde = false,
+    this.approximate = false,
+  });
+
+  final String glyph;
+  final String name;
+  final ZodiacSign sign;
+  final double degreeInSign;
+  final int? house;
+  final bool retrograde;
+  final bool approximate;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final signName = zodiacSignLabel(l10n, sign);
+    final degrees = formatDegrees(degreeInSign);
+    final houseText = house == null ? null : l10n.chartHouse(house!);
+
+    // One announcement per row instead of a stop for every piece of it.
+    final spoken = [
+      l10n.chartRowLabel(name, signName, degrees),
+      ?houseText,
+      if (retrograde) l10n.chartRetrograde,
+      if (approximate) l10n.chartApproximate,
+    ].join(', ');
+
+    return Semantics(
+      container: true,
+      label: spoken,
+      excludeSemantics: true,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: AppSpacing.minTouchTarget),
+        child: Row(
+          children: [
+            SizedBox(
+              width: AppSpacing.xl,
+              child: Glyph(glyph, style: theme.textTheme.titleLarge),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: theme.textTheme.bodyLarge),
+                  Text(
+                    approximate
+                        ? '$signName $degrees (${l10n.chartApproximate})'
+                        : '$signName $degrees',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (houseText != null)
+                  Text(houseText, style: theme.textTheme.bodyMedium),
+                if (retrograde)
+                  Text(retrogradeMark, style: theme.textTheme.labelLarge),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

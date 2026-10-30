@@ -97,6 +97,15 @@ void main() {
     await tester.pumpAndSettle();
   });
 
+  testWidgets('has a banner to the birth chart even without a birth date', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host());
+    await tester.pumpAndSettle();
+    expect(find.text('Birth chart'), findsOneWidget);
+    expect(find.text('See your Sun, Moon and Rising'), findsOneWidget);
+  });
+
   testWidgets('asks for a birth date when there is none', (tester) async {
     await tester.pumpWidget(_host());
     await tester.pumpAndSettle();

@@ -1429,6 +1429,384 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong and nothing was deleted. Please try again.'**
   String get accountDeleteFailed;
+
+  /// No description provided for @chartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth chart'**
+  String get chartTitle;
+
+  /// No description provided for @chartButtonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'See your Sun, Moon and Rising'**
+  String get chartButtonHint;
+
+  /// No description provided for @chartBigThreeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Big 3'**
+  String get chartBigThreeTitle;
+
+  /// No description provided for @chartPlacementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Placements'**
+  String get chartPlacementsTitle;
+
+  /// No description provided for @chartBodySun.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get chartBodySun;
+
+  /// No description provided for @chartBodyMoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Moon'**
+  String get chartBodyMoon;
+
+  /// No description provided for @chartBodyMercury.
+  ///
+  /// In en, this message translates to:
+  /// **'Mercury'**
+  String get chartBodyMercury;
+
+  /// No description provided for @chartBodyVenus.
+  ///
+  /// In en, this message translates to:
+  /// **'Venus'**
+  String get chartBodyVenus;
+
+  /// No description provided for @chartBodyMars.
+  ///
+  /// In en, this message translates to:
+  /// **'Mars'**
+  String get chartBodyMars;
+
+  /// No description provided for @chartBodyJupiter.
+  ///
+  /// In en, this message translates to:
+  /// **'Jupiter'**
+  String get chartBodyJupiter;
+
+  /// No description provided for @chartBodySaturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturn'**
+  String get chartBodySaturn;
+
+  /// No description provided for @chartBodyUranus.
+  ///
+  /// In en, this message translates to:
+  /// **'Uranus'**
+  String get chartBodyUranus;
+
+  /// No description provided for @chartBodyNeptune.
+  ///
+  /// In en, this message translates to:
+  /// **'Neptune'**
+  String get chartBodyNeptune;
+
+  /// No description provided for @chartBodyPluto.
+  ///
+  /// In en, this message translates to:
+  /// **'Pluto'**
+  String get chartBodyPluto;
+
+  /// No description provided for @chartBodyRising.
+  ///
+  /// In en, this message translates to:
+  /// **'Rising'**
+  String get chartBodyRising;
+
+  /// No description provided for @chartBodyAscendant.
+  ///
+  /// In en, this message translates to:
+  /// **'Ascendant'**
+  String get chartBodyAscendant;
+
+  /// No description provided for @chartBodyMidheaven.
+  ///
+  /// In en, this message translates to:
+  /// **'Midheaven'**
+  String get chartBodyMidheaven;
+
+  /// No description provided for @chartRoleIn.
+  ///
+  /// In en, this message translates to:
+  /// **'{role} in {sign}'**
+  String chartRoleIn(String role, String sign);
+
+  /// No description provided for @chartHouse.
+  ///
+  /// In en, this message translates to:
+  /// **'House {number}'**
+  String chartHouse(int number);
+
+  /// No description provided for @chartRetrograde.
+  ///
+  /// In en, this message translates to:
+  /// **'retrograde'**
+  String get chartRetrograde;
+
+  /// No description provided for @chartApproximate.
+  ///
+  /// In en, this message translates to:
+  /// **'approximate'**
+  String get chartApproximate;
+
+  /// No description provided for @chartRowLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{body} in {sign}, {degrees}'**
+  String chartRowLabel(String body, String sign, String degrees);
+
+  /// No description provided for @chartNoTimeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your birth time'**
+  String get chartNoTimeTitle;
+
+  /// No description provided for @chartNoTimeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Without it we can\'t find your Rising sign or your houses, and your Moon sign is only approximate.'**
+  String get chartNoTimeBody;
+
+  /// No description provided for @chartNeedsBirthDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your chart needs a birth date'**
+  String get chartNeedsBirthDateTitle;
+
+  /// No description provided for @chartNeedsBirthDateBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your birth date to see your Sun, Moon and Rising.'**
+  String get chartNeedsBirthDateBody;
+
+  /// No description provided for @chartHighLatitudeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Near the poles the Rising sign can be less reliable.'**
+  String get chartHighLatitudeNote;
+
+  /// No description provided for @chartSunAries.
+  ///
+  /// In en, this message translates to:
+  /// **'You have a brave, bright spark. You shine when you start something new, and your courage can be gentle too.'**
+  String get chartSunAries;
+
+  /// No description provided for @chartSunTaurus.
+  ///
+  /// In en, this message translates to:
+  /// **'You are steady, warm and loyal. You glow when life feels cozy, and slow, patient steps are a strength.'**
+  String get chartSunTaurus;
+
+  /// No description provided for @chartSunGemini.
+  ///
+  /// In en, this message translates to:
+  /// **'You are curious, playful and quick with words. Your many sides are not a flaw, they are your charm.'**
+  String get chartSunGemini;
+
+  /// No description provided for @chartSunCancer.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel deeply and care for others with a soft heart. Your sensitivity is a gift, and you deserve the same tenderness.'**
+  String get chartSunCancer;
+
+  /// No description provided for @chartSunLeo.
+  ///
+  /// In en, this message translates to:
+  /// **'You carry a warm, sunny presence. You love to shine and to cheer others on, and you are enough even on quiet days.'**
+  String get chartSunLeo;
+
+  /// No description provided for @chartSunVirgo.
+  ///
+  /// In en, this message translates to:
+  /// **'You are thoughtful, caring and good with details. You are allowed to be kind to yourself, even when things are not perfect.'**
+  String get chartSunVirgo;
+
+  /// No description provided for @chartSunLibra.
+  ///
+  /// In en, this message translates to:
+  /// **'You bring balance, beauty and gentle harmony wherever you go. Your own needs matter as much as everyone else\'s.'**
+  String get chartSunLibra;
+
+  /// No description provided for @chartSunScorpio.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel things with depth and you are loyal to the core. Your intensity is a strength, and you can soften when you are ready.'**
+  String get chartSunScorpio;
+
+  /// No description provided for @chartSunSagittarius.
+  ///
+  /// In en, this message translates to:
+  /// **'You are adventurous, honest and full of hope. You grow whenever you follow your curiosity.'**
+  String get chartSunSagittarius;
+
+  /// No description provided for @chartSunCapricorn.
+  ///
+  /// In en, this message translates to:
+  /// **'You are patient, determined and dependable. You can rest and still be proud of how far you have come.'**
+  String get chartSunCapricorn;
+
+  /// No description provided for @chartSunAquarius.
+  ///
+  /// In en, this message translates to:
+  /// **'You are original, kind and a little bit dreamy. Your different way of seeing things is what makes you special.'**
+  String get chartSunAquarius;
+
+  /// No description provided for @chartSunPisces.
+  ///
+  /// In en, this message translates to:
+  /// **'You are gentle, imaginative and full of compassion. Your dreams are worth protecting, and so is your peace.'**
+  String get chartSunPisces;
+
+  /// No description provided for @chartMoonAries.
+  ///
+  /// In en, this message translates to:
+  /// **'Your feelings arrive fast and bright. Give yourself a moment to breathe, and let your heart move at its own pace.'**
+  String get chartMoonAries;
+
+  /// No description provided for @chartMoonTaurus.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel safest with comfort and calm. Cozy routines, good food and soft things help your heart settle.'**
+  String get chartMoonTaurus;
+
+  /// No description provided for @chartMoonGemini.
+  ///
+  /// In en, this message translates to:
+  /// **'Talking, writing or sharing helps you understand how you feel. It is okay if your moods change like the sky.'**
+  String get chartMoonGemini;
+
+  /// No description provided for @chartMoonCancer.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel everything deeply, and home is where your heart rests. Be as gentle with yourself as you are with others.'**
+  String get chartMoonCancer;
+
+  /// No description provided for @chartMoonLeo.
+  ///
+  /// In en, this message translates to:
+  /// **'Your heart loves to be seen and appreciated. Kind words, from others and from you, help you glow.'**
+  String get chartMoonLeo;
+
+  /// No description provided for @chartMoonVirgo.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel calm when things are tidy and useful. You can let small worries go, because you are doing well.'**
+  String get chartMoonVirgo;
+
+  /// No description provided for @chartMoonLibra.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel best when things are peaceful and fair. It is okay to say what you need, even when it feels hard.'**
+  String get chartMoonLibra;
+
+  /// No description provided for @chartMoonScorpio.
+  ///
+  /// In en, this message translates to:
+  /// **'Your feelings run deep and private. You can take your time before opening up, and trust those who have earned it.'**
+  String get chartMoonScorpio;
+
+  /// No description provided for @chartMoonSagittarius.
+  ///
+  /// In en, this message translates to:
+  /// **'You feel free when you have space and hope. A walk, a laugh or a little adventure lifts your mood.'**
+  String get chartMoonSagittarius;
+
+  /// No description provided for @chartMoonCapricorn.
+  ///
+  /// In en, this message translates to:
+  /// **'You may keep your feelings close and tend to them quietly. Soft rest is just as important as hard work.'**
+  String get chartMoonCapricorn;
+
+  /// No description provided for @chartMoonAquarius.
+  ///
+  /// In en, this message translates to:
+  /// **'You make sense of feelings by stepping back and thinking them through. Your heart is warm even when it is quiet.'**
+  String get chartMoonAquarius;
+
+  /// No description provided for @chartMoonPisces.
+  ///
+  /// In en, this message translates to:
+  /// **'Your heart is soft and picks up on every mood around you. Quiet time, music and dreaming help you recharge.'**
+  String get chartMoonPisces;
+
+  /// No description provided for @chartRisingAries.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as bold, energetic and ready to go. Your confidence invites others to be brave too.'**
+  String get chartRisingAries;
+
+  /// No description provided for @chartRisingTaurus.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as calm, grounded and warm. Your steady presence makes others feel at ease.'**
+  String get chartRisingTaurus;
+
+  /// No description provided for @chartRisingGemini.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as bright, curious and easy to talk to. Your lively energy is a joy to be around.'**
+  String get chartRisingGemini;
+
+  /// No description provided for @chartRisingCancer.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as gentle and caring. Your kindness makes others feel at home.'**
+  String get chartRisingCancer;
+
+  /// No description provided for @chartRisingLeo.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as warm, confident and a little bit sparkly. Your presence lights up a room.'**
+  String get chartRisingLeo;
+
+  /// No description provided for @chartRisingVirgo.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as thoughtful, neat and kind. Your quiet care shows in the little things.'**
+  String get chartRisingVirgo;
+
+  /// No description provided for @chartRisingLibra.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as graceful, friendly and easygoing. Your charm helps others feel welcome.'**
+  String get chartRisingLibra;
+
+  /// No description provided for @chartRisingScorpio.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as calm, magnetic and a little mysterious. Your depth makes others curious.'**
+  String get chartRisingScorpio;
+
+  /// No description provided for @chartRisingSagittarius.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as cheerful, open and adventurous. Your optimism is contagious.'**
+  String get chartRisingSagittarius;
+
+  /// No description provided for @chartRisingCapricorn.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as composed, capable and wise. Your calm focus earns trust.'**
+  String get chartRisingCapricorn;
+
+  /// No description provided for @chartRisingAquarius.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as unique, friendly and a bit unexpected. Your originality stands out in a lovely way.'**
+  String get chartRisingAquarius;
+
+  /// No description provided for @chartRisingPisces.
+  ///
+  /// In en, this message translates to:
+  /// **'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.'**
+  String get chartRisingPisces;
 }
 
 class _AppLocalizationsDelegate

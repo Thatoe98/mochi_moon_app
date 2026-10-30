@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/shell_scaffold.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/chart_screen.dart';
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
@@ -19,6 +20,7 @@ abstract final class AppRoutes {
   static const deck = '/deck';
   static const cosmic = '/cosmic';
   static const retrogrades = '/cosmic/retrogrades';
+  static const chart = '/cosmic/chart';
   static const me = '/me';
   static const journal = '/me/journal';
   static const welcome = '/welcome';
@@ -83,6 +85,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'retrogrades',
                     builder: (context, state) => const RetrogradeScreen(),
+                  ),
+                  GoRoute(
+                    path: 'chart',
+                    builder: (context, state) => const ChartScreen(),
                   ),
                 ],
               ),

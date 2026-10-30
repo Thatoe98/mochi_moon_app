@@ -4,6 +4,10 @@ import 'package:timezone/timezone.dart' as tz;
 /// Minutes after midnight that stand in for an unknown birth time (PRD §9.1).
 const int unknownBirthTimeMinutes = 12 * 60;
 
+/// The zone used to read a birth date when no birthplace was given. UTC can
+/// put a birth within half a day of a sign change in the neighbouring sign.
+const String noPlaceTimeZone = 'UTC';
+
 bool _timeZonesReady = false;
 
 /// The moment of birth as a UTC instant (PRD §9.1).

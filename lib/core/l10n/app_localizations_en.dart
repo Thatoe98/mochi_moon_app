@@ -802,4 +802,238 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get accountDeleteFailed =>
       'Something went wrong and nothing was deleted. Please try again.';
+
+  @override
+  String get chartTitle => 'Birth chart';
+
+  @override
+  String get chartButtonHint => 'See your Sun, Moon and Rising';
+
+  @override
+  String get chartBigThreeTitle => 'Your Big 3';
+
+  @override
+  String get chartPlacementsTitle => 'Placements';
+
+  @override
+  String get chartBodySun => 'Sun';
+
+  @override
+  String get chartBodyMoon => 'Moon';
+
+  @override
+  String get chartBodyMercury => 'Mercury';
+
+  @override
+  String get chartBodyVenus => 'Venus';
+
+  @override
+  String get chartBodyMars => 'Mars';
+
+  @override
+  String get chartBodyJupiter => 'Jupiter';
+
+  @override
+  String get chartBodySaturn => 'Saturn';
+
+  @override
+  String get chartBodyUranus => 'Uranus';
+
+  @override
+  String get chartBodyNeptune => 'Neptune';
+
+  @override
+  String get chartBodyPluto => 'Pluto';
+
+  @override
+  String get chartBodyRising => 'Rising';
+
+  @override
+  String get chartBodyAscendant => 'Ascendant';
+
+  @override
+  String get chartBodyMidheaven => 'Midheaven';
+
+  @override
+  String chartRoleIn(String role, String sign) {
+    return '$role in $sign';
+  }
+
+  @override
+  String chartHouse(int number) {
+    return 'House $number';
+  }
+
+  @override
+  String get chartRetrograde => 'retrograde';
+
+  @override
+  String get chartApproximate => 'approximate';
+
+  @override
+  String chartRowLabel(String body, String sign, String degrees) {
+    return '$body in $sign, $degrees';
+  }
+
+  @override
+  String get chartNoTimeTitle => 'Add your birth time';
+
+  @override
+  String get chartNoTimeBody =>
+      'Without it we can\'t find your Rising sign or your houses, and your Moon sign is only approximate.';
+
+  @override
+  String get chartNeedsBirthDateTitle => 'Your chart needs a birth date';
+
+  @override
+  String get chartNeedsBirthDateBody =>
+      'Add your birth date to see your Sun, Moon and Rising.';
+
+  @override
+  String get chartHighLatitudeNote =>
+      'Near the poles the Rising sign can be less reliable.';
+
+  @override
+  String get chartSunAries =>
+      'You have a brave, bright spark. You shine when you start something new, and your courage can be gentle too.';
+
+  @override
+  String get chartSunTaurus =>
+      'You are steady, warm and loyal. You glow when life feels cozy, and slow, patient steps are a strength.';
+
+  @override
+  String get chartSunGemini =>
+      'You are curious, playful and quick with words. Your many sides are not a flaw, they are your charm.';
+
+  @override
+  String get chartSunCancer =>
+      'You feel deeply and care for others with a soft heart. Your sensitivity is a gift, and you deserve the same tenderness.';
+
+  @override
+  String get chartSunLeo =>
+      'You carry a warm, sunny presence. You love to shine and to cheer others on, and you are enough even on quiet days.';
+
+  @override
+  String get chartSunVirgo =>
+      'You are thoughtful, caring and good with details. You are allowed to be kind to yourself, even when things are not perfect.';
+
+  @override
+  String get chartSunLibra =>
+      'You bring balance, beauty and gentle harmony wherever you go. Your own needs matter as much as everyone else\'s.';
+
+  @override
+  String get chartSunScorpio =>
+      'You feel things with depth and you are loyal to the core. Your intensity is a strength, and you can soften when you are ready.';
+
+  @override
+  String get chartSunSagittarius =>
+      'You are adventurous, honest and full of hope. You grow whenever you follow your curiosity.';
+
+  @override
+  String get chartSunCapricorn =>
+      'You are patient, determined and dependable. You can rest and still be proud of how far you have come.';
+
+  @override
+  String get chartSunAquarius =>
+      'You are original, kind and a little bit dreamy. Your different way of seeing things is what makes you special.';
+
+  @override
+  String get chartSunPisces =>
+      'You are gentle, imaginative and full of compassion. Your dreams are worth protecting, and so is your peace.';
+
+  @override
+  String get chartMoonAries =>
+      'Your feelings arrive fast and bright. Give yourself a moment to breathe, and let your heart move at its own pace.';
+
+  @override
+  String get chartMoonTaurus =>
+      'You feel safest with comfort and calm. Cozy routines, good food and soft things help your heart settle.';
+
+  @override
+  String get chartMoonGemini =>
+      'Talking, writing or sharing helps you understand how you feel. It is okay if your moods change like the sky.';
+
+  @override
+  String get chartMoonCancer =>
+      'You feel everything deeply, and home is where your heart rests. Be as gentle with yourself as you are with others.';
+
+  @override
+  String get chartMoonLeo =>
+      'Your heart loves to be seen and appreciated. Kind words, from others and from you, help you glow.';
+
+  @override
+  String get chartMoonVirgo =>
+      'You feel calm when things are tidy and useful. You can let small worries go, because you are doing well.';
+
+  @override
+  String get chartMoonLibra =>
+      'You feel best when things are peaceful and fair. It is okay to say what you need, even when it feels hard.';
+
+  @override
+  String get chartMoonScorpio =>
+      'Your feelings run deep and private. You can take your time before opening up, and trust those who have earned it.';
+
+  @override
+  String get chartMoonSagittarius =>
+      'You feel free when you have space and hope. A walk, a laugh or a little adventure lifts your mood.';
+
+  @override
+  String get chartMoonCapricorn =>
+      'You may keep your feelings close and tend to them quietly. Soft rest is just as important as hard work.';
+
+  @override
+  String get chartMoonAquarius =>
+      'You make sense of feelings by stepping back and thinking them through. Your heart is warm even when it is quiet.';
+
+  @override
+  String get chartMoonPisces =>
+      'Your heart is soft and picks up on every mood around you. Quiet time, music and dreaming help you recharge.';
+
+  @override
+  String get chartRisingAries =>
+      'People may see you as bold, energetic and ready to go. Your confidence invites others to be brave too.';
+
+  @override
+  String get chartRisingTaurus =>
+      'People may see you as calm, grounded and warm. Your steady presence makes others feel at ease.';
+
+  @override
+  String get chartRisingGemini =>
+      'People may see you as bright, curious and easy to talk to. Your lively energy is a joy to be around.';
+
+  @override
+  String get chartRisingCancer =>
+      'People may see you as gentle and caring. Your kindness makes others feel at home.';
+
+  @override
+  String get chartRisingLeo =>
+      'People may see you as warm, confident and a little bit sparkly. Your presence lights up a room.';
+
+  @override
+  String get chartRisingVirgo =>
+      'People may see you as thoughtful, neat and kind. Your quiet care shows in the little things.';
+
+  @override
+  String get chartRisingLibra =>
+      'People may see you as graceful, friendly and easygoing. Your charm helps others feel welcome.';
+
+  @override
+  String get chartRisingScorpio =>
+      'People may see you as calm, magnetic and a little mysterious. Your depth makes others curious.';
+
+  @override
+  String get chartRisingSagittarius =>
+      'People may see you as cheerful, open and adventurous. Your optimism is contagious.';
+
+  @override
+  String get chartRisingCapricorn =>
+      'People may see you as composed, capable and wise. Your calm focus earns trust.';
+
+  @override
+  String get chartRisingAquarius =>
+      'People may see you as unique, friendly and a bit unexpected. Your originality stands out in a lovely way.';
+
+  @override
+  String get chartRisingPisces =>
+      'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.';
 }

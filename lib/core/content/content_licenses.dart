@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 /// Adds the data we bundle (not packages) to Flutter's licenses page, where
 /// attribution is required (PRD §8.5).
@@ -10,6 +11,12 @@ void registerContentLicenses() {
       'GeoNames (https://www.geonames.org), licensed under Creative Commons '
       'Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/). '
       'It was reduced to cities with at least 15,000 people.',
+    );
+  });
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks(
+      ['Planet and zodiac glyphs (from Noto Sans Symbols and Symbols 2)'],
+      await rootBundle.loadString('assets/fonts/MochiSymbols-OFL.txt'),
     );
   });
 }
