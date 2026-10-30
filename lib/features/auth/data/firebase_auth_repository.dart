@@ -59,24 +59,37 @@ class FirebaseAuthRepository implements AuthRepository {
     }
   }
 
+  /// Re-checks the signed-in Google account, but only when the phone can do it
+  /// silently. Without a silent account (or with a different one on the
+  /// phone) it does nothing: a picker here only confuses, and choosing the
+  /// wrong account makes Firebase reject the check. The two confirmation
+  /// dialogs already guard against accidents.
   @override
   Future<void> confirmIdentity() async {
     final user = _auth.currentUser;
     if (user == null) return;
     try {
+      await (_googleReady ??= _google.initialize());
+      final account = await _google.attemptLightweightAuthentication();
+      final idToken = account?.authentication.idToken;
+      if (idToken == null) return;
       await user.reauthenticateWithCredential(
-        await _googleCredential(preferSilent: true),
+        GoogleAuthProvider.credential(idToken: idToken),
       );
-    } on GoogleSignInException catch (error) {
-      throw switch (error.code) {
-        GoogleSignInExceptionCode.canceled ||
-        GoogleSignInExceptionCode.interrupted => const CancelledFailure(),
-        _ => UnknownFailure(error),
-      };
+    } on GoogleSignInException {
+      // No silent account; carry on.
     } on FirebaseAuthException catch (error) {
-      throw error.code == 'network-request-failed'
-          ? const NetworkFailure()
-          : UnknownFailure(error);
+      switch (error.code) {
+        case 'network-request-failed':
+          throw const NetworkFailure();
+        case 'user-mismatch':
+        case 'invalid-credential':
+        case 'user-not-found':
+          // Another Google account is on the phone; nothing to confirm.
+          return;
+        default:
+          throw UnknownFailure(error);
+      }
     }
   }
 
@@ -113,19 +126,11 @@ class FirebaseAuthRepository implements AuthRepository {
     }
   }
 
-  /// With [preferSilent], reuses the Google account already on the phone
-  /// without showing the picker, and only asks when that is not possible.
-  Future<AuthCredential> _googleCredential({bool preferSilent = false}) async {
+  /// Shows the Google account picker. Only used when Firebase insists on a
+  /// recent sign-in before deleting the Auth user itself.
+  Future<AuthCredential> _googleCredential() async {
     await (_googleReady ??= _google.initialize());
-    GoogleSignInAccount? account;
-    if (preferSilent) {
-      try {
-        account = await _google.attemptLightweightAuthentication();
-      } on GoogleSignInException {
-        // Fall through to the picker.
-      }
-    }
-    account ??= await _google.authenticate();
+    final account = await _google.authenticate();
     final idToken = account.authentication.idToken;
     if (idToken == null) throw const UnknownFailure('Google sent no id token');
     return GoogleAuthProvider.credential(idToken: idToken);
