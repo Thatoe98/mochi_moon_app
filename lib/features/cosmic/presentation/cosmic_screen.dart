@@ -4,6 +4,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/moon/presentation/moon_card.dart';
 import 'package:mochi_moon/features/cosmic/presentation/sign_picker.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_art.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
@@ -48,10 +49,17 @@ class CosmicScreen extends ConsumerWidget {
               error: (error, stack) => ErrorView(
                 onRetry: () => ref.invalidate(cosmicTodayProvider(lang)),
               ),
+              // The Moon needs no birth date, so it shows either way.
               data: (data) => data == null
-                  ? EmptyState(
-                      title: l10n.cosmicNeedsBirthDateTitle,
-                      body: l10n.cosmicNeedsBirthDateBody,
+                  ? ListView(
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      children: [
+                        const MoonCard(),
+                        EmptyState(
+                          title: l10n.cosmicNeedsBirthDateTitle,
+                          body: l10n.cosmicNeedsBirthDateBody,
+                        ),
+                      ],
                     )
                   : _TodayView(today: data, lang: lang),
             ),
@@ -88,11 +96,8 @@ class _TodayView extends ConsumerWidget {
             style: theme.textTheme.titleMedium,
           ),
         ),
-        Text(
-          l10n.cosmicMoonIn(zodiacSignLabel(l10n, today.moonSign)),
-          style: theme.textTheme.bodyMedium,
-        ),
         const SizedBox(height: AppSpacing.md),
+        const MoonCard(),
         _Block(
           children: [
             Text(reading.headline, style: theme.textTheme.titleLarge),

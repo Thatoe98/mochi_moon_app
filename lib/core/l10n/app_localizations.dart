@@ -812,6 +812,126 @@ abstract class AppLocalizations {
   /// **'For entertainment and self-reflection'**
   String get cosmicDisclaimer;
 
+  /// No description provided for @moonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Moon'**
+  String get moonTitle;
+
+  /// No description provided for @moonPhaseNewMoon.
+  ///
+  /// In en, this message translates to:
+  /// **'New moon'**
+  String get moonPhaseNewMoon;
+
+  /// No description provided for @moonPhaseWaxingCrescent.
+  ///
+  /// In en, this message translates to:
+  /// **'Waxing crescent'**
+  String get moonPhaseWaxingCrescent;
+
+  /// No description provided for @moonPhaseFirstQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'First quarter'**
+  String get moonPhaseFirstQuarter;
+
+  /// No description provided for @moonPhaseWaxingGibbous.
+  ///
+  /// In en, this message translates to:
+  /// **'Waxing gibbous'**
+  String get moonPhaseWaxingGibbous;
+
+  /// No description provided for @moonPhaseFullMoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Full moon'**
+  String get moonPhaseFullMoon;
+
+  /// No description provided for @moonPhaseWaningGibbous.
+  ///
+  /// In en, this message translates to:
+  /// **'Waning gibbous'**
+  String get moonPhaseWaningGibbous;
+
+  /// No description provided for @moonPhaseLastQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Last quarter'**
+  String get moonPhaseLastQuarter;
+
+  /// No description provided for @moonPhaseWaningCrescent.
+  ///
+  /// In en, this message translates to:
+  /// **'Waning crescent'**
+  String get moonPhaseWaningCrescent;
+
+  /// No description provided for @moonIlluminated.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% lit'**
+  String moonIlluminated(int percent);
+
+  /// No description provided for @moonNextNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Next new moon: {date}'**
+  String moonNextNew(String date);
+
+  /// No description provided for @moonNextFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Next full moon: {date}'**
+  String moonNextFull(String date);
+
+  /// No description provided for @moonAffirmationNewMoon.
+  ///
+  /// In en, this message translates to:
+  /// **'I plant a gentle intention for myself, and I trust it to grow.'**
+  String get moonAffirmationNewMoon;
+
+  /// No description provided for @moonAffirmationWaxingCrescent.
+  ///
+  /// In en, this message translates to:
+  /// **'I take one small, kind step toward what I want.'**
+  String get moonAffirmationWaxingCrescent;
+
+  /// No description provided for @moonAffirmationFirstQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'I can keep going at my own pace, and my effort matters.'**
+  String get moonAffirmationFirstQuarter;
+
+  /// No description provided for @moonAffirmationWaxingGibbous.
+  ///
+  /// In en, this message translates to:
+  /// **'I trust what I have started and I give it time to bloom.'**
+  String get moonAffirmationWaxingGibbous;
+
+  /// No description provided for @moonAffirmationFullMoon.
+  ///
+  /// In en, this message translates to:
+  /// **'I am glowing, and I am grateful for how far I have come.'**
+  String get moonAffirmationFullMoon;
+
+  /// No description provided for @moonAffirmationWaningGibbous.
+  ///
+  /// In en, this message translates to:
+  /// **'I share what I have learned and I thank myself for it.'**
+  String get moonAffirmationWaningGibbous;
+
+  /// No description provided for @moonAffirmationLastQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'I let go of what feels heavy, and I forgive myself with ease.'**
+  String get moonAffirmationLastQuarter;
+
+  /// No description provided for @moonAffirmationWaningCrescent.
+  ///
+  /// In en, this message translates to:
+  /// **'I rest, I soften, and I make room for a fresh start.'**
+  String get moonAffirmationWaningCrescent;
+
   /// No description provided for @thaiColorsSettingTitle.
   ///
   /// In en, this message translates to:

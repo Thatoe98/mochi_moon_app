@@ -138,6 +138,25 @@ void main() {
     expect(find.text('For entertainment and self-reflection'), findsOneWidget);
   });
 
+  testWidgets('shows the Moon card with a birth date', (tester) async {
+    await tester.pumpWidget(_host(profile: _scorpio));
+    await tester.pumpAndSettle();
+
+    await _scrollTo(tester, find.text('Moon'), 300);
+    expect(find.textContaining('% lit'), findsOneWidget);
+    expect(find.textContaining('Next new moon:'), findsOneWidget);
+    expect(find.textContaining('Next full moon:'), findsOneWidget);
+  });
+
+  testWidgets('shows the Moon card even without a birth date', (tester) async {
+    await tester.pumpWidget(_host());
+    await tester.pumpAndSettle();
+
+    expect(find.text('Moon'), findsOneWidget);
+    expect(find.textContaining('Next full moon:'), findsOneWidget);
+    expect(find.text('Your stars need a date'), findsOneWidget);
+  });
+
   testWidgets('hides the Thai colors unless they are switched on', (
     tester,
   ) async {

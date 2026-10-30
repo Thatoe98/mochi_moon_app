@@ -439,6 +439,80 @@ class AppLocalizationsMy extends AppLocalizations {
       'ဖျော်ဖြေရေးနဲ့ ကိုယ့်ကိုယ်ကို ပြန်လည်ဆင်ခြင်ဖို့အတွက်';
 
   @override
+  String get moonTitle => 'Moon';
+
+  @override
+  String get moonPhaseNewMoon => 'New moon';
+
+  @override
+  String get moonPhaseWaxingCrescent => 'Waxing crescent';
+
+  @override
+  String get moonPhaseFirstQuarter => 'First quarter';
+
+  @override
+  String get moonPhaseWaxingGibbous => 'Waxing gibbous';
+
+  @override
+  String get moonPhaseFullMoon => 'Full moon';
+
+  @override
+  String get moonPhaseWaningGibbous => 'Waning gibbous';
+
+  @override
+  String get moonPhaseLastQuarter => 'Last quarter';
+
+  @override
+  String get moonPhaseWaningCrescent => 'Waning crescent';
+
+  @override
+  String moonIlluminated(int percent) {
+    return '$percent% လင်းနေတယ်';
+  }
+
+  @override
+  String moonNextNew(String date) {
+    return 'နောက်လာမယ့် new moon: $date';
+  }
+
+  @override
+  String moonNextFull(String date) {
+    return 'နောက်လာမယ့် full moon: $date';
+  }
+
+  @override
+  String get moonAffirmationNewMoon =>
+      'ငါ့အတွက် နူးညံ့တဲ့ ရည်ရွယ်ချက်လေးတစ်ခု ချမှတ်ပြီး အဲဒါ တဖြည်းဖြည်း ကြီးထွားလာမယ်လို့ ယုံကြည်တယ်။';
+
+  @override
+  String get moonAffirmationWaxingCrescent =>
+      'ငါလိုချင်တဲ့အရာဆီကို ကြင်နာတဲ့ ခြေလှမ်းသေးသေးလေးတစ်လှမ်း လှမ်းတယ်။';
+
+  @override
+  String get moonAffirmationFirstQuarter =>
+      'ငါ ကိုယ့်အရှိန်နဲ့ကိုယ် ဆက်လျှောက်နိုင်တယ်၊ ငါ့ရဲ့ ကြိုးစားမှုကလည်း တန်ဖိုးရှိတယ်။';
+
+  @override
+  String get moonAffirmationWaxingGibbous =>
+      'ငါ စတင်ထားတာကို ယုံကြည်ပြီး ပွင့်လန်းလာဖို့ အချိန်ပေးတယ်။';
+
+  @override
+  String get moonAffirmationFullMoon =>
+      'ငါ တောက်ပနေတယ်၊ ဒီအထိ ရောက်လာနိုင်ခဲ့တာအတွက် ကျေးဇူးတင်တယ်။';
+
+  @override
+  String get moonAffirmationWaningGibbous =>
+      'ငါ သင်ယူခဲ့တာတွေကို မျှဝေပြီး အဲဒီအတွက် ကိုယ့်ကိုယ်ကို ကျေးဇူးတင်တယ်။';
+
+  @override
+  String get moonAffirmationLastQuarter =>
+      'လေးလံတယ်လို့ ခံစားရတာတွေကို လွှတ်ချပြီး ကိုယ့်ကိုယ်ကို အေးအေးဆေးဆေး ခွင့်လွှတ်တယ်။';
+
+  @override
+  String get moonAffirmationWaningCrescent =>
+      'ငါ အနားယူတယ်၊ စိတ်ကို ပျော့ပျောင်းစေတယ်၊ အသစ်စဖို့ နေရာလေး ဖန်တီးတယ်။';
+
+  @override
   String get thaiColorsSettingTitle => 'ထိုင်းရိုးရာ နေ့အလိုက်အရောင်များ';
 
   @override

@@ -437,6 +437,80 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cosmicDisclaimer => 'For entertainment and self-reflection';
 
   @override
+  String get moonTitle => 'Moon';
+
+  @override
+  String get moonPhaseNewMoon => 'New moon';
+
+  @override
+  String get moonPhaseWaxingCrescent => 'Waxing crescent';
+
+  @override
+  String get moonPhaseFirstQuarter => 'First quarter';
+
+  @override
+  String get moonPhaseWaxingGibbous => 'Waxing gibbous';
+
+  @override
+  String get moonPhaseFullMoon => 'Full moon';
+
+  @override
+  String get moonPhaseWaningGibbous => 'Waning gibbous';
+
+  @override
+  String get moonPhaseLastQuarter => 'Last quarter';
+
+  @override
+  String get moonPhaseWaningCrescent => 'Waning crescent';
+
+  @override
+  String moonIlluminated(int percent) {
+    return '$percent% lit';
+  }
+
+  @override
+  String moonNextNew(String date) {
+    return 'Next new moon: $date';
+  }
+
+  @override
+  String moonNextFull(String date) {
+    return 'Next full moon: $date';
+  }
+
+  @override
+  String get moonAffirmationNewMoon =>
+      'I plant a gentle intention for myself, and I trust it to grow.';
+
+  @override
+  String get moonAffirmationWaxingCrescent =>
+      'I take one small, kind step toward what I want.';
+
+  @override
+  String get moonAffirmationFirstQuarter =>
+      'I can keep going at my own pace, and my effort matters.';
+
+  @override
+  String get moonAffirmationWaxingGibbous =>
+      'I trust what I have started and I give it time to bloom.';
+
+  @override
+  String get moonAffirmationFullMoon =>
+      'I am glowing, and I am grateful for how far I have come.';
+
+  @override
+  String get moonAffirmationWaningGibbous =>
+      'I share what I have learned and I thank myself for it.';
+
+  @override
+  String get moonAffirmationLastQuarter =>
+      'I let go of what feels heavy, and I forgive myself with ease.';
+
+  @override
+  String get moonAffirmationWaningCrescent =>
+      'I rest, I soften, and I make room for a fresh start.';
+
+  @override
   String get thaiColorsSettingTitle => 'Thai day colors';
 
   @override

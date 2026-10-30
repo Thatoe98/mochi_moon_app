@@ -11,6 +11,7 @@ Rules:
   - the twelve zodiac signs (Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces);
   - the planet names (Mercury, Venus, Mars, Jupiter, Saturn, ...) and "Moon" and "Sun" when they name the body or the sign placement;
   - "retrograde" (and "direct" when it is the opposite of retrograde);
+  - the Moon phase names and the words for them in running text: new moon, full moon, waxing crescent, first quarter, waxing gibbous, waning gibbous, last quarter, waning crescent (keep the capitalization of the English);
   - "Self Love" / "self-love", written "Self Love";
   - other words Burmese people usually say in English in daily life: for example horoscope, birth chart, Premium, widget, app, notification, and similar app or astrology vocabulary. When unsure, prefer the English word if a young Burmese reader would say it in English, and Burmese if the Burmese word is the everyday one.
   Translate everything else into Burmese.
