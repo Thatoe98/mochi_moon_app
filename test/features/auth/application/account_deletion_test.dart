@@ -58,6 +58,32 @@ void main() {
     expect(alerts.cancels, 1);
   });
 
+  test(
+    'server deletion: signs out instead of deleting the user again',
+    () async {
+      remote = FakeAccountRemote(removesAuthUser: true);
+
+      final outcome = await delete(container());
+
+      expect(outcome, AccountDeletionOutcome.deleted);
+      expect(remote.deleted, ['uid_1']);
+      expect(auth.deleteCalls, 0);
+      expect(auth.currentUser, isNull);
+      expect(eraser.erased, 1);
+    },
+  );
+
+  test('server deletion that fails keeps the phone as it was', () async {
+    remote = FakeAccountRemote(removesAuthUser: true)
+      ..error = const UnknownFailure('server said no');
+
+    final outcome = await delete(container());
+
+    expect(outcome, AccountDeletionOutcome.failed);
+    expect(auth.currentUser, isNotNull);
+    expect(eraser.erased, 0);
+  });
+
   test('signed out: only wipes the phone', () async {
     auth = FakeAuthRepository();
 

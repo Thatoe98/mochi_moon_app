@@ -40,6 +40,19 @@ class ReadingsApi {
     }
   }
 
+  /// A `DELETE` that answers with no body. [receiveTimeout] is for calls that
+  /// do real work on the server before they answer.
+  Future<void> delete(String path, {Duration? receiveTimeout}) async {
+    try {
+      await _dio.delete<Object?>(
+        path,
+        options: Options(receiveTimeout: receiveTimeout),
+      );
+    } on DioException catch (error) {
+      throw _translate(error);
+    }
+  }
+
   Exception _translate(DioException error) {
     if (error.error is AppFailure) return error.error! as AppFailure;
     switch (error.type) {

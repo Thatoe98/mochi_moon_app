@@ -1,8 +1,10 @@
 import 'package:mochi_moon/core/errors/app_failure.dart';
+import 'package:mochi_moon/core/network/network_providers.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/auth/data/drift_local_data_eraser.dart';
 import 'package:mochi_moon/features/auth/data/firestore_account_remote.dart';
+import 'package:mochi_moon/features/auth/data/server_account_remote.dart';
 import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
@@ -11,8 +13,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'account_deletion_providers.g.dart';
 
+/// The server deletes the account when the build has a Readings API; without
+/// one the app deletes the Firestore data and the Auth user itself.
 @Riverpod(keepAlive: true)
-AccountRemote accountRemote(Ref ref) => FirestoreAccountRemote();
+AccountRemote accountRemote(Ref ref) {
+  final api = ref.watch(readingsApiProvider);
+  return api == null ? FirestoreAccountRemote() : ServerAccountRemote(api);
+}
 
 @Riverpod(keepAlive: true)
 LocalDataEraser localDataEraser(Ref ref) => DriftLocalDataEraser(
@@ -45,6 +52,9 @@ enum AccountDeletionOutcome {
 /// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
+///
+/// With the Readings API the server removes the cloud data and the Auth user
+/// in one call, so the app only signs out afterwards.
 @Riverpod(keepAlive: true)
 class AccountDeletion extends _$AccountDeletion {
   @override
@@ -57,8 +67,9 @@ class AccountDeletion extends _$AccountDeletion {
       final auth = ref.read(authRepositoryProvider);
       if (auth.currentUser case final user?) {
         await auth.confirmIdentity();
-        await ref.read(accountRemoteProvider).deleteUserData(user.uid);
-        await auth.deleteAccount();
+        final remote = ref.read(accountRemoteProvider);
+        await remote.deleteUserData(user.uid);
+        await (remote.removesAuthUser ? auth.signOut() : auth.deleteAccount());
       }
       await _cancelNotifications();
       await ref.read(localDataEraserProvider).eraseAll();

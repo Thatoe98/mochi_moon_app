@@ -42,6 +42,11 @@ abstract interface class AuthRepository {
 
 /// Removes a user's data from the Mochi Moon service (Firestore).
 abstract interface class AccountRemote {
+  /// Whether [deleteUserData] also deletes the Auth user, as the server does.
+  /// When true the app only signs out afterwards; when false it deletes the
+  /// Auth user itself.
+  bool get removesAuthUser;
+
   /// Deletes everything stored under [uid], profile last so a failed run can
   /// be retried. Throws a `NetworkFailure` when offline.
   Future<void> deleteUserData(String uid);

@@ -115,6 +115,28 @@ void main() {
     await expectLater(api.getJson('daily'), throwsA(isA<FormatException>()));
   });
 
+  test('delete sends a DELETE and accepts an empty answer', () async {
+    final (:api, :adapter) = _api(
+      handler: (_) async => ResponseBody.fromString('', 204),
+    );
+
+    await api.delete('account');
+
+    expect(adapter.requests.single.method, 'DELETE');
+    expect(adapter.requests.single.path, 'account');
+  });
+
+  test('delete turns an error answer into a ReadingsApiException', () async {
+    final (:api, adapter: _) = _api(
+      handler: (_) async => errorResponse(401, 'unauthenticated'),
+    );
+
+    await expectLater(
+      api.delete('account'),
+      throwsA(isA<ReadingsApiException>().having((e) => e.status, 's', 401)),
+    );
+  });
+
   group('readingsApiProvider', () {
     ProviderContainer container({required String baseUrl}) {
       final container = ProviderContainer(

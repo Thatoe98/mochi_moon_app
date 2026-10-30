@@ -2,6 +2,11 @@ import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
 
 /// Records the uids whose cloud data was deleted; throws [error] when set.
 class FakeAccountRemote implements AccountRemote {
+  FakeAccountRemote({this.removesAuthUser = false});
+
+  @override
+  final bool removesAuthUser;
+
   Exception? error;
   final deleted = <String>[];
 

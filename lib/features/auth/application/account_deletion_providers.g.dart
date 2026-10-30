@@ -8,13 +8,20 @@ part of 'account_deletion_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The server deletes the account when the build has a Readings API; without
+/// one the app deletes the Firestore data and the Auth user itself.
 
 @ProviderFor(accountRemote)
 final accountRemoteProvider = AccountRemoteProvider._();
 
+/// The server deletes the account when the build has a Readings API; without
+/// one the app deletes the Firestore data and the Auth user itself.
+
 final class AccountRemoteProvider
     extends $FunctionalProvider<AccountRemote, AccountRemote, AccountRemote>
     with $Provider<AccountRemote> {
+  /// The server deletes the account when the build has a Readings API; without
+  /// one the app deletes the Firestore data and the Auth user itself.
   AccountRemoteProvider._()
     : super(
         from: null,
@@ -48,7 +55,7 @@ final class AccountRemoteProvider
   }
 }
 
-String _$accountRemoteHash() => r'69ee2ae61602f1db2cfe0d36558b741a984f9c67';
+String _$accountRemoteHash() => r'afbed4fe93d14c15e54832d0820934256b705ad9';
 
 @ProviderFor(localDataEraser)
 final localDataEraserProvider = LocalDataEraserProvider._();
@@ -100,6 +107,9 @@ String _$localDataEraserHash() => r'7b931eca00a168d45439d815e728829bb1a958ce';
 /// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
+///
+/// With the Readings API the server removes the cloud data and the Auth user
+/// in one call, so the app only signs out afterwards.
 
 @ProviderFor(AccountDeletion)
 final accountDeletionProvider = AccountDeletionProvider._();
@@ -112,6 +122,9 @@ final accountDeletionProvider = AccountDeletionProvider._();
 /// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
+///
+/// With the Readings API the server removes the cloud data and the Auth user
+/// in one call, so the app only signs out afterwards.
 final class AccountDeletionProvider
     extends $NotifierProvider<AccountDeletion, bool> {
   /// Deletes the account from Mochi Moon and wipes this phone. The state is
@@ -122,6 +135,9 @@ final class AccountDeletionProvider
   /// signed in), then the Auth user, then the local data. The sync providers stop once the
   /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
   /// only the local wipe runs, which makes this a full reset for testing.
+  ///
+  /// With the Readings API the server removes the cloud data and the Auth user
+  /// in one call, so the app only signs out afterwards.
   AccountDeletionProvider._()
     : super(
         from: null,
@@ -149,7 +165,7 @@ final class AccountDeletionProvider
   }
 }
 
-String _$accountDeletionHash() => r'35f00d08e71e39447029f41c54a141958b2611ce';
+String _$accountDeletionHash() => r'79b1f4fba35663b92df56263b47bff9cd6541472';
 
 /// Deletes the account from Mochi Moon and wipes this phone. The state is
 /// whether a deletion is running.
@@ -159,6 +175,9 @@ String _$accountDeletionHash() => r'35f00d08e71e39447029f41c54a141958b2611ce';
 /// signed in), then the Auth user, then the local data. The sync providers stop once the
 /// user is gone, so nothing recreates the cloud copy afterwards. Signed out,
 /// only the local wipe runs, which makes this a full reset for testing.
+///
+/// With the Readings API the server removes the cloud data and the Auth user
+/// in one call, so the app only signs out afterwards.
 
 abstract class _$AccountDeletion extends $Notifier<bool> {
   bool build();

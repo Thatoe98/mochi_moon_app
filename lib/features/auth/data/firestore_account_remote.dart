@@ -25,6 +25,9 @@ class FirestoreAccountRemote implements AccountRemote {
   static const _subcollections = ['journal', 'partners'];
 
   @override
+  bool get removesAuthUser => false;
+
+  @override
   Future<void> deleteUserData(String uid) => _guard(() async {
     final user = _firestore.collection('users').doc(uid);
     for (final name in _subcollections) {
