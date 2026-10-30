@@ -1,7 +1,7 @@
 name: mochi_moon
 description: "Mochi Moon: self-love and zodiac."
 publish_to: 'none'
-version: 0.1.0+2
+version: 0.1.0+3
 
 environment:
   sdk: ^3.13.2

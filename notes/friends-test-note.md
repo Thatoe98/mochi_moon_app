@@ -12,7 +12,7 @@ compatibility). It is for fun and self-reflection, never for predictions.
 
 ## Install (Android only)
 
-1. Open the file `MochiMoon-dev-0.1.0+2.apk` on your phone.
+1. Open the file `MochiMoon-dev-0.1.0+3.apk` on your phone.
 2. Android will say it blocks installs from this source. Tap **Settings**,
    allow it for the app you opened the file from (Files, Chrome, Drive...),
    then go back and tap **Install**.
