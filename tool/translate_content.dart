@@ -9,7 +9,10 @@
 //   --arb          translate missing strings of l10n/app_en.arb
 //   --readings     translate assets/content/fallback_readings/en.json
 //   --quotes       add a Burmese text to assets/content/quotes/quotes.json
-//                  (with none of the three flags, all run)
+//                  (with none of the three flags above, all three run)
+//   --web          translate the account deletion web page of the sibling
+//                  mochi-moon-api repo (app/web_strings/en.json -> my.json);
+//                  only runs when asked for
 //   --only REGEX   only ARB keys (or quote ids) that match REGEX
 //   --force        translate again even if a translation exists
 //   --batch-size N ARB strings per request (default 25)
@@ -34,13 +37,15 @@ const _myArb = 'l10n/app_my.arb';
 const _enReadings = 'assets/content/fallback_readings/en.json';
 const _myReadings = 'assets/content/fallback_readings/my.json';
 const _quotes = 'assets/content/quotes/quotes.json';
+const _enWeb = '../mochi-moon-api/app/web_strings/en.json';
+const _myWeb = '../mochi-moon-api/app/web_strings/my.json';
 
 Future<void> main(List<String> args) async {
   final options = _Options.parse(args);
   if (options == null) {
     stderr.writeln(
       'usage: dart run tool/translate_content.dart [--arb] [--readings] [--quotes] '
-      '[--only REGEX] [--force] [--batch-size N] [--dry-run]',
+      '[--web] [--only REGEX] [--force] [--batch-size N] [--dry-run]',
     );
     exit(64);
   }
@@ -69,6 +74,7 @@ Future<void> main(List<String> args) async {
     if (options.arb) failures += await _runArb(options, chat);
     if (options.readings) failures += await _runReadings(options, chat);
     if (options.quotes) failures += await _runQuotes(options, chat);
+    if (options.web) failures += await _runWeb(options, chat);
   } on OpenAiException catch (e) {
     stderr.writeln(e);
     exit(1);
@@ -198,6 +204,41 @@ Future<int> _runQuotes(_Options options, ChatCall? chat) async {
   return failures;
 }
 
+Future<int> _runWeb(_Options options, ChatCall? chat) async {
+  final en = _readJson(_enWeb);
+  if (en == null) {
+    stderr.writeln(
+      'Web: $_enWeb not found (is mochi-moon-api next to this repo?).',
+    );
+    return 1;
+  }
+  final my = _readJson(_myWeb) ?? <String, Object?>{};
+  final keys = pendingKeys(
+    en,
+    my,
+    only: options.only == null ? null : RegExp(options.only!),
+    force: options.force,
+  );
+  stdout.writeln('Web page: ${keys.length} string(s) to translate.');
+  if (keys.isEmpty) return 0;
+  if (chat == null) {
+    stdout.writeln('  would send: ${keys.join(', ')}');
+    return 0;
+  }
+
+  final result = await translateArb(chat: chat, en: en, my: my, keys: keys);
+  // Same key order as English; the file has no `@@locale` entry.
+  final merged = <String, Object?>{
+    for (final key in en.keys) key: ?(result.done[key] ?? my[key]),
+  };
+  File(_myWeb).writeAsStringSync(encodeArb(merged));
+  stdout.writeln('    wrote ${result.done.length}');
+  for (final entry in result.failed.entries) {
+    stderr.writeln('    FAILED ${entry.key}: ${entry.value.join('; ')}');
+  }
+  return result.failed.length;
+}
+
 Map<String, Object?>? _readJson(String path) {
   final file = File(path);
   if (!file.existsSync()) return null;
@@ -209,6 +250,7 @@ class _Options {
     required this.arb,
     required this.readings,
     required this.quotes,
+    required this.web,
     required this.only,
     required this.force,
     required this.batchSize,
@@ -218,6 +260,7 @@ class _Options {
   final bool arb;
   final bool readings;
   final bool quotes;
+  final bool web;
   final String? only;
   final bool force;
   final int batchSize;
@@ -227,6 +270,7 @@ class _Options {
     var arb = false;
     var readings = false;
     var quotes = false;
+    var web = false;
     var force = false;
     var dryRun = false;
     String? only;
@@ -239,6 +283,8 @@ class _Options {
           readings = true;
         case '--quotes':
           quotes = true;
+        case '--web':
+          web = true;
         case '--force':
           force = true;
         case '--dry-run':
@@ -255,7 +301,7 @@ class _Options {
           return null;
       }
     }
-    if (!arb && !readings && !quotes) {
+    if (!arb && !readings && !quotes && !web) {
       arb = true;
       readings = true;
       quotes = true;
@@ -264,6 +310,7 @@ class _Options {
       arb: arb,
       readings: readings,
       quotes: quotes,
+      web: web,
       only: only,
       force: force,
       batchSize: batchSize,
