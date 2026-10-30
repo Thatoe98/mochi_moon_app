@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/features/profile/data/profile_codec.dart';
 import 'package:mochi_moon/features/profile/domain/profile_repository.dart';
+import 'package:mochi_moon/features/profile/domain/profile_signs.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
 class FirestoreProfileRemote implements ProfileRemote {
@@ -32,8 +33,16 @@ class FirestoreProfileRemote implements ProfileRemote {
   }) => _guard(() async {
     final doc = _doc(uid);
     final exists = (await doc.get()).exists;
+    final signs = signsOfProfile(profile);
+    final map = profileToMap(profile);
     await doc.set({
-      ...profileToMap(profile),
+      ...map,
+      // The signs are derived from the birth data, so they are rewritten on
+      // every save and never go stale.
+      'profile': {
+        ...(map['profile']! as Map<String, Object?>),
+        if (signs != null) ...signs.toMap(),
+      },
       'locale': locale,
       'settings': {'reminderTime': reminderTime},
       'updatedAt': FieldValue.serverTimestamp(),

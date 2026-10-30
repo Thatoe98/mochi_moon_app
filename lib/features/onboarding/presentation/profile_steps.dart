@@ -49,7 +49,7 @@ class ProfileStepBody extends StatelessWidget {
       ProfileStep.birthTime => _Step(
         title: l10n.profileBirthTimeTitle,
         body: l10n.profileBirthTimeBody,
-        child: _BirthTime(
+        child: BirthTimePicker(
           minutes: setup.birthMinutes,
           onChanged: notifier.setBirthMinutes,
         ),
@@ -75,7 +75,7 @@ class ProfileStepBody extends StatelessWidget {
       ProfileStep.focus => _Step(
         title: l10n.profileFocusTitle,
         body: l10n.profileFocusBody(maxFocusAreas),
-        child: _FocusAreas(
+        child: FocusAreaChips(
           selected: setup.focusAreas,
           onToggle: notifier.toggleFocus,
         ),
@@ -178,9 +178,7 @@ class _BirthDatePicker extends StatelessWidget {
         ),
         if (chosen != null)
           Text(
-            l10n.profileBirthDateChosen(
-              englishDates.formatMediumDate(chosen!),
-            ),
+            l10n.profileBirthDateChosen(englishDates.formatMediumDate(chosen!)),
             style: Theme.of(context).textTheme.titleMedium,
           ),
       ],
@@ -188,8 +186,13 @@ class _BirthDatePicker extends StatelessWidget {
   }
 }
 
-class _BirthTime extends StatelessWidget {
-  const _BirthTime({required this.minutes, required this.onChanged});
+/// Picks a birth time, or "I don't know" (null).
+class BirthTimePicker extends StatelessWidget {
+  const BirthTimePicker({
+    required this.minutes,
+    required this.onChanged,
+    super.key,
+  });
 
   final int? minutes;
   final ValueChanged<int?> onChanged;
@@ -216,9 +219,7 @@ class _BirthTime extends StatelessWidget {
         Text(
           time == null
               ? l10n.profileBirthTimeNone
-              : l10n.profileBirthTimeChosen(
-                  englishDates.formatTimeOfDay(time),
-                ),
+              : l10n.profileBirthTimeChosen(englishDates.formatTimeOfDay(time)),
           style: theme.textTheme.titleMedium,
         ),
         const SizedBox(height: AppSpacing.md),
@@ -260,9 +261,7 @@ class _ReminderTime extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          l10n.profileReminderAt(
-            englishDates.formatTimeOfDay(of),
-          ),
+          l10n.profileReminderAt(englishDates.formatTimeOfDay(of)),
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: AppSpacing.md),
@@ -275,8 +274,13 @@ class _ReminderTime extends StatelessWidget {
   }
 }
 
-class _FocusAreas extends StatelessWidget {
-  const _FocusAreas({required this.selected, required this.onToggle});
+/// The focus-area chips; at most [maxFocusAreas] can be on.
+class FocusAreaChips extends StatelessWidget {
+  const FocusAreaChips({
+    required this.selected,
+    required this.onToggle,
+    super.key,
+  });
 
   final List<FocusArea> selected;
   final ValueChanged<FocusArea> onToggle;

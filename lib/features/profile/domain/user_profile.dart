@@ -6,6 +6,9 @@ part 'user_profile.freezed.dart';
 /// Most focus areas a user can pick (PRD §6.1).
 const maxFocusAreas = 3;
 
+/// Longest name the profile accepts.
+const maxDisplayNameLength = 40;
+
 /// The earliest birth year the date picker offers (PRD §6.1).
 const earliestBirthYear = 1940;
 
@@ -59,6 +62,17 @@ abstract class UserProfile with _$UserProfile {
   /// A profile needs a name and a birth date to be useful; the rest is
   /// optional.
   bool get isComplete => displayName.trim().isNotEmpty && birthDate != null;
+
+  /// Whether this can be saved from the edit form on [today]: a name, a real
+  /// birth date, and a birthplace whenever a birth time is given (PRD §6.1).
+  bool isValidFor(DateTime today) {
+    final date = birthDate;
+    return displayName.trim().isNotEmpty &&
+        displayName.trim().length <= maxDisplayNameLength &&
+        date != null &&
+        isValidBirthDate(date, today) &&
+        (birthMinutes == null || birthPlace != null);
+  }
 }
 
 /// True when [date] can be a birth date: from [earliestBirthYear] up to and

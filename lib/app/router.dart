@@ -15,6 +15,7 @@ import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart'
 import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
+import 'package:mochi_moon/features/profile/presentation/profile_edit_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -26,6 +27,7 @@ abstract final class AppRoutes {
   static const chart = '/cosmic/chart';
   static const me = '/me';
   static const journal = '/me/journal';
+  static const profileEdit = '/me/profile';
   static const partners = '/me/partners';
   static const partnerEdit = '/me/partners/edit';
   static const partnerResult = '/me/partners/result';
@@ -109,6 +111,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'journal',
                     builder: (context, state) => const JournalScreen(),
+                  ),
+                  GoRoute(
+                    path: 'profile',
+                    builder: (context, state) => const ProfileEditScreen(),
                   ),
                   GoRoute(
                     path: 'partners',

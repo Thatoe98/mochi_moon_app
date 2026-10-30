@@ -163,6 +163,19 @@ void main() {
     expect(find.text('No partners yet'), findsOneWidget);
   });
 
+  testWidgets('Me opens Edit profile', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Edit profile'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your name'), findsOneWidget);
+    expect(find.text('Birthday'), findsOneWidget);
+  });
+
   group('first run', () {
     final cards = [
       const Quote(id: 'q_a', text: {'en': 'Soft moon'}, category: 'calm'),

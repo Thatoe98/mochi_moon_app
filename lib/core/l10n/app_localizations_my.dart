@@ -1240,4 +1240,42 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get compatAspectOpposition =>
       'ဒီနှစ်ခုက ဦးတည်ရာမတူဘဲ ဆွဲခေါ်တတ်တာကြောင့် ဟန်ချက်ညီအောင်နေခြင်းနဲ့ နားထောင်ပေးခြင်းက အထောက်အကူဖြစ်ပါတယ်။';
+
+  @override
+  String get meProfileTitle => 'ပရိုဖိုင်ကို ပြင်မယ်';
+
+  @override
+  String get meProfileSubtitle => 'နာမည်၊ မွေးနေ့နဲ့ အာရုံစိုက်ချင်တဲ့အရာတွေ';
+
+  @override
+  String get profileEditTitle => 'ပရိုဖိုင်ကို ပြင်မယ်';
+
+  @override
+  String get profileEditBirthDateLabel => 'မွေးနေ့';
+
+  @override
+  String get profileEditBirthDateChoose => 'ရက်စွဲရွေးပါ';
+
+  @override
+  String get profileEditBirthTimeLabel => 'မွေးချိန် (မဖြည့်လည်းရပါတယ်)';
+
+  @override
+  String get profileEditBirthPlaceLabel => 'မွေးဖွားရာနေရာ';
+
+  @override
+  String get profileEditBirthPlaceNeeded =>
+      'မွေးချိန်ကို မှန်ကန်တဲ့ time zone နဲ့ ဖတ်ရှုနိုင်ဖို့ မွေးဖွားရာနေရာကို ထည့်ပေးပါ။';
+
+  @override
+  String get profileEditFocusLabel => 'ပိုပြီး ရချင်တဲ့အရာတွေ';
+
+  @override
+  String get profileEditNote =>
+      'မွေးဖွားမှုအချက်အလက်တွေ ပြောင်းလိုက်ရင် birth chart၊ ဖတ်ရှုချက်တွေနဲ့ compatibility ရလဒ်တွေပါ ပြောင်းလဲသွားပါမယ်။';
+
+  @override
+  String get profileEditSave => 'သိမ်းမယ်';
+
+  @override
+  String get profileEditSaved => 'ပရိုဖိုင်ကို ပြင်ဆင်ပြီးပါပြီ။';
 }

@@ -2119,6 +2119,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'These two pull in different directions, so balance and listening help here.'**
   String get compatAspectOpposition;
+
+  /// No description provided for @meProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get meProfileTitle;
+
+  /// No description provided for @meProfileSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name, birthday and focus areas'**
+  String get meProfileSubtitle;
+
+  /// No description provided for @profileEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileEditTitle;
+
+  /// No description provided for @profileEditBirthDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get profileEditBirthDateLabel;
+
+  /// No description provided for @profileEditBirthDateChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a date'**
+  String get profileEditBirthDateChoose;
+
+  /// No description provided for @profileEditBirthTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth time (optional)'**
+  String get profileEditBirthTimeLabel;
+
+  /// No description provided for @profileEditBirthPlaceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthplace'**
+  String get profileEditBirthPlaceLabel;
+
+  /// No description provided for @profileEditBirthPlaceNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a birthplace so we can read the birth time in the right time zone.'**
+  String get profileEditBirthPlaceNeeded;
+
+  /// No description provided for @profileEditFocusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What you\'d like more of'**
+  String get profileEditFocusLabel;
+
+  /// No description provided for @profileEditNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Changing your birth details updates your birth chart, your readings and your compatibility results.'**
+  String get profileEditNote;
+
+  /// No description provided for @profileEditSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get profileEditSave;
+
+  /// No description provided for @profileEditSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated.'**
+  String get profileEditSaved;
 }
 
 class _AppLocalizationsDelegate

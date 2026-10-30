@@ -1229,4 +1229,42 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get compatAspectOpposition =>
       'These two pull in different directions, so balance and listening help here.';
+
+  @override
+  String get meProfileTitle => 'Edit profile';
+
+  @override
+  String get meProfileSubtitle => 'Your name, birthday and focus areas';
+
+  @override
+  String get profileEditTitle => 'Edit profile';
+
+  @override
+  String get profileEditBirthDateLabel => 'Birthday';
+
+  @override
+  String get profileEditBirthDateChoose => 'Choose a date';
+
+  @override
+  String get profileEditBirthTimeLabel => 'Birth time (optional)';
+
+  @override
+  String get profileEditBirthPlaceLabel => 'Birthplace';
+
+  @override
+  String get profileEditBirthPlaceNeeded =>
+      'Add a birthplace so we can read the birth time in the right time zone.';
+
+  @override
+  String get profileEditFocusLabel => 'What you\'d like more of';
+
+  @override
+  String get profileEditNote =>
+      'Changing your birth details updates your birth chart, your readings and your compatibility results.';
+
+  @override
+  String get profileEditSave => 'Save';
+
+  @override
+  String get profileEditSaved => 'Profile updated.';
 }

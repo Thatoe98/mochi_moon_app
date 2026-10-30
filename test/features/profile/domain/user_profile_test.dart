@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
 void main() {
@@ -40,6 +41,59 @@ void main() {
         FocusArea.selfLove,
         FocusArea.healing,
       ]);
+    });
+  });
+
+  group('isValidFor', () {
+    final valid = UserProfile(
+      displayName: 'Mochi',
+      birthDate: DateTime(1998, 11, 8),
+    );
+
+    test('needs a name and a birthday', () {
+      expect(valid.isValidFor(today), isTrue);
+      expect(valid.copyWith(displayName: '  ').isValidFor(today), isFalse);
+      expect(valid.copyWith(birthDate: null).isValidFor(today), isFalse);
+    });
+
+    test('keeps the name within the limit', () {
+      final longest = 'a' * maxDisplayNameLength;
+      expect(valid.copyWith(displayName: longest).isValidFor(today), isTrue);
+      expect(
+        valid.copyWith(displayName: '${longest}a').isValidFor(today),
+        isFalse,
+      );
+    });
+
+    test('rejects a birthday that is in the future or before 1940', () {
+      expect(
+        valid.copyWith(birthDate: DateTime(2026, 10, 29)).isValidFor(today),
+        isFalse,
+      );
+      expect(
+        valid.copyWith(birthDate: DateTime(1939)).isValidFor(today),
+        isFalse,
+      );
+    });
+
+    test('a birth time needs a birthplace', () {
+      final withTime = valid.copyWith(birthMinutes: 8 * 60);
+      expect(withTime.isValidFor(today), isFalse);
+      expect(
+        withTime
+            .copyWith(
+              birthPlace: const BirthPlace(
+                name: 'Bangkok',
+                region: 'Bangkok',
+                countryCode: 'TH',
+                lat: 13.75,
+                lng: 100.5,
+                tzId: 'Asia/Bangkok',
+              ),
+            )
+            .isValidFor(today),
+        isTrue,
+      );
     });
   });
 

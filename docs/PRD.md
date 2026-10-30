@@ -85,7 +85,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [x] Birth date is required (date picker; year range 1940–current year; no future dates).
 - [x] Birth time is optional; "I don't know" sets `timeKnown = false`.
 - [x] Birthplace is required when birth time is given, optional otherwise. Search is offline over the bundled cities list (§8.5), showing "City, Region, Country". — *the step sits between birth time and reminder; picking a city stores `place` with its `tzId`.*
-- [ ] On save, the app computes and stores sun sign (always), moon sign (always; flagged approximate when time unknown), rising sign (only when time known).
+- [x] On save, the app computes and stores sun sign (always), moon sign (always; flagged approximate when time unknown), rising sign (only when time known). — *the signs are derived in `signsOfProfile` and written into `users/{uid}.profile` on every Firestore upsert; the device copy recomputes them from the birth data.*
 - [x] Reminder time defaults to 08:00 local; user can skip.
 - [x] Focus areas: Self-love, Confidence, Healing, Study & work, Body kindness, Calm (multi-select, up to 3).
 - [ ] The whole flow works in en/th/my and respects text scaling. — *text scaling 1.3× is tested; the new profile strings are English only (`my` falls back to English, `th` is deferred)*
@@ -201,7 +201,7 @@ Shows for the user's local date:
 
 **AC**
 - [x] Unknown birth time: no Ascendant, no houses, Moon marked "approximate"; banner invites adding the time. *(the banner explains why but cannot link anywhere yet: there is no screen to edit birth data)*
-- [ ] Editing birth data recomputes everything and invalidates cached reports.
+- [ ] Editing birth data recomputes everything and invalidates cached reports. — *on the device the chart, Cosmic Today and compatibility follow a saved edit (tested); invalidating server-side cached reports waits for the Readings API in M4.*
 - [ ] Golden tests pass (§9.7).
 
 ### 6.12 Love compatibility (score Free; full report Premium or one-off purchase)
@@ -241,7 +241,7 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 - [x] Language: System / English / ไทย / မြန်မာ. Done as System / English / မြန်မာ (Me tab → Language); Thai joins when it has a native reviewer.
 - [ ] Notifications: reminder time, retrograde alerts per planet, announcements.
 - [ ] Show Thai colors toggle. Reduce motion toggle (also follows system).
-- [ ] Edit profile from the Me tab: name, birthday, birth time (and later birthplace) and focus areas, reusing the onboarding profile steps. Manage partners. — *requested during M2; the profile steps and `ProfileController.save` already exist, so this is a presentation task for this phase, not before.*
+- [x] Edit profile from the Me tab: name, birthday, birth time (and later birthplace) and focus areas, reusing the onboarding profile steps. Manage partners. — *requested during M2; done as `/me/profile` (name, birthday, birth time with "I don't know", birthplace, focus areas; Save is off until the form is valid and changed). Partners are managed from the Me tab too. The Burmese strings for it are machine-translated and unreviewed.*
 - [ ] Privacy policy, Terms, "About readings" (entertainment notice), licenses.
 - [ ] Analytics consent toggle (default off until the consent prompt is answered).
 - [ ] **Delete account**: two confirmations ("Delete your account?", then "Are you completely sure?"), a silent Google re-check of the signed-in account before anything is erased (backing out of it changes nothing), a progress dialog, and then the whole app restarts at the first-run screens → calls `DELETE /v1/account` → server deletes Firestore data, reports, and the Auth user → app clears local DB and signs out. A web deletion page (`https://<domain>/delete-account`) offers the same.

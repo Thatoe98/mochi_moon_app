@@ -383,5 +383,17 @@
   "compatAspectSextile": "These two cooperate easily, with a friendly give and take.",
   "compatAspectTrine": "These two flow together with an effortless, easy warmth.",
   "compatAspectSquare": "These two have a spark that asks for patience and understanding.",
-  "compatAspectOpposition": "These two pull in different directions, so balance and listening help here."
+  "compatAspectOpposition": "These two pull in different directions, so balance and listening help here.",
+  "meProfileTitle": "Edit profile",
+  "meProfileSubtitle": "Your name, birthday and focus areas",
+  "profileEditTitle": "Edit profile",
+  "profileEditBirthDateLabel": "Birthday",
+  "profileEditBirthDateChoose": "Choose a date",
+  "profileEditBirthTimeLabel": "Birth time (optional)",
+  "profileEditBirthPlaceLabel": "Birthplace",
+  "profileEditBirthPlaceNeeded": "Add a birthplace so we can read the birth time in the right time zone.",
+  "profileEditFocusLabel": "What you'd like more of",
+  "profileEditNote": "Changing your birth details updates your birth chart, your readings and your compatibility results.",
+  "profileEditSave": "Save",
+  "profileEditSaved": "Profile updated."
 }
