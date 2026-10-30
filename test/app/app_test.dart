@@ -201,6 +201,22 @@ void main() {
     expect(find.text('Birthday'), findsOneWidget);
   });
 
+  testWidgets('Me opens About', (tester) async {
+    tester.view
+      ..physicalSize = const Size(800, 2400)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('About'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('About readings'), findsOneWidget);
+  });
+
   group('first run', () {
     final cards = [
       const Quote(id: 'q_a', text: {'en': 'Soft moon'}, category: 'calm'),

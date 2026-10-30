@@ -1049,6 +1049,43 @@ class AppLocalizationsEn extends AppLocalizations {
       'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.';
 
   @override
+  String get meAboutSubtitle => 'How readings work, and open-source licenses';
+
+  @override
+  String get aboutTitle => 'About';
+
+  @override
+  String get aboutReadingsTitle => 'About readings';
+
+  @override
+  String get aboutReadingsBody =>
+      'Everything you read here is for entertainment and self-reflection. It is a gentle prompt to notice how you feel, never a rule for how your day or your life must go.';
+
+  @override
+  String get aboutZodiacTitle => 'Which zodiac we use';
+
+  @override
+  String get aboutZodiacBody =>
+      'Mochi Moon uses the Western tropical zodiac. Your Sun, Moon and Rising signs are worked out from your birthday, and the Moon phase and retrograde dates follow the real sky.';
+
+  @override
+  String get aboutWritingTitle => 'How readings are written';
+
+  @override
+  String get aboutWritingBody =>
+      'Daily readings are written ahead of time with the help of AI, in a soft and encouraging tone. There is no chat: nobody types questions to an AI here.';
+
+  @override
+  String get aboutCareTitle => 'What we leave out';
+
+  @override
+  String get aboutCareBody =>
+      'Readings never predict health, death, pregnancy, money or legal outcomes, and they never say a relationship will fail or succeed. For anything like that, please talk to someone you trust or a qualified professional.';
+
+  @override
+  String get aboutLicenses => 'Open-source licenses';
+
+  @override
   String get mePartnersSubtitle => 'People you compare your chart with';
 
   @override

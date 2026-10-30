@@ -1826,6 +1826,72 @@ abstract class AppLocalizations {
   /// **'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.'**
   String get chartRisingPisces;
 
+  /// No description provided for @meAboutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How readings work, and open-source licenses'**
+  String get meAboutSubtitle;
+
+  /// No description provided for @aboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutTitle;
+
+  /// No description provided for @aboutReadingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About readings'**
+  String get aboutReadingsTitle;
+
+  /// No description provided for @aboutReadingsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything you read here is for entertainment and self-reflection. It is a gentle prompt to notice how you feel, never a rule for how your day or your life must go.'**
+  String get aboutReadingsBody;
+
+  /// No description provided for @aboutZodiacTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Which zodiac we use'**
+  String get aboutZodiacTitle;
+
+  /// No description provided for @aboutZodiacBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Moon uses the Western tropical zodiac. Your Sun, Moon and Rising signs are worked out from your birthday, and the Moon phase and retrograde dates follow the real sky.'**
+  String get aboutZodiacBody;
+
+  /// No description provided for @aboutWritingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How readings are written'**
+  String get aboutWritingTitle;
+
+  /// No description provided for @aboutWritingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily readings are written ahead of time with the help of AI, in a soft and encouraging tone. There is no chat: nobody types questions to an AI here.'**
+  String get aboutWritingBody;
+
+  /// No description provided for @aboutCareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What we leave out'**
+  String get aboutCareTitle;
+
+  /// No description provided for @aboutCareBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Readings never predict health, death, pregnancy, money or legal outcomes, and they never say a relationship will fail or succeed. For anything like that, please talk to someone you trust or a qualified professional.'**
+  String get aboutCareBody;
+
+  /// No description provided for @aboutLicenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Open-source licenses'**
+  String get aboutLicenses;
+
   /// No description provided for @mePartnersSubtitle.
   ///
   /// In en, this message translates to:

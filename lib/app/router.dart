@@ -16,6 +16,7 @@ import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.da
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
 import 'package:mochi_moon/features/profile/presentation/profile_edit_screen.dart';
+import 'package:mochi_moon/features/settings/presentation/about_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -28,6 +29,7 @@ abstract final class AppRoutes {
   static const me = '/me';
   static const journal = '/me/journal';
   static const profileEdit = '/me/profile';
+  static const about = '/me/about';
   static const partners = '/me/partners';
   static const partnerEdit = '/me/partners/edit';
   static const partnerResult = '/me/partners/result';
@@ -115,6 +117,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'profile',
                     builder: (context, state) => const ProfileEditScreen(),
+                  ),
+                  GoRoute(
+                    path: 'about',
+                    builder: (context, state) => const AboutScreen(),
                   ),
                   GoRoute(
                     path: 'partners',

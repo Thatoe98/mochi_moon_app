@@ -513,11 +513,11 @@ class AppLocalizationsMy extends AppLocalizations {
       'ငါ အနားယူတယ်၊ စိတ်ကို ပျော့ပျောင်းစေတယ်၊ အသစ်စဖို့ နေရာလေး ဖန်တီးတယ်။';
 
   @override
-  String get reduceMotionTitle => 'Reduce motion';
+  String get reduceMotionTitle => 'လှုပ်ရှားမှု လျှော့မယ်';
 
   @override
   String get reduceMotionSubtitle =>
-      'Calmer cards: no tilting or sparkles. Already on if your phone removes animations';
+      'ပိုငြိမ်သက်တဲ့ ကတ်တွေ: စောင်းတာနဲ့ တလက်လက်တောက်တာတွေ မရှိတော့ပါဘူး။ ဖုန်းမှာ animation တွေကို ဖယ်ထားပြီးသားဆိုရင် ဒီ setting က ဖွင့်ထားပြီးသားပါ။';
 
   @override
   String get thaiColorsSettingTitle => 'ထိုင်းရိုးရာ နေ့အလိုက်အရောင်များ';
@@ -1055,6 +1055,44 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get chartRisingPisces =>
       'လူတွေက ကိုယ့်ကို နူးညံ့အိပ်မက်ဆန်ပြီး ကြင်နာတတ်သူလို့ မြင်နိုင်တယ်။ ကိုယ့်ရဲ့ နူးညံ့တဲ့အငွေ့အသက်ကြောင့် တခြားသူတွေကို နားလည်ခံစားပေးခံရတယ်လို့ ခံစားရစေတယ်။';
+
+  @override
+  String get meAboutSubtitle =>
+      'ဖတ်ရှုချက်တွေ ဘယ်လိုလုပ်ဆောင်လဲ၊ Open-source လိုင်စင်များ';
+
+  @override
+  String get aboutTitle => 'အကြောင်း';
+
+  @override
+  String get aboutReadingsTitle => 'ဖတ်ရှုချက်တွေအကြောင်း';
+
+  @override
+  String get aboutReadingsBody =>
+      'ဒီမှာ ဖတ်ရှုရတာတွေအားလုံးက ဖျော်ဖြေရေးနဲ့ ကိုယ့်ကိုယ်ကို ပြန်လည်ဆင်ခြင်ဖို့အတွက်ပါ။ ကိုယ့်ခံစားချက်တွေကို သတိထားမိစေဖို့ နူးညံ့တဲ့ အကြံပြုချက်လေးတွေဖြစ်ပြီး ကိုယ့်နေ့ရက် ဒါမှမဟုတ် ဘဝက ဘယ်လိုဖြစ်ရမယ်ဆိုတဲ့ စည်းမျဉ်းတွေ မဟုတ်ပါဘူး။';
+
+  @override
+  String get aboutZodiacTitle => 'အသုံးပြုထားတဲ့ ရာသီခွင်စနစ်';
+
+  @override
+  String get aboutZodiacBody =>
+      'Mochi Moon က အနောက်တိုင်း tropical zodiac စနစ်ကို အသုံးပြုထားပါတယ်။ မွေးနေ့ရက်အပေါ်မူတည်ပြီး Sun, Moon နဲ့ Rising sign တွေကို တွက်ချက်ထားပြီး Moon phase နဲ့ retrograde ရက်စွဲတွေကလည်း တကယ့်ကောင်းကင်အခြေအနေအတိုင်း ဖြစ်ပါတယ်။';
+
+  @override
+  String get aboutWritingTitle => 'ဖတ်ရှုချက်တွေကို ဘယ်လိုရေးထားလဲ';
+
+  @override
+  String get aboutWritingBody =>
+      'နေ့စဉ်ဖတ်ရှုချက်တွေကို AI အကူအညီနဲ့ ကြိုတင်ရေးသားထားပြီး နူးညံ့အားပေးတဲ့ အသံနေအသံထားနဲ့ ရေးထားပါတယ်။ ဒီမှာ chat မရှိပါဘူး—ဘယ်သူမှ AI ကို မေးခွန်းတွေ ရိုက်မေးနေတာ မဟုတ်ပါဘူး။';
+
+  @override
+  String get aboutCareTitle => 'မပါဝင်စေထားတဲ့အရာတွေ';
+
+  @override
+  String get aboutCareBody =>
+      'ဖတ်ရှုချက်တွေမှာ ကျန်းမာရေး၊ သေဆုံးမှု၊ ကိုယ်ဝန်၊ ငွေကြေး ဒါမှမဟုတ် ဥပဒေရေးရာ ရလဒ်တွေကို ဘယ်တော့မှ ကြိုဟောမှာမဟုတ်သလို၊ ဆက်ဆံရေးတစ်ခု အဆင်မပြေတော့ဘူး ဒါမှမဟုတ် အောင်မြင်မယ်လို့လည်း မပြောပါဘူး။ အဲဒီလိုကိစ္စတွေအတွက် ယုံကြည်ရတဲ့သူတစ်ယောက် ဒါမှမဟုတ် ကျွမ်းကျင်ပညာရှင်တစ်ယောက်နဲ့ ဆွေးနွေးပါနော်။';
+
+  @override
+  String get aboutLicenses => 'Open-source လိုင်စင်များ';
 
   @override
   String get mePartnersSubtitle =>
