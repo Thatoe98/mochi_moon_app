@@ -7,6 +7,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/chart/application/chart_providers.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_glyphs.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_screen.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/chart_wheel.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
@@ -141,6 +142,21 @@ void main() {
     expect(find.text('approximate'), findsOneWidget);
     expect(find.text('Cancer 10°52′ (approximate)'), findsOneWidget);
     expect(find.text(retrogradeMark), findsNWidgets(2));
+  });
+
+  testWidgets('draws the wheel above the Big 3, with or without a time', (
+    tester,
+  ) async {
+    _tallView(tester);
+    for (final profile in [_withTime, _noTime]) {
+      await tester.pumpWidget(_host(profile: profile));
+      await tester.pumpAndSettle();
+      expect(find.byType(ChartWheel), findsOneWidget);
+      expect(
+        tester.getBottomLeft(find.byType(ChartWheel)).dy,
+        lessThan(tester.getTopLeft(find.text('Your Big 3')).dy),
+      );
+    }
   });
 
   testWidgets('reads in Burmese', (tester) async {

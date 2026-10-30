@@ -1454,6 +1454,12 @@ abstract class AppLocalizations {
   /// **'Placements'**
   String get chartPlacementsTitle;
 
+  /// No description provided for @chartWheelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth chart wheel. The placements are listed below.'**
+  String get chartWheelLabel;
+
   /// No description provided for @chartBodySun.
   ///
   /// In en, this message translates to:

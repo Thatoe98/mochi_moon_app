@@ -260,6 +260,7 @@
   "chartButtonHint": "See your Sun, Moon and Rising",
   "chartBigThreeTitle": "Your Big 3",
   "chartPlacementsTitle": "Placements",
+  "chartWheelLabel": "Birth chart wheel. The placements are listed below.",
   "chartBodySun": "Sun",
   "chartBodyMoon": "Moon",
   "chartBodyMercury": "Mercury",

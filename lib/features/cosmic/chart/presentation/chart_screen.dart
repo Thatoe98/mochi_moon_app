@@ -9,6 +9,7 @@ import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/chart/application/chart_providers.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/big_three_card.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_labels.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/chart_wheel.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/placements_list.dart';
 
 /// The birth chart: the Big 3 and every placement (PRD §6.11).
@@ -50,6 +51,8 @@ class _ChartView extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.md),
       children: [
         if (!chart.timeKnown) const _NoTimeBanner(),
+        ChartWheel(chart: chart),
+        const SizedBox(height: AppSpacing.md),
         Semantics(
           header: true,
           child: Text(

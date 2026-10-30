@@ -823,6 +823,10 @@ class AppLocalizationsMy extends AppLocalizations {
   String get chartPlacementsTitle => 'ဂြိုဟ်တည်နေရာများ';
 
   @override
+  String get chartWheelLabel =>
+      'Birth chart စက်ဝိုင်းပုံ။ ဂြိုဟ်တည်နေရာတွေကို အောက်မှာ ဖော်ပြထားပါတယ်။';
+
+  @override
   String get chartBodySun => 'Sun';
 
   @override

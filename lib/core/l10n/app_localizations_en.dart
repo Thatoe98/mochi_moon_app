@@ -816,6 +816,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chartPlacementsTitle => 'Placements';
 
   @override
+  String get chartWheelLabel =>
+      'Birth chart wheel. The placements are listed below.';
+
+  @override
   String get chartBodySun => 'Sun';
 
   @override
