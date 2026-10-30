@@ -1147,4 +1147,97 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get partnersNotFound => 'ဒီပါတနာကို ရှာမတွေ့ပါဘူး။';
+
+  @override
+  String partnersEditTooltip(String name) {
+    return '$name ကို ပြင်မယ်';
+  }
+
+  @override
+  String get compatTitle => 'လိုက်ဖက်မှု';
+
+  @override
+  String get compatNeedsBirthDateTitle => 'နှိုင်းယှဉ်ဖို့ မွေးနေ့ထည့်ပါ';
+
+  @override
+  String get compatNeedsBirthDateBody =>
+      'ကိုယ့် birth chart နဲ့ သူ့ birth chart ဘယ်လိုဆုံစည်းလဲ ဖတ်ဖို့ ကိုယ့်မွေးနေ့ရက် လိုပါတယ်။';
+
+  @override
+  String compatHeader(String yourSign, String name, String theirSign) {
+    return 'ကိုယ် ($yourSign) + $name ($theirSign)';
+  }
+
+  @override
+  String compatMeterLabel(int score) {
+    return 'လိုက်ဖက်မှု $score ရာခိုင်နှုန်း';
+  }
+
+  @override
+  String get compatSummaryLow =>
+      'အတူတူ ကြီးထွားဖို့ အခွင့်အရေးများတဲ့ နူးညံ့တဲ့ လိုက်ဖက်မှုလေးပါ။';
+
+  @override
+  String get compatSummaryMid =>
+      'အေးအေးဆေးဆေး သက်တောင့်သက်သာရှိတဲ့ အခိုက်အတန့်လေးတွေ ပါဝင်တဲ့ နွေးထွေးတဲ့ လိုက်ဖက်မှုလေးပါ။';
+
+  @override
+  String get compatSummaryHigh =>
+      'birth chart တွေ အတူတူ တကယ်လိုက်ဖက်ညီစွာ တောက်ပနေတဲ့ လိုက်ဖက်မှုလေးပါ။';
+
+  @override
+  String get compatLightLabel => 'အခြေခံဖတ်ရှုချက်';
+
+  @override
+  String get compatLightBody =>
+      'နှစ်ယောက်လုံးရဲ့ မွေးချိန်မရှိတဲ့အတွက် ဒီဖတ်ရှုချက်က အခြေခံပုံစံလေးပါ။ မွေးချိန်နဲ့ မွေးဖွားရာနေရာ ထည့်ပေးရင် ပိုပြည့်စုံလာမယ်။';
+
+  @override
+  String get compatThemeRomance => 'အချစ်ရေး';
+
+  @override
+  String get compatThemeEmotional => 'စိတ်ခံစားမှု';
+
+  @override
+  String get compatThemeCommunication => 'ဆက်သွယ်ပြောဆိုမှု';
+
+  @override
+  String compatThemeScore(String theme, int score) {
+    return '$theme $score ရာခိုင်နှုန်း';
+  }
+
+  @override
+  String get compatFlowTitle => 'အဆင်ပြေချောမွေ့တဲ့အရာတွေ';
+
+  @override
+  String get compatGrowTitle => 'အတူတူ ကြီးထွားနိုင်မယ့်နေရာတွေ';
+
+  @override
+  String get compatQuiet =>
+      'ကိုယ့် birth chart တွေကြားမှာ ထူးထူးခြားခြား မတွေ့ရလည်း အဆင်ပြေပါတယ်။ ဆက်ဆံရေးတိုင်းမှာ ကိုယ်ပိုင်စည်းချက်လေးတွေ ရှိတတ်ပါတယ်။';
+
+  @override
+  String compatAspectPair(String yours, String name, String theirs) {
+    return 'ကိုယ့် $yours + $name ရဲ့ $theirs';
+  }
+
+  @override
+  String get compatAspectConjunction =>
+      'ဒီနှစ်ခုက အတူတူ လိုက်ဖက်နေတဲ့အတွက် ကိုယ့်ရဲ့ ဒီအပိုင်းလေးက သဘာဝအတိုင်း နီးစပ်တယ်လို့ ခံစားရစေပါတယ်။';
+
+  @override
+  String get compatAspectSextile =>
+      'ဒီနှစ်ခုက အဆင်ပြေပြေ ပူးပေါင်းနိုင်ပြီး တစ်ယောက်နဲ့တစ်ယောက် အပြန်အလှန် အားဖြည့်ပေးတတ်ပါတယ်။';
+
+  @override
+  String get compatAspectTrine =>
+      'ဒီနှစ်ခုက အားစိုက်စရာမလိုဘဲ နွေးနွေးထွေးထွေး အဆင်ပြေပြေ စီးဆင်းနေပါတယ်။';
+
+  @override
+  String get compatAspectSquare =>
+      'ဒီနှစ်ခုကြားမှာ တောက်ပတဲ့ဆွဲအားလေးရှိပြီး စိတ်ရှည်မှုနဲ့ နားလည်ပေးမှုကို တောင်းဆိုတတ်ပါတယ်။';
+
+  @override
+  String get compatAspectOpposition =>
+      'ဒီနှစ်ခုက ဦးတည်ရာမတူဘဲ ဆွဲခေါ်တတ်တာကြောင့် ဟန်ချက်ညီအောင်နေခြင်းနဲ့ နားထောင်ပေးခြင်းက အထောက်အကူဖြစ်ပါတယ်။';
 }

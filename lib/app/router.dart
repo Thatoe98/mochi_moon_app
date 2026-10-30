@@ -13,6 +13,7 @@ import 'package:mochi_moon/features/onboarding/presentation/profile_setup_screen
 import 'package:mochi_moon/features/onboarding/presentation/sample_cards_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.dart';
+import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -27,6 +28,7 @@ abstract final class AppRoutes {
   static const journal = '/me/journal';
   static const partners = '/me/partners';
   static const partnerEdit = '/me/partners/edit';
+  static const partnerResult = '/me/partners/result';
   static const welcome = '/welcome';
   static const welcomeCards = '/welcome/cards';
   static const welcomeProfile = '/welcome/profile';
@@ -115,6 +117,12 @@ GoRouter router(Ref ref) {
                       GoRoute(
                         path: 'edit',
                         builder: (context, state) => PartnerEditScreen(
+                          partnerId: state.uri.queryParameters['id'],
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'result',
+                        builder: (context, state) => PartnerResultScreen(
                           partnerId: state.uri.queryParameters['id'],
                         ),
                       ),

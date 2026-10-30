@@ -1975,6 +1975,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We couldn\'t find this partner.'**
   String get partnersNotFound;
+
+  /// No description provided for @partnersEditTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit {name}'**
+  String partnersEditTooltip(String name);
+
+  /// No description provided for @compatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Compatibility'**
+  String get compatTitle;
+
+  /// No description provided for @compatNeedsBirthDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your birthday to compare'**
+  String get compatNeedsBirthDateTitle;
+
+  /// No description provided for @compatNeedsBirthDateBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your own birth date is needed to read how your chart and theirs meet.'**
+  String get compatNeedsBirthDateBody;
+
+  /// No description provided for @compatHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'You ({yourSign}) + {name} ({theirSign})'**
+  String compatHeader(String yourSign, String name, String theirSign);
+
+  /// No description provided for @compatMeterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Compatibility {score} percent'**
+  String compatMeterLabel(int score);
+
+  /// No description provided for @compatSummaryLow.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle pairing with plenty of room to grow together.'**
+  String get compatSummaryLow;
+
+  /// No description provided for @compatSummaryMid.
+  ///
+  /// In en, this message translates to:
+  /// **'A warm pairing with lovely moments of ease.'**
+  String get compatSummaryMid;
+
+  /// No description provided for @compatSummaryHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'A bright pairing where your charts really sing together.'**
+  String get compatSummaryHigh;
+
+  /// No description provided for @compatLightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Light reading'**
+  String get compatLightLabel;
+
+  /// No description provided for @compatLightBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Without both birth times this is a lighter reading. Adding a birth time and place makes it richer.'**
+  String get compatLightBody;
+
+  /// No description provided for @compatThemeRomance.
+  ///
+  /// In en, this message translates to:
+  /// **'Romance'**
+  String get compatThemeRomance;
+
+  /// No description provided for @compatThemeEmotional.
+  ///
+  /// In en, this message translates to:
+  /// **'Emotional'**
+  String get compatThemeEmotional;
+
+  /// No description provided for @compatThemeCommunication.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication'**
+  String get compatThemeCommunication;
+
+  /// No description provided for @compatThemeScore.
+  ///
+  /// In en, this message translates to:
+  /// **'{theme} {score} percent'**
+  String compatThemeScore(String theme, int score);
+
+  /// No description provided for @compatFlowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What flows'**
+  String get compatFlowTitle;
+
+  /// No description provided for @compatGrowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where you grow'**
+  String get compatGrowTitle;
+
+  /// No description provided for @compatQuiet.
+  ///
+  /// In en, this message translates to:
+  /// **'Your charts are quiet together, and that\'s okay. Every connection finds its own rhythm.'**
+  String get compatQuiet;
+
+  /// No description provided for @compatAspectPair.
+  ///
+  /// In en, this message translates to:
+  /// **'Your {yours} + {name}\'s {theirs}'**
+  String compatAspectPair(String yours, String name, String theirs);
+
+  /// No description provided for @compatAspectConjunction.
+  ///
+  /// In en, this message translates to:
+  /// **'These two blend together, so this part of you feels naturally close.'**
+  String get compatAspectConjunction;
+
+  /// No description provided for @compatAspectSextile.
+  ///
+  /// In en, this message translates to:
+  /// **'These two cooperate easily, with a friendly give and take.'**
+  String get compatAspectSextile;
+
+  /// No description provided for @compatAspectTrine.
+  ///
+  /// In en, this message translates to:
+  /// **'These two flow together with an effortless, easy warmth.'**
+  String get compatAspectTrine;
+
+  /// No description provided for @compatAspectSquare.
+  ///
+  /// In en, this message translates to:
+  /// **'These two have a spark that asks for patience and understanding.'**
+  String get compatAspectSquare;
+
+  /// No description provided for @compatAspectOpposition.
+  ///
+  /// In en, this message translates to:
+  /// **'These two pull in different directions, so balance and listening help here.'**
+  String get compatAspectOpposition;
 }
 
 class _AppLocalizationsDelegate

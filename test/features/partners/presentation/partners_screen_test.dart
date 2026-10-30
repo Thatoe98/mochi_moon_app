@@ -34,6 +34,11 @@ Widget _app(PartnerRepository repository, {bool premium = true}) {
         builder: (context, state) =>
             Text('edit ${state.uri.queryParameters['id'] ?? 'new'}'),
       ),
+      GoRoute(
+        path: AppRoutes.partnerResult,
+        builder: (context, state) =>
+            Text('result ${state.uri.queryParameters['id']}'),
+      ),
     ],
   );
   return ProviderScope(
@@ -92,11 +97,25 @@ void main() {
     expect(find.text('Taurus · Born May 14, 1998'), findsOneWidget);
   });
 
-  testWidgets('tapping a partner opens the edit form for it', (tester) async {
+  testWidgets('tapping a partner opens the compatibility result', (
+    tester,
+  ) async {
     await tester.pumpWidget(_app(FakePartnerRepository([partner('a')])));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Luna'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('result a'), findsOneWidget);
+  });
+
+  testWidgets('the pencil opens the edit form for that partner', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_app(FakePartnerRepository([partner('a')])));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Edit Luna'));
     await tester.pumpAndSettle();
 
     expect(find.text('edit a'), findsOneWidget);
@@ -179,12 +198,17 @@ void main() {
     expect(add.onPressed, isNotNull);
   });
 
-  testWidgets('delete buttons meet the 48 dp touch target', (tester) async {
+  testWidgets('edit and delete buttons meet the 48 dp touch target', (
+    tester,
+  ) async {
     await tester.pumpWidget(_app(FakePartnerRepository([partner('a')])));
     await tester.pumpAndSettle();
 
-    final size = tester.getSize(find.byType(IconButton));
-    expect(size.width, greaterThanOrEqualTo(48));
-    expect(size.height, greaterThanOrEqualTo(48));
+    expect(find.byType(IconButton), findsNWidgets(2));
+    for (final button in find.byType(IconButton).evaluate()) {
+      final size = tester.getSize(find.byWidget(button.widget));
+      expect(size.width, greaterThanOrEqualTo(48));
+      expect(size.height, greaterThanOrEqualTo(48));
+    }
   });
 }

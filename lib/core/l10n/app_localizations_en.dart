@@ -1137,4 +1137,96 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get partnersNotFound => 'We couldn\'t find this partner.';
+
+  @override
+  String partnersEditTooltip(String name) {
+    return 'Edit $name';
+  }
+
+  @override
+  String get compatTitle => 'Compatibility';
+
+  @override
+  String get compatNeedsBirthDateTitle => 'Add your birthday to compare';
+
+  @override
+  String get compatNeedsBirthDateBody =>
+      'Your own birth date is needed to read how your chart and theirs meet.';
+
+  @override
+  String compatHeader(String yourSign, String name, String theirSign) {
+    return 'You ($yourSign) + $name ($theirSign)';
+  }
+
+  @override
+  String compatMeterLabel(int score) {
+    return 'Compatibility $score percent';
+  }
+
+  @override
+  String get compatSummaryLow =>
+      'A gentle pairing with plenty of room to grow together.';
+
+  @override
+  String get compatSummaryMid => 'A warm pairing with lovely moments of ease.';
+
+  @override
+  String get compatSummaryHigh =>
+      'A bright pairing where your charts really sing together.';
+
+  @override
+  String get compatLightLabel => 'Light reading';
+
+  @override
+  String get compatLightBody =>
+      'Without both birth times this is a lighter reading. Adding a birth time and place makes it richer.';
+
+  @override
+  String get compatThemeRomance => 'Romance';
+
+  @override
+  String get compatThemeEmotional => 'Emotional';
+
+  @override
+  String get compatThemeCommunication => 'Communication';
+
+  @override
+  String compatThemeScore(String theme, int score) {
+    return '$theme $score percent';
+  }
+
+  @override
+  String get compatFlowTitle => 'What flows';
+
+  @override
+  String get compatGrowTitle => 'Where you grow';
+
+  @override
+  String get compatQuiet =>
+      'Your charts are quiet together, and that\'s okay. Every connection finds its own rhythm.';
+
+  @override
+  String compatAspectPair(String yours, String name, String theirs) {
+    return 'Your $yours + $name\'s $theirs';
+  }
+
+  @override
+  String get compatAspectConjunction =>
+      'These two blend together, so this part of you feels naturally close.';
+
+  @override
+  String get compatAspectSextile =>
+      'These two cooperate easily, with a friendly give and take.';
+
+  @override
+  String get compatAspectTrine =>
+      'These two flow together with an effortless, easy warmth.';
+
+  @override
+  String get compatAspectSquare =>
+      'These two have a spark that asks for patience and understanding.';
+
+  @override
+  String get compatAspectOpposition =>
+      'These two pull in different directions, so balance and listening help here.';
 }

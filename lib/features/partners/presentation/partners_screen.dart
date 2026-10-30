@@ -125,6 +125,9 @@ class _PartnerTile extends StatelessWidget {
   final Partner partner;
   final VoidCallback onDelete;
 
+  String _path(String route) =>
+      Uri(path: route, queryParameters: {'id': partner.id}).toString();
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -144,21 +147,30 @@ class _PartnerTile extends StatelessWidget {
           englishDates.formatShortDate(partner.birthDate),
         ),
       ),
-      trailing: IconButton(
-        constraints: const BoxConstraints(
-          minWidth: AppSpacing.minTouchTarget,
-          minHeight: AppSpacing.minTouchTarget,
-        ),
-        tooltip: l10n.partnersDeleteTooltip(partner.nickname),
-        icon: const Icon(Icons.delete_outline_rounded),
-        onPressed: onDelete,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            constraints: const BoxConstraints(
+              minWidth: AppSpacing.minTouchTarget,
+              minHeight: AppSpacing.minTouchTarget,
+            ),
+            tooltip: l10n.partnersEditTooltip(partner.nickname),
+            icon: const Icon(Icons.edit_outlined),
+            onPressed: () => context.push(_path(AppRoutes.partnerEdit)),
+          ),
+          IconButton(
+            constraints: const BoxConstraints(
+              minWidth: AppSpacing.minTouchTarget,
+              minHeight: AppSpacing.minTouchTarget,
+            ),
+            tooltip: l10n.partnersDeleteTooltip(partner.nickname),
+            icon: const Icon(Icons.delete_outline_rounded),
+            onPressed: onDelete,
+          ),
+        ],
       ),
-      onTap: () => context.push(
-        Uri(
-          path: AppRoutes.partnerEdit,
-          queryParameters: {'id': partner.id},
-        ).toString(),
-      ),
+      onTap: () => context.push(_path(AppRoutes.partnerResult)),
     );
   }
 }
