@@ -166,6 +166,25 @@ void main() {
         expect(onPressedOf(tester, icon), isNotNull);
       }
     });
+
+    testWidgets('a new deal locks the front card again', (tester) async {
+      final repo = FakeDeckRepository();
+      await tester.pumpWidget(app(repo: repo));
+      await load(tester);
+      await tester.pump(lock);
+      expect(find.text('Ready to swipe'), findsOneWidget);
+
+      // The card of the day is dealt first on every deal, so the same card
+      // faces the reader; only the cleared read state can lock it.
+      ProviderScope.containerOf(
+        tester.element(find.byType(DeckScreen)),
+      ).invalidate(deckProvider);
+      await load(tester);
+
+      expect(find.text('Ready to swipe'), findsNothing);
+      expect(find.text('Read it out loud ✨'), findsOneWidget);
+      expect(onPressedOf(tester, Icons.favorite_rounded), isNull);
+    });
   });
 
   group('sharing', () {
