@@ -1,0 +1,2485 @@
+{
+  "source": "Swiss Ephemeris 2.10 (pyswisseph, Moshier), tropical, Whole Sign houses; generated once as a dev-time oracle",
+  "charts": [
+    {
+      "id": "bangkok-1998",
+      "note": "Bangkok, morning",
+      "birthDate": "1998-11-08",
+      "birthMinutes": 510,
+      "tzId": "Asia/Bangkok",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "utc": "1998-11-08T01:30:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 225.4332,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 98.8254,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 247.9619,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 227.6787,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 168.8963,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 348.2127,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "saturn": {
+          "longitude": 28.9647,
+          "sign": "aries",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 308.9835,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 299.5947,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 247.0625,
+          "sign": "sagittarius",
+          "retrograde": false
+        }
+      },
+      "ascendant": 255.4287,
+      "ascendantSign": "sagittarius",
+      "midheaven": 169.1671,
+      "midheavenSign": "virgo",
+      "houses": {
+        "sun": 12,
+        "moon": 8,
+        "mercury": 1,
+        "venus": 12,
+        "mars": 10,
+        "jupiter": 4,
+        "saturn": 5,
+        "uranus": 3,
+        "neptune": 2,
+        "pluto": 1
+      }
+    },
+    {
+      "id": "yangon-2001",
+      "note": "Yangon, dawn",
+      "birthDate": "2001-03-21",
+      "birthMinutes": 375,
+      "tzId": "Asia/Yangon",
+      "latitude": 16.8409,
+      "longitude": 96.1735,
+      "utc": "2001-03-20T23:45:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 0.4238,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 315.2962,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 334.802,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 14.8184,
+          "sign": "aries",
+          "retrograde": true
+        },
+        "mars": {
+          "longitude": 256.3417,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 65.7948,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 56.7196,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 322.9852,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 308.085,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 255.2769,
+          "sign": "sagittarius",
+          "retrograde": true
+        }
+      },
+      "ascendant": 1.2418,
+      "ascendantSign": "aries",
+      "midheaven": 270.9082,
+      "midheavenSign": "capricorn",
+      "houses": {
+        "sun": 1,
+        "moon": 11,
+        "mercury": 12,
+        "venus": 1,
+        "mars": 9,
+        "jupiter": 3,
+        "saturn": 2,
+        "uranus": 11,
+        "neptune": 11,
+        "pluto": 9
+      }
+    },
+    {
+      "id": "yangon-1975-late",
+      "note": "Yangon, historical +6:30, just before midnight",
+      "birthDate": "1975-07-04",
+      "birthMinutes": 1430,
+      "tzId": "Asia/Yangon",
+      "latitude": 16.8409,
+      "longitude": 96.1735,
+      "utc": "1975-07-04T17:20:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 102.1128,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 46.2898,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 80.7402,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 146.3667,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 32.528,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 22.0704,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 111.0925,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 208.3606,
+          "sign": "libra",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 249.5862,
+          "sign": "sagittarius",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 186.5664,
+          "sign": "libra",
+          "retrograde": false
+        }
+      },
+      "ascendant": 10.351,
+      "ascendantSign": "aries",
+      "midheaven": 277.5959,
+      "midheavenSign": "capricorn",
+      "houses": {
+        "sun": 4,
+        "moon": 2,
+        "mercury": 3,
+        "venus": 5,
+        "mars": 2,
+        "jupiter": 1,
+        "saturn": 4,
+        "uranus": 7,
+        "neptune": 9,
+        "pluto": 7
+      }
+    },
+    {
+      "id": "rangoon-1935",
+      "note": "Rangoon before 1942 (+6:30)",
+      "birthDate": "1935-02-14",
+      "birthMinutes": 605,
+      "tzId": "Asia/Yangon",
+      "latitude": 16.8409,
+      "longitude": 96.1735,
+      "utc": "1935-02-14T03:35:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 324.5228,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 97.6481,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 330.9569,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "venus": {
+          "longitude": 345.2724,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 203.5879,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 232.4114,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 329.9468,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 28.1374,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 163.718,
+          "sign": "virgo",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 114.3634,
+          "sign": "cancer",
+          "retrograde": true
+        }
+      },
+      "ascendant": 28.5412,
+      "ascendantSign": "aries",
+      "midheaven": 291.4247,
+      "midheavenSign": "capricorn",
+      "houses": {
+        "sun": 11,
+        "moon": 4,
+        "mercury": 12,
+        "venus": 12,
+        "mars": 7,
+        "jupiter": 8,
+        "saturn": 11,
+        "uranus": 1,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "mandalay-newyear",
+      "note": "Mandalay, 31 Dec late evening",
+      "birthDate": "1999-12-31",
+      "birthMinutes": 1410,
+      "tzId": "Asia/Yangon",
+      "latitude": 21.9588,
+      "longitude": 96.0891,
+      "utc": "1999-12-31T17:00:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 279.5619,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 213.7554,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 270.6589,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 240.609,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 327.3492,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 25.2218,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 40.412,
+          "sign": "taurus",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 314.7695,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 303.1649,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 251.4268,
+          "sign": "sagittarius",
+          "retrograde": false
+        }
+      },
+      "ascendant": 180.7105,
+      "ascendantSign": "libra",
+      "midheaven": 90.7027,
+      "midheavenSign": "cancer",
+      "houses": {
+        "sun": 4,
+        "moon": 2,
+        "mercury": 4,
+        "venus": 3,
+        "mars": 5,
+        "jupiter": 7,
+        "saturn": 8,
+        "uranus": 5,
+        "neptune": 5,
+        "pluto": 3
+      }
+    },
+    {
+      "id": "chiangmai-2010",
+      "note": "Chiang Mai, Songkran afternoon",
+      "birthDate": "2010-04-13",
+      "birthMinutes": 920,
+      "tzId": "Asia/Bangkok",
+      "latitude": 18.7883,
+      "longitude": 98.9853,
+      "utc": "2010-04-13T08:20:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 23.3055,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 9.6979,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 41.4191,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 45.5055,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 126.1193,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 350.0445,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 179.6062,
+          "sign": "virgo",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 358.0811,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 328.0804,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 275.4099,
+          "sign": "capricorn",
+          "retrograde": true
+        }
+      },
+      "ascendant": 156.7679,
+      "ascendantSign": "virgo",
+      "midheaven": 67.2196,
+      "midheavenSign": "gemini",
+      "houses": {
+        "sun": 8,
+        "moon": 8,
+        "mercury": 9,
+        "venus": 9,
+        "mars": 12,
+        "jupiter": 7,
+        "saturn": 1,
+        "uranus": 7,
+        "neptune": 6,
+        "pluto": 5
+      }
+    },
+    {
+      "id": "singapore-1979",
+      "note": "Singapore, +7:30 offset",
+      "birthDate": "1979-08-09",
+      "birthMinutes": 280,
+      "tzId": "Asia/Singapore",
+      "latitude": 1.3521,
+      "longitude": 103.8198,
+      "utc": "1979-08-08T21:10:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 135.718,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 326.2605,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 123.421,
+          "sign": "leo",
+          "retrograde": true
+        },
+        "venus": {
+          "longitude": 131.1427,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 90.2131,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 139.0481,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 163.2529,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 226.9984,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 257.8465,
+          "sign": "sagittarius",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 196.9264,
+          "sign": "libra",
+          "retrograde": false
+        }
+      },
+      "ascendant": 107.2081,
+      "ascendantSign": "cancer",
+      "midheaven": 19.6053,
+      "midheavenSign": "aries",
+      "houses": {
+        "sun": 2,
+        "moon": 8,
+        "mercury": 2,
+        "venus": 2,
+        "mars": 1,
+        "jupiter": 2,
+        "saturn": 3,
+        "uranus": 5,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "newyork-dst",
+      "note": "New York, daylight saving",
+      "birthDate": "1990-07-04",
+      "birthMinutes": 1005,
+      "tzId": "America/New_York",
+      "latitude": 40.7128,
+      "longitude": -74.006,
+      "utc": "1990-07-04T20:45:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 102.6069,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 247.0215,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 105.2033,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 71.7013,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 24.7051,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 110.1652,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 292.7448,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 277.3876,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 283.2071,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 225.0919,
+          "sign": "scorpio",
+          "retrograde": true
+        }
+      },
+      "ascendant": 234.9518,
+      "ascendantSign": "scorpio",
+      "midheaven": 158.193,
+      "midheavenSign": "virgo",
+      "houses": {
+        "sun": 9,
+        "moon": 2,
+        "mercury": 9,
+        "venus": 8,
+        "mars": 6,
+        "jupiter": 9,
+        "saturn": 3,
+        "uranus": 3,
+        "neptune": 3,
+        "pluto": 1
+      }
+    },
+    {
+      "id": "london-bst-1969",
+      "note": "London, British Standard Time (+1 all year)",
+      "birthDate": "1969-01-20",
+      "birthMinutes": 840,
+      "tzId": "Europe/London",
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "utc": "1969-01-20T13:00:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 300.3124,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 332.1701,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 316.0432,
+          "sign": "aquarius",
+          "retrograde": true
+        },
+        "venus": {
+          "longitude": 347.1625,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 222.0432,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 186.0571,
+          "sign": "libra",
+          "retrograde": true
+        },
+        "saturn": {
+          "longitude": 19.5166,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 183.939,
+          "sign": "libra",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 238.28,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 174.9558,
+          "sign": "virgo",
+          "retrograde": true
+        }
+      },
+      "ascendant": 77.7171,
+      "ascendantSign": "gemini",
+      "midheaven": 312.138,
+      "midheavenSign": "aquarius",
+      "houses": {
+        "sun": 9,
+        "moon": 10,
+        "mercury": 9,
+        "venus": 10,
+        "mars": 6,
+        "jupiter": 5,
+        "saturn": 11,
+        "uranus": 5,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "sydney-dst",
+      "note": "Sydney, southern summer daylight saving",
+      "birthDate": "2004-01-15",
+      "birthMinutes": 550,
+      "tzId": "Australia/Sydney",
+      "latitude": -33.8688,
+      "longitude": 151.2093,
+      "utc": "2004-01-14T22:10:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 294.0781,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 200.5807,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 270.3956,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 330.2487,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 17.7279,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 168.7118,
+          "sign": "virgo",
+          "retrograde": true
+        },
+        "saturn": {
+          "longitude": 98.6243,
+          "sign": "cancer",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 330.6974,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 312.1748,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 260.9813,
+          "sign": "sagittarius",
+          "retrograde": false
+        }
+      },
+      "ascendant": 332.6358,
+      "ascendantSign": "pisces",
+      "midheaven": 239.6254,
+      "midheavenSign": "scorpio",
+      "houses": {
+        "sun": 11,
+        "moon": 8,
+        "mercury": 11,
+        "venus": 1,
+        "mars": 2,
+        "jupiter": 7,
+        "saturn": 5,
+        "uranus": 1,
+        "neptune": 12,
+        "pluto": 10
+      }
+    },
+    {
+      "id": "saopaulo-dst",
+      "note": "Sao Paulo, Brazilian summer time",
+      "birthDate": "1988-01-20",
+      "birthMinutes": 1285,
+      "tzId": "America/Sao_Paulo",
+      "latitude": -23.5505,
+      "longitude": -46.6333,
+      "utc": "1988-01-20T23:25:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 300.1278,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 324.964,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 317.1707,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 336.4651,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 248.2228,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 21.9777,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 267.695,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 268.8057,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 278.5278,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 222.403,
+          "sign": "scorpio",
+          "retrograde": false
+        }
+      },
+      "ascendant": 146.2773,
+      "ascendantSign": "leo",
+      "midheaven": 66.0648,
+      "midheavenSign": "gemini",
+      "houses": {
+        "sun": 7,
+        "moon": 7,
+        "mercury": 7,
+        "venus": 8,
+        "mars": 5,
+        "jupiter": 9,
+        "saturn": 5,
+        "uranus": 5,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "capetown-1990",
+      "note": "Cape Town, southern hemisphere",
+      "birthDate": "1990-06-21",
+      "birthMinutes": 355,
+      "tzId": "Africa/Johannesburg",
+      "latitude": -33.9249,
+      "longitude": 18.4241,
+      "utc": "1990-06-21T03:55:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 89.5374,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 66.6931,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 76.1194,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 55.4517,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 15.0936,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 107.1249,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 293.6846,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 277.9415,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 283.5725,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 225.2937,
+          "sign": "scorpio",
+          "retrograde": true
+        }
+      },
+      "ascendant": 63.4509,
+      "ascendantSign": "gemini",
+      "midheaven": 345.0851,
+      "midheavenSign": "pisces",
+      "houses": {
+        "sun": 1,
+        "moon": 1,
+        "mercury": 1,
+        "venus": 12,
+        "mars": 11,
+        "jupiter": 2,
+        "saturn": 8,
+        "uranus": 8,
+        "neptune": 8,
+        "pluto": 6
+      }
+    },
+    {
+      "id": "tokyo-1958",
+      "note": "Tokyo, before 1970",
+      "birthDate": "1958-03-03",
+      "birthMinutes": 1085,
+      "tzId": "Asia/Tokyo",
+      "latitude": 35.6762,
+      "longitude": 139.6503,
+      "utc": "1958-03-03T09:05:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 342.2878,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 128.8281,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 341.8767,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 303.8121,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 289.8581,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 211.2746,
+          "sign": "scorpio",
+          "retrograde": true
+        },
+        "saturn": {
+          "longitude": 264.8473,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 128.3112,
+          "sign": "leo",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 214.5909,
+          "sign": "scorpio",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 150.7983,
+          "sign": "virgo",
+          "retrograde": true
+        }
+      },
+      "ascendant": 168.8198,
+      "ascendantSign": "virgo",
+      "midheaven": 77.6133,
+      "midheavenSign": "gemini",
+      "houses": {
+        "sun": 7,
+        "moon": 12,
+        "mercury": 7,
+        "venus": 6,
+        "mars": 5,
+        "jupiter": 3,
+        "saturn": 4,
+        "uranus": 12,
+        "neptune": 3,
+        "pluto": 1
+      }
+    },
+    {
+      "id": "mumbai-1947",
+      "note": "Mumbai, before 1970",
+      "birthDate": "1947-08-15",
+      "birthMinutes": 5,
+      "tzId": "Asia/Kolkata",
+      "latitude": 19.076,
+      "longitude": 72.8777,
+      "utc": "1947-08-14T18:35:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 141.1142,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 117.1577,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 126.8024,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 135.6873,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 90.5803,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 228.9998,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 133.5953,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 85.1753,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 188.8292,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 133.23,
+          "sign": "leo",
+          "retrograde": false
+        }
+      },
+      "ascendant": 53.0206,
+      "ascendantSign": "taurus",
+      "midheaven": 311.5039,
+      "midheavenSign": "aquarius",
+      "houses": {
+        "sun": 4,
+        "moon": 3,
+        "mercury": 4,
+        "venus": 4,
+        "mars": 3,
+        "jupiter": 7,
+        "saturn": 4,
+        "uranus": 2,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "losangeles-1955",
+      "note": "Los Angeles, daylight saving before 1970",
+      "birthDate": "1955-07-15",
+      "birthMinutes": 700,
+      "tzId": "America/Los_Angeles",
+      "latitude": 34.0522,
+      "longitude": -118.2437,
+      "utc": "1955-07-15T18:40:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 112.4919,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 61.1861,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 92.8494,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 99.4952,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 122.8098,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 126.8081,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 224.511,
+          "sign": "scorpio",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 117.6252,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 205.4815,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 145.3781,
+          "sign": "leo",
+          "retrograde": false
+        }
+      },
+      "ascendant": 183.8741,
+      "ascendantSign": "libra",
+      "midheaven": 94.2185,
+      "midheavenSign": "cancer",
+      "houses": {
+        "sun": 10,
+        "moon": 9,
+        "mercury": 10,
+        "venus": 10,
+        "mars": 11,
+        "jupiter": 11,
+        "saturn": 2,
+        "uranus": 10,
+        "neptune": 1,
+        "pluto": 11
+      }
+    },
+    {
+      "id": "moscow-1985",
+      "note": "Moscow, Soviet summer time",
+      "birthDate": "1985-07-20",
+      "birthMinutes": 435,
+      "tzId": "Europe/Moscow",
+      "latitude": 55.7558,
+      "longitude": 37.6173,
+      "utc": "1985-07-20T03:15:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 117.3598,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 144.1327,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 142.8506,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 75.0771,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 116.7409,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 313.9711,
+          "sign": "aquarius",
+          "retrograde": true
+        },
+        "saturn": {
+          "longitude": 231.4939,
+          "sign": "scorpio",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 254.4275,
+          "sign": "sagittarius",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 271.5594,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 211.9417,
+          "sign": "scorpio",
+          "retrograde": false
+        }
+      },
+      "ascendant": 136.4929,
+      "ascendantSign": "leo",
+      "midheaven": 26.1182,
+      "midheavenSign": "aries",
+      "houses": {
+        "sun": 12,
+        "moon": 1,
+        "mercury": 1,
+        "venus": 11,
+        "mars": 12,
+        "jupiter": 7,
+        "saturn": 4,
+        "uranus": 5,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "quito-epoch",
+      "note": "Quito, on the equator, at the Unix epoch date",
+      "birthDate": "1970-01-01",
+      "birthMinutes": 330,
+      "tzId": "America/Guayaquil",
+      "latitude": -0.1807,
+      "longitude": -78.4678,
+      "utc": "1970-01-01T10:30:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 280.6022,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 196.2242,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 299.2534,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 275.0038,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 342.5625,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 212.3846,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 32.0601,
+          "sign": "taurus",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 188.7256,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 239.8992,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 177.3918,
+          "sign": "virgo",
+          "retrograde": true
+        }
+      },
+      "ascendant": 269.7914,
+      "ascendantSign": "sagittarius",
+      "midheaven": 179.6667,
+      "midheavenSign": "virgo",
+      "houses": {
+        "sun": 2,
+        "moon": 11,
+        "mercury": 2,
+        "venus": 2,
+        "mars": 4,
+        "jupiter": 12,
+        "saturn": 6,
+        "uranus": 11,
+        "neptune": 12,
+        "pluto": 10
+      }
+    },
+    {
+      "id": "honolulu-1985",
+      "note": "Honolulu, Pacific",
+      "birthDate": "1985-11-11",
+      "birthMinutes": 795,
+      "tzId": "Pacific/Honolulu",
+      "latitude": 21.3069,
+      "longitude": -157.8583,
+      "utc": "1985-11-11T23:15:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 229.5128,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 220.5703,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 252.1148,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 212.9276,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 189.6003,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 309.606,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 239.3935,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 256.5136,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 271.8102,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 215.2756,
+          "sign": "scorpio",
+          "retrograde": false
+        }
+      },
+      "ascendant": 324.2785,
+      "ascendantSign": "aquarius",
+      "midheaven": 243.9278,
+      "midheavenSign": "sagittarius",
+      "houses": {
+        "sun": 10,
+        "moon": 10,
+        "mercury": 11,
+        "venus": 10,
+        "mars": 9,
+        "jupiter": 1,
+        "saturn": 10,
+        "uranus": 11,
+        "neptune": 12,
+        "pluto": 10
+      }
+    },
+    {
+      "id": "auckland-nzdt",
+      "note": "Auckland, just before the new year",
+      "birthDate": "2019-12-31",
+      "birthMinutes": 1430,
+      "tzId": "Pacific/Auckland",
+      "latitude": -36.8509,
+      "longitude": 174.7645,
+      "utc": "2019-12-31T10:50:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 279.4502,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 339.5892,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 273.5201,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 313.737,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 238.0158,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 276.5439,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 291.3308,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 32.699,
+          "sign": "taurus",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 346.254,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 292.3675,
+          "sign": "capricorn",
+          "retrograde": false
+        }
+      },
+      "ascendant": 159.0735,
+      "ascendantSign": "virgo",
+      "midheaven": 77.8935,
+      "midheavenSign": "gemini",
+      "houses": {
+        "sun": 5,
+        "moon": 7,
+        "mercury": 5,
+        "venus": 6,
+        "mars": 3,
+        "jupiter": 5,
+        "saturn": 5,
+        "uranus": 9,
+        "neptune": 7,
+        "pluto": 5
+      }
+    },
+    {
+      "id": "anchorage-1979",
+      "note": "Anchorage, 61N",
+      "birthDate": "1979-12-05",
+      "birthMinutes": 210,
+      "tzId": "America/Anchorage",
+      "latitude": 61.2181,
+      "longitude": -149.9003,
+      "utc": "1979-12-05T13:30:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 252.8097,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 95.199,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 232.4239,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 278.6561,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 156.4933,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 159.538,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 176.0792,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 232.6083,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 259.9347,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 201.0469,
+          "sign": "libra",
+          "retrograde": false
+        }
+      },
+      "ascendant": 202.056,
+      "ascendantSign": "libra",
+      "midheaven": 124.03,
+      "midheavenSign": "leo",
+      "houses": {
+        "sun": 3,
+        "moon": 10,
+        "mercury": 2,
+        "venus": 4,
+        "mars": 12,
+        "jupiter": 12,
+        "saturn": 12,
+        "uranus": 2,
+        "neptune": 3,
+        "pluto": 1
+      }
+    },
+    {
+      "id": "reykjavik-solstice",
+      "note": "Reykjavik, 64N, winter solstice",
+      "birthDate": "1995-12-21",
+      "birthMinutes": 671,
+      "tzId": "Atlantic/Reykjavik",
+      "latitude": 64.1466,
+      "longitude": -21.9426,
+      "utc": "1995-12-21T11:11:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 269.1043,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 260.0656,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 284.4467,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 299.6294,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 285.9878,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 267.0801,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 348.7687,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 298.7731,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 294.2985,
+          "sign": "capricorn",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 241.583,
+          "sign": "sagittarius",
+          "retrograde": false
+        }
+      },
+      "ascendant": 263.3834,
+      "ascendantSign": "sagittarius",
+      "midheaven": 237.6332,
+      "midheavenSign": "scorpio",
+      "houses": {
+        "sun": 1,
+        "moon": 1,
+        "mercury": 2,
+        "venus": 2,
+        "mars": 2,
+        "jupiter": 1,
+        "saturn": 4,
+        "uranus": 2,
+        "neptune": 2,
+        "pluto": 1
+      }
+    },
+    {
+      "id": "tromso-midnight-sun",
+      "note": "Tromso, 69.6N, high latitude",
+      "birthDate": "2003-06-21",
+      "birthMinutes": 750,
+      "tzId": "Europe/Oslo",
+      "latitude": 69.6492,
+      "longitude": 18.9553,
+      "utc": "2003-06-21T10:30:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 89.6551,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 357.6565,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 73.9294,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 73.7551,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 331.7817,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 136.1619,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 92.2357,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 332.7411,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 312.846,
+          "sign": "aquarius",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 258.298,
+          "sign": "sagittarius",
+          "retrograde": true
+        }
+      },
+      "ascendant": 177.8222,
+      "ascendantSign": "virgo",
+      "midheaven": 86.0224,
+      "midheavenSign": "gemini",
+      "houses": {
+        "sun": 10,
+        "moon": 7,
+        "mercury": 10,
+        "venus": 10,
+        "mars": 7,
+        "jupiter": 12,
+        "saturn": 11,
+        "uranus": 7,
+        "neptune": 6,
+        "pluto": 4
+      }
+    },
+    {
+      "id": "ushuaia-1992",
+      "note": "Ushuaia, 54.8S",
+      "birthDate": "1992-09-02",
+      "birthMinutes": 1020,
+      "tzId": "America/Argentina/Ushuaia",
+      "latitude": -54.8019,
+      "longitude": -68.303,
+      "utc": "1992-09-02T20:00:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 160.5839,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 237.3702,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 149.056,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 182.6533,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 84.4872,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 171.8836,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 313.2741,
+          "sign": "aquarius",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 284.2114,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 286.3462,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 230.4724,
+          "sign": "scorpio",
+          "retrograde": false
+        }
+      },
+      "ascendant": 322.3537,
+      "ascendantSign": "aquarius",
+      "midheaven": 216.2327,
+      "midheavenSign": "scorpio",
+      "houses": {
+        "sun": 8,
+        "moon": 10,
+        "mercury": 7,
+        "venus": 9,
+        "mars": 5,
+        "jupiter": 8,
+        "saturn": 1,
+        "uranus": 12,
+        "neptune": 12,
+        "pluto": 10
+      }
+    },
+    {
+      "id": "bangkok-unknown-time",
+      "note": "Bangkok, birth time unknown (noon)",
+      "birthDate": "1995-05-17",
+      "birthMinutes": null,
+      "tzId": "Asia/Bangkok",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "utc": "1995-05-17T05:00:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 55.8456,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 269.0049,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 76.3099,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 30.2846,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 146.3205,
+          "sign": "leo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 252.4052,
+          "sign": "sagittarius",
+          "retrograde": true
+        },
+        "saturn": {
+          "longitude": 352.7413,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 300.4162,
+          "sign": "aquarius",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 295.4514,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 239.325,
+          "sign": "scorpio",
+          "retrograde": true
+        }
+      }
+    },
+    {
+      "id": "sun-aries-2000-before",
+      "note": "Sun Aries ingress, 90 minutes before (Bangkok)",
+      "birthDate": "2000-03-20",
+      "birthMinutes": 785,
+      "tzId": "Asia/Bangkok",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "utc": "2000-03-20T06:05:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 359.9378,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 180.6418,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 334.1379,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 338.3631,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 27.9346,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 36.5867,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 44.2138,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 319.1393,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 305.9257,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 252.8955,
+          "sign": "sagittarius",
+          "retrograde": true
+        }
+      },
+      "ascendant": 104.4578,
+      "ascendantSign": "cancer",
+      "midheaven": 10.6964,
+      "midheavenSign": "aries",
+      "houses": {
+        "sun": 9,
+        "moon": 4,
+        "mercury": 9,
+        "venus": 9,
+        "mars": 10,
+        "jupiter": 11,
+        "saturn": 11,
+        "uranus": 8,
+        "neptune": 8,
+        "pluto": 6
+      }
+    },
+    {
+      "id": "sun-aries-2000-after",
+      "note": "Sun Aries ingress, 90 minutes after (Bangkok)",
+      "birthDate": "2000-03-20",
+      "birthMinutes": 965,
+      "tzId": "Asia/Bangkok",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "utc": "2000-03-20T09:05:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 0.0619,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 182.335,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 334.1986,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 338.5175,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 28.0268,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 36.6135,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 44.2269,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 319.1452,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 305.9289,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 252.8952,
+          "sign": "sagittarius",
+          "retrograde": true
+        }
+      },
+      "ascendant": 145.9128,
+      "ascendantSign": "leo",
+      "midheaven": 57.2384,
+      "midheavenSign": "taurus",
+      "houses": {
+        "sun": 9,
+        "moon": 3,
+        "mercury": 8,
+        "venus": 8,
+        "mars": 9,
+        "jupiter": 10,
+        "saturn": 10,
+        "uranus": 7,
+        "neptune": 7,
+        "pluto": 5
+      }
+    },
+    {
+      "id": "sun-cancer-2012-before",
+      "note": "Sun Cancer ingress, 90 minutes before (Bangkok)",
+      "birthDate": "2012-06-21",
+      "birthMinutes": 278,
+      "tzId": "Asia/Bangkok",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "utc": "2012-06-20T21:38:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 89.9398,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 104.3225,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 113.1153,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 68.3759,
+          "sign": "gemini",
+          "retrograde": true
+        },
+        "mars": {
+          "longitude": 173.6103,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 62.0656,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 202.7797,
+          "sign": "libra",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 8.3375,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 333.0823,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 278.4827,
+          "sign": "capricorn",
+          "retrograde": true
+        }
+      },
+      "ascendant": 71.7503,
+      "ascendantSign": "gemini",
+      "midheaven": 332.5319,
+      "midheavenSign": "pisces",
+      "houses": {
+        "sun": 1,
+        "moon": 2,
+        "mercury": 2,
+        "venus": 1,
+        "mars": 4,
+        "jupiter": 1,
+        "saturn": 5,
+        "uranus": 11,
+        "neptune": 10,
+        "pluto": 8
+      }
+    },
+    {
+      "id": "sun-cancer-2012-after",
+      "note": "Sun Cancer ingress, 90 minutes after (Bangkok)",
+      "birthDate": "2012-06-21",
+      "birthMinutes": 458,
+      "tzId": "Asia/Bangkok",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "utc": "2012-06-21T00:38:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 90.0591,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 105.8681,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 113.295,
+          "sign": "cancer",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 68.3431,
+          "sign": "gemini",
+          "retrograde": true
+        },
+        "mars": {
+          "longitude": 173.671,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 62.0933,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 202.7788,
+          "sign": "libra",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 8.3397,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 333.0813,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 278.4796,
+          "sign": "capricorn",
+          "retrograde": true
+        }
+      },
+      "ascendant": 113.2921,
+      "ascendantSign": "cancer",
+      "midheaven": 21.2362,
+      "midheavenSign": "aries",
+      "houses": {
+        "sun": 1,
+        "moon": 1,
+        "mercury": 1,
+        "venus": 12,
+        "mars": 3,
+        "jupiter": 12,
+        "saturn": 4,
+        "uranus": 10,
+        "neptune": 9,
+        "pluto": 7
+      }
+    },
+    {
+      "id": "asc-cusp-yangon-before",
+      "note": "Ascendant sign change in yangon, minute before the change",
+      "birthDate": "2001-03-21",
+      "birthMinutes": 371,
+      "tzId": "Asia/Yangon",
+      "latitude": 16.8409,
+      "longitude": 96.1735,
+      "utc": "2001-03-20T23:41:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 0.4211,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 315.2634,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 334.7983,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 14.8197,
+          "sign": "aries",
+          "retrograde": true
+        },
+        "mars": {
+          "longitude": 256.3406,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 65.7944,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 56.7194,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 322.9851,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 308.0849,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 255.2769,
+          "sign": "sagittarius",
+          "retrograde": true
+        }
+      },
+      "ascendant": 359.9839,
+      "ascendantSign": "pisces",
+      "midheaven": 269.9882,
+      "midheavenSign": "sagittarius",
+      "houses": {
+        "sun": 2,
+        "moon": 12,
+        "mercury": 1,
+        "venus": 2,
+        "mars": 10,
+        "jupiter": 4,
+        "saturn": 3,
+        "uranus": 12,
+        "neptune": 12,
+        "pluto": 10
+      }
+    },
+    {
+      "id": "asc-cusp-yangon-after",
+      "note": "Ascendant sign change in yangon, minute after the change",
+      "birthDate": "2001-03-21",
+      "birthMinutes": 372,
+      "tzId": "Asia/Yangon",
+      "latitude": 16.8409,
+      "longitude": 96.1735,
+      "utc": "2001-03-20T23:42:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 0.4217,
+          "sign": "aries",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 315.2716,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 334.7992,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 14.8194,
+          "sign": "aries",
+          "retrograde": true
+        },
+        "mars": {
+          "longitude": 256.3409,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 65.7945,
+          "sign": "gemini",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 56.7194,
+          "sign": "taurus",
+          "retrograde": false
+        },
+        "uranus": {
+          "longitude": 322.9851,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "neptune": {
+          "longitude": 308.0849,
+          "sign": "aquarius",
+          "retrograde": false
+        },
+        "pluto": {
+          "longitude": 255.2769,
+          "sign": "sagittarius",
+          "retrograde": true
+        }
+      },
+      "ascendant": 0.2984,
+      "ascendantSign": "aries",
+      "midheaven": 270.2182,
+      "midheavenSign": "capricorn",
+      "houses": {
+        "sun": 1,
+        "moon": 11,
+        "mercury": 12,
+        "venus": 1,
+        "mars": 9,
+        "jupiter": 3,
+        "saturn": 2,
+        "uranus": 11,
+        "neptune": 11,
+        "pluto": 9
+      }
+    },
+    {
+      "id": "asc-cusp-london-before",
+      "note": "Ascendant sign change in london, minute before the change",
+      "birthDate": "1995-09-09",
+      "birthMinutes": 469,
+      "tzId": "Europe/London",
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "utc": "1995-09-09T06:49:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 166.1326,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 347.845,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 192.9953,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 171.3982,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 211.3182,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 247.6077,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 351.75,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 296.8273,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 292.9529,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 238.0962,
+          "sign": "scorpio",
+          "retrograde": false
+        }
+      },
+      "ascendant": 179.9842,
+      "ascendantSign": "virgo",
+      "midheaven": 89.9795,
+      "midheavenSign": "gemini",
+      "houses": {
+        "sun": 1,
+        "moon": 7,
+        "mercury": 2,
+        "venus": 1,
+        "mars": 3,
+        "jupiter": 4,
+        "saturn": 7,
+        "uranus": 5,
+        "neptune": 5,
+        "pluto": 3
+      }
+    },
+    {
+      "id": "asc-cusp-london-after",
+      "note": "Ascendant sign change in london, minute after the change",
+      "birthDate": "1995-09-09",
+      "birthMinutes": 470,
+      "tzId": "Europe/London",
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "utc": "1995-09-09T06:50:00Z",
+      "planets": {
+        "sun": {
+          "longitude": 166.1333,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "moon": {
+          "longitude": 347.8545,
+          "sign": "pisces",
+          "retrograde": false
+        },
+        "mercury": {
+          "longitude": 192.996,
+          "sign": "libra",
+          "retrograde": false
+        },
+        "venus": {
+          "longitude": 171.399,
+          "sign": "virgo",
+          "retrograde": false
+        },
+        "mars": {
+          "longitude": 211.3187,
+          "sign": "scorpio",
+          "retrograde": false
+        },
+        "jupiter": {
+          "longitude": 247.6078,
+          "sign": "sagittarius",
+          "retrograde": false
+        },
+        "saturn": {
+          "longitude": 351.75,
+          "sign": "pisces",
+          "retrograde": true
+        },
+        "uranus": {
+          "longitude": 296.8272,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "neptune": {
+          "longitude": 292.9529,
+          "sign": "capricorn",
+          "retrograde": true
+        },
+        "pluto": {
+          "longitude": 238.0963,
+          "sign": "scorpio",
+          "retrograde": false
+        }
+      },
+      "ascendant": 180.1611,
+      "ascendantSign": "libra",
+      "midheaven": 90.2095,
+      "midheavenSign": "cancer",
+      "houses": {
+        "sun": 12,
+        "moon": 6,
+        "mercury": 1,
+        "venus": 12,
+        "mars": 2,
+        "jupiter": 3,
+        "saturn": 6,
+        "uranus": 4,
+        "neptune": 4,
+        "pluto": 2
+      }
+    }
+  ]
+}
