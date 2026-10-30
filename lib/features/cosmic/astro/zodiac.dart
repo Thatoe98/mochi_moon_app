@@ -14,6 +14,14 @@ enum ZodiacSign {
   pisces,
 }
 
+/// The four elements. Signs cycle through them in this order, so a sign's
+/// element is its index modulo four.
+enum SignElement { fire, earth, air, water }
+
+extension ZodiacSignElement on ZodiacSign {
+  SignElement get element => SignElement.values[index % 4];
+}
+
 /// Width of one sign in degrees.
 const degreesPerSign = 30.0;
 
