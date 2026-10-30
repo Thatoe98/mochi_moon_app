@@ -1057,6 +1057,28 @@ class AppLocalizationsMy extends AppLocalizations {
       'လူတွေက ကိုယ့်ကို နူးညံ့အိပ်မက်ဆန်ပြီး ကြင်နာတတ်သူလို့ မြင်နိုင်တယ်။ ကိုယ့်ရဲ့ နူးညံ့တဲ့အငွေ့အသက်ကြောင့် တခြားသူတွေကို နားလည်ခံစားပေးခံရတယ်လို့ ခံစားရစေတယ်။';
 
   @override
+  String get analyticsConsentTitle =>
+      'Mochi Moon ကို ပိုတိုးတက်အောင် ကူညီမလား။';
+
+  @override
+  String get analyticsConsentBody =>
+      'ကတ်ဘယ်နှစ်ကတ် ပြီးသွားလဲဆိုတာလို ရိုးရိုး tap အရေအတွက်လေးတွေကို ရေတွက်ပြီး app ကို ပိုနူးညံ့ပြီး ပိုကောင်းလာအောင် လုပ်ချင်ပါတယ်။ မွေးနေ့၊ ပါတနာတွေရဲ့နာမည်၊ ကိုယ့်မှတ်တမ်း ဒါမှမဟုတ် ကတ်ပေါ်ကစာတွေကို ဘယ်တော့မှ မမျှဝေပါဘူး။ ဒီအချက်ကို အချိန်မရွေး ကိုယ်တိုင်မှာ ပြောင်းနိုင်ပါတယ်။';
+
+  @override
+  String get analyticsConsentAllow => 'ဟုတ်ကဲ့၊ ငါ့ tap တွေကို ရေတွက်ပါ';
+
+  @override
+  String get analyticsConsentDecline => 'မလိုပါဘူး၊ ကျေးဇူးပါ';
+
+  @override
+  String get analyticsSettingTitle =>
+      'အမည်မဖော်တဲ့ အသုံးပြုမှုအချက်အလက် မျှဝေမယ်';
+
+  @override
+  String get analyticsSettingSubtitle =>
+      'ပြီးသွားတဲ့ကတ်အရေအတွက်လို ရိုးရိုးရေတွက်ချက်တွေပါ။ မွေးနေ့၊ နာမည်၊ မှတ်တမ်း ဒါမှမဟုတ် ကတ်ပေါ်ကစာတွေကို ဘယ်တော့မှ မပါဝင်ပါဘူး။';
+
+  @override
   String get meAboutSubtitle =>
       'ဖတ်ရှုချက်တွေ ဘယ်လိုလုပ်ဆောင်လဲ၊ Open-source လိုင်စင်များ';
 

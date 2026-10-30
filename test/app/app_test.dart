@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/app/router.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
@@ -31,6 +32,7 @@ import '../features/journal/support/fake_journal_repository.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
+import '../features/settings/support/fake_analytics_consent.dart';
 import '../features/settings/support/fake_app_language.dart';
 import '../features/settings/support/fake_reduce_motion.dart';
 import '../features/settings/support/fake_reminder.dart';
@@ -47,6 +49,7 @@ Widget _app({
   bool onboarded = true,
   FakeProfileRepository? profiles,
   bool reduceMotion = false,
+  bool? analyticsConsent = false,
 }) => ProviderScope(
   overrides: [
     initialOnboardingCompleteProvider.overrideWithValue(onboarded),
@@ -67,6 +70,9 @@ Widget _app({
     ),
     reduceMotionSettingRepositoryProvider.overrideWithValue(
       FakeReduceMotionSettingRepository(saved: reduceMotion),
+    ),
+    analyticsConsentRepositoryProvider.overrideWithValue(
+      FakeAnalyticsConsentRepository(saved: analyticsConsent),
     ),
     reminderSettingsRepositoryProvider.overrideWithValue(
       FakeReminderSettingsRepository(),
@@ -109,6 +115,28 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(_motionReduced(tester), isTrue);
+  });
+
+  testWidgets('asks about anonymous usage once the main screens show', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_app(analyticsConsent: null));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Help Mochi Moon grow?'), findsOneWidget);
+
+    await tester.tap(find.text('No thanks'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Help Mochi Moon grow?'), findsNothing);
+    expect(find.text('I am enough.'), findsOneWidget);
+  });
+
+  testWidgets('does not ask again after an answer', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    expect(find.text('Help Mochi Moon grow?'), findsNothing);
   });
 
   testWidgets('opens on the deck tab and shows a quote', (tester) async {

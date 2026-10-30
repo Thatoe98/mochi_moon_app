@@ -1826,6 +1826,42 @@ abstract class AppLocalizations {
   /// **'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.'**
   String get chartRisingPisces;
 
+  /// No description provided for @analyticsConsentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help Mochi Moon grow?'**
+  String get analyticsConsentTitle;
+
+  /// No description provided for @analyticsConsentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We would love to count simple taps, like how many cards get finished, so we can make the app kinder and better. We never share your birthday, your partners\' names, your journal or the words on your cards. You can change this any time in Me.'**
+  String get analyticsConsentBody;
+
+  /// No description provided for @analyticsConsentAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, count my taps'**
+  String get analyticsConsentAllow;
+
+  /// No description provided for @analyticsConsentDecline.
+  ///
+  /// In en, this message translates to:
+  /// **'No thanks'**
+  String get analyticsConsentDecline;
+
+  /// No description provided for @analyticsSettingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share anonymous usage'**
+  String get analyticsSettingTitle;
+
+  /// No description provided for @analyticsSettingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Simple counts like cards completed. Never birthdays, names, journal or card text'**
+  String get analyticsSettingSubtitle;
+
   /// No description provided for @meAboutSubtitle.
   ///
   /// In en, this message translates to:

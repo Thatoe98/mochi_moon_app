@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/features/settings/presentation/analytics_consent_gate.dart';
 
 class ShellScaffold extends StatelessWidget {
   const ShellScaffold({required this.navigationShell, super.key});
@@ -11,7 +12,7 @@ class ShellScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      body: navigationShell,
+      body: AnalyticsConsentGate(child: navigationShell),
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: (index) => navigationShell.goBranch(

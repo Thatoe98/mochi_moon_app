@@ -1049,6 +1049,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'People may see you as soft, dreamy and kind. Your gentle aura makes others feel understood.';
 
   @override
+  String get analyticsConsentTitle => 'Help Mochi Moon grow?';
+
+  @override
+  String get analyticsConsentBody =>
+      'We would love to count simple taps, like how many cards get finished, so we can make the app kinder and better. We never share your birthday, your partners\' names, your journal or the words on your cards. You can change this any time in Me.';
+
+  @override
+  String get analyticsConsentAllow => 'Yes, count my taps';
+
+  @override
+  String get analyticsConsentDecline => 'No thanks';
+
+  @override
+  String get analyticsSettingTitle => 'Share anonymous usage';
+
+  @override
+  String get analyticsSettingSubtitle =>
+      'Simple counts like cards completed. Never birthdays, names, journal or card text';
+
+  @override
   String get meAboutSubtitle => 'How readings work, and open-source licenses';
 
   @override

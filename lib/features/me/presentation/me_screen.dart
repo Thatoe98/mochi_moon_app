@@ -5,6 +5,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/auth/presentation/delete_account_section.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/thai_colors_section.dart';
+import 'package:mochi_moon/features/settings/presentation/analytics_section.dart';
 import 'package:mochi_moon/features/settings/presentation/language_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reduce_motion_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reminder_section.dart';
@@ -49,6 +50,7 @@ class MeScreen extends StatelessWidget {
           const ReminderSection(),
           const ThaiColorsSection(),
           const ReduceMotionSection(),
+          const AnalyticsSection(),
           ListTile(
             minTileHeight: AppSpacing.minTouchTarget,
             leading: const Icon(Icons.info_rounded),
