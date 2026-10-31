@@ -1505,4 +1505,55 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get profileEditSaved => 'ပရိုဖိုင်ကို ပြင်ဆင်ပြီးပါပြီ။';
+
+  @override
+  String get ritualIntroBody =>
+      'ကိုယ့်အတွက်ပဲ နူးညံ့တဲ့ 2 မိနစ်လောက်: ကိုယ်ဘယ်လိုခံစားနေရလဲ၊ ကြင်နာတဲ့ကတ် 3 ကတ်နဲ့ ကျေးဇူးတင်မိတဲ့အရာတစ်ခု။';
+
+  @override
+  String get ritualStart => 'ငါ့ ritual လေး စမယ်';
+
+  @override
+  String get ritualBrowseDeck => 'ကတ်တွေကို ကြည့်မယ်';
+
+  @override
+  String ritualStepOf(int step, int total) {
+    return 'အဆင့် $step / $total';
+  }
+
+  @override
+  String get ritualNext => 'နောက်တစ်ခု';
+
+  @override
+  String get ritualSkip => 'ကျော်မယ်';
+
+  @override
+  String ritualCardsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ကိုယ့် ritual ထဲမှာ ကတ် $count ကတ် ကျန်ပါတယ်',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ritualGratitudeTitle => 'ကျေးဇူးတင်မိတဲ့အရာတစ်ခု';
+
+  @override
+  String get ritualGratitudeBody =>
+      'ဖြည်းဖြည်း အသက်ရှူပြီး ဒီနေ့ စိတ်ချမ်းသာစေခဲ့တဲ့ သေးသေးလေးတစ်ခုကို စဉ်းစားကြည့်ပါ။ ရေးမှတ်နိုင်တာကို မကြာခင် ထည့်ပေးတော့မယ်။';
+
+  @override
+  String get ritualFinish => 'ငါ့ ritual လေး ပြီးအောင်လုပ်မယ်';
+
+  @override
+  String get ritualDoneTitle => 'ကိုယ့် ritual လေး ပြီးသွားပြီ';
+
+  @override
+  String get ritualDoneBody =>
+      'ဒီနေ့ ကိုယ့်အတွက် အချိန်ပေးခဲ့တယ်။ အဲဒါလည်း အမြဲတမ်း တန်ဖိုးရှိပါတယ်။';
+
+  @override
+  String get ritualDoneSemantics => 'Ritual ပြီးပါပြီ';
 }

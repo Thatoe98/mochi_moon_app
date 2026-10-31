@@ -19,6 +19,7 @@ import 'package:mochi_moon/features/partners/application/partner_providers.dart'
 import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/settings/application/announcements_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
@@ -36,6 +37,7 @@ import '../features/mood/support/fake_mood.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
+import '../features/ritual/support/fake_ritual_progress.dart';
 import '../features/settings/support/fake_analytics_consent.dart';
 import '../features/settings/support/fake_announcements.dart';
 import '../features/settings/support/fake_app_language.dart';
@@ -68,6 +70,9 @@ Widget _app({
     ),
     profileRemoteProvider.overrideWithValue(null),
     deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
+    ritualProgressRepositoryProvider.overrideWithValue(
+      FakeRitualProgressRepository(),
+    ),
     journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
     moodRepositoryProvider.overrideWithValue(FakeMoodRepository()),
     moodRemoteProvider.overrideWithValue(null),
@@ -188,7 +193,7 @@ void main() {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text("Read today's cards"));
+    await tester.tap(find.text('Browse the deck'));
     await tester.pumpAndSettle();
 
     expect(find.text('I am enough.'), findsOneWidget);

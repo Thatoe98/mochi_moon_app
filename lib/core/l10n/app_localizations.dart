@@ -2569,6 +2569,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile updated.'**
   String get profileEditSaved;
+
+  /// No description provided for @ritualIntroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Two soft minutes, just for you: how you feel, three kind cards and one thing you\'re grateful for.'**
+  String get ritualIntroBody;
+
+  /// No description provided for @ritualStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Begin my ritual'**
+  String get ritualStart;
+
+  /// No description provided for @ritualBrowseDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse the deck'**
+  String get ritualBrowseDeck;
+
+  /// No description provided for @ritualStepOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String ritualStepOf(int step, int total);
+
+  /// No description provided for @ritualNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get ritualNext;
+
+  /// No description provided for @ritualSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get ritualSkip;
+
+  /// No description provided for @ritualCardsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 card left in your ritual} other{{count} cards left in your ritual}}'**
+  String ritualCardsLeft(int count);
+
+  /// No description provided for @ritualGratitudeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'One thing you\'re grateful for'**
+  String get ritualGratitudeTitle;
+
+  /// No description provided for @ritualGratitudeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a slow breath and think of one small thing that felt good today. Writing it down is coming soon.'**
+  String get ritualGratitudeBody;
+
+  /// No description provided for @ritualFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish my ritual'**
+  String get ritualFinish;
+
+  /// No description provided for @ritualDoneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your ritual is done'**
+  String get ritualDoneTitle;
+
+  /// No description provided for @ritualDoneBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You showed up for yourself today. That always counts.'**
+  String get ritualDoneBody;
+
+  /// No description provided for @ritualDoneSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Ritual complete'**
+  String get ritualDoneSemantics;
 }
 
 class _AppLocalizationsDelegate

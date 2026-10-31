@@ -1490,4 +1490,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileEditSaved => 'Profile updated.';
+
+  @override
+  String get ritualIntroBody =>
+      'Two soft minutes, just for you: how you feel, three kind cards and one thing you\'re grateful for.';
+
+  @override
+  String get ritualStart => 'Begin my ritual';
+
+  @override
+  String get ritualBrowseDeck => 'Browse the deck';
+
+  @override
+  String ritualStepOf(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get ritualNext => 'Next';
+
+  @override
+  String get ritualSkip => 'Skip';
+
+  @override
+  String ritualCardsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cards left in your ritual',
+      one: '1 card left in your ritual',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ritualGratitudeTitle => 'One thing you\'re grateful for';
+
+  @override
+  String get ritualGratitudeBody =>
+      'Take a slow breath and think of one small thing that felt good today. Writing it down is coming soon.';
+
+  @override
+  String get ritualFinish => 'Finish my ritual';
+
+  @override
+  String get ritualDoneTitle => 'Your ritual is done';
+
+  @override
+  String get ritualDoneBody =>
+      'You showed up for yourself today. That always counts.';
+
+  @override
+  String get ritualDoneSemantics => 'Ritual complete';
 }

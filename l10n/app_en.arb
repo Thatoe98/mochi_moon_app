@@ -472,5 +472,20 @@
   "profileEditFocusLabel": "What you'd like more of",
   "profileEditNote": "Changing your birth details updates your birth chart, your readings and your compatibility results.",
   "profileEditSave": "Save",
-  "profileEditSaved": "Profile updated."
+  "profileEditSaved": "Profile updated.",
+  "ritualIntroBody": "Two soft minutes, just for you: how you feel, three kind cards and one thing you're grateful for.",
+  "ritualStart": "Begin my ritual",
+  "ritualBrowseDeck": "Browse the deck",
+  "ritualStepOf": "Step {step} of {total}",
+  "@ritualStepOf": { "placeholders": { "step": { "type": "int" }, "total": { "type": "int" } } },
+  "ritualNext": "Next",
+  "ritualSkip": "Skip",
+  "ritualCardsLeft": "{count, plural, =1{1 card left in your ritual} other{{count} cards left in your ritual}}",
+  "@ritualCardsLeft": { "placeholders": { "count": { "type": "int" } } },
+  "ritualGratitudeTitle": "One thing you're grateful for",
+  "ritualGratitudeBody": "Take a slow breath and think of one small thing that felt good today. Writing it down is coming soon.",
+  "ritualFinish": "Finish my ritual",
+  "ritualDoneTitle": "Your ritual is done",
+  "ritualDoneBody": "You showed up for yourself today. That always counts.",
+  "ritualDoneSemantics": "Ritual complete"
 }

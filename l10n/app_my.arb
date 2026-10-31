@@ -411,5 +411,18 @@
   "profileEditFocusLabel": "ပိုပြီး ရချင်တဲ့အရာတွေ",
   "profileEditNote": "မွေးဖွားမှုအချက်အလက်တွေ ပြောင်းလိုက်ရင် birth chart၊ ဖတ်ရှုချက်တွေနဲ့ compatibility ရလဒ်တွေပါ ပြောင်းလဲသွားပါမယ်။",
   "profileEditSave": "သိမ်းမယ်",
-  "profileEditSaved": "ပရိုဖိုင်ကို ပြင်ဆင်ပြီးပါပြီ။"
+  "profileEditSaved": "ပရိုဖိုင်ကို ပြင်ဆင်ပြီးပါပြီ။",
+  "ritualIntroBody": "ကိုယ့်အတွက်ပဲ နူးညံ့တဲ့ 2 မိနစ်လောက်: ကိုယ်ဘယ်လိုခံစားနေရလဲ၊ ကြင်နာတဲ့ကတ် 3 ကတ်နဲ့ ကျေးဇူးတင်မိတဲ့အရာတစ်ခု။",
+  "ritualStart": "ငါ့ ritual လေး စမယ်",
+  "ritualBrowseDeck": "ကတ်တွေကို ကြည့်မယ်",
+  "ritualStepOf": "အဆင့် {step} / {total}",
+  "ritualNext": "နောက်တစ်ခု",
+  "ritualSkip": "ကျော်မယ်",
+  "ritualCardsLeft": "{count, plural, other{ကိုယ့် ritual ထဲမှာ ကတ် {count} ကတ် ကျန်ပါတယ်}}",
+  "ritualGratitudeTitle": "ကျေးဇူးတင်မိတဲ့အရာတစ်ခု",
+  "ritualGratitudeBody": "ဖြည်းဖြည်း အသက်ရှူပြီး ဒီနေ့ စိတ်ချမ်းသာစေခဲ့တဲ့ သေးသေးလေးတစ်ခုကို စဉ်းစားကြည့်ပါ။ ရေးမှတ်နိုင်တာကို မကြာခင် ထည့်ပေးတော့မယ်။",
+  "ritualFinish": "ငါ့ ritual လေး ပြီးအောင်လုပ်မယ်",
+  "ritualDoneTitle": "ကိုယ့် ritual လေး ပြီးသွားပြီ",
+  "ritualDoneBody": "ဒီနေ့ ကိုယ့်အတွက် အချိန်ပေးခဲ့တယ်။ အဲဒါလည်း အမြဲတမ်း တန်ဖိုးရှိပါတယ်။",
+  "ritualDoneSemantics": "Ritual ပြီးပါပြီ"
 }
