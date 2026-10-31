@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "quests": [
+    {
+      "id": "qst_001",
+      "text": {
+        "en": "Say one kind thing to yourself, out loud or in your head.",
+        "my": "ကိုယ့်ကိုယ်ကို ကြင်နာတဲ့စကားလေးတစ်ခွန်း အသံထွက်ပြောပါ၊ ဒါမှမဟုတ် စိတ်ထဲမှာပဲ ပြောပါ။"
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_002",
+      "text": {
+        "en": "Write down one thing you like about who you are.",
+        "my": "ကိုယ့်ရဲ့ ဘယ်အချက်လေးကို သဘောကျလဲဆိုတာ တစ်ခုလောက် ရေးချပါ။"
+      },
+      "focusAreas": [
+        "self_love",
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_003",
+      "text": {
+        "en": "Do one small thing today just because you enjoy it.",
+        "my": "ဒီနေ့ ကိုယ်ပျော်လို့ပဲ လုပ်ချင်တဲ့အရာလေးတစ်ခု လုပ်ပါ။"
+      },
+      "focusAreas": [
+        "self_love",
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_004",
+      "text": {
+        "en": "Say yes to one small thing you usually shy away from.",
+        "my": "ပုံမှန်ဆို ရှောင်တတ်တဲ့ အရာလေးတစ်ခုကို ဒီတစ်ခါ လက်ခံကြည့်ပါ။"
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_005",
+      "text": {
+        "en": "Remember something you did well this week and give yourself a nod.",
+        "my": "ဒီတစ်ပတ်မှာ ကိုယ်ကောင်းကောင်းလုပ်နိုင်ခဲ့တာလေးတစ်ခုကို သတိရပြီး ကိုယ့်ကိုယ်ကို အသိအမှတ်ပြုလိုက်ပါ။"
+      },
+      "focusAreas": [
+        "confidence",
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_006",
+      "text": {
+        "en": "Speak up kindly once today, even in a tiny way.",
+        "my": "ဒီနေ့ တစ်ခါလောက် ကိုယ့်အမြင်ကို ကြင်ကြင်နာနာ ပြောပြပါ။ နည်းနည်းလေးပဲဖြစ်ဖြစ်ပေါ့။"
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_007",
+      "text": {
+        "en": "Let yourself feel one feeling for a minute without judging it.",
+        "my": "ခံစားချက်တစ်ခုကို တစ်မိနစ်လောက် အကဲဖြတ်မနေဘဲ ခံစားခွင့်ပေးလိုက်ပါ။"
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_008",
+      "text": {
+        "en": "Send a kind message to a friend.",
+        "my": "သူငယ်ချင်းတစ်ယောက်ဆီ ကြင်နာတဲ့စာလေး ပို့လိုက်ပါ။"
+      },
+      "focusAreas": [
+        "healing",
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_009",
+      "text": {
+        "en": "Play a song that feels like a hug.",
+        "my": "ပွေ့ဖက်ထားသလို ခံစားရစေတဲ့ သီချင်းတစ်ပုဒ် ဖွင့်နားထောင်ပါ။"
+      },
+      "focusAreas": [
+        "healing",
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_010",
+      "text": {
+        "en": "Take three slow breaths before you start your next task.",
+        "my": "နောက်တစ်ခု စမလုပ်ခင် အသက်ကို ဖြည်းဖြည်း 3 ကြိမ် ရှူထုတ်ပါ။"
+      },
+      "focusAreas": [
+        "study_work",
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_011",
+      "text": {
+        "en": "Tidy one small corner of your desk.",
+        "my": "စားပွဲပေါ်က နေရာလေးတစ်ခုကို သပ်သပ်ရပ်ရပ် လုပ်လိုက်ပါ။"
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_012",
+      "text": {
+        "en": "When you finish something, say \"well done\" to yourself.",
+        "my": "တစ်ခုခု ပြီးသွားတဲ့အခါ ကိုယ့်ကိုယ်ကို \"တော်တယ်\" လို့ ပြောပါ။"
+      },
+      "focusAreas": [
+        "study_work",
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_013",
+      "text": {
+        "en": "Drink a glass of water slowly.",
+        "my": "ရေတစ်ခွက်ကို ဖြည်းဖြည်းသောက်ပါ။"
+      },
+      "focusAreas": [
+        "body_kindness",
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_014",
+      "text": {
+        "en": "Stretch gently for one minute, only as far as feels nice.",
+        "my": "ကိုယ်သက်သောင့်သက်သာရှိသလောက်ပဲ တစ်မိနစ်လောက် ညင်ညင်သာသာ အကြောလျှော့ပါ။"
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_015",
+      "text": {
+        "en": "Thank your hands for something they did today.",
+        "my": "ဒီနေ့ လက်နဲ့လုပ်ခဲ့တဲ့အရာတစ်ခုအတွက် ကိုယ့်လက်တွေကို ကျေးဇူးတင်လိုက်ပါ။"
+      },
+      "focusAreas": [
+        "body_kindness",
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_016",
+      "text": {
+        "en": "Look out of a window for one minute and notice three things.",
+        "my": "ပြတင်းပေါက်ကနေ အပြင်ကို တစ်မိနစ်လောက်ကြည့်ပြီး သတိထားမိတာ 3 ခုကို မှတ်ကြည့်ပါ။"
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_017",
+      "text": {
+        "en": "Put your phone down for ten minutes and just be.",
+        "my": "ဖုန်းကို 10 မိနစ်လောက် ချထားပြီး ဘာမှမလုပ်ဘဲ ကိုယ့်အတိုင်းလေး နေပါ။"
+      },
+      "focusAreas": [
+        "calm",
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_018",
+      "text": {
+        "en": "Take five slow breaths, in through the nose and out through the mouth.",
+        "my": "နှာခေါင်းကနေ အသက်ကို ဖြည်းဖြည်းရှူသွင်းပြီး ပါးစပ်ကနေ ရှူထုတ်ပါ။ အဲဒီလို 5 ကြိမ်လုပ်ပါ။"
+      },
+      "focusAreas": [
+        "calm",
+        "body_kindness"
+      ],
+      "premium": false
+    }
+  ]
+}

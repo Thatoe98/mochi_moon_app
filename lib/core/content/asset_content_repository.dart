@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mochi_moon/core/content/content_repository.dart';
 import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/fallback_reading.dart';
+import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
 
@@ -12,6 +13,7 @@ class AssetContentRepository implements ContentRepository {
     : _bundle = bundle ?? rootBundle;
 
   static const quotesPath = 'assets/content/quotes/quotes.json';
+  static const questsPath = 'assets/content/quests/quests.json';
   static const signsPath = 'assets/content/signs/signs.json';
 
   static const dayColorsPath = 'assets/content/signs/day_colors.json';
@@ -33,6 +35,14 @@ class AssetContentRepository implements ContentRepository {
     final json = await _loadJson(quotesPath);
     return (json['quotes'] as List<dynamic>)
         .map((e) => Quote.fromJson(e as Map<String, dynamic>))
+        .toList(growable: false);
+  }
+
+  @override
+  Future<List<Quest>> loadQuests() async {
+    final json = await _loadJson(questsPath);
+    return (json['quests'] as List<dynamic>)
+        .map((e) => Quest.fromJson(e as Map<String, dynamic>))
         .toList(growable: false);
   }
 

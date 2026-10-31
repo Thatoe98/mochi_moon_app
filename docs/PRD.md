@@ -318,8 +318,8 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.20 Tiny kindness quests (Free)
 
-- [ ] One small daily task picked from the bundled `quests.json`, matched to her focus areas, chosen deterministically from the date so it is stable all day.
-- [ ] She can mark it done or **swap it once** per day for another quest.
+- [x] One small daily task picked from the bundled `quests.json`, matched to her focus areas, chosen deterministically from the date so it is stable all day. *(Q1: `dailyQuest` in `features/quests/domain`; 18 starter quests, the launch set of 120 is still to write.)*
+- [ ] She can mark it done or **swap it once** per day for another quest. *(Q1: the pick supports one swap; the buttons and state come in Q2.)*
 - [ ] A quest is never anything about health, money, or others' bodies; it is a tiny kind act toward herself or someone else ("Drink a glass of water slowly", "Send a kind message to a friend").
 - [ ] Done quests count toward the weekly letter's aggregates and mascot milestones.
 - [ ] Quest state is stored locally and synced to `users/{uid}/state/quest`.

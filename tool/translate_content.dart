@@ -9,7 +9,8 @@
 //   --arb          translate missing strings of l10n/app_en.arb
 //   --readings     translate assets/content/fallback_readings/en.json
 //   --quotes       add a Burmese text to assets/content/quotes/quotes.json
-//                  (with none of the three flags above, all three run)
+//   --quests       add a Burmese text to assets/content/quests/quests.json
+//                  (with none of the four flags above, all but --web run)
 //   --web          translate the account deletion web page of the sibling
 //                  mochi-moon-api repo (app/web_strings/en.json -> my.json);
 //                  only runs when asked for
@@ -37,6 +38,7 @@ const _myArb = 'l10n/app_my.arb';
 const _enReadings = 'assets/content/fallback_readings/en.json';
 const _myReadings = 'assets/content/fallback_readings/my.json';
 const _quotes = 'assets/content/quotes/quotes.json';
+const _quests = 'assets/content/quests/quests.json';
 const _enWeb = '../mochi-moon-api/app/web_strings/en.json';
 const _myWeb = '../mochi-moon-api/app/web_strings/my.json';
 
@@ -44,7 +46,7 @@ Future<void> main(List<String> args) async {
   final options = _Options.parse(args);
   if (options == null) {
     stderr.writeln(
-      'usage: dart run tool/translate_content.dart [--arb] [--readings] [--quotes] '
+      'usage: dart run tool/translate_content.dart [--arb] [--readings] [--quotes] [--quests] '
       '[--web] [--only REGEX] [--force] [--batch-size N] [--dry-run]',
     );
     exit(64);
@@ -73,7 +75,24 @@ Future<void> main(List<String> args) async {
   try {
     if (options.arb) failures += await _runArb(options, chat);
     if (options.readings) failures += await _runReadings(options, chat);
-    if (options.quotes) failures += await _runQuotes(options, chat);
+    if (options.quotes) {
+      failures += await _runTexts(
+        options,
+        chat,
+        path: _quotes,
+        key: 'quotes',
+        label: 'Quotes',
+      );
+    }
+    if (options.quests) {
+      failures += await _runTexts(
+        options,
+        chat,
+        path: _quests,
+        key: 'quests',
+        label: 'Quests',
+      );
+    }
     if (options.web) failures += await _runWeb(options, chat);
   } on OpenAiException catch (e) {
     stderr.writeln(e);
@@ -166,15 +185,27 @@ Future<int> _runReadings(_Options options, ChatCall? chat) async {
   return failures;
 }
 
-Future<int> _runQuotes(_Options options, ChatCall? chat) async {
-  final json = _readJson(_quotes)!;
-  final quotes = json['quotes']! as List<Object?>;
+/// Adds a Burmese `text.my` to each item of a content file whose items have an
+/// `id` and a `text` map (quotes, quests).
+Future<int> _runTexts(
+  _Options options,
+  ChatCall? chat, {
+  required String path,
+  required String key,
+  required String label,
+}) async {
+  final json = _readJson(path);
+  if (json == null) {
+    stdout.writeln('$label: $path not found, skipped.');
+    return 0;
+  }
+  final quotes = json[key]! as List<Object?>;
   final ids = pendingQuotes(
     quotes,
     only: options.only == null ? null : RegExp(options.only!),
     force: options.force,
   );
-  stdout.writeln('Quotes: ${ids.length} quote(s) to translate.');
+  stdout.writeln('$label: ${ids.length} item(s) to translate.');
   if (ids.isEmpty) return 0;
   if (chat == null) {
     stdout.writeln('  would send: ${ids.join(', ')}');
@@ -186,7 +217,7 @@ Future<int> _runQuotes(_Options options, ChatCall? chat) async {
   var failures = 0;
   for (var i = 0; i < ids.length; i += options.batchSize) {
     final batch = ids.sublist(i, (i + options.batchSize).clamp(0, ids.length));
-    stdout.writeln('  ${batch.length} quote(s)…');
+    stdout.writeln('  ${batch.length} item(s)…');
     final result = await translateArb(
       chat: chat,
       en: source,
@@ -194,8 +225,10 @@ Future<int> _runQuotes(_Options options, ChatCall? chat) async {
       keys: batch,
     );
     done.addAll(result.done);
-    File(_quotes)
-        .writeAsStringSync(encodeQuotes(json, mergeQuotes(quotes, done)));
+    final merged = {...json, key: mergeQuotes(quotes, done)};
+    File(path).writeAsStringSync(
+      "${const JsonEncoder.withIndent('  ').convert(merged)}\n",
+    );
     for (final entry in result.failed.entries) {
       failures++;
       stderr.writeln('    FAILED ${entry.key}: ${entry.value.join('; ')}');
@@ -250,6 +283,7 @@ class _Options {
     required this.arb,
     required this.readings,
     required this.quotes,
+    required this.quests,
     required this.web,
     required this.only,
     required this.force,
@@ -260,6 +294,7 @@ class _Options {
   final bool arb;
   final bool readings;
   final bool quotes;
+  final bool quests;
   final bool web;
   final String? only;
   final bool force;
@@ -270,6 +305,7 @@ class _Options {
     var arb = false;
     var readings = false;
     var quotes = false;
+    var quests = false;
     var web = false;
     var force = false;
     var dryRun = false;
@@ -283,6 +319,8 @@ class _Options {
           readings = true;
         case '--quotes':
           quotes = true;
+        case '--quests':
+          quests = true;
         case '--web':
           web = true;
         case '--force':
@@ -301,15 +339,17 @@ class _Options {
           return null;
       }
     }
-    if (!arb && !readings && !quotes && !web) {
+    if (!arb && !readings && !quotes && !quests && !web) {
       arb = true;
       readings = true;
       quotes = true;
+      quests = true;
     }
     return _Options(
       arb: arb,
       readings: readings,
       quotes: quotes,
+      quests: quests,
       web: web,
       only: only,
       force: force,

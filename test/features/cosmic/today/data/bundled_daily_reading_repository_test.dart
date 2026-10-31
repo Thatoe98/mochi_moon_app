@@ -3,6 +3,7 @@ import 'package:mochi_moon/core/content/asset_content_repository.dart';
 import 'package:mochi_moon/core/content/content_repository.dart';
 import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/fallback_reading.dart';
+import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
@@ -38,6 +39,9 @@ class _FakeContent implements ContentRepository {
 
   @override
   Future<List<Quote>> loadQuotes() => throw UnimplementedError();
+
+  @override
+  Future<List<Quest>> loadQuests() => throw UnimplementedError();
 
   @override
   Future<List<SignInfo>> loadSigns() => throw UnimplementedError();

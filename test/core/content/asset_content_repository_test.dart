@@ -26,6 +26,34 @@ void main() {
     expect(quotes.every((q) => q.textFor('en').isNotEmpty), isTrue);
   });
 
+  test(
+    'loads the quests with unique ids, English text and known areas',
+    () async {
+      final quests = await repo.loadQuests();
+      const areas = {
+        'self_love',
+        'confidence',
+        'healing',
+        'study_work',
+        'body_kindness',
+        'calm',
+      };
+      expect(quests, isNotEmpty);
+      expect(quests.map((q) => q.id).toSet(), hasLength(quests.length));
+      for (final quest in quests) {
+        expect(quest.text['en'], isNotEmpty);
+        expect(quest.focusAreas, isNotEmpty);
+        expect(areas.containsAll(quest.focusAreas), isTrue);
+      }
+      for (final area in areas) {
+        expect(
+          quests.where((q) => q.focusAreas.contains(area)).length,
+          greaterThanOrEqualTo(3),
+        );
+      }
+    },
+  );
+
   test('loads all 12 signs with palettes of 4-6 colors', () async {
     final signs = await repo.loadSigns();
     expect(signs, hasLength(12));
@@ -45,21 +73,24 @@ void main() {
     expect(quote.textFor('en'), 'Hello');
   });
 
-  test('loads an element palette for each element and seven Thai days', () async {
-    final colors = await repo.loadDayColors();
-    expect(colors.elements.keys, unorderedEquals(Element.values));
-    for (final palette in colors.elements.values) {
-      expect(palette.length, inInclusiveRange(4, 6));
-    }
-    expect(
-      colors.thaiDays.map((c) => c.weekday),
-      unorderedEquals([1, 2, 3, 4, 5, 6, 7]),
-    );
-    expect(
-      colors.thaiDays.singleWhere((c) => c.weekday == DateTime.sunday).name,
-      'Red',
-    );
-  });
+  test(
+    'loads an element palette for each element and seven Thai days',
+    () async {
+      final colors = await repo.loadDayColors();
+      expect(colors.elements.keys, unorderedEquals(Element.values));
+      for (final palette in colors.elements.values) {
+        expect(palette.length, inInclusiveRange(4, 6));
+      }
+      expect(
+        colors.thaiDays.map((c) => c.weekday),
+        unorderedEquals([1, 2, 3, 4, 5, 6, 7]),
+      );
+      expect(
+        colors.thaiDays.singleWhere((c) => c.weekday == DateTime.sunday).name,
+        'Red',
+      );
+    },
+  );
 
   group('fallback readings', () {
     test('cover every sign with three things to avoid in each text', () async {
@@ -78,22 +109,24 @@ void main() {
       }
     });
 
-    test('Burmese covers every sign and variant with three things to avoid',
-        () async {
-      final en = await repo.loadFallbackReadings('en');
-      final my = await repo.loadFallbackReadings('my');
-      expect(my!.keys, unorderedEquals(en!.keys));
-      for (final id in en.keys) {
-        expect(my[id]!.length, en[id]!.length, reason: id);
-        for (final text in my[id]!) {
-          expect(text.headline, isNotEmpty);
-          expect(text.body, isNotEmpty);
-          expect(text.energy, isNotEmpty);
-          expect(text.love, isNotEmpty);
-          expect(text.avoid, hasLength(3));
+    test(
+      'Burmese covers every sign and variant with three things to avoid',
+      () async {
+        final en = await repo.loadFallbackReadings('en');
+        final my = await repo.loadFallbackReadings('my');
+        expect(my!.keys, unorderedEquals(en!.keys));
+        for (final id in en.keys) {
+          expect(my[id]!.length, en[id]!.length, reason: id);
+          for (final text in my[id]!) {
+            expect(text.headline, isNotEmpty);
+            expect(text.body, isNotEmpty);
+            expect(text.energy, isNotEmpty);
+            expect(text.love, isNotEmpty);
+            expect(text.avoid, hasLength(3));
+          }
         }
-      }
-    });
+      },
+    );
 
     test('are null for a language with no file', () async {
       expect(await repo.loadFallbackReadings('th'), isNull);
@@ -102,9 +135,8 @@ void main() {
     test('every listed language has a file', () {
       for (final lang in AssetContentRepository.fallbackReadingLanguages) {
         expect(
-          File(
-            '${AssetContentRepository.fallbackReadingsDir}/$lang.json',
-          ).existsSync(),
+          File('${AssetContentRepository.fallbackReadingsDir}/$lang.json')
+              .existsSync(),
           isTrue,
           reason: lang,
         );

@@ -53,6 +53,7 @@ flutter:
   generate: true
   assets:
     - assets/content/quotes/
+    - assets/content/quests/
     - assets/content/signs/
     - assets/content/fallback_readings/
     - assets/content/cities/

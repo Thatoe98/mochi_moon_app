@@ -95,6 +95,45 @@ final class QuotesProvider
 
 String _$quotesHash() => r'781638bd6366711c350c886879f2ca9b2f8d0550';
 
+@ProviderFor(quests)
+final questsProvider = QuestsProvider._();
+
+final class QuestsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Quest>>,
+          List<Quest>,
+          FutureOr<List<Quest>>
+        >
+    with $FutureModifier<List<Quest>>, $FutureProvider<List<Quest>> {
+  QuestsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'questsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$questsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<Quest>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<Quest>> create(Ref ref) {
+    return quests(ref);
+  }
+}
+
+String _$questsHash() => r'e0234938a0f6e98a4c0d8d9864980cedeb3d7eea';
+
 @ProviderFor(signs)
 final signsProvider = SignsProvider._();
 
