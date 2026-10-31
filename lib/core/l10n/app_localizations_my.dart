@@ -1904,4 +1904,121 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get journeyNotFound => 'ဒီခရီးစဉ်ကို ရှာမတွေ့ပါဘူး။';
+
+  @override
+  String get lettersTitle => 'အနာဂတ်က ငါ့အတွက် စာလေးတွေ';
+
+  @override
+  String get lettersMeSubtitle =>
+      'အခုကနေ 30, 90 ဒါမှမဟုတ် 365 ရက်အကြာက ကိုယ့်ဆီ စာရေးပါ';
+
+  @override
+  String get lettersIntro =>
+      'အနာဂတ်က ကိုယ့်အတွက် ကြင်နာတဲ့ စာလေးတစ်စောင် ရေးပါ။ ကိုယ်ရွေးထားတဲ့နေ့ရောက်တဲ့အထိ ပိတ်သိမ်းထားမှာဖြစ်ပြီး ကိုယ်တစ်ယောက်တည်းပဲ ဖတ်နိုင်ပါတယ်။';
+
+  @override
+  String get lettersEmptyTitle => 'စာလေးတွေ မရှိသေးပါဘူး';
+
+  @override
+  String get lettersEmptyBody =>
+      'အနာဂတ်က ကိုယ့်ဆီ ပို့မယ့် ပထမဆုံးစာလေးက ရေးဖို့ စောင့်နေပါတယ်။';
+
+  @override
+  String get lettersWrite => 'စာတစ်စောင် ရေးမယ်';
+
+  @override
+  String letterSealedUntil(String date) {
+    return '$date အထိ ပိတ်ထားပါတယ်';
+  }
+
+  @override
+  String get letterReady => 'ဖွင့်ဖို့ အသင့်ဖြစ်ပါပြီ';
+
+  @override
+  String letterWrittenOn(String date) {
+    return '$date မှာ ရေးထားပါတယ်';
+  }
+
+  @override
+  String get letterWriteTitle => 'အနာဂတ်က ငါ့ဆီ စာတစ်စောင်';
+
+  @override
+  String get letterHint => 'အနာဂတ်က ငါ့ဆီသို့...';
+
+  @override
+  String get letterDelayLabel => 'ဘယ်အချိန်မှာ ဖွင့်မလဲ';
+
+  @override
+  String letterDelayDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ရက်',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get letterPrivacyNote =>
+      'သီးသန့်ပါ: ကိုယ်တစ်ယောက်တည်းပဲ ဖတ်နိုင်ပါတယ်။ app က ဒီစာကို ဘယ်တော့မှ အသုံးမပြုသလို တခြားသူတွေဆီလည်း မျှဝေမှာ မဟုတ်ပါဘူး။';
+
+  @override
+  String get letterSeal => 'စာကို ပိတ်သိမ်းမယ်';
+
+  @override
+  String get letterSealConfirmTitle => 'ဒီစာကို ပိတ်သိမ်းမှာလား။';
+
+  @override
+  String letterSealConfirmBody(String date) {
+    return '$date အထိ ဒီစာကို ဖတ်လို့ရမှာမဟုတ်သလို ပြင်လို့လည်း ရမှာမဟုတ်ပါဘူး။';
+  }
+
+  @override
+  String get letterSealConfirmYes => 'ပိတ်သိမ်းမယ်';
+
+  @override
+  String get letterSealConfirmNo => 'ဆက်ရေးမယ်';
+
+  @override
+  String letterSealedNote(String date) {
+    return 'ဒီစာကို ပိတ်သိမ်းထားပါတယ်။ $date မှာ ဖွင့်လို့ရပါမယ်။';
+  }
+
+  @override
+  String letterNoReminder(String date) {
+    return 'notifications ပိတ်ထားတာကြောင့် စာဖတ်ဖို့ $date မှာ စာတွေကို ဖွင့်ပါ။';
+  }
+
+  @override
+  String get letterDelete => 'ဒီစာကို ဖျက်မယ်';
+
+  @override
+  String get letterDeleteTitle => 'ဒီစာကို ဖျက်မှာလား။';
+
+  @override
+  String get letterDeleteBody =>
+      'ဒီစာကို အပြီးဖယ်ရှားမှာဖြစ်ပြီး ပြန်ဖတ်လို့ရတော့မှာ မဟုတ်ပါဘူး။';
+
+  @override
+  String get letterDeleteConfirm => 'ဖျက်မယ်';
+
+  @override
+  String get letterDeleteKeep => 'ဆက်သိမ်းထားမယ်';
+
+  @override
+  String get letterNotificationTitle => 'ကိုယ်ရေးထားတဲ့စာလေး';
+
+  @override
+  String get letterNotificationBody =>
+      'ကိုယ်ရေးထားတဲ့စာကို ဖွင့်ဖတ်လို့ရပါပြီ။';
+
+  @override
+  String get letterChannelName => 'အနာဂတ်က ငါ့ဆီ စာလေးတွေ';
+
+  @override
+  String get letterChannelDescription =>
+      'ပိတ်သိမ်းထားတဲ့စာကို ဖွင့်ဖတ်လို့ရပြီဆိုတာ အသိပေးပါတယ်။';
+
+  @override
+  String get letterNotFound => 'ဒီစာကို ရှာမတွေ့ပါဘူး။';
 }

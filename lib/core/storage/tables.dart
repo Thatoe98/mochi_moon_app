@@ -159,6 +159,20 @@ class JourneyProgressEntries extends Table {
   Set<Column<Object>> get primaryKey => {journeyId};
 }
 
+/// Letters to her future self (PRD §6.22). Private, like gratitude. [synced]
+/// is false until the row reached Firestore.
+class FutureLetterEntries extends Table {
+  TextColumn get id => text()();
+  TextColumn get body => text()();
+  DateTimeColumn get writtenAt => dateTime()();
+  DateTimeColumn get unlockAt => dateTime()();
+  IntColumn get unlockDays => integer()();
+  BoolColumn get synced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
 /// Where today's ritual stands, so it resumes after the app is closed.
 /// [quoteIds] is a JSON list of the three card ids.
 class RitualProgress extends Table {

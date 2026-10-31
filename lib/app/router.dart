@@ -15,6 +15,9 @@ import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 import 'package:mochi_moon/features/journeys/presentation/journey_day_screen.dart';
 import 'package:mochi_moon/features/journeys/presentation/journey_screen.dart';
 import 'package:mochi_moon/features/journeys/presentation/journeys_screen.dart';
+import 'package:mochi_moon/features/letters/presentation/letter_screen.dart';
+import 'package:mochi_moon/features/letters/presentation/letters_screen.dart';
+import 'package:mochi_moon/features/letters/presentation/write_letter_screen.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_screen.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
@@ -46,6 +49,7 @@ abstract final class AppRoutes {
   static const mood = '/me/mood';
   static const gratitude = '/me/gratitude';
   static const journeys = '/me/journeys';
+  static const letters = '/me/letters';
   static const ownCards = '/me/cards';
   static const breathe = '/me/breathe';
   static const hardDay = '/me/hard-day';
@@ -157,6 +161,21 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'journal',
                     builder: (context, state) => const JournalScreen(),
+                  ),
+                  GoRoute(
+                    path: 'letters',
+                    builder: (context, state) => const LettersScreen(),
+                    routes: [
+                      GoRoute(
+                        path: 'write',
+                        builder: (context, state) => const WriteLetterScreen(),
+                      ),
+                      GoRoute(
+                        path: ':id',
+                        builder: (context, state) =>
+                            LetterScreen(letterId: state.pathParameters['id']!),
+                      ),
+                    ],
                   ),
                   GoRoute(
                     path: 'journeys',

@@ -2958,6 +2958,416 @@ class GratitudeEntriesCompanion extends UpdateCompanion<GratitudeEntry> {
   }
 }
 
+class $FutureLetterEntriesTable extends FutureLetterEntries
+    with TableInfo<$FutureLetterEntriesTable, FutureLetterEntry> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $FutureLetterEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _writtenAtMeta = const VerificationMeta(
+    'writtenAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> writtenAt = GeneratedColumn<DateTime>(
+    'written_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _unlockAtMeta = const VerificationMeta(
+    'unlockAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> unlockAt = GeneratedColumn<DateTime>(
+    'unlock_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _unlockDaysMeta = const VerificationMeta(
+    'unlockDays',
+  );
+  @override
+  late final GeneratedColumn<int> unlockDays = GeneratedColumn<int>(
+    'unlock_days',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _syncedMeta = const VerificationMeta('synced');
+  @override
+  late final GeneratedColumn<bool> synced = GeneratedColumn<bool>(
+    'synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    body,
+    writtenAt,
+    unlockAt,
+    unlockDays,
+    synced,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'future_letter_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<FutureLetterEntry> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('written_at')) {
+      context.handle(
+        _writtenAtMeta,
+        writtenAt.isAcceptableOrUnknown(data['written_at']!, _writtenAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_writtenAtMeta);
+    }
+    if (data.containsKey('unlock_at')) {
+      context.handle(
+        _unlockAtMeta,
+        unlockAt.isAcceptableOrUnknown(data['unlock_at']!, _unlockAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_unlockAtMeta);
+    }
+    if (data.containsKey('unlock_days')) {
+      context.handle(
+        _unlockDaysMeta,
+        unlockDays.isAcceptableOrUnknown(data['unlock_days']!, _unlockDaysMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_unlockDaysMeta);
+    }
+    if (data.containsKey('synced')) {
+      context.handle(
+        _syncedMeta,
+        synced.isAcceptableOrUnknown(data['synced']!, _syncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  FutureLetterEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return FutureLetterEntry(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      writtenAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}written_at'],
+      )!,
+      unlockAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}unlock_at'],
+      )!,
+      unlockDays: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}unlock_days'],
+      )!,
+      synced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}synced'],
+      )!,
+    );
+  }
+
+  @override
+  $FutureLetterEntriesTable createAlias(String alias) {
+    return $FutureLetterEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class FutureLetterEntry extends DataClass
+    implements Insertable<FutureLetterEntry> {
+  final String id;
+  final String body;
+  final DateTime writtenAt;
+  final DateTime unlockAt;
+  final int unlockDays;
+  final bool synced;
+  const FutureLetterEntry({
+    required this.id,
+    required this.body,
+    required this.writtenAt,
+    required this.unlockAt,
+    required this.unlockDays,
+    required this.synced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['body'] = Variable<String>(body);
+    map['written_at'] = Variable<DateTime>(writtenAt);
+    map['unlock_at'] = Variable<DateTime>(unlockAt);
+    map['unlock_days'] = Variable<int>(unlockDays);
+    map['synced'] = Variable<bool>(synced);
+    return map;
+  }
+
+  FutureLetterEntriesCompanion toCompanion(bool nullToAbsent) {
+    return FutureLetterEntriesCompanion(
+      id: Value(id),
+      body: Value(body),
+      writtenAt: Value(writtenAt),
+      unlockAt: Value(unlockAt),
+      unlockDays: Value(unlockDays),
+      synced: Value(synced),
+    );
+  }
+
+  factory FutureLetterEntry.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return FutureLetterEntry(
+      id: serializer.fromJson<String>(json['id']),
+      body: serializer.fromJson<String>(json['body']),
+      writtenAt: serializer.fromJson<DateTime>(json['writtenAt']),
+      unlockAt: serializer.fromJson<DateTime>(json['unlockAt']),
+      unlockDays: serializer.fromJson<int>(json['unlockDays']),
+      synced: serializer.fromJson<bool>(json['synced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'body': serializer.toJson<String>(body),
+      'writtenAt': serializer.toJson<DateTime>(writtenAt),
+      'unlockAt': serializer.toJson<DateTime>(unlockAt),
+      'unlockDays': serializer.toJson<int>(unlockDays),
+      'synced': serializer.toJson<bool>(synced),
+    };
+  }
+
+  FutureLetterEntry copyWith({
+    String? id,
+    String? body,
+    DateTime? writtenAt,
+    DateTime? unlockAt,
+    int? unlockDays,
+    bool? synced,
+  }) => FutureLetterEntry(
+    id: id ?? this.id,
+    body: body ?? this.body,
+    writtenAt: writtenAt ?? this.writtenAt,
+    unlockAt: unlockAt ?? this.unlockAt,
+    unlockDays: unlockDays ?? this.unlockDays,
+    synced: synced ?? this.synced,
+  );
+  FutureLetterEntry copyWithCompanion(FutureLetterEntriesCompanion data) {
+    return FutureLetterEntry(
+      id: data.id.present ? data.id.value : this.id,
+      body: data.body.present ? data.body.value : this.body,
+      writtenAt: data.writtenAt.present ? data.writtenAt.value : this.writtenAt,
+      unlockAt: data.unlockAt.present ? data.unlockAt.value : this.unlockAt,
+      unlockDays: data.unlockDays.present
+          ? data.unlockDays.value
+          : this.unlockDays,
+      synced: data.synced.present ? data.synced.value : this.synced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FutureLetterEntry(')
+          ..write('id: $id, ')
+          ..write('body: $body, ')
+          ..write('writtenAt: $writtenAt, ')
+          ..write('unlockAt: $unlockAt, ')
+          ..write('unlockDays: $unlockDays, ')
+          ..write('synced: $synced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, body, writtenAt, unlockAt, unlockDays, synced);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FutureLetterEntry &&
+          other.id == this.id &&
+          other.body == this.body &&
+          other.writtenAt == this.writtenAt &&
+          other.unlockAt == this.unlockAt &&
+          other.unlockDays == this.unlockDays &&
+          other.synced == this.synced);
+}
+
+class FutureLetterEntriesCompanion extends UpdateCompanion<FutureLetterEntry> {
+  final Value<String> id;
+  final Value<String> body;
+  final Value<DateTime> writtenAt;
+  final Value<DateTime> unlockAt;
+  final Value<int> unlockDays;
+  final Value<bool> synced;
+  final Value<int> rowid;
+  const FutureLetterEntriesCompanion({
+    this.id = const Value.absent(),
+    this.body = const Value.absent(),
+    this.writtenAt = const Value.absent(),
+    this.unlockAt = const Value.absent(),
+    this.unlockDays = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  FutureLetterEntriesCompanion.insert({
+    required String id,
+    required String body,
+    required DateTime writtenAt,
+    required DateTime unlockAt,
+    required int unlockDays,
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       body = Value(body),
+       writtenAt = Value(writtenAt),
+       unlockAt = Value(unlockAt),
+       unlockDays = Value(unlockDays);
+  static Insertable<FutureLetterEntry> custom({
+    Expression<String>? id,
+    Expression<String>? body,
+    Expression<DateTime>? writtenAt,
+    Expression<DateTime>? unlockAt,
+    Expression<int>? unlockDays,
+    Expression<bool>? synced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (body != null) 'body': body,
+      if (writtenAt != null) 'written_at': writtenAt,
+      if (unlockAt != null) 'unlock_at': unlockAt,
+      if (unlockDays != null) 'unlock_days': unlockDays,
+      if (synced != null) 'synced': synced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  FutureLetterEntriesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? body,
+    Value<DateTime>? writtenAt,
+    Value<DateTime>? unlockAt,
+    Value<int>? unlockDays,
+    Value<bool>? synced,
+    Value<int>? rowid,
+  }) {
+    return FutureLetterEntriesCompanion(
+      id: id ?? this.id,
+      body: body ?? this.body,
+      writtenAt: writtenAt ?? this.writtenAt,
+      unlockAt: unlockAt ?? this.unlockAt,
+      unlockDays: unlockDays ?? this.unlockDays,
+      synced: synced ?? this.synced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (writtenAt.present) {
+      map['written_at'] = Variable<DateTime>(writtenAt.value);
+    }
+    if (unlockAt.present) {
+      map['unlock_at'] = Variable<DateTime>(unlockAt.value);
+    }
+    if (unlockDays.present) {
+      map['unlock_days'] = Variable<int>(unlockDays.value);
+    }
+    if (synced.present) {
+      map['synced'] = Variable<bool>(synced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('FutureLetterEntriesCompanion(')
+          ..write('id: $id, ')
+          ..write('body: $body, ')
+          ..write('writtenAt: $writtenAt, ')
+          ..write('unlockAt: $unlockAt, ')
+          ..write('unlockDays: $unlockDays, ')
+          ..write('synced: $synced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $CustomCardsTable extends CustomCards
     with TableInfo<$CustomCardsTable, CustomCard> {
   @override
@@ -4716,6 +5126,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $GratitudeEntriesTable gratitudeEntries = $GratitudeEntriesTable(
     this,
   );
+  late final $FutureLetterEntriesTable futureLetterEntries =
+      $FutureLetterEntriesTable(this);
   late final $CustomCardsTable customCards = $CustomCardsTable(this);
   late final $RitualDaysTable ritualDays = $RitualDaysTable(this);
   late final $RitualProgressTable ritualProgress = $RitualProgressTable(this);
@@ -4737,6 +5149,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     partnerCache,
     moodEntries,
     gratitudeEntries,
+    futureLetterEntries,
     customCards,
     ritualDays,
     ritualProgress,
@@ -6605,6 +7018,254 @@ typedef $$GratitudeEntriesTableProcessedTableManager =
       GratitudeEntry,
       PrefetchHooks Function()
     >;
+typedef $$FutureLetterEntriesTableCreateCompanionBuilder =
+    FutureLetterEntriesCompanion Function({
+      required String id,
+      required String body,
+      required DateTime writtenAt,
+      required DateTime unlockAt,
+      required int unlockDays,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+typedef $$FutureLetterEntriesTableUpdateCompanionBuilder =
+    FutureLetterEntriesCompanion Function({
+      Value<String> id,
+      Value<String> body,
+      Value<DateTime> writtenAt,
+      Value<DateTime> unlockAt,
+      Value<int> unlockDays,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+
+class $$FutureLetterEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $FutureLetterEntriesTable> {
+  $$FutureLetterEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get writtenAt => $composableBuilder(
+    column: $table.writtenAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get unlockAt => $composableBuilder(
+    column: $table.unlockAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get unlockDays => $composableBuilder(
+    column: $table.unlockDays,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$FutureLetterEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $FutureLetterEntriesTable> {
+  $$FutureLetterEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get writtenAt => $composableBuilder(
+    column: $table.writtenAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get unlockAt => $composableBuilder(
+    column: $table.unlockAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get unlockDays => $composableBuilder(
+    column: $table.unlockDays,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$FutureLetterEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $FutureLetterEntriesTable> {
+  $$FutureLetterEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get writtenAt =>
+      $composableBuilder(column: $table.writtenAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get unlockAt =>
+      $composableBuilder(column: $table.unlockAt, builder: (column) => column);
+
+  GeneratedColumn<int> get unlockDays => $composableBuilder(
+    column: $table.unlockDays,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get synced =>
+      $composableBuilder(column: $table.synced, builder: (column) => column);
+}
+
+class $$FutureLetterEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $FutureLetterEntriesTable,
+          FutureLetterEntry,
+          $$FutureLetterEntriesTableFilterComposer,
+          $$FutureLetterEntriesTableOrderingComposer,
+          $$FutureLetterEntriesTableAnnotationComposer,
+          $$FutureLetterEntriesTableCreateCompanionBuilder,
+          $$FutureLetterEntriesTableUpdateCompanionBuilder,
+          (
+            FutureLetterEntry,
+            BaseReferences<
+              _$AppDatabase,
+              $FutureLetterEntriesTable,
+              FutureLetterEntry
+            >,
+          ),
+          FutureLetterEntry,
+          PrefetchHooks Function()
+        > {
+  $$FutureLetterEntriesTableTableManager(
+    _$AppDatabase db,
+    $FutureLetterEntriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$FutureLetterEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$FutureLetterEntriesTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$FutureLetterEntriesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<DateTime> writtenAt = const Value.absent(),
+                Value<DateTime> unlockAt = const Value.absent(),
+                Value<int> unlockDays = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => FutureLetterEntriesCompanion(
+                id: id,
+                body: body,
+                writtenAt: writtenAt,
+                unlockAt: unlockAt,
+                unlockDays: unlockDays,
+                synced: synced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String body,
+                required DateTime writtenAt,
+                required DateTime unlockAt,
+                required int unlockDays,
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => FutureLetterEntriesCompanion.insert(
+                id: id,
+                body: body,
+                writtenAt: writtenAt,
+                unlockAt: unlockAt,
+                unlockDays: unlockDays,
+                synced: synced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$FutureLetterEntriesTable, FutureLetterEntry>(
+                    table,
+                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $FutureLetterEntriesTable,
+                    FutureLetterEntry
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$FutureLetterEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $FutureLetterEntriesTable,
+      FutureLetterEntry,
+      $$FutureLetterEntriesTableFilterComposer,
+      $$FutureLetterEntriesTableOrderingComposer,
+      $$FutureLetterEntriesTableAnnotationComposer,
+      $$FutureLetterEntriesTableCreateCompanionBuilder,
+      $$FutureLetterEntriesTableUpdateCompanionBuilder,
+      (
+        FutureLetterEntry,
+        BaseReferences<
+          _$AppDatabase,
+          $FutureLetterEntriesTable,
+          FutureLetterEntry
+        >,
+      ),
+      FutureLetterEntry,
+      PrefetchHooks Function()
+    >;
 typedef $$CustomCardsTableCreateCompanionBuilder =
     CustomCardsCompanion Function({
       required String id,
@@ -7673,6 +8334,8 @@ class $AppDatabaseManager {
       $$MoodEntriesTableTableManager(_db, _db.moodEntries);
   $$GratitudeEntriesTableTableManager get gratitudeEntries =>
       $$GratitudeEntriesTableTableManager(_db, _db.gratitudeEntries);
+  $$FutureLetterEntriesTableTableManager get futureLetterEntries =>
+      $$FutureLetterEntriesTableTableManager(_db, _db.futureLetterEntries);
   $$CustomCardsTableTableManager get customCards =>
       $$CustomCardsTableTableManager(_db, _db.customCards);
   $$RitualDaysTableTableManager get ritualDays =>

@@ -17,6 +17,7 @@ part 'app_database.g.dart';
     PartnerCache,
     MoodEntries,
     GratitudeEntries,
+    FutureLetterEntries,
     CustomCards,
     RitualDays,
     RitualProgress,
@@ -29,7 +30,7 @@ class AppDatabase extends _$AppDatabase {
     : super(executor ?? driftDatabase(name: 'mochi_moon'));
 
   @override
-  int get schemaVersion => 6;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -46,6 +47,7 @@ class AppDatabase extends _$AppDatabase {
       }
       if (from < 5) await m.createTable(questStates);
       if (from < 6) await m.createTable(journeyProgressEntries);
+      if (from < 7) await m.createTable(futureLetterEntries);
     },
   );
 }

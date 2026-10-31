@@ -336,10 +336,10 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.22 Letter to future me (Free)
 
-- [ ] She writes a note (max 1,000 characters), chooses to unlock it in 30, 90 or 365 days, and seals it. A sealed letter cannot be read or edited before its date; it can be deleted.
-- [ ] A local notification fires on the unlock date (permission handled like the reminder, §6.6). Opening the letter shows it with its written date.
-- [ ] Letters are stored locally and in `users/{uid}/letters/{id}`. **Private (§10).** The notification text never contains the letter.
-- [ ] Phone clock changes cannot unlock a letter early on a signed-in device: the unlock date is checked against the stored `unlockAt`, and the server-time is not required (document this limitation).
+- [x] She writes a note (max 1,000 characters), chooses to unlock it in 30, 90 or 365 days, and seals it. A sealed letter cannot be read or edited before its date; it can be deleted.
+- [x] A local notification fires on the unlock date (permission handled like the reminder, §6.6). Opening the letter shows it with its written date.
+- [x] Letters are stored locally and in `users/{uid}/letters/{id}`. **Private (§10).** The notification text never contains the letter.
+- [x] Phone clock changes cannot unlock a letter early on a signed-in device: the unlock date is checked against the stored `unlockAt`, and the server-time is not required (document this limitation). **Limitation, accepted:** the check uses the phone clock, so moving the clock forward opens a letter early. There is no server time. The letter is her own, so we accept this.
 
 ### 6.23 Mochi grows with you (some items Premium)
 
@@ -915,7 +915,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 #### M5b — Depth and retention
 - [x] Tiny kindness quests (§6.20) — *Q1 + Q2 done 2026-11-01. Only 18 starter quests; the 120-quest launch set, the weekly-letter aggregate and mascot milestones come later.*
 - [ ] Self-love journeys, 1 free (§6.21) — *Q3 done 2026-11-01: schema, loader, progress model, drift table (schema v6), Firestore sync, one starter journey (Confidence, 7 days, en + my). *Q4 done 2026-11-01: Me → Journeys list, journey page, day screen (3 gated cards, quest, private reflection), Premium lock via `hasPremiumProvider`, completion share image. Completing a day counts toward the streak; the mascot unlock on completion is Q6; the other three scripts are L2; the paywall itself is unbuilt.*
-- [ ] Letter to future me with unlock notification (§6.22)
+- [x] Letter to future me with unlock notification (§6.22) — *Q5 done 2026-11-02: Me → Letters (write, seal with confirm, list, read once open, delete), local notification on the unlock day with generic text, drift table (schema v7), Firestore sync. Clock-change limitation documented in §6.22.*
 - [ ] Mochi grows with you: items and room (§6.23)
 - [ ] Mood insights, Premium (§6.18)
 - [ ] Weekly letter from Mochi, Premium: server endpoint and app (§6.24, §8.2)

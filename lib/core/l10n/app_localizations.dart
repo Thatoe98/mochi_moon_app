@@ -3223,6 +3223,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We couldn\'t find that journey.'**
   String get journeyNotFound;
+
+  /// No description provided for @lettersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Letters to future me'**
+  String get lettersTitle;
+
+  /// No description provided for @lettersMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Write to the you of 30, 90 or 365 days from now'**
+  String get lettersMeSubtitle;
+
+  /// No description provided for @lettersIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a kind note to your future self. It stays sealed until the day you choose, and only you can read it.'**
+  String get lettersIntro;
+
+  /// No description provided for @lettersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No letters yet'**
+  String get lettersEmptyTitle;
+
+  /// No description provided for @lettersEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your first letter to future you is waiting to be written.'**
+  String get lettersEmptyBody;
+
+  /// No description provided for @lettersWrite.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a letter'**
+  String get lettersWrite;
+
+  /// No description provided for @letterSealedUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Sealed until {date}'**
+  String letterSealedUntil(String date);
+
+  /// No description provided for @letterReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to open'**
+  String get letterReady;
+
+  /// No description provided for @letterWrittenOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Written on {date}'**
+  String letterWrittenOn(String date);
+
+  /// No description provided for @letterWriteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A letter to future me'**
+  String get letterWriteTitle;
+
+  /// No description provided for @letterHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Dear future me...'**
+  String get letterHint;
+
+  /// No description provided for @letterDelayLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Open it in'**
+  String get letterDelayLabel;
+
+  /// No description provided for @letterDelayDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String letterDelayDays(int count);
+
+  /// No description provided for @letterPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Private: only you can read this. It is never used by the app or shared.'**
+  String get letterPrivacyNote;
+
+  /// No description provided for @letterSeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Seal the letter'**
+  String get letterSeal;
+
+  /// No description provided for @letterSealConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Seal this letter?'**
+  String get letterSealConfirmTitle;
+
+  /// No description provided for @letterSealConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You will not be able to read or change it until {date}.'**
+  String letterSealConfirmBody(String date);
+
+  /// No description provided for @letterSealConfirmYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Seal it'**
+  String get letterSealConfirmYes;
+
+  /// No description provided for @letterSealConfirmNo.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep writing'**
+  String get letterSealConfirmNo;
+
+  /// No description provided for @letterSealedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This letter is sealed. It will open on {date}.'**
+  String letterSealedNote(String date);
+
+  /// No description provided for @letterNoReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are off, so open Letters on {date} to read it.'**
+  String letterNoReminder(String date);
+
+  /// No description provided for @letterDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this letter'**
+  String get letterDelete;
+
+  /// No description provided for @letterDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this letter?'**
+  String get letterDeleteTitle;
+
+  /// No description provided for @letterDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It will be removed for good, and you will not be able to read it.'**
+  String get letterDeleteBody;
+
+  /// No description provided for @letterDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get letterDeleteConfirm;
+
+  /// No description provided for @letterDeleteKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it'**
+  String get letterDeleteKeep;
+
+  /// No description provided for @letterNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A letter from you'**
+  String get letterNotificationTitle;
+
+  /// No description provided for @letterNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A letter you wrote is ready to open.'**
+  String get letterNotificationBody;
+
+  /// No description provided for @letterChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Letters to future me'**
+  String get letterChannelName;
+
+  /// No description provided for @letterChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tells you when a letter you sealed is ready to open.'**
+  String get letterChannelDescription;
+
+  /// No description provided for @letterNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not find that letter.'**
+  String get letterNotFound;
 }
 
 class _AppLocalizationsDelegate

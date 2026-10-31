@@ -1892,4 +1892,115 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get journeyNotFound => 'We couldn\'t find that journey.';
+
+  @override
+  String get lettersTitle => 'Letters to future me';
+
+  @override
+  String get lettersMeSubtitle =>
+      'Write to the you of 30, 90 or 365 days from now';
+
+  @override
+  String get lettersIntro =>
+      'Write a kind note to your future self. It stays sealed until the day you choose, and only you can read it.';
+
+  @override
+  String get lettersEmptyTitle => 'No letters yet';
+
+  @override
+  String get lettersEmptyBody =>
+      'Your first letter to future you is waiting to be written.';
+
+  @override
+  String get lettersWrite => 'Write a letter';
+
+  @override
+  String letterSealedUntil(String date) {
+    return 'Sealed until $date';
+  }
+
+  @override
+  String get letterReady => 'Ready to open';
+
+  @override
+  String letterWrittenOn(String date) {
+    return 'Written on $date';
+  }
+
+  @override
+  String get letterWriteTitle => 'A letter to future me';
+
+  @override
+  String get letterHint => 'Dear future me...';
+
+  @override
+  String get letterDelayLabel => 'Open it in';
+
+  @override
+  String letterDelayDays(int count) {
+    return '$count days';
+  }
+
+  @override
+  String get letterPrivacyNote =>
+      'Private: only you can read this. It is never used by the app or shared.';
+
+  @override
+  String get letterSeal => 'Seal the letter';
+
+  @override
+  String get letterSealConfirmTitle => 'Seal this letter?';
+
+  @override
+  String letterSealConfirmBody(String date) {
+    return 'You will not be able to read or change it until $date.';
+  }
+
+  @override
+  String get letterSealConfirmYes => 'Seal it';
+
+  @override
+  String get letterSealConfirmNo => 'Keep writing';
+
+  @override
+  String letterSealedNote(String date) {
+    return 'This letter is sealed. It will open on $date.';
+  }
+
+  @override
+  String letterNoReminder(String date) {
+    return 'Notifications are off, so open Letters on $date to read it.';
+  }
+
+  @override
+  String get letterDelete => 'Delete this letter';
+
+  @override
+  String get letterDeleteTitle => 'Delete this letter?';
+
+  @override
+  String get letterDeleteBody =>
+      'It will be removed for good, and you will not be able to read it.';
+
+  @override
+  String get letterDeleteConfirm => 'Delete';
+
+  @override
+  String get letterDeleteKeep => 'Keep it';
+
+  @override
+  String get letterNotificationTitle => 'A letter from you';
+
+  @override
+  String get letterNotificationBody => 'A letter you wrote is ready to open.';
+
+  @override
+  String get letterChannelName => 'Letters to future me';
+
+  @override
+  String get letterChannelDescription =>
+      'Tells you when a letter you sealed is ready to open.';
+
+  @override
+  String get letterNotFound => 'We could not find that letter.';
 }
