@@ -1766,4 +1766,34 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get breatheHapticOff => 'နူးညံ့တဲ့ တုန်ခါမှု ပိတ်ထားပါတယ်';
+
+  @override
+  String get hardDayButton => 'ဒီနေ့ ခက်ခဲနေလား။';
+
+  @override
+  String get hardDayTitle => 'ခက်ခဲတဲ့နေ့လေး';
+
+  @override
+  String get hardDayIntro =>
+      'အခက်အခဲရှိတဲ့နေ့တွေ ကြုံရတာလည်း အဆင်ပြေပါတယ်။ အခုချက်ချင်း ဘာကိုမှ ဖြေရှင်းဖို့ မလိုပါဘူး။ တစ်ခုပြီးတစ်ခု ဖြည်းဖြည်းချင်း စမ်းကြည့်လို့ရတဲ့ နူးညံ့တဲ့နည်းလမ်းလေးတွေ ရှိပါတယ်။';
+
+  @override
+  String get hardDayBreatheSub => 'အသက်ရှူရင်း အေးအေးဆေးဆေး 1 မိနစ်လေး';
+
+  @override
+  String get hardDayCardsTitle => 'ကိုယ့်အတွက် ကြင်နာတဲ့စကားလေး 3 ခု';
+
+  @override
+  String get hardDayJarSub => 'သိမ်းထားခဲ့တဲ့ ကောင်းတဲ့အရာလေးတွေကို ဖတ်ကြည့်ပါ';
+
+  @override
+  String get hardDayHelpTitle => 'အကူအညီ';
+
+  @override
+  String get hardDayHelpNote =>
+      'Mochi Moon က ကျွမ်းကျင်သူတွေဆီက အကူအညီကို အစားထိုးပေးနိုင်တာ မဟုတ်ပါဘူး။ အခု အန္တရာယ်ရှိနေတယ်ဆိုရင် ကိုယ့်ဒေသက အရေးပေါ်ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ၊ ဒါမှမဟုတ် ယုံကြည်ရတဲ့သူတစ်ယောက်ကို အခုပဲ ပြောပြပါနော်။';
+
+  @override
+  String get hardDayHelpFind =>
+      'ကိုယ့်နိုင်ငံမှာ အကူအညီပေးတဲ့ ဖုန်းလိုင်းကို ရှာဖို့ နိုင်ငံအလိုက် အရေးပေါ်အကူအညီပေးတဲ့ ဖုန်းလိုင်း ဒါမှမဟုတ် စိတ်ကျန်းမာရေးအကူအညီပေးတဲ့ ဖုန်းလိုင်းကို ရှာကြည့်ပါ။ ယုံကြည်ရတဲ့သူတစ်ယောက်ကိုလည်း အတူရှာပေးဖို့ အကူအညီတောင်းနိုင်ပါတယ်။';
 }

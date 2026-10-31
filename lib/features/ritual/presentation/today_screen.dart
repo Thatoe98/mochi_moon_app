@@ -5,6 +5,7 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
 import 'package:mochi_moon/features/ritual/presentation/cosmic_reward_card.dart';
@@ -24,6 +25,7 @@ class TodayScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.todayTitle),
         actions: [
+          const HardDayButton(source: 'today'),
           IconButton(
             tooltip: l10n.breatheTitle,
             icon: const Icon(Icons.self_improvement_rounded),

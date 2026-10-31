@@ -12,6 +12,7 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
 import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
+import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_chips.dart';
@@ -94,6 +95,7 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
       appBar: AppBar(
         title: Text(l10n.deckTitle),
         actions: [
+          const HardDayButton(source: 'deck'),
           if (deck.value case final state? when state.streak > 0)
             _StreakBadge(streak: state.streak),
         ],

@@ -1755,4 +1755,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get breatheHapticOff => 'Soft vibration is off';
+
+  @override
+  String get hardDayButton => 'Hard day?';
+
+  @override
+  String get hardDayTitle => 'A hard day';
+
+  @override
+  String get hardDayIntro =>
+      'It is okay to have a hard day. You do not have to fix anything right now. Here are a few gentle things you can try, one at a time.';
+
+  @override
+  String get hardDayBreatheSub => 'One slow minute, just breathing';
+
+  @override
+  String get hardDayCardsTitle => 'Three kind words for you';
+
+  @override
+  String get hardDayJarSub => 'Read the good things you saved';
+
+  @override
+  String get hardDayHelpTitle => 'Help';
+
+  @override
+  String get hardDayHelpNote =>
+      'Mochi Moon is not a substitute for professional help. If you are in danger, please contact your local emergency services or someone you trust right now.';
+
+  @override
+  String get hardDayHelpFind =>
+      'To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look.';
 }

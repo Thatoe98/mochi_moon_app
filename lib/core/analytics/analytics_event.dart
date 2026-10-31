@@ -18,7 +18,8 @@ enum AnalyticsEvent {
   purchaseCompleted('purchase_completed', {'productId'}),
   widgetAdded('widget_added'),
   notificationOpened('notification_opened', {'type'}),
-  accountDeleted('account_deleted');
+  accountDeleted('account_deleted'),
+  hardDayOpened('hard_day_opened', {'source'});
 
   AnalyticsEvent(this.eventName, [this.allowedParams = const {}]);
 

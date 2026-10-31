@@ -549,5 +549,14 @@
   "breatheAgain": "Breathe again",
   "breatheDone": "Done",
   "breatheHapticOn": "Soft vibration is on",
-  "breatheHapticOff": "Soft vibration is off"
+  "breatheHapticOff": "Soft vibration is off",
+  "hardDayButton": "Hard day?",
+  "hardDayTitle": "A hard day",
+  "hardDayIntro": "It is okay to have a hard day. You do not have to fix anything right now. Here are a few gentle things you can try, one at a time.",
+  "hardDayBreatheSub": "One slow minute, just breathing",
+  "hardDayCardsTitle": "Three kind words for you",
+  "hardDayJarSub": "Read the good things you saved",
+  "hardDayHelpTitle": "Help",
+  "hardDayHelpNote": "Mochi Moon is not a substitute for professional help. If you are in danger, please contact your local emergency services or someone you trust right now.",
+  "hardDayHelpFind": "To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look."
 }

@@ -2995,6 +2995,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Soft vibration is off'**
   String get breatheHapticOff;
+
+  /// No description provided for @hardDayButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard day?'**
+  String get hardDayButton;
+
+  /// No description provided for @hardDayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A hard day'**
+  String get hardDayTitle;
+
+  /// No description provided for @hardDayIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'It is okay to have a hard day. You do not have to fix anything right now. Here are a few gentle things you can try, one at a time.'**
+  String get hardDayIntro;
+
+  /// No description provided for @hardDayBreatheSub.
+  ///
+  /// In en, this message translates to:
+  /// **'One slow minute, just breathing'**
+  String get hardDayBreatheSub;
+
+  /// No description provided for @hardDayCardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Three kind words for you'**
+  String get hardDayCardsTitle;
+
+  /// No description provided for @hardDayJarSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the good things you saved'**
+  String get hardDayJarSub;
+
+  /// No description provided for @hardDayHelpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get hardDayHelpTitle;
+
+  /// No description provided for @hardDayHelpNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Moon is not a substitute for professional help. If you are in danger, please contact your local emergency services or someone you trust right now.'**
+  String get hardDayHelpNote;
+
+  /// No description provided for @hardDayHelpFind.
+  ///
+  /// In en, this message translates to:
+  /// **'To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look.'**
+  String get hardDayHelpFind;
 }
 
 class _AppLocalizationsDelegate
