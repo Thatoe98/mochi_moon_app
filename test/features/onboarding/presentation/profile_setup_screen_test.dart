@@ -14,7 +14,6 @@ import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
-import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
@@ -98,24 +97,12 @@ Future<void> _tap(WidgetTester tester, String text) async {
   await tester.pumpAndSettle();
 }
 
-/// Taps the last step's button. The screen is left on a spinner afterwards
+/// Taps a final reminder choice. The screen is left on a spinner afterwards
 /// (the router would take over), so this does not wait for it to settle.
-Future<void> _finish(WidgetTester tester) async {
-  await tester.tap(find.text("Let's go"));
+Future<void> _finishWith(WidgetTester tester, String text) async {
+  await tester.tap(find.text(text));
   await tester.pump();
   await tester.pump();
-}
-
-Future<void> _pickBirthday(WidgetTester tester) async {
-  await _tap(tester, '1998');
-  await _tap(tester, '15');
-}
-
-/// Moves from the name step to the birth time step.
-Future<void> _toBirthTime(WidgetTester tester) async {
-  await _tap(tester, 'Continue');
-  await _pickBirthday(tester);
-  await _tap(tester, 'Continue');
 }
 
 /// How far along the progress bar is, in steps.
@@ -168,132 +155,40 @@ void main() {
     expect(_mainButton(tester).onPressed, isNotNull);
   });
 
-  testWidgets('Continue waits for a birth date', (tester) async {
-    await tester.pumpWidget(_Harness().build());
-    await tester.pumpAndSettle();
-    await _tap(tester, 'Continue');
-
-    expect(find.text('When is your birthday?'), findsOneWidget);
-    expect(_mainButton(tester).onPressed, isNull);
-
-    await _pickBirthday(tester);
-
-    expect(_mainButton(tester).onPressed, isNotNull);
-    expect(find.textContaining('Born '), findsOneWidget);
-  });
-
-  testWidgets('a birth time can be chosen and then dropped', (tester) async {
-    await tester.pumpWidget(_Harness().build());
-    await tester.pumpAndSettle();
-    await _toBirthTime(tester);
-
-    expect(find.text("No birth time. That's okay."), findsOneWidget);
-    expect(
-      tester
-          .widget<TextButton>(find.widgetWithText(TextButton, "I don't know"))
-          .onPressed,
-      isNull,
-    );
-
-    await _tap(tester, 'Choose a time');
-    await _tap(tester, 'OK');
-    expect(find.textContaining('Born at'), findsOneWidget);
-
-    await _tap(tester, "I don't know");
-    expect(find.text("No birth time. That's okay."), findsOneWidget);
-  });
-
-  testWidgets('the birthplace is optional without a birth time', (
+  testWidgets('no birth data is asked: name, focus areas, then reminder', (
     tester,
   ) async {
     await tester.pumpWidget(_Harness().build());
     await tester.pumpAndSettle();
-    await _toBirthTime(tester);
+    expect(ProfileStep.values.length, 3);
+
     await _tap(tester, 'Continue');
+    expect(find.text('What would you like more of?'), findsOneWidget);
+    expect(_progressSteps(tester), 2);
 
-    expect(find.text('Where were you born?'), findsOneWidget);
-    expect(find.textContaining('optional'), findsOneWidget);
-    expect(_mainButton(tester).onPressed, isNotNull);
-  });
-
-  testWidgets('the birthplace is required once a birth time is given', (
-    tester,
-  ) async {
-    await tester.pumpWidget(_Harness().build());
-    await tester.pumpAndSettle();
-    await _toBirthTime(tester);
-    await _tap(tester, 'Choose a time');
-    await _tap(tester, 'OK');
     await _tap(tester, 'Continue');
-
-    expect(find.text('Where were you born?'), findsOneWidget);
-    expect(_mainButton(tester).onPressed, isNull);
-
-    await tester.enterText(find.byType(TextField), 'bang');
-    await tester.pumpAndSettle();
-    await _tap(tester, 'Bangkok, Bangkok, Thailand');
-
-    expect(find.text('Born in Bangkok, Bangkok, Thailand'), findsOneWidget);
-    expect(_mainButton(tester).onPressed, isNotNull);
-  });
-
-  testWidgets('a chosen place gets its time zone and can be changed', (
-    tester,
-  ) async {
-    final harness = _Harness();
-    await tester.pumpWidget(harness.build());
-    await tester.pumpAndSettle();
-    await _toBirthTime(tester);
-    await _tap(tester, 'Continue');
-
-    await tester.enterText(find.byType(TextField), 'YANGON');
-    await tester.pumpAndSettle();
-    await _tap(tester, 'Yangon, Yangon, Myanmar');
-    await _tap(tester, 'Choose a different place');
-    expect(find.widgetWithText(TextField, ''), findsOneWidget);
-
-    await tester.enterText(find.byType(TextField), 'bangkok');
-    await tester.pumpAndSettle();
-    await _tap(tester, 'Bangkok, Bangkok, Thailand');
-    await _tap(tester, 'Continue');
-    await _tap(tester, 'Skip for now');
-    await _finish(tester);
-
-    expect(
-      harness.profiles.profile?.birthPlace,
-      const BirthPlace(
-        name: 'Bangkok',
-        region: 'Bangkok',
-        countryCode: 'TH',
-        lat: 13.7540,
-        lng: 100.5014,
-        tzId: 'Asia/Bangkok',
-      ),
-    );
-  });
-
-  testWidgets('says so when nothing matches', (tester) async {
-    await tester.pumpWidget(_Harness().build());
-    await tester.pumpAndSettle();
-    await _toBirthTime(tester);
-    await _tap(tester, 'Continue');
-
-    await tester.enterText(find.byType(TextField), 'zzzz');
-    await tester.pumpAndSettle();
-
-    expect(find.textContaining('No places found'), findsOneWidget);
+    expect(find.text('A daily nudge?'), findsOneWidget);
+    expect(_progressSteps(tester), 3);
+    expect(find.text('When is your birthday?'), findsNothing);
   });
 
   testWidgets('back keeps every answer', (tester) async {
     await tester.pumpWidget(_Harness().build());
     await tester.pumpAndSettle();
-    await _toBirthTime(tester);
+    await _tap(tester, 'Continue');
+    await _tap(tester, 'Calm');
+    await _tap(tester, 'Continue');
     expect(_progressSteps(tester), 3);
 
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
-    expect(find.text('When is your birthday?'), findsOneWidget);
-    expect(find.textContaining('Born '), findsOneWidget);
+    expect(find.text('What would you like more of?'), findsOneWidget);
+    expect(
+      tester
+          .widget<FilterChip>(find.widgetWithText(FilterChip, 'Calm'))
+          .selected,
+      isTrue,
+    );
 
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
@@ -306,7 +201,7 @@ void main() {
     await tester.pumpWidget(_Harness().build());
     await tester.pumpAndSettle();
     await _tap(tester, 'Continue');
-    expect(find.text('When is your birthday?'), findsOneWidget);
+    expect(find.text('What would you like more of?'), findsOneWidget);
 
     await tester.binding.handlePopRoute();
     await tester.pumpAndSettle();
@@ -317,11 +212,7 @@ void main() {
   testWidgets('at most three focus areas can be picked', (tester) async {
     await tester.pumpWidget(_Harness().build());
     await tester.pumpAndSettle();
-    await _toBirthTime(tester);
     await _tap(tester, 'Continue');
-    await _tap(tester, 'Continue');
-    await _tap(tester, 'Skip for now');
-    expect(find.text('What would you like more of?'), findsOneWidget);
 
     for (final label in ['Self-love', 'Calm', 'Healing']) {
       await _tap(tester, label);
@@ -336,28 +227,24 @@ void main() {
     expect(chip('Confidence').onSelected, isNotNull);
   });
 
-  testWidgets('finishing saves the profile and the reminder', (tester) async {
+  testWidgets('the reminder choice finishes and saves the profile', (
+    tester,
+  ) async {
     final harness = _Harness();
     await tester.pumpWidget(harness.build());
     await tester.pumpAndSettle();
-    await _toBirthTime(tester);
     await _tap(tester, 'Continue');
+    await _tap(tester, 'Calm');
     await _tap(tester, 'Continue');
 
-    expect(find.text('A daily nudge?'), findsOneWidget);
     expect(find.text('Remind me at 8:00 AM'), findsOneWidget);
-    await _tap(tester, 'Remind me');
-    await _tap(tester, 'Calm');
-    await _finish(tester);
+    await _finishWith(tester, 'Remind me');
 
     expect(
       harness.profiles.profile,
-      UserProfile(
-        displayName: 'Mochi',
-        birthDate: DateTime(1998, 1, 15),
-        focusAreas: const [FocusArea.calm],
-      ),
+      const UserProfile(displayName: 'Mochi', focusAreas: [FocusArea.calm]),
     );
+    expect(harness.profiles.profile?.birthDate, isNull);
     expect(harness.reminders.settings.enabled, isTrue);
     expect(harness.onboarding.complete, isTrue);
   });
@@ -366,11 +253,9 @@ void main() {
     final harness = _Harness();
     await tester.pumpWidget(harness.build());
     await tester.pumpAndSettle();
-    await _toBirthTime(tester);
     await _tap(tester, 'Continue');
     await _tap(tester, 'Continue');
-    await _tap(tester, 'Skip for now');
-    await _finish(tester);
+    await _finishWith(tester, 'Skip for now');
 
     expect(harness.reminders.settings.enabled, isFalse);
     expect(harness.scheduler.permissionRequests, 0);
@@ -382,23 +267,20 @@ void main() {
     harness.profiles.saveError = Exception('disk full');
     await tester.pumpWidget(harness.build());
     await tester.pumpAndSettle();
-    await _toBirthTime(tester);
     await _tap(tester, 'Continue');
     await _tap(tester, 'Continue');
-    await _tap(tester, 'Skip for now');
 
-    await _finish(tester);
+    await _finishWith(tester, 'Skip for now');
 
     expect(find.text("Couldn't save that. Please try again."), findsOneWidget);
     expect(harness.onboarding.complete, isFalse);
-    expect(_mainButton(tester).onPressed, isNotNull);
 
-    // Let the snack bar go; it covers the button.
+    // Let the snack bar go; it covers the buttons.
     ScaffoldMessenger.of(tester.element(find.byType(Scaffold)))
         .hideCurrentSnackBar();
     await tester.pumpAndSettle();
     harness.profiles.saveError = null;
-    await _finish(tester);
+    await _finishWith(tester, 'Skip for now');
     expect(harness.onboarding.complete, isTrue);
   });
 
@@ -409,15 +291,8 @@ void main() {
 
     await _tap(tester, 'Continue');
     expect(tester.takeException(), isNull);
-    await _pickBirthday(tester);
     await _tap(tester, 'Continue');
     expect(tester.takeException(), isNull);
-    await _tap(tester, 'Continue');
-    expect(tester.takeException(), isNull);
-    await _tap(tester, 'Continue');
-    expect(tester.takeException(), isNull);
-    await _tap(tester, 'Skip for now');
-    expect(tester.takeException(), isNull);
-    expect(find.text('What would you like more of?'), findsOneWidget);
+    expect(find.text('A daily nudge?'), findsOneWidget);
   });
 }

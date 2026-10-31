@@ -102,7 +102,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [x] Back navigation never loses entered data within the flow.
 
 **Changes in v1.1 (self-love first)**
-- [ ] Onboarding order is: language, 3 sample cards, Google sign-in, name, focus areas, reminder time, done. No birth data is asked. A profile is complete with a name alone (`hasAccountProfile`); birth data is a separate state (`hasBirthData`).
+- [x] Onboarding order is: language, 3 sample cards, Google sign-in, name, focus areas, reminder time, done. No birth data is asked. A profile is complete with a name alone (`hasAccountProfile`); birth data is a separate state (`hasBirthData`).
 - [ ] **Unlock your cosmic side:** the first time she opens the Cosmic tab without birth data, it shows a friendly locked state (mascot, one sentence, one button) instead of an error. The button opens the birth steps (birth date, then birth time or "I don't know", then birthplace when the time is given), then Cosmic opens. She can leave at any step and keep using every self-love feature; the locked state shows again next time.
 - [ ] Today's cosmic reward card, the chart, the compatibility result and Cosmic Today show the locked state or an "Unlock" prompt when birth data is missing. The Moon card and the retrograde calendar need no birth data and stay visible.
 - [ ] Editing birth data from Me → Profile still works; clearing it is not offered.
@@ -900,7 +900,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 
 #### M5a — Ritual home, onboarding change and the first self-love features
 - [x] Profile astro fields nullable, `hasAccountProfile` vs `hasBirthData`, migration tests (§6.1) — *done 2026-10-31: `isComplete` replaced; reconcile keeps remote birth data; the onboarding flow itself changes in P7*
-- [ ] Onboarding reordered, birth data moved to the Cosmic unlock flow (§6.1)
+- [ ] Onboarding reordered, birth data moved to the Cosmic unlock flow (§6.1) — *reorder done (name, focus areas, reminder; birth steps removed from the flow, birth widgets kept for the unlock flow); the Cosmic unlock flow is still open (P8).*
 - [x] 4-tab shell: Today (home), Deck, Cosmic, Me; routes, deep links, notification and widget targets updated (§5) — *shell done 2026-10-31 (P5): Today opens first with a stub (streak + button to the deck); the /deck route the widget link uses is unchanged and the reminder opens the app on Today (neither re-tried on a device); the ritual itself is P11+*
 - [x] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14) — *rules + 83 emulator tests done 2026-10-31 (P3, committed, not yet deployed to dev); account deletion coverage done in P4 (2026-10-31); rules still to deploy*
 - [x] Drift schema v4 with the first new tables (§8.6) — *done 2026-10-31: `mood_entries`, `gratitude_entries`, `custom_cards`, `ritual_days`, `ritual_progress`; the text columns are named `body`; the other §8.6 tables follow in their own tasks*

@@ -5,7 +5,6 @@ import 'package:mochi_moon/core/utils/english_dates.dart';
 import 'package:mochi_moon/features/deck/presentation/category_label.dart';
 import 'package:mochi_moon/features/onboarding/application/profile_setup.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
-import 'package:mochi_moon/features/onboarding/presentation/birth_place_field.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/settings/domain/reminder.dart';
 
@@ -14,15 +13,11 @@ class ProfileStepBody extends StatelessWidget {
   const ProfileStepBody({
     required this.setup,
     required this.notifier,
-    required this.today,
     super.key,
   });
 
   final ProfileSetupState setup;
   final ProfileSetup notifier;
-
-  /// The latest possible birth date.
-  final DateTime today;
 
   @override
   Widget build(BuildContext context) {
@@ -35,33 +30,6 @@ class ProfileStepBody extends StatelessWidget {
           initial: setup.name,
           onChanged: notifier.setName,
           onSubmitted: notifier.next,
-        ),
-      ),
-      ProfileStep.birthDate => _Step(
-        title: l10n.profileBirthDateTitle,
-        body: l10n.profileBirthDateBody,
-        child: _BirthDatePicker(
-          chosen: setup.birthDate,
-          today: today,
-          onChanged: notifier.setBirthDate,
-        ),
-      ),
-      ProfileStep.birthTime => _Step(
-        title: l10n.profileBirthTimeTitle,
-        body: l10n.profileBirthTimeBody,
-        child: BirthTimePicker(
-          minutes: setup.birthMinutes,
-          onChanged: notifier.setBirthMinutes,
-        ),
-      ),
-      ProfileStep.birthPlace => _Step(
-        title: l10n.profileBirthPlaceTitle,
-        body: setup.birthMinutes == null
-            ? l10n.profileBirthPlaceBodyOptional
-            : l10n.profileBirthPlaceBodyRequired,
-        child: BirthPlaceField(
-          chosen: setup.birthPlace,
-          onChosen: notifier.setBirthCity,
         ),
       ),
       ProfileStep.reminder => _Step(
@@ -149,11 +117,12 @@ class _NameFieldState extends State<_NameField> {
   );
 }
 
-class _BirthDatePicker extends StatelessWidget {
-  const _BirthDatePicker({
+class BirthDatePicker extends StatelessWidget {
+  const BirthDatePicker({
     required this.chosen,
     required this.today,
     required this.onChanged,
+    super.key,
   });
 
   final DateTime? chosen;

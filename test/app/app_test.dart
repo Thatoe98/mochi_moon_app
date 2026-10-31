@@ -395,26 +395,9 @@ void main() {
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 
-      // Birth date: Continue stays off until a day is picked.
-      expect(find.text('When is your birthday?'), findsOneWidget);
-      expect(
-        tester.widget<FilledButton>(find.byType(FilledButton)).onPressed,
-        isNull,
-      );
-      await tester.tap(find.text('1998'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('15'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Continue'));
-      await tester.pumpAndSettle();
-
-      // Birth time is optional.
-      expect(find.text('What time were you born?'), findsOneWidget);
-      await tester.tap(find.text('Continue'));
-      await tester.pumpAndSettle();
-
-      // So is the birthplace, when there is no birth time.
-      expect(find.text('Where were you born?'), findsOneWidget);
+      // No birth data is asked; focus areas come next, then the reminder.
+      expect(find.text('When is your birthday?'), findsNothing);
+      expect(find.text('What would you like more of?'), findsOneWidget);
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 
@@ -422,14 +405,11 @@ void main() {
       await tester.tap(find.text('Skip for now'));
       await tester.pumpAndSettle();
 
-      expect(find.text('What would you like more of?'), findsOneWidget);
-      await tester.tap(find.text("Let's go"));
-      await tester.pumpAndSettle();
-
+      expect(find.text('Today'), findsWidgets);
       expect(find.text('Deck'), findsOneWidget);
       expect(find.text('Welcome to Mochi Moon'), findsNothing);
       expect(profiles.profile?.displayName, 'Mochi');
-      expect(profiles.profile?.birthDate, DateTime(1998, 1, 15));
+      expect(profiles.profile?.birthDate, isNull);
     });
   });
 }

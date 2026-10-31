@@ -1,5 +1,4 @@
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
-import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
 import 'package:mochi_moon/features/places/application/places_providers.dart';
@@ -36,8 +35,6 @@ class ProfileSetup extends _$ProfileSetup {
       focusAreas: saved?.focusAreas ?? const [],
     );
   }
-
-  DateTime get _today => ref.read(clockProvider)();
 
   void setName(String name) => state = state.copyWith(name: name);
 
@@ -84,7 +81,7 @@ class ProfileSetup extends _$ProfileSetup {
   /// Moves to the next step; does nothing while the step is incomplete or on
   /// the last step (use [finish]).
   void next() {
-    if (!state.canContinue(_today) || state.isLastStep) return;
+    if (!state.canContinue || state.isLastStep) return;
     state = state.copyWith(step: ProfileStep.values[state.step.index + 1]);
   }
 
@@ -96,7 +93,7 @@ class ProfileSetup extends _$ProfileSetup {
   /// Saves the profile and the reminder choice, then ends the first-run flow.
   /// Rethrows a failed save (after clearing `saving`) so the screen can say so.
   Future<void> finish() async {
-    if (state.saving || !state.canContinue(_today)) return;
+    if (state.saving || !state.canContinue) return;
     final answers = state;
     state = state.copyWith(saving: true);
     try {

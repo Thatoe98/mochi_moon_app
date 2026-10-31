@@ -1,15 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
-import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/profile_setup.dart';
 import 'package:mochi_moon/features/onboarding/domain/profile_setup_state.dart';
 import 'package:mochi_moon/features/onboarding/presentation/profile_steps.dart';
 
-/// The profile steps after sign-in (PRD §6.1): name, birth date, birth time,
-/// birthplace, reminder, focus areas. One screen, so back moves between steps and keeps
+/// The profile steps after sign-in (PRD §6.1): name, focus areas, reminder. One screen, so back moves between steps and keeps
 /// every answer; finishing ends the first-run flow and the router takes over.
 class ProfileSetupScreen extends ConsumerWidget {
   const ProfileSetupScreen({super.key});
@@ -19,7 +19,6 @@ class ProfileSetupScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final setup = ref.watch(profileSetupProvider);
     final notifier = ref.read(profileSetupProvider.notifier);
-    final today = ref.watch(clockProvider)();
     final stepCount = ProfileStep.values.length;
 
     return PopScope(
@@ -42,15 +41,11 @@ class ProfileSetupScreen extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.md),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: ProfileStepBody(
-                      setup: setup,
-                      notifier: notifier,
-                      today: today,
-                    ),
+                    child: ProfileStepBody(setup: setup, notifier: notifier),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                ..._buttons(context, ref, setup, today, l10n),
+                ..._buttons(context, ref, setup, l10n),
               ],
             ),
           ),
@@ -65,7 +60,6 @@ class ProfileSetupScreen extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     ProfileSetupState setup,
-    DateTime today,
     AppLocalizations l10n,
   ) {
     final notifier = ref.read(profileSetupProvider.notifier);
@@ -79,31 +73,29 @@ class ProfileSetupScreen extends ConsumerWidget {
       }
     }
 
-    void advance({required bool remind}) {
-      notifier
-        ..setReminderEnabled(enabled: remind)
-        ..next();
+    // The reminder is the last step: both choices finish the flow.
+    void finishWith({required bool remind}) {
+      notifier.setReminderEnabled(enabled: remind);
+      unawaited(finish());
     }
 
     if (setup.step == ProfileStep.reminder) {
       return [
         _WideButton(
           label: l10n.profileReminderOn,
-          onPressed: () => advance(remind: true),
+          busy: setup.saving,
+          onPressed: () => finishWith(remind: true),
         ),
         TextButton(
-          onPressed: () => advance(remind: false),
+          onPressed: setup.saving ? null : () => finishWith(remind: false),
           child: Text(l10n.profileReminderSkip),
         ),
       ];
     }
     return [
       _WideButton(
-        label: setup.isLastStep ? l10n.profileFinish : l10n.onboardingContinue,
-        busy: setup.saving,
-        onPressed: setup.canContinue(today)
-            ? (setup.isLastStep ? finish : notifier.next)
-            : null,
+        label: l10n.onboardingContinue,
+        onPressed: setup.canContinue ? notifier.next : null,
       ),
     ];
   }
