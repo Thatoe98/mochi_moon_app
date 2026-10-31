@@ -83,3 +83,59 @@ class PreferenceVector extends Table {
   @override
   Set<Column<Object>> get primaryKey => {id};
 }
+
+/// The day's mood (PRD §6.18), one row per local day. [date] is `YYYY-MM-DD`;
+/// [mood] is the mood id. [synced] is false until it reached Firestore.
+class MoodEntries extends Table {
+  TextColumn get date => text()();
+  TextColumn get mood => text()();
+  BoolColumn get synced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {date};
+}
+
+/// Gratitude and wins lines (PRD §6.16). Private: never leaves her own
+/// Firestore documents.
+class GratitudeEntries extends Table {
+  TextColumn get id => text()();
+  TextColumn get date => text()();
+  TextColumn get body => text()();
+  DateTimeColumn get createdAt => dateTime()();
+  BoolColumn get synced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+/// Her own affirmation cards (PRD §6.17). Private, like gratitude.
+class CustomCards extends Table {
+  TextColumn get id => text()();
+  TextColumn get body => text()();
+  TextColumn get illustrationId => text()();
+  DateTimeColumn get createdAt => dateTime()();
+  BoolColumn get synced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+/// Days on which the daily ritual was finished (PRD §6.15), for the streak.
+class RitualDays extends Table {
+  TextColumn get date => text()();
+  DateTimeColumn get completedAt => dateTime()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {date};
+}
+
+/// Where today's ritual stands, so it resumes after the app is closed.
+/// [quoteIds] is a JSON list of the three card ids.
+class RitualProgress extends Table {
+  TextColumn get date => text()();
+  IntColumn get step => integer()();
+  TextColumn get quoteIds => text()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {date};
+}

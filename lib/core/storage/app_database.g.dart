@@ -2347,6 +2347,1464 @@ class PartnerCacheCompanion extends UpdateCompanion<PartnerCacheData> {
   }
 }
 
+class $MoodEntriesTable extends MoodEntries
+    with TableInfo<$MoodEntriesTable, MoodEntry> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MoodEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _moodMeta = const VerificationMeta('mood');
+  @override
+  late final GeneratedColumn<String> mood = GeneratedColumn<String>(
+    'mood',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _syncedMeta = const VerificationMeta('synced');
+  @override
+  late final GeneratedColumn<bool> synced = GeneratedColumn<bool>(
+    'synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, mood, synced];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'mood_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MoodEntry> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('mood')) {
+      context.handle(
+        _moodMeta,
+        mood.isAcceptableOrUnknown(data['mood']!, _moodMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_moodMeta);
+    }
+    if (data.containsKey('synced')) {
+      context.handle(
+        _syncedMeta,
+        synced.isAcceptableOrUnknown(data['synced']!, _syncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date};
+  @override
+  MoodEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MoodEntry(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      mood: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mood'],
+      )!,
+      synced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}synced'],
+      )!,
+    );
+  }
+
+  @override
+  $MoodEntriesTable createAlias(String alias) {
+    return $MoodEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class MoodEntry extends DataClass implements Insertable<MoodEntry> {
+  final String date;
+  final String mood;
+  final bool synced;
+  const MoodEntry({
+    required this.date,
+    required this.mood,
+    required this.synced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['mood'] = Variable<String>(mood);
+    map['synced'] = Variable<bool>(synced);
+    return map;
+  }
+
+  MoodEntriesCompanion toCompanion(bool nullToAbsent) {
+    return MoodEntriesCompanion(
+      date: Value(date),
+      mood: Value(mood),
+      synced: Value(synced),
+    );
+  }
+
+  factory MoodEntry.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MoodEntry(
+      date: serializer.fromJson<String>(json['date']),
+      mood: serializer.fromJson<String>(json['mood']),
+      synced: serializer.fromJson<bool>(json['synced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'mood': serializer.toJson<String>(mood),
+      'synced': serializer.toJson<bool>(synced),
+    };
+  }
+
+  MoodEntry copyWith({String? date, String? mood, bool? synced}) => MoodEntry(
+    date: date ?? this.date,
+    mood: mood ?? this.mood,
+    synced: synced ?? this.synced,
+  );
+  MoodEntry copyWithCompanion(MoodEntriesCompanion data) {
+    return MoodEntry(
+      date: data.date.present ? data.date.value : this.date,
+      mood: data.mood.present ? data.mood.value : this.mood,
+      synced: data.synced.present ? data.synced.value : this.synced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MoodEntry(')
+          ..write('date: $date, ')
+          ..write('mood: $mood, ')
+          ..write('synced: $synced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, mood, synced);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MoodEntry &&
+          other.date == this.date &&
+          other.mood == this.mood &&
+          other.synced == this.synced);
+}
+
+class MoodEntriesCompanion extends UpdateCompanion<MoodEntry> {
+  final Value<String> date;
+  final Value<String> mood;
+  final Value<bool> synced;
+  final Value<int> rowid;
+  const MoodEntriesCompanion({
+    this.date = const Value.absent(),
+    this.mood = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  MoodEntriesCompanion.insert({
+    required String date,
+    required String mood,
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       mood = Value(mood);
+  static Insertable<MoodEntry> custom({
+    Expression<String>? date,
+    Expression<String>? mood,
+    Expression<bool>? synced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (mood != null) 'mood': mood,
+      if (synced != null) 'synced': synced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  MoodEntriesCompanion copyWith({
+    Value<String>? date,
+    Value<String>? mood,
+    Value<bool>? synced,
+    Value<int>? rowid,
+  }) {
+    return MoodEntriesCompanion(
+      date: date ?? this.date,
+      mood: mood ?? this.mood,
+      synced: synced ?? this.synced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (mood.present) {
+      map['mood'] = Variable<String>(mood.value);
+    }
+    if (synced.present) {
+      map['synced'] = Variable<bool>(synced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MoodEntriesCompanion(')
+          ..write('date: $date, ')
+          ..write('mood: $mood, ')
+          ..write('synced: $synced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GratitudeEntriesTable extends GratitudeEntries
+    with TableInfo<$GratitudeEntriesTable, GratitudeEntry> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GratitudeEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _syncedMeta = const VerificationMeta('synced');
+  @override
+  late final GeneratedColumn<bool> synced = GeneratedColumn<bool>(
+    'synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, date, body, createdAt, synced];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'gratitude_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GratitudeEntry> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('synced')) {
+      context.handle(
+        _syncedMeta,
+        synced.isAcceptableOrUnknown(data['synced']!, _syncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GratitudeEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GratitudeEntry(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      synced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}synced'],
+      )!,
+    );
+  }
+
+  @override
+  $GratitudeEntriesTable createAlias(String alias) {
+    return $GratitudeEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class GratitudeEntry extends DataClass implements Insertable<GratitudeEntry> {
+  final String id;
+  final String date;
+  final String body;
+  final DateTime createdAt;
+  final bool synced;
+  const GratitudeEntry({
+    required this.id,
+    required this.date,
+    required this.body,
+    required this.createdAt,
+    required this.synced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['date'] = Variable<String>(date);
+    map['body'] = Variable<String>(body);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['synced'] = Variable<bool>(synced);
+    return map;
+  }
+
+  GratitudeEntriesCompanion toCompanion(bool nullToAbsent) {
+    return GratitudeEntriesCompanion(
+      id: Value(id),
+      date: Value(date),
+      body: Value(body),
+      createdAt: Value(createdAt),
+      synced: Value(synced),
+    );
+  }
+
+  factory GratitudeEntry.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GratitudeEntry(
+      id: serializer.fromJson<String>(json['id']),
+      date: serializer.fromJson<String>(json['date']),
+      body: serializer.fromJson<String>(json['body']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      synced: serializer.fromJson<bool>(json['synced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'date': serializer.toJson<String>(date),
+      'body': serializer.toJson<String>(body),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'synced': serializer.toJson<bool>(synced),
+    };
+  }
+
+  GratitudeEntry copyWith({
+    String? id,
+    String? date,
+    String? body,
+    DateTime? createdAt,
+    bool? synced,
+  }) => GratitudeEntry(
+    id: id ?? this.id,
+    date: date ?? this.date,
+    body: body ?? this.body,
+    createdAt: createdAt ?? this.createdAt,
+    synced: synced ?? this.synced,
+  );
+  GratitudeEntry copyWithCompanion(GratitudeEntriesCompanion data) {
+    return GratitudeEntry(
+      id: data.id.present ? data.id.value : this.id,
+      date: data.date.present ? data.date.value : this.date,
+      body: data.body.present ? data.body.value : this.body,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      synced: data.synced.present ? data.synced.value : this.synced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GratitudeEntry(')
+          ..write('id: $id, ')
+          ..write('date: $date, ')
+          ..write('body: $body, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('synced: $synced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, date, body, createdAt, synced);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GratitudeEntry &&
+          other.id == this.id &&
+          other.date == this.date &&
+          other.body == this.body &&
+          other.createdAt == this.createdAt &&
+          other.synced == this.synced);
+}
+
+class GratitudeEntriesCompanion extends UpdateCompanion<GratitudeEntry> {
+  final Value<String> id;
+  final Value<String> date;
+  final Value<String> body;
+  final Value<DateTime> createdAt;
+  final Value<bool> synced;
+  final Value<int> rowid;
+  const GratitudeEntriesCompanion({
+    this.id = const Value.absent(),
+    this.date = const Value.absent(),
+    this.body = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GratitudeEntriesCompanion.insert({
+    required String id,
+    required String date,
+    required String body,
+    required DateTime createdAt,
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       date = Value(date),
+       body = Value(body),
+       createdAt = Value(createdAt);
+  static Insertable<GratitudeEntry> custom({
+    Expression<String>? id,
+    Expression<String>? date,
+    Expression<String>? body,
+    Expression<DateTime>? createdAt,
+    Expression<bool>? synced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (date != null) 'date': date,
+      if (body != null) 'body': body,
+      if (createdAt != null) 'created_at': createdAt,
+      if (synced != null) 'synced': synced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GratitudeEntriesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? date,
+    Value<String>? body,
+    Value<DateTime>? createdAt,
+    Value<bool>? synced,
+    Value<int>? rowid,
+  }) {
+    return GratitudeEntriesCompanion(
+      id: id ?? this.id,
+      date: date ?? this.date,
+      body: body ?? this.body,
+      createdAt: createdAt ?? this.createdAt,
+      synced: synced ?? this.synced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (synced.present) {
+      map['synced'] = Variable<bool>(synced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GratitudeEntriesCompanion(')
+          ..write('id: $id, ')
+          ..write('date: $date, ')
+          ..write('body: $body, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('synced: $synced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CustomCardsTable extends CustomCards
+    with TableInfo<$CustomCardsTable, CustomCard> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CustomCardsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _illustrationIdMeta = const VerificationMeta(
+    'illustrationId',
+  );
+  @override
+  late final GeneratedColumn<String> illustrationId = GeneratedColumn<String>(
+    'illustration_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _syncedMeta = const VerificationMeta('synced');
+  @override
+  late final GeneratedColumn<bool> synced = GeneratedColumn<bool>(
+    'synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    body,
+    illustrationId,
+    createdAt,
+    synced,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'custom_cards';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<CustomCard> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('illustration_id')) {
+      context.handle(
+        _illustrationIdMeta,
+        illustrationId.isAcceptableOrUnknown(
+          data['illustration_id']!,
+          _illustrationIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_illustrationIdMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('synced')) {
+      context.handle(
+        _syncedMeta,
+        synced.isAcceptableOrUnknown(data['synced']!, _syncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CustomCard map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CustomCard(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      illustrationId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}illustration_id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      synced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}synced'],
+      )!,
+    );
+  }
+
+  @override
+  $CustomCardsTable createAlias(String alias) {
+    return $CustomCardsTable(attachedDatabase, alias);
+  }
+}
+
+class CustomCard extends DataClass implements Insertable<CustomCard> {
+  final String id;
+  final String body;
+  final String illustrationId;
+  final DateTime createdAt;
+  final bool synced;
+  const CustomCard({
+    required this.id,
+    required this.body,
+    required this.illustrationId,
+    required this.createdAt,
+    required this.synced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['body'] = Variable<String>(body);
+    map['illustration_id'] = Variable<String>(illustrationId);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['synced'] = Variable<bool>(synced);
+    return map;
+  }
+
+  CustomCardsCompanion toCompanion(bool nullToAbsent) {
+    return CustomCardsCompanion(
+      id: Value(id),
+      body: Value(body),
+      illustrationId: Value(illustrationId),
+      createdAt: Value(createdAt),
+      synced: Value(synced),
+    );
+  }
+
+  factory CustomCard.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CustomCard(
+      id: serializer.fromJson<String>(json['id']),
+      body: serializer.fromJson<String>(json['body']),
+      illustrationId: serializer.fromJson<String>(json['illustrationId']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      synced: serializer.fromJson<bool>(json['synced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'body': serializer.toJson<String>(body),
+      'illustrationId': serializer.toJson<String>(illustrationId),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'synced': serializer.toJson<bool>(synced),
+    };
+  }
+
+  CustomCard copyWith({
+    String? id,
+    String? body,
+    String? illustrationId,
+    DateTime? createdAt,
+    bool? synced,
+  }) => CustomCard(
+    id: id ?? this.id,
+    body: body ?? this.body,
+    illustrationId: illustrationId ?? this.illustrationId,
+    createdAt: createdAt ?? this.createdAt,
+    synced: synced ?? this.synced,
+  );
+  CustomCard copyWithCompanion(CustomCardsCompanion data) {
+    return CustomCard(
+      id: data.id.present ? data.id.value : this.id,
+      body: data.body.present ? data.body.value : this.body,
+      illustrationId: data.illustrationId.present
+          ? data.illustrationId.value
+          : this.illustrationId,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      synced: data.synced.present ? data.synced.value : this.synced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CustomCard(')
+          ..write('id: $id, ')
+          ..write('body: $body, ')
+          ..write('illustrationId: $illustrationId, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('synced: $synced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, body, illustrationId, createdAt, synced);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CustomCard &&
+          other.id == this.id &&
+          other.body == this.body &&
+          other.illustrationId == this.illustrationId &&
+          other.createdAt == this.createdAt &&
+          other.synced == this.synced);
+}
+
+class CustomCardsCompanion extends UpdateCompanion<CustomCard> {
+  final Value<String> id;
+  final Value<String> body;
+  final Value<String> illustrationId;
+  final Value<DateTime> createdAt;
+  final Value<bool> synced;
+  final Value<int> rowid;
+  const CustomCardsCompanion({
+    this.id = const Value.absent(),
+    this.body = const Value.absent(),
+    this.illustrationId = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CustomCardsCompanion.insert({
+    required String id,
+    required String body,
+    required String illustrationId,
+    required DateTime createdAt,
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       body = Value(body),
+       illustrationId = Value(illustrationId),
+       createdAt = Value(createdAt);
+  static Insertable<CustomCard> custom({
+    Expression<String>? id,
+    Expression<String>? body,
+    Expression<String>? illustrationId,
+    Expression<DateTime>? createdAt,
+    Expression<bool>? synced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (body != null) 'body': body,
+      if (illustrationId != null) 'illustration_id': illustrationId,
+      if (createdAt != null) 'created_at': createdAt,
+      if (synced != null) 'synced': synced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CustomCardsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? body,
+    Value<String>? illustrationId,
+    Value<DateTime>? createdAt,
+    Value<bool>? synced,
+    Value<int>? rowid,
+  }) {
+    return CustomCardsCompanion(
+      id: id ?? this.id,
+      body: body ?? this.body,
+      illustrationId: illustrationId ?? this.illustrationId,
+      createdAt: createdAt ?? this.createdAt,
+      synced: synced ?? this.synced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (illustrationId.present) {
+      map['illustration_id'] = Variable<String>(illustrationId.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (synced.present) {
+      map['synced'] = Variable<bool>(synced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CustomCardsCompanion(')
+          ..write('id: $id, ')
+          ..write('body: $body, ')
+          ..write('illustrationId: $illustrationId, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('synced: $synced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RitualDaysTable extends RitualDays
+    with TableInfo<$RitualDaysTable, RitualDay> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RitualDaysTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _completedAtMeta = const VerificationMeta(
+    'completedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> completedAt = GeneratedColumn<DateTime>(
+    'completed_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, completedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'ritual_days';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RitualDay> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('completed_at')) {
+      context.handle(
+        _completedAtMeta,
+        completedAt.isAcceptableOrUnknown(
+          data['completed_at']!,
+          _completedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_completedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date};
+  @override
+  RitualDay map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RitualDay(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      completedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}completed_at'],
+      )!,
+    );
+  }
+
+  @override
+  $RitualDaysTable createAlias(String alias) {
+    return $RitualDaysTable(attachedDatabase, alias);
+  }
+}
+
+class RitualDay extends DataClass implements Insertable<RitualDay> {
+  final String date;
+  final DateTime completedAt;
+  const RitualDay({required this.date, required this.completedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['completed_at'] = Variable<DateTime>(completedAt);
+    return map;
+  }
+
+  RitualDaysCompanion toCompanion(bool nullToAbsent) {
+    return RitualDaysCompanion(
+      date: Value(date),
+      completedAt: Value(completedAt),
+    );
+  }
+
+  factory RitualDay.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RitualDay(
+      date: serializer.fromJson<String>(json['date']),
+      completedAt: serializer.fromJson<DateTime>(json['completedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'completedAt': serializer.toJson<DateTime>(completedAt),
+    };
+  }
+
+  RitualDay copyWith({String? date, DateTime? completedAt}) => RitualDay(
+    date: date ?? this.date,
+    completedAt: completedAt ?? this.completedAt,
+  );
+  RitualDay copyWithCompanion(RitualDaysCompanion data) {
+    return RitualDay(
+      date: data.date.present ? data.date.value : this.date,
+      completedAt: data.completedAt.present
+          ? data.completedAt.value
+          : this.completedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RitualDay(')
+          ..write('date: $date, ')
+          ..write('completedAt: $completedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, completedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RitualDay &&
+          other.date == this.date &&
+          other.completedAt == this.completedAt);
+}
+
+class RitualDaysCompanion extends UpdateCompanion<RitualDay> {
+  final Value<String> date;
+  final Value<DateTime> completedAt;
+  final Value<int> rowid;
+  const RitualDaysCompanion({
+    this.date = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RitualDaysCompanion.insert({
+    required String date,
+    required DateTime completedAt,
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       completedAt = Value(completedAt);
+  static Insertable<RitualDay> custom({
+    Expression<String>? date,
+    Expression<DateTime>? completedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (completedAt != null) 'completed_at': completedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RitualDaysCompanion copyWith({
+    Value<String>? date,
+    Value<DateTime>? completedAt,
+    Value<int>? rowid,
+  }) {
+    return RitualDaysCompanion(
+      date: date ?? this.date,
+      completedAt: completedAt ?? this.completedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (completedAt.present) {
+      map['completed_at'] = Variable<DateTime>(completedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RitualDaysCompanion(')
+          ..write('date: $date, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RitualProgressTable extends RitualProgress
+    with TableInfo<$RitualProgressTable, RitualProgressData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RitualProgressTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _stepMeta = const VerificationMeta('step');
+  @override
+  late final GeneratedColumn<int> step = GeneratedColumn<int>(
+    'step',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _quoteIdsMeta = const VerificationMeta(
+    'quoteIds',
+  );
+  @override
+  late final GeneratedColumn<String> quoteIds = GeneratedColumn<String>(
+    'quote_ids',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, step, quoteIds];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'ritual_progress';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<RitualProgressData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('step')) {
+      context.handle(
+        _stepMeta,
+        step.isAcceptableOrUnknown(data['step']!, _stepMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_stepMeta);
+    }
+    if (data.containsKey('quote_ids')) {
+      context.handle(
+        _quoteIdsMeta,
+        quoteIds.isAcceptableOrUnknown(data['quote_ids']!, _quoteIdsMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_quoteIdsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date};
+  @override
+  RitualProgressData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RitualProgressData(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      step: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}step'],
+      )!,
+      quoteIds: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}quote_ids'],
+      )!,
+    );
+  }
+
+  @override
+  $RitualProgressTable createAlias(String alias) {
+    return $RitualProgressTable(attachedDatabase, alias);
+  }
+}
+
+class RitualProgressData extends DataClass
+    implements Insertable<RitualProgressData> {
+  final String date;
+  final int step;
+  final String quoteIds;
+  const RitualProgressData({
+    required this.date,
+    required this.step,
+    required this.quoteIds,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['step'] = Variable<int>(step);
+    map['quote_ids'] = Variable<String>(quoteIds);
+    return map;
+  }
+
+  RitualProgressCompanion toCompanion(bool nullToAbsent) {
+    return RitualProgressCompanion(
+      date: Value(date),
+      step: Value(step),
+      quoteIds: Value(quoteIds),
+    );
+  }
+
+  factory RitualProgressData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RitualProgressData(
+      date: serializer.fromJson<String>(json['date']),
+      step: serializer.fromJson<int>(json['step']),
+      quoteIds: serializer.fromJson<String>(json['quoteIds']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'step': serializer.toJson<int>(step),
+      'quoteIds': serializer.toJson<String>(quoteIds),
+    };
+  }
+
+  RitualProgressData copyWith({String? date, int? step, String? quoteIds}) =>
+      RitualProgressData(
+        date: date ?? this.date,
+        step: step ?? this.step,
+        quoteIds: quoteIds ?? this.quoteIds,
+      );
+  RitualProgressData copyWithCompanion(RitualProgressCompanion data) {
+    return RitualProgressData(
+      date: data.date.present ? data.date.value : this.date,
+      step: data.step.present ? data.step.value : this.step,
+      quoteIds: data.quoteIds.present ? data.quoteIds.value : this.quoteIds,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RitualProgressData(')
+          ..write('date: $date, ')
+          ..write('step: $step, ')
+          ..write('quoteIds: $quoteIds')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, step, quoteIds);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RitualProgressData &&
+          other.date == this.date &&
+          other.step == this.step &&
+          other.quoteIds == this.quoteIds);
+}
+
+class RitualProgressCompanion extends UpdateCompanion<RitualProgressData> {
+  final Value<String> date;
+  final Value<int> step;
+  final Value<String> quoteIds;
+  final Value<int> rowid;
+  const RitualProgressCompanion({
+    this.date = const Value.absent(),
+    this.step = const Value.absent(),
+    this.quoteIds = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RitualProgressCompanion.insert({
+    required String date,
+    required int step,
+    required String quoteIds,
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       step = Value(step),
+       quoteIds = Value(quoteIds);
+  static Insertable<RitualProgressData> custom({
+    Expression<String>? date,
+    Expression<int>? step,
+    Expression<String>? quoteIds,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (step != null) 'step': step,
+      if (quoteIds != null) 'quote_ids': quoteIds,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RitualProgressCompanion copyWith({
+    Value<String>? date,
+    Value<int>? step,
+    Value<String>? quoteIds,
+    Value<int>? rowid,
+  }) {
+    return RitualProgressCompanion(
+      date: date ?? this.date,
+      step: step ?? this.step,
+      quoteIds: quoteIds ?? this.quoteIds,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (step.present) {
+      map['step'] = Variable<int>(step.value);
+    }
+    if (quoteIds.present) {
+      map['quote_ids'] = Variable<String>(quoteIds.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RitualProgressCompanion(')
+          ..write('date: $date, ')
+          ..write('step: $step, ')
+          ..write('quoteIds: $quoteIds, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2360,6 +3818,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final $ProfileCacheTable profileCache = $ProfileCacheTable(this);
   late final $PartnerCacheTable partnerCache = $PartnerCacheTable(this);
+  late final $MoodEntriesTable moodEntries = $MoodEntriesTable(this);
+  late final $GratitudeEntriesTable gratitudeEntries = $GratitudeEntriesTable(
+    this,
+  );
+  late final $CustomCardsTable customCards = $CustomCardsTable(this);
+  late final $RitualDaysTable ritualDays = $RitualDaysTable(this);
+  late final $RitualProgressTable ritualProgress = $RitualProgressTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2373,6 +3838,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     preferenceVector,
     profileCache,
     partnerCache,
+    moodEntries,
+    gratitudeEntries,
+    customCards,
+    ritualDays,
+    ritualProgress,
   ];
 }
 
@@ -3853,6 +5323,926 @@ typedef $$PartnerCacheTableProcessedTableManager =
       PartnerCacheData,
       PrefetchHooks Function()
     >;
+typedef $$MoodEntriesTableCreateCompanionBuilder =
+    MoodEntriesCompanion Function({
+      required String date,
+      required String mood,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+typedef $$MoodEntriesTableUpdateCompanionBuilder =
+    MoodEntriesCompanion Function({
+      Value<String> date,
+      Value<String> mood,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+
+class $$MoodEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $MoodEntriesTable> {
+  $$MoodEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mood => $composableBuilder(
+    column: $table.mood,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MoodEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $MoodEntriesTable> {
+  $$MoodEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mood => $composableBuilder(
+    column: $table.mood,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MoodEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MoodEntriesTable> {
+  $$MoodEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get mood =>
+      $composableBuilder(column: $table.mood, builder: (column) => column);
+
+  GeneratedColumn<bool> get synced =>
+      $composableBuilder(column: $table.synced, builder: (column) => column);
+}
+
+class $$MoodEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MoodEntriesTable,
+          MoodEntry,
+          $$MoodEntriesTableFilterComposer,
+          $$MoodEntriesTableOrderingComposer,
+          $$MoodEntriesTableAnnotationComposer,
+          $$MoodEntriesTableCreateCompanionBuilder,
+          $$MoodEntriesTableUpdateCompanionBuilder,
+          (
+            MoodEntry,
+            BaseReferences<_$AppDatabase, $MoodEntriesTable, MoodEntry>,
+          ),
+          MoodEntry,
+          PrefetchHooks Function()
+        > {
+  $$MoodEntriesTableTableManager(_$AppDatabase db, $MoodEntriesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MoodEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MoodEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MoodEntriesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<String> mood = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MoodEntriesCompanion(
+                date: date,
+                mood: mood,
+                synced: synced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required String mood,
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MoodEntriesCompanion.insert(
+                date: date,
+                mood: mood,
+                synced: synced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$MoodEntriesTable, MoodEntry>(table),
+                  BaseReferences<_$AppDatabase, $MoodEntriesTable, MoodEntry>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MoodEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MoodEntriesTable,
+      MoodEntry,
+      $$MoodEntriesTableFilterComposer,
+      $$MoodEntriesTableOrderingComposer,
+      $$MoodEntriesTableAnnotationComposer,
+      $$MoodEntriesTableCreateCompanionBuilder,
+      $$MoodEntriesTableUpdateCompanionBuilder,
+      (MoodEntry, BaseReferences<_$AppDatabase, $MoodEntriesTable, MoodEntry>),
+      MoodEntry,
+      PrefetchHooks Function()
+    >;
+typedef $$GratitudeEntriesTableCreateCompanionBuilder =
+    GratitudeEntriesCompanion Function({
+      required String id,
+      required String date,
+      required String body,
+      required DateTime createdAt,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+typedef $$GratitudeEntriesTableUpdateCompanionBuilder =
+    GratitudeEntriesCompanion Function({
+      Value<String> id,
+      Value<String> date,
+      Value<String> body,
+      Value<DateTime> createdAt,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+
+class $$GratitudeEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $GratitudeEntriesTable> {
+  $$GratitudeEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$GratitudeEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $GratitudeEntriesTable> {
+  $$GratitudeEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$GratitudeEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GratitudeEntriesTable> {
+  $$GratitudeEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get synced =>
+      $composableBuilder(column: $table.synced, builder: (column) => column);
+}
+
+class $$GratitudeEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GratitudeEntriesTable,
+          GratitudeEntry,
+          $$GratitudeEntriesTableFilterComposer,
+          $$GratitudeEntriesTableOrderingComposer,
+          $$GratitudeEntriesTableAnnotationComposer,
+          $$GratitudeEntriesTableCreateCompanionBuilder,
+          $$GratitudeEntriesTableUpdateCompanionBuilder,
+          (
+            GratitudeEntry,
+            BaseReferences<
+              _$AppDatabase,
+              $GratitudeEntriesTable,
+              GratitudeEntry
+            >,
+          ),
+          GratitudeEntry,
+          PrefetchHooks Function()
+        > {
+  $$GratitudeEntriesTableTableManager(
+    _$AppDatabase db,
+    $GratitudeEntriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GratitudeEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GratitudeEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GratitudeEntriesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> date = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GratitudeEntriesCompanion(
+                id: id,
+                date: date,
+                body: body,
+                createdAt: createdAt,
+                synced: synced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String date,
+                required String body,
+                required DateTime createdAt,
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GratitudeEntriesCompanion.insert(
+                id: id,
+                date: date,
+                body: body,
+                createdAt: createdAt,
+                synced: synced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$GratitudeEntriesTable, GratitudeEntry>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $GratitudeEntriesTable,
+                    GratitudeEntry
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$GratitudeEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GratitudeEntriesTable,
+      GratitudeEntry,
+      $$GratitudeEntriesTableFilterComposer,
+      $$GratitudeEntriesTableOrderingComposer,
+      $$GratitudeEntriesTableAnnotationComposer,
+      $$GratitudeEntriesTableCreateCompanionBuilder,
+      $$GratitudeEntriesTableUpdateCompanionBuilder,
+      (
+        GratitudeEntry,
+        BaseReferences<_$AppDatabase, $GratitudeEntriesTable, GratitudeEntry>,
+      ),
+      GratitudeEntry,
+      PrefetchHooks Function()
+    >;
+typedef $$CustomCardsTableCreateCompanionBuilder =
+    CustomCardsCompanion Function({
+      required String id,
+      required String body,
+      required String illustrationId,
+      required DateTime createdAt,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+typedef $$CustomCardsTableUpdateCompanionBuilder =
+    CustomCardsCompanion Function({
+      Value<String> id,
+      Value<String> body,
+      Value<String> illustrationId,
+      Value<DateTime> createdAt,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+
+class $$CustomCardsTableFilterComposer
+    extends Composer<_$AppDatabase, $CustomCardsTable> {
+  $$CustomCardsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get illustrationId => $composableBuilder(
+    column: $table.illustrationId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$CustomCardsTableOrderingComposer
+    extends Composer<_$AppDatabase, $CustomCardsTable> {
+  $$CustomCardsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get illustrationId => $composableBuilder(
+    column: $table.illustrationId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$CustomCardsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CustomCardsTable> {
+  $$CustomCardsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<String> get illustrationId => $composableBuilder(
+    column: $table.illustrationId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get synced =>
+      $composableBuilder(column: $table.synced, builder: (column) => column);
+}
+
+class $$CustomCardsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $CustomCardsTable,
+          CustomCard,
+          $$CustomCardsTableFilterComposer,
+          $$CustomCardsTableOrderingComposer,
+          $$CustomCardsTableAnnotationComposer,
+          $$CustomCardsTableCreateCompanionBuilder,
+          $$CustomCardsTableUpdateCompanionBuilder,
+          (
+            CustomCard,
+            BaseReferences<_$AppDatabase, $CustomCardsTable, CustomCard>,
+          ),
+          CustomCard,
+          PrefetchHooks Function()
+        > {
+  $$CustomCardsTableTableManager(_$AppDatabase db, $CustomCardsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CustomCardsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CustomCardsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CustomCardsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<String> illustrationId = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CustomCardsCompanion(
+                id: id,
+                body: body,
+                illustrationId: illustrationId,
+                createdAt: createdAt,
+                synced: synced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String body,
+                required String illustrationId,
+                required DateTime createdAt,
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CustomCardsCompanion.insert(
+                id: id,
+                body: body,
+                illustrationId: illustrationId,
+                createdAt: createdAt,
+                synced: synced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$CustomCardsTable, CustomCard>(table),
+                  BaseReferences<_$AppDatabase, $CustomCardsTable, CustomCard>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$CustomCardsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $CustomCardsTable,
+      CustomCard,
+      $$CustomCardsTableFilterComposer,
+      $$CustomCardsTableOrderingComposer,
+      $$CustomCardsTableAnnotationComposer,
+      $$CustomCardsTableCreateCompanionBuilder,
+      $$CustomCardsTableUpdateCompanionBuilder,
+      (
+        CustomCard,
+        BaseReferences<_$AppDatabase, $CustomCardsTable, CustomCard>,
+      ),
+      CustomCard,
+      PrefetchHooks Function()
+    >;
+typedef $$RitualDaysTableCreateCompanionBuilder = RitualDaysCompanion Function({
+  required String date,
+  required DateTime completedAt,
+  Value<int> rowid,
+});
+typedef $$RitualDaysTableUpdateCompanionBuilder = RitualDaysCompanion Function({
+  Value<String> date,
+  Value<DateTime> completedAt,
+  Value<int> rowid,
+});
+
+class $$RitualDaysTableFilterComposer
+    extends Composer<_$AppDatabase, $RitualDaysTable> {
+  $$RitualDaysTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$RitualDaysTableOrderingComposer
+    extends Composer<_$AppDatabase, $RitualDaysTable> {
+  $$RitualDaysTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$RitualDaysTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RitualDaysTable> {
+  $$RitualDaysTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => column,
+  );
+}
+
+class $$RitualDaysTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RitualDaysTable,
+          RitualDay,
+          $$RitualDaysTableFilterComposer,
+          $$RitualDaysTableOrderingComposer,
+          $$RitualDaysTableAnnotationComposer,
+          $$RitualDaysTableCreateCompanionBuilder,
+          $$RitualDaysTableUpdateCompanionBuilder,
+          (
+            RitualDay,
+            BaseReferences<_$AppDatabase, $RitualDaysTable, RitualDay>,
+          ),
+          RitualDay,
+          PrefetchHooks Function()
+        > {
+  $$RitualDaysTableTableManager(_$AppDatabase db, $RitualDaysTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RitualDaysTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RitualDaysTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RitualDaysTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<DateTime> completedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RitualDaysCompanion(
+                date: date,
+                completedAt: completedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required DateTime completedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => RitualDaysCompanion.insert(
+                date: date,
+                completedAt: completedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$RitualDaysTable, RitualDay>(table),
+                  BaseReferences<_$AppDatabase, $RitualDaysTable, RitualDay>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$RitualDaysTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RitualDaysTable,
+      RitualDay,
+      $$RitualDaysTableFilterComposer,
+      $$RitualDaysTableOrderingComposer,
+      $$RitualDaysTableAnnotationComposer,
+      $$RitualDaysTableCreateCompanionBuilder,
+      $$RitualDaysTableUpdateCompanionBuilder,
+      (RitualDay, BaseReferences<_$AppDatabase, $RitualDaysTable, RitualDay>),
+      RitualDay,
+      PrefetchHooks Function()
+    >;
+typedef $$RitualProgressTableCreateCompanionBuilder =
+    RitualProgressCompanion Function({
+      required String date,
+      required int step,
+      required String quoteIds,
+      Value<int> rowid,
+    });
+typedef $$RitualProgressTableUpdateCompanionBuilder =
+    RitualProgressCompanion Function({
+      Value<String> date,
+      Value<int> step,
+      Value<String> quoteIds,
+      Value<int> rowid,
+    });
+
+class $$RitualProgressTableFilterComposer
+    extends Composer<_$AppDatabase, $RitualProgressTable> {
+  $$RitualProgressTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get step => $composableBuilder(
+    column: $table.step,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get quoteIds => $composableBuilder(
+    column: $table.quoteIds,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$RitualProgressTableOrderingComposer
+    extends Composer<_$AppDatabase, $RitualProgressTable> {
+  $$RitualProgressTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get step => $composableBuilder(
+    column: $table.step,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get quoteIds => $composableBuilder(
+    column: $table.quoteIds,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$RitualProgressTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RitualProgressTable> {
+  $$RitualProgressTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<int> get step =>
+      $composableBuilder(column: $table.step, builder: (column) => column);
+
+  GeneratedColumn<String> get quoteIds =>
+      $composableBuilder(column: $table.quoteIds, builder: (column) => column);
+}
+
+class $$RitualProgressTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $RitualProgressTable,
+          RitualProgressData,
+          $$RitualProgressTableFilterComposer,
+          $$RitualProgressTableOrderingComposer,
+          $$RitualProgressTableAnnotationComposer,
+          $$RitualProgressTableCreateCompanionBuilder,
+          $$RitualProgressTableUpdateCompanionBuilder,
+          (
+            RitualProgressData,
+            BaseReferences<
+              _$AppDatabase,
+              $RitualProgressTable,
+              RitualProgressData
+            >,
+          ),
+          RitualProgressData,
+          PrefetchHooks Function()
+        > {
+  $$RitualProgressTableTableManager(
+    _$AppDatabase db,
+    $RitualProgressTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RitualProgressTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RitualProgressTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RitualProgressTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<int> step = const Value.absent(),
+                Value<String> quoteIds = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RitualProgressCompanion(
+                date: date,
+                step: step,
+                quoteIds: quoteIds,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required int step,
+                required String quoteIds,
+                Value<int> rowid = const Value.absent(),
+              }) => RitualProgressCompanion.insert(
+                date: date,
+                step: step,
+                quoteIds: quoteIds,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$RitualProgressTable, RitualProgressData>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $RitualProgressTable,
+                    RitualProgressData
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$RitualProgressTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $RitualProgressTable,
+      RitualProgressData,
+      $$RitualProgressTableFilterComposer,
+      $$RitualProgressTableOrderingComposer,
+      $$RitualProgressTableAnnotationComposer,
+      $$RitualProgressTableCreateCompanionBuilder,
+      $$RitualProgressTableUpdateCompanionBuilder,
+      (
+        RitualProgressData,
+        BaseReferences<_$AppDatabase, $RitualProgressTable, RitualProgressData>,
+      ),
+      RitualProgressData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3873,6 +6263,16 @@ class $AppDatabaseManager {
       $$ProfileCacheTableTableManager(_db, _db.profileCache);
   $$PartnerCacheTableTableManager get partnerCache =>
       $$PartnerCacheTableTableManager(_db, _db.partnerCache);
+  $$MoodEntriesTableTableManager get moodEntries =>
+      $$MoodEntriesTableTableManager(_db, _db.moodEntries);
+  $$GratitudeEntriesTableTableManager get gratitudeEntries =>
+      $$GratitudeEntriesTableTableManager(_db, _db.gratitudeEntries);
+  $$CustomCardsTableTableManager get customCards =>
+      $$CustomCardsTableTableManager(_db, _db.customCards);
+  $$RitualDaysTableTableManager get ritualDays =>
+      $$RitualDaysTableTableManager(_db, _db.ritualDays);
+  $$RitualProgressTableTableManager get ritualProgress =>
+      $$RitualProgressTableTableManager(_db, _db.ritualProgress);
 }
 
 // **************************************************************************

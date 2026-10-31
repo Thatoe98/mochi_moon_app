@@ -38,6 +38,55 @@ void main() {
     expect(await prefs.getString('language'), isNull);
   });
 
+  test('also empties the self-love tables', () async {
+    final now = DateTime(2026, 10, 31);
+    await db
+        .into(db.moodEntries)
+        .insert(MoodEntriesCompanion.insert(date: '2026-10-31', mood: 'calm'));
+    await db
+        .into(db.gratitudeEntries)
+        .insert(
+          GratitudeEntriesCompanion.insert(
+            id: 'g1',
+            date: '2026-10-31',
+            body: 'Warm tea',
+            createdAt: now,
+          ),
+        );
+    await db
+        .into(db.customCards)
+        .insert(
+          CustomCardsCompanion.insert(
+            id: 'c1',
+            body: 'I am enough',
+            illustrationId: 'ill_0001',
+            createdAt: now,
+          ),
+        );
+    await db
+        .into(db.ritualDays)
+        .insert(
+          RitualDaysCompanion.insert(date: '2026-10-31', completedAt: now),
+        );
+    await db
+        .into(db.ritualProgress)
+        .insert(
+          RitualProgressCompanion.insert(
+            date: '2026-10-31',
+            step: 2,
+            quoteIds: '[]',
+          ),
+        );
+
+    await eraser.eraseAll();
+
+    expect(await db.select(db.moodEntries).get(), isEmpty);
+    expect(await db.select(db.gratitudeEntries).get(), isEmpty);
+    expect(await db.select(db.customCards).get(), isEmpty);
+    expect(await db.select(db.ritualDays).get(), isEmpty);
+    expect(await db.select(db.ritualProgress).get(), isEmpty);
+  });
+
   test('is fine on an already empty phone', () async {
     await expectLater(eraser.eraseAll(), completes);
   });

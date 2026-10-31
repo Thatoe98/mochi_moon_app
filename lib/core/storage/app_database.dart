@@ -15,6 +15,11 @@ part 'app_database.g.dart';
     PreferenceVector,
     ProfileCache,
     PartnerCache,
+    MoodEntries,
+    GratitudeEntries,
+    CustomCards,
+    RitualDays,
+    RitualProgress,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -22,7 +27,7 @@ class AppDatabase extends _$AppDatabase {
     : super(executor ?? driftDatabase(name: 'mochi_moon'));
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -30,6 +35,13 @@ class AppDatabase extends _$AppDatabase {
     onUpgrade: (m, from, to) async {
       if (from < 2) await m.createTable(profileCache);
       if (from < 3) await m.createTable(partnerCache);
+      if (from < 4) {
+        await m.createTable(moodEntries);
+        await m.createTable(gratitudeEntries);
+        await m.createTable(customCards);
+        await m.createTable(ritualDays);
+        await m.createTable(ritualProgress);
+      }
     },
   );
 }

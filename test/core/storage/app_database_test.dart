@@ -78,4 +78,84 @@ void main() {
       expect(history.single.quoteId, 'q_0001');
     },
   );
+
+  test('upgrading from version 3 adds the self-love tables and keeps data', () async {
+    final v3 = AppDatabase(
+      NativeDatabase.memory(
+        setup: (raw) {
+          raw
+            ..execute(
+              'CREATE TABLE journal_cache (quote_id TEXT NOT NULL PRIMARY KEY, '
+              'saved_at INTEGER NOT NULL)',
+            )
+            ..execute(
+              "INSERT INTO journal_cache (quote_id, saved_at) VALUES ('q_0001', 1792000000)",
+            )
+            ..execute(
+              'CREATE TABLE profile_cache (id INTEGER NOT NULL PRIMARY KEY, '
+              'json TEXT NOT NULL, updated_at INTEGER NOT NULL)',
+            )
+            ..execute(
+              'INSERT INTO profile_cache (id, json, updated_at) '
+              '''VALUES (0, '{"displayName":"Mochi"}', 1792000000)''',
+            )
+            ..execute('PRAGMA user_version = 3');
+        },
+      ),
+    );
+    addTearDown(v3.close);
+
+    expect((await v3.select(v3.journalCache).get()).single.quoteId, 'q_0001');
+    expect(
+      (await v3.select(v3.profileCache).get()).single.json,
+      '{"displayName":"Mochi"}',
+    );
+
+    await v3
+        .into(v3.moodEntries)
+        .insert(MoodEntriesCompanion.insert(date: '2026-10-31', mood: 'calm'));
+    await v3
+        .into(v3.gratitudeEntries)
+        .insert(
+          GratitudeEntriesCompanion.insert(
+            id: 'g1',
+            date: '2026-10-31',
+            body: 'Warm tea',
+            createdAt: DateTime.utc(2026, 10, 31),
+          ),
+        );
+    await v3
+        .into(v3.customCards)
+        .insert(
+          CustomCardsCompanion.insert(
+            id: 'c1',
+            body: 'I am enough',
+            illustrationId: 'ill_0001',
+            createdAt: DateTime.utc(2026, 10, 31),
+          ),
+        );
+    await v3
+        .into(v3.ritualDays)
+        .insert(
+          RitualDaysCompanion.insert(
+            date: '2026-10-31',
+            completedAt: DateTime.utc(2026, 10, 31),
+          ),
+        );
+    await v3
+        .into(v3.ritualProgress)
+        .insert(
+          RitualProgressCompanion.insert(
+            date: '2026-10-31',
+            step: 1,
+            quoteIds: '["q1","q2","q3"]',
+          ),
+        );
+
+    expect((await v3.select(v3.moodEntries).get()).single.synced, isFalse);
+    expect(await v3.select(v3.gratitudeEntries).get(), hasLength(1));
+    expect(await v3.select(v3.customCards).get(), hasLength(1));
+    expect(await v3.select(v3.ritualDays).get(), hasLength(1));
+    expect(await v3.select(v3.ritualProgress).get(), hasLength(1));
+  });
 }
