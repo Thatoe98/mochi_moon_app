@@ -5,6 +5,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_theme.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
@@ -32,6 +33,7 @@ class MochiMoonApp extends ConsumerWidget {
       ..watch(profileSyncProvider)
       ..watch(journalSyncProvider)
       ..watch(moodSyncProvider)
+      ..watch(gratitudeSyncProvider)
       ..watch(partnerSyncProvider)
       ..watch(deckSyncProvider);
     final reduceMotion =

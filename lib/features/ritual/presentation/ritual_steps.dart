@@ -12,6 +12,8 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
 import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
+import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
+import 'package:mochi_moon/features/gratitude/presentation/gratitude_entry_input.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_chips.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
@@ -163,8 +165,7 @@ class _RitualCardsStepState extends ConsumerState<RitualCardsStep> {
   }
 }
 
-/// Step 3: one grateful thought. Writing it down arrives with the gratitude
-/// jar; until then this is a quiet moment.
+/// Step 3: one grateful thought for the jar (PRD §6.16). She can skip it.
 class RitualGratitudeStep extends ConsumerWidget {
   const RitualGratitudeStep({super.key});
 
@@ -172,6 +173,7 @@ class RitualGratitudeStep extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    final written = ref.watch(gratitudeCountTodayProvider) > 0;
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
@@ -184,11 +186,13 @@ class RitualGratitudeStep extends ConsumerWidget {
         ),
         const SizedBox(height: AppSpacing.md),
         Text(l10n.ritualGratitudeBody, style: theme.textTheme.bodyLarge),
+        const SizedBox(height: AppSpacing.md),
+        const GratitudeEntryInput(),
         const SizedBox(height: AppSpacing.lg),
         FilledButton(
           onPressed: () =>
               ref.read(ritualControllerProvider.notifier).finishGratitude(),
-          child: Text(l10n.ritualFinish),
+          child: Text(written ? l10n.ritualFinish : l10n.ritualSkip),
         ),
       ],
     );

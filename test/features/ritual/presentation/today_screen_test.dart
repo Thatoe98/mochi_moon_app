@@ -19,6 +19,7 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
@@ -27,6 +28,7 @@ import 'package:mochi_moon/features/ritual/presentation/today_screen.dart';
 
 import '../../deck/support/fake_deck_repository.dart';
 import '../../deck/support/fake_image_sharer.dart';
+import '../../gratitude/support/fake_gratitude.dart';
 import '../../mood/support/fake_mood.dart';
 import '../support/fake_ritual_progress.dart';
 
@@ -72,6 +74,7 @@ const _lock = Duration(seconds: 3, milliseconds: 100);
 Widget _app(
   FakeDeckRepository repo, {
   FakeMoodRepository? moods,
+  FakeGratitudeRepository? gratitude,
   FakeRitualProgressRepository? progress,
   int limit = 10,
   bool reduceMotion = false,
@@ -84,6 +87,10 @@ Widget _app(
     ritualProgressRepositoryProvider.overrideWithValue(
       progress ?? FakeRitualProgressRepository(),
     ),
+    gratitudeRepositoryProvider.overrideWithValue(
+      gratitude ?? FakeGratitudeRepository(),
+    ),
+    gratitudeRemoteProvider.overrideWithValue(null),
     moodRepositoryProvider.overrideWithValue(moods ?? FakeMoodRepository()),
     moodRemoteProvider.overrideWithValue(null),
     imageSharerProvider.overrideWithValue(FakeImageSharer()),
@@ -202,7 +209,8 @@ void main() {
     testWidgets('runs end to end and counts the day', (tester) async {
       final repo = FakeDeckRepository();
       final moods = FakeMoodRepository();
-      await tester.pumpWidget(_app(repo, moods: moods));
+      final gratitude = FakeGratitudeRepository();
+      await tester.pumpWidget(_app(repo, moods: moods, gratitude: gratitude));
       await tester.pumpAndSettle();
 
       await _start(tester);
@@ -223,6 +231,13 @@ void main() {
       expect(repo.events, hasLength(3));
 
       expect(find.text('Step 3 of 4'), findsOneWidget);
+      // Nothing written yet, so the button offers to skip.
+      expect(find.text('Skip'), findsOneWidget);
+      await tester.enterText(find.byType(TextField), 'Warm tea');
+      await tester.pump();
+      await tester.tap(find.text('Drop a star in the jar'));
+      await tester.pumpAndSettle();
+      expect(gratitude.all.single.body, 'Warm tea');
       await tester.tap(find.text('Finish my ritual'));
       await tester.pumpAndSettle();
 
@@ -296,7 +311,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Step 3 of 4'), findsOneWidget);
-      await tester.tap(find.text('Finish my ritual'));
+      await tester.tap(find.text('Skip'));
       await tester.pumpAndSettle();
 
       // A ritual-only day still counts for the streak.

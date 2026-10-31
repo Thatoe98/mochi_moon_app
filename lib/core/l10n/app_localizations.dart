@@ -2621,7 +2621,7 @@ abstract class AppLocalizations {
   /// No description provided for @ritualGratitudeBody.
   ///
   /// In en, this message translates to:
-  /// **'Take a slow breath and think of one small thing that felt good today. Writing it down is coming soon.'**
+  /// **'Take a slow breath and think of one small thing that felt good today.'**
   String get ritualGratitudeBody;
 
   /// No description provided for @ritualFinish.
@@ -2647,6 +2647,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ritual complete'**
   String get ritualDoneSemantics;
+
+  /// No description provided for @gratitudeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gratitude jar'**
+  String get gratitudeTitle;
+
+  /// No description provided for @gratitudeMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Little thanks and small wins, kept safe'**
+  String get gratitudeMeSubtitle;
+
+  /// No description provided for @gratitudeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Something good, big or small'**
+  String get gratitudeHint;
+
+  /// No description provided for @gratitudeAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop a star in the jar'**
+  String get gratitudeAdd;
+
+  /// No description provided for @gratitudeDayFull.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s three for today. Your jar will be happy to see you tomorrow.'**
+  String get gratitudeDayFull;
+
+  /// No description provided for @gratitudeJarCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Your jar is waiting for its first star} =1{1 star in your jar} other{{count} stars in your jar}}'**
+  String gratitudeJarCount(int count);
+
+  /// No description provided for @gratitudeJarSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{An empty jar} =1{A jar with 1 paper star} other{A jar with {count} paper stars}}'**
+  String gratitudeJarSemantics(int count);
+
+  /// No description provided for @gratitudeOpenJar.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the jar'**
+  String get gratitudeOpenJar;
+
+  /// No description provided for @gratitudeAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Another one'**
+  String get gratitudeAnother;
+
+  /// No description provided for @gratitudeCloseJar.
+  ///
+  /// In en, this message translates to:
+  /// **'Close the jar'**
+  String get gratitudeCloseJar;
+
+  /// No description provided for @gratitudeNothingYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing from earlier days yet. Come back tomorrow and your jar will have something for you.'**
+  String get gratitudeNothingYet;
+
+  /// No description provided for @gratitudeEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your jar is empty'**
+  String get gratitudeEmptyTitle;
+
+  /// No description provided for @gratitudeEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Write one thing you\'re thankful for, or a small win, and it becomes a paper star.'**
+  String get gratitudeEmptyBody;
+
+  /// No description provided for @gratitudeTodayHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get gratitudeTodayHeader;
+
+  /// No description provided for @gratitudeEarlierHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier'**
+  String get gratitudeEarlierHeader;
+
+  /// No description provided for @gratitudeDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this star'**
+  String get gratitudeDelete;
+
+  /// No description provided for @gratitudeDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this star?'**
+  String get gratitudeDeleteTitle;
+
+  /// No description provided for @gratitudeDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It will be removed from your jar for good.'**
+  String get gratitudeDeleteBody;
+
+  /// No description provided for @gratitudeDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get gratitudeDeleteConfirm;
+
+  /// No description provided for @gratitudeCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it'**
+  String get gratitudeCancel;
+
+  /// No description provided for @gratitudePrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can read what you write here.'**
+  String get gratitudePrivacyNote;
 }
 
 class _AppLocalizationsDelegate

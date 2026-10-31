@@ -284,11 +284,11 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.16 Gratitude and wins jar (Free)
 
-- [ ] She can add 1–3 short entries per local day (max 200 characters each), as part of the ritual or from the jar screen in Me.
-- [ ] Each entry drops a paper star into the jar with a short fill animation; the jar fills visibly with the count of entries (capped for display).
-- [ ] "Open the jar" shows random past entries one at a time, never one from today first; an empty jar shows the mascot and an invitation.
-- [ ] She can delete an entry. Entries are stored locally first and synced to `users/{uid}/gratitude` (§8.1).
-- [ ] **Entries are private (§10):** never sent to the AI API or to analytics.
+- [x] She can add 1–3 short entries per local day (max 200 characters each), as part of the ritual or from the jar screen in Me. *(built P13, 2026-10-31)*
+- [x] Each entry drops a paper star into the jar with a short fill animation; the jar fills visibly with the count of entries (capped for display).
+- [x] "Open the jar" shows random past entries one at a time, never one from today first; an empty jar shows the mascot and an invitation.
+- [x] She can delete an entry. Entries are stored locally first and synced to `users/{uid}/gratitude` (§8.1). *(a delete made while offline is not queued: the Firestore copy comes back with the next sync)*
+- [x] **Entries are private (§10):** never sent to the AI API or to analytics. *(no analytics event carries text; the gratitude events of §11 are not wired yet)*
 - [ ] The jar is also reachable from the hard-day kit (§6.26).
 
 ### 6.17 My own cards (3 free, unlimited Premium)
@@ -905,8 +905,8 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14) — *rules + 83 emulator tests done 2026-10-31 (P3, committed, not yet deployed to dev); account deletion coverage done in P4 (2026-10-31); rules still to deploy*
 - [x] Drift schema v4 with the first new tables (§8.6) — *done 2026-10-31: `mood_entries`, `gratitude_entries`, `custom_cards`, `ritual_days`, `ritual_progress`; the text columns are named `body`; the other §8.6 tables follow in their own tasks*
 - [x] Daily mood check-in stored per date (§6.18, month view) — *done 2026-10-31: Deck check-in, Me → Mood, Firestore sync of `moods/{date}`; the ritual's mood step comes with the ritual flow*
-- [x] Daily ritual on Today with streak and cosmic reward (§6.15) — *the gratitude step is a placeholder until the jar (§6.16)*
-- [ ] Gratitude and wins jar (§6.16)
+- [x] Daily ritual on Today with streak and cosmic reward (§6.15)
+- [x] Gratitude and wins jar (§6.16) — *done 2026-10-31 (P13); the hard-day kit link comes with P17*
 - [ ] My own cards, 3 free (§6.17)
 - [ ] Breathe with Mochi (§6.19)
 - [ ] Hard-day kit with `TODO_CONTENT` helplines (§6.26)

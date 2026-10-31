@@ -1542,7 +1542,7 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get ritualGratitudeBody =>
-      'ဖြည်းဖြည်း အသက်ရှူပြီး ဒီနေ့ စိတ်ချမ်းသာစေခဲ့တဲ့ သေးသေးလေးတစ်ခုကို စဉ်းစားကြည့်ပါ။ ရေးမှတ်နိုင်တာကို မကြာခင် ထည့်ပေးတော့မယ်။';
+      'အသက်ကို ဖြည်းဖြည်းလေး ရှူပြီး ဒီနေ့ စိတ်ချမ်းသာစေခဲ့တဲ့ အရာသေးသေးလေးတစ်ခုကို စဉ်းစားကြည့်ပါ။';
 
   @override
   String get ritualFinish => 'ငါ့ ritual လေး ပြီးအောင်လုပ်မယ်';
@@ -1556,4 +1556,86 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get ritualDoneSemantics => 'Ritual ပြီးပါပြီ';
+
+  @override
+  String get gratitudeTitle => 'ကျေးဇူးတင်စရာလေးတွေ ထည့်တဲ့အိုး';
+
+  @override
+  String get gratitudeMeSubtitle =>
+      'ကျေးဇူးတင်စရာလေးတွေနဲ့ အောင်မြင်မှုအသေးလေးတွေကို လုံလုံခြုံခြုံ သိမ်းထားမယ်';
+
+  @override
+  String get gratitudeHint => 'ကောင်းတဲ့အရာလေးတစ်ခု၊ ကြီးကြီးသေးသေး';
+
+  @override
+  String get gratitudeAdd => 'အိုးလေးထဲ ကြယ်လေးတစ်ပွင့် ထည့်လိုက်ပါ';
+
+  @override
+  String get gratitudeDayFull =>
+      'ဒီနေ့အတွက် 3 ခု ရှိပြီနော်။ မနက်ဖြန်ကျရင် အိုးလေးက ပြန်လာတွေ့တာကို ဝမ်းသာနေမှာပါ။';
+
+  @override
+  String gratitudeJarCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'အိုးလေးထဲမှာ ကြယ် $count ပွင့် ရှိပါတယ်',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gratitudeJarSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'စက္ကူကြယ် $count ပွင့်ပါတဲ့ အိုးလေး',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gratitudeOpenJar => 'အိုးလေးကို ဖွင့်မယ်';
+
+  @override
+  String get gratitudeAnother => 'နောက်တစ်ခု ထပ်ထည့်မယ်';
+
+  @override
+  String get gratitudeCloseJar => 'အိုးလေးကို ပိတ်မယ်';
+
+  @override
+  String get gratitudeNothingYet =>
+      'အရင်ရက်တွေအတွက်တော့ မရှိသေးပါဘူး။ မနက်ဖြန် ပြန်လာကြည့်ပါနော်၊ အိုးလေးထဲမှာ တစ်ခုခု ရှိနေပါလိမ့်မယ်။';
+
+  @override
+  String get gratitudeEmptyTitle => 'အိုးလေးထဲမှာ ဘာမှ မရှိသေးဘူး';
+
+  @override
+  String get gratitudeEmptyBody =>
+      'ကျေးဇူးတင်မိတဲ့အရာလေးတစ်ခု ဒါမှမဟုတ် အောင်မြင်မှုအသေးလေးတစ်ခုကို ရေးလိုက်ပါ၊ စက္ကူကြယ်လေးတစ်ပွင့် ဖြစ်လာပါလိမ့်မယ်။';
+
+  @override
+  String get gratitudeTodayHeader => 'ဒီနေ့';
+
+  @override
+  String get gratitudeEarlierHeader => 'အရင်ရက်တွေ';
+
+  @override
+  String get gratitudeDelete => 'ဒီကြယ်လေးကို ဖျက်မယ်';
+
+  @override
+  String get gratitudeDeleteTitle => 'ဒီကြယ်လေးကို ဖျက်မှာလား။';
+
+  @override
+  String get gratitudeDeleteBody => 'အိုးလေးထဲကနေ အပြီးဖယ်ရှားလိုက်ပါမယ်။';
+
+  @override
+  String get gratitudeDeleteConfirm => 'ဖျက်မယ်';
+
+  @override
+  String get gratitudeCancel => 'ဆက်သိမ်းထားမယ်';
+
+  @override
+  String get gratitudePrivacyNote =>
+      'ဒီမှာ ရေးထားတာကို ကိုယ်တစ်ယောက်တည်းပဲ ဖတ်နိုင်ပါတယ်။';
 }

@@ -1528,7 +1528,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ritualGratitudeBody =>
-      'Take a slow breath and think of one small thing that felt good today. Writing it down is coming soon.';
+      'Take a slow breath and think of one small thing that felt good today.';
 
   @override
   String get ritualFinish => 'Finish my ritual';
@@ -1542,4 +1542,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ritualDoneSemantics => 'Ritual complete';
+
+  @override
+  String get gratitudeTitle => 'Gratitude jar';
+
+  @override
+  String get gratitudeMeSubtitle => 'Little thanks and small wins, kept safe';
+
+  @override
+  String get gratitudeHint => 'Something good, big or small';
+
+  @override
+  String get gratitudeAdd => 'Drop a star in the jar';
+
+  @override
+  String get gratitudeDayFull =>
+      'That\'s three for today. Your jar will be happy to see you tomorrow.';
+
+  @override
+  String gratitudeJarCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stars in your jar',
+      one: '1 star in your jar',
+      zero: 'Your jar is waiting for its first star',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gratitudeJarSemantics(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'A jar with $count paper stars',
+      one: 'A jar with 1 paper star',
+      zero: 'An empty jar',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gratitudeOpenJar => 'Open the jar';
+
+  @override
+  String get gratitudeAnother => 'Another one';
+
+  @override
+  String get gratitudeCloseJar => 'Close the jar';
+
+  @override
+  String get gratitudeNothingYet =>
+      'Nothing from earlier days yet. Come back tomorrow and your jar will have something for you.';
+
+  @override
+  String get gratitudeEmptyTitle => 'Your jar is empty';
+
+  @override
+  String get gratitudeEmptyBody =>
+      'Write one thing you\'re thankful for, or a small win, and it becomes a paper star.';
+
+  @override
+  String get gratitudeTodayHeader => 'Today';
+
+  @override
+  String get gratitudeEarlierHeader => 'Earlier';
+
+  @override
+  String get gratitudeDelete => 'Delete this star';
+
+  @override
+  String get gratitudeDeleteTitle => 'Delete this star?';
+
+  @override
+  String get gratitudeDeleteBody =>
+      'It will be removed from your jar for good.';
+
+  @override
+  String get gratitudeDeleteConfirm => 'Delete';
+
+  @override
+  String get gratitudeCancel => 'Keep it';
+
+  @override
+  String get gratitudePrivacyNote => 'Only you can read what you write here.';
 }

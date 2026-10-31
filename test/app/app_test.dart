@@ -12,6 +12,7 @@ import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_pro
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
@@ -32,6 +33,7 @@ import '../features/cosmic/retrograde/support/fake_alerts.dart';
 import '../features/cosmic/retrograde/support/periods.dart';
 import '../features/cosmic/today/support/fake_thai_colors_setting.dart';
 import '../features/deck/support/fake_deck_repository.dart';
+import '../features/gratitude/support/fake_gratitude.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/mood/support/fake_mood.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
@@ -74,6 +76,8 @@ Widget _app({
       FakeRitualProgressRepository(),
     ),
     journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
+    gratitudeRepositoryProvider.overrideWithValue(FakeGratitudeRepository()),
+    gratitudeRemoteProvider.overrideWithValue(null),
     moodRepositoryProvider.overrideWithValue(FakeMoodRepository()),
     moodRemoteProvider.overrideWithValue(null),
     partnerRepositoryProvider.overrideWithValue(FakePartnerRepository()),
