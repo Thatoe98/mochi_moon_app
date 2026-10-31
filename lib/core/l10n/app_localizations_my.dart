@@ -559,6 +559,16 @@ class AppLocalizationsMy extends AppLocalizations {
   String get languageSystem => 'ဖုန်းမှာ သတ်မှတ်ထားတဲ့ ဘာသာစကားအတိုင်း';
 
   @override
+  String get languageFirstTitle => 'ဘာသာစကားကို ရွေးပါ';
+
+  @override
+  String get languageFirstBody =>
+      'အိမ်လို နွေးထွေးတယ်လို့ ခံစားရတဲ့ ဘာသာစကားကို ရွေးပါ။ ကိုယ်တိုင်ထဲမှာ အချိန်မရွေး ပြောင်းလို့ရပါတယ်။';
+
+  @override
+  String get languageFirstContinue => 'ဆက်လုပ်မယ်';
+
+  @override
   String get signAries => 'Aries';
 
   @override

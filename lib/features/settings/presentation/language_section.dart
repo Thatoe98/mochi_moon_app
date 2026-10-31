@@ -4,18 +4,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/domain/app_language.dart';
-
-/// Each language is named in its own language, whatever the app language is,
-/// so these two names are not in the ARB files.
-const _englishName = 'English';
-const _burmeseName = 'မြန်မာ';
-
-String _nameOf(AppLanguage language, AppLocalizations l10n) =>
-    switch (language) {
-      AppLanguage.system => l10n.languageSystem,
-      AppLanguage.english => _englishName,
-      AppLanguage.burmese => _burmeseName,
-    };
+import 'package:mochi_moon/features/settings/presentation/language_names.dart';
 
 /// The Me-tab row that shows the app language and opens the choice sheet.
 class LanguageSection extends ConsumerWidget {
@@ -30,7 +19,7 @@ class LanguageSection extends ConsumerWidget {
       minTileHeight: AppSpacing.minTouchTarget,
       leading: const Icon(Icons.language_rounded),
       title: Text(l10n.languageTitle),
-      subtitle: Text(_nameOf(current, l10n)),
+      subtitle: Text(languageName(current, l10n)),
       trailing: const Icon(Icons.chevron_right_rounded),
       enabled: loaded.hasValue,
       onTap: () => _choose(context, ref, current),
@@ -68,7 +57,7 @@ class _LanguageSheet extends StatelessWidget {
           for (final language in AppLanguage.values)
             ListTile(
               minTileHeight: AppSpacing.minTouchTarget,
-              title: Text(_nameOf(language, l10n)),
+              title: Text(languageName(language, l10n)),
               selected: language == current,
               trailing: language == current
                   ? const Icon(Icons.check_rounded)

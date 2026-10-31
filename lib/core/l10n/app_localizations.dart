@@ -1004,6 +1004,24 @@ abstract class AppLocalizations {
   /// **'Same as my phone'**
   String get languageSystem;
 
+  /// First onboarding screen heading, before any language is set
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get languageFirstTitle;
+
+  /// No description provided for @languageFirstBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick the one that feels like home. You can change it any time in Me.'**
+  String get languageFirstBody;
+
+  /// No description provided for @languageFirstContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get languageFirstContinue;
+
   /// No description provided for @signAries.
   ///
   /// In en, this message translates to:

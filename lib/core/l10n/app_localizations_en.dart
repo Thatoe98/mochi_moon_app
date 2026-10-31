@@ -558,6 +558,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageSystem => 'Same as my phone';
 
   @override
+  String get languageFirstTitle => 'Choose your language';
+
+  @override
+  String get languageFirstBody =>
+      'Pick the one that feels like home. You can change it any time in Me.';
+
+  @override
+  String get languageFirstContinue => 'Continue';
+
+  @override
   String get signAries => 'Aries';
 
   @override

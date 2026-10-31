@@ -175,6 +175,12 @@
   "@languageSystem": {
     "description": "Language option that follows the device language"
   },
+  "languageFirstTitle": "Choose your language",
+  "@languageFirstTitle": {
+    "description": "First onboarding screen heading, before any language is set"
+  },
+  "languageFirstBody": "Pick the one that feels like home. You can change it any time in Me.",
+  "languageFirstContinue": "Continue",
   "signAries": "Aries",
   "signTaurus": "Taurus",
   "signGemini": "Gemini",
