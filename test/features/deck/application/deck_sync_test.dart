@@ -63,6 +63,20 @@ void main() {
     expect(put.counters.lastCompletedDate, DateTime(2026, 10, 28));
   });
 
+  test('a finished ritual counts in the counters', () async {
+    final repo = FakeDeckRepository();
+    final remote = FakeDeckCountersRemote();
+    await start(repo: repo, remote: remote);
+
+    await repo.markRitualDay(now);
+    await pumpEventQueue();
+
+    final counters = remote.puts.last.counters;
+    expect(counters.streak, 1);
+    expect(counters.todayCount, 0);
+    expect(counters.lastCompletedDate, DateTime(2026, 10, 28));
+  });
+
   test('sends zeroes and no last day before the first card', () async {
     final remote = FakeDeckCountersRemote();
     await start(repo: FakeDeckRepository(), remote: remote);

@@ -145,6 +145,35 @@ void main() {
     });
   });
 
+  group('currentStreak with ritual days', () {
+    test('a ritual-only day counts', () {
+      final ritual = {DateTime(2026, 10, 28)};
+      expect(currentStreak(const [], now, ritualDays: ritual), 1);
+    });
+
+    test('card days and ritual days chain together', () {
+      final history = [event('a', DateTime(2026, 10, 26, 9))];
+      final ritual = {DateTime(2026, 10, 27), DateTime(2026, 10, 28, 7)};
+      expect(currentStreak(history, now, ritualDays: ritual), 3);
+    });
+
+    test('a card-only day counts without a ritual', () {
+      final history = [event('a', DateTime(2026, 10, 28, 9))];
+      expect(currentStreak(history, now), 1);
+    });
+
+    test('a gap day breaks the run', () {
+      final history = [event('a', DateTime(2026, 10, 28, 9))];
+      final ritual = {DateTime(2026, 10, 26)};
+      expect(currentStreak(history, now, ritualDays: ritual), 1);
+    });
+
+    test('a streak that reached yesterday stays alive until today ends', () {
+      final ritual = {DateTime(2026, 10, 26), DateTime(2026, 10, 27)};
+      expect(currentStreak(const [], now, ritualDays: ritual), 2);
+    });
+  });
+
   group('currentStreak', () {
     test('is zero with no history', () {
       expect(currentStreak(const [], now), 0);

@@ -15,13 +15,20 @@ class DeckCounters {
   });
 
   /// Counters for [history] on the local day of [now].
-  factory DeckCounters.from(List<DeckEvent> history, DateTime now) {
+  factory DeckCounters.from(
+    List<DeckEvent> history,
+    DateTime now, {
+    Set<DateTime> ritualDays = const {},
+  }) {
     DateTime? last;
     for (final event in history) {
       if (last == null || event.at.isAfter(last)) last = event.at;
     }
+    for (final day in ritualDays) {
+      if (last == null || day.isAfter(last)) last = day;
+    }
     return DeckCounters(
-      streak: currentStreak(history, now),
+      streak: currentStreak(history, now, ritualDays: ritualDays),
       lastCompletedDate: last == null
           ? null
           : DateTime(last.year, last.month, last.day),
@@ -32,7 +39,8 @@ class DeckCounters {
 
   final int streak;
 
-  /// Local day of the latest completed card, or null before the first one.
+  /// Local day of the latest completed card or ritual, or null before the
+  /// first one.
   final DateTime? lastCompletedDate;
 
   final int todayCount;

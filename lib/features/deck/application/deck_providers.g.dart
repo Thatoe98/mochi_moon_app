@@ -148,7 +148,7 @@ final class DeckSyncProvider
   }
 }
 
-String _$deckSyncHash() => r'5a8bd1d5a5f55aa0524bff5342726046e781f239';
+String _$deckSyncHash() => r'b933c581b865a64847b6d5d9f52fc4548fbdbe22';
 
 /// Current time; overridden in tests.
 
@@ -310,7 +310,7 @@ final class DeckProvider extends $AsyncNotifierProvider<Deck, DeckState> {
   Deck create() => Deck();
 }
 
-String _$deckHash() => r'ecb7631e8e844ce9504c216f77e7a1b7b41de631';
+String _$deckHash() => r'0f4e59a3c6978600f56fe7f4578e48d4724e50fb';
 
 abstract class _$Deck extends $AsyncNotifier<DeckState> {
   FutureOr<DeckState> build();

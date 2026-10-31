@@ -40,6 +40,25 @@ class FakeDeckRepository implements DeckRepository {
     return event;
   }
 
+  final _ritualDays = <DateTime>{};
+
+  @override
+  Future<Set<DateTime>> ritualDays() async => {..._ritualDays};
+
+  @override
+  Stream<Set<DateTime>> watchRitualDays() async* {
+    yield {..._ritualDays};
+    await for (final _ in _changes.stream) {
+      yield {..._ritualDays};
+    }
+  }
+
+  @override
+  Future<void> markRitualDay(DateTime at) async {
+    _ritualDays.add(DateTime(at.year, at.month, at.day));
+    _changes.add(null);
+  }
+
   @override
   Future<void> undo(DeckEvent event) async {
     events.removeWhere((e) => e.id == event.id);

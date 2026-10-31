@@ -275,7 +275,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [ ] Today is the home tab and shows the ritual's state: not started, in progress (step n of 4), or done for today.
 - [ ] The 3 ritual cards use the same timer gate and swipe rules as the Deck; a swipe before the ring is full is cancelled.
 - [ ] Ritual cards count toward the 10 new cards per day free limit (§6.2). If fewer than 3 are left, the ritual uses what is left and still completes; Premium has no limit.
-- [ ] Completing the ritual stores one `ritual_days` row for the local date and updates the streak. The streak counts a day when the ritual is completed **or** at least 1 deck card is completed. A missed day shows no guilt copy.
+- [ ] Completing the ritual stores one `ritual_days` row for the local date and updates the streak. The streak counts a day when the ritual is completed **or** at least 1 deck card is completed. A missed day shows no guilt copy. *Streak rule built (P10, 2026-10-31): `currentStreak` counts ritual days and card days; the `ritual_days` table is read and written through the deck repository (`markRitualDay`); the ritual flow that calls it is P11.*
 - [ ] The mood step stores the day's mood (§6.18). Skipping it stores nothing.
 - [ ] Leaving mid-ritual and coming back the same day resumes at the same step.
 - [ ] The cosmic reward card shows today's energy line and lucky color when she has birth data; otherwise "Unlock your cosmic side" (§6.1). Neither blocks finishing the ritual.

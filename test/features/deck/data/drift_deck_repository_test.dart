@@ -17,6 +17,37 @@ void main() {
   Future<int> journalCount() async =>
       (await db.select(db.journalCache).get()).length;
 
+  group('ritual days', () {
+    test('are empty at first', () async {
+      expect(await repo.ritualDays(), isEmpty);
+    });
+
+    test('keep the local day, once however often it is marked', () async {
+      await repo.markRitualDay(DateTime(2026, 10, 28, 9, 30));
+      await repo.markRitualDay(DateTime(2026, 10, 28, 21));
+      await repo.markRitualDay(DateTime(2026, 10, 29, 8));
+
+      expect(await repo.ritualDays(), {
+        DateTime(2026, 10, 28),
+        DateTime(2026, 10, 29),
+      });
+    });
+
+    test('watch emits again after a day is marked', () async {
+      final seen = <int>[];
+      final sub = repo.watchRitualDays().listen(
+        (days) => seen.add(days.length),
+      );
+      addTearDown(sub.cancel);
+
+      await pumpEventQueue();
+      await repo.markRitualDay(DateTime(2026, 10, 28));
+      await pumpEventQueue();
+
+      expect(seen, [0, 1]);
+    });
+  });
+
   test('history is empty at first', () async {
     expect(await repo.history(), isEmpty);
   });

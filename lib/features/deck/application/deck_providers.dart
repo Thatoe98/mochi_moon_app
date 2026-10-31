@@ -54,7 +54,11 @@ Future<void> deckSync(Ref ref) async {
     try {
       do {
         again = false;
-        final counters = DeckCounters.from(await repository.history(), clock());
+        final counters = DeckCounters.from(
+          await repository.history(),
+          clock(),
+          ritualDays: await repository.ritualDays(),
+        );
         if (counters == sent) continue;
         try {
           await remote.put(user.uid, counters);
@@ -68,8 +72,15 @@ Future<void> deckSync(Ref ref) async {
     }
   }
 
-  final subscription = repository.watchHistory().listen((_) => push());
-  ref.onDispose(subscription.cancel);
+  final subscriptions = [
+    repository.watchHistory().listen((_) => push()),
+    repository.watchRitualDays().listen((_) => push()),
+  ];
+  ref.onDispose(() {
+    for (final subscription in subscriptions) {
+      unawaited(subscription.cancel());
+    }
+  });
 }
 
 /// Current time; overridden in tests.
@@ -123,6 +134,7 @@ class DeckState {
 @riverpod
 class Deck extends _$Deck {
   List<DeckEvent> _history = [];
+  Set<DateTime> _ritualDays = {};
   DeckEvent? _last;
 
   /// The local day the current deck was dealt for.
@@ -144,6 +156,7 @@ class Deck extends _$Deck {
     _dealAgainAtMidnight(now);
 
     _history = await repo.history();
+    _ritualDays = await repo.ritualDays();
     _last = null;
 
     final byId = {for (final q in quotes) q.id: q};
@@ -164,7 +177,7 @@ class Deck extends _$Deck {
           : dealt,
       position: 0,
       completedToday: completed,
-      streak: currentStreak(_history, now),
+      streak: currentStreak(_history, now, ritualDays: _ritualDays),
       canUndo: false,
     );
   }
@@ -198,6 +211,22 @@ class Deck extends _$Deck {
     if (!identical(cards, current.cards)) {
       state = AsyncData(current.copyWith(cards: cards));
     }
+  }
+
+  /// Marks today as a finished ritual day and updates the streak. The cards
+  /// already dealt stay as they are.
+  Future<void> completeRitualDay() async {
+    final now = ref.read(clockProvider)();
+    final repo = ref.read(deckRepositoryProvider);
+    await repo.markRitualDay(now);
+    _ritualDays = await repo.ritualDays();
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(
+      current.copyWith(
+        streak: currentStreak(_history, now, ritualDays: _ritualDays),
+      ),
+    );
   }
 
   /// Deals a fresh deck if the local day has changed since this one was dealt.
@@ -239,7 +268,7 @@ class Deck extends _$Deck {
       current.copyWith(
         position: current.position + 1,
         completedToday: completedOnDay(_history, now),
-        streak: currentStreak(_history, now),
+        streak: currentStreak(_history, now, ritualDays: _ritualDays),
         canUndo: true,
       ),
     );
@@ -260,7 +289,7 @@ class Deck extends _$Deck {
       current.copyWith(
         position: current.position - 1,
         completedToday: completedOnDay(_history, now),
-        streak: currentStreak(_history, now),
+        streak: currentStreak(_history, now, ritualDays: _ritualDays),
         canUndo: false,
       ),
     );

@@ -67,10 +67,15 @@ int completedOnDay(List<DeckEvent> history, DateTime now) {
   return history.where((e) => _day(e.at) == today).length;
 }
 
-/// Consecutive local days with at least one completed card, ending today. A
-/// streak that reached yesterday stays alive until today ends.
-int currentStreak(List<DeckEvent> history, DateTime now) {
-  final days = history.map((e) => _day(e.at)).toSet();
+/// Consecutive local days with at least one completed card or a finished
+/// daily ritual ([ritualDays], local days), ending today. A streak that
+/// reached yesterday stays alive until today ends.
+int currentStreak(
+  List<DeckEvent> history,
+  DateTime now, {
+  Set<DateTime> ritualDays = const {},
+}) {
+  final days = {...history.map((e) => _day(e.at)), ...ritualDays.map(_day)};
   var day = _day(now);
   if (!days.contains(day)) {
     day = DateTime(day.year, day.month, day.day - 1);

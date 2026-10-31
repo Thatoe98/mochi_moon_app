@@ -88,6 +88,32 @@ void main() {
     });
   });
 
+  group('ritual days', () {
+    test('a ritual-only yesterday keeps the streak', () async {
+      final repo = FakeDeckRepository();
+      await repo.markRitualDay(DateTime(2026, 10, 27, 20));
+      final container = makeContainer(repo: repo);
+
+      final state = await container.read(deckProvider.future);
+
+      expect(state.streak, 1);
+    });
+
+    test('completeRitualDay raises the streak and keeps the cards', () async {
+      final repo = FakeDeckRepository();
+      await repo.markRitualDay(DateTime(2026, 10, 27, 20));
+      final container = makeContainer(repo: repo);
+      final before = await container.read(deckProvider.future);
+
+      await container.read(deckProvider.notifier).completeRitualDay();
+
+      final after = container.read(deckProvider).requireValue;
+      expect(after.streak, 2);
+      expect(identical(after.cards, before.cards), isTrue);
+      expect(after.completedToday, 0);
+    });
+  });
+
   test('deals up to the daily limit', () async {
     final container = makeContainer();
     final state = await container.read(deckProvider.future);

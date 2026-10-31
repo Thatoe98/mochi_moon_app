@@ -69,6 +69,34 @@ class DriftDeckRepository implements DeckRepository {
     });
   }
 
+  @override
+  Future<Set<DateTime>> ritualDays() async =>
+      (await _db.select(_db.ritualDays).get()).map(_toDay).toSet();
+
+  @override
+  Stream<Set<DateTime>> watchRitualDays() => _db
+      .select(_db.ritualDays)
+      .watch()
+      .map((rows) => rows.map(_toDay).toSet());
+
+  @override
+  Future<void> markRitualDay(DateTime at) => _db
+      .into(_db.ritualDays)
+      .insert(
+        RitualDaysCompanion.insert(date: _key(at), completedAt: at),
+        mode: InsertMode.insertOrIgnore,
+      );
+
+  static String _key(DateTime t) =>
+      '${t.year.toString().padLeft(4, '0')}-'
+      '${t.month.toString().padLeft(2, '0')}-'
+      '${t.day.toString().padLeft(2, '0')}';
+
+  static DateTime _toDay(RitualDay row) {
+    final parts = row.date.split('-').map(int.parse).toList();
+    return DateTime(parts[0], parts[1], parts[2]);
+  }
+
   DeckEvent _toEvent(DeckHistoryData row) => DeckEvent(
     id: row.id,
     quoteId: row.quoteId,
