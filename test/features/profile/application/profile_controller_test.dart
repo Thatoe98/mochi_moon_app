@@ -164,7 +164,7 @@ void main() {
     );
 
     test(
-      'an unfinished local profile does not overwrite a complete remote one',
+      'a name-only local profile takes the birth data the account holds',
       () async {
         final local = FakeProfileRepository(
           const UserProfile(displayName: 'Mo'),
@@ -172,14 +172,46 @@ void main() {
         final remote = FakeProfileRemote({_uid: _complete});
         final container = _container(local: local, remote: remote);
 
-        await container
+        final result = await container
             .read(profileControllerProvider.notifier)
             .reconcile(_uid);
 
-        expect(local.profile, _complete);
-        expect(remote.stored[_uid], _complete);
+        final expected = _complete.copyWith(
+          displayName: 'Mo',
+          focusAreas: const [],
+        );
+        expect(result, expected);
+        expect(local.profile, expected);
+        expect(remote.stored[_uid], expected);
       },
     );
+
+    test('a name-only profile is uploaded when the account has none', () async {
+      const nameOnly = UserProfile(displayName: 'Mo');
+      final remote = FakeProfileRemote();
+      final container = _container(
+        local: FakeProfileRepository(nameOnly),
+        remote: remote,
+      );
+
+      final result = await container
+          .read(profileControllerProvider.notifier)
+          .reconcile(_uid);
+
+      expect(result, nameOnly);
+      expect(remote.stored[_uid], nameOnly);
+    });
+
+    test('a nameless local profile does not overwrite the remote one', () async {
+      final local = FakeProfileRepository(const UserProfile());
+      final remote = FakeProfileRemote({_uid: _complete});
+      final container = _container(local: local, remote: remote);
+
+      await container.read(profileControllerProvider.notifier).reconcile(_uid);
+
+      expect(local.profile, _complete);
+      expect(remote.upserts, isEmpty);
+    });
 
     test('with nothing anywhere it returns null', () async {
       final container = _container(

@@ -36,13 +36,15 @@ enum FocusArea {
 
 /// What the user told us about themselves.
 ///
-/// The sun/moon/rising signs join this once the astro engine lands.
+/// Only the name is needed to have a profile. The birth data is optional: it is
+/// asked for the first time the user opens the Cosmic tab (PRD §6.1), so every
+/// astro field here (and the signs derived from it) can be absent.
 @freezed
 abstract class UserProfile with _$UserProfile {
   const factory UserProfile({
     @Default('') String displayName,
 
-    /// Date only; the time part is ignored.
+    /// Date only; the time part is ignored. Null until the user unlocks Cosmic.
     DateTime? birthDate,
 
     /// Minutes since midnight, local to the birthplace. Null means the user
@@ -59,18 +61,25 @@ abstract class UserProfile with _$UserProfile {
   /// PRD §6.1: "I don't know" sets `timeKnown = false`.
   bool get timeKnown => birthMinutes != null;
 
-  /// A profile needs a name and a birth date to be useful; the rest is
-  /// optional.
-  bool get isComplete => displayName.trim().isNotEmpty && birthDate != null;
+  /// She has an account profile once she has given a name. This is what ends
+  /// the first-run profile steps; birth data is not needed for it.
+  bool get hasAccountProfile => displayName.trim().isNotEmpty;
 
-  /// Whether this can be saved from the edit form on [today]: a name, a real
-  /// birth date, and a birthplace whenever a birth time is given (PRD §6.1).
+  /// Whether the Cosmic features can be computed: a birth date was given. The
+  /// birth time and place stay optional.
+  bool get hasBirthData => birthDate != null;
+
+  /// Whether this can be saved from the edit form on [today]: a name, and
+  /// either no birth data at all or a real birth date with a birthplace
+  /// whenever a birth time is given (PRD §6.1).
   bool isValidFor(DateTime today) {
+    if (!hasAccountProfile || displayName.trim().length > maxDisplayNameLength) {
+      return false;
+    }
     final date = birthDate;
-    return displayName.trim().isNotEmpty &&
-        displayName.trim().length <= maxDisplayNameLength &&
-        date != null &&
-        isValidBirthDate(date, today) &&
+    // A birth time or place means nothing without a birth date.
+    if (date == null) return birthMinutes == null && birthPlace == null;
+    return isValidBirthDate(date, today) &&
         (birthMinutes == null || birthPlace != null);
   }
 }

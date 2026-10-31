@@ -38,12 +38,14 @@ class ProfileController extends _$ProfileController {
   }
 
   /// Brings the device and Firestore copies together for [uid] after sign-in
-  /// or app start. A complete local profile is uploaded; otherwise a complete
-  /// one from Firestore (for example after a reinstall) is taken. Returns the
-  /// profile now in use.
+  /// or app start. A local profile with a name and birth data is uploaded. A
+  /// local profile with only a name is uploaded too, after taking over any
+  /// birth data the account already holds (set on another device or before
+  /// this profile was reset). With no local profile, one from Firestore (for
+  /// example after a reinstall) is taken. Returns the profile now in use.
   Future<UserProfile?> reconcile(String uid) async {
     final local = await future;
-    if (local != null && local.isComplete) {
+    if (local != null && local.hasAccountProfile && local.hasBirthData) {
       await _push(uid, local);
       return local;
     }
@@ -51,7 +53,22 @@ class ProfileController extends _$ProfileController {
     if (remote == null) return local;
     try {
       final fetched = await remote.fetch(uid);
-      if (fetched != null && fetched.isComplete) {
+      if (local != null && local.hasAccountProfile) {
+        final merged = fetched != null && fetched.hasBirthData
+            ? local.copyWith(
+                birthDate: fetched.birthDate,
+                birthMinutes: fetched.birthMinutes,
+                birthPlace: fetched.birthPlace,
+              )
+            : local;
+        if (merged != local) {
+          await ref.read(profileRepositoryProvider).save(merged);
+          state = AsyncData(merged);
+        }
+        await _push(uid, merged);
+        return merged;
+      }
+      if (fetched != null && fetched.hasAccountProfile) {
         await ref.read(profileRepositoryProvider).save(fetched);
         state = AsyncData(fetched);
         return fetched;

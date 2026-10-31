@@ -36,6 +36,57 @@ void main() {
     expect(profile['timeKnown'], isFalse);
   });
 
+  test('a name-only profile has no birth data and reads back', () {
+    const nameOnly = UserProfile(displayName: 'Mochi');
+    final profile = profileToMap(nameOnly)['profile']! as Map<String, Object?>;
+
+    expect(profile['birthDate'], isNull);
+    expect(profile['timeKnown'], isNull);
+    expect(profileFromMap(profileToMap(nameOnly)), nameOnly);
+  });
+
+  test('a document without birth data or signs is a valid profile', () {
+    expect(
+      profileFromMap({
+        'displayName': 'Mochi',
+        'profile': {'focusAreas': ['calm']},
+      }),
+      const UserProfile(
+        displayName: 'Mochi',
+        focusAreas: [FocusArea.calm],
+      ),
+    );
+  });
+
+  test('a legacy full document with signs still loads', () {
+    expect(
+      profileFromMap({
+        'displayName': 'Mochi',
+        'profile': {
+          'birthDate': '1998-02-04',
+          'birthTime': null,
+          'timeKnown': false,
+          'sunSign': 'aquarius',
+          'focusAreas': <String>[],
+        },
+      }),
+      UserProfile(displayName: 'Mochi', birthDate: DateTime(1998, 2, 4)),
+    );
+  });
+
+  test('the remote map leaves the birth fields out without a birth date', () {
+    final map = profileToRemoteMap(const UserProfile(displayName: 'Mochi'));
+    final profile = map['profile']! as Map<String, Object?>;
+
+    expect(profile.keys, ['focusAreas']);
+  });
+
+  test('the remote map keeps the birth fields with a birth date', () {
+    final full = UserProfile(displayName: 'Mochi', birthDate: DateTime(1998));
+
+    expect(profileToRemoteMap(full), profileToMap(full));
+  });
+
   test('reads back what it wrote', () {
     final original = UserProfile(
       displayName: 'Mochi',

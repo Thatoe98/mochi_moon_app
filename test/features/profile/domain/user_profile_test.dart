@@ -50,10 +50,22 @@ void main() {
       birthDate: DateTime(1998, 11, 8),
     );
 
-    test('needs a name and a birthday', () {
+    test('needs a name', () {
       expect(valid.isValidFor(today), isTrue);
       expect(valid.copyWith(displayName: '  ').isValidFor(today), isFalse);
-      expect(valid.copyWith(birthDate: null).isValidFor(today), isFalse);
+    });
+
+    test('a name alone is enough; birth data is optional', () {
+      expect(const UserProfile(displayName: 'Mochi').isValidFor(today), isTrue);
+      expect(valid.copyWith(birthDate: null).isValidFor(today), isTrue);
+    });
+
+    test('a birth time or place without a birth date is not valid', () {
+      expect(
+        const UserProfile(displayName: 'Mochi', birthMinutes: 60)
+            .isValidFor(today),
+        isFalse,
+      );
     });
 
     test('keeps the name within the limit', () {
@@ -103,12 +115,20 @@ void main() {
       expect(const UserProfile(birthMinutes: 0).timeKnown, isTrue);
     });
 
-    test('is complete with a name and a birth date', () {
-      expect(const UserProfile().isComplete, isFalse);
-      expect(const UserProfile(displayName: 'Mochi').isComplete, isFalse);
-      expect(const UserProfile(displayName: '  ').isComplete, isFalse);
+    test('has an account profile with a name alone', () {
+      expect(const UserProfile().hasAccountProfile, isFalse);
+      expect(const UserProfile(displayName: '  ').hasAccountProfile, isFalse);
       expect(
-        UserProfile(displayName: 'Mochi', birthDate: DateTime(1998)).isComplete,
+        const UserProfile(displayName: 'Mochi').hasAccountProfile,
+        isTrue,
+      );
+    });
+
+    test('has birth data only with a birth date', () {
+      expect(const UserProfile(displayName: 'Mochi').hasBirthData, isFalse);
+      expect(
+        UserProfile(displayName: 'Mochi', birthDate: DateTime(1998))
+            .hasBirthData,
         isTrue,
       );
     });

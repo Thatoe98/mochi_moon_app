@@ -34,7 +34,7 @@ class FirestoreProfileRemote implements ProfileRemote {
     final doc = _doc(uid);
     final exists = (await doc.get()).exists;
     final signs = signsOfProfile(profile);
-    final map = profileToMap(profile);
+    final map = profileToRemoteMap(profile);
     await doc.set({
       ...map,
       // The signs are derived from the birth data, so they are rewritten on

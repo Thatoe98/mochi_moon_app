@@ -14,13 +14,28 @@ Map<String, Object?> profileToMap(UserProfile profile) => {
     'birthTime': profile.birthMinutes == null
         ? null
         : formatMinutes(profile.birthMinutes!),
-    'timeKnown': profile.timeKnown,
+    // Only meaningful with a birth date (PRD §8.1).
+    'timeKnown': profile.hasBirthData ? profile.timeKnown : null,
     'place': profile.birthPlace == null
         ? null
         : birthPlaceToMap(profile.birthPlace!),
     'focusAreas': [for (final area in profile.focusAreas) area.id],
   },
 };
+
+/// [profileToMap] for a Firestore write that is merged into the existing
+/// document. Without birth data the birth fields are left out, so a profile
+/// that has none on this device can never blank out birth data the account
+/// already holds (clearing it is not offered in the app).
+Map<String, Object?> profileToRemoteMap(UserProfile profile) {
+  final map = profileToMap(profile);
+  if (profile.hasBirthData) return map;
+  final inner = Map<String, Object?>.of(map['profile']! as Map<String, Object?>)
+    ..removeWhere((key, _) => _birthKeys.contains(key));
+  return {...map, 'profile': inner};
+}
+
+const _birthKeys = {'birthDate', 'birthTime', 'timeKnown', 'place'};
 
 /// Reads what [profileToMap] wrote. Fields that are missing or malformed come
 /// back empty rather than failing, so one bad value cannot lock the user out.

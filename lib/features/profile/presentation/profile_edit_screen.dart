@@ -94,7 +94,10 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       await notifier.save(
         _draft.copyWith(
           displayName: _draft.displayName.trim(),
-          birthDate: DateUtils.dateOnly(_draft.birthDate!),
+          birthDate: switch (_draft.birthDate) {
+            final date? => DateUtils.dateOnly(date),
+            null => null,
+          },
         ),
       );
       messenger.showSnackBar(SnackBar(content: Text(l10n.profileEditSaved)));

@@ -37,7 +37,7 @@ class SignInStep extends _$SignInStep {
       final profile = await ref
           .read(profileControllerProvider.notifier)
           .reconcile(user.uid);
-      return profile != null && profile.isComplete
+      return profile != null && profile.hasAccountProfile
           ? SignInOutcome.restored
           : SignInOutcome.signedIn;
     } on AppFailure catch (failure) {
