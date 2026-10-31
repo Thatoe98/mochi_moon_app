@@ -54,6 +54,29 @@ void main() {
     },
   );
 
+  test('every journey day points at real quotes and quests', () async {
+    final journeys = await repo.loadJourneys();
+    final quoteIds = (await repo.loadQuotes()).map((q) => q.id).toSet();
+    final questIds = (await repo.loadQuests()).map((q) => q.id).toSet();
+
+    expect(journeys, isNotEmpty);
+    expect(journeys.map((j) => j.id).toSet(), hasLength(journeys.length));
+    for (final journey in journeys) {
+      expect(journey.days, anyOf(7, 14));
+      expect(journey.titleFor('en'), isNotEmpty);
+      expect(journey.summaryFor('en'), isNotEmpty);
+      expect(journey.daysPlan.map((d) => d.day), [
+        for (var day = 1; day <= journey.days; day++) day,
+      ]);
+      for (final plan in journey.daysPlan) {
+        expect(plan.quoteIds, hasLength(3));
+        expect(quoteIds.containsAll(plan.quoteIds), isTrue);
+        expect(questIds, contains(plan.questId));
+        expect(plan.reflectionFor('en'), isNotEmpty);
+      }
+    }
+  });
+
   test('loads all 12 signs with palettes of 4-6 colors', () async {
     final signs = await repo.loadSigns();
     expect(signs, hasLength(12));

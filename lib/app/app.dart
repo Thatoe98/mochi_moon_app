@@ -8,6 +8,7 @@ import 'package:mochi_moon/features/custom_cards/application/own_card_providers.
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
+import 'package:mochi_moon/features/journeys/application/journey_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
@@ -38,6 +39,7 @@ class MochiMoonApp extends ConsumerWidget {
       ..watch(gratitudeSyncProvider)
       ..watch(ownCardSyncProvider)
       ..watch(questSyncProvider)
+      ..watch(journeySyncProvider)
       ..watch(partnerSyncProvider)
       ..watch(deckSyncProvider);
     final reduceMotion =

@@ -4163,6 +4163,542 @@ class QuestStatesCompanion extends UpdateCompanion<QuestState> {
   }
 }
 
+class $JourneyProgressEntriesTable extends JourneyProgressEntries
+    with TableInfo<$JourneyProgressEntriesTable, JourneyProgressEntry> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $JourneyProgressEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _journeyIdMeta = const VerificationMeta(
+    'journeyId',
+  );
+  @override
+  late final GeneratedColumn<String> journeyId = GeneratedColumn<String>(
+    'journey_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _startedAtMeta = const VerificationMeta(
+    'startedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> startedAt = GeneratedColumn<DateTime>(
+    'started_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _currentDayMeta = const VerificationMeta(
+    'currentDay',
+  );
+  @override
+  late final GeneratedColumn<int> currentDay = GeneratedColumn<int>(
+    'current_day',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _completedDaysMeta = const VerificationMeta(
+    'completedDays',
+  );
+  @override
+  late final GeneratedColumn<String> completedDays = GeneratedColumn<String>(
+    'completed_days',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  );
+  static const VerificationMeta _reflectionsMeta = const VerificationMeta(
+    'reflections',
+  );
+  @override
+  late final GeneratedColumn<String> reflections = GeneratedColumn<String>(
+    'reflections',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('{}'),
+  );
+  static const VerificationMeta _completedAtMeta = const VerificationMeta(
+    'completedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> completedAt = GeneratedColumn<DateTime>(
+    'completed_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lastDoneOnMeta = const VerificationMeta(
+    'lastDoneOn',
+  );
+  @override
+  late final GeneratedColumn<String> lastDoneOn = GeneratedColumn<String>(
+    'last_done_on',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _syncedMeta = const VerificationMeta('synced');
+  @override
+  late final GeneratedColumn<bool> synced = GeneratedColumn<bool>(
+    'synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    journeyId,
+    startedAt,
+    currentDay,
+    completedDays,
+    reflections,
+    completedAt,
+    lastDoneOn,
+    synced,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'journey_progress_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<JourneyProgressEntry> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('journey_id')) {
+      context.handle(
+        _journeyIdMeta,
+        journeyId.isAcceptableOrUnknown(data['journey_id']!, _journeyIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_journeyIdMeta);
+    }
+    if (data.containsKey('started_at')) {
+      context.handle(
+        _startedAtMeta,
+        startedAt.isAcceptableOrUnknown(data['started_at']!, _startedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_startedAtMeta);
+    }
+    if (data.containsKey('current_day')) {
+      context.handle(
+        _currentDayMeta,
+        currentDay.isAcceptableOrUnknown(data['current_day']!, _currentDayMeta),
+      );
+    }
+    if (data.containsKey('completed_days')) {
+      context.handle(
+        _completedDaysMeta,
+        completedDays.isAcceptableOrUnknown(
+          data['completed_days']!,
+          _completedDaysMeta,
+        ),
+      );
+    }
+    if (data.containsKey('reflections')) {
+      context.handle(
+        _reflectionsMeta,
+        reflections.isAcceptableOrUnknown(
+          data['reflections']!,
+          _reflectionsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('completed_at')) {
+      context.handle(
+        _completedAtMeta,
+        completedAt.isAcceptableOrUnknown(
+          data['completed_at']!,
+          _completedAtMeta,
+        ),
+      );
+    }
+    if (data.containsKey('last_done_on')) {
+      context.handle(
+        _lastDoneOnMeta,
+        lastDoneOn.isAcceptableOrUnknown(
+          data['last_done_on']!,
+          _lastDoneOnMeta,
+        ),
+      );
+    }
+    if (data.containsKey('synced')) {
+      context.handle(
+        _syncedMeta,
+        synced.isAcceptableOrUnknown(data['synced']!, _syncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {journeyId};
+  @override
+  JourneyProgressEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return JourneyProgressEntry(
+      journeyId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}journey_id'],
+      )!,
+      startedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}started_at'],
+      )!,
+      currentDay: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}current_day'],
+      )!,
+      completedDays: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}completed_days'],
+      )!,
+      reflections: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reflections'],
+      )!,
+      completedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}completed_at'],
+      ),
+      lastDoneOn: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}last_done_on'],
+      ),
+      synced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}synced'],
+      )!,
+    );
+  }
+
+  @override
+  $JourneyProgressEntriesTable createAlias(String alias) {
+    return $JourneyProgressEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class JourneyProgressEntry extends DataClass
+    implements Insertable<JourneyProgressEntry> {
+  final String journeyId;
+  final DateTime startedAt;
+  final int currentDay;
+  final String completedDays;
+  final String reflections;
+  final DateTime? completedAt;
+  final String? lastDoneOn;
+  final bool synced;
+  const JourneyProgressEntry({
+    required this.journeyId,
+    required this.startedAt,
+    required this.currentDay,
+    required this.completedDays,
+    required this.reflections,
+    this.completedAt,
+    this.lastDoneOn,
+    required this.synced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['journey_id'] = Variable<String>(journeyId);
+    map['started_at'] = Variable<DateTime>(startedAt);
+    map['current_day'] = Variable<int>(currentDay);
+    map['completed_days'] = Variable<String>(completedDays);
+    map['reflections'] = Variable<String>(reflections);
+    if (!nullToAbsent || completedAt != null) {
+      map['completed_at'] = Variable<DateTime>(completedAt);
+    }
+    if (!nullToAbsent || lastDoneOn != null) {
+      map['last_done_on'] = Variable<String>(lastDoneOn);
+    }
+    map['synced'] = Variable<bool>(synced);
+    return map;
+  }
+
+  JourneyProgressEntriesCompanion toCompanion(bool nullToAbsent) {
+    return JourneyProgressEntriesCompanion(
+      journeyId: Value(journeyId),
+      startedAt: Value(startedAt),
+      currentDay: Value(currentDay),
+      completedDays: Value(completedDays),
+      reflections: Value(reflections),
+      completedAt: completedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(completedAt),
+      lastDoneOn: lastDoneOn == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastDoneOn),
+      synced: Value(synced),
+    );
+  }
+
+  factory JourneyProgressEntry.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return JourneyProgressEntry(
+      journeyId: serializer.fromJson<String>(json['journeyId']),
+      startedAt: serializer.fromJson<DateTime>(json['startedAt']),
+      currentDay: serializer.fromJson<int>(json['currentDay']),
+      completedDays: serializer.fromJson<String>(json['completedDays']),
+      reflections: serializer.fromJson<String>(json['reflections']),
+      completedAt: serializer.fromJson<DateTime?>(json['completedAt']),
+      lastDoneOn: serializer.fromJson<String?>(json['lastDoneOn']),
+      synced: serializer.fromJson<bool>(json['synced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'journeyId': serializer.toJson<String>(journeyId),
+      'startedAt': serializer.toJson<DateTime>(startedAt),
+      'currentDay': serializer.toJson<int>(currentDay),
+      'completedDays': serializer.toJson<String>(completedDays),
+      'reflections': serializer.toJson<String>(reflections),
+      'completedAt': serializer.toJson<DateTime?>(completedAt),
+      'lastDoneOn': serializer.toJson<String?>(lastDoneOn),
+      'synced': serializer.toJson<bool>(synced),
+    };
+  }
+
+  JourneyProgressEntry copyWith({
+    String? journeyId,
+    DateTime? startedAt,
+    int? currentDay,
+    String? completedDays,
+    String? reflections,
+    Value<DateTime?> completedAt = const Value.absent(),
+    Value<String?> lastDoneOn = const Value.absent(),
+    bool? synced,
+  }) => JourneyProgressEntry(
+    journeyId: journeyId ?? this.journeyId,
+    startedAt: startedAt ?? this.startedAt,
+    currentDay: currentDay ?? this.currentDay,
+    completedDays: completedDays ?? this.completedDays,
+    reflections: reflections ?? this.reflections,
+    completedAt: completedAt.present ? completedAt.value : this.completedAt,
+    lastDoneOn: lastDoneOn.present ? lastDoneOn.value : this.lastDoneOn,
+    synced: synced ?? this.synced,
+  );
+  JourneyProgressEntry copyWithCompanion(JourneyProgressEntriesCompanion data) {
+    return JourneyProgressEntry(
+      journeyId: data.journeyId.present ? data.journeyId.value : this.journeyId,
+      startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
+      currentDay: data.currentDay.present
+          ? data.currentDay.value
+          : this.currentDay,
+      completedDays: data.completedDays.present
+          ? data.completedDays.value
+          : this.completedDays,
+      reflections: data.reflections.present
+          ? data.reflections.value
+          : this.reflections,
+      completedAt: data.completedAt.present
+          ? data.completedAt.value
+          : this.completedAt,
+      lastDoneOn: data.lastDoneOn.present
+          ? data.lastDoneOn.value
+          : this.lastDoneOn,
+      synced: data.synced.present ? data.synced.value : this.synced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JourneyProgressEntry(')
+          ..write('journeyId: $journeyId, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('currentDay: $currentDay, ')
+          ..write('completedDays: $completedDays, ')
+          ..write('reflections: $reflections, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('lastDoneOn: $lastDoneOn, ')
+          ..write('synced: $synced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    journeyId,
+    startedAt,
+    currentDay,
+    completedDays,
+    reflections,
+    completedAt,
+    lastDoneOn,
+    synced,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is JourneyProgressEntry &&
+          other.journeyId == this.journeyId &&
+          other.startedAt == this.startedAt &&
+          other.currentDay == this.currentDay &&
+          other.completedDays == this.completedDays &&
+          other.reflections == this.reflections &&
+          other.completedAt == this.completedAt &&
+          other.lastDoneOn == this.lastDoneOn &&
+          other.synced == this.synced);
+}
+
+class JourneyProgressEntriesCompanion
+    extends UpdateCompanion<JourneyProgressEntry> {
+  final Value<String> journeyId;
+  final Value<DateTime> startedAt;
+  final Value<int> currentDay;
+  final Value<String> completedDays;
+  final Value<String> reflections;
+  final Value<DateTime?> completedAt;
+  final Value<String?> lastDoneOn;
+  final Value<bool> synced;
+  final Value<int> rowid;
+  const JourneyProgressEntriesCompanion({
+    this.journeyId = const Value.absent(),
+    this.startedAt = const Value.absent(),
+    this.currentDay = const Value.absent(),
+    this.completedDays = const Value.absent(),
+    this.reflections = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    this.lastDoneOn = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  JourneyProgressEntriesCompanion.insert({
+    required String journeyId,
+    required DateTime startedAt,
+    this.currentDay = const Value.absent(),
+    this.completedDays = const Value.absent(),
+    this.reflections = const Value.absent(),
+    this.completedAt = const Value.absent(),
+    this.lastDoneOn = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : journeyId = Value(journeyId),
+       startedAt = Value(startedAt);
+  static Insertable<JourneyProgressEntry> custom({
+    Expression<String>? journeyId,
+    Expression<DateTime>? startedAt,
+    Expression<int>? currentDay,
+    Expression<String>? completedDays,
+    Expression<String>? reflections,
+    Expression<DateTime>? completedAt,
+    Expression<String>? lastDoneOn,
+    Expression<bool>? synced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (journeyId != null) 'journey_id': journeyId,
+      if (startedAt != null) 'started_at': startedAt,
+      if (currentDay != null) 'current_day': currentDay,
+      if (completedDays != null) 'completed_days': completedDays,
+      if (reflections != null) 'reflections': reflections,
+      if (completedAt != null) 'completed_at': completedAt,
+      if (lastDoneOn != null) 'last_done_on': lastDoneOn,
+      if (synced != null) 'synced': synced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  JourneyProgressEntriesCompanion copyWith({
+    Value<String>? journeyId,
+    Value<DateTime>? startedAt,
+    Value<int>? currentDay,
+    Value<String>? completedDays,
+    Value<String>? reflections,
+    Value<DateTime?>? completedAt,
+    Value<String?>? lastDoneOn,
+    Value<bool>? synced,
+    Value<int>? rowid,
+  }) {
+    return JourneyProgressEntriesCompanion(
+      journeyId: journeyId ?? this.journeyId,
+      startedAt: startedAt ?? this.startedAt,
+      currentDay: currentDay ?? this.currentDay,
+      completedDays: completedDays ?? this.completedDays,
+      reflections: reflections ?? this.reflections,
+      completedAt: completedAt ?? this.completedAt,
+      lastDoneOn: lastDoneOn ?? this.lastDoneOn,
+      synced: synced ?? this.synced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (journeyId.present) {
+      map['journey_id'] = Variable<String>(journeyId.value);
+    }
+    if (startedAt.present) {
+      map['started_at'] = Variable<DateTime>(startedAt.value);
+    }
+    if (currentDay.present) {
+      map['current_day'] = Variable<int>(currentDay.value);
+    }
+    if (completedDays.present) {
+      map['completed_days'] = Variable<String>(completedDays.value);
+    }
+    if (reflections.present) {
+      map['reflections'] = Variable<String>(reflections.value);
+    }
+    if (completedAt.present) {
+      map['completed_at'] = Variable<DateTime>(completedAt.value);
+    }
+    if (lastDoneOn.present) {
+      map['last_done_on'] = Variable<String>(lastDoneOn.value);
+    }
+    if (synced.present) {
+      map['synced'] = Variable<bool>(synced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JourneyProgressEntriesCompanion(')
+          ..write('journeyId: $journeyId, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('currentDay: $currentDay, ')
+          ..write('completedDays: $completedDays, ')
+          ..write('reflections: $reflections, ')
+          ..write('completedAt: $completedAt, ')
+          ..write('lastDoneOn: $lastDoneOn, ')
+          ..write('synced: $synced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -4184,6 +4720,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $RitualDaysTable ritualDays = $RitualDaysTable(this);
   late final $RitualProgressTable ritualProgress = $RitualProgressTable(this);
   late final $QuestStatesTable questStates = $QuestStatesTable(this);
+  late final $JourneyProgressEntriesTable journeyProgressEntries =
+      $JourneyProgressEntriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -4203,6 +4741,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ritualDays,
     ritualProgress,
     questStates,
+    journeyProgressEntries,
   ];
 }
 
@@ -6812,6 +7351,304 @@ typedef $$QuestStatesTableProcessedTableManager =
       QuestState,
       PrefetchHooks Function()
     >;
+typedef $$JourneyProgressEntriesTableCreateCompanionBuilder =
+    JourneyProgressEntriesCompanion Function({
+      required String journeyId,
+      required DateTime startedAt,
+      Value<int> currentDay,
+      Value<String> completedDays,
+      Value<String> reflections,
+      Value<DateTime?> completedAt,
+      Value<String?> lastDoneOn,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+typedef $$JourneyProgressEntriesTableUpdateCompanionBuilder =
+    JourneyProgressEntriesCompanion Function({
+      Value<String> journeyId,
+      Value<DateTime> startedAt,
+      Value<int> currentDay,
+      Value<String> completedDays,
+      Value<String> reflections,
+      Value<DateTime?> completedAt,
+      Value<String?> lastDoneOn,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+
+class $$JourneyProgressEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $JourneyProgressEntriesTable> {
+  $$JourneyProgressEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get journeyId => $composableBuilder(
+    column: $table.journeyId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get startedAt => $composableBuilder(
+    column: $table.startedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get currentDay => $composableBuilder(
+    column: $table.currentDay,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get completedDays => $composableBuilder(
+    column: $table.completedDays,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get reflections => $composableBuilder(
+    column: $table.reflections,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get lastDoneOn => $composableBuilder(
+    column: $table.lastDoneOn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$JourneyProgressEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $JourneyProgressEntriesTable> {
+  $$JourneyProgressEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get journeyId => $composableBuilder(
+    column: $table.journeyId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get startedAt => $composableBuilder(
+    column: $table.startedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get currentDay => $composableBuilder(
+    column: $table.currentDay,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get completedDays => $composableBuilder(
+    column: $table.completedDays,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get reflections => $composableBuilder(
+    column: $table.reflections,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get lastDoneOn => $composableBuilder(
+    column: $table.lastDoneOn,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$JourneyProgressEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JourneyProgressEntriesTable> {
+  $$JourneyProgressEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get journeyId =>
+      $composableBuilder(column: $table.journeyId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get startedAt =>
+      $composableBuilder(column: $table.startedAt, builder: (column) => column);
+
+  GeneratedColumn<int> get currentDay => $composableBuilder(
+    column: $table.currentDay,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get completedDays => $composableBuilder(
+    column: $table.completedDays,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get reflections => $composableBuilder(
+    column: $table.reflections,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get completedAt => $composableBuilder(
+    column: $table.completedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get lastDoneOn => $composableBuilder(
+    column: $table.lastDoneOn,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get synced =>
+      $composableBuilder(column: $table.synced, builder: (column) => column);
+}
+
+class $$JourneyProgressEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JourneyProgressEntriesTable,
+          JourneyProgressEntry,
+          $$JourneyProgressEntriesTableFilterComposer,
+          $$JourneyProgressEntriesTableOrderingComposer,
+          $$JourneyProgressEntriesTableAnnotationComposer,
+          $$JourneyProgressEntriesTableCreateCompanionBuilder,
+          $$JourneyProgressEntriesTableUpdateCompanionBuilder,
+          (
+            JourneyProgressEntry,
+            BaseReferences<
+              _$AppDatabase,
+              $JourneyProgressEntriesTable,
+              JourneyProgressEntry
+            >,
+          ),
+          JourneyProgressEntry,
+          PrefetchHooks Function()
+        > {
+  $$JourneyProgressEntriesTableTableManager(
+    _$AppDatabase db,
+    $JourneyProgressEntriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$JourneyProgressEntriesTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$JourneyProgressEntriesTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$JourneyProgressEntriesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> journeyId = const Value.absent(),
+                Value<DateTime> startedAt = const Value.absent(),
+                Value<int> currentDay = const Value.absent(),
+                Value<String> completedDays = const Value.absent(),
+                Value<String> reflections = const Value.absent(),
+                Value<DateTime?> completedAt = const Value.absent(),
+                Value<String?> lastDoneOn = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => JourneyProgressEntriesCompanion(
+                journeyId: journeyId,
+                startedAt: startedAt,
+                currentDay: currentDay,
+                completedDays: completedDays,
+                reflections: reflections,
+                completedAt: completedAt,
+                lastDoneOn: lastDoneOn,
+                synced: synced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String journeyId,
+                required DateTime startedAt,
+                Value<int> currentDay = const Value.absent(),
+                Value<String> completedDays = const Value.absent(),
+                Value<String> reflections = const Value.absent(),
+                Value<DateTime?> completedAt = const Value.absent(),
+                Value<String?> lastDoneOn = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => JourneyProgressEntriesCompanion.insert(
+                journeyId: journeyId,
+                startedAt: startedAt,
+                currentDay: currentDay,
+                completedDays: completedDays,
+                reflections: reflections,
+                completedAt: completedAt,
+                lastDoneOn: lastDoneOn,
+                synced: synced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<
+                    $JourneyProgressEntriesTable,
+                    JourneyProgressEntry
+                  >(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $JourneyProgressEntriesTable,
+                    JourneyProgressEntry
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$JourneyProgressEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JourneyProgressEntriesTable,
+      JourneyProgressEntry,
+      $$JourneyProgressEntriesTableFilterComposer,
+      $$JourneyProgressEntriesTableOrderingComposer,
+      $$JourneyProgressEntriesTableAnnotationComposer,
+      $$JourneyProgressEntriesTableCreateCompanionBuilder,
+      $$JourneyProgressEntriesTableUpdateCompanionBuilder,
+      (
+        JourneyProgressEntry,
+        BaseReferences<
+          _$AppDatabase,
+          $JourneyProgressEntriesTable,
+          JourneyProgressEntry
+        >,
+      ),
+      JourneyProgressEntry,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6844,6 +7681,11 @@ class $AppDatabaseManager {
       $$RitualProgressTableTableManager(_db, _db.ritualProgress);
   $$QuestStatesTableTableManager get questStates =>
       $$QuestStatesTableTableManager(_db, _db.questStates);
+  $$JourneyProgressEntriesTableTableManager get journeyProgressEntries =>
+      $$JourneyProgressEntriesTableTableManager(
+        _db,
+        _db.journeyProgressEntries,
+      );
 }
 
 // **************************************************************************

@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "journeys": [
+    {
+      "id": "confidence",
+      "days": 7,
+      "premium": false,
+      "title": {
+        "en": "Confidence",
+        "my": "ကိုယ့်ကိုယ်ကို ယုံကြည်မှု"
+      },
+      "summary": {
+        "en": "Seven gentle days to trust your own voice a little more.",
+        "my": "ကိုယ့်အသံကို နည်းနည်းပိုယုံကြည်လာဖို့ နူးညံ့တဲ့ 7 ရက်တာ။"
+      },
+      "illustrationId": "ill_journey_confidence",
+      "daysPlan": [
+        {
+          "day": 1,
+          "quoteIds": [
+            "q_0003",
+            "q_0001",
+            "q_0005"
+          ],
+          "questId": "qst_002",
+          "reflection": {
+            "en": "What is one thing you like about yourself today?",
+            "my": "ဒီနေ့ ကိုယ့်ကိုယ်ကို သဘောကျမိတဲ့အချက်တစ်ခုက ဘာလဲ။"
+          }
+        },
+        {
+          "day": 2,
+          "quoteIds": [
+            "q_0007",
+            "q_0008",
+            "q_0006"
+          ],
+          "questId": "qst_005",
+          "reflection": {
+            "en": "What is one thing you did well this week?",
+            "my": "ဒီအပတ်မှာ ကိုယ်ကောင်းကောင်းလုပ်နိုင်ခဲ့တာတစ်ခုက ဘာလဲ။"
+          }
+        },
+        {
+          "day": 3,
+          "quoteIds": [
+            "q_0002",
+            "q_0004",
+            "q_0003"
+          ],
+          "questId": "qst_004",
+          "reflection": {
+            "en": "Where could a little more courage feel good?",
+            "my": "ဘယ်နေရာမှာ နည်းနည်းပိုသတ္တိရှိတာက ကိုယ့်အတွက် ကောင်းမလဲ။"
+          }
+        },
+        {
+          "day": 4,
+          "quoteIds": [
+            "q_0005",
+            "q_0006",
+            "q_0007"
+          ],
+          "questId": "qst_006",
+          "reflection": {
+            "en": "What would you say if you knew it would be heard kindly?",
+            "my": "ကြင်ကြင်နာနာ နားထောင်ပေးမယ်လို့ သိထားရင် ဘာပြောချင်မလဲ။"
+          }
+        },
+        {
+          "day": 5,
+          "quoteIds": [
+            "q_0001",
+            "q_0008",
+            "q_0002"
+          ],
+          "questId": "qst_001",
+          "reflection": {
+            "en": "How do you talk to yourself on a hard day, and how would you like to?",
+            "my": "ခက်ခဲတဲ့နေ့တွေမှာ ကိုယ့်ကိုယ်ကို ဘယ်လိုစကားပြောတတ်လဲ၊ ဘယ်လိုပြောချင်လဲ။"
+          }
+        },
+        {
+          "day": 6,
+          "quoteIds": [
+            "q_0004",
+            "q_0007",
+            "q_0005"
+          ],
+          "questId": "qst_012",
+          "reflection": {
+            "en": "What is something you are proud of, however small?",
+            "my": "ဘယ်လောက်သေးငယ်နေပါစေ ကိုယ်ဂုဏ်ယူမိတဲ့အရာတစ်ခုက ဘာလဲ။"
+          }
+        },
+        {
+          "day": 7,
+          "quoteIds": [
+            "q_0008",
+            "q_0003",
+            "q_0006"
+          ],
+          "questId": "qst_003",
+          "reflection": {
+            "en": "What do you want to carry with you from this week?",
+            "my": "ဒီအပတ်ထဲက ဘာကို ကိုယ်နဲ့အတူ ဆက်ယူသွားချင်လဲ။"
+          }
+        }
+      ]
+    }
+  ]
+}

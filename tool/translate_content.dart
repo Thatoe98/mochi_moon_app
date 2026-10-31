@@ -29,6 +29,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'translate/arb_batch.dart';
+import 'translate/journeys_batch.dart';
 import 'translate/openai_chat.dart';
 import 'translate/quotes_batch.dart';
 import 'translate/readings_batch.dart';
@@ -39,6 +40,7 @@ const _enReadings = 'assets/content/fallback_readings/en.json';
 const _myReadings = 'assets/content/fallback_readings/my.json';
 const _quotes = 'assets/content/quotes/quotes.json';
 const _quests = 'assets/content/quests/quests.json';
+const _journeys = 'assets/content/journeys/journeys.json';
 const _enWeb = '../mochi-moon-api/app/web_strings/en.json';
 const _myWeb = '../mochi-moon-api/app/web_strings/my.json';
 
@@ -46,7 +48,7 @@ Future<void> main(List<String> args) async {
   final options = _Options.parse(args);
   if (options == null) {
     stderr.writeln(
-      'usage: dart run tool/translate_content.dart [--arb] [--readings] [--quotes] [--quests] '
+      'usage: dart run tool/translate_content.dart [--arb] [--readings] [--quotes] [--quests] [--journeys] '
       '[--web] [--only REGEX] [--force] [--batch-size N] [--dry-run]',
     );
     exit(64);
@@ -93,6 +95,7 @@ Future<void> main(List<String> args) async {
         label: 'Quests',
       );
     }
+    if (options.journeys) failures += await _runJourneys(options, chat);
     if (options.web) failures += await _runWeb(options, chat);
   } on OpenAiException catch (e) {
     stderr.writeln(e);
@@ -237,6 +240,53 @@ Future<int> _runTexts(
   return failures;
 }
 
+Future<int> _runJourneys(_Options options, ChatCall? chat) async {
+  final json = _readJson(_journeys);
+  if (json == null) {
+    stdout.writeln('Journeys: $_journeys not found, skipped.');
+    return 0;
+  }
+  final journeys = json['journeys']! as List<Object?>;
+  final keys = pendingJourneyTexts(
+    journeys,
+    only: options.only == null ? null : RegExp(options.only!),
+    force: options.force,
+  );
+  stdout.writeln('Journeys: ${keys.length} text(s) to translate.');
+  if (keys.isEmpty) return 0;
+  if (chat == null) {
+    stdout.writeln('  would send: ${keys.join(', ')}');
+    return 0;
+  }
+
+  final source = journeySource(journeys);
+  final done = <String, String>{};
+  var failures = 0;
+  for (var i = 0; i < keys.length; i += options.batchSize) {
+    final batch = keys.sublist(
+      i,
+      (i + options.batchSize).clamp(0, keys.length),
+    );
+    stdout.writeln('  ${batch.length} text(s)…');
+    final result = await translateArb(
+      chat: chat,
+      en: source,
+      my: const {},
+      keys: batch,
+    );
+    done.addAll(result.done);
+    final merged = {...json, 'journeys': mergeJourneys(journeys, done)};
+    File(_journeys).writeAsStringSync(
+      "${const JsonEncoder.withIndent('  ').convert(merged)}\n",
+    );
+    for (final entry in result.failed.entries) {
+      failures++;
+      stderr.writeln('    FAILED ${entry.key}: ${entry.value.join('; ')}');
+    }
+  }
+  return failures;
+}
+
 Future<int> _runWeb(_Options options, ChatCall? chat) async {
   final en = _readJson(_enWeb);
   if (en == null) {
@@ -284,6 +334,7 @@ class _Options {
     required this.readings,
     required this.quotes,
     required this.quests,
+    required this.journeys,
     required this.web,
     required this.only,
     required this.force,
@@ -295,6 +346,7 @@ class _Options {
   final bool readings;
   final bool quotes;
   final bool quests;
+  final bool journeys;
   final bool web;
   final String? only;
   final bool force;
@@ -306,6 +358,7 @@ class _Options {
     var readings = false;
     var quotes = false;
     var quests = false;
+    var journeys = false;
     var web = false;
     var force = false;
     var dryRun = false;
@@ -321,6 +374,8 @@ class _Options {
           quotes = true;
         case '--quests':
           quests = true;
+        case '--journeys':
+          journeys = true;
         case '--web':
           web = true;
         case '--force':
@@ -339,17 +394,19 @@ class _Options {
           return null;
       }
     }
-    if (!arb && !readings && !quotes && !quests && !web) {
+    if (!arb && !readings && !quotes && !quests && !journeys && !web) {
       arb = true;
       readings = true;
       quotes = true;
       quests = true;
+      journeys = true;
     }
     return _Options(
       arb: arb,
       readings: readings,
       quotes: quotes,
       quests: quests,
+      journeys: journeys,
       web: web,
       only: only,
       force: force,

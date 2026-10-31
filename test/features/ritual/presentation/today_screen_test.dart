@@ -22,6 +22,7 @@ import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
+import 'package:mochi_moon/features/journeys/application/journey_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/quests/application/quest_providers.dart';
@@ -33,6 +34,7 @@ import '../../custom_cards/support/fake_own_cards.dart';
 import '../../deck/support/fake_deck_repository.dart';
 import '../../deck/support/fake_image_sharer.dart';
 import '../../gratitude/support/fake_gratitude.dart';
+import '../../journeys/support/fake_journey.dart';
 import '../../mood/support/fake_mood.dart';
 import '../../quests/support/fake_quest.dart';
 import '../support/fake_ritual_progress.dart';
@@ -102,6 +104,8 @@ Widget _app(
     moodRemoteProvider.overrideWithValue(null),
     questRepositoryProvider.overrideWithValue(FakeQuestRepository()),
     questRemoteProvider.overrideWithValue(null),
+    journeyRepositoryProvider.overrideWithValue(FakeJourneyRepository()),
+    journeyRemoteProvider.overrideWithValue(null),
     questsProvider.overrideWith((ref) async => const <Quest>[]),
     imageSharerProvider.overrideWithValue(FakeImageSharer()),
     clockProvider.overrideWithValue(() => _today),

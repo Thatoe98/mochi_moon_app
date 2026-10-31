@@ -142,6 +142,23 @@ class QuestStates extends Table {
   Set<Column<Object>> get primaryKey => {date};
 }
 
+/// How far she is in each journey (PRD §6.21). [completedDays] is a JSON list
+/// of day numbers and [reflections] a JSON map of day to her private note.
+/// [synced] is false until the row reached Firestore.
+class JourneyProgressEntries extends Table {
+  TextColumn get journeyId => text()();
+  DateTimeColumn get startedAt => dateTime()();
+  IntColumn get currentDay => integer().withDefault(const Constant(1))();
+  TextColumn get completedDays => text().withDefault(const Constant('[]'))();
+  TextColumn get reflections => text().withDefault(const Constant('{}'))();
+  DateTimeColumn get completedAt => dateTime().nullable()();
+  TextColumn get lastDoneOn => text().nullable()();
+  BoolColumn get synced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {journeyId};
+}
+
 /// Where today's ritual stands, so it resumes after the app is closed.
 /// [quoteIds] is a JSON list of the three card ids.
 class RitualProgress extends Table {
