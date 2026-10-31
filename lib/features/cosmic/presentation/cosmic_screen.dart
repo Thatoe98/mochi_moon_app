@@ -14,6 +14,7 @@ import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_bu
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/color_swatch_tile.dart';
+import 'package:mochi_moon/features/cosmic/unlock/presentation/cosmic_locked_view.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// The Cosmic tab: today's guidance for the user's sun sign (PRD §6.7).
@@ -57,7 +58,7 @@ class CosmicScreen extends ConsumerWidget {
                       padding: const EdgeInsets.all(AppSpacing.md),
                       children: [
                         const MoonCard(),
-                        EmptyState(
+                        CosmicLockedView(
                           title: l10n.cosmicNeedsBirthDateTitle,
                           body: l10n.cosmicNeedsBirthDateBody,
                         ),

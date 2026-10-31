@@ -8,6 +8,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/report/application/natal_report_providers.dart';
 import 'package:mochi_moon/features/cosmic/report/domain/natal_report.dart';
+import 'package:mochi_moon/features/cosmic/unlock/presentation/cosmic_locked_view.dart';
 
 /// The Premium natal report: a long, gentle read about the user, shown part by
 /// part as the server writes it (PRD §6.11).
@@ -34,7 +35,7 @@ class NatalReportScreen extends ConsumerWidget {
       body = _FailureView(error: report.error!, onRetry: retry);
     } else if (report.hasValue) {
       // The stream gave null: there is no birth date to read from.
-      body = EmptyState(
+      body = CosmicLockedView(
         title: l10n.chartNeedsBirthDateTitle,
         body: l10n.chartNeedsBirthDateBody,
       );

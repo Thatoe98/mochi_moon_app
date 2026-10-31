@@ -5,6 +5,7 @@ import 'package:mochi_moon/features/cosmic/chart/presentation/chart_screen.dart'
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/cosmic/report/presentation/natal_report_screen.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_screen.dart';
+import 'package:mochi_moon/features/cosmic/unlock/presentation/unlock_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
@@ -30,6 +31,7 @@ abstract final class AppRoutes {
   static const cosmic = '/cosmic';
   static const retrogrades = '/cosmic/retrogrades';
   static const chart = '/cosmic/chart';
+  static const cosmicUnlock = '/cosmic/unlock';
   static const chartReport = '/cosmic/chart/report';
   static const me = '/me';
   static const journal = '/me/journal';
@@ -110,6 +112,10 @@ GoRouter router(Ref ref) {
                 path: AppRoutes.cosmic,
                 builder: (context, state) => const CosmicScreen(),
                 routes: [
+                  GoRoute(
+                    path: 'unlock',
+                    builder: (context, state) => const UnlockScreen(),
+                  ),
                   GoRoute(
                     path: 'retrogrades',
                     builder: (context, state) => const RetrogradeScreen(),

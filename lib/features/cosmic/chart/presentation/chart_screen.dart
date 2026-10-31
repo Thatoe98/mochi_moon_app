@@ -12,6 +12,7 @@ import 'package:mochi_moon/features/cosmic/chart/presentation/chart_labels.dart'
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_wheel.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/placements_list.dart';
 import 'package:mochi_moon/features/cosmic/report/presentation/full_reading_card.dart';
+import 'package:mochi_moon/features/cosmic/unlock/presentation/cosmic_locked_view.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// The birth chart: the Big 3 and every placement (PRD §6.11).
@@ -29,7 +30,7 @@ class ChartScreen extends ConsumerWidget {
         error: (error, stack) =>
             ErrorView(onRetry: () => ref.invalidate(natalChartProvider)),
         data: (data) => data == null
-            ? EmptyState(
+            ? CosmicLockedView(
                 title: l10n.chartNeedsBirthDateTitle,
                 body: l10n.chartNeedsBirthDateBody,
               )

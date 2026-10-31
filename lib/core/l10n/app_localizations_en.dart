@@ -420,11 +420,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSaveFailed => 'Couldn\'t save that. Please try again.';
 
   @override
-  String get cosmicNeedsBirthDateTitle => 'Your stars need a date';
+  String get cosmicNeedsBirthDateTitle => 'Unlock your cosmic side';
 
   @override
   String get cosmicNeedsBirthDateBody =>
-      'Share your birth date and your daily guidance will appear here.';
+      'Share your birthday when you like, and your daily sign guidance will appear here. Everything else in Mochi Moon works without it.';
+
+  @override
+  String get cosmicUnlockTitle => 'Unlock your cosmic side';
+
+  @override
+  String get cosmicUnlockButton => 'Unlock';
+
+  @override
+  String get cosmicUnlockFinish => 'Unlock Cosmic';
+
+  @override
+  String get cosmicUnlockPrivacy =>
+      'Your birth details stay on your account and are never shared.';
+
+  @override
+  String get cosmicLockedArtLabel =>
+      'Mochi the moon bunny waiting by the stars';
 
   @override
   String cosmicHeader(String sign, String date) {

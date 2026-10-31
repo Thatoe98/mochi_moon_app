@@ -230,7 +230,7 @@ void main() {
 
     await tester.tap(find.text('Cosmic'));
     await tester.pumpAndSettle();
-    expect(find.text('Your stars need a date'), findsOneWidget);
+    expect(find.text('Unlock your cosmic side'), findsOneWidget);
 
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();

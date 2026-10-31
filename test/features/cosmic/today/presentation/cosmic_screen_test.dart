@@ -109,7 +109,7 @@ void main() {
   testWidgets('asks for a birth date when there is none', (tester) async {
     await tester.pumpWidget(_host());
     await tester.pumpAndSettle();
-    expect(find.text('Your stars need a date'), findsOneWidget);
+    expect(find.text('Unlock your cosmic side'), findsOneWidget);
     expect(find.text('For entertainment and self-reflection'), findsNothing);
   });
 
@@ -163,7 +163,7 @@ void main() {
 
     expect(find.text('Moon'), findsOneWidget);
     expect(find.textContaining('Next full moon:'), findsOneWidget);
-    expect(find.text('Your stars need a date'), findsOneWidget);
+    expect(find.text('Unlock your cosmic side'), findsOneWidget);
   });
 
   testWidgets('hides the Thai colors unless they are switched on', (

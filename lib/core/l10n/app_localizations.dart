@@ -773,14 +773,44 @@ abstract class AppLocalizations {
   /// No description provided for @cosmicNeedsBirthDateTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your stars need a date'**
+  /// **'Unlock your cosmic side'**
   String get cosmicNeedsBirthDateTitle;
 
   /// No description provided for @cosmicNeedsBirthDateBody.
   ///
   /// In en, this message translates to:
-  /// **'Share your birth date and your daily guidance will appear here.'**
+  /// **'Share your birthday when you like, and your daily sign guidance will appear here. Everything else in Mochi Moon works without it.'**
   String get cosmicNeedsBirthDateBody;
+
+  /// No description provided for @cosmicUnlockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock your cosmic side'**
+  String get cosmicUnlockTitle;
+
+  /// No description provided for @cosmicUnlockButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get cosmicUnlockButton;
+
+  /// No description provided for @cosmicUnlockFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Cosmic'**
+  String get cosmicUnlockFinish;
+
+  /// No description provided for @cosmicUnlockPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Your birth details stay on your account and are never shared.'**
+  String get cosmicUnlockPrivacy;
+
+  /// No description provided for @cosmicLockedArtLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi the moon bunny waiting by the stars'**
+  String get cosmicLockedArtLabel;
 
   /// No description provided for @cosmicHeader.
   ///

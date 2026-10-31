@@ -420,11 +420,30 @@ class AppLocalizationsMy extends AppLocalizations {
   String get profileSaveFailed => 'သိမ်းလို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
 
   @override
-  String get cosmicNeedsBirthDateTitle => 'မွေးနေ့ရက်လေး လိုနေတယ်';
+  String get cosmicNeedsBirthDateTitle =>
+      'ကိုယ့်ရဲ့ စကြဝဠာဆန်တဲ့ဘက်လေးကို ဖော်ထုတ်ကြည့်ပါ';
 
   @override
   String get cosmicNeedsBirthDateBody =>
-      'မွေးနေ့ရက်ကို မျှဝေပေးရင် နေ့စဉ်လမ်းညွှန်ချက်လေးတွေ ဒီမှာ ပေါ်လာမယ်။';
+      'ကိုယ်အဆင်သင့်ဖြစ်တဲ့အခါ မွေးနေ့ကို မျှဝေပေးပါ၊ နေ့စဉ် ရာသီခွင်အလိုက် လမ်းညွှန်ချက်လေးကို ဒီမှာ ပြပေးမယ်နော်။ ဒါပေမဲ့ Mochi Moon ရဲ့ တခြားအရာအားလုံးကိုတော့ မွေးနေ့မထည့်ဘဲ သုံးလို့ရပါတယ်။';
+
+  @override
+  String get cosmicUnlockTitle =>
+      'ကိုယ့်ရဲ့ စကြဝဠာဆန်တဲ့ဘက်လေးကို ဖော်ထုတ်ကြည့်ပါ';
+
+  @override
+  String get cosmicUnlockButton => 'ဖွင့်မယ်';
+
+  @override
+  String get cosmicUnlockFinish => 'စကြဝဠာကို ဖွင့်မယ်';
+
+  @override
+  String get cosmicUnlockPrivacy =>
+      'မွေးဖွားမှုအချက်အလက်တွေက ကိုယ့်အကောင့်ထဲမှာပဲ ရှိနေပြီး ဘယ်သူ့ကိုမှ မမျှဝေပါဘူး။';
+
+  @override
+  String get cosmicLockedArtLabel =>
+      'ကြယ်တွေအနားမှာ စောင့်နေတဲ့ လယုန်လေး Mochi';
 
   @override
   String cosmicHeader(String sign, String date) {

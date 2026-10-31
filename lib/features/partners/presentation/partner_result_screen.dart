@@ -9,6 +9,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/astro/synastry.dart';
 import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
+import 'package:mochi_moon/features/cosmic/unlock/presentation/cosmic_locked_view.dart';
 import 'package:mochi_moon/features/partners/application/compatibility_providers.dart';
 import 'package:mochi_moon/features/partners/domain/compatibility_band.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_labels.dart';
@@ -39,7 +40,7 @@ class PartnerResultScreen extends ConsumerWidget {
                 onRetry: () => ref.invalidate(compatibilityProvider(id)),
               ),
         data: (compat) => compat == null
-            ? EmptyState(
+            ? CosmicLockedView(
                 title: l10n.compatNeedsBirthDateTitle,
                 body: l10n.compatNeedsBirthDateBody,
               )
