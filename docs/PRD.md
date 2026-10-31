@@ -902,7 +902,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Profile astro fields nullable, `hasAccountProfile` vs `hasBirthData`, migration tests (§6.1) — *done 2026-10-31: `isComplete` replaced; reconcile keeps remote birth data; the onboarding flow itself changes in P7*
 - [ ] Onboarding reordered, birth data moved to the Cosmic unlock flow (§6.1)
 - [ ] 4-tab shell: Today (home), Deck, Cosmic, Me; routes, deep links, notification and widget targets updated (§5)
-- [ ] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14)
+- [ ] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14) — *rules + 83 emulator tests done 2026-10-31 (P3, committed, not yet deployed to dev); account deletion coverage is P4*
 - [x] Drift schema v4 with the first new tables (§8.6) — *done 2026-10-31: `mood_entries`, `gratitude_entries`, `custom_cards`, `ritual_days`, `ritual_progress`; the text columns are named `body`; the other §8.6 tables follow in their own tasks*
 - [ ] Daily mood check-in stored per date (§6.18, month view)
 - [ ] Daily ritual on Today with streak and cosmic reward (§6.15)

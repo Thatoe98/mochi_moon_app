@@ -266,6 +266,202 @@ describe('users/{uid}/partners/{id}', () => {
   });
 });
 
+const ts = () => serverTimestamp();
+
+/** One row per self-love collection: a valid document and what must fail. */
+const selfLove = [
+  {
+    name: 'gratitude',
+    path: 'users/alice/gratitude/g1',
+    valid: () => ({ text: 'Warm tea', date: '2026-10-31', createdAt: ts() }),
+    bad: {
+      'a 201-character line': (d) => ({ ...d, text: 'a'.repeat(201) }),
+      'an empty line': (d) => ({ ...d, text: '' }),
+      'a bad date': (d) => ({ ...d, date: 'yesterday' }),
+      'an unknown key': (d) => ({ ...d, extra: 1 }),
+      'a missing date': ({ date, ...d }) => d,
+    },
+    edge: { 'a 200-character line': (d) => ({ ...d, text: 'a'.repeat(200) }) },
+  },
+  {
+    name: 'customCards',
+    path: 'users/alice/customCards/c1',
+    valid: () => ({
+      text: 'I am enough',
+      illustrationId: 'ill_0001',
+      createdAt: ts(),
+      updatedAt: ts(),
+    }),
+    bad: {
+      'a 141-character card': (d) => ({ ...d, text: 'a'.repeat(141) }),
+      'an empty card': (d) => ({ ...d, text: '' }),
+      'no illustration': ({ illustrationId, ...d }) => d,
+      'an unknown key': (d) => ({ ...d, category: 'x' }),
+    },
+    edge: { 'a 140-character card': (d) => ({ ...d, text: 'a'.repeat(140) }) },
+  },
+  {
+    name: 'moods',
+    path: 'users/alice/moods/2026-10-31',
+    valid: () => ({ mood: 'calm', updatedAt: ts() }),
+    bad: {
+      'an unknown mood': (d) => ({ ...d, mood: 'furious' }),
+      'an unknown key': (d) => ({ ...d, note: 'hi' }),
+      'a missing timestamp': ({ updatedAt, ...d }) => d,
+    },
+    edge: { in_love: (d) => ({ ...d, mood: 'in_love' }) },
+  },
+  {
+    name: 'letters',
+    path: 'users/alice/letters/l1',
+    valid: () => ({
+      text: 'Dear me',
+      writtenAt: ts(),
+      unlockAt: ts(),
+      unlockDays: 30,
+    }),
+    bad: {
+      'a 1001-character letter': (d) => ({ ...d, text: 'a'.repeat(1001) }),
+      'an odd unlock length': (d) => ({ ...d, unlockDays: 7 }),
+      'an unknown key': (d) => ({ ...d, mood: 'x' }),
+    },
+    edge: {
+      'a 1000-character letter': (d) => ({ ...d, text: 'a'.repeat(1000) }),
+      'a 365-day unlock': (d) => ({ ...d, unlockDays: 365 }),
+    },
+  },
+  {
+    name: 'journeyProgress',
+    path: 'users/alice/journeyProgress/confidence',
+    valid: () => ({
+      startedAt: ts(),
+      currentDay: 2,
+      completedDays: [1],
+      reflections: { 1: 'I felt proud' },
+      completedAt: null,
+    }),
+    bad: {
+      'day zero': (d) => ({ ...d, currentDay: 0 }),
+      'a text day': (d) => ({ ...d, currentDay: '2' }),
+      'too many completed days': (d) => ({
+        ...d,
+        completedDays: Array.from({ length: 15 }, (_, i) => i + 1),
+      }),
+      'an unknown key': (d) => ({ ...d, score: 3 }),
+    },
+    edge: {
+      'a finished journey': (d) => ({ ...d, completedAt: ts() }),
+      'no reflections': ({ reflections, ...d }) => d,
+    },
+  },
+  {
+    name: 'state/quest',
+    path: 'users/alice/state/quest',
+    valid: () => ({
+      date: '2026-10-31',
+      questId: 'quest_001',
+      done: false,
+      swapped: false,
+    }),
+    bad: {
+      'a text flag': (d) => ({ ...d, done: 'yes' }),
+      'a bad date': (d) => ({ ...d, date: '31/10/2026' }),
+      'an unknown key': (d) => ({ ...d, extra: 1 }),
+    },
+    edge: {},
+  },
+  {
+    name: 'state/mascot',
+    path: 'users/alice/state/mascot',
+    valid: () => ({
+      owned: ['hat_star'],
+      equipped: { outfit: null, room: {} },
+      updatedAt: ts(),
+    }),
+    bad: {
+      'owned that is not a list': (d) => ({ ...d, owned: 'hat_star' }),
+      'a hundred and one items': (d) => ({
+        ...d,
+        owned: Array.from({ length: 101 }, (_, i) => `i${i}`),
+      }),
+      'an unknown key': (d) => ({ ...d, coins: 5 }),
+    },
+    edge: {},
+  },
+  {
+    name: 'state/ritual',
+    path: 'users/alice/state/ritual',
+    valid: () => ({ completedDates: ['2026-10-30', '2026-10-31'] }),
+    bad: {
+      'more than 400 dates': (d) => ({
+        ...d,
+        completedDates: Array.from({ length: 401 }, () => '2026-10-31'),
+      }),
+      'dates that are not a list': (d) => ({ ...d, completedDates: 'x' }),
+      'an unknown key': (d) => ({ ...d, streak: 3 }),
+    },
+    edge: {},
+  },
+];
+
+for (const c of selfLove) {
+  describe(`users/{uid}/${c.name}`, () => {
+    test('the owner can write, read, update and delete', async () => {
+      const ref = doc(alice(), c.path);
+      await assertSucceeds(setDoc(ref, c.valid()));
+      await assertSucceeds(getDoc(ref));
+      await assertSucceeds(setDoc(ref, c.valid()));
+      await assertSucceeds(deleteDoc(ref));
+    });
+
+    for (const [label, make] of Object.entries(c.edge)) {
+      test(`accepts ${label}`, async () => {
+        await assertSucceeds(setDoc(doc(alice(), c.path), make(c.valid())));
+      });
+    }
+
+    for (const [label, make] of Object.entries(c.bad)) {
+      test(`rejects ${label}`, async () => {
+        await assertFails(setDoc(doc(alice(), c.path), make(c.valid())));
+      });
+    }
+
+    test('someone else cannot read, write or delete it', async () => {
+      await seed(c.path, c.valid());
+      const ref = doc(bob(), c.path);
+      await assertFails(getDoc(ref));
+      await assertFails(setDoc(ref, c.valid()));
+      await assertFails(deleteDoc(ref));
+    });
+
+    test('signed-out visitors cannot read or write it', async () => {
+      await seed(c.path, c.valid());
+      const ref = doc(anonymous(), c.path);
+      await assertFails(getDoc(ref));
+      await assertFails(setDoc(ref, c.valid()));
+    });
+  });
+}
+
+describe('users/{uid}/moods/{date}', () => {
+  test('the document id must be a date', async () => {
+    await assertFails(
+      setDoc(doc(alice(), 'users/alice/moods/today'), {
+        mood: 'calm',
+        updatedAt: ts(),
+      }),
+    );
+  });
+});
+
+describe('users/{uid}/state/{other}', () => {
+  test('unknown state documents are closed', async () => {
+    await assertFails(
+      setDoc(doc(alice(), 'users/alice/state/other'), { a: 1 }),
+    );
+  });
+});
+
 describe('users/{uid}/reports/{id}', () => {
   test('the owner can read but never write; others cannot read', async () => {
     await seed('users/alice/reports/r1', { type: 'natal' });

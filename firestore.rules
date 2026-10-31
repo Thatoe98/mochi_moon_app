@@ -37,6 +37,110 @@ service cloud.firestore {
               || request.resource.data.place == null
               || request.resource.data.place is map);
       }
+      // Self-love data (PRD 6.15-6.24, 8.1). Owner only, with shape and size
+      // checks. All of it is private writing or state of her own.
+      match /gratitude/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['text', 'date', 'createdAt'])
+          && request.resource.data.keys().hasAll(['text', 'date', 'createdAt'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 200
+          && request.resource.data.date is string
+          && request.resource.data.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+          && request.resource.data.createdAt is timestamp;
+      }
+      match /customCards/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(
+            ['text', 'illustrationId', 'createdAt', 'updatedAt'])
+          && request.resource.data.keys().hasAll(
+            ['text', 'illustrationId', 'createdAt', 'updatedAt'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 140
+          && request.resource.data.illustrationId is string
+          && request.resource.data.illustrationId.size() >= 1
+          && request.resource.data.illustrationId.size() <= 64
+          && request.resource.data.createdAt is timestamp
+          && request.resource.data.updatedAt is timestamp;
+      }
+      match /moods/{date} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+          && request.resource.data.keys().hasOnly(['mood', 'updatedAt'])
+          && request.resource.data.keys().hasAll(['mood', 'updatedAt'])
+          && request.resource.data.mood in
+            ['happy', 'calm', 'tired', 'sad', 'anxious', 'in_love']
+          && request.resource.data.updatedAt is timestamp;
+      }
+      match /letters/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(
+            ['text', 'writtenAt', 'unlockAt', 'unlockDays'])
+          && request.resource.data.keys().hasAll(
+            ['text', 'writtenAt', 'unlockAt', 'unlockDays'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 1000
+          && request.resource.data.writtenAt is timestamp
+          && request.resource.data.unlockAt is timestamp
+          && request.resource.data.unlockDays in [30, 90, 365];
+      }
+      match /journeyProgress/{journeyId} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && journeyId.size() <= 64
+          && request.resource.data.keys().hasOnly(
+            ['startedAt', 'currentDay', 'completedDays', 'reflections', 'completedAt'])
+          && request.resource.data.keys().hasAll(
+            ['startedAt', 'currentDay', 'completedDays', 'completedAt'])
+          && request.resource.data.startedAt is timestamp
+          && request.resource.data.currentDay is int
+          && request.resource.data.currentDay >= 1
+          && request.resource.data.currentDay <= 15
+          && request.resource.data.completedDays is list
+          && request.resource.data.completedDays.size() <= 14
+          && (!('reflections' in request.resource.data)
+              || (request.resource.data.reflections is map
+                  && request.resource.data.reflections.size() <= 14))
+          && (request.resource.data.completedAt == null
+              || request.resource.data.completedAt is timestamp);
+      }
+      match /state/quest {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['date', 'questId', 'done', 'swapped'])
+          && request.resource.data.keys().hasAll(['date', 'questId', 'done', 'swapped'])
+          && request.resource.data.date is string
+          && request.resource.data.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+          && request.resource.data.questId is string
+          && request.resource.data.questId.size() <= 64
+          && request.resource.data.done is bool
+          && request.resource.data.swapped is bool;
+      }
+      match /state/mascot {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['owned', 'equipped', 'updatedAt'])
+          && request.resource.data.keys().hasAll(['owned', 'equipped', 'updatedAt'])
+          && request.resource.data.owned is list
+          && request.resource.data.owned.size() <= 100
+          && request.resource.data.equipped is map
+          && request.resource.data.updatedAt is timestamp;
+      }
+      match /state/ritual {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['completedDates'])
+          && request.resource.data.keys().hasAll(['completedDates'])
+          && request.resource.data.completedDates is list
+          && request.resource.data.completedDates.size() <= 400;
+      }
       match /reports/{id}  { allow read: if request.auth.uid == uid; allow write: if false; }
     }
   }
