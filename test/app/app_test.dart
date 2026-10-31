@@ -103,6 +103,12 @@ Widget _app({
   child: const MochiMoonApp(),
 );
 
+/// The app opens on Today; the deck is one tap away.
+Future<void> _openDeck(WidgetTester tester) async {
+  await tester.tap(find.text('Deck'));
+  await tester.pumpAndSettle();
+}
+
 bool _motionReduced(WidgetTester tester) =>
     MediaQuery.disableAnimationsOf(tester.element(find.byType(Scaffold).first));
 
@@ -135,6 +141,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Help Mochi Moon grow?'), findsNothing);
+    await _openDeck(tester);
     expect(find.text('I am enough.'), findsOneWidget);
   });
 
@@ -145,12 +152,38 @@ void main() {
     expect(find.text('Help Mochi Moon grow?'), findsNothing);
   });
 
-  testWidgets('opens on the deck tab and shows a quote', (tester) async {
+  testWidgets('opens on Today, with the deck one tab away', (tester) async {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
 
+    expect(find.text('Start your self-love streak today'), findsOneWidget);
+    expect(find.text('I am enough.'), findsNothing);
+
+    await _openDeck(tester);
     expect(find.text('I am enough.'), findsOneWidget);
-    expect(find.text('Deck'), findsOneWidget);
+  });
+
+  testWidgets('the Today button opens the deck', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text("Read today's cards"));
+    await tester.pumpAndSettle();
+
+    expect(find.text('I am enough.'), findsOneWidget);
+  });
+
+  testWidgets('has four tabs: Today, Deck, Cosmic and Me', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+
+    final bar = find.byType(NavigationBar);
+    for (final label in ['Today', 'Deck', 'Cosmic', 'Me']) {
+      expect(
+        find.descendant(of: bar, matching: find.text(label)),
+        findsOneWidget,
+      );
+    }
   });
 
   testWidgets('shows a loading state while quotes load', (tester) async {
@@ -160,6 +193,8 @@ void main() {
             Future.delayed(const Duration(seconds: 1), () => [_quote]),
       ),
     );
+    await tester.pump();
+    await tester.tap(find.text('Deck'));
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -171,6 +206,7 @@ void main() {
       _app(quotes: () => Future.error(Exception('boom'))),
     );
     await tester.pumpAndSettle();
+    await _openDeck(tester);
 
     expect(find.text('Something wobbled'), findsOneWidget);
     expect(find.text('Try again'), findsOneWidget);
@@ -179,6 +215,7 @@ void main() {
   testWidgets('shows an empty state when there are no quotes', (tester) async {
     await tester.pumpWidget(_app(quotes: () => Future.value(<Quote>[])));
     await tester.pumpAndSettle();
+    await _openDeck(tester);
 
     expect(find.text('Nothing here yet'), findsOneWidget);
   });

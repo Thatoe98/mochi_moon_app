@@ -901,7 +901,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 #### M5a — Ritual home, onboarding change and the first self-love features
 - [x] Profile astro fields nullable, `hasAccountProfile` vs `hasBirthData`, migration tests (§6.1) — *done 2026-10-31: `isComplete` replaced; reconcile keeps remote birth data; the onboarding flow itself changes in P7*
 - [ ] Onboarding reordered, birth data moved to the Cosmic unlock flow (§6.1)
-- [ ] 4-tab shell: Today (home), Deck, Cosmic, Me; routes, deep links, notification and widget targets updated (§5)
+- [x] 4-tab shell: Today (home), Deck, Cosmic, Me; routes, deep links, notification and widget targets updated (§5) — *shell done 2026-10-31 (P5): Today opens first with a stub (streak + button to the deck); the /deck route the widget link uses is unchanged and the reminder opens the app on Today (neither re-tried on a device); the ritual itself is P11+*
 - [x] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14) — *rules + 83 emulator tests done 2026-10-31 (P3, committed, not yet deployed to dev); account deletion coverage done in P4 (2026-10-31); rules still to deploy*
 - [x] Drift schema v4 with the first new tables (§8.6) — *done 2026-10-31: `mood_entries`, `gratitude_entries`, `custom_cards`, `ritual_days`, `ritual_progress`; the text columns are named `body`; the other §8.6 tables follow in their own tasks*
 - [ ] Daily mood check-in stored per date (§6.18, month view)

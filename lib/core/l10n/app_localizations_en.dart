@@ -13,6 +13,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'Mochi Moon';
 
   @override
+  String get tabToday => 'Today';
+
+  @override
   String get tabDeck => 'Deck';
 
   @override
@@ -20,6 +23,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tabMe => 'Me';
+
+  @override
+  String get todayTitle => 'Today';
+
+  @override
+  String todayStreak(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days of self-love',
+      one: '1 day of self-love',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get todayNoStreak => 'Start your self-love streak today';
+
+  @override
+  String get todayBody =>
+      'Two soft minutes with Mochi. Read a few kind cards, and let them sink in.';
+
+  @override
+  String get todayStart => 'Read today\'s cards';
 
   @override
   String get deckTitle => 'Your self-love deck';

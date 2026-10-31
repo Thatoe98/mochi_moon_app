@@ -17,12 +17,14 @@ import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.da
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
 import 'package:mochi_moon/features/profile/presentation/profile_edit_screen.dart';
+import 'package:mochi_moon/features/ritual/presentation/today_screen.dart';
 import 'package:mochi_moon/features/settings/presentation/about_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
 abstract final class AppRoutes {
+  static const today = '/today';
   static const deck = '/deck';
   static const cosmic = '/cosmic';
   static const retrogrades = '/cosmic/retrogrades';
@@ -53,13 +55,13 @@ GoRouter router(Ref ref) {
     ..onDispose(firstRun.dispose);
 
   return GoRouter(
-    initialLocation: AppRoutes.deck,
+    initialLocation: AppRoutes.today,
     refreshListenable: firstRun,
     redirect: (context, state) => onboardingRedirect(
       complete: ref.read(onboardingCompleteProvider),
       location: state.matchedLocation,
       welcomeRoute: AppRoutes.welcome,
-      homeRoute: AppRoutes.deck,
+      homeRoute: AppRoutes.today,
     ),
     routes: [
       GoRoute(
@@ -80,6 +82,14 @@ GoRouter router(Ref ref) {
         builder: (context, state, shell) =>
             ShellScaffold(navigationShell: shell),
         branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.today,
+                builder: (context, state) => const TodayScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(

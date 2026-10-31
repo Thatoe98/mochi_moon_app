@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Mochi Moon'**
   String get appName;
 
+  /// No description provided for @tabToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get tabToday;
+
   /// No description provided for @tabDeck.
   ///
   /// In en, this message translates to:
@@ -121,6 +127,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Me'**
   String get tabMe;
+
+  /// No description provided for @todayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get todayTitle;
+
+  /// No description provided for @todayStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day of self-love} other{{count} days of self-love}}'**
+  String todayStreak(int count);
+
+  /// No description provided for @todayNoStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your self-love streak today'**
+  String get todayNoStreak;
+
+  /// No description provided for @todayBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Two soft minutes with Mochi. Read a few kind cards, and let them sink in.'**
+  String get todayBody;
+
+  /// No description provided for @todayStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Read today\'s cards'**
+  String get todayStart;
 
   /// No description provided for @deckTitle.
   ///
