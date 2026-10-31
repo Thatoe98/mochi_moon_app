@@ -3073,6 +3073,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Done for today. Well done, you.'**
   String get questDoneNote;
+
+  /// No description provided for @journeysTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Journeys'**
+  String get journeysTitle;
+
+  /// No description provided for @journeysMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle programs, one small day at a time'**
+  String get journeysMeSubtitle;
+
+  /// No description provided for @journeysIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick one journey. Each day has three cards, a tiny kindness and a moment to reflect. Missed a day? It simply waits for you.'**
+  String get journeysIntro;
+
+  /// No description provided for @journeyDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String journeyDaysCount(int count);
+
+  /// No description provided for @journeyFreeTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get journeyFreeTag;
+
+  /// No description provided for @journeyPremiumTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get journeyPremiumTag;
+
+  /// No description provided for @journeyLockedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This journey is part of Premium.'**
+  String get journeyLockedNote;
+
+  /// No description provided for @journeyInProgressTag.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get journeyInProgressTag;
+
+  /// No description provided for @journeyFinishedTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get journeyFinishedTag;
+
+  /// No description provided for @journeyStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start this journey'**
+  String get journeyStart;
+
+  /// No description provided for @journeyContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with day {day}'**
+  String journeyContinue(int day);
+
+  /// No description provided for @journeyProgressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} of {total}'**
+  String journeyProgressLabel(int day, int total);
+
+  /// No description provided for @journeyOtherRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re on another journey. Finish it first, then pick a new one.'**
+  String get journeyOtherRunning;
+
+  /// No description provided for @journeyDoneToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s day is done. Come back tomorrow for the next one.'**
+  String get journeyDoneToday;
+
+  /// No description provided for @journeyWaitsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'No rush. Your journey waits for you right where you stopped.'**
+  String get journeyWaitsNote;
+
+  /// No description provided for @journeyCardsCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Read each card aloud. Day {day}.'**
+  String journeyCardsCaption(int day);
+
+  /// No description provided for @journeyQuestHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s tiny kindness'**
+  String get journeyQuestHeader;
+
+  /// No description provided for @journeyReflectionHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'A moment to reflect'**
+  String get journeyReflectionHeader;
+
+  /// No description provided for @journeyReflectionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write whatever comes, just for you (optional)'**
+  String get journeyReflectionHint;
+
+  /// No description provided for @journeyFinishDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish day {day}'**
+  String journeyFinishDay(int day);
+
+  /// No description provided for @journeyCompleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You finished {title}'**
+  String journeyCompleteTitle(String title);
+
+  /// No description provided for @journeyCompleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Be proud of every small day you showed up for yourself.'**
+  String get journeyCompleteBody;
+
+  /// No description provided for @journeyShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share my journey'**
+  String get journeyShare;
+
+  /// No description provided for @journeyShareText.
+  ///
+  /// In en, this message translates to:
+  /// **'I finished the {title} journey'**
+  String journeyShareText(String title);
+
+  /// No description provided for @journeyNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t find that journey.'**
+  String get journeyNotFound;
 }
 
 class _AppLocalizationsDelegate

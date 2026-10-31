@@ -149,14 +149,183 @@ final class JourneyProgressListProvider
 String _$journeyProgressListHash() =>
     r'425f96cdbb85a08113704c0443ac0ef5e862acb6';
 
-/// Starts the journey [journeyId]. Does nothing when another journey is still
+/// The journeys she can see, with the one she is on first.
+
+@ProviderFor(journeyById)
+final journeyByIdProvider = JourneyByIdFamily._();
+
+/// The journeys she can see, with the one she is on first.
+
+final class JourneyByIdProvider
+    extends
+        $FunctionalProvider<AsyncValue<Journey?>, Journey?, FutureOr<Journey?>>
+    with $FutureModifier<Journey?>, $FutureProvider<Journey?> {
+  /// The journeys she can see, with the one she is on first.
+  JourneyByIdProvider._({
+    required JourneyByIdFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'journeyByIdProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$journeyByIdHash();
+
+  @override
+  String toString() {
+    return r'journeyByIdProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Journey?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Journey?> create(Ref ref) {
+    final argument = this.argument as String;
+    return journeyById(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is JourneyByIdProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$journeyByIdHash() => r'2c94062d159d8392c47e93a1819473bd35b46969';
+
+/// The journeys she can see, with the one she is on first.
+
+final class JourneyByIdFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<Journey?>, String> {
+  JourneyByIdFamily._()
+    : super(
+        retry: null,
+        name: r'journeyByIdProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// The journeys she can see, with the one she is on first.
+
+  JourneyByIdProvider call(String journeyId) =>
+      JourneyByIdProvider._(argument: journeyId, from: this);
+
+  @override
+  String toString() => r'journeyByIdProvider';
+}
+
+/// Day `day` of `journeyId` with its cards and quest looked up, or null.
+
+@ProviderFor(journeyDay)
+final journeyDayProvider = JourneyDayFamily._();
+
+/// Day `day` of `journeyId` with its cards and quest looked up, or null.
+
+final class JourneyDayProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<ResolvedJourneyDay?>,
+          ResolvedJourneyDay?,
+          FutureOr<ResolvedJourneyDay?>
+        >
+    with
+        $FutureModifier<ResolvedJourneyDay?>,
+        $FutureProvider<ResolvedJourneyDay?> {
+  /// Day `day` of `journeyId` with its cards and quest looked up, or null.
+  JourneyDayProvider._({
+    required JourneyDayFamily super.from,
+    required (String, int) super.argument,
+  }) : super(
+         retry: null,
+         name: r'journeyDayProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$journeyDayHash();
+
+  @override
+  String toString() {
+    return r'journeyDayProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<ResolvedJourneyDay?> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<ResolvedJourneyDay?> create(Ref ref) {
+    final argument = this.argument as (String, int);
+    return journeyDay(ref, argument.$1, argument.$2);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is JourneyDayProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$journeyDayHash() => r'aece03fc4ea20f9b3ee8d54b3af9511c0f5c2552';
+
+/// Day `day` of `journeyId` with its cards and quest looked up, or null.
+
+final class JourneyDayFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          FutureOr<ResolvedJourneyDay?>,
+          (String, int)
+        > {
+  JourneyDayFamily._()
+    : super(
+        retry: null,
+        name: r'journeyDayProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// Day `day` of `journeyId` with its cards and quest looked up, or null.
+
+  JourneyDayProvider call(String journeyId, int day) =>
+      JourneyDayProvider._(argument: (journeyId, day), from: this);
+
+  @override
+  String toString() => r'journeyDayProvider';
+}
+
+/// Starts the journey `journeyId`. Does nothing when another journey is still
 /// going (one at a time) or the id is unknown. A finished journey can be
 /// started again.
 
 @ProviderFor(startJourneyAction)
 final startJourneyActionProvider = StartJourneyActionProvider._();
 
-/// Starts the journey [journeyId]. Does nothing when another journey is still
+/// Starts the journey `journeyId`. Does nothing when another journey is still
 /// going (one at a time) or the id is unknown. A finished journey can be
 /// started again.
 
@@ -168,7 +337,7 @@ final class StartJourneyActionProvider
           Future<void> Function(String journeyId)
         >
     with $Provider<Future<void> Function(String journeyId)> {
-  /// Starts the journey [journeyId]. Does nothing when another journey is still
+  /// Starts the journey `journeyId`. Does nothing when another journey is still
   /// going (one at a time) or the id is unknown. A finished journey can be
   /// started again.
   StartJourneyActionProvider._()
@@ -177,7 +346,7 @@ final class StartJourneyActionProvider
         argument: null,
         retry: null,
         name: r'startJourneyActionProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -207,15 +376,15 @@ final class StartJourneyActionProvider
 }
 
 String _$startJourneyActionHash() =>
-    r'ca94f160a6381226dcec6338648debfc8f09d314';
+    r'2e7b48606d053c289373f79eaa265926a2ddd886';
 
-/// Finishes the current day of [journeyId], with her optional private
+/// Finishes the current day of `journeyId`, with her optional private
 /// reflection. Does nothing when she already finished a day today.
 
 @ProviderFor(completeJourneyDay)
 final completeJourneyDayProvider = CompleteJourneyDayProvider._();
 
-/// Finishes the current day of [journeyId], with her optional private
+/// Finishes the current day of `journeyId`, with her optional private
 /// reflection. Does nothing when she already finished a day today.
 
 final class CompleteJourneyDayProvider
@@ -229,7 +398,7 @@ final class CompleteJourneyDayProvider
         $Provider<
           Future<void> Function(String journeyId, {String? reflection})
         > {
-  /// Finishes the current day of [journeyId], with her optional private
+  /// Finishes the current day of `journeyId`, with her optional private
   /// reflection. Does nothing when she already finished a day today.
   CompleteJourneyDayProvider._()
     : super(
@@ -237,7 +406,7 @@ final class CompleteJourneyDayProvider
         argument: null,
         retry: null,
         name: r'completeJourneyDayProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -274,7 +443,7 @@ final class CompleteJourneyDayProvider
 }
 
 String _$completeJourneyDayHash() =>
-    r'7c831ae20c7331bdb68454ed0224dabfba14675c';
+    r'fd73c8584b380919d5379fa0faf7f3e95d8bf752';
 
 /// Keeps the journey progress in Firestore in step with the device while
 /// someone is signed in. Progress never goes backwards: a record from

@@ -327,9 +327,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 ### 6.21 Self-love journeys (1 free, the rest Premium)
 
 - [ ] A journey is a 7 or 14 day program. Each day has: a set of cards (3), one quest, and one reflection prompt. Launch set: **Confidence (7)**, **Healing after a breakup (14)**, **Exam & work calm (7)**, **Body kindness (7)**. One of the four is free (suggested: Confidence); the others are Premium.
-- [ ] She can run one journey at a time and see progress (day n of N).
+- [x] She can run one journey at a time and see progress (day n of N). *(Q4)*
 - [x] **Missing a day pauses; it never resets.** *(Q3: domain logic and tests; UI is Q4.)* The next day she opens it she continues at the same day. No streak-loss messaging.
-- [ ] The reflection answer is free text she writes for herself. It is **private (§10)**: stored locally and in her Firestore, never sent to the AI API or analytics.
+- [x] The reflection answer is free text she writes for herself. It is **private (§10)**: stored locally and in her Firestore, never sent to the AI API or analytics. *(Q4)*
 - [ ] Completing a day counts toward the streak and the mascot's milestones; completing a journey unlocks a mascot item (§6.23) and offers the share image.
 - [ ] Journey scripts are in `journeys.json` (§8.3) in en and my. Healing after a breakup follows the style guide: no predictions, no promises about the ex, no clinical language, and shows the hard-day kit link.
 - [x] Progress is saved to `users/{uid}/journeyProgress/{journeyId}`. *(Q3: local drift table + sync; her reflections stay private.)*
@@ -914,7 +914,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 
 #### M5b — Depth and retention
 - [x] Tiny kindness quests (§6.20) — *Q1 + Q2 done 2026-11-01. Only 18 starter quests; the 120-quest launch set, the weekly-letter aggregate and mascot milestones come later.*
-- [ ] Self-love journeys, 1 free (§6.21) — *Q3 done 2026-11-01: schema, loader, progress model, drift table (schema v6), Firestore sync, one starter journey (Confidence, 7 days, en + my). Journeys UI and gating (Q4) and the other three scripts (L2) are open.*
+- [ ] Self-love journeys, 1 free (§6.21) — *Q3 done 2026-11-01: schema, loader, progress model, drift table (schema v6), Firestore sync, one starter journey (Confidence, 7 days, en + my). *Q4 done 2026-11-01: Me → Journeys list, journey page, day screen (3 gated cards, quest, private reflection), Premium lock via `hasPremiumProvider`, completion share image. Completing a day counts toward the streak; the mascot unlock on completion is Q6; the other three scripts are L2; the paywall itself is unbuilt.*
 - [ ] Letter to future me with unlock notification (§6.22)
 - [ ] Mochi grows with you: items and room (§6.23)
 - [ ] Mood insights, Premium (§6.18)

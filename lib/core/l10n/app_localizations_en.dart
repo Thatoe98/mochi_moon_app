@@ -1797,4 +1797,99 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get questDoneNote => 'Done for today. Well done, you.';
+
+  @override
+  String get journeysTitle => 'Journeys';
+
+  @override
+  String get journeysMeSubtitle => 'Gentle programs, one small day at a time';
+
+  @override
+  String get journeysIntro =>
+      'Pick one journey. Each day has three cards, a tiny kindness and a moment to reflect. Missed a day? It simply waits for you.';
+
+  @override
+  String journeyDaysCount(int count) {
+    return '$count days';
+  }
+
+  @override
+  String get journeyFreeTag => 'Free';
+
+  @override
+  String get journeyPremiumTag => 'Premium';
+
+  @override
+  String get journeyLockedNote => 'This journey is part of Premium.';
+
+  @override
+  String get journeyInProgressTag => 'In progress';
+
+  @override
+  String get journeyFinishedTag => 'Finished';
+
+  @override
+  String get journeyStart => 'Start this journey';
+
+  @override
+  String journeyContinue(int day) {
+    return 'Continue with day $day';
+  }
+
+  @override
+  String journeyProgressLabel(int day, int total) {
+    return 'Day $day of $total';
+  }
+
+  @override
+  String get journeyOtherRunning =>
+      'You\'re on another journey. Finish it first, then pick a new one.';
+
+  @override
+  String get journeyDoneToday =>
+      'Today\'s day is done. Come back tomorrow for the next one.';
+
+  @override
+  String get journeyWaitsNote =>
+      'No rush. Your journey waits for you right where you stopped.';
+
+  @override
+  String journeyCardsCaption(int day) {
+    return 'Read each card aloud. Day $day.';
+  }
+
+  @override
+  String get journeyQuestHeader => 'Today\'s tiny kindness';
+
+  @override
+  String get journeyReflectionHeader => 'A moment to reflect';
+
+  @override
+  String get journeyReflectionHint =>
+      'Write whatever comes, just for you (optional)';
+
+  @override
+  String journeyFinishDay(int day) {
+    return 'Finish day $day';
+  }
+
+  @override
+  String journeyCompleteTitle(String title) {
+    return 'You finished $title';
+  }
+
+  @override
+  String get journeyCompleteBody =>
+      'Be proud of every small day you showed up for yourself.';
+
+  @override
+  String get journeyShare => 'Share my journey';
+
+  @override
+  String journeyShareText(String title) {
+    return 'I finished the $title journey';
+  }
+
+  @override
+  String get journeyNotFound => 'We couldn\'t find that journey.';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/core/content/journey.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
@@ -26,10 +27,34 @@ JourneyRemote? journeyRemote(Ref ref) =>
 Stream<List<JourneyProgress>> journeyProgressList(Ref ref) =>
     ref.watch(journeyRepositoryProvider).watchAll();
 
+/// The journeys she can see, with the one she is on first.
+@riverpod
+Future<Journey?> journeyById(Ref ref, String journeyId) async {
+  final journeys = await ref.watch(journeysProvider.future);
+  for (final journey in journeys) {
+    if (journey.id == journeyId) return journey;
+  }
+  return null;
+}
+
+/// Day `day` of `journeyId` with its cards and quest looked up, or null.
+@riverpod
+Future<ResolvedJourneyDay?> journeyDay(
+  Ref ref,
+  String journeyId,
+  int day,
+) async {
+  final journey = await ref.watch(journeyByIdProvider(journeyId).future);
+  if (journey == null) return null;
+  final quotes = await ref.watch(quotesProvider.future);
+  final quests = await ref.watch(questsProvider.future);
+  return resolveJourneyDay(journey, day, quotes, quests);
+}
+
 /// Starts the journey `journeyId`. Does nothing when another journey is still
 /// going (one at a time) or the id is unknown. A finished journey can be
 /// started again.
-@riverpod
+@Riverpod(keepAlive: true)
 Future<void> Function(String journeyId) startJourneyAction(Ref ref) =>
     (journeyId) async {
       final journeys = await ref.read(journeysProvider.future);
@@ -46,7 +71,7 @@ Future<void> Function(String journeyId) startJourneyAction(Ref ref) =>
 
 /// Finishes the current day of `journeyId`, with her optional private
 /// reflection. Does nothing when she already finished a day today.
-@riverpod
+@Riverpod(keepAlive: true)
 Future<void> Function(String journeyId, {String? reflection})
 completeJourneyDay(Ref ref) => (journeyId, {reflection}) async {
   final journeys = await ref.read(journeysProvider.future);

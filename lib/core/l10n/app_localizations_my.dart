@@ -1808,4 +1808,100 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get questDoneNote => 'ဒီနေ့အတွက် ပြီးပါပြီ။ တော်လိုက်တာနော်။';
+
+  @override
+  String get journeysTitle => 'ခရီးစဉ်များ';
+
+  @override
+  String get journeysMeSubtitle =>
+      'နူးညံ့တဲ့အစီအစဉ်လေးတွေ၊ တစ်နေ့ကို ခြေလှမ်းသေးသေးလေးတစ်လှမ်းစီ';
+
+  @override
+  String get journeysIntro =>
+      'ခရီးစဉ်တစ်ခု ရွေးပါ။ တစ်နေ့စီမှာ ကတ် 3 ကတ်၊ ကြင်နာမှုလေးတစ်ခုနဲ့ ပြန်လည်ဆင်ခြင်ဖို့ အချိန်လေးတစ်ခု ပါပါတယ်။ တစ်ရက်ကျော်သွားလည်း ရပါတယ်။ ကိုယ်ပြန်လာတဲ့အထိ ဒီအတိုင်း စောင့်နေမှာပါ။';
+
+  @override
+  String journeyDaysCount(int count) {
+    return '$count ရက်';
+  }
+
+  @override
+  String get journeyFreeTag => 'အခမဲ့';
+
+  @override
+  String get journeyPremiumTag => 'Premium';
+
+  @override
+  String get journeyLockedNote => 'ဒီခရီးစဉ်က Premium မှာ ပါဝင်ပါတယ်။';
+
+  @override
+  String get journeyInProgressTag => 'လုပ်ဆောင်နေဆဲ';
+
+  @override
+  String get journeyFinishedTag => 'ပြီးဆုံးပြီ';
+
+  @override
+  String get journeyStart => 'ဒီခရီးစဉ်ကို စမယ်';
+
+  @override
+  String journeyContinue(int day) {
+    return 'နေ့ $day ကို ဆက်လုပ်မယ်';
+  }
+
+  @override
+  String journeyProgressLabel(int day, int total) {
+    return '$total ရက်ထဲက နေ့ $day';
+  }
+
+  @override
+  String get journeyOtherRunning =>
+      'တခြားခရီးစဉ်တစ်ခု လုပ်နေပါတယ်။ အဲဒါကို အရင်ပြီးအောင်လုပ်ပြီးမှ ခရီးစဉ်အသစ် ရွေးပါ။';
+
+  @override
+  String get journeyDoneToday =>
+      'ဒီနေ့အတွက် ပြီးပါပြီ။ နောက်နေ့ကို ဆက်လုပ်ဖို့ မနက်ဖြန် ပြန်လာခဲ့နော်။';
+
+  @override
+  String get journeyWaitsNote =>
+      'အလျင်မလိုပါဘူး။ ရပ်ထားခဲ့တဲ့နေရာမှာပဲ ကိုယ့်ခရီးစဉ်လေးက စောင့်နေပါတယ်။';
+
+  @override
+  String journeyCardsCaption(int day) {
+    return 'ကတ်တစ်ကတ်စီကို အသံထွက်ဖတ်ပါ။ နေ့ $day။';
+  }
+
+  @override
+  String get journeyQuestHeader => 'ဒီနေ့လုပ်မယ့် ကြင်နာမှုသေးသေးလေး';
+
+  @override
+  String get journeyReflectionHeader => 'ပြန်လည်ဆင်ခြင်ဖို့ အချိန်လေး';
+
+  @override
+  String get journeyReflectionHint =>
+      'စိတ်ထဲပေါ်လာတာတွေကို ကိုယ့်အတွက်ပဲ ရေးပါ (မဖြစ်မနေရေးစရာမလိုပါဘူး)';
+
+  @override
+  String journeyFinishDay(int day) {
+    return 'နေ့ $day ကို ပြီးအောင်လုပ်မယ်';
+  }
+
+  @override
+  String journeyCompleteTitle(String title) {
+    return '$title ကို ပြီးဆုံးခဲ့ပြီ';
+  }
+
+  @override
+  String get journeyCompleteBody =>
+      'ကိုယ့်အတွက် အချိန်ပေးခဲ့တဲ့ နေ့ရက်လေးတိုင်းကို ဂုဏ်ယူလိုက်ပါ။';
+
+  @override
+  String get journeyShare => 'ငါ့ခရီးစဉ်ကို မျှဝေမယ်';
+
+  @override
+  String journeyShareText(String title) {
+    return 'ငါ $title ခရီးစဉ်ကို ပြီးဆုံးခဲ့ပြီ';
+  }
+
+  @override
+  String get journeyNotFound => 'ဒီခရီးစဉ်ကို ရှာမတွေ့ပါဘူး။';
 }
