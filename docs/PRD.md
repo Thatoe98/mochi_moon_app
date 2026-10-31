@@ -910,6 +910,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [ ] My own cards, 3 free (§6.17) (done except the paywall on the 4th card)
 - [x] Breathe with Mochi (§6.19) — *done 2026-10-31 (P16, with the hard-day link in P17)*
 - [x] Hard-day kit with `TODO_CONTENT` helplines (§6.26) — *done 2026-10-31 (P17)*
+- [x] Strings and Burmese for M5a — *checked 2026-10-31 (P18): all 492 keys of `app_en.arb` have a Burmese string in `app_my.arb` with matching placeholders, and the translate tool reports nothing left to translate. Generated per feature with `tool/translate_content.dart`. **Unreviewed machine translation:** a native reviewer must approve the M5a strings (ritual, gratitude, own cards, mood, breathe, hard-day) before they count as shipped. Thai is not generated.*
 
 #### M5b — Depth and retention
 - [ ] Tiny kindness quests (§6.20)
