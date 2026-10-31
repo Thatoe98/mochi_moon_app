@@ -295,9 +295,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 - [ ] She writes an affirmation (max 140 characters) and picks one illustration from the bundled set (§8.4). The card has the same layout and timer gate as a bundled card; its category is `self_love`.
 - [ ] A custom card joins the deck rotation (and the ritual) and can be chosen as the home-screen widget card.
-- [ ] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot.
-- [ ] She can edit and delete her cards. Stored locally first, synced to `users/{uid}/customCards`.
-- [ ] **Private (§10):** the text never goes to the AI API, analytics, or the For You embeddings server. Custom cards get no embedding; the For You deck ignores them for ranking.
+- [ ] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot. (P14: limit, Premium override and freed slot are done in `saveOwnCard`; the paywall on the 4th card is P15.)
+- [ ] She can edit and delete her cards. Stored locally first, synced to `users/{uid}/customCards`. (P14: drift storage, edit, delete and Firestore sync are done and tested; the screens are P15. Deleting while offline is not queued; the card returns on the next sync.)
+- [x] **Private (§10):** the text never goes to the AI API, analytics, or the For You embeddings server. Custom cards get no embedding; the For You deck ignores them for ranking. (P14: `OwnCard.toQuote()` carries no mood, sign or embedding; the For You ranking must skip ids starting `own_`.)
 - [ ] Shareable as an image like any card (§6.4).
 
 ### 6.18 Mood calendar (month view Free, insights Premium)

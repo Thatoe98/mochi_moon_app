@@ -15,6 +15,7 @@ import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/daily_reading.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
@@ -26,6 +27,7 @@ import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
 import 'package:mochi_moon/features/ritual/presentation/today_screen.dart';
 
+import '../../custom_cards/support/fake_own_cards.dart';
 import '../../deck/support/fake_deck_repository.dart';
 import '../../deck/support/fake_image_sharer.dart';
 import '../../gratitude/support/fake_gratitude.dart';
@@ -91,6 +93,8 @@ Widget _app(
       gratitude ?? FakeGratitudeRepository(),
     ),
     gratitudeRemoteProvider.overrideWithValue(null),
+    ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
+    ownCardRemoteProvider.overrideWithValue(null),
     moodRepositoryProvider.overrideWithValue(moods ?? FakeMoodRepository()),
     moodRemoteProvider.overrideWithValue(null),
     imageSharerProvider.overrideWithValue(FakeImageSharer()),
