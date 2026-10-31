@@ -6,9 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/core/content/sign_info.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/widgets/sparkle.dart';
+import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
+import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
+import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
+import 'package:mochi_moon/features/cosmic/today/domain/daily_reading.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
@@ -25,6 +31,33 @@ import '../../mood/support/fake_mood.dart';
 import '../support/fake_ritual_progress.dart';
 
 const _deckPage = 'deck page';
+const _unlockPage = 'unlock page';
+
+Future<CosmicToday?> _noBirthData() async => null;
+
+Future<CosmicToday?> _withBirthData() async => CosmicToday(
+  date: DateTime(2026, 10, 28),
+  sign: ZodiacSign.libra,
+  moonSign: ZodiacSign.cancer,
+  reading: const DailyReading(
+    headline: 'Soft balance',
+    body: 'A gentle day.',
+    energy: 'Slow down and be kind to yourself.',
+    love: 'Love begins with you.',
+    avoid: ['Rushing', 'Doubting', 'Comparing'],
+    lang: 'en',
+    isFallback: true,
+  ),
+  luckyColors: (
+    sign: const NamedColor(name: 'Rose Quartz', hex: '#F7CAC9'),
+    moon: const NamedColor(name: 'Sea Glass', hex: '#B2D8D8'),
+  ),
+  luckyNumber: 6,
+  thaiColors: (
+    today: const ThaiDayColor(weekday: 3, name: 'Green', hex: '#4CAF50'),
+    birthday: null,
+  ),
+);
 final _today = DateTime(2026, 10, 28, 12);
 final _midnight = DateTime(2026, 10, 28);
 
@@ -43,8 +76,10 @@ Widget _app(
   int limit = 10,
   bool reduceMotion = false,
   double textScale = 1,
+  Future<CosmicToday?> Function() cosmic = _noBirthData,
 }) => ProviderScope(
   overrides: [
+    cosmicTodayProvider('en').overrideWith((ref) => cosmic()),
     deckRepositoryProvider.overrideWithValue(repo),
     ritualProgressRepositoryProvider.overrideWithValue(
       progress ?? FakeRitualProgressRepository(),
@@ -71,6 +106,10 @@ Widget _app(
       routes: [
         GoRoute(path: '/', builder: (_, _) => const TodayScreen()),
         GoRoute(path: AppRoutes.deck, builder: (_, _) => const Text(_deckPage)),
+        GoRoute(
+          path: AppRoutes.cosmicUnlock,
+          builder: (_, _) => const Text(_unlockPage),
+        ),
       ],
     ),
   ),
@@ -309,6 +348,56 @@ void main() {
         ),
         findsNothing,
       );
+    });
+  });
+
+  group('the cosmic reward card', () {
+    Future<void> finished(
+      WidgetTester tester, {
+      Future<CosmicToday?> Function() cosmic = _noBirthData,
+    }) async {
+      final repo = FakeDeckRepository();
+      await repo.markRitualDay(_today);
+      await tester.pumpWidget(_app(repo, cosmic: cosmic));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('shows the energy line and lucky color with birth data', (
+      tester,
+    ) async {
+      await finished(tester, cosmic: _withBirthData);
+
+      expect(find.text("Today's energy"), findsOneWidget);
+      expect(find.text('Slow down and be kind to yourself.'), findsOneWidget);
+      expect(find.bySemanticsLabel('Rose Quartz'), findsOneWidget);
+      expect(
+        find.text('For entertainment and self-reflection'),
+        findsOneWidget,
+      );
+      expect(find.text('Unlock'), findsNothing);
+    });
+
+    testWidgets('invites her to unlock the cosmic side without birth data', (
+      tester,
+    ) async {
+      await finished(tester);
+
+      expect(find.text('Your ritual is done'), findsOneWidget);
+      expect(find.text('Unlock your cosmic side'), findsOneWidget);
+
+      await tester.tap(find.text('Unlock'));
+      await tester.pumpAndSettle();
+      expect(find.text(_unlockPage), findsOneWidget);
+    });
+
+    testWidgets('a failing reward never blocks the celebration', (
+      tester,
+    ) async {
+      await finished(tester, cosmic: () async => throw StateError('offline'));
+
+      expect(find.text('Your ritual is done'), findsOneWidget);
+      expect(find.text('Unlock your cosmic side'), findsNothing);
+      expect(find.text("Today's energy"), findsNothing);
     });
   });
 }

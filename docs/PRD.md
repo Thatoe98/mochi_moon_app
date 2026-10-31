@@ -104,7 +104,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 **Changes in v1.1 (self-love first)**
 - [x] Onboarding order is: language, 3 sample cards, Google sign-in, name, focus areas, reminder time, done. No birth data is asked. A profile is complete with a name alone (`hasAccountProfile`); birth data is a separate state (`hasBirthData`).
 - [x] **Unlock your cosmic side:** the first time she opens the Cosmic tab without birth data, it shows a friendly locked state (mascot, one sentence, one button) instead of an error. The button opens the birth steps (birth date, then birth time or "I don't know", then birthplace when the time is given), then Cosmic opens. She can leave at any step and keep using every self-love feature; the locked state shows again next time.
-- [x] The chart, the compatibility result, the natal report and Cosmic Today show the locked state with an "Unlock" button when birth data is missing. The Moon card and the retrograde calendar need no birth data and stay visible. *Today's cosmic reward card does not exist yet; it comes with the ritual (§6.15).*
+- [x] The chart, the compatibility result, the natal report and Cosmic Today show the locked state with an "Unlock" button when birth data is missing. The Moon card and the retrograde calendar need no birth data and stay visible. *Today's cosmic reward card is built (P12): it shows the unlock prompt until birth data is given.*
 - [ ] Editing birth data from Me → Profile still works; clearing it is not offered.
 - [x] **Profile astro fields are nullable.** `birthDate`, `birthTime`, `place`, `sunSign`, `moonSign`, `moonApproximate` and `risingSign` may all be absent, in Firestore and in the local profile. `timeKnown` only matters with a birth date.
 - [ ] **Migration for existing users:** nothing is erased. A profile that already has birth data keeps it and its derived signs and skips the Cosmic unlock. A profile with a name but no birth date is now complete. The app must accept Firestore documents without `profile.birthDate` (the codec already returns empty fields instead of failing). The security rules do not validate the `profile` map, so they need no change for this, and the local drift `ProfileCache` stores the same JSON map, so it needs no migration. Tests: a name-only profile, a legacy full profile, and a Firestore document missing the signs.
@@ -278,7 +278,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [x] Completing the ritual stores one `ritual_days` row for the local date and updates the streak. The streak counts a day when the ritual is completed **or** at least 1 deck card is completed. A missed day shows no guilt copy. *Streak rule built (P10, 2026-10-31): `currentStreak` counts ritual days and card days; the `ritual_days` table is read and written through the deck repository (`markRitualDay`); the ritual flow that calls it is P11 (built 2026-10-31).* — *`today_screen_test` runs the ritual end to end; the gratitude step is a quiet placeholder until the jar (§6.16, P13).*
 - [x] The mood step stores the day's mood (§6.18). Skipping it stores nothing.
 - [x] Leaving mid-ritual and coming back the same day resumes at the same step.
-- [ ] The cosmic reward card shows today's energy line and lucky color when she has birth data; otherwise "Unlock your cosmic side" (§6.1). Neither blocks finishing the ritual.
+- [x] The cosmic reward card shows today's energy line and lucky color when she has birth data; otherwise "Unlock your cosmic side" (§6.1). Neither blocks finishing the ritual.
 - [x] Works fully offline. Respects reduce motion (the sparkle is replaced by a still celebration).
 - [x] Widget test: the ritual runs end to end; the timer gate holds; the streak counts a ritual-only day.
 
@@ -905,7 +905,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14) — *rules + 83 emulator tests done 2026-10-31 (P3, committed, not yet deployed to dev); account deletion coverage done in P4 (2026-10-31); rules still to deploy*
 - [x] Drift schema v4 with the first new tables (§8.6) — *done 2026-10-31: `mood_entries`, `gratitude_entries`, `custom_cards`, `ritual_days`, `ritual_progress`; the text columns are named `body`; the other §8.6 tables follow in their own tasks*
 - [x] Daily mood check-in stored per date (§6.18, month view) — *done 2026-10-31: Deck check-in, Me → Mood, Firestore sync of `moods/{date}`; the ritual's mood step comes with the ritual flow*
-- [ ] Daily ritual on Today with streak and cosmic reward (§6.15)
+- [x] Daily ritual on Today with streak and cosmic reward (§6.15) — *the gratitude step is a placeholder until the jar (§6.16)*
 - [ ] Gratitude and wins jar (§6.16)
 - [ ] My own cards, 3 free (§6.17)
 - [ ] Breathe with Mochi (§6.19)

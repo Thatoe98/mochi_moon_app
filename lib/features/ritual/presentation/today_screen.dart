@@ -7,6 +7,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
+import 'package:mochi_moon/features/ritual/presentation/cosmic_reward_card.dart';
 import 'package:mochi_moon/features/ritual/presentation/ritual_steps.dart';
 
 /// The home tab (PRD §5, §6.15): today's 2-minute self-love ritual. It shows
@@ -31,7 +32,10 @@ class TodayScreen extends ConsumerWidget {
             onStart: ref.read(ritualControllerProvider.notifier).start,
             onBrowseDeck: () => context.go(AppRoutes.deck),
           ),
-          RitualPhase.finished => RitualFinished(streak: streak),
+          RitualPhase.finished => RitualFinished(
+            streak: streak,
+            reward: const CosmicRewardCard(),
+          ),
           _ => Column(
             children: [
               RitualProgressHeader(step: state.phase.stepNumber!),
