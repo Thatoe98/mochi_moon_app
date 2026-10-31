@@ -21,8 +21,19 @@ class FirestoreAccountRemote implements AccountRemote {
   /// Stays under Firestore's 500-writes-per-batch limit.
   static const _batchSize = 400;
 
-  /// Subcollections the app writes under `users/{uid}`.
-  static const _subcollections = ['journal', 'partners'];
+  /// Subcollections the app writes under `users/{uid}`: every one in
+  /// `firestore.rules` except `reports`, which only the server writes. A test
+  /// keeps this list in step with the rules.
+  static const subcollections = [
+    'journal',
+    'partners',
+    'gratitude',
+    'customCards',
+    'moods',
+    'letters',
+    'journeyProgress',
+    'state',
+  ];
 
   @override
   bool get removesAuthUser => false;
@@ -30,7 +41,7 @@ class FirestoreAccountRemote implements AccountRemote {
   @override
   Future<void> deleteUserData(String uid) => _guard(() async {
     final user = _firestore.collection('users').doc(uid);
-    for (final name in _subcollections) {
+    for (final name in subcollections) {
       await _deleteAll(user.collection(name));
     }
     await user.delete();
