@@ -128,6 +128,57 @@ class AppLocalizationsMy extends AppLocalizations {
   String get mePlaceholderTitle => 'ကိုယ်တိုင်အတွက်';
 
   @override
+  String get moodHappy => 'ပျော်တယ်';
+
+  @override
+  String get moodCalm => 'စိတ်အေးတယ်';
+
+  @override
+  String get moodTired => 'ပင်ပန်းတယ်';
+
+  @override
+  String get moodSad => 'ဝမ်းနည်းတယ်';
+
+  @override
+  String get moodAnxious => 'စိုးရိမ်ပူပန်တယ်';
+
+  @override
+  String get moodInLove => 'အချစ်စိတ်ဝင်နေတယ်';
+
+  @override
+  String get moodCheckInTitle => 'ဒီနေ့ ဘယ်လိုခံစားနေရလဲ။';
+
+  @override
+  String get moodScreenTitle => 'ကိုယ့်စိတ်ခံစားချက်တွေ';
+
+  @override
+  String get moodMeSubtitle => 'စိတ်အခြေအနေကို မှတ်သားပြီး တစ်လတာကို ကြည့်မယ်';
+
+  @override
+  String get moodPreviousMonth => 'ပြီးခဲ့တဲ့လ';
+
+  @override
+  String get moodNextMonth => 'နောက်လ';
+
+  @override
+  String get moodDayNone => 'ဒီနေ့အတွက် စိတ်အခြေအနေ မသိမ်းထားရသေးပါဘူး။';
+
+  @override
+  String moodDayValue(String date, String mood) {
+    return '$date: $mood';
+  }
+
+  @override
+  String moodDaySemanticsNone(String date) {
+    return '$date၊ စိတ်အခြေအနေ မရှိပါ';
+  }
+
+  @override
+  String moodDaySemantics(String date, String mood) {
+    return '$date၊ $mood';
+  }
+
+  @override
   String get journalTitle => 'ကိုယ့်မှတ်တမ်း';
 
   @override

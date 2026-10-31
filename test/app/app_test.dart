@@ -13,6 +13,7 @@ import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_provid
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
+import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/places/application/places_providers.dart';
@@ -31,6 +32,7 @@ import '../features/cosmic/retrograde/support/periods.dart';
 import '../features/cosmic/today/support/fake_thai_colors_setting.dart';
 import '../features/deck/support/fake_deck_repository.dart';
 import '../features/journal/support/fake_journal_repository.dart';
+import '../features/mood/support/fake_mood.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
@@ -67,6 +69,8 @@ Widget _app({
     profileRemoteProvider.overrideWithValue(null),
     deckRepositoryProvider.overrideWithValue(FakeDeckRepository()),
     journalRepositoryProvider.overrideWithValue(FakeJournalRepository()),
+    moodRepositoryProvider.overrideWithValue(FakeMoodRepository()),
+    moodRemoteProvider.overrideWithValue(null),
     partnerRepositoryProvider.overrideWithValue(FakePartnerRepository()),
     partnerRemoteProvider.overrideWithValue(null),
     appLanguageRepositoryProvider.overrideWithValue(
@@ -115,6 +119,21 @@ bool _motionReduced(WidgetTester tester) =>
     MediaQuery.disableAnimationsOf(tester.element(find.byType(Scaffold).first));
 
 void main() {
+  // The deck now carries a mood check-in, so the default 800x600 surface is
+  // too short for the tab screens.
+  setUp(() {
+    final binding = TestWidgetsFlutterBinding.ensureInitialized();
+    binding.platformDispatcher.views.first
+      ..physicalSize = const Size(800, 2400)
+      ..devicePixelRatio = 1;
+  });
+
+  tearDown(() {
+    TestWidgetsFlutterBinding.instance.platformDispatcher.views.first
+      ..resetPhysicalSize()
+      ..resetDevicePixelRatio();
+  });
+
   testWidgets('animations stay on unless reduce motion is switched on', (
     tester,
   ) async {

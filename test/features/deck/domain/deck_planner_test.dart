@@ -1,14 +1,54 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/domain/deck_planner.dart';
 
 DeckEvent event(String quoteId, DateTime at, {int id = 0}) =>
     DeckEvent(id: id, quoteId: quoteId, action: DeckAction.skipped, at: at);
 
+Quote card(String id, [List<String> moods = const []]) =>
+    Quote(id: id, text: {'en': id}, category: 'calm', moods: moods);
+
 void main() {
   final now = DateTime(2026, 10, 28, 12);
+
+  group('reorderForMood', () {
+    test('puts the cards that fit the mood first, keeping order', () {
+      final cards = [
+        card('a'),
+        card('b', ['sad']),
+        card('c'),
+        card('d', ['sad', 'tired']),
+      ];
+      final result = reorderForMood(cards, 0, 'sad');
+      expect(result.map((q) => q.id), ['b', 'd', 'a', 'c']);
+    });
+
+    test('leaves the swiped cards where they are', () {
+      final cards = [
+        card('a'),
+        card('b'),
+        card('c', ['calm']),
+        card('d'),
+      ];
+      final result = reorderForMood(cards, 2, 'calm');
+      expect(result.map((q) => q.id), ['a', 'b', 'c', 'd']);
+
+      final result2 = reorderForMood(cards, 1, 'calm');
+      expect(result2.map((q) => q.id), ['a', 'c', 'b', 'd']);
+    });
+
+    test('returns the same list when nothing moves', () {
+      final cards = [
+        card('a', ['sad']),
+        card('b'),
+      ];
+      expect(identical(reorderForMood(cards, 0, 'sad'), cards), isTrue);
+      expect(identical(reorderForMood(cards, 0, 'happy'), cards), isTrue);
+    });
+  });
 
   group('planDeck', () {
     test('returns every quote exactly once', () {

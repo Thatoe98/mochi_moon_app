@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 
 /// Cards seen within this window are not repeated while fresh ones remain.
@@ -32,6 +33,30 @@ List<String> planDeck({
   fresh.shuffle(random);
   stale.sort((a, b) => lastSeen[a]!.compareTo(lastSeen[b]!));
   return [...fresh, ...stale];
+}
+
+/// Moves the cards from [position] on that fit [moodId] to the front of that
+/// part of [cards], keeping the order inside both groups. Cards already
+/// swiped stay where they are. Returns [cards] itself when nothing moves.
+List<Quote> reorderForMood(List<Quote> cards, int position, String moodId) {
+  final rest = cards.sublist(position);
+  final fitting = [
+    for (final card in rest)
+      if (card.moods.contains(moodId)) card,
+  ];
+  final others = [
+    for (final card in rest)
+      if (!card.moods.contains(moodId)) card,
+  ];
+  final reordered = [...fitting, ...others];
+  var same = true;
+  for (var i = 0; i < rest.length; i++) {
+    if (!identical(rest[i], reordered[i])) {
+      same = false;
+      break;
+    }
+  }
+  return same ? cards : [...cards.sublist(0, position), ...reordered];
 }
 
 DateTime _day(DateTime t) => DateTime(t.year, t.month, t.day);

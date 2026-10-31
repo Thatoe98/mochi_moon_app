@@ -121,7 +121,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - Swipe right → saved to Journal, heart animation. Swipe left → next. Swipe up → share sheet (§6.4). Undo the last swipe (1 level).
 - Deck source order: For You ranking (§6.9) if enough history, otherwise focus-area weighted random without repeats in 30 days.
 - **Free limit:** 10 new cards per local day. Cards read inside the daily ritual (§6.15) count toward the same 10. After that, show a friendly "You're glowing — come back tomorrow" card with a premium upsell. Journal and reshares stay unlimited.
-- Mood check-in (optional) at the top: 6 emoji moods (happy, calm, tired, sad, anxious, in love). Choosing one re-ranks the next cards. v1.1: the choice is also stored as the day's mood (§6.18). *Not built yet: the Deck has no mood check-in today.*
+- Mood check-in (optional) at the top: 6 emoji moods (happy, calm, tired, sad, anxious, in love). Choosing one re-ranks the next cards. v1.1: the choice is also stored as the day's mood (§6.18). *Built (P9): the Deck has the check-in; a mood she already chose today re-ranks the deck when she opens it.*
 - Her own cards (§6.17) join the rotation.
 
 **AC**
@@ -302,8 +302,8 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.18 Mood calendar (month view Free, insights Premium)
 
-- [ ] The mood check-in (ritual or Deck) stores **one mood per local date** (the last choice wins). She can also set or change today's mood from Me → Mood.
-- [ ] Month calendar: one colored mood dot per day, previous and next month, tap a day to see its mood; unlogged days are empty without any warning style.
+- [x] The mood check-in (ritual or Deck) stores **one mood per local date** (the last choice wins). She can also set or change today's mood from Me → Mood.
+- [x] Month calendar: one colored mood dot per day, previous and next month, tap a day to see its mood; unlogged days are empty without any warning style.
 - [ ] **Insights (Premium):** a few simple statements computed on the device from her own data only, for example "You logged calm more often on days you finished your ritual". They need at least 14 logged days. Wording is gentle, never a diagnosis, never about health or mental conditions, and always offers a kind next step.
 - [ ] Nothing about moods leaves the phone except her own Firestore documents `users/{uid}/moods/{YYYY-MM-DD}`; mood **counts** (not days or text) feed the weekly letter (§6.24).
 - [ ] Unit tests for the insight rules, including "not enough data" and no-claim wording.
@@ -904,7 +904,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] 4-tab shell: Today (home), Deck, Cosmic, Me; routes, deep links, notification and widget targets updated (§5) — *shell done 2026-10-31 (P5): Today opens first with a stub (streak + button to the deck); the /deck route the widget link uses is unchanged and the reminder opens the app on Today (neither re-tried on a device); the ritual itself is P11+*
 - [x] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14) — *rules + 83 emulator tests done 2026-10-31 (P3, committed, not yet deployed to dev); account deletion coverage done in P4 (2026-10-31); rules still to deploy*
 - [x] Drift schema v4 with the first new tables (§8.6) — *done 2026-10-31: `mood_entries`, `gratitude_entries`, `custom_cards`, `ritual_days`, `ritual_progress`; the text columns are named `body`; the other §8.6 tables follow in their own tasks*
-- [ ] Daily mood check-in stored per date (§6.18, month view)
+- [x] Daily mood check-in stored per date (§6.18, month view) — *done 2026-10-31: Deck check-in, Me → Mood, Firestore sync of `moods/{date}`; the ritual's mood step comes with the ritual flow*
 - [ ] Daily ritual on Today with streak and cosmic reward (§6.15)
 - [ ] Gratitude and wins jar (§6.16)
 - [ ] My own cards, 3 free (§6.17)

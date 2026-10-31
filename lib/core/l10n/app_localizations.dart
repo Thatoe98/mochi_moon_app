@@ -284,6 +284,96 @@ abstract class AppLocalizations {
   /// **'Just you'**
   String get mePlaceholderTitle;
 
+  /// No description provided for @moodHappy.
+  ///
+  /// In en, this message translates to:
+  /// **'Happy'**
+  String get moodHappy;
+
+  /// No description provided for @moodCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm'**
+  String get moodCalm;
+
+  /// No description provided for @moodTired.
+  ///
+  /// In en, this message translates to:
+  /// **'Tired'**
+  String get moodTired;
+
+  /// No description provided for @moodSad.
+  ///
+  /// In en, this message translates to:
+  /// **'Sad'**
+  String get moodSad;
+
+  /// No description provided for @moodAnxious.
+  ///
+  /// In en, this message translates to:
+  /// **'Anxious'**
+  String get moodAnxious;
+
+  /// No description provided for @moodInLove.
+  ///
+  /// In en, this message translates to:
+  /// **'In love'**
+  String get moodInLove;
+
+  /// No description provided for @moodCheckInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How are you feeling today?'**
+  String get moodCheckInTitle;
+
+  /// No description provided for @moodScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your moods'**
+  String get moodScreenTitle;
+
+  /// No description provided for @moodMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check in and see your month'**
+  String get moodMeSubtitle;
+
+  /// No description provided for @moodPreviousMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous month'**
+  String get moodPreviousMonth;
+
+  /// No description provided for @moodNextMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Next month'**
+  String get moodNextMonth;
+
+  /// No description provided for @moodDayNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No mood saved for this day.'**
+  String get moodDayNone;
+
+  /// No description provided for @moodDayValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}: {mood}'**
+  String moodDayValue(String date, String mood);
+
+  /// No description provided for @moodDaySemanticsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}, no mood'**
+  String moodDaySemanticsNone(String date);
+
+  /// No description provided for @moodDaySemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}, {mood}'**
+  String moodDaySemantics(String date, String mood);
+
   /// No description provided for @journalTitle.
   ///
   /// In en, this message translates to:

@@ -129,6 +129,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mePlaceholderTitle => 'Just you';
 
   @override
+  String get moodHappy => 'Happy';
+
+  @override
+  String get moodCalm => 'Calm';
+
+  @override
+  String get moodTired => 'Tired';
+
+  @override
+  String get moodSad => 'Sad';
+
+  @override
+  String get moodAnxious => 'Anxious';
+
+  @override
+  String get moodInLove => 'In love';
+
+  @override
+  String get moodCheckInTitle => 'How are you feeling today?';
+
+  @override
+  String get moodScreenTitle => 'Your moods';
+
+  @override
+  String get moodMeSubtitle => 'Check in and see your month';
+
+  @override
+  String get moodPreviousMonth => 'Previous month';
+
+  @override
+  String get moodNextMonth => 'Next month';
+
+  @override
+  String get moodDayNone => 'No mood saved for this day.';
+
+  @override
+  String moodDayValue(String date, String mood) {
+    return '$date: $mood';
+  }
+
+  @override
+  String moodDaySemanticsNone(String date) {
+    return '$date, no mood';
+  }
+
+  @override
+  String moodDaySemantics(String date, String mood) {
+    return '$date, $mood';
+  }
+
+  @override
   String get journalTitle => 'Your journal';
 
   @override

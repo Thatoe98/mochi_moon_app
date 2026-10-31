@@ -12,6 +12,9 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
 import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
+import 'package:mochi_moon/features/mood/application/mood_providers.dart';
+import 'package:mochi_moon/features/mood/domain/mood.dart';
+import 'package:mochi_moon/features/mood/presentation/mood_chips.dart';
 
 /// The home tab: a swipe deck where each card stays locked until the timer
 /// ring has filled (PRD §6.2).
@@ -35,6 +38,10 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // A mood she already chose today shapes the deck; so does a new choice.
+    ref.listenManual<Mood?>(todayMoodProvider, (_, mood) {
+      if (mood != null) ref.read(deckProvider.notifier).applyMood(mood);
+    }, fireImmediately: true);
   }
 
   @override
@@ -91,16 +98,26 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
             _StreakBadge(streak: state.streak),
         ],
       ),
-      body: deck.when(
-        loading: () => const LoadingView(),
-        error: (_, _) => ErrorView(
-          onRetry: () {
-            ref
-              ..invalidate(quotesProvider)
-              ..invalidate(deckProvider);
-          },
-        ),
-        data: _buildDeck,
+      body: Column(
+        children: [
+          _MoodCheckIn(
+            selected: ref.watch(todayMoodProvider),
+            onSelected: (mood) => ref.read(setTodayMoodProvider)(mood),
+          ),
+          Expanded(
+            child: deck.when(
+              loading: () => const LoadingView(),
+              error: (_, _) => ErrorView(
+                onRetry: () {
+                  ref
+                    ..invalidate(quotesProvider)
+                    ..invalidate(deckProvider);
+                },
+              ),
+              data: _buildDeck,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -131,6 +148,43 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
       onRead: (id) => setState(() => _read.add(id)),
       onAction: _onAction,
       onUndo: ref.read(deckProvider.notifier).undo,
+    );
+  }
+}
+
+/// The optional mood check-in above the deck (PRD §6.2): one row she can
+/// scroll sideways, so it never takes much room.
+class _MoodCheckIn extends StatelessWidget {
+  const _MoodCheckIn({required this.selected, required this.onSelected});
+
+  final Mood? selected;
+  final ValueChanged<Mood> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.moodCheckInTitle,
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          MoodChips(
+            selected: selected,
+            onSelected: onSelected,
+            scrollable: true,
+          ),
+        ],
+      ),
     );
   }
 }

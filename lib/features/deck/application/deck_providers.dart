@@ -14,6 +14,7 @@ import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/domain/deck_counters.dart';
 import 'package:mochi_moon/features/deck/domain/deck_planner.dart';
 import 'package:mochi_moon/features/deck/domain/deck_repository.dart';
+import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'deck_providers.g.dart';
@@ -105,12 +106,13 @@ class DeckState {
   bool get isDone => remaining == 0;
 
   DeckState copyWith({
+    List<Quote>? cards,
     int? position,
     int? completedToday,
     int? streak,
     bool? canUndo,
   }) => DeckState(
-    cards: cards,
+    cards: cards ?? this.cards,
     position: position ?? this.position,
     completedToday: completedToday ?? this.completedToday,
     streak: streak ?? this.streak,
@@ -125,6 +127,11 @@ class Deck extends _$Deck {
 
   /// The local day the current deck was dealt for.
   DateTime _day = DateTime(0);
+
+  /// The mood she checked in with and the day she did, so a deck dealt again
+  /// the same day keeps leaning toward it (PRD §6.2).
+  Mood? _mood;
+  DateTime _moodDay = DateTime(0);
 
   @override
   Future<DeckState> build() async {
@@ -149,9 +156,12 @@ class Deck extends _$Deck {
     final pinned = _pinCardOfTheDay(plan, quotes, now);
     final completed = completedOnDay(_history, now);
     final left = (limit - completed).clamp(0, plan.length);
+    final dealt = [for (final id in pinned.take(left)) byId[id]!];
 
     return DeckState(
-      cards: [for (final id in pinned.take(left)) byId[id]!],
+      cards: _mood != null && _moodDay == _day
+          ? reorderForMood(dealt, 0, _mood!.id)
+          : dealt,
       position: 0,
       completedToday: completed,
       streak: currentStreak(_history, now),
@@ -171,6 +181,23 @@ class Deck extends _$Deck {
       ref.invalidateSelf,
     );
     ref.onDispose(timer.cancel);
+  }
+
+  /// Leans the cards still to come toward [mood] (PRD §6.2): the ones that
+  /// fit it move to the front. The card she is looking at may change, so its
+  /// read-aloud timer starts again.
+  void applyMood(Mood mood) {
+    final now = ref.read(clockProvider)();
+    final today = DateTime(now.year, now.month, now.day);
+    if (_mood == mood && _moodDay == today) return;
+    _mood = mood;
+    _moodDay = today;
+    final current = state.value;
+    if (current == null) return;
+    final cards = reorderForMood(current.cards, current.position, mood.id);
+    if (!identical(cards, current.cards)) {
+      state = AsyncData(current.copyWith(cards: cards));
+    }
   }
 
   /// Deals a fresh deck if the local day has changed since this one was dealt.

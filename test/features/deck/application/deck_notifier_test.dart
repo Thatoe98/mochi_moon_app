@@ -7,11 +7,12 @@ import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
+import 'package:mochi_moon/features/mood/domain/mood.dart';
 
 import '../support/fake_deck_repository.dart';
 
-Quote quote(String id) =>
-    Quote(id: id, text: {'en': 'text $id'}, category: 'worth');
+Quote quote(String id, [List<String> moods = const []]) =>
+    Quote(id: id, text: {'en': 'text $id'}, category: 'worth', moods: moods);
 
 void main() {
   final now = DateTime(2026, 10, 28, 12);
@@ -20,6 +21,7 @@ void main() {
     FakeDeckRepository? repo,
     int limit = 10,
     int quoteCount = 20,
+    List<String> sadIds = const [],
     DateTime Function()? clock,
   }) {
     final container = ProviderContainer(
@@ -29,13 +31,62 @@ void main() {
         randomProvider.overrideWithValue(Random(1)),
         dailyCardLimitProvider.overrideWithValue(limit),
         quotesProvider.overrideWith(
-          (ref) async => [for (var i = 0; i < quoteCount; i++) quote('q$i')],
+          (ref) async => [
+            for (var i = 0; i < quoteCount; i++)
+              quote('q$i', sadIds.contains('q$i') ? ['sad'] : const []),
+          ],
         ),
       ],
     );
     addTearDown(container.dispose);
     return container;
   }
+
+  group('applyMood', () {
+    test('moves the cards that fit the mood to the front', () async {
+      final container = makeContainer(
+        quoteCount: 3,
+        sadIds: const ['q0', 'q1', 'q2'],
+      );
+      final before = await container.read(deckProvider.future);
+      final ids = before.cards.map((q) => q.id).toList();
+
+      container.read(deckProvider.notifier).applyMood(Mood.sad);
+
+      // Every card fits, so nothing moves and the list is the same.
+      expect(
+        container.read(deckProvider).requireValue.cards.map((q) => q.id),
+        ids,
+      );
+    });
+
+    test('puts the one fitting card on top and keeps the rest', () async {
+      final container = makeContainer(quoteCount: 6, sadIds: const ['q5']);
+      final before = await container.read(deckProvider.future);
+      final others = before.cards.where((q) => q.id != 'q5').map((q) => q.id);
+
+      container.read(deckProvider.notifier).applyMood(Mood.sad);
+
+      final after = container.read(deckProvider).requireValue.cards;
+      expect(after.first.id, 'q5');
+      expect(after.skip(1).map((q) => q.id), others);
+    });
+
+    test('choosing the same mood again changes nothing', () async {
+      final container = makeContainer(quoteCount: 6, sadIds: const ['q5']);
+      await container.read(deckProvider.future);
+      final notifier = container.read(deckProvider.notifier)
+        ..applyMood(Mood.sad);
+      final first = container.read(deckProvider).requireValue.cards;
+
+      notifier.applyMood(Mood.sad);
+
+      expect(
+        identical(container.read(deckProvider).requireValue.cards, first),
+        isTrue,
+      );
+    });
+  });
 
   test('deals up to the daily limit', () async {
     final container = makeContainer();

@@ -11,7 +11,10 @@ import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/features/mood/application/mood_providers.dart';
+import 'package:mochi_moon/features/mood/domain/mood.dart';
 
+import '../../mood/support/fake_mood.dart';
 import '../support/fake_deck_repository.dart';
 import '../support/fake_image_sharer.dart';
 
@@ -26,6 +29,7 @@ const lock = Duration(seconds: 3, milliseconds: 100);
 Widget app({
   required FakeDeckRepository repo,
   FakeImageSharer? sharer,
+  FakeMoodRepository? moods,
   Future<List<Quote>> Function()? loadQuotes,
   int limit = 10,
   bool reduceMotion = false,
@@ -33,6 +37,8 @@ Widget app({
 }) => ProviderScope(
   overrides: [
     deckRepositoryProvider.overrideWithValue(repo),
+    moodRepositoryProvider.overrideWithValue(moods ?? FakeMoodRepository()),
+    moodRemoteProvider.overrideWithValue(null),
     imageSharerProvider.overrideWithValue(sharer ?? FakeImageSharer()),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
     randomProvider.overrideWithValue(Random(1)),
@@ -83,6 +89,62 @@ void main() {
     TestWidgetsFlutterBinding.instance.platformDispatcher.views.first
       ..resetPhysicalSize()
       ..resetDevicePixelRatio();
+  });
+
+  group('mood check-in', () {
+    testWidgets('choosing a mood stores it for today', (tester) async {
+      final moods = FakeMoodRepository();
+      await tester.pumpWidget(app(repo: FakeDeckRepository(), moods: moods));
+      await load(tester);
+
+      await tester.tap(find.text('Calm'));
+      await tester.pump();
+
+      expect(moods.moodOf(DateTime(2026, 10, 28)), Mood.calm);
+    });
+
+    testWidgets('a mood chosen earlier today is already selected', (
+      tester,
+    ) async {
+      final moods = FakeMoodRepository([
+        DayMood(day: DateTime(2026, 10, 28), mood: Mood.sad),
+      ]);
+      await tester.pumpWidget(app(repo: FakeDeckRepository(), moods: moods));
+      await load(tester);
+
+      final chip = tester.widget<ChoiceChip>(
+        find.widgetWithText(ChoiceChip, 'Sad'),
+      );
+      expect(chip.selected, isTrue);
+    });
+
+    testWidgets('a mood that fits a card puts it on top', (tester) async {
+      await tester.pumpWidget(
+        app(
+          repo: FakeDeckRepository(),
+          loadQuotes: () async => [
+            const Quote(id: 'a', text: {'en': 'Soft moon a'}, category: 'calm'),
+            const Quote(id: 'b', text: {'en': 'Soft moon b'}, category: 'calm'),
+            const Quote(
+              id: 'c',
+              text: {'en': 'Gentle light c'},
+              category: 'calm',
+              moods: ['sad'],
+            ),
+          ],
+        ),
+      );
+      await load(tester);
+
+      await tester.ensureVisible(find.text('Sad'));
+      await tester.pump();
+      await tester.tap(find.text('Sad'));
+      await tester.pump();
+      await tester.pump();
+
+      final top = tester.widgetList<QuoteCard>(find.byType(QuoteCard)).last;
+      expect(top.text, 'Gentle light c');
+    });
   });
 
   group('timer gate', () {
@@ -176,9 +238,8 @@ void main() {
 
       // The card of the day is dealt first on every deal, so the same card
       // faces the reader; only the cleared read state can lock it.
-      ProviderScope.containerOf(
-        tester.element(find.byType(DeckScreen)),
-      ).invalidate(deckProvider);
+      ProviderScope.containerOf(tester.element(find.byType(DeckScreen)))
+          .invalidate(deckProvider);
       await load(tester);
 
       expect(find.text('Ready to swipe'), findsNothing);

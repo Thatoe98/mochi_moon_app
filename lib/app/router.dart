@@ -9,6 +9,7 @@ import 'package:mochi_moon/features/cosmic/unlock/presentation/unlock_screen.dar
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
+import 'package:mochi_moon/features/mood/presentation/mood_screen.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/domain/onboarding_repository.dart';
 import 'package:mochi_moon/features/onboarding/presentation/language_screen.dart';
@@ -35,6 +36,7 @@ abstract final class AppRoutes {
   static const chartReport = '/cosmic/chart/report';
   static const me = '/me';
   static const journal = '/me/journal';
+  static const mood = '/me/mood';
   static const profileEdit = '/me/profile';
   static const about = '/me/about';
   static const partners = '/me/partners';
@@ -143,6 +145,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'journal',
                     builder: (context, state) => const JournalScreen(),
+                  ),
+                  GoRoute(
+                    path: 'mood',
+                    builder: (context, state) => const MoodScreen(),
                   ),
                   GoRoute(
                     path: 'profile',
