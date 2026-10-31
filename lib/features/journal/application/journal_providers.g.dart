@@ -192,7 +192,7 @@ final class JournalProvider
   Journal create() => Journal();
 }
 
-String _$journalHash() => r'372928ae565c6cc9133fe124a13714adf4c6876c';
+String _$journalHash() => r'1a33eede57084b5495421ab0984e8a011ad05eec';
 
 /// Saved cards, newest first. Rebuilds on each visit so it never shows a
 /// stale list after the deck saved something.

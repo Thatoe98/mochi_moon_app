@@ -9,6 +9,7 @@ class QuoteCard extends StatelessWidget {
   const QuoteCard({
     required this.text,
     required this.category,
+    this.illustrationId,
     this.categoryLabel,
     super.key,
   });
@@ -17,6 +18,9 @@ class QuoteCard extends StatelessWidget {
 
   /// The category id, which picks the art.
   final String category;
+
+  /// A picked art id (her own cards); null uses the category art.
+  final String? illustrationId;
   final String? categoryLabel;
 
   @override
@@ -26,7 +30,13 @@ class QuoteCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          Expanded(flex: 11, child: QuoteIllustration(category: category)),
+          Expanded(
+            flex: 11,
+            child: QuoteIllustration(
+              category: category,
+              illustrationId: illustrationId,
+            ),
+          ),
           Expanded(
             flex: 9,
             child: Padding(
@@ -75,13 +85,18 @@ class QuoteCard extends StatelessWidget {
 
 /// The theme art for a card of [category], with its TalkBack label.
 class QuoteIllustration extends StatelessWidget {
-  const QuoteIllustration({required this.category, super.key});
+  const QuoteIllustration({
+    required this.category,
+    this.illustrationId,
+    super.key,
+  });
 
   final String category;
+  final String? illustrationId;
 
   @override
   Widget build(BuildContext context) {
-    final asset = AppIllustrations.forCategory(category);
+    final asset = AppIllustrations.forCard(category, illustrationId);
     return MochiIllustration(
       asset: asset,
       semanticLabel: _label(AppLocalizations.of(context), asset),

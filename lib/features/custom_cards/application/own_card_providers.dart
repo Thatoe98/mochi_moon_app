@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
@@ -33,6 +34,15 @@ List<Quote> ownCardQuotes(Ref ref) => [
   for (final card in ref.watch(ownCardsProvider).value ?? const <OwnCard>[])
     card.toQuote(),
 ];
+
+/// Every card the deck can deal: the bundled quotes, then the ones she wrote.
+/// The deck, the ritual, the journal and the widget all draw from this.
+@riverpod
+Future<List<Quote>> cardPool(Ref ref) async {
+  final bundled = await ref.watch(quotesProvider.future);
+  final own = await ref.watch(ownCardsProvider.future);
+  return [...bundled, for (final card in own) card.toQuote()];
+}
 
 /// How many more cards she can write: null means no limit (Premium).
 @riverpod

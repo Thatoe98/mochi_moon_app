@@ -6,6 +6,7 @@ import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/cosmic/report/presentation/natal_report_screen.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_screen.dart';
 import 'package:mochi_moon/features/cosmic/unlock/presentation/unlock_screen.dart';
+import 'package:mochi_moon/features/custom_cards/presentation/own_cards_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/gratitude/presentation/gratitude_screen.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
@@ -39,6 +40,7 @@ abstract final class AppRoutes {
   static const journal = '/me/journal';
   static const mood = '/me/mood';
   static const gratitude = '/me/gratitude';
+  static const ownCards = '/me/cards';
   static const profileEdit = '/me/profile';
   static const about = '/me/about';
   static const partners = '/me/partners';
@@ -151,6 +153,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'gratitude',
                     builder: (context, state) => const GratitudeScreen(),
+                  ),
+                  GoRoute(
+                    path: 'cards',
+                    builder: (context, state) => const OwnCardsScreen(),
                   ),
                   GoRoute(
                     path: 'mood',

@@ -192,6 +192,53 @@ final class OwnCardQuotesProvider
 
 String _$ownCardQuotesHash() => r'8c832b8b8b59e538c01a4a8762b1828c4f5e127a';
 
+/// Every card the deck can deal: the bundled quotes, then the ones she wrote.
+/// The deck, the ritual, the journal and the widget all draw from this.
+
+@ProviderFor(cardPool)
+final cardPoolProvider = CardPoolProvider._();
+
+/// Every card the deck can deal: the bundled quotes, then the ones she wrote.
+/// The deck, the ritual, the journal and the widget all draw from this.
+
+final class CardPoolProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Quote>>,
+          List<Quote>,
+          FutureOr<List<Quote>>
+        >
+    with $FutureModifier<List<Quote>>, $FutureProvider<List<Quote>> {
+  /// Every card the deck can deal: the bundled quotes, then the ones she wrote.
+  /// The deck, the ritual, the journal and the widget all draw from this.
+  CardPoolProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'cardPoolProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$cardPoolHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<Quote>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<Quote>> create(Ref ref) {
+    return cardPool(ref);
+  }
+}
+
+String _$cardPoolHash() => r'd6e101d106e4ffd2dddf757a95013e565d27165e';
+
 /// How many more cards she can write: null means no limit (Premium).
 
 @ProviderFor(ownCardSlotsLeft)
@@ -238,7 +285,7 @@ final class OwnCardSlotsLeftProvider
 
 String _$ownCardSlotsLeftHash() => r'da74c97334f64ea0e34bdadf0cb54ba68f8d49b6';
 
-/// Creates a card, or edits the one with [editId]. Returns why it was not
+/// Creates a card, or edits the one with `editId`. Returns why it was not
 /// saved, or null when it was. The count is read from the store, so two quick
 /// taps cannot pass the free limit. Editing never counts against the limit,
 /// and deleting a card frees its slot.
@@ -246,7 +293,7 @@ String _$ownCardSlotsLeftHash() => r'da74c97334f64ea0e34bdadf0cb54ba68f8d49b6';
 @ProviderFor(saveOwnCard)
 final saveOwnCardProvider = SaveOwnCardProvider._();
 
-/// Creates a card, or edits the one with [editId]. Returns why it was not
+/// Creates a card, or edits the one with `editId`. Returns why it was not
 /// saved, or null when it was. The count is read from the store, so two quick
 /// taps cannot pass the free limit. Editing never counts against the limit,
 /// and deleting a card frees its slot.
@@ -278,7 +325,7 @@ final class SaveOwnCardProvider
             String? editId,
           })
         > {
-  /// Creates a card, or edits the one with [editId]. Returns why it was not
+  /// Creates a card, or edits the one with `editId`. Returns why it was not
   /// saved, or null when it was. The count is read from the store, so two quick
   /// taps cannot pass the free limit. Editing never counts against the limit,
   /// and deleting a card frees its slot.

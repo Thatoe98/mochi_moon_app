@@ -41,6 +41,7 @@ class _JournalScreenState extends ConsumerState<JournalScreen> {
                   child: QuoteCard(
                     text: item.quote.textFor(lang),
                     category: item.quote.category,
+                    illustrationId: item.quote.illustrationId,
                     categoryLabel: categoryLabel(l10n, item.quote.category),
                   ),
                 ),
@@ -210,7 +211,10 @@ class _JournalTile extends StatelessWidget {
         dimension: AppSpacing.minTouchTarget + AppSpacing.sm,
         child: ClipRRect(
           borderRadius: AppRadii.chipRadius,
-          child: QuoteIllustration(category: item.quote.category),
+          child: QuoteIllustration(
+            category: item.quote.category,
+            illustrationId: item.quote.illustrationId,
+          ),
         ),
       ),
       title: Text(

@@ -167,6 +167,7 @@ class _GatedCardDeckState extends State<GatedCardDeck> {
               return QuoteCard(
                 text: quote.textFor(lang),
                 category: quote.category,
+                illustrationId: quote.illustrationId,
                 categoryLabel: categoryLabel(l10n, quote.category),
               );
             },

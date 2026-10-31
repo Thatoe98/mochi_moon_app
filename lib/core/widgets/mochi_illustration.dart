@@ -23,6 +23,20 @@ abstract final class AppIllustrations {
     _ => calm,
   };
 
+  /// The art she can put on a card of her own: id (as stored) to asset.
+  static const Map<String, String> ownCardArt = {
+    'calm_01': calm,
+    'confidence_01': confidence,
+    'healing_01': healing,
+    'selfworth_01': selfWorth,
+    'rest_01': rest,
+  };
+
+  /// The art for a card: its own pick when [illustrationId] names bundled
+  /// art, otherwise the theme art of its [category].
+  static String forCard(String category, String? illustrationId) =>
+      ownCardArt[illustrationId] ?? forCategory(category);
+
   static const List<String> all = [
     onboardingWelcome,
     onboardingSave,

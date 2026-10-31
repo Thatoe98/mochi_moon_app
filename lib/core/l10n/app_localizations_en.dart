@@ -1627,4 +1627,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gratitudePrivacyNote => 'Only you can read what you write here.';
+
+  @override
+  String get ownCardsTitle => 'My own cards';
+
+  @override
+  String get ownCardsMeSubtitle => 'Affirmations in your own words';
+
+  @override
+  String get ownCardsEmptyTitle => 'No cards of your own yet';
+
+  @override
+  String get ownCardsEmptyBody =>
+      'Write something kind you want to hear. It joins your deck.';
+
+  @override
+  String get ownCardsWrite => 'Write a card';
+
+  @override
+  String ownCardsSlotsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count free cards left',
+      one: '1 free card left',
+      zero: 'No free cards left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ownCardsNewTitle => 'A card in your words';
+
+  @override
+  String get ownCardsEditTitle => 'Edit your card';
+
+  @override
+  String get ownCardsHint => 'I am allowed to take my time';
+
+  @override
+  String get ownCardsPickArt => 'Pick a picture';
+
+  @override
+  String get ownCardsSave => 'Save my card';
+
+  @override
+  String get ownCardsShare => 'Share as an image';
+
+  @override
+  String get ownCardsDelete => 'Delete this card';
+
+  @override
+  String get ownCardsDeleteTitle => 'Delete this card?';
+
+  @override
+  String get ownCardsDeleteBody =>
+      'It will be removed from your deck for good, and it frees a spot.';
+
+  @override
+  String get ownCardsDeleteConfirm => 'Delete';
+
+  @override
+  String get ownCardsKeep => 'Keep it';
+
+  @override
+  String get ownCardsCouldNotSave =>
+      'That card could not be saved. Please try again.';
+
+  @override
+  String get ownCardsLimitTitle => 'Your three free cards are in use';
+
+  @override
+  String get ownCardsLimitBody =>
+      'Free accounts keep three cards of their own. Premium lets you write as many as you like. You can also delete a card to make room.';
+
+  @override
+  String get ownCardsLimitOk => 'OK';
+
+  @override
+  String get ownCardsPrivacyNote => 'Only you can read what you write here.';
 }

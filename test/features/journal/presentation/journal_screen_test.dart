@@ -4,11 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/journal/domain/journal_repository.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
 
+import '../../custom_cards/support/fake_own_cards.dart';
 import '../../deck/support/fake_image_sharer.dart';
 import '../support/fake_journal_repository.dart';
 
@@ -29,6 +31,7 @@ Widget _app(
   overrides: [
     journalRepositoryProvider.overrideWithValue(repo),
     imageSharerProvider.overrideWithValue(sharer ?? FakeImageSharer()),
+    ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
     quotesProvider.overrideWith(
       (ref) => loadQuotes?.call() ?? Future.value(_quotes),
     ),

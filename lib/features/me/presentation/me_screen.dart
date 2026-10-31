@@ -49,6 +49,14 @@ class MeScreen extends StatelessWidget {
           ),
           ListTile(
             minTileHeight: AppSpacing.minTouchTarget,
+            leading: const Icon(Icons.edit_note_rounded),
+            title: Text(l10n.ownCardsTitle),
+            subtitle: Text(l10n.ownCardsMeSubtitle),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => context.push(AppRoutes.ownCards),
+          ),
+          ListTile(
+            minTileHeight: AppSpacing.minTouchTarget,
             leading: const Icon(Icons.mood_rounded),
             title: Text(l10n.moodScreenTitle),
             subtitle: Text(l10n.moodMeSubtitle),

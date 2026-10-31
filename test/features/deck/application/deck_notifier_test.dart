@@ -5,10 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 
+import '../../custom_cards/support/fake_own_cards.dart';
 import '../support/fake_deck_repository.dart';
 
 Quote quote(String id, [List<String> moods = const []]) =>
@@ -30,6 +32,7 @@ void main() {
         clockProvider.overrideWithValue(clock ?? () => now),
         randomProvider.overrideWithValue(Random(1)),
         dailyCardLimitProvider.overrideWithValue(limit),
+        ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
         quotesProvider.overrideWith(
           (ref) async => [
             for (var i = 0; i < quoteCount; i++)

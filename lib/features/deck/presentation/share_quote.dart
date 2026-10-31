@@ -24,7 +24,9 @@ Future<void> shareQuote(
   try {
     // The art decodes asynchronously; without this the capture can be blank.
     await precacheImage(
-      AssetImage(AppIllustrations.forCategory(quote.category)),
+      AssetImage(
+        AppIllustrations.forCard(quote.category, quote.illustrationId),
+      ),
       context,
     );
     if (!context.mounted) return;
@@ -36,6 +38,7 @@ Future<void> shareQuote(
         child: ShareCardImage(
           text: quote.textFor(lang),
           category: quote.category,
+          illustrationId: quote.illustrationId,
           categoryLabel: categoryLabel(l10n, quote.category),
           wordmark: l10n.appName,
           handle: handle,

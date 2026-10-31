@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/journal/data/drift_journal_repository.dart';
 import 'package:mochi_moon/features/journal/data/firestore_journal_remote.dart';
 import 'package:mochi_moon/features/journal/domain/journal_repository.dart';
@@ -79,7 +79,9 @@ Future<void> journalSync(Ref ref) async {
             await remote.delete(uid, quoteId);
             mirrored.remove(quoteId);
           } on AppFailure catch (error) {
-            debugPrint('Could not remove a journal card from Firestore: $error');
+            debugPrint(
+              'Could not remove a journal card from Firestore: $error',
+            );
           }
         }
       } while (again);
@@ -107,7 +109,7 @@ class Journal extends _$Journal {
   @override
   Future<List<JournalItem>> build() async {
     final entries = await ref.watch(journalRepositoryProvider).entries();
-    final quotes = await ref.watch(quotesProvider.future);
+    final quotes = await ref.watch(cardPoolProvider.future);
     final byId = {for (final q in quotes) q.id: q};
     // A saved id missing from the bundled quotes (e.g. a retired card) is
     // skipped rather than shown blank.

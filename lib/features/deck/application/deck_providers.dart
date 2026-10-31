@@ -3,11 +3,11 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:mochi_moon/core/content/card_of_the_day.dart';
-import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/data/drift_deck_repository.dart';
 import 'package:mochi_moon/features/deck/data/firestore_deck_counters_remote.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
@@ -149,7 +149,7 @@ class Deck extends _$Deck {
   Future<DeckState> build() async {
     final repo = ref.watch(deckRepositoryProvider);
     final now = ref.watch(clockProvider)();
-    final quotes = await ref.watch(quotesProvider.future);
+    final quotes = await ref.watch(cardPoolProvider.future);
     final limit = ref.watch(dailyCardLimitProvider);
 
     _day = DateTime(now.year, now.month, now.day);

@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/application/share_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
@@ -14,6 +15,7 @@ import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 
+import '../../custom_cards/support/fake_own_cards.dart';
 import '../../mood/support/fake_mood.dart';
 import '../support/fake_deck_repository.dart';
 import '../support/fake_image_sharer.dart';
@@ -43,6 +45,7 @@ Widget app({
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
     randomProvider.overrideWithValue(Random(1)),
     dailyCardLimitProvider.overrideWithValue(limit),
+    ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
     quotesProvider.overrideWith(
       (ref) => loadQuotes?.call() ?? Future.value(quotes(3)),
     ),

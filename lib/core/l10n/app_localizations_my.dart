@@ -1638,4 +1638,83 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get gratitudePrivacyNote =>
       'ဒီမှာ ရေးထားတာကို ကိုယ်တစ်ယောက်တည်းပဲ ဖတ်နိုင်ပါတယ်။';
+
+  @override
+  String get ownCardsTitle => 'ကိုယ့်ကတ်တွေ';
+
+  @override
+  String get ownCardsMeSubtitle =>
+      'ကိုယ့်စကားလုံးတွေနဲ့ ရေးထားတဲ့ အားပေးစကားလေးတွေ';
+
+  @override
+  String get ownCardsEmptyTitle => 'ကိုယ်ပိုင်ကတ်တွေ မရှိသေးဘူး';
+
+  @override
+  String get ownCardsEmptyBody =>
+      'ကြားချင်တဲ့ ကြင်နာတဲ့စကားလေးတစ်ခု ရေးကြည့်ပါ။ ကတ်ပုံထဲမှာ ပါလာပါမယ်။';
+
+  @override
+  String get ownCardsWrite => 'ကတ်တစ်ကတ် ရေးမယ်';
+
+  @override
+  String ownCardsSlotsLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'အခမဲ့ကတ် $count ကတ် ကျန်ပါသေးတယ်',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ownCardsNewTitle => 'ကိုယ့်စကားနဲ့ ကတ်တစ်ကတ်';
+
+  @override
+  String get ownCardsEditTitle => 'ကိုယ့်ကတ်ကို ပြင်မယ်';
+
+  @override
+  String get ownCardsHint => 'ငါ အချိန်ယူလို့ရတယ်';
+
+  @override
+  String get ownCardsPickArt => 'ပုံတစ်ပုံ ရွေးမယ်';
+
+  @override
+  String get ownCardsSave => 'ကိုယ့်ကတ်ကို သိမ်းမယ်';
+
+  @override
+  String get ownCardsShare => 'ပုံအနေနဲ့ မျှဝေမယ်';
+
+  @override
+  String get ownCardsDelete => 'ဒီကတ်ကို ဖျက်မယ်';
+
+  @override
+  String get ownCardsDeleteTitle => 'ဒီကတ်ကို ဖျက်မှာလား။';
+
+  @override
+  String get ownCardsDeleteBody =>
+      'ဒီကတ်ကို ကိုယ့်ကတ်ပုံထဲကနေ အပြီးဖယ်ရှားပါမယ်၊ နေရာတစ်နေရာလည်း လွတ်လာပါမယ်။';
+
+  @override
+  String get ownCardsDeleteConfirm => 'ဖျက်မယ်';
+
+  @override
+  String get ownCardsKeep => 'ဆက်သိမ်းထားမယ်';
+
+  @override
+  String get ownCardsCouldNotSave =>
+      'ဒီကတ်ကို သိမ်းလို့မရပါဘူး။ ထပ်စမ်းကြည့်ပါနော်။';
+
+  @override
+  String get ownCardsLimitTitle => 'အခမဲ့ကတ် 3 ကတ်လုံး အသုံးပြုနေပါတယ်';
+
+  @override
+  String get ownCardsLimitBody =>
+      'အခမဲ့အကောင့်မှာ ကိုယ်ပိုင်ကတ် 3 ကတ်အထိ ထားနိုင်ပါတယ်။ Premium မှာတော့ ကြိုက်သလောက် ရေးနိုင်ပါတယ်။ နေရာလွတ်ဖို့ ကတ်တစ်ကတ်ကိုလည်း ဖျက်နိုင်ပါတယ်။';
+
+  @override
+  String get ownCardsLimitOk => 'OK';
+
+  @override
+  String get ownCardsPrivacyNote =>
+      'ဒီမှာ ရေးထားတာကို ကိုယ်တစ်ယောက်တည်းပဲ ဖတ်နိုင်ပါတယ်။';
 }

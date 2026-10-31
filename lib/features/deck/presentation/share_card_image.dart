@@ -15,6 +15,7 @@ class ShareCardImage extends StatelessWidget {
     required this.text,
     required this.category,
     required this.wordmark,
+    this.illustrationId,
     this.categoryLabel,
     this.handle,
     super.key,
@@ -23,6 +24,7 @@ class ShareCardImage extends StatelessWidget {
   final String text;
   final String category;
   final String wordmark;
+  final String? illustrationId;
   final String? categoryLabel;
   final String? handle;
 
@@ -50,7 +52,10 @@ class ShareCardImage extends StatelessWidget {
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: AppRadii.cardRadius,
-                  child: QuoteIllustration(category: category),
+                  child: QuoteIllustration(
+                    category: category,
+                    illustrationId: illustrationId,
+                  ),
                 ),
               ),
             ),

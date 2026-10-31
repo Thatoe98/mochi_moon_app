@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/ritual/data/drift_ritual_progress_repository.dart';
@@ -40,7 +40,7 @@ class RitualController extends _$RitualController {
     final saved = await ref.watch(ritualProgressRepositoryProvider).load(_day);
     if (saved == null) return const RitualState(phase: RitualPhase.notStarted);
 
-    final quotes = await ref.watch(quotesProvider.future);
+    final quotes = await ref.watch(cardPoolProvider.future);
     final byId = {for (final quote in quotes) quote.id: quote};
     final cards = [for (final id in saved.quoteIds) ?byId[id]];
     // Cards she already finished are in today's history, so the ritual picks

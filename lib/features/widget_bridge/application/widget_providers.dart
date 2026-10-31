@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/data/home_widget_publisher.dart';
@@ -17,7 +17,7 @@ WidgetPublisher widgetPublisher(Ref ref) => HomeWidgetPublisher();
 @Riverpod(keepAlive: true)
 Future<void> widgetSync(Ref ref) async {
   try {
-    final quotes = await ref.watch(quotesProvider.future);
+    final quotes = await ref.watch(cardPoolProvider.future);
     final days = planWidgetDays(
       now: ref.read(clockProvider)(),
       quotes: quotes,

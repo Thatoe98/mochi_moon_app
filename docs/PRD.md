@@ -293,12 +293,12 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.17 My own cards (3 free, unlimited Premium)
 
-- [ ] She writes an affirmation (max 140 characters) and picks one illustration from the bundled set (§8.4). The card has the same layout and timer gate as a bundled card; its category is `self_love`.
-- [ ] A custom card joins the deck rotation (and the ritual) and can be chosen as the home-screen widget card.
-- [ ] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot. (P14: limit, Premium override and freed slot are done in `saveOwnCard`; the paywall on the 4th card is P15.)
-- [ ] She can edit and delete her cards. Stored locally first, synced to `users/{uid}/customCards`. (P14: drift storage, edit, delete and Firestore sync are done and tested; the screens are P15. Deleting while offline is not queued; the card returns on the next sync.)
+- [x] She writes an affirmation (max 140 characters) and picks one illustration from the bundled set (§8.4). The card has the same layout and timer gate as a bundled card; its category is `self_love`.
+- [x] A custom card joins the deck rotation (and the ritual) and can be chosen as the home-screen widget card. (P15: it joins the card pool used by the deck, ritual, journal and widget rotation; the widget thumbnail uses the category art. Choosing one specific card for the widget is not built.)
+- [ ] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot. (P14/P15: limit, Premium override and freed slot are done. The 4th card shows an explanation dialog; the real paywall screen does not exist yet, so this stays open.)
+- [x] She can edit and delete her cards. Stored locally first, synced to `users/{uid}/customCards`. (P14/P15: storage, sync and the Me → My own cards screens are done. Deleting while offline is not queued; the card returns on the next sync.)
 - [x] **Private (§10):** the text never goes to the AI API, analytics, or the For You embeddings server. Custom cards get no embedding; the For You deck ignores them for ranking. (P14: `OwnCard.toQuote()` carries no mood, sign or embedding; the For You ranking must skip ids starting `own_`.)
-- [ ] Shareable as an image like any card (§6.4).
+- [x] Shareable as an image like any card (§6.4).
 
 ### 6.18 Mood calendar (month view Free, insights Premium)
 
@@ -907,7 +907,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Daily mood check-in stored per date (§6.18, month view) — *done 2026-10-31: Deck check-in, Me → Mood, Firestore sync of `moods/{date}`; the ritual's mood step comes with the ritual flow*
 - [x] Daily ritual on Today with streak and cosmic reward (§6.15)
 - [x] Gratitude and wins jar (§6.16) — *done 2026-10-31 (P13); the hard-day kit link comes with P17*
-- [ ] My own cards, 3 free (§6.17)
+- [ ] My own cards, 3 free (§6.17) (done except the paywall on the 4th card)
 - [ ] Breathe with Mochi (§6.19)
 - [ ] Hard-day kit with `TODO_CONTENT` helplines (§6.26)
 

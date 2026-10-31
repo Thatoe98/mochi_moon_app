@@ -2773,6 +2773,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Only you can read what you write here.'**
   String get gratitudePrivacyNote;
+
+  /// No description provided for @ownCardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My own cards'**
+  String get ownCardsTitle;
+
+  /// No description provided for @ownCardsMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Affirmations in your own words'**
+  String get ownCardsMeSubtitle;
+
+  /// No description provided for @ownCardsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No cards of your own yet'**
+  String get ownCardsEmptyTitle;
+
+  /// No description provided for @ownCardsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Write something kind you want to hear. It joins your deck.'**
+  String get ownCardsEmptyBody;
+
+  /// No description provided for @ownCardsWrite.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a card'**
+  String get ownCardsWrite;
+
+  /// No description provided for @ownCardsSlotsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No free cards left} =1{1 free card left} other{{count} free cards left}}'**
+  String ownCardsSlotsLeft(int count);
+
+  /// No description provided for @ownCardsNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A card in your words'**
+  String get ownCardsNewTitle;
+
+  /// No description provided for @ownCardsEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit your card'**
+  String get ownCardsEditTitle;
+
+  /// No description provided for @ownCardsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'I am allowed to take my time'**
+  String get ownCardsHint;
+
+  /// No description provided for @ownCardsPickArt.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a picture'**
+  String get ownCardsPickArt;
+
+  /// No description provided for @ownCardsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save my card'**
+  String get ownCardsSave;
+
+  /// No description provided for @ownCardsShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share as an image'**
+  String get ownCardsShare;
+
+  /// No description provided for @ownCardsDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this card'**
+  String get ownCardsDelete;
+
+  /// No description provided for @ownCardsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this card?'**
+  String get ownCardsDeleteTitle;
+
+  /// No description provided for @ownCardsDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It will be removed from your deck for good, and it frees a spot.'**
+  String get ownCardsDeleteBody;
+
+  /// No description provided for @ownCardsDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get ownCardsDeleteConfirm;
+
+  /// No description provided for @ownCardsKeep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it'**
+  String get ownCardsKeep;
+
+  /// No description provided for @ownCardsCouldNotSave.
+  ///
+  /// In en, this message translates to:
+  /// **'That card could not be saved. Please try again.'**
+  String get ownCardsCouldNotSave;
+
+  /// No description provided for @ownCardsLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your three free cards are in use'**
+  String get ownCardsLimitTitle;
+
+  /// No description provided for @ownCardsLimitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Free accounts keep three cards of their own. Premium lets you write as many as you like. You can also delete a card to make room.'**
+  String get ownCardsLimitBody;
+
+  /// No description provided for @ownCardsLimitOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ownCardsLimitOk;
+
+  /// No description provided for @ownCardsPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can read what you write here.'**
+  String get ownCardsPrivacyNote;
 }
 
 class _AppLocalizationsDelegate

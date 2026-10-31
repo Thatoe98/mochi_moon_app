@@ -2,11 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/domain/widget_day.dart';
 
+import '../../custom_cards/support/fake_own_cards.dart';
 import '../support/fake_widget_publisher.dart';
 
 const _quote = Quote(
@@ -30,6 +32,7 @@ ProviderContainer _container({
       widgetPublisherProvider.overrideWithValue(publisher),
       reminderLanguageProvider.overrideWithValue('en'),
       clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 9)),
+      ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
       quotesProvider.overrideWith((ref) => Future.value(quotes)),
     ],
   );
