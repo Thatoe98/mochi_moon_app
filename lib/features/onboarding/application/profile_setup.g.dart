@@ -47,7 +47,7 @@ final class ProfileSetupProvider
   }
 }
 
-String _$profileSetupHash() => r'1d6b93f01b84eeddfe34fce615d8564870b41815';
+String _$profileSetupHash() => r'a2189c921b47f0a49325db1ff82f29a2910e7f7d';
 
 /// The profile steps after sign-in. Answers are kept here, not in the step
 /// widgets, so going back never loses them.

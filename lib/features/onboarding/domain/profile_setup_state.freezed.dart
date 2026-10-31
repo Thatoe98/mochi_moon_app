@@ -15,7 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileSetupState {
 
- ProfileStep get step; String get name; DateTime? get birthDate;/// Minutes since midnight; null is "I don't know".
+ ProfileStep get step; String get name; DateTime? get birthDate;/// Birth data is not asked in this flow; it is carried over from a saved
+/// profile so finishing never erases it. Minutes since midnight; null is
+/// "I don't know".
  int? get birthMinutes; BirthPlace? get birthPlace; bool get reminderEnabled; ReminderTime get reminderTime; List<FocusArea> get focusAreas; bool get saving;
 /// Create a copy of ProfileSetupState
 /// with the given fields replaced by the non-null parameter values.
@@ -248,7 +250,9 @@ class _ProfileSetupState extends ProfileSetupState {
 @override@JsonKey() final  ProfileStep step;
 @override@JsonKey() final  String name;
 @override final  DateTime? birthDate;
-/// Minutes since midnight; null is "I don't know".
+/// Birth data is not asked in this flow; it is carried over from a saved
+/// profile so finishing never erases it. Minutes since midnight; null is
+/// "I don't know".
 @override final  int? birthMinutes;
 @override final  BirthPlace? birthPlace;
 @override@JsonKey() final  bool reminderEnabled;
