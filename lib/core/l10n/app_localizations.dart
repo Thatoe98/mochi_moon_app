@@ -2905,6 +2905,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Only you can read what you write here.'**
   String get ownCardsPrivacyNote;
+
+  /// No description provided for @breatheTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe with Mochi'**
+  String get breatheTitle;
+
+  /// No description provided for @breatheMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'One calm minute'**
+  String get breatheMeSubtitle;
+
+  /// No description provided for @breatheIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'One minute, just you and Mochi. Breathe in for 4, hold for 4, breathe out for 4, hold for 4. You can stop any time.'**
+  String get breatheIntro;
+
+  /// No description provided for @breatheStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Begin'**
+  String get breatheStart;
+
+  /// No description provided for @breatheIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe in'**
+  String get breatheIn;
+
+  /// No description provided for @breatheHold.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold'**
+  String get breatheHold;
+
+  /// No description provided for @breatheOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe out'**
+  String get breatheOut;
+
+  /// No description provided for @breatheRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {round} of {total}'**
+  String breatheRound(int round, int total);
+
+  /// No description provided for @breatheStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop for now'**
+  String get breatheStop;
+
+  /// No description provided for @breatheFinishTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Well done, lovely'**
+  String get breatheFinishTitle;
+
+  /// No description provided for @breatheFinishBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You gave yourself one calm minute. That counts.'**
+  String get breatheFinishBody;
+
+  /// No description provided for @breatheAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe again'**
+  String get breatheAgain;
+
+  /// No description provided for @breatheDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get breatheDone;
+
+  /// No description provided for @breatheHapticOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft vibration is on'**
+  String get breatheHapticOn;
+
+  /// No description provided for @breatheHapticOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft vibration is off'**
+  String get breatheHapticOff;
 }
 
 class _AppLocalizationsDelegate

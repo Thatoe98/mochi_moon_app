@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/shell_scaffold.dart';
+import 'package:mochi_moon/features/breathe/presentation/breathe_screen.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_screen.dart';
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/cosmic/report/presentation/natal_report_screen.dart';
@@ -41,6 +42,7 @@ abstract final class AppRoutes {
   static const mood = '/me/mood';
   static const gratitude = '/me/gratitude';
   static const ownCards = '/me/cards';
+  static const breathe = '/me/breathe';
   static const profileEdit = '/me/profile';
   static const about = '/me/about';
   static const partners = '/me/partners';
@@ -157,6 +159,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'cards',
                     builder: (context, state) => const OwnCardsScreen(),
+                  ),
+                  GoRoute(
+                    path: 'breathe',
+                    builder: (context, state) => const BreatheScreen(),
                   ),
                   GoRoute(
                     path: 'mood',

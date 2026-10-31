@@ -21,7 +21,16 @@ class TodayScreen extends ConsumerWidget {
     final ritual = ref.watch(ritualControllerProvider);
     final streak = ref.watch(deckProvider.select((d) => d.value?.streak)) ?? 0;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.todayTitle)),
+      appBar: AppBar(
+        title: Text(l10n.todayTitle),
+        actions: [
+          IconButton(
+            tooltip: l10n.breatheTitle,
+            icon: const Icon(Icons.self_improvement_rounded),
+            onPressed: () => context.push(AppRoutes.breathe),
+          ),
+        ],
+      ),
       body: ritual.when(
         loading: () => const LoadingView(),
         error: (_, _) =>

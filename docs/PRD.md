@@ -310,11 +310,11 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.19 Breathe with Mochi (Free)
 
-- [ ] A 1-minute box breathing session (4 seconds in, 4 hold, 4 out, 4 hold) with the mascot growing and shrinking and a text cue ("Breathe in", ...).
-- [ ] Reduce motion: the mascot stays still and the cue text and a progress ring carry the rhythm. Optional soft haptic on each phase.
-- [ ] Fully offline, no account, no network, no sound permission needed.
-- [ ] Reachable from Today, the hard-day kit, and Me. Finishing shows a gentle line and offers the next step; leaving early is fine.
-- [ ] Breathing copy lives in `breathing.json` (§8.3), in en and my.
+- [x] A 1-minute box breathing session (4 seconds in, 4 hold, 4 out, 4 hold) with the mascot growing and shrinking and a text cue ("Breathe in", ...).
+- [x] Reduce motion: the mascot stays still and the cue text and a progress ring carry the rhythm. Optional soft haptic on each phase.
+- [x] Fully offline, no account, no network, no sound permission needed.
+- [ ] Reachable from Today, the hard-day kit, and Me. Finishing shows a gentle line and offers the next step; leaving early is fine. *(Today and Me done 2026-10-31 (P16); the hard-day kit link comes with P17.)*
+- [ ] Breathing copy lives in `breathing.json` (§8.3), in en and my. *(Deferred: the copy is in `app_en.arb` / `app_my.arb` instead, so the translation tool covers it; `breathing.json` is not used. Burmese is machine-translated and unreviewed.)*
 
 ### 6.20 Tiny kindness quests (Free)
 
@@ -908,7 +908,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Daily ritual on Today with streak and cosmic reward (§6.15)
 - [x] Gratitude and wins jar (§6.16) — *done 2026-10-31 (P13); the hard-day kit link comes with P17*
 - [ ] My own cards, 3 free (§6.17) (done except the paywall on the 4th card)
-- [ ] Breathe with Mochi (§6.19)
+- [x] Breathe with Mochi (§6.19) — *done 2026-10-31 (P16); the hard-day kit link comes with P17*
 - [ ] Hard-day kit with `TODO_CONTENT` helplines (§6.26)
 
 #### M5b — Depth and retention

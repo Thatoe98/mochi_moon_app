@@ -1706,4 +1706,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ownCardsPrivacyNote => 'Only you can read what you write here.';
+
+  @override
+  String get breatheTitle => 'Breathe with Mochi';
+
+  @override
+  String get breatheMeSubtitle => 'One calm minute';
+
+  @override
+  String get breatheIntro =>
+      'One minute, just you and Mochi. Breathe in for 4, hold for 4, breathe out for 4, hold for 4. You can stop any time.';
+
+  @override
+  String get breatheStart => 'Begin';
+
+  @override
+  String get breatheIn => 'Breathe in';
+
+  @override
+  String get breatheHold => 'Hold';
+
+  @override
+  String get breatheOut => 'Breathe out';
+
+  @override
+  String breatheRound(int round, int total) {
+    return 'Round $round of $total';
+  }
+
+  @override
+  String get breatheStop => 'Stop for now';
+
+  @override
+  String get breatheFinishTitle => 'Well done, lovely';
+
+  @override
+  String get breatheFinishBody =>
+      'You gave yourself one calm minute. That counts.';
+
+  @override
+  String get breatheAgain => 'Breathe again';
+
+  @override
+  String get breatheDone => 'Done';
+
+  @override
+  String get breatheHapticOn => 'Soft vibration is on';
+
+  @override
+  String get breatheHapticOff => 'Soft vibration is off';
 }

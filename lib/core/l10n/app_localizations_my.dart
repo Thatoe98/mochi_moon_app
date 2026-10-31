@@ -1717,4 +1717,53 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get ownCardsPrivacyNote =>
       'ဒီမှာ ရေးထားတာကို ကိုယ်တစ်ယောက်တည်းပဲ ဖတ်နိုင်ပါတယ်။';
+
+  @override
+  String get breatheTitle => 'Mochi နဲ့အတူ အသက်ရှူကြမယ်';
+
+  @override
+  String get breatheMeSubtitle => 'စိတ်အေးအေးနဲ့ 1 မိနစ်လေး';
+
+  @override
+  String get breatheIntro =>
+      '1 မိနစ်လောက်၊ ကိုယ်နဲ့ Mochi ပဲ။ 4 စက္ကန့်ကြာ အသက်ရှူသွင်း၊ 4 စက္ကန့်ကြာ ထိန်းထား၊ 4 စက္ကန့်ကြာ အသက်ရှူထုတ်၊ 4 စက္ကန့်ကြာ ထိန်းထားပါ။ အချိန်မရွေး ရပ်လို့ရပါတယ်။';
+
+  @override
+  String get breatheStart => 'စမယ်';
+
+  @override
+  String get breatheIn => 'အသက်ရှူသွင်းပါ';
+
+  @override
+  String get breatheHold => 'အသက်ထိန်းထားပါ';
+
+  @override
+  String get breatheOut => 'အသက်ရှူထုတ်ပါ';
+
+  @override
+  String breatheRound(int round, int total) {
+    return 'အကြိမ် $round / $total';
+  }
+
+  @override
+  String get breatheStop => 'အခုတော့ ရပ်မယ်';
+
+  @override
+  String get breatheFinishTitle => 'ကောင်းလိုက်တာနော်';
+
+  @override
+  String get breatheFinishBody =>
+      'ကိုယ့်အတွက် စိတ်အေးချမ်းတဲ့ 1 မိနစ်လေး ပေးခဲ့တယ်။ အဲဒါလည်း တန်ဖိုးရှိပါတယ်။';
+
+  @override
+  String get breatheAgain => 'ထပ်ပြီး အသက်ရှူမယ်';
+
+  @override
+  String get breatheDone => 'ပြီးပါပြီ';
+
+  @override
+  String get breatheHapticOn => 'နူးညံ့တဲ့ တုန်ခါမှု ဖွင့်ထားပါတယ်';
+
+  @override
+  String get breatheHapticOff => 'နူးညံ့တဲ့ တုန်ခါမှု ပိတ်ထားပါတယ်';
 }

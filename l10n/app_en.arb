@@ -533,5 +533,21 @@
   "ownCardsLimitTitle": "Your three free cards are in use",
   "ownCardsLimitBody": "Free accounts keep three cards of their own. Premium lets you write as many as you like. You can also delete a card to make room.",
   "ownCardsLimitOk": "OK",
-  "ownCardsPrivacyNote": "Only you can read what you write here."
+  "ownCardsPrivacyNote": "Only you can read what you write here.",
+  "breatheTitle": "Breathe with Mochi",
+  "breatheMeSubtitle": "One calm minute",
+  "breatheIntro": "One minute, just you and Mochi. Breathe in for 4, hold for 4, breathe out for 4, hold for 4. You can stop any time.",
+  "breatheStart": "Begin",
+  "breatheIn": "Breathe in",
+  "breatheHold": "Hold",
+  "breatheOut": "Breathe out",
+  "breatheRound": "Round {round} of {total}",
+  "@breatheRound": { "placeholders": { "round": { "type": "int" }, "total": { "type": "int" } } },
+  "breatheStop": "Stop for now",
+  "breatheFinishTitle": "Well done, lovely",
+  "breatheFinishBody": "You gave yourself one calm minute. That counts.",
+  "breatheAgain": "Breathe again",
+  "breatheDone": "Done",
+  "breatheHapticOn": "Soft vibration is on",
+  "breatheHapticOff": "Soft vibration is off"
 }
