@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
+import 'package:mochi_moon/features/quests/presentation/quest_card.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
 import 'package:mochi_moon/features/ritual/presentation/cosmic_reward_card.dart';
@@ -38,14 +39,28 @@ class TodayScreen extends ConsumerWidget {
         error: (_, _) =>
             ErrorView(onRetry: () => ref.invalidate(ritualControllerProvider)),
         data: (state) => switch (state.phase) {
-          RitualPhase.notStarted => RitualIntro(
-            streak: streak,
-            onStart: ref.read(ritualControllerProvider.notifier).start,
-            onBrowseDeck: () => context.go(AppRoutes.deck),
+          RitualPhase.notStarted => Column(
+            children: [
+              Expanded(
+                child: RitualIntro(
+                  streak: streak,
+                  onStart: ref.read(ritualControllerProvider.notifier).start,
+                  onBrowseDeck: () => context.go(AppRoutes.deck),
+                ),
+              ),
+              const QuestCard(),
+            ],
           ),
-          RitualPhase.finished => RitualFinished(
-            streak: streak,
-            reward: const CosmicRewardCard(),
+          RitualPhase.finished => Column(
+            children: [
+              Expanded(
+                child: RitualFinished(
+                  streak: streak,
+                  reward: const CosmicRewardCard(),
+                ),
+              ),
+              const QuestCard(),
+            ],
           ),
           _ => Column(
             children: [

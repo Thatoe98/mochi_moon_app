@@ -319,10 +319,10 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 ### 6.20 Tiny kindness quests (Free)
 
 - [x] One small daily task picked from the bundled `quests.json`, matched to her focus areas, chosen deterministically from the date so it is stable all day. *(Q1: `dailyQuest` in `features/quests/domain`; 18 starter quests, the launch set of 120 is still to write.)*
-- [ ] She can mark it done or **swap it once** per day for another quest. *(Q1: the pick supports one swap; the buttons and state come in Q2.)*
+- [x] She can mark it done or **swap it once** per day for another quest. *(Q2: the quest card on Today.)*
 - [ ] A quest is never anything about health, money, or others' bodies; it is a tiny kind act toward herself or someone else ("Drink a glass of water slowly", "Send a kind message to a friend").
 - [ ] Done quests count toward the weekly letter's aggregates and mascot milestones.
-- [ ] Quest state is stored locally and synced to `users/{uid}/state/quest`.
+- [x] Quest state is stored locally and synced to `users/{uid}/state/quest`. *(Q2: drift table `quest_states`, schema v5; deleted with the account through the existing `state` cleanup.)*
 
 ### 6.21 Self-love journeys (1 free, the rest Premium)
 
@@ -913,7 +913,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Strings and Burmese for M5a — *checked 2026-10-31 (P18): all 492 keys of `app_en.arb` have a Burmese string in `app_my.arb` with matching placeholders, and the translate tool reports nothing left to translate. Generated per feature with `tool/translate_content.dart`. **Unreviewed machine translation:** a native reviewer must approve the M5a strings (ritual, gratitude, own cards, mood, breathe, hard-day) before they count as shipped. Thai is not generated.*
 
 #### M5b — Depth and retention
-- [ ] Tiny kindness quests (§6.20)
+- [x] Tiny kindness quests (§6.20) — *Q1 + Q2 done 2026-11-01. Only 18 starter quests; the 120-quest launch set, the weekly-letter aggregate and mascot milestones come later.*
 - [ ] Self-love journeys, 1 free (§6.21)
 - [ ] Letter to future me with unlock notification (§6.22)
 - [ ] Mochi grows with you: items and room (§6.23)

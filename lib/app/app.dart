@@ -11,6 +11,7 @@ import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/quests/application/quest_providers.dart';
 import 'package:mochi_moon/features/settings/application/announcements_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
@@ -36,6 +37,7 @@ class MochiMoonApp extends ConsumerWidget {
       ..watch(moodSyncProvider)
       ..watch(gratitudeSyncProvider)
       ..watch(ownCardSyncProvider)
+      ..watch(questSyncProvider)
       ..watch(partnerSyncProvider)
       ..watch(deckSyncProvider);
     final reduceMotion =

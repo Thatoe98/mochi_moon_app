@@ -5,6 +5,7 @@ import 'package:mochi_moon/app/app.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
+import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
@@ -21,6 +22,7 @@ import 'package:mochi_moon/features/partners/application/partner_providers.dart'
 import 'package:mochi_moon/features/places/application/places_providers.dart';
 import 'package:mochi_moon/features/places/domain/city_index.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
+import 'package:mochi_moon/features/quests/application/quest_providers.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/settings/application/announcements_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
@@ -41,6 +43,7 @@ import '../features/mood/support/fake_mood.dart';
 import '../features/onboarding/support/fake_onboarding_repository.dart';
 import '../features/partners/support/fake_partners.dart';
 import '../features/profile/support/fake_profile.dart';
+import '../features/quests/support/fake_quest.dart';
 import '../features/ritual/support/fake_ritual_progress.dart';
 import '../features/settings/support/fake_analytics_consent.dart';
 import '../features/settings/support/fake_announcements.dart';
@@ -84,6 +87,9 @@ Widget _app({
     ownCardRemoteProvider.overrideWithValue(null),
     moodRepositoryProvider.overrideWithValue(FakeMoodRepository()),
     moodRemoteProvider.overrideWithValue(null),
+    questRepositoryProvider.overrideWithValue(FakeQuestRepository()),
+    questRemoteProvider.overrideWithValue(null),
+    questsProvider.overrideWith((ref) async => const <Quest>[]),
     partnerRepositoryProvider.overrideWithValue(FakePartnerRepository()),
     partnerRemoteProvider.overrideWithValue(null),
     appLanguageRepositoryProvider.overrideWithValue(

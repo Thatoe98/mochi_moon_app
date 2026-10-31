@@ -3805,6 +3805,364 @@ class RitualProgressCompanion extends UpdateCompanion<RitualProgressData> {
   }
 }
 
+class $QuestStatesTable extends QuestStates
+    with TableInfo<$QuestStatesTable, QuestState> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $QuestStatesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _questIdMeta = const VerificationMeta(
+    'questId',
+  );
+  @override
+  late final GeneratedColumn<String> questId = GeneratedColumn<String>(
+    'quest_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _doneMeta = const VerificationMeta('done');
+  @override
+  late final GeneratedColumn<bool> done = GeneratedColumn<bool>(
+    'done',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("done" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _swappedMeta = const VerificationMeta(
+    'swapped',
+  );
+  @override
+  late final GeneratedColumn<bool> swapped = GeneratedColumn<bool>(
+    'swapped',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("swapped" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _syncedMeta = const VerificationMeta('synced');
+  @override
+  late final GeneratedColumn<bool> synced = GeneratedColumn<bool>(
+    'synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, questId, done, swapped, synced];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'quest_states';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<QuestState> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('quest_id')) {
+      context.handle(
+        _questIdMeta,
+        questId.isAcceptableOrUnknown(data['quest_id']!, _questIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_questIdMeta);
+    }
+    if (data.containsKey('done')) {
+      context.handle(
+        _doneMeta,
+        done.isAcceptableOrUnknown(data['done']!, _doneMeta),
+      );
+    }
+    if (data.containsKey('swapped')) {
+      context.handle(
+        _swappedMeta,
+        swapped.isAcceptableOrUnknown(data['swapped']!, _swappedMeta),
+      );
+    }
+    if (data.containsKey('synced')) {
+      context.handle(
+        _syncedMeta,
+        synced.isAcceptableOrUnknown(data['synced']!, _syncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date};
+  @override
+  QuestState map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return QuestState(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      questId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}quest_id'],
+      )!,
+      done: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}done'],
+      )!,
+      swapped: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}swapped'],
+      )!,
+      synced: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}synced'],
+      )!,
+    );
+  }
+
+  @override
+  $QuestStatesTable createAlias(String alias) {
+    return $QuestStatesTable(attachedDatabase, alias);
+  }
+}
+
+class QuestState extends DataClass implements Insertable<QuestState> {
+  final String date;
+  final String questId;
+  final bool done;
+  final bool swapped;
+  final bool synced;
+  const QuestState({
+    required this.date,
+    required this.questId,
+    required this.done,
+    required this.swapped,
+    required this.synced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['quest_id'] = Variable<String>(questId);
+    map['done'] = Variable<bool>(done);
+    map['swapped'] = Variable<bool>(swapped);
+    map['synced'] = Variable<bool>(synced);
+    return map;
+  }
+
+  QuestStatesCompanion toCompanion(bool nullToAbsent) {
+    return QuestStatesCompanion(
+      date: Value(date),
+      questId: Value(questId),
+      done: Value(done),
+      swapped: Value(swapped),
+      synced: Value(synced),
+    );
+  }
+
+  factory QuestState.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return QuestState(
+      date: serializer.fromJson<String>(json['date']),
+      questId: serializer.fromJson<String>(json['questId']),
+      done: serializer.fromJson<bool>(json['done']),
+      swapped: serializer.fromJson<bool>(json['swapped']),
+      synced: serializer.fromJson<bool>(json['synced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'questId': serializer.toJson<String>(questId),
+      'done': serializer.toJson<bool>(done),
+      'swapped': serializer.toJson<bool>(swapped),
+      'synced': serializer.toJson<bool>(synced),
+    };
+  }
+
+  QuestState copyWith({
+    String? date,
+    String? questId,
+    bool? done,
+    bool? swapped,
+    bool? synced,
+  }) => QuestState(
+    date: date ?? this.date,
+    questId: questId ?? this.questId,
+    done: done ?? this.done,
+    swapped: swapped ?? this.swapped,
+    synced: synced ?? this.synced,
+  );
+  QuestState copyWithCompanion(QuestStatesCompanion data) {
+    return QuestState(
+      date: data.date.present ? data.date.value : this.date,
+      questId: data.questId.present ? data.questId.value : this.questId,
+      done: data.done.present ? data.done.value : this.done,
+      swapped: data.swapped.present ? data.swapped.value : this.swapped,
+      synced: data.synced.present ? data.synced.value : this.synced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('QuestState(')
+          ..write('date: $date, ')
+          ..write('questId: $questId, ')
+          ..write('done: $done, ')
+          ..write('swapped: $swapped, ')
+          ..write('synced: $synced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, questId, done, swapped, synced);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is QuestState &&
+          other.date == this.date &&
+          other.questId == this.questId &&
+          other.done == this.done &&
+          other.swapped == this.swapped &&
+          other.synced == this.synced);
+}
+
+class QuestStatesCompanion extends UpdateCompanion<QuestState> {
+  final Value<String> date;
+  final Value<String> questId;
+  final Value<bool> done;
+  final Value<bool> swapped;
+  final Value<bool> synced;
+  final Value<int> rowid;
+  const QuestStatesCompanion({
+    this.date = const Value.absent(),
+    this.questId = const Value.absent(),
+    this.done = const Value.absent(),
+    this.swapped = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  QuestStatesCompanion.insert({
+    required String date,
+    required String questId,
+    this.done = const Value.absent(),
+    this.swapped = const Value.absent(),
+    this.synced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       questId = Value(questId);
+  static Insertable<QuestState> custom({
+    Expression<String>? date,
+    Expression<String>? questId,
+    Expression<bool>? done,
+    Expression<bool>? swapped,
+    Expression<bool>? synced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (questId != null) 'quest_id': questId,
+      if (done != null) 'done': done,
+      if (swapped != null) 'swapped': swapped,
+      if (synced != null) 'synced': synced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  QuestStatesCompanion copyWith({
+    Value<String>? date,
+    Value<String>? questId,
+    Value<bool>? done,
+    Value<bool>? swapped,
+    Value<bool>? synced,
+    Value<int>? rowid,
+  }) {
+    return QuestStatesCompanion(
+      date: date ?? this.date,
+      questId: questId ?? this.questId,
+      done: done ?? this.done,
+      swapped: swapped ?? this.swapped,
+      synced: synced ?? this.synced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (questId.present) {
+      map['quest_id'] = Variable<String>(questId.value);
+    }
+    if (done.present) {
+      map['done'] = Variable<bool>(done.value);
+    }
+    if (swapped.present) {
+      map['swapped'] = Variable<bool>(swapped.value);
+    }
+    if (synced.present) {
+      map['synced'] = Variable<bool>(synced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('QuestStatesCompanion(')
+          ..write('date: $date, ')
+          ..write('questId: $questId, ')
+          ..write('done: $done, ')
+          ..write('swapped: $swapped, ')
+          ..write('synced: $synced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3825,6 +4183,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $CustomCardsTable customCards = $CustomCardsTable(this);
   late final $RitualDaysTable ritualDays = $RitualDaysTable(this);
   late final $RitualProgressTable ritualProgress = $RitualProgressTable(this);
+  late final $QuestStatesTable questStates = $QuestStatesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3843,6 +4202,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     customCards,
     ritualDays,
     ritualProgress,
+    questStates,
   ];
 }
 
@@ -6243,6 +6603,215 @@ typedef $$RitualProgressTableProcessedTableManager =
       RitualProgressData,
       PrefetchHooks Function()
     >;
+typedef $$QuestStatesTableCreateCompanionBuilder =
+    QuestStatesCompanion Function({
+      required String date,
+      required String questId,
+      Value<bool> done,
+      Value<bool> swapped,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+typedef $$QuestStatesTableUpdateCompanionBuilder =
+    QuestStatesCompanion Function({
+      Value<String> date,
+      Value<String> questId,
+      Value<bool> done,
+      Value<bool> swapped,
+      Value<bool> synced,
+      Value<int> rowid,
+    });
+
+class $$QuestStatesTableFilterComposer
+    extends Composer<_$AppDatabase, $QuestStatesTable> {
+  $$QuestStatesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get questId => $composableBuilder(
+    column: $table.questId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get done => $composableBuilder(
+    column: $table.done,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get swapped => $composableBuilder(
+    column: $table.swapped,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$QuestStatesTableOrderingComposer
+    extends Composer<_$AppDatabase, $QuestStatesTable> {
+  $$QuestStatesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get questId => $composableBuilder(
+    column: $table.questId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get done => $composableBuilder(
+    column: $table.done,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get swapped => $composableBuilder(
+    column: $table.swapped,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get synced => $composableBuilder(
+    column: $table.synced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$QuestStatesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $QuestStatesTable> {
+  $$QuestStatesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get questId =>
+      $composableBuilder(column: $table.questId, builder: (column) => column);
+
+  GeneratedColumn<bool> get done =>
+      $composableBuilder(column: $table.done, builder: (column) => column);
+
+  GeneratedColumn<bool> get swapped =>
+      $composableBuilder(column: $table.swapped, builder: (column) => column);
+
+  GeneratedColumn<bool> get synced =>
+      $composableBuilder(column: $table.synced, builder: (column) => column);
+}
+
+class $$QuestStatesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $QuestStatesTable,
+          QuestState,
+          $$QuestStatesTableFilterComposer,
+          $$QuestStatesTableOrderingComposer,
+          $$QuestStatesTableAnnotationComposer,
+          $$QuestStatesTableCreateCompanionBuilder,
+          $$QuestStatesTableUpdateCompanionBuilder,
+          (
+            QuestState,
+            BaseReferences<_$AppDatabase, $QuestStatesTable, QuestState>,
+          ),
+          QuestState,
+          PrefetchHooks Function()
+        > {
+  $$QuestStatesTableTableManager(_$AppDatabase db, $QuestStatesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$QuestStatesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$QuestStatesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$QuestStatesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<String> questId = const Value.absent(),
+                Value<bool> done = const Value.absent(),
+                Value<bool> swapped = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => QuestStatesCompanion(
+                date: date,
+                questId: questId,
+                done: done,
+                swapped: swapped,
+                synced: synced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required String questId,
+                Value<bool> done = const Value.absent(),
+                Value<bool> swapped = const Value.absent(),
+                Value<bool> synced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => QuestStatesCompanion.insert(
+                date: date,
+                questId: questId,
+                done: done,
+                swapped: swapped,
+                synced: synced,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$QuestStatesTable, QuestState>(table),
+                  BaseReferences<_$AppDatabase, $QuestStatesTable, QuestState>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$QuestStatesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $QuestStatesTable,
+      QuestState,
+      $$QuestStatesTableFilterComposer,
+      $$QuestStatesTableOrderingComposer,
+      $$QuestStatesTableAnnotationComposer,
+      $$QuestStatesTableCreateCompanionBuilder,
+      $$QuestStatesTableUpdateCompanionBuilder,
+      (
+        QuestState,
+        BaseReferences<_$AppDatabase, $QuestStatesTable, QuestState>,
+      ),
+      QuestState,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6273,6 +6842,8 @@ class $AppDatabaseManager {
       $$RitualDaysTableTableManager(_db, _db.ritualDays);
   $$RitualProgressTableTableManager get ritualProgress =>
       $$RitualProgressTableTableManager(_db, _db.ritualProgress);
+  $$QuestStatesTableTableManager get questStates =>
+      $$QuestStatesTableTableManager(_db, _db.questStates);
 }
 
 // **************************************************************************

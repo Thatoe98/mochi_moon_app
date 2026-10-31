@@ -20,6 +20,7 @@ part 'app_database.g.dart';
     CustomCards,
     RitualDays,
     RitualProgress,
+    QuestStates,
   ],
 )
 class AppDatabase extends _$AppDatabase {
@@ -27,7 +28,7 @@ class AppDatabase extends _$AppDatabase {
     : super(executor ?? driftDatabase(name: 'mochi_moon'));
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -42,6 +43,7 @@ class AppDatabase extends _$AppDatabase {
         await m.createTable(ritualDays);
         await m.createTable(ritualProgress);
       }
+      if (from < 5) await m.createTable(questStates);
     },
   );
 }

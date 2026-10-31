@@ -129,6 +129,19 @@ class RitualDays extends Table {
   Set<Column<Object>> get primaryKey => {date};
 }
 
+/// The quest of the latest day she used (PRD §6.20). One row; [synced] is false
+/// until it reached Firestore.
+class QuestStates extends Table {
+  TextColumn get date => text()();
+  TextColumn get questId => text()();
+  BoolColumn get done => boolean().withDefault(const Constant(false))();
+  BoolColumn get swapped => boolean().withDefault(const Constant(false))();
+  BoolColumn get synced => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {date};
+}
+
 /// Where today's ritual stands, so it resumes after the app is closed.
 /// [quoteIds] is a JSON list of the three card ids.
 class RitualProgress extends Table {

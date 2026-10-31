@@ -1785,4 +1785,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get hardDayHelpFind =>
       'To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look.';
+
+  @override
+  String get questCardTitle => 'Today\'s tiny kindness';
+
+  @override
+  String get questMarkDone => 'I did it';
+
+  @override
+  String get questSwap => 'Try another';
+
+  @override
+  String get questDoneNote => 'Done for today. Well done, you.';
 }

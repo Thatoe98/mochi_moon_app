@@ -558,5 +558,9 @@
   "hardDayJarSub": "Read the good things you saved",
   "hardDayHelpTitle": "Help",
   "hardDayHelpNote": "Mochi Moon is not a substitute for professional help. If you are in danger, please contact your local emergency services or someone you trust right now.",
-  "hardDayHelpFind": "To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look."
+  "hardDayHelpFind": "To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look.",
+  "questCardTitle": "Today's tiny kindness",
+  "questMarkDone": "I did it",
+  "questSwap": "Try another",
+  "questDoneNote": "Done for today. Well done, you."
 }

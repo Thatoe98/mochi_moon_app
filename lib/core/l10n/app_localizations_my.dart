@@ -1796,4 +1796,16 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get hardDayHelpFind =>
       'ကိုယ့်နိုင်ငံမှာ အကူအညီပေးတဲ့ ဖုန်းလိုင်းကို ရှာဖို့ နိုင်ငံအလိုက် အရေးပေါ်အကူအညီပေးတဲ့ ဖုန်းလိုင်း ဒါမှမဟုတ် စိတ်ကျန်းမာရေးအကူအညီပေးတဲ့ ဖုန်းလိုင်းကို ရှာကြည့်ပါ။ ယုံကြည်ရတဲ့သူတစ်ယောက်ကိုလည်း အတူရှာပေးဖို့ အကူအညီတောင်းနိုင်ပါတယ်။';
+
+  @override
+  String get questCardTitle => 'ဒီနေ့လုပ်မယ့် ကြင်နာမှုသေးသေးလေး';
+
+  @override
+  String get questMarkDone => 'ငါ လုပ်ပြီးပြီ';
+
+  @override
+  String get questSwap => 'တခြားတစ်ခု စမ်းကြည့်မယ်';
+
+  @override
+  String get questDoneNote => 'ဒီနေ့အတွက် ပြီးပါပြီ။ တော်လိုက်တာနော်။';
 }

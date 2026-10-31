@@ -3049,6 +3049,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To find a helpline in your country, search for your national crisis or mental health line, or ask someone you trust to help you look.'**
   String get hardDayHelpFind;
+
+  /// No description provided for @questCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s tiny kindness'**
+  String get questCardTitle;
+
+  /// No description provided for @questMarkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'I did it'**
+  String get questMarkDone;
+
+  /// No description provided for @questSwap.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another'**
+  String get questSwap;
+
+  /// No description provided for @questDoneNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Done for today. Well done, you.'**
+  String get questDoneNote;
 }
 
 class _AppLocalizationsDelegate
