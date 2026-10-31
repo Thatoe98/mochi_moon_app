@@ -9,20 +9,24 @@ The product spec lives in `docs/PRD.md`; read the section for the feature you're
 
 **Mochi Moon** is a cute, girl-focused self-love app for Android (iOS later) built in Flutter.
 
+**Self-love is the core; astrology is a supporting layer.** The promise is a 2-minute daily self-love ritual. The home tab is **Today** (the ritual), not the deck and not astrology.
+
 Two pillars:
 
-1. **Self-love deck** — illustrated affirmation cards in a Tinder-style swipe deck. Each card is locked for a short read-aloud timer (≥ 3 s) before it can be swiped.
-2. **Cosmic you** — Western (tropical) astrology: daily sign guidance, lucky colors, things to avoid, retrograde tracker, moon phase, birth chart, and love compatibility.
+1. **Self-love** — the daily ritual (mood → 3 cards → gratitude line → streak), the swipe deck of illustrated affirmation cards (each locked for a short read-aloud timer, ≥ 3 s), the gratitude and wins jar, her own cards, mood calendar, breathing, tiny kindness quests, self-love journeys, letters to future me, Mochi's room, the weekly letter and the hard-day kit.
+2. **Cosmic you** (supporting) — Western (tropical) astrology: daily sign guidance, lucky colors, things to avoid, retrograde tracker, moon phase, birth chart, and love compatibility. Birth data is asked for the first time she opens the Cosmic tab, not in onboarding.
+
+Tabs: Today, Deck, Cosmic, Me. Spec: `docs/PRD.md` §5 and §6.15 onward.
 
 Mascot: a moon bunny. Tone: soft, warm, encouraging, never fatalistic.
 
 **Hard product rules**
 
 - There is **no chat feature** of any kind. Never add a chatbot, chat UI, or free-text prompt to an AI.
-- AI is used only in the background: written readings (generated server-side), the "For You" quote ranking, and the daily mix. See PRD §7.
+- AI is used only in the background: written readings (generated server-side), the weekly letter from Mochi (aggregates only), the "For You" quote ranking, and the daily mix. See PRD §7.
 - **Western tropical zodiac only.** No Vedic/sidereal calculations.
 - Read-aloud gate is a **timer ring only**. Never request microphone permission; never add speech recognition.
-- Self-love is the primary identity. The app's home tab is the deck, not astrology.
+- Self-love is the primary identity. The app's home tab is Today (the ritual), not astrology.
 
 ---
 
@@ -106,8 +110,24 @@ lib/
     utils/
   features/
     auth/                    # Google sign-in, onboarding, account deletion
+    onboarding/              # language, sample cards, sign-in, name, focus, reminder
+    profile/                 # profile model (astro fields nullable), edit screen, sync
+    places/                  # cities dataset, birthplace search, tz resolution
+    partners/                # saved partners, compatibility result
+    me/                      # Me tab screen
+    ritual/                  # Today tab: daily ritual flow, completion, streak
     deck/                    # self-love swipe deck, timer gate, share
     journal/                 # saved cards ("This is me")
+    gratitude/               # gratitude and wins jar
+    custom_cards/            # her own affirmation cards
+    mood/                    # daily mood, calendar, on-device insights
+    breathe/                 # box breathing with Mochi
+    quests/                  # tiny kindness quests
+    journeys/                # 7/14-day self-love programs
+    letters/                 # letter to future me, weekly letter from Mochi
+    mascot/                  # Mochi's outfits, room items
+    recap/                   # monthly glow recap (share image)
+    hard_day/                # hard-day kit and help resources
     cosmic/
       astro/                 # PURE DART astro engine (see §6) — no Flutter imports
       today/                 # daily guidance, lucky colors, things to avoid
@@ -123,6 +143,11 @@ assets/
   content/
     quotes/quotes.json       # see PRD §8.3
     signs/signs.json         # sign metadata, palettes, base texts
+    quests/quests.json       # tiny kindness quests (PRD §8.3)
+    journeys/journeys.json   # self-love journeys (PRD §8.3)
+    breathing/breathing.json # breathing copy
+    hard_day/hard_day.json   # hard-day copy; helplines are TODO_CONTENT until verified
+    mascot/mascot_items.json # outfits and room items
     fallback_readings/       # offline fallback readings per sign per language
   illustrations/             # webp, named by id (see PRD §8.4)
   fonts/
@@ -219,6 +244,8 @@ docs/
 - Users can only read/write their own Firestore documents (rules in PRD §8.1). Test the rules with the emulator.
 - Account deletion must work **in-app** (Settings → Delete account) and through a web page; it deletes Firestore data and the Auth user.
 - No ads SDKs. Analytics only after explicit consent, and never log birth data, partner names, or journal contents.
+- **Anything she writes herself** (gratitude lines, letters, own cards, journal, reflection answers) is private: synced only to her own Firestore, **never sent to the AI API or to analytics**, always deleted with the account. The weekly letter takes aggregates only (counts, journey name and day, focus areas, lang).
+- **Never invent helpline numbers or medical claims.** Help resources are `TODO_CONTENT` entries until the owner verifies them; the hard-day kit says the app is not a substitute for professional help.
 - Every reading screen shows a small "For entertainment and self-reflection" note.
 - Never write predictions about health, death, pregnancy, money outcomes, or legal matters (the server prompt enforces this too; the app must not add such copy).
 - Store metadata must lead with self-love/affirmations (relevant for the future iOS review).
@@ -254,6 +281,8 @@ docs/
 - Add AGPL/GPL dependencies.
 - Hardcode strings, colors, or secrets.
 - Send raw birth data to the Readings API or any third party.
+- Send user-written text (gratitude, letters, own cards, journal, reflection answers) to the AI API or to analytics.
+- Invent helpline names or phone numbers, or make medical claims.
 - Commit or print the OpenAI key, or send anything but app copy and content texts to OpenAI.
 - Use sidereal/Vedic calculations.
 - Put business logic in widgets.

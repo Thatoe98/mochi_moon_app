@@ -4,26 +4,30 @@
 | --- | --- |
 | Product | Mochi Moon: Self-Love & Zodiac |
 | Owner | Thatoe |
-| Version | 1.0 (draft) |
-| Date | 2026-10-27 |
+| Version | 1.1 (draft) |
+| Date | 2026-10-31 |
 | Platforms | Android first; iOS later |
-| Languages | English (source), Thai, Burmese |
+| Languages | English (source), Burmese; Thai when a native reviewer exists |
 | Engineering rules | See `CLAUDE.md` (it wins on engineering; this PRD wins on product behavior) |
 
 ---
 
 ## 1. Summary
 
-Mochi Moon is a cute, illustrated self-love app for young women. Its home is a swipe deck of affirmation cards, each of which she reads aloud during a short timer before swiping. A second tab, "Cosmic you", adds Western astrology: daily guidance, lucky colors, things to avoid, retrograde alerts, moon phase, birth chart and love compatibility. AI works in the background (written readings, personalized deck ranking); there is no chat.
+Mochi Moon is a cute, illustrated **self-love app** for young women. The core promise is a **2-minute daily self-love ritual**: say how she feels, read three affirmation cards aloud, write one thing she is grateful for, and watch her streak and her moon bunny grow. Around the ritual sit a swipe deck of affirmation cards, a gratitude and wins jar, her own cards, a mood calendar, breathing, tiny kindness quests, self-love journeys, letters to her future self and a hard-day kit.
+
+Astrology is a **supporting layer**, not the identity: a "Cosmic you" tab with Western astrology (daily guidance, lucky colors, things to avoid, retrograde alerts, moon phase, birth chart, love compatibility). Birth data is asked for the first time she opens that tab. AI works in the background only (written readings, the weekly letter from Mochi, personalized deck ranking); there is no chat.
 
 ## 2. Goals and non-goals
 
 ### Goals
 
-1. Build a daily self-love ritual: open → read 1–10 cards aloud → feel good → come back tomorrow.
-2. Make astrology personal and gentle: computed from her real birth data, written warmly.
-3. Monetize through a freemium subscription and one-off compatibility reports.
-4. Work offline for core features; stay cheap to run (on-device astro math, cached readings).
+1. Build a daily self-love ritual: open, check in, read 3 cards aloud, one grateful line, streak, come back tomorrow (about 2 minutes).
+2. Be useful on hard days: breathing, comforting cards, her own wins, and help resources, without ever posing as therapy.
+3. Go deeper over time: self-love journeys, her own cards, letters to her future self, and a moon bunny that grows with her.
+4. Make astrology a gentle reward and a curiosity, personal and warm, computed from her real birth data.
+5. Monetize through a freemium subscription (self-love value first) and one-off compatibility reports.
+6. Work offline for core features; stay cheap to run (on-device astro math, on-device insights, cached readings).
 
 ### Non-goals (v1)
 
@@ -56,11 +60,12 @@ Mochi Moon is a cute, illustrated self-love app for young women. Its home is a s
 
 ## 5. App structure
 
-Bottom navigation (3 tabs):
+Bottom navigation (4 tabs):
 
-1. **Deck** (home) — self-love swipe deck, mood check-in, entry to Journal.
-2. **Cosmic** — Today, Retrogrades, Moon, Birth chart, Love match.
-3. **Me** — Journal, profile, premium, settings.
+1. **Today** (home) — the daily ritual (§6.15), streak, the "Hard day?" button (§6.26), today's quest (§6.20), and today's cosmic card as the ritual's last reward (or the "Unlock your cosmic side" prompt until she has given birth data).
+2. **Deck** — the self-love swipe deck (§6.2) with her own cards in the rotation (§6.17), the mood check-in, and the hard-day button.
+3. **Cosmic** — a locked state ("Unlock your cosmic side") until birth data is given, then Today, Retrogrades, Moon, Birth chart, Love match and the Premium natal report. Everything in §6.7–§6.12.
+4. **Me** — Journal, gratitude jar (§6.16), mood calendar (§6.18), journeys (§6.21), letters (§6.22, §6.24), Mochi's room (§6.23), monthly recap (§6.25), profile, partners, Premium, settings.
 
 Paywall is a modal route reachable from locked items.
 
@@ -72,26 +77,37 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 
 ### 6.1 Onboarding and sign-in
 
-**Flow:** Splash → **language** (first step, before anything else) → 3 sample cards (no account) → "Save your cards and get your cosmic reading" → Google sign-in → name → birth date → birth time (optional) → birthplace (search) → reminder time → pick up to 3 focus areas → Deck.
+**Flow (v1.1):** Splash → **language** (first step, before anything else) → 3 sample cards (no account) → "Save your cards and your streak" → Google sign-in → name → focus areas (up to 3) → reminder time → done → Today. **Birth date, birth time and birthplace are no longer part of onboarding**; they are asked the first time she opens the Cosmic tab ("Unlock your cosmic side", see below).
+
+*Built today (v1.0): the order was sample cards, sign-in, name, birth date, birth time, birthplace, reminder, focus. The v1.1 items below change it.*
 
 **User stories**
 - As a new user, I pick my language before I see anything else, so I never have to read a language I do not know.
 - As a new user, I can try 3 cards before signing in, so I understand the app first.
 - As a user, I can sign in with Google in one tap.
-- As a user, I can say "I don't know my birth time" and still continue.
+- As a user, I can say "I don't know my birth time" and still continue (in the Cosmic unlock flow).
+- As a user who only wants self-love, I am never asked for birth data.
 
 **AC**
 - [ ] **Ask the language first.** The very first screen after the splash is a language choice (System / English / Burmese, the same choices as the Me tab picker), shown before the welcome screen and the 3 sample cards. Each option is written in its own language and script so it reads before any language is set. The choice is saved at once and applies to the cards, the profile steps, the Cosmic readings (`lang`) and the reminder texts. It is also the first screen after account deletion restarts the app. — *planned for the next session (owner request, 2026-10-30); today the cards start in the device language and the picker is only on the Me tab (§12 M2).*
 - [x] 3 sample cards work without network or account; the timer gate applies. — *shown after a welcome screen; the "save your cards" step is the Google sign-in button*
 - [x] Google sign-in via Firebase Auth; on success a `users/{uid}` doc is created (§8.1). — *verified on the Android emulator against the dev project (`mochi-moon-dev`): the Auth user is created, the profile steps run, and `users/{uid}` appears in Firestore with name, locale, profile and settings. Sign-in waits up to 10 s for the first Firestore read when the network is slow. Without Firebase config the button carries on signed out. An account that already has a complete `users/{uid}` profile skips the profile steps.*
-- [x] Birth date is required (date picker; year range 1940–current year; no future dates).
+- [x] Birth date is required **to unlock Cosmic** (date picker; year range 1940–current year; no future dates).
 - [x] Birth time is optional; "I don't know" sets `timeKnown = false`.
 - [x] Birthplace is required when birth time is given, optional otherwise. Search is offline over the bundled cities list (§8.5), showing "City, Region, Country". — *the step sits between birth time and reminder; picking a city stores `place` with its `tzId`.*
 - [x] On save, the app computes and stores sun sign (always), moon sign (always; flagged approximate when time unknown), rising sign (only when time known). — *the signs are derived in `signsOfProfile` and written into `users/{uid}.profile` on every Firestore upsert; the device copy recomputes them from the birth data.*
-- [x] Reminder time defaults to 08:00 local; user can skip.
+- [x] Reminder time defaults to 08:00 local; user can skip. — *v1.1 puts it after focus areas, as the last step.*
 - [x] Focus areas: Self-love, Confidence, Healing, Study & work, Body kindness, Calm (multi-select, up to 3).
 - [ ] The whole flow works in en/th/my and respects text scaling. — *text scaling 1.3× is tested; the new profile strings are English only (`my` falls back to English, `th` is deferred)*
 - [x] Back navigation never loses entered data within the flow.
+
+**Changes in v1.1 (self-love first)**
+- [ ] Onboarding order is: language, 3 sample cards, Google sign-in, name, focus areas, reminder time, done. No birth data is asked. A profile is complete with a name alone (`hasAccountProfile`); birth data is a separate state (`hasBirthData`).
+- [ ] **Unlock your cosmic side:** the first time she opens the Cosmic tab without birth data, it shows a friendly locked state (mascot, one sentence, one button) instead of an error. The button opens the birth steps (birth date, then birth time or "I don't know", then birthplace when the time is given), then Cosmic opens. She can leave at any step and keep using every self-love feature; the locked state shows again next time.
+- [ ] Today's cosmic reward card, the chart, the compatibility result and Cosmic Today show the locked state or an "Unlock" prompt when birth data is missing. The Moon card and the retrograde calendar need no birth data and stay visible.
+- [ ] Editing birth data from Me → Profile still works; clearing it is not offered.
+- [x] **Profile astro fields are nullable.** `birthDate`, `birthTime`, `place`, `sunSign`, `moonSign`, `moonApproximate` and `risingSign` may all be absent, in Firestore and in the local profile. `timeKnown` only matters with a birth date.
+- [ ] **Migration for existing users:** nothing is erased. A profile that already has birth data keeps it and its derived signs and skips the Cosmic unlock. A profile with a name but no birth date is now complete. The app must accept Firestore documents without `profile.birthDate` (the codec already returns empty fields instead of failing). The security rules do not validate the `profile` map, so they need no change for this, and the local drift `ProfileCache` stores the same JSON map, so it needs no migration. Tests: a name-only profile, a legacy full profile, and a Firestore document missing the signs.
 
 ### 6.2 Self-love deck (Free with daily limit)
 
@@ -104,8 +120,9 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - **Timer gate:** lock duration = `max(3.0, wordCount / 2.5)` seconds, capped at 8 s. The ring fills while locked; card swipes and the action buttons are disabled until full. A gentle haptic + sparkle plays when unlocked. A small hint under the ring reads "Read it out loud ✨" (localized).
 - Swipe right → saved to Journal, heart animation. Swipe left → next. Swipe up → share sheet (§6.4). Undo the last swipe (1 level).
 - Deck source order: For You ranking (§6.9) if enough history, otherwise focus-area weighted random without repeats in 30 days.
-- **Free limit:** 10 new cards per local day. After that, show a friendly "You're glowing — come back tomorrow" card with a premium upsell. Journal and reshares stay unlimited.
-- Mood check-in (optional) at the top: 6 emoji moods (happy, calm, tired, sad, anxious, in love). Choosing one re-ranks the next cards.
+- **Free limit:** 10 new cards per local day. Cards read inside the daily ritual (§6.15) count toward the same 10. After that, show a friendly "You're glowing — come back tomorrow" card with a premium upsell. Journal and reshares stay unlimited.
+- Mood check-in (optional) at the top: 6 emoji moods (happy, calm, tired, sad, anxious, in love). Choosing one re-ranks the next cards. v1.1: the choice is also stored as the day's mood (§6.18). *Not built yet: the Deck has no mood check-in today.*
+- Her own cards (§6.17) join the rotation.
 
 **AC**
 - [x] Swipe attempts before the timer completes are cancelled and the card springs back. — *widget test `a swipe before the timer ends is cancelled`.*
@@ -113,12 +130,12 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [x] The daily counter resets at local midnight; it is stored locally and synced to Firestore. — *synced since M2 (`users/{uid}.deck`); an open deck is dealt again by a timer at local midnight, and on returning to the app if the day changed meanwhile (unlocked cards are cleared, so the read-aloud timer applies again). The Firestore copy updates with the next swipe, not at midnight itself*
 - [x] "Reduce motion" disables tilt and sparkle animations but keeps the ring. — *follows the system setting and the new Me-tab switch (tested)*
 - [x] Works offline using bundled quotes. — *the deck reads the bundled `quotes.json` and the local drift database; the only network part is the Firestore counter sync, which is local-first and retried later.*
-- [x] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header. — *`deck_planner_test` covers the count (a streak reaching yesterday stays alive until today ends); `the streak shows in the app bar once a card is done` covers the header.*
+- [x] Streak: a day counts when ≥ 1 card is completed; streak shown on the Deck header. — *v1.1: a day also counts when the daily ritual (§6.15) is completed, and the streak shows on Today too. Missing a day never shows punishing copy.* — *`deck_planner_test` covers the count (a streak reaching yesterday stays alive until today ends); `the streak shows in the app bar once a card is done` covers the header.*
 
 ### 6.3 Journal (Free)
 
 - [x] Lists saved cards newest first with illustration thumbnails; tap opens full card; long-press to remove.
-- [ ] Filter by category. Synced via Firestore so it survives reinstall. — *sync is done (`users/{uid}/journal/{quoteId}`); the category filter is not*
+- [x] Filter by category. Synced via Firestore so it survives reinstall. — *sync is done (`users/{uid}/journal/{quoteId}`); the category filter is in `journal_screen.dart` and tested (`filters by category`)*
 - [x] Empty state with the mascot and a prompt to swipe right on cards she loves. — *uses `ill_empty_deck.webp`*
 
 ### 6.4 Share as image (Free)
@@ -230,13 +247,13 @@ Shows for the user's local date:
 | `mochi_premium_yearly` | Auto-renewing subscription | 7-day free trial |
 | `mochi_compat_report` | Consumable (one report credit) | Unlocks one full compatibility report |
 
-Premium unlocks: unlimited deck, For You deck, personalized Today, full natal report, full compatibility reports, up to 5 partners, all widget themes and mascot outfits.
+Premium unlocks, in this order on the paywall (self-love value first): unlimited deck, all self-love journeys (§6.21), the weekly letter from Mochi (§6.24), mood insights (§6.18), unlimited own cards (§6.17), Mochi's premium outfits and room items (§6.23), then the astrology extras: For You deck, personalized Today, full natal report, full compatibility reports, up to 5 partners, all widget themes.
 
 **AC**
 - [ ] Prices come from Play Billing (localized currency); never hardcoded.
 - [ ] Purchases are verified server-side (`POST /v1/purchases/verify`), which writes `entitlement` to Firestore; the app reads entitlement from Firestore only.
 - [ ] Restore purchases button. Clear trial terms and a link to manage subscriptions in Play.
-- [ ] Paywall shows: mascot, 3 benefit bullets, yearly plan preselected with trial, monthly option, close button visible immediately.
+- [ ] Paywall shows: mascot, 3 benefit bullets (journeys, weekly letter, unlimited cards first), yearly plan preselected with trial, monthly option, close button visible immediately.
 
 ### 6.14 Settings and account
 
@@ -246,7 +263,116 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 - [x] Edit profile from the Me tab: name, birthday, birth time (and later birthplace) and focus areas, reusing the onboarding profile steps. Manage partners. — *requested during M2; done as `/me/profile` (name, birthday, birth time with "I don't know", birthplace, focus areas; Save is off until the form is valid and changed). Partners are managed from the Me tab too. The Burmese strings for it are machine-translated and unreviewed.*
 - [ ] Privacy policy, Terms, "About readings" (entertainment notice), licenses. — *"About readings" and the open-source licenses are done (Me → About, `/me/about`; Burmese is machine-translated and unreviewed). Privacy policy and Terms are open: they need the policy text, a URL on the owner's domain, and a way to open links (`url_launcher` is not in the approved stack, so ask first).*
 - [x] Analytics consent toggle (default off until the consent prompt is answered). — *done: a one-time friendly dialog the first time the main screens show (both answers equally easy), and a "Share anonymous usage" switch on the Me tab; the answer is stored locally (`analytics_consent`; unanswered counts as off). `AnalyticsLogger` does nothing unless consent is on and drops any parameter an event does not list (§11 events only). Deferred: the sink is a no-op until `firebase_analytics` is approved (nothing leaves the device), and syncing `settings.analyticsConsent` to Firestore. Account deletion clears the answer with the other local data. The Burmese strings are machine-translated and unreviewed.*
-- [ ] **Delete account**: two confirmations ("Delete your account?", then "Are you completely sure?"), a silent Google re-check of the signed-in account before anything is erased (backing out of it changes nothing), a progress dialog, and then the whole app restarts at the first-run screens → calls `DELETE /v1/account` → server deletes Firestore data, reports, and the Auth user → app clears local DB and signs out. A web deletion page (`https://<domain>/delete-account`) offers the same.
+- [ ] **Delete account** (v1.1: the client currently erases only `journal` and `partners`; every new subcollection must be added to `FirestoreAccountRemote` and to the server): two confirmations ("Delete your account?", then "Are you completely sure?"), a silent Google re-check of the signed-in account before anything is erased (backing out of it changes nothing), a progress dialog, and then the whole app restarts at the first-run screens → calls `DELETE /v1/account` → server deletes Firestore data (the user document and **every subcollection**: `journal`, `partners`, `reports`, `gratitude`, `customCards`, `moods`, `letters`, `journeyProgress`, `state`), reports, weekly letters, and the Auth user → app clears local DB and signs out. A web deletion page (`https://<domain>/delete-account`) offers the same.
+
+### 6.15 Daily ritual (Today tab, Free)
+
+**Story:** As a user, I open the app and get one gentle 2-minute routine, so self-love becomes a habit.
+
+**Flow:** mood check-in (6 moods, may be skipped) → 3 cards, each with the read-aloud timer gate (§6.2) → one gratitude line (§6.16, may be skipped) → completion sparkle and streak update → today's cosmic card shown last as a reward (or the "Unlock your cosmic side" prompt when she has no birth data).
+
+**AC**
+- [ ] Today is the home tab and shows the ritual's state: not started, in progress (step n of 4), or done for today.
+- [ ] The 3 ritual cards use the same timer gate and swipe rules as the Deck; a swipe before the ring is full is cancelled.
+- [ ] Ritual cards count toward the 10 new cards per day free limit (§6.2). If fewer than 3 are left, the ritual uses what is left and still completes; Premium has no limit.
+- [ ] Completing the ritual stores one `ritual_days` row for the local date and updates the streak. The streak counts a day when the ritual is completed **or** at least 1 deck card is completed. A missed day shows no guilt copy.
+- [ ] The mood step stores the day's mood (§6.18). Skipping it stores nothing.
+- [ ] Leaving mid-ritual and coming back the same day resumes at the same step.
+- [ ] The cosmic reward card shows today's energy line and lucky color when she has birth data; otherwise "Unlock your cosmic side" (§6.1). Neither blocks finishing the ritual.
+- [ ] Works fully offline. Respects reduce motion (the sparkle is replaced by a still celebration).
+- [ ] Widget test: the ritual runs end to end; the timer gate holds; the streak counts a ritual-only day.
+
+### 6.16 Gratitude and wins jar (Free)
+
+- [ ] She can add 1–3 short entries per local day (max 200 characters each), as part of the ritual or from the jar screen in Me.
+- [ ] Each entry drops a paper star into the jar with a short fill animation; the jar fills visibly with the count of entries (capped for display).
+- [ ] "Open the jar" shows random past entries one at a time, never one from today first; an empty jar shows the mascot and an invitation.
+- [ ] She can delete an entry. Entries are stored locally first and synced to `users/{uid}/gratitude` (§8.1).
+- [ ] **Entries are private (§10):** never sent to the AI API or to analytics.
+- [ ] The jar is also reachable from the hard-day kit (§6.26).
+
+### 6.17 My own cards (3 free, unlimited Premium)
+
+- [ ] She writes an affirmation (max 140 characters) and picks one illustration from the bundled set (§8.4). The card has the same layout and timer gate as a bundled card; its category is `self_love`.
+- [ ] A custom card joins the deck rotation (and the ritual) and can be chosen as the home-screen widget card.
+- [ ] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot.
+- [ ] She can edit and delete her cards. Stored locally first, synced to `users/{uid}/customCards`.
+- [ ] **Private (§10):** the text never goes to the AI API, analytics, or the For You embeddings server. Custom cards get no embedding; the For You deck ignores them for ranking.
+- [ ] Shareable as an image like any card (§6.4).
+
+### 6.18 Mood calendar (month view Free, insights Premium)
+
+- [ ] The mood check-in (ritual or Deck) stores **one mood per local date** (the last choice wins). She can also set or change today's mood from Me → Mood.
+- [ ] Month calendar: one colored mood dot per day, previous and next month, tap a day to see its mood; unlogged days are empty without any warning style.
+- [ ] **Insights (Premium):** a few simple statements computed on the device from her own data only, for example "You logged calm more often on days you finished your ritual". They need at least 14 logged days. Wording is gentle, never a diagnosis, never about health or mental conditions, and always offers a kind next step.
+- [ ] Nothing about moods leaves the phone except her own Firestore documents `users/{uid}/moods/{YYYY-MM-DD}`; mood **counts** (not days or text) feed the weekly letter (§6.24).
+- [ ] Unit tests for the insight rules, including "not enough data" and no-claim wording.
+
+### 6.19 Breathe with Mochi (Free)
+
+- [ ] A 1-minute box breathing session (4 seconds in, 4 hold, 4 out, 4 hold) with the mascot growing and shrinking and a text cue ("Breathe in", ...).
+- [ ] Reduce motion: the mascot stays still and the cue text and a progress ring carry the rhythm. Optional soft haptic on each phase.
+- [ ] Fully offline, no account, no network, no sound permission needed.
+- [ ] Reachable from Today, the hard-day kit, and Me. Finishing shows a gentle line and offers the next step; leaving early is fine.
+- [ ] Breathing copy lives in `breathing.json` (§8.3), in en and my.
+
+### 6.20 Tiny kindness quests (Free)
+
+- [ ] One small daily task picked from the bundled `quests.json`, matched to her focus areas, chosen deterministically from the date so it is stable all day.
+- [ ] She can mark it done or **swap it once** per day for another quest.
+- [ ] A quest is never anything about health, money, or others' bodies; it is a tiny kind act toward herself or someone else ("Drink a glass of water slowly", "Send a kind message to a friend").
+- [ ] Done quests count toward the weekly letter's aggregates and mascot milestones.
+- [ ] Quest state is stored locally and synced to `users/{uid}/state/quest`.
+
+### 6.21 Self-love journeys (1 free, the rest Premium)
+
+- [ ] A journey is a 7 or 14 day program. Each day has: a set of cards (3), one quest, and one reflection prompt. Launch set: **Confidence (7)**, **Healing after a breakup (14)**, **Exam & work calm (7)**, **Body kindness (7)**. One of the four is free (suggested: Confidence); the others are Premium.
+- [ ] She can run one journey at a time and see progress (day n of N).
+- [ ] **Missing a day pauses; it never resets.** The next day she opens it she continues at the same day. No streak-loss messaging.
+- [ ] The reflection answer is free text she writes for herself. It is **private (§10)**: stored locally and in her Firestore, never sent to the AI API or analytics.
+- [ ] Completing a day counts toward the streak and the mascot's milestones; completing a journey unlocks a mascot item (§6.23) and offers the share image.
+- [ ] Journey scripts are in `journeys.json` (§8.3) in en and my. Healing after a breakup follows the style guide: no predictions, no promises about the ex, no clinical language, and shows the hard-day kit link.
+- [ ] Progress is saved to `users/{uid}/journeyProgress/{journeyId}`.
+
+### 6.22 Letter to future me (Free)
+
+- [ ] She writes a note (max 1,000 characters), chooses to unlock it in 30, 90 or 365 days, and seals it. A sealed letter cannot be read or edited before its date; it can be deleted.
+- [ ] A local notification fires on the unlock date (permission handled like the reminder, §6.6). Opening the letter shows it with its written date.
+- [ ] Letters are stored locally and in `users/{uid}/letters/{id}`. **Private (§10).** The notification text never contains the letter.
+- [ ] Phone clock changes cannot unlock a letter early on a signed-in device: the unlock date is checked against the stored `unlockAt`, and the server-time is not required (document this limitation).
+
+### 6.23 Mochi grows with you (some items Premium)
+
+- [ ] The mascot earns outfits and room items at streak milestones (3, 7, 14, 30, 60, 100 days) and at journey and quest milestones.
+- [ ] A simple Room screen (Me → Mochi's room) shows Mochi, the equipped outfit, and placed room items; she can equip one outfit and place items in fixed slots (no free drag, to keep it simple and accessible).
+- [ ] Items come from `mascot_items.json` (§8.4): each has an id, a slot, an unlock rule and a `premium` flag. Free items are earned; Premium items are earned too but equipping needs Premium.
+- [ ] **No punishment:** missed days never remove items or make Mochi sad. A streak break shows nothing negative.
+- [ ] Inventory is stored locally and in `users/{uid}/state/mascot`.
+- [ ] Every item image has a semantic label.
+
+### 6.24 Weekly letter from Mochi (Premium, AI)
+
+- [ ] Every Sunday (local) a short, warm letter (80–150 words) about her week appears on Today and in Me → Letters, with a notification if she allowed it.
+- [ ] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers.
+- [ ] Cached per week per language on the device and server; offline shows the last letter or a bundled fallback.
+- [ ] Style guide (§7.1) applies: warm, no predictions about health, death, pregnancy, money or legal outcomes, no fear language, no absolute claims, no clinical language.
+- [ ] If she has fewer than 2 active days in the week, the letter is a gentle "fresh start" letter that does not mention the gap negatively.
+- [ ] Free users see the first line and a paywall invitation.
+
+### 6.25 Monthly glow recap (Free)
+
+- [ ] On the 1st of each month (or from Me), she can open a recap of last month: days she showed up, most common mood, and her favourite saved card (the Journal card saved most recently that month, or the first one).
+- [ ] Rendered **on the device** as a 1080×1920 story image by the share pipeline (§6.4) and shared with the system share sheet. Nothing is uploaded.
+- [ ] The recap never shows her written text (gratitude, letters, own cards).
+- [ ] If she did not show up at all last month, the recap is replaced by a warm "welcome back" card instead of an empty page.
+
+### 6.26 Hard-day kit (Free)
+
+- [ ] One calm button, "Hard day?", on Today and on the Deck opens a kit with: a 1-minute breathing session (§6.19), 3 comforting cards from the `calm`/`healing` categories, a way to open the wins jar (§6.16), and a **Help** section.
+- [ ] The Help section shows a clear note that the app is not a substitute for professional help, and if she is in danger she should contact local emergency services or someone she trusts.
+- [ ] Helpline **names and numbers per locale are `TODO_CONTENT` entries in `hard_day.json`** until the owner verifies them from official sources. **Do not invent phone numbers.** Until verified, the Help section shows only the note and a "Find a local helpline" instruction without a number.
+- [ ] The kit works offline and needs no account. It never asks for her mood, text, or location, and logs only the `hard_day_opened` event (§11, no text).
+- [ ] Copy is reviewed by the owner before launch; no medical claims or diagnostic words.
 
 ---
 
@@ -258,6 +384,7 @@ Premium unlocks: unlimited deck, For You deck, personalized Today, full natal re
 - The API key lives only in the VPS environment (`OPENAI_API_KEY`); it is never in the app, the repo or a client request. The model ID is a server setting so it can change without an app release.
 - Inputs to the prompt are computed facts only (sign, Moon sign and phase, active retrogrades, notable transits to the sign), plus the style guide.
 - Personal reports (natal, compatibility) are generated on request from **placements only** (no birth date/time/place), then cached.
+- The weekly letter from Mochi (§6.24) is generated on request from **aggregates only** (§8.2), cached per week per language.
 - Output is strict JSON matching §8.2 schemas; invalid output is retried once, then the bundled fallback is served.
 
 **Style guide (enforced in the system prompt and by a post-check)**
@@ -285,7 +412,7 @@ Burmese UI strings, bundled fallback readings and quote texts are generated from
 
 ### 7.3 Store wording
 
-The listing may say "AI-personalized affirmations" and "AI-written birth chart readings" because §7.1–7.2 exist. Never claim the AI "predicts" anything.
+The listing leads with the daily ritual, journeys and affirmations, and mentions astrology after. It may say "AI-personalized affirmations", "a weekly letter from Mochi" and "AI-written birth chart readings" because §7.1–7.2 exist. Never claim the AI "predicts" anything.
 
 ---
 
@@ -299,13 +426,14 @@ users/{uid}
   locale: "en" | "th" | "my"
   createdAt, updatedAt: timestamp
   profile:
-    birthDate: "YYYY-MM-DD"
+    birthDate: "YYYY-MM-DD" | null
     birthTime: "HH:mm" | null
-    timeKnown: bool
+    timeKnown: bool | null
     place: { name, region, countryCode, lat, lng, tzId } | null
-    sunSign: string
-    moonSign: string
-    moonApproximate: bool
+    # v1.1: every astro field below may be absent until she unlocks Cosmic
+    sunSign: string | null
+    moonSign: string | null
+    moonApproximate: bool | null
     risingSign: string | null
     focusAreas: string[]
   settings:
@@ -327,12 +455,52 @@ users/{uid}
 users/{uid}/journal/{quoteId}
   savedAt: timestamp
 
+users/{uid}/gratitude/{id}                # id = auto id
+  text: string (1-200)
+  date: "YYYY-MM-DD"                       # local date
+  createdAt: timestamp
+
+users/{uid}/customCards/{id}
+  text: string (1-140)
+  illustrationId: string                   # from the bundled set
+  createdAt, updatedAt: timestamp
+
+users/{uid}/moods/{YYYY-MM-DD}             # one doc per local date
+  mood: "happy" | "calm" | "tired" | "sad" | "anxious" | "in_love"
+  updatedAt: timestamp
+
+users/{uid}/letters/{id}                   # letters to future me
+  text: string (1-1000)
+  writtenAt, unlockAt: timestamp
+  unlockDays: 30 | 90 | 365
+
+users/{uid}/journeyProgress/{journeyId}
+  startedAt: timestamp
+  currentDay: int                          # next day to do (pauses, never resets)
+  completedDays: int[]
+  reflections: map<string, string>         # day -> her own answer (private)
+  completedAt: timestamp | null
+
+users/{uid}/state/quest                    # one doc
+  date: "YYYY-MM-DD"
+  questId: string
+  done: bool
+  swapped: bool
+
+users/{uid}/state/mascot                   # one doc
+  owned: string[]                          # item ids from mascot_items.json
+  equipped: { outfit: string | null, room: map<string, string> }
+  updatedAt: timestamp
+
+users/{uid}/state/ritual                   # one doc
+  completedDates: string[]                 # "YYYY-MM-DD", latest 400
+
 users/{uid}/partners/{partnerId}
   nickname: string
   birthDate, birthTime, timeKnown, place   # same shape as profile
   createdAt: timestamp
 
-users/{uid}/reports/{reportId}       # written by the server only
+users/{uid}/reports/{reportId}       # written by the server only (v1.1 note: natal reports are today kept in the server's SQLite and the device's drift cache; this collection is reserved for later)
   type: "natal" | "compatibility"
   partnerId: string | null
   lang: string
@@ -358,10 +526,62 @@ service cloud.firestore {
       match /journal/{id}  { allow read, write: if request.auth.uid == uid; }
       match /partners/{id} { allow read, write: if request.auth.uid == uid; }
       match /reports/{id}  { allow read: if request.auth.uid == uid; allow write: if false; }
+
+      // v1.1 self-love data: owner only, with shape and size checks.
+      match /gratitude/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['text', 'date', 'createdAt'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 200
+          && request.resource.data.date is string
+          && request.resource.data.createdAt is timestamp;
+      }
+      match /customCards/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(
+            ['text', 'illustrationId', 'createdAt', 'updatedAt'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 140
+          && request.resource.data.illustrationId is string;
+      }
+      match /moods/{day} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['mood', 'updatedAt'])
+          && request.resource.data.mood in
+            ['happy', 'calm', 'tired', 'sad', 'anxious', 'in_love'];
+      }
+      match /letters/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(
+            ['text', 'writtenAt', 'unlockAt', 'unlockDays'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() >= 1
+          && request.resource.data.text.size() <= 1000
+          && request.resource.data.unlockDays in [30, 90, 365];
+      }
+      match /journeyProgress/{id} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(
+            ['startedAt', 'currentDay', 'completedDays', 'reflections', 'completedAt']);
+      }
+      match /state/{doc} {
+        allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid
+          && doc in ['quest', 'mascot', 'ritual'];
+      }
     }
   }
 }
 ```
+
+Notes for the rules: every new subcollection is owner-only; `entitlement` stays server-only. Premium-only mascot items are enforced in the app and in the server's weekly-letter check; the `mascot` document is cosmetic, so a user editing it only changes how her own room looks. Every collection above must be covered by emulator tests (owner can read and write valid data, another user cannot, oversized text and unknown keys are rejected) and added to account deletion (§6.14).
 
 ### 8.2 Readings API (VPS)
 
@@ -373,6 +593,7 @@ Base: `https://api.<domain>/v1`. Auth: `Authorization: Bearer <Firebase ID token
 | POST | `/daily/personal` | Premium | Transit-personalized daily text from placements |
 | POST | `/reports/natal` | Premium | Full natal report |
 | POST | `/reports/compatibility` | Premium or 1 credit | Full compatibility report |
+| POST | `/letters/weekly` | Premium | Weekly letter from Mochi, from aggregates only |
 | POST | `/purchases/verify` | Signed-in | Verify Play purchase, write entitlement |
 | DELETE | `/account` | Signed-in | Delete all user data and the Auth user |
 
@@ -415,7 +636,23 @@ Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generatin
 
 **`POST /reports/compatibility` request:** `{ "lang", "partnerId", "a": <placements block>, "b": <placements block>, "score": { "overall", "romance", "emotional", "communication" }, "topAspects": [...] }`.
 
-**Rate limits:** 60 requests/min per user; report endpoints 5/hour per user.
+**`POST /letters/weekly` request** (aggregates only; any other field, and in particular any text she wrote, is rejected with 400):
+
+```json
+{
+  "lang": "en",
+  "weekStart": "2026-11-01",
+  "moodCounts": { "happy": 2, "calm": 3, "tired": 1, "sad": 0, "anxious": 1, "in_love": 0 },
+  "ritualDays": 5,
+  "questsCompleted": 4,
+  "journey": { "id": "confidence", "day": 3 },
+  "focusAreas": ["self_love", "confidence"]
+}
+```
+
+`journey` is `null` when she has none running. Response: `{ "weekStart": "2026-11-01", "lang": "en", "version": 1, "title": "string", "body": "string (80–150 words)", "generatedBy": "ai" }`. The server checks Premium (once purchase verification exists), caches one letter per user per `weekStart` and `lang`, and serves the same one on repeat calls with no new cost. Rate limit: 3 requests per week per user (429). Logs never contain the request body.
+
+**Rate limits:** 60 requests/min per user; report endpoints 5/hour per user; weekly letter 3/week per user.
 
 **Server notes (separate repo `mochi-moon-api`)**
 - FastAPI (Python) behind Nginx on the existing Hostinger VPS, Docker Compose, SQLite or Postgres for the reading cache.
@@ -448,11 +685,48 @@ Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generatin
 - Launch target: 500 quotes (≥ 150 free), all three languages.
 - Authors: only original (null) or public-domain authors.
 
+**Self-love content files** (all loaded through `ContentRepository`; every text has `en` and `my`, `th` later; unreviewed machine translation is flagged like the quotes):
+
+`assets/content/quests/quests.json`
+```json
+{ "version": 1, "quests": [
+  { "id": "qst_001", "text": { "en": "Drink a glass of water slowly.", "my": "..." },
+    "focusAreas": ["self_love", "calm"], "premium": false } ] }
+```
+Launch target: 120 quests (20 per focus area), none about health outcomes, money, or others' bodies.
+
+`assets/content/journeys/journeys.json`
+```json
+{ "version": 1, "journeys": [
+  { "id": "confidence", "days": 7, "premium": false,
+    "title": { "en": "Confidence", "my": "..." },
+    "summary": { "en": "...", "my": "..." },
+    "illustrationId": "ill_journey_confidence",
+    "daysPlan": [
+      { "day": 1, "quoteIds": ["q_0101", "q_0102", "q_0103"], "questId": "qst_014",
+        "reflection": { "en": "What is one thing you did well this week?", "my": "..." } } ] } ] }
+```
+Launch set: Confidence (7, free), Healing after a breakup (14), Exam & work calm (7), Body kindness (7). Each day references existing quotes and quests by id so nothing is duplicated.
+
+`assets/content/breathing/breathing.json`: the box breathing cues ("Breathe in", "Hold", "Breathe out", "Hold"), the intro and the finish lines, in en and my.
+
+`assets/content/hard_day/hard_day.json`: the kit's intro, the "not a substitute for professional help" note, the quote ids for the 3 comforting cards, and a `helplines` list per locale. **Every helpline name and number is a `TODO_CONTENT` entry until the owner verifies it from an official source.** Never invent one.
+
+`assets/content/mascot/mascot_items.json`
+```json
+{ "version": 1, "items": [
+  { "id": "outfit_scarf_01", "slot": "outfit", "premium": false,
+    "name": { "en": "Cozy scarf", "my": "..." },
+    "unlock": { "type": "streak", "value": 7 }, "illustrationId": "ill_mascot_scarf_01" } ] }
+```
+Unlock types: `streak`, `journey`, `quests`. Launch target: 12 outfits and 12 room items (about a third Premium).
+
 ### 8.4 Illustrations
 
 - `assets/illustrations/ill_<theme>_<nn>.webp`, 1080×1350, pastel background, consistent moon-bunny mascot.
 - 12 zodiac outfit variants: `ill_zodiac_<sign>.webp`.
 - Launch target: 60–100 illustrations, each reused across many quotes.
+- v1.1 additions: `ill_journey_<id>.webp` (one per journey, 4 at launch), `ill_mascot_<item>.webp` for outfits and room items (24 at launch), and a mood set of 6 small mood icons. Custom cards (§6.17) pick from the same bundled set. Every image has a semantic label.
 
 ### 8.5 Cities dataset
 
@@ -461,7 +735,7 @@ Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generatin
 
 ### 8.6 Local database (drift)
 
-Tables: `cached_readings` (date, sign, lang, version, json, fetchedAt), `cached_reports`, `deck_history` (quoteId, action, at), `journal_cache`, `retro_calendar` (planet, year, json), `preference_vector`.
+Tables: `cached_readings` (date, sign, lang, version, json, fetchedAt), `cached_reports`, `deck_history` (quoteId, action, at), `journal_cache`, `retro_calendar` (planet, year, json), `preference_vector`. v1.1 adds: `mood_entries` (date, mood), `gratitude_entries` (id, date, text, createdAt, synced), `custom_cards` (id, text, illustrationId, createdAt, synced), `ritual_days` (date, completedAt), `ritual_progress` (date, step, quoteIds), `future_letters` (id, text, writtenAt, unlockAt, unlockDays, synced), `journey_progress` (journeyId, currentDay, completedDays, reflections, completedAt), `quest_state` (date, questId, done, swapped), `mascot_inventory` (itemId, earnedAt, equipped), `weekly_letters` (weekStart, lang, version, json). Each synced table keeps the same local-first rule as the journal. The schema version goes from 3 to 4 (and later), each with a migration test.
 
 ---
 
@@ -558,14 +832,17 @@ Whole Sign: house 1 = Ascendant's sign; house *n* = sign `(ascSign + n − 1) mo
 | Offline | Deck, Journal (cached), Big 3, lucky colors, retrogrades, moon, compatibility score all work offline |
 | Accessibility | TalkBack labels, 48 dp targets, text scaling to 1.3×, contrast AA, reduce motion |
 | Privacy | Minimal data; no raw birth data to the API; no ads; consent-gated analytics; account deletion in-app and on web |
-| Localization | 100% of UI strings in en/th/my at release; Burmese in Unicode |
+| Localization | 100% of UI strings in en and my at release (th when a native reviewer exists); Burmese in Unicode |
+| Private writing | Anything she writes herself (gratitude, letters, own cards, journal, reflection answers) is synced only to her own Firestore, never sent to the AI API or to analytics, and always deleted with the account |
 | Reliability | Crash-free sessions ≥ 99.5% (Firebase Crashlytics) |
 | Security | Firestore rules tested in the emulator; API verifies ID tokens; HTTPS only |
 
 ## 11. Analytics events (only after consent)
 
 `onboarding_started`, `onboarding_completed`, `sign_in_success`, `card_completed`, `card_swiped {direction}`, `card_shared`, `daily_limit_reached`, `mood_selected {mood}`, `cosmic_today_viewed`, `chart_viewed`, `compat_created {mode}`, `paywall_viewed {source}`, `trial_started`, `purchase_completed {productId}`, `widget_added`, `notification_opened {type}`, `account_deleted`.
-Never include birth data, partner names or quote text in event params.
+
+v1.1 events: `ritual_started`, `ritual_completed`, `gratitude_added {count}`, `jar_opened`, `custom_card_created`, `mood_logged {mood}`, `breathe_completed`, `quest_completed`, `quest_swapped`, `journey_started {journeyId}`, `journey_day_completed {journeyId, day}`, `journey_completed {journeyId}`, `letter_sealed {unlockDays}`, `letter_opened`, `mascot_item_unlocked {itemId}`, `weekly_letter_viewed`, `recap_shared`, `hard_day_opened {source}`, `cosmic_unlocked`.
+Never include birth data, partner names, quote text, or anything she wrote (gratitude, letters, own cards, reflections) in event params.
 
 ---
 
@@ -575,9 +852,9 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 
 ### M0 — Foundation
 - [x] Flutter project with dev/prod flavors, lints, CI script (`analyze` + `test`)
-- [x] Theme tokens, bundled fonts incl. Noto Sans Thai/Myanmar, dark mode — *partial: tokens + dark mode done; font files not bundled yet, Thai deferred*
+- [ ] Theme tokens, bundled fonts incl. Noto Sans Thai/Myanmar, dark mode — *partial (audit 2026-10-31): tokens + dark mode done; the only bundled font is `MochiSymbols.ttf`, so the display font, Nunito and the Noto Sans Myanmar/Thai fallbacks are still missing (also blocks §6.4 script rendering); Thai deferred*
 - [x] gen-l10n set up with en/th/my ARB files — *en + my done; th deferred until a Thai reviewer is available*
-- [x] go_router shell with 3 tabs and placeholder screens
+- [x] go_router shell with 3 tabs and placeholder screens — *v1.1 restructures it to 4 tabs, see M5a*
 - [x] drift database scaffold
 - [x] Content loader for `quotes.json` and `signs.json` with 20 sample quotes — *quotes are en only; my/th text pending*
 
@@ -617,11 +894,38 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [ ] For You deck with embeddings (§7.2); daily mix card
 - [ ] Analytics with consent, Crashlytics
 
-### M5 — Launch
-- [ ] 500 quotes and 60–100 illustrations in all languages, human-reviewed
-- [ ] Store listing (self-love first), screenshots in en/th/my, privacy policy, Data safety form
-- [ ] Closed test with ≥ 15 testers for 14+ days (Google Play requires 12 for 14 days on new personal accounts)
+### M5 — Self-love expansion (v1.1)
 
+Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. Nothing in M5 is built. Order of risk is in `docs/PLAN.md`.
+
+#### M5a — Ritual home, onboarding change and the first self-love features
+- [x] Profile astro fields nullable, `hasAccountProfile` vs `hasBirthData`, migration tests (§6.1) — *done 2026-10-31: `isComplete` replaced; reconcile keeps remote birth data; the onboarding flow itself changes in P7*
+- [ ] Onboarding reordered, birth data moved to the Cosmic unlock flow (§6.1)
+- [ ] 4-tab shell: Today (home), Deck, Cosmic, Me; routes, deep links, notification and widget targets updated (§5)
+- [ ] Firestore rules and emulator tests for the new subcollections; account deletion covers them (§8.1, §6.14)
+- [ ] Drift schema v4 with the first new tables (§8.6)
+- [ ] Daily mood check-in stored per date (§6.18, month view)
+- [ ] Daily ritual on Today with streak and cosmic reward (§6.15)
+- [ ] Gratitude and wins jar (§6.16)
+- [ ] My own cards, 3 free (§6.17)
+- [ ] Breathe with Mochi (§6.19)
+- [ ] Hard-day kit with `TODO_CONTENT` helplines (§6.26)
+
+#### M5b — Depth and retention
+- [ ] Tiny kindness quests (§6.20)
+- [ ] Self-love journeys, 1 free (§6.21)
+- [ ] Letter to future me with unlock notification (§6.22)
+- [ ] Mochi grows with you: items and room (§6.23)
+- [ ] Mood insights, Premium (§6.18)
+- [ ] Weekly letter from Mochi, Premium: server endpoint and app (§6.24, §8.2)
+- [ ] Monthly glow recap (§6.25)
+- [ ] Analytics events for the new features (§11)
+
+### M6 — Launch
+- [ ] Content: 500 quotes and 60–100 illustrations in all shipped languages, human-reviewed
+- [ ] Content for the new features in en and my (th when a reviewer exists): 4 journey scripts, 120 quests, breathing copy, hard-day copy with verified helplines, 24 mascot items, mood icons
+- [ ] Store listing leading with the daily ritual, journeys and affirmations (astrology mentioned after), screenshots in en/my (th later), privacy policy, Data safety form
+- [ ] Closed test with ≥ 15 testers for 14+ days (Google Play requires 12 for 14 days on new personal accounts)
 
 ### Later
 - [ ] iOS build with Sign in with Apple and self-love-first App Store positioning
@@ -636,4 +940,8 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - Domain name and API host (`api.<domain>`).
 - Final price points per region (set in Play Console; suggested anchors: yearly ≈ 6× monthly).
 - Who reviews Thai content (native reviewer needed), and who reviews the OpenAI-generated Burmese (§7.1a).
+- Helpline sources and wording per locale for the hard-day kit (the owner verifies every name and number before launch).
+- Mascot item art: who draws the 24 launch items and in what style.
+- Do existing test users see the new onboarding, or only new installs? (Suggested: only new installs; existing profiles keep their birth data.)
+- Whether the free journey is Confidence, and the price anchors once the paywall leads with self-love.
 - Whether to register a Play **organization** account (needs business verification but skips the closed-testing requirement) or a personal one.
