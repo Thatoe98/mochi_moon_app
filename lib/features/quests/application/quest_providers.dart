@@ -5,6 +5,7 @@ import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/letters/application/weekly_letter_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/quests/data/drift_quest_repository.dart';
@@ -90,16 +91,23 @@ TodayQuest? todayQuest(Ref ref) {
 Future<void> Function() completeQuest(Ref ref) => () async {
   final current = ref.read(todayQuestProvider);
   if (current == null || current.done) return;
+  final dateKey = questDateKey(ref.read(clockProvider)());
+  final log = ref.read(questDoneLogProvider);
   await ref
       .read(questRepositoryProvider)
       .save(
         QuestDay(
-          date: questDateKey(ref.read(clockProvider)()),
+          date: dateKey,
           questId: current.quest.id,
           done: true,
           swapped: current.swapped,
         ),
       );
+  // The weekly letter counts finished quests, and the quest record keeps only
+  // the latest day.
+  await log.add(dateKey);
+  // Nobody may be listening any more once the save has landed.
+  if (ref.mounted) ref.invalidate(questDoneDaysProvider);
 };
 
 /// Trades today's quest for the other pick, once a day.

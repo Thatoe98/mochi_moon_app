@@ -5,16 +5,19 @@ import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/letters/application/weekly_letter_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/quests/application/quest_providers.dart';
 import 'package:mochi_moon/features/quests/presentation/quest_card.dart';
 
+import '../../letters/support/fake_weekly_letter.dart';
 import '../../profile/support/fake_profile.dart';
 import '../support/fake_quest.dart';
 
 Widget _app(FakeQuestRepository repo, List<Quest> quests) => ProviderScope(
   overrides: [
     questRepositoryProvider.overrideWithValue(repo),
+    questDoneLogProvider.overrideWithValue(FakeQuestDoneLog()),
     questsProvider.overrideWith((ref) async => quests),
     profileRepositoryProvider.overrideWithValue(FakeProfileRepository()),
     profileRemoteProvider.overrideWithValue(null),

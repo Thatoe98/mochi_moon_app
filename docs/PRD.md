@@ -352,12 +352,12 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 ### 6.24 Weekly letter from Mochi (Premium, AI)
 
-- [ ] Every Sunday (local) a short, warm letter (80–150 words) about her week appears on Today and in Me → Letters, with a notification if she allowed it.
-- [x] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers. *Q9 done 2026-11-01 (API repo `mochi-moon-api`, e35ac50): strict schema (ids and counts only, any other field is a 400), one letter cached per user, week and language, 3 new letters per week (cached repeats are free), account deletion erases letters. Not deployed to the VPS yet. Premium is not checked until purchase verification exists.*
-- [ ] Cached per week per language on the device and server; offline shows the last letter or a bundled fallback.
+- [x] Every Sunday (local) a short, warm letter (80–150 words) about her week appears on Today and in Me → Letters, with a notification if she allowed it. *Q10 done 2026-11-01: the card stays all week (the letter for the last finished week); the notification is Sunday 18:00 local for the next 4 Sundays (ids 3000+), only while Premium and permission are granted, and its text never carries the letter. An empty week with nothing saved shows no card and makes no call.*
+- [x] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers. *Q9 done 2026-11-01 (API repo `mochi-moon-api`, e35ac50): strict schema (ids and counts only, any other field is a 400), one letter cached per user, week and language, 3 new letters per week (cached repeats are free), account deletion erases letters. Deployed to the VPS 2026-11-01. Premium is not checked until purchase verification exists.*
+- [x] Cached per week per language on the device and server; offline shows the last letter or a bundled fallback. *Q10: the device cache reuses the `cached_reports` table (type `weekly_letter`, id `weekly_letter:<lang>:<weekStart>`) instead of a separate `weekly_letters` table, so there is no schema migration. Finished quests are counted from a small on-device day log (`quest_done_days`, last 21 dates) because the quest record keeps only the latest day.*
 - [x] Style guide (§7.1) applies: warm, no predictions about health, death, pregnancy, money or legal outcomes, no fear language, no absolute claims, no clinical language.
 - [x] If she has fewer than 2 active days in the week, the letter is a gentle "fresh start" letter that does not mention the gap negatively. *Server side done (Q9); the validator also bans blame words such as missed, gap, behind.*
-- [ ] Free users see the first line and a paywall invitation.
+- [x] Free users see the first line and a paywall invitation. *Q10: free users see a teaser plus a Premium invitation on Sundays only and no call is made. There is no paywall screen yet, so the invitation is text only. Premium is checked in the app only (the server has no purchase verification yet).*
 
 ### 6.25 Monthly glow recap (Free)
 
@@ -918,7 +918,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Letter to future me with unlock notification (§6.22) — *Q5 done 2026-11-02: Me → Letters (write, seal with confirm, list, read once open, delete), local notification on the unlock day with generic text, drift table (schema v7), Firestore sync. Clock-change limitation documented in §6.22.*
 - [ ] Mochi grows with you: items and room (§6.23) — *Q6 done 2026-11-02: `mascot_items.json` (12 starter items, English names only), unlock engine (streak 3/7/14/30/60/100 and journey finish; items are only added), drift `mascot_inventory` (schema v8), Firestore sync to `state/mascot`, equip with the Premium check. Open: Burmese names (the translate tool does not cover `mascot_items.json` yet), quest-count unlocks, the 24 launch items and their art (`ill_mascot_*` files do not exist), Q7 done 2026-11-02: Me → Mochi's room screen (one item per slot, locked hints, Premium note, TalkBack labels, 1.3x text). Not built: an unlock celebration and item art (icons stand in).*
 - [ ] Mood insights, Premium (§6.18)
-- [ ] Weekly letter from Mochi, Premium: server endpoint and app (§6.24, §8.2)
+- [x] Weekly letter from Mochi, Premium: server endpoint and app (§6.24, §8.2) — *Q9 server + Q10 app done 2026-11-01; the `weekly_letter_viewed` event waits for Q12.*
 - [ ] Monthly glow recap (§6.25)
 - [ ] Analytics events for the new features (§11)
 

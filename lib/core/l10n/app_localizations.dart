@@ -3410,6 +3410,96 @@ abstract class AppLocalizations {
   /// **'We could not find that letter.'**
   String get letterNotFound;
 
+  /// No description provided for @weeklyLetterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your week, from Mochi'**
+  String get weeklyLetterTitle;
+
+  /// No description provided for @weeklyLetterOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Read your letter'**
+  String get weeklyLetterOpen;
+
+  /// No description provided for @weeklyLetterLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi is writing your letter...'**
+  String get weeklyLetterLoading;
+
+  /// No description provided for @weeklyLetterTeaser.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi wrote you a letter about your week.'**
+  String get weeklyLetterTeaser;
+
+  /// No description provided for @weeklyLetterPremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A weekly letter from Mochi'**
+  String get weeklyLetterPremiumTitle;
+
+  /// No description provided for @weeklyLetterPremiumBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Every Sunday Mochi writes you a short, warm letter about your week. Premium keeps it coming.'**
+  String get weeklyLetterPremiumBody;
+
+  /// No description provided for @weeklyLetterOfflineNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi could not reach her desk this time, so here is a little note until she can write yours.'**
+  String get weeklyLetterOfflineNote;
+
+  /// No description provided for @weeklyLetterRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get weeklyLetterRetry;
+
+  /// No description provided for @weeklyLetterClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get weeklyLetterClose;
+
+  /// No description provided for @weeklyLetterFallbackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A fresh start with Mochi'**
+  String get weeklyLetterFallbackTitle;
+
+  /// No description provided for @weeklyLetterFallbackBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello you. Every week is a new page, and this one is yours to fill in softly. You do not need to do everything to be doing enough. A deep breath, a kind word to yourself, or one small thing you enjoy already counts. Mochi is proud of you for being here. When you are ready, your next card is waiting, and so is a little quest that takes only a minute. Be gentle with yourself this week, the way you would be with a friend you love.'**
+  String get weeklyLetterFallbackBody;
+
+  /// No description provided for @weeklyLetterNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A letter from Mochi'**
+  String get weeklyLetterNotificationTitle;
+
+  /// No description provided for @weeklyLetterNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi wrote you a little letter about your week.'**
+  String get weeklyLetterNotificationBody;
+
+  /// No description provided for @weeklyLetterChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly letter'**
+  String get weeklyLetterChannelName;
+
+  /// No description provided for @weeklyLetterChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tells you on Sunday that your weekly letter from Mochi is ready.'**
+  String get weeklyLetterChannelDescription;
+
   /// No description provided for @mascotRoomTitle.
   ///
   /// In en, this message translates to:

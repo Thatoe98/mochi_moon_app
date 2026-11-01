@@ -8,6 +8,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/letters/application/letter_providers.dart';
+import 'package:mochi_moon/features/letters/presentation/weekly_letter_card.dart';
 
 /// Me → Letters to future me (PRD §6.22): the sealed and the opened letters.
 /// A sealed letter shows only when it opens, never its text.
@@ -29,6 +30,7 @@ class LettersScreen extends ConsumerWidget {
         data: (all) => ListView(
           padding: const EdgeInsets.all(AppSpacing.md),
           children: [
+            const WeeklyLetterCard(),
             Text(
               l10n.lettersIntro,
               style: Theme.of(context).textTheme.bodyLarge,

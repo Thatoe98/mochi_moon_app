@@ -2023,6 +2023,56 @@ class AppLocalizationsMy extends AppLocalizations {
   String get letterNotFound => 'ဒီစာကို ရှာမတွေ့ပါဘူး။';
 
   @override
+  String get weeklyLetterTitle => 'Your week, from Mochi';
+
+  @override
+  String get weeklyLetterOpen => 'Read your letter';
+
+  @override
+  String get weeklyLetterLoading => 'Mochi is writing your letter...';
+
+  @override
+  String get weeklyLetterTeaser => 'Mochi wrote you a letter about your week.';
+
+  @override
+  String get weeklyLetterPremiumTitle => 'A weekly letter from Mochi';
+
+  @override
+  String get weeklyLetterPremiumBody =>
+      'Every Sunday Mochi writes you a short, warm letter about your week. Premium keeps it coming.';
+
+  @override
+  String get weeklyLetterOfflineNote =>
+      'Mochi could not reach her desk this time, so here is a little note until she can write yours.';
+
+  @override
+  String get weeklyLetterRetry => 'Try again';
+
+  @override
+  String get weeklyLetterClose => 'Close';
+
+  @override
+  String get weeklyLetterFallbackTitle => 'A fresh start with Mochi';
+
+  @override
+  String get weeklyLetterFallbackBody =>
+      'Hello you. Every week is a new page, and this one is yours to fill in softly. You do not need to do everything to be doing enough. A deep breath, a kind word to yourself, or one small thing you enjoy already counts. Mochi is proud of you for being here. When you are ready, your next card is waiting, and so is a little quest that takes only a minute. Be gentle with yourself this week, the way you would be with a friend you love.';
+
+  @override
+  String get weeklyLetterNotificationTitle => 'A letter from Mochi';
+
+  @override
+  String get weeklyLetterNotificationBody =>
+      'Mochi wrote you a little letter about your week.';
+
+  @override
+  String get weeklyLetterChannelName => 'Weekly letter';
+
+  @override
+  String get weeklyLetterChannelDescription =>
+      'Tells you on Sunday that your weekly letter from Mochi is ready.';
+
+  @override
   String get mascotRoomTitle => 'Mochi\'s room';
 
   @override

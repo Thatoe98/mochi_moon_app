@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
+import 'package:mochi_moon/features/letters/presentation/weekly_letter_card.dart';
 import 'package:mochi_moon/features/quests/presentation/quest_card.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
@@ -48,6 +49,7 @@ class TodayScreen extends ConsumerWidget {
                   onBrowseDeck: () => context.go(AppRoutes.deck),
                 ),
               ),
+              const WeeklyLetterCard(),
               const QuestCard(),
             ],
           ),
@@ -59,6 +61,7 @@ class TodayScreen extends ConsumerWidget {
                   reward: const CosmicRewardCard(),
                 ),
               ),
+              const WeeklyLetterCard(),
               const QuestCard(),
             ],
           ),

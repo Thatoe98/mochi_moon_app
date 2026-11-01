@@ -5,11 +5,13 @@ import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/letters/application/weekly_letter_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/quests/application/quest_providers.dart';
 import 'package:mochi_moon/features/quests/domain/quest_day.dart';
 
 import '../../auth/support/fake_auth_repository.dart';
+import '../../letters/support/fake_weekly_letter.dart';
 import '../../profile/support/fake_profile.dart';
 import '../support/fake_quest.dart';
 
@@ -27,6 +29,7 @@ ProviderContainer _container(
   final container = ProviderContainer(
     overrides: [
       questRepositoryProvider.overrideWithValue(repo),
+      questDoneLogProvider.overrideWithValue(FakeQuestDoneLog()),
       questRemoteProvider.overrideWithValue(remote),
       profileRepositoryProvider.overrideWithValue(FakeProfileRepository()),
       profileRemoteProvider.overrideWithValue(null),

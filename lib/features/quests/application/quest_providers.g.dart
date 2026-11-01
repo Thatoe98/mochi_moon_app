@@ -235,7 +235,7 @@ final class CompleteQuestProvider
   }
 }
 
-String _$completeQuestHash() => r'01c2053aecbdc892a44e80995a2d2a3cd3cc3f86';
+String _$completeQuestHash() => r'33deb5cafb1e745f851b456c4623f72b1db01326';
 
 /// Trades today's quest for the other pick, once a day.
 
