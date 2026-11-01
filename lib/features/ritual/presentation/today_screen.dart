@@ -8,6 +8,7 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/letters/presentation/weekly_letter_card.dart';
 import 'package:mochi_moon/features/quests/presentation/quest_card.dart';
+import 'package:mochi_moon/features/recap/presentation/recap_today_card.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
 import 'package:mochi_moon/features/ritual/presentation/cosmic_reward_card.dart';
@@ -49,6 +50,7 @@ class TodayScreen extends ConsumerWidget {
                   onBrowseDeck: () => context.go(AppRoutes.deck),
                 ),
               ),
+              const RecapTodayCard(),
               const WeeklyLetterCard(),
               const QuestCard(),
             ],
@@ -61,6 +63,7 @@ class TodayScreen extends ConsumerWidget {
                   reward: const CosmicRewardCard(),
                 ),
               ),
+              const RecapTodayCard(),
               const WeeklyLetterCard(),
               const QuestCard(),
             ],

@@ -2174,4 +2174,52 @@ class AppLocalizationsMy extends AppLocalizations {
   String mascotItemSemantics(String name, String status) {
     return '$name, $status';
   }
+
+  @override
+  String get recapTitle => 'Monthly glow';
+
+  @override
+  String get recapMeSubtitle => 'Look back at last month';
+
+  @override
+  String recapHeadline(String month) {
+    return 'Your $month glow';
+  }
+
+  @override
+  String recapDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'days you showed up',
+      one: 'day you showed up',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recapTopMood(String mood) {
+    return 'Most often you felt $mood';
+  }
+
+  @override
+  String get recapFavouriteLabel => 'A card you loved';
+
+  @override
+  String get recapShare => 'Share your glow';
+
+  @override
+  String get recapWelcomeBackTitle => 'Welcome back';
+
+  @override
+  String get recapWelcomeBackBody =>
+      'A new month is a soft place to start. Mochi kept your spot warm.';
+
+  @override
+  String recapTodayTitle(String month) {
+    return 'Your $month glow is ready';
+  }
+
+  @override
+  String get recapTodayOpen => 'See it';
 }

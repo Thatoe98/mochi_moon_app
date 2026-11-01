@@ -679,5 +679,20 @@
   "moodInsightsPremiumTitle": "Mood insights are part of Premium",
   "moodInsightsPremiumBody": "Premium shares a few gentle patterns from your own check-ins, kept on your phone.",
   "mascotItemSemantics": "{name}, {status}",
-  "@mascotItemSemantics": { "placeholders": { "name": { "type": "String" }, "status": { "type": "String" } } }
+  "@mascotItemSemantics": { "placeholders": { "name": { "type": "String" }, "status": { "type": "String" } } },
+  "recapTitle": "Monthly glow",
+  "recapMeSubtitle": "Look back at last month",
+  "recapHeadline": "Your {month} glow",
+  "@recapHeadline": { "placeholders": { "month": { "type": "String" } } },
+  "recapDays": "{count, plural, =1{day you showed up} other{days you showed up}}",
+  "@recapDays": { "placeholders": { "count": { "type": "int" } } },
+  "recapTopMood": "Most often you felt {mood}",
+  "@recapTopMood": { "placeholders": { "mood": { "type": "String" } } },
+  "recapFavouriteLabel": "A card you loved",
+  "recapShare": "Share your glow",
+  "recapWelcomeBackTitle": "Welcome back",
+  "recapWelcomeBackBody": "A new month is a soft place to start. Mochi kept your spot warm.",
+  "recapTodayTitle": "Your {month} glow is ready",
+  "@recapTodayTitle": { "placeholders": { "month": { "type": "String" } } },
+  "recapTodayOpen": "See it"
 }

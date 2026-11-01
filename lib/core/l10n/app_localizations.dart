@@ -3667,6 +3667,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{name}, {status}'**
   String mascotItemSemantics(String name, String status);
+
+  /// No description provided for @recapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly glow'**
+  String get recapTitle;
+
+  /// No description provided for @recapMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Look back at last month'**
+  String get recapMeSubtitle;
+
+  /// No description provided for @recapHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Your {month} glow'**
+  String recapHeadline(String month);
+
+  /// No description provided for @recapDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{day you showed up} other{days you showed up}}'**
+  String recapDays(int count);
+
+  /// No description provided for @recapTopMood.
+  ///
+  /// In en, this message translates to:
+  /// **'Most often you felt {mood}'**
+  String recapTopMood(String mood);
+
+  /// No description provided for @recapFavouriteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'A card you loved'**
+  String get recapFavouriteLabel;
+
+  /// No description provided for @recapShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your glow'**
+  String get recapShare;
+
+  /// No description provided for @recapWelcomeBackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get recapWelcomeBackTitle;
+
+  /// No description provided for @recapWelcomeBackBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A new month is a soft place to start. Mochi kept your spot warm.'**
+  String get recapWelcomeBackBody;
+
+  /// No description provided for @recapTodayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your {month} glow is ready'**
+  String recapTodayTitle(String month);
+
+  /// No description provided for @recapTodayOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'See it'**
+  String get recapTodayOpen;
 }
 
 class _AppLocalizationsDelegate

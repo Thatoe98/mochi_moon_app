@@ -30,6 +30,7 @@ import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.da
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
 import 'package:mochi_moon/features/profile/presentation/profile_edit_screen.dart';
+import 'package:mochi_moon/features/recap/presentation/recap_screen.dart';
 import 'package:mochi_moon/features/ritual/presentation/today_screen.dart';
 import 'package:mochi_moon/features/settings/presentation/about_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -51,6 +52,7 @@ abstract final class AppRoutes {
   static const journeys = '/me/journeys';
   static const letters = '/me/letters';
   static const mascotRoom = '/me/room';
+  static const recap = '/me/recap';
   static const ownCards = '/me/cards';
   static const breathe = '/me/breathe';
   static const hardDay = '/me/hard-day';
@@ -157,6 +159,10 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'journal',
                     builder: (context, state) => const JournalScreen(),
+                  ),
+                  GoRoute(
+                    path: 'recap',
+                    builder: (context, state) => const RecapScreen(),
                   ),
                   GoRoute(
                     path: 'room',
