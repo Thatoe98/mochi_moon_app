@@ -304,9 +304,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 - [x] The mood check-in (ritual or Deck) stores **one mood per local date** (the last choice wins). She can also set or change today's mood from Me → Mood.
 - [x] Month calendar: one colored mood dot per day, previous and next month, tap a day to see its mood; unlogged days are empty without any warning style.
-- [ ] **Insights (Premium):** a few simple statements computed on the device from her own data only, for example "You logged calm more often on days you finished your ritual". They need at least 14 logged days. Wording is gentle, never a diagnosis, never about health or mental conditions, and always offers a kind next step.
+- [x] **Insights (Premium):** a few simple statements computed on the device from her own data only, for example "You logged calm more often on days you finished your ritual". They need at least 14 logged days. Wording is gentle, never a diagnosis, never about health or mental conditions, and always offers a kind next step. *Built (Q8, 2026-11-02): two statements ("most often" mood, and good moods more often on ritual days) shown on Me → Mood for Premium; free users see an invitation, under 14 logged days shows how many more are needed. More statements can be added later.*
 - [ ] Nothing about moods leaves the phone except her own Firestore documents `users/{uid}/moods/{YYYY-MM-DD}`; mood **counts** (not days or text) feed the weekly letter (§6.24).
-- [ ] Unit tests for the insight rules, including "not enough data" and no-claim wording.
+- [x] Unit tests for the insight rules, including "not enough data" and no-claim wording.
 
 ### 6.19 Breathe with Mochi (Free)
 

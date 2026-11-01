@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,12 +8,15 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_screen.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 import '../support/fake_mood.dart';
 
 Widget _app(FakeMoodRepository repo) => ProviderScope(
   overrides: [
     moodRepositoryProvider.overrideWithValue(repo),
+    ritualDaySetProvider.overrideWith((ref) => Stream.value(<DateTime>{})),
+    hasPremiumProvider.overrideWithValue(false),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
   ],
   child: const MaterialApp(

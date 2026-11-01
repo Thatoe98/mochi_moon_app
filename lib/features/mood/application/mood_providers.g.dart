@@ -140,6 +140,96 @@ final class DayMoodsProvider
 
 String _$dayMoodsHash() => r'2841bfc67564f1de1ba308f483a1ff90e03d5eed';
 
+/// Days the ritual was finished, from the device.
+
+@ProviderFor(ritualDaySet)
+final ritualDaySetProvider = RitualDaySetProvider._();
+
+/// Days the ritual was finished, from the device.
+
+final class RitualDaySetProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Set<DateTime>>,
+          Set<DateTime>,
+          Stream<Set<DateTime>>
+        >
+    with $FutureModifier<Set<DateTime>>, $StreamProvider<Set<DateTime>> {
+  /// Days the ritual was finished, from the device.
+  RitualDaySetProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'ritualDaySetProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$ritualDaySetHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<Set<DateTime>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<Set<DateTime>> create(Ref ref) {
+    return ritualDaySet(ref);
+  }
+}
+
+String _$ritualDaySetHash() => r'5253e4937d15d40f3f900d20a8e1eb98726a1e0d';
+
+/// The gentle patterns in her own moods; computed on the device only.
+
+@ProviderFor(moodInsights)
+final moodInsightsProvider = MoodInsightsProvider._();
+
+/// The gentle patterns in her own moods; computed on the device only.
+
+final class MoodInsightsProvider
+    extends $FunctionalProvider<MoodInsights?, MoodInsights?, MoodInsights?>
+    with $Provider<MoodInsights?> {
+  /// The gentle patterns in her own moods; computed on the device only.
+  MoodInsightsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'moodInsightsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$moodInsightsHash();
+
+  @$internal
+  @override
+  $ProviderElement<MoodInsights?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  MoodInsights? create(Ref ref) {
+    return moodInsights(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(MoodInsights? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<MoodInsights?>(value),
+    );
+  }
+}
+
+String _$moodInsightsHash() => r'2cb304cef1edeff218b140b179281cb2e16e91ec';
+
 /// Today's mood, or null until she picks one.
 
 @ProviderFor(todayMood)

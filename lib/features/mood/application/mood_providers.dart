@@ -5,6 +5,7 @@ import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/mood/data/drift_mood_repository.dart';
 import 'package:mochi_moon/features/mood/data/firestore_mood_remote.dart';
+import 'package:mochi_moon/features/mood/domain/insights.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/mood/domain/mood_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -24,6 +25,20 @@ MoodRemote? moodRemote(Ref ref) =>
 @riverpod
 Stream<List<DayMood>> dayMoods(Ref ref) =>
     ref.watch(moodRepositoryProvider).watch();
+
+/// Days the ritual was finished, from the device.
+@riverpod
+Stream<Set<DateTime>> ritualDaySet(Ref ref) =>
+    ref.watch(deckRepositoryProvider).watchRitualDays();
+
+/// The gentle patterns in her own moods; computed on the device only.
+@riverpod
+MoodInsights? moodInsights(Ref ref) {
+  final moods = ref.watch(dayMoodsProvider).value;
+  if (moods == null) return null;
+  final ritual = ref.watch(ritualDaySetProvider).value ?? const <DateTime>{};
+  return computeMoodInsights(moods, ritual);
+}
 
 /// Today's mood, or null until she picks one.
 @riverpod

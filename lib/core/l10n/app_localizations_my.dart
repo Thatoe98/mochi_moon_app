@@ -2085,6 +2085,42 @@ class AppLocalizationsMy extends AppLocalizations {
       'Mochi keeps this gift. Using it is part of Premium.';
 
   @override
+  String get moodInsightsTitle => 'Your patterns';
+
+  @override
+  String moodInsightsNotEnough(int days) {
+    return 'Log your mood on $days more days and Mochi will share a few gentle patterns.';
+  }
+
+  @override
+  String get moodInsightsNone =>
+      'Nothing stands out yet, and that is perfectly fine. Keep checking in when you feel like it.';
+
+  @override
+  String moodInsightMostOften(String mood, int count, int total) {
+    return '$mood showed up on $count of your $total logged days.';
+  }
+
+  @override
+  String get moodInsightMostOftenStep =>
+      'Whatever it was, you noticed and checked in. That is a kind thing to do for yourself.';
+
+  @override
+  String get moodInsightRitualLift =>
+      'You logged a good mood more often on days you finished your ritual.';
+
+  @override
+  String get moodInsightRitualLiftStep =>
+      'Your two minutes seem to matter. Come back tomorrow if you would like to.';
+
+  @override
+  String get moodInsightsPremiumTitle => 'Mood insights are part of Premium';
+
+  @override
+  String get moodInsightsPremiumBody =>
+      'Premium shares a few gentle patterns from your own check-ins, kept on your phone.';
+
+  @override
   String mascotItemSemantics(String name, String status) {
     return '$name, $status';
   }

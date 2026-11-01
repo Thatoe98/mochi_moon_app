@@ -3518,6 +3518,60 @@ abstract class AppLocalizations {
   /// **'Mochi keeps this gift. Using it is part of Premium.'**
   String get mascotPremiumNote;
 
+  /// No description provided for @moodInsightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your patterns'**
+  String get moodInsightsTitle;
+
+  /// No description provided for @moodInsightsNotEnough.
+  ///
+  /// In en, this message translates to:
+  /// **'Log your mood on {days} more days and Mochi will share a few gentle patterns.'**
+  String moodInsightsNotEnough(int days);
+
+  /// No description provided for @moodInsightsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing stands out yet, and that is perfectly fine. Keep checking in when you feel like it.'**
+  String get moodInsightsNone;
+
+  /// No description provided for @moodInsightMostOften.
+  ///
+  /// In en, this message translates to:
+  /// **'{mood} showed up on {count} of your {total} logged days.'**
+  String moodInsightMostOften(String mood, int count, int total);
+
+  /// No description provided for @moodInsightMostOftenStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Whatever it was, you noticed and checked in. That is a kind thing to do for yourself.'**
+  String get moodInsightMostOftenStep;
+
+  /// No description provided for @moodInsightRitualLift.
+  ///
+  /// In en, this message translates to:
+  /// **'You logged a good mood more often on days you finished your ritual.'**
+  String get moodInsightRitualLift;
+
+  /// No description provided for @moodInsightRitualLiftStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Your two minutes seem to matter. Come back tomorrow if you would like to.'**
+  String get moodInsightRitualLiftStep;
+
+  /// No description provided for @moodInsightsPremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood insights are part of Premium'**
+  String get moodInsightsPremiumTitle;
+
+  /// No description provided for @moodInsightsPremiumBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium shares a few gentle patterns from your own check-ins, kept on your phone.'**
+  String get moodInsightsPremiumBody;
+
   /// No description provided for @mascotItemSemantics.
   ///
   /// In en, this message translates to:

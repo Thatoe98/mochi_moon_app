@@ -9,6 +9,7 @@ import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_calendar.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_chips.dart';
+import 'package:mochi_moon/features/mood/presentation/mood_insights_card.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_labels.dart';
 
 /// Me → Mood: set today's mood and look back over the month (PRD §6.18).
@@ -81,6 +82,8 @@ class _MoodScreenState extends ConsumerState<MoodScreen> {
                   textAlign: TextAlign.center,
                 ),
               ],
+              const SizedBox(height: AppSpacing.lg),
+              const MoodInsightsCard(),
             ],
           );
         },
