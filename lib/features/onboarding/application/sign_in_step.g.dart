@@ -46,7 +46,7 @@ final class SignInStepProvider extends $NotifierProvider<SignInStep, bool> {
   }
 }
 
-String _$signInStepHash() => r'a6506ff582980f0d0f267f1ccb2525017a8210f8';
+String _$signInStepHash() => r'0da809026539165597b89e14855cc6383219148d';
 
 /// The "continue with Google" button on the save-your-cards screen. The state
 /// is true while a sign-in is running.

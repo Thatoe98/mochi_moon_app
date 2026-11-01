@@ -55,6 +55,7 @@ flutter:
     - assets/content/quotes/
     - assets/content/quests/
     - assets/content/journeys/
+    - assets/content/mascot/
     - assets/content/signs/
     - assets/content/fallback_readings/
     - assets/content/cities/

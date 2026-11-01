@@ -2,6 +2,7 @@ import 'package:mochi_moon/core/content/asset_content_repository.dart';
 import 'package:mochi_moon/core/content/content_repository.dart';
 import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/journey.dart';
+import 'package:mochi_moon/core/content/mascot_item.dart';
 import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
@@ -23,6 +24,10 @@ Future<List<Quest>> quests(Ref ref) =>
 @Riverpod(keepAlive: true)
 Future<List<Journey>> journeys(Ref ref) =>
     ref.watch(contentRepositoryProvider).loadJourneys();
+
+@Riverpod(keepAlive: true)
+Future<List<MascotItem>> mascotItems(Ref ref) =>
+    ref.watch(contentRepositoryProvider).loadMascotItems();
 
 @Riverpod(keepAlive: true)
 Future<List<SignInfo>> signs(Ref ref) =>

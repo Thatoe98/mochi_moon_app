@@ -173,6 +173,45 @@ final class JourneysProvider
 
 String _$journeysHash() => r'b97507d41e5f466afa7d4659f053059a794791c7';
 
+@ProviderFor(mascotItems)
+final mascotItemsProvider = MascotItemsProvider._();
+
+final class MascotItemsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<MascotItem>>,
+          List<MascotItem>,
+          FutureOr<List<MascotItem>>
+        >
+    with $FutureModifier<List<MascotItem>>, $FutureProvider<List<MascotItem>> {
+  MascotItemsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'mascotItemsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$mascotItemsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<MascotItem>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<MascotItem>> create(Ref ref) {
+    return mascotItems(ref);
+  }
+}
+
+String _$mascotItemsHash() => r'f5cd21958e572f1a88da3b69875337ae223d6c44';
+
 @ProviderFor(signs)
 final signsProvider = SignsProvider._();
 

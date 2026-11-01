@@ -133,7 +133,7 @@ final class ProfileControllerProvider
   ProfileController create() => ProfileController();
 }
 
-String _$profileControllerHash() => r'13b8354d9b470f38df7c4920735288615c79bcee';
+String _$profileControllerHash() => r'a69992de0ece60b4618ac4c2e2d6ec2c3eb17abc';
 
 /// The user's profile, local first: it is saved on the device, then copied to
 /// Firestore when someone is signed in.

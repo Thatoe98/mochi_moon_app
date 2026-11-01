@@ -315,7 +315,7 @@ final class DeleteGratitudeProvider
   }
 }
 
-String _$deleteGratitudeHash() => r'fb2d17266adabdea35b197942f843de3192e5294';
+String _$deleteGratitudeHash() => r'204fa71745fc85e5e9675abf3d4d60aa31d0a654';
 
 /// Keeps the entries in Firestore in step with the device while someone is
 /// signed in: entries only Firestore has are added here, and new ones here are

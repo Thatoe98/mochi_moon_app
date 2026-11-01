@@ -5109,6 +5109,280 @@ class JourneyProgressEntriesCompanion
   }
 }
 
+class $MascotInventoryTable extends MascotInventory
+    with TableInfo<$MascotInventoryTable, MascotInventoryData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MascotInventoryTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _itemIdMeta = const VerificationMeta('itemId');
+  @override
+  late final GeneratedColumn<String> itemId = GeneratedColumn<String>(
+    'item_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _earnedAtMeta = const VerificationMeta(
+    'earnedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> earnedAt = GeneratedColumn<DateTime>(
+    'earned_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _equippedSlotMeta = const VerificationMeta(
+    'equippedSlot',
+  );
+  @override
+  late final GeneratedColumn<String> equippedSlot = GeneratedColumn<String>(
+    'equipped_slot',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [itemId, earnedAt, equippedSlot];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'mascot_inventory';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<MascotInventoryData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('item_id')) {
+      context.handle(
+        _itemIdMeta,
+        itemId.isAcceptableOrUnknown(data['item_id']!, _itemIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_itemIdMeta);
+    }
+    if (data.containsKey('earned_at')) {
+      context.handle(
+        _earnedAtMeta,
+        earnedAt.isAcceptableOrUnknown(data['earned_at']!, _earnedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_earnedAtMeta);
+    }
+    if (data.containsKey('equipped_slot')) {
+      context.handle(
+        _equippedSlotMeta,
+        equippedSlot.isAcceptableOrUnknown(
+          data['equipped_slot']!,
+          _equippedSlotMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {itemId};
+  @override
+  MascotInventoryData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MascotInventoryData(
+      itemId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}item_id'],
+      )!,
+      earnedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}earned_at'],
+      )!,
+      equippedSlot: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}equipped_slot'],
+      ),
+    );
+  }
+
+  @override
+  $MascotInventoryTable createAlias(String alias) {
+    return $MascotInventoryTable(attachedDatabase, alias);
+  }
+}
+
+class MascotInventoryData extends DataClass
+    implements Insertable<MascotInventoryData> {
+  final String itemId;
+  final DateTime earnedAt;
+  final String? equippedSlot;
+  const MascotInventoryData({
+    required this.itemId,
+    required this.earnedAt,
+    this.equippedSlot,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['item_id'] = Variable<String>(itemId);
+    map['earned_at'] = Variable<DateTime>(earnedAt);
+    if (!nullToAbsent || equippedSlot != null) {
+      map['equipped_slot'] = Variable<String>(equippedSlot);
+    }
+    return map;
+  }
+
+  MascotInventoryCompanion toCompanion(bool nullToAbsent) {
+    return MascotInventoryCompanion(
+      itemId: Value(itemId),
+      earnedAt: Value(earnedAt),
+      equippedSlot: equippedSlot == null && nullToAbsent
+          ? const Value.absent()
+          : Value(equippedSlot),
+    );
+  }
+
+  factory MascotInventoryData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return MascotInventoryData(
+      itemId: serializer.fromJson<String>(json['itemId']),
+      earnedAt: serializer.fromJson<DateTime>(json['earnedAt']),
+      equippedSlot: serializer.fromJson<String?>(json['equippedSlot']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'itemId': serializer.toJson<String>(itemId),
+      'earnedAt': serializer.toJson<DateTime>(earnedAt),
+      'equippedSlot': serializer.toJson<String?>(equippedSlot),
+    };
+  }
+
+  MascotInventoryData copyWith({
+    String? itemId,
+    DateTime? earnedAt,
+    Value<String?> equippedSlot = const Value.absent(),
+  }) => MascotInventoryData(
+    itemId: itemId ?? this.itemId,
+    earnedAt: earnedAt ?? this.earnedAt,
+    equippedSlot: equippedSlot.present ? equippedSlot.value : this.equippedSlot,
+  );
+  MascotInventoryData copyWithCompanion(MascotInventoryCompanion data) {
+    return MascotInventoryData(
+      itemId: data.itemId.present ? data.itemId.value : this.itemId,
+      earnedAt: data.earnedAt.present ? data.earnedAt.value : this.earnedAt,
+      equippedSlot: data.equippedSlot.present
+          ? data.equippedSlot.value
+          : this.equippedSlot,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MascotInventoryData(')
+          ..write('itemId: $itemId, ')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('equippedSlot: $equippedSlot')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(itemId, earnedAt, equippedSlot);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is MascotInventoryData &&
+          other.itemId == this.itemId &&
+          other.earnedAt == this.earnedAt &&
+          other.equippedSlot == this.equippedSlot);
+}
+
+class MascotInventoryCompanion extends UpdateCompanion<MascotInventoryData> {
+  final Value<String> itemId;
+  final Value<DateTime> earnedAt;
+  final Value<String?> equippedSlot;
+  final Value<int> rowid;
+  const MascotInventoryCompanion({
+    this.itemId = const Value.absent(),
+    this.earnedAt = const Value.absent(),
+    this.equippedSlot = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  MascotInventoryCompanion.insert({
+    required String itemId,
+    required DateTime earnedAt,
+    this.equippedSlot = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : itemId = Value(itemId),
+       earnedAt = Value(earnedAt);
+  static Insertable<MascotInventoryData> custom({
+    Expression<String>? itemId,
+    Expression<DateTime>? earnedAt,
+    Expression<String>? equippedSlot,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (itemId != null) 'item_id': itemId,
+      if (earnedAt != null) 'earned_at': earnedAt,
+      if (equippedSlot != null) 'equipped_slot': equippedSlot,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  MascotInventoryCompanion copyWith({
+    Value<String>? itemId,
+    Value<DateTime>? earnedAt,
+    Value<String?>? equippedSlot,
+    Value<int>? rowid,
+  }) {
+    return MascotInventoryCompanion(
+      itemId: itemId ?? this.itemId,
+      earnedAt: earnedAt ?? this.earnedAt,
+      equippedSlot: equippedSlot ?? this.equippedSlot,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (itemId.present) {
+      map['item_id'] = Variable<String>(itemId.value);
+    }
+    if (earnedAt.present) {
+      map['earned_at'] = Variable<DateTime>(earnedAt.value);
+    }
+    if (equippedSlot.present) {
+      map['equipped_slot'] = Variable<String>(equippedSlot.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MascotInventoryCompanion(')
+          ..write('itemId: $itemId, ')
+          ..write('earnedAt: $earnedAt, ')
+          ..write('equippedSlot: $equippedSlot, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -5134,6 +5408,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $QuestStatesTable questStates = $QuestStatesTable(this);
   late final $JourneyProgressEntriesTable journeyProgressEntries =
       $JourneyProgressEntriesTable(this);
+  late final $MascotInventoryTable mascotInventory = $MascotInventoryTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -5155,6 +5432,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ritualProgress,
     questStates,
     journeyProgressEntries,
+    mascotInventory,
   ];
 }
 
@@ -8310,6 +8588,191 @@ typedef $$JourneyProgressEntriesTableProcessedTableManager =
       JourneyProgressEntry,
       PrefetchHooks Function()
     >;
+typedef $$MascotInventoryTableCreateCompanionBuilder =
+    MascotInventoryCompanion Function({
+      required String itemId,
+      required DateTime earnedAt,
+      Value<String?> equippedSlot,
+      Value<int> rowid,
+    });
+typedef $$MascotInventoryTableUpdateCompanionBuilder =
+    MascotInventoryCompanion Function({
+      Value<String> itemId,
+      Value<DateTime> earnedAt,
+      Value<String?> equippedSlot,
+      Value<int> rowid,
+    });
+
+class $$MascotInventoryTableFilterComposer
+    extends Composer<_$AppDatabase, $MascotInventoryTable> {
+  $$MascotInventoryTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get itemId => $composableBuilder(
+    column: $table.itemId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get earnedAt => $composableBuilder(
+    column: $table.earnedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get equippedSlot => $composableBuilder(
+    column: $table.equippedSlot,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$MascotInventoryTableOrderingComposer
+    extends Composer<_$AppDatabase, $MascotInventoryTable> {
+  $$MascotInventoryTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get itemId => $composableBuilder(
+    column: $table.itemId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get earnedAt => $composableBuilder(
+    column: $table.earnedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get equippedSlot => $composableBuilder(
+    column: $table.equippedSlot,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$MascotInventoryTableAnnotationComposer
+    extends Composer<_$AppDatabase, $MascotInventoryTable> {
+  $$MascotInventoryTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get itemId =>
+      $composableBuilder(column: $table.itemId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get earnedAt =>
+      $composableBuilder(column: $table.earnedAt, builder: (column) => column);
+
+  GeneratedColumn<String> get equippedSlot => $composableBuilder(
+    column: $table.equippedSlot,
+    builder: (column) => column,
+  );
+}
+
+class $$MascotInventoryTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $MascotInventoryTable,
+          MascotInventoryData,
+          $$MascotInventoryTableFilterComposer,
+          $$MascotInventoryTableOrderingComposer,
+          $$MascotInventoryTableAnnotationComposer,
+          $$MascotInventoryTableCreateCompanionBuilder,
+          $$MascotInventoryTableUpdateCompanionBuilder,
+          (
+            MascotInventoryData,
+            BaseReferences<
+              _$AppDatabase,
+              $MascotInventoryTable,
+              MascotInventoryData
+            >,
+          ),
+          MascotInventoryData,
+          PrefetchHooks Function()
+        > {
+  $$MascotInventoryTableTableManager(
+    _$AppDatabase db,
+    $MascotInventoryTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$MascotInventoryTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$MascotInventoryTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$MascotInventoryTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> itemId = const Value.absent(),
+                Value<DateTime> earnedAt = const Value.absent(),
+                Value<String?> equippedSlot = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MascotInventoryCompanion(
+                itemId: itemId,
+                earnedAt: earnedAt,
+                equippedSlot: equippedSlot,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String itemId,
+                required DateTime earnedAt,
+                Value<String?> equippedSlot = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => MascotInventoryCompanion.insert(
+                itemId: itemId,
+                earnedAt: earnedAt,
+                equippedSlot: equippedSlot,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$MascotInventoryTable, MascotInventoryData>(
+                    table,
+                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $MascotInventoryTable,
+                    MascotInventoryData
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$MascotInventoryTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $MascotInventoryTable,
+      MascotInventoryData,
+      $$MascotInventoryTableFilterComposer,
+      $$MascotInventoryTableOrderingComposer,
+      $$MascotInventoryTableAnnotationComposer,
+      $$MascotInventoryTableCreateCompanionBuilder,
+      $$MascotInventoryTableUpdateCompanionBuilder,
+      (
+        MascotInventoryData,
+        BaseReferences<
+          _$AppDatabase,
+          $MascotInventoryTable,
+          MascotInventoryData
+        >,
+      ),
+      MascotInventoryData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -8349,6 +8812,8 @@ class $AppDatabaseManager {
         _db,
         _db.journeyProgressEntries,
       );
+  $$MascotInventoryTableTableManager get mascotInventory =>
+      $$MascotInventoryTableTableManager(_db, _db.mascotInventory);
 }
 
 // **************************************************************************

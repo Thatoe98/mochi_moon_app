@@ -183,3 +183,14 @@ class RitualProgress extends Table {
   @override
   Set<Column<Object>> get primaryKey => {date};
 }
+
+/// The items Mochi owns (PRD §6.23). [equippedSlot] is the slot it is worn or
+/// placed in, or null.
+class MascotInventory extends Table {
+  TextColumn get itemId => text()();
+  DateTimeColumn get earnedAt => dateTime()();
+  TextColumn get equippedSlot => text().nullable()();
+
+  @override
+  Set<Column<Object>> get primaryKey => {itemId};
+}

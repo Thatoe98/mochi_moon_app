@@ -151,4 +151,4 @@ final class ReadingsApiProvider
   }
 }
 
-String _$readingsApiHash() => r'c8ce7597125a6bdb17133dfe303752767d76b4fa';
+String _$readingsApiHash() => r'b3d4e271f17c9ce0feec06ecf0c7dad085c68a96';

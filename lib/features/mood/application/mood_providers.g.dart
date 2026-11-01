@@ -185,12 +185,12 @@ final class TodayMoodProvider extends $FunctionalProvider<Mood?, Mood?, Mood?>
 
 String _$todayMoodHash() => r'84f8b35e05aa44cd9c93fadc8a59e33d920fb2dc';
 
-/// Stores [mood] as today's mood; the last choice of the day wins.
+/// Stores the given mood as today's mood; the last choice of the day wins.
 
 @ProviderFor(setTodayMood)
 final setTodayMoodProvider = SetTodayMoodProvider._();
 
-/// Stores [mood] as today's mood; the last choice of the day wins.
+/// Stores the given mood as today's mood; the last choice of the day wins.
 
 final class SetTodayMoodProvider
     extends
@@ -200,7 +200,7 @@ final class SetTodayMoodProvider
           Future<void> Function(Mood mood)
         >
     with $Provider<Future<void> Function(Mood mood)> {
-  /// Stores [mood] as today's mood; the last choice of the day wins.
+  /// Stores the given mood as today's mood; the last choice of the day wins.
   SetTodayMoodProvider._()
     : super(
         from: null,

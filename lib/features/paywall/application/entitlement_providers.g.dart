@@ -10,26 +10,29 @@ part of 'entitlement_providers.dart';
 // ignore_for_file: type=lint, type=warning
 /// Whether the user has Premium (PRD §6.12).
 ///
-/// TODO(billing): always true until Google Play Billing and the server
-/// entitlement exist (M4), so Premium features can be built and tried now.
-/// Switch this to the real entitlement then; nothing else has to change.
+/// Always true until Google Play Billing and the server entitlement exist
+/// (M4), so Premium features can be built and tried now. Switch this to the
+/// real entitlement then; nothing else has to change.
+// TODO(Thatoe98): read the real entitlement in M4.
 
 @ProviderFor(hasPremium)
 final hasPremiumProvider = HasPremiumProvider._();
 
 /// Whether the user has Premium (PRD §6.12).
 ///
-/// TODO(billing): always true until Google Play Billing and the server
-/// entitlement exist (M4), so Premium features can be built and tried now.
-/// Switch this to the real entitlement then; nothing else has to change.
+/// Always true until Google Play Billing and the server entitlement exist
+/// (M4), so Premium features can be built and tried now. Switch this to the
+/// real entitlement then; nothing else has to change.
+// TODO(Thatoe98): read the real entitlement in M4.
 
 final class HasPremiumProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
   /// Whether the user has Premium (PRD §6.12).
   ///
-  /// TODO(billing): always true until Google Play Billing and the server
-  /// entitlement exist (M4), so Premium features can be built and tried now.
-  /// Switch this to the real entitlement then; nothing else has to change.
+  /// Always true until Google Play Billing and the server entitlement exist
+  /// (M4), so Premium features can be built and tried now. Switch this to the
+  /// real entitlement then; nothing else has to change.
+  // TODO(Thatoe98): read the real entitlement in M4.
   HasPremiumProvider._()
     : super(
         from: null,

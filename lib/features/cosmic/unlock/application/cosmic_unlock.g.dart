@@ -50,7 +50,7 @@ final class CosmicUnlockProvider
   }
 }
 
-String _$cosmicUnlockHash() => r'5cca726efcede44e3e0ca7a5df874bf76b86f877';
+String _$cosmicUnlockHash() => r'766ec00a3d62d44dc31540f56928794292026b2b';
 
 /// The "Unlock your cosmic side" flow (PRD §6.1): birth date, birth time,
 /// birthplace. Saving puts them on the profile; nothing is saved before that,

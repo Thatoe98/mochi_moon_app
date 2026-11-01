@@ -4,6 +4,7 @@ import 'package:mochi_moon/core/content/content_repository.dart';
 import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/fallback_reading.dart';
 import 'package:mochi_moon/core/content/journey.dart';
+import 'package:mochi_moon/core/content/mascot_item.dart';
 import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
@@ -34,6 +35,9 @@ class _FakeContent implements ContentRepository {
     asked.add(lang);
     return byLang[lang];
   }
+
+  @override
+  Future<List<MascotItem>> loadMascotItems() => throw UnimplementedError();
 
   @override
   Future<DayColors> loadDayColors() => throw UnimplementedError();

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserProfile {
 
- String get displayName;/// Date only; the time part is ignored.
+ String get displayName;/// Date only; the time part is ignored. Null until the user unlocks Cosmic.
  DateTime? get birthDate;/// Minutes since midnight, local to the birthplace. Null means the user
 /// does not know the birth time.
  int? get birthMinutes;/// Required in the first-run flow when the birth time is known.
@@ -236,7 +236,7 @@ class _UserProfile extends UserProfile {
   
 
 @override@JsonKey() final  String displayName;
-/// Date only; the time part is ignored.
+/// Date only; the time part is ignored. Null until the user unlocks Cosmic.
 @override final  DateTime? birthDate;
 /// Minutes since midnight, local to the birthplace. Null means the user
 /// does not know the birth time.

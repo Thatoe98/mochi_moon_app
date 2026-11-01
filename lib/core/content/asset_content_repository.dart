@@ -5,6 +5,7 @@ import 'package:mochi_moon/core/content/content_repository.dart';
 import 'package:mochi_moon/core/content/day_colors.dart';
 import 'package:mochi_moon/core/content/fallback_reading.dart';
 import 'package:mochi_moon/core/content/journey.dart';
+import 'package:mochi_moon/core/content/mascot_item.dart';
 import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
@@ -14,6 +15,7 @@ class AssetContentRepository implements ContentRepository {
     : _bundle = bundle ?? rootBundle;
 
   static const quotesPath = 'assets/content/quotes/quotes.json';
+  static const mascotItemsPath = 'assets/content/mascot/mascot_items.json';
   static const questsPath = 'assets/content/quests/quests.json';
   static const journeysPath = 'assets/content/journeys/journeys.json';
   static const signsPath = 'assets/content/signs/signs.json';
@@ -46,6 +48,14 @@ class AssetContentRepository implements ContentRepository {
     return (json['journeys'] as List<dynamic>)
         .map((e) => Journey.fromJson(e as Map<String, dynamic>))
         .toList();
+  }
+
+  @override
+  Future<List<MascotItem>> loadMascotItems() async {
+    final json = await _loadJson(mascotItemsPath);
+    return (json['items'] as List<dynamic>)
+        .map((e) => MascotItem.fromJson(e as Map<String, dynamic>))
+        .toList(growable: false);
   }
 
   @override
