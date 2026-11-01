@@ -19,7 +19,7 @@ PRD §12 ticks were checked against code and tests.
 - Account deletion: the web page is not switched on; the server call is untested from the emulator. The client erases only `journal` and `partners`. → P4.
 - Deck mood check-in and the heart animation (§6.2) were never built. The ritual needs the mood step. → P9.
 - Premium upsell on the daily-limit card is not built; `hasPremiumProvider` returns `true` for everyone (`paywall/application/entitlement_providers.dart`). M5 gating is built against that provider and tested with overrides; the real paywall and Play Billing (M4) are not part of this plan.
-- Paywall, billing, server purchase verification, compatibility report, For You deck, daily mix, analytics sink and Crashlytics (M4) remain open.
+- The paywall screen is built (2026-11-02, stub catalog, no real billing). Billing, server purchase verification, compatibility report, For You deck, daily mix, analytics sink and Crashlytics (M4) remain open.
 - §6.14 privacy policy and Terms; §6.11 server-side cache invalidation.
 
 **Code conflicts with the PRD (docs were corrected where noted)**

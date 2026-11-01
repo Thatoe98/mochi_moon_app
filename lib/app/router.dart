@@ -29,6 +29,7 @@ import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart'
 import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
+import 'package:mochi_moon/features/paywall/presentation/paywall_screen.dart';
 import 'package:mochi_moon/features/profile/presentation/profile_edit_screen.dart';
 import 'package:mochi_moon/features/recap/presentation/recap_screen.dart';
 import 'package:mochi_moon/features/ritual/presentation/today_screen.dart';
@@ -61,6 +62,7 @@ abstract final class AppRoutes {
   static const partners = '/me/partners';
   static const partnerEdit = '/me/partners/edit';
   static const partnerResult = '/me/partners/result';
+  static const paywall = '/paywall';
   static const welcome = '/welcome';
   static const welcomeCards = '/welcome/cards';
   static const welcomeProfile = '/welcome/profile';
@@ -88,6 +90,12 @@ GoRouter router(Ref ref) {
       homeRoute: AppRoutes.today,
     ),
     routes: [
+      GoRoute(
+        path: AppRoutes.paywall,
+        builder: (context, state) => PaywallScreen(
+          source: state.uri.queryParameters['source'] ?? 'unknown',
+        ),
+      ),
       GoRoute(
         path: AppRoutes.welcome,
         builder: (context, state) => const WelcomeScreen(),

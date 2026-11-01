@@ -235,7 +235,7 @@ final class CompleteQuestProvider
   }
 }
 
-String _$completeQuestHash() => r'5f4b7740671a0be3a2020dd7592044911946d989';
+String _$completeQuestHash() => r'801e29dff0c0996ca8d76768522b06eb85175ba1';
 
 /// Trades today's quest for the other pick, once a day.
 
@@ -287,7 +287,7 @@ final class SwapQuestProvider
   }
 }
 
-String _$swapQuestHash() => r'365c37f4ae800e485f40a1420129eee8bb703ce2';
+String _$swapQuestHash() => r'2633bc74b08db10cab8152222725f6cd707662b6';
 
 /// Keeps the quest state in Firestore in step with the device while someone
 /// is signed in. The device wins when its day is the same or newer. A failed

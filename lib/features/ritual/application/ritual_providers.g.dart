@@ -91,7 +91,7 @@ final class RitualControllerProvider
   RitualController create() => RitualController();
 }
 
-String _$ritualControllerHash() => r'4e7df1fe3c8e59d54293b8ee8acf2177d460227d';
+String _$ritualControllerHash() => r'49e3625fc48bd38bdae3a9e71c7aa92933a53482';
 
 /// Today's daily ritual (PRD §6.15): mood, three cards, a gratitude line and
 /// a celebration. It resumes at the same step when she leaves and returns the

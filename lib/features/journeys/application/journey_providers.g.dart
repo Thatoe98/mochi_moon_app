@@ -376,7 +376,7 @@ final class StartJourneyActionProvider
 }
 
 String _$startJourneyActionHash() =>
-    r'2e7b48606d053c289373f79eaa265926a2ddd886';
+    r'be57b4d2481fad93722fb9da79e25dde2147d71b';
 
 /// Finishes the current day of `journeyId`, with her optional private
 /// reflection. Does nothing when she already finished a day today.
@@ -443,7 +443,7 @@ final class CompleteJourneyDayProvider
 }
 
 String _$completeJourneyDayHash() =>
-    r'fd73c8584b380919d5379fa0faf7f3e95d8bf752';
+    r'8fbf97ba77bf1d5ba4e56dafdef96910fabfe8bf';
 
 /// Keeps the journey progress in Firestore in step with the device while
 /// someone is signed in. Progress never goes backwards: a record from

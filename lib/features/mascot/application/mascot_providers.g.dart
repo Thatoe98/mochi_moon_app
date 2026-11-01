@@ -187,7 +187,7 @@ final class MascotEarnerProvider
   }
 }
 
-String _$mascotEarnerHash() => r'118373c312a7ff42d8f16a1783474123048cac1a';
+String _$mascotEarnerHash() => r'8acfd4964766e59b5ba0d5d9dddb526c4fe62292';
 
 /// Puts `item` on Mochi, or does nothing when she does not own it or it needs
 /// Premium. Returns whether it was equipped.

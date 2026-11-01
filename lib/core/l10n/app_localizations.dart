@@ -3739,6 +3739,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See it'**
   String get recapTodayOpen;
+
+  /// No description provided for @paywallClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get paywallClose;
+
+  /// No description provided for @paywallTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Premium'**
+  String get paywallTitle;
+
+  /// No description provided for @paywallBenefitJourneys.
+  ///
+  /// In en, this message translates to:
+  /// **'Every self-love journey, at your own pace'**
+  String get paywallBenefitJourneys;
+
+  /// No description provided for @paywallBenefitLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'A warm weekly letter from Mochi'**
+  String get paywallBenefitLetter;
+
+  /// No description provided for @paywallBenefitCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Write as many cards of your own as you like'**
+  String get paywallBenefitCards;
+
+  /// No description provided for @paywallYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get paywallYearly;
+
+  /// No description provided for @paywallMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get paywallMonthly;
+
+  /// No description provided for @paywallTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'7 days free'**
+  String get paywallTrial;
+
+  /// No description provided for @paywallStartTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start free trial'**
+  String get paywallStartTrial;
+
+  /// No description provided for @paywallSubscribe.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get paywallSubscribe;
+
+  /// No description provided for @paywallUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium is not available to buy just yet. Everything free stays free.'**
+  String get paywallUnavailable;
+
+  /// No description provided for @paywallRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get paywallRestore;
+
+  /// No description provided for @paywallRestoreFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back, your Premium is restored.'**
+  String get paywallRestoreFound;
+
+  /// No description provided for @paywallRestoreNone.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not find an earlier purchase.'**
+  String get paywallRestoreNone;
+
+  /// No description provided for @paywallFinePrint.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions renew until you cancel them in Google Play. Prices are set by the store.'**
+  String get paywallFinePrint;
+
+  /// No description provided for @paywallSeePremium.
+  ///
+  /// In en, this message translates to:
+  /// **'See Premium'**
+  String get paywallSeePremium;
 }
 
 class _AppLocalizationsDelegate

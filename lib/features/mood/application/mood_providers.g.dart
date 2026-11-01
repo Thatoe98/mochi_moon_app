@@ -327,7 +327,7 @@ final class SetTodayMoodProvider
   }
 }
 
-String _$setTodayMoodHash() => r'89f5a920ea947f8e216419c2a94085211fc924c7';
+String _$setTodayMoodHash() => r'a3c69e98ea737d59d6c11aa1d09d633d3c8a0635';
 
 /// Keeps the moods in Firestore in step with the device while someone is
 /// signed in. The device wins: days only Firestore has are added here, and

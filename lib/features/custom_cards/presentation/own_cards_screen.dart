@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
@@ -83,6 +87,13 @@ Future<void> _showLimit(BuildContext context) {
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(l10n.ownCardsLimitOk),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            unawaited(context.push('${AppRoutes.paywall}?source=own_cards'));
+          },
+          child: Text(l10n.paywallSeePremium),
         ),
       ],
     ),

@@ -695,5 +695,21 @@
   "recapWelcomeBackBody": "A new month is a soft place to start. Mochi kept your spot warm.",
   "recapTodayTitle": "Your {month} glow is ready",
   "@recapTodayTitle": { "placeholders": { "month": { "type": "String" } } },
-  "recapTodayOpen": "See it"
+  "recapTodayOpen": "See it",
+  "paywallClose": "Close",
+  "paywallTitle": "Mochi Premium",
+  "paywallBenefitJourneys": "Every self-love journey, at your own pace",
+  "paywallBenefitLetter": "A warm weekly letter from Mochi",
+  "paywallBenefitCards": "Write as many cards of your own as you like",
+  "paywallYearly": "Yearly",
+  "paywallMonthly": "Monthly",
+  "paywallTrial": "7 days free",
+  "paywallStartTrial": "Start free trial",
+  "paywallSubscribe": "Subscribe",
+  "paywallUnavailable": "Premium is not available to buy just yet. Everything free stays free.",
+  "paywallRestore": "Restore purchases",
+  "paywallRestoreFound": "Welcome back, your Premium is restored.",
+  "paywallRestoreNone": "We could not find an earlier purchase.",
+  "paywallFinePrint": "Subscriptions renew until you cancel them in Google Play. Prices are set by the store.",
+  "paywallSeePremium": "See Premium"
 }

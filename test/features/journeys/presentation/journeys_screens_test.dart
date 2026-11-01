@@ -133,7 +133,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Start'), findsNothing);
-    expect(find.byType(FilledButton), findsNothing);
+    expect(find.text('Start this journey'), findsNothing);
+    expect(find.text('See Premium'), findsOneWidget);
     expect(repo.saved('paid'), isNull);
   });
 

@@ -387,7 +387,7 @@ final class SaveOwnCardProvider
   }
 }
 
-String _$saveOwnCardHash() => r'7a1ebcf03a6223602e33743d01b28ba9711c0933';
+String _$saveOwnCardHash() => r'bb60359a819229fde0f88c38e6a6ca98ace65208';
 
 /// Deletes a card here and, when signed in, in Firestore. If Firestore cannot
 /// be reached the copy there comes back with the next sync.

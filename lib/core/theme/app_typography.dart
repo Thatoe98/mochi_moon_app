@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 /// Bundled font families. Font files are declared in `pubspec.yaml` once added

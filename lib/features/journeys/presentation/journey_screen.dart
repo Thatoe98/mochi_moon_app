@@ -64,7 +64,17 @@ class _Body extends ConsumerWidget {
 
     final Widget action;
     if (locked) {
-      action = Text(l10n.journeyLockedNote, style: theme.textTheme.bodyLarge);
+      action = Column(
+        children: [
+          Text(l10n.journeyLockedNote, style: theme.textTheme.bodyLarge),
+          const SizedBox(height: AppSpacing.sm),
+          FilledButton(
+            onPressed: () =>
+                context.push('${AppRoutes.paywall}?source=journey'),
+            child: Text(l10n.paywallSeePremium),
+          ),
+        ],
+      );
     } else if (run != null && run.isFinished) {
       action = _Finished(journey: journey);
     } else if (run != null) {

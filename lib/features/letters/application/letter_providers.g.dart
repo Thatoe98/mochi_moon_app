@@ -329,7 +329,7 @@ final class SealLetterActionProvider
   }
 }
 
-String _$sealLetterActionHash() => r'4357f7085c944f14d3dc745238da476784a545e3';
+String _$sealLetterActionHash() => r'e9a189b9243b4c840dc8d04d05f318219374a1ed';
 
 /// Deletes a letter here, its notification and, when signed in, its copy in
 /// Firestore. If Firestore cannot be reached the copy there comes back with

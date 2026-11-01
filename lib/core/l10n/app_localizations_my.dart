@@ -2225,4 +2225,56 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get recapTodayOpen => 'See it';
+
+  @override
+  String get paywallClose => 'Close';
+
+  @override
+  String get paywallTitle => 'Mochi Premium';
+
+  @override
+  String get paywallBenefitJourneys =>
+      'Every self-love journey, at your own pace';
+
+  @override
+  String get paywallBenefitLetter => 'A warm weekly letter from Mochi';
+
+  @override
+  String get paywallBenefitCards =>
+      'Write as many cards of your own as you like';
+
+  @override
+  String get paywallYearly => 'Yearly';
+
+  @override
+  String get paywallMonthly => 'Monthly';
+
+  @override
+  String get paywallTrial => '7 days free';
+
+  @override
+  String get paywallStartTrial => 'Start free trial';
+
+  @override
+  String get paywallSubscribe => 'Subscribe';
+
+  @override
+  String get paywallUnavailable =>
+      'Premium is not available to buy just yet. Everything free stays free.';
+
+  @override
+  String get paywallRestore => 'Restore purchases';
+
+  @override
+  String get paywallRestoreFound => 'Welcome back, your Premium is restored.';
+
+  @override
+  String get paywallRestoreNone => 'We could not find an earlier purchase.';
+
+  @override
+  String get paywallFinePrint =>
+      'Subscriptions renew until you cancel them in Google Play. Prices are set by the store.';
+
+  @override
+  String get paywallSeePremium => 'See Premium';
 }

@@ -253,7 +253,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [ ] Prices come from Play Billing (localized currency); never hardcoded.
 - [ ] Purchases are verified server-side (`POST /v1/purchases/verify`), which writes `entitlement` to Firestore; the app reads entitlement from Firestore only.
 - [ ] Restore purchases button. Clear trial terms and a link to manage subscriptions in Play.
-- [ ] Paywall shows: mascot, 3 benefit bullets (journeys, weekly letter, unlimited cards first), yearly plan preselected with trial, monthly option, close button visible immediately.
+- [x] Paywall shows: mascot, 3 benefit bullets (journeys, weekly letter, unlimited cards first), yearly plan preselected with trial, monthly option, close button visible immediately. *Built 2026-11-02 as `features/paywall/presentation/paywall_screen.dart` at `/paywall?source=...`; prices come from a `PurchaseCatalog` interface (stub `UnavailablePurchaseCatalog` until Play Billing is connected, so the buy button is off and says so); Restore button; logs `paywall_viewed {source}`. Entry points: locked journey, own-card limit dialog. Still open: real Play Billing, server `POST /v1/purchases/verify`, entitlement from Firestore, a manage-subscriptions link, `hasPremiumProvider` stays true.*
 
 ### 6.14 Settings and account
 
