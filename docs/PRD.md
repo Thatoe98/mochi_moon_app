@@ -353,10 +353,10 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 ### 6.24 Weekly letter from Mochi (Premium, AI)
 
 - [ ] Every Sunday (local) a short, warm letter (80–150 words) about her week appears on Today and in Me → Letters, with a notification if she allowed it.
-- [ ] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers.
+- [x] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers. *Q9 done 2026-11-01 (API repo `mochi-moon-api`, e35ac50): strict schema (ids and counts only, any other field is a 400), one letter cached per user, week and language, 3 new letters per week (cached repeats are free), account deletion erases letters. Not deployed to the VPS yet. Premium is not checked until purchase verification exists.*
 - [ ] Cached per week per language on the device and server; offline shows the last letter or a bundled fallback.
-- [ ] Style guide (§7.1) applies: warm, no predictions about health, death, pregnancy, money or legal outcomes, no fear language, no absolute claims, no clinical language.
-- [ ] If she has fewer than 2 active days in the week, the letter is a gentle "fresh start" letter that does not mention the gap negatively.
+- [x] Style guide (§7.1) applies: warm, no predictions about health, death, pregnancy, money or legal outcomes, no fear language, no absolute claims, no clinical language.
+- [x] If she has fewer than 2 active days in the week, the letter is a gentle "fresh start" letter that does not mention the gap negatively. *Server side done (Q9); the validator also bans blame words such as missed, gap, behind.*
 - [ ] Free users see the first line and a paywall invitation.
 
 ### 6.25 Monthly glow recap (Free)
