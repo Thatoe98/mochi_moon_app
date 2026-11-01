@@ -2021,4 +2021,71 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get letterNotFound => 'ဒီစာကို ရှာမတွေ့ပါဘူး။';
+
+  @override
+  String get mascotRoomTitle => 'Mochi\'s room';
+
+  @override
+  String get mascotRoomMeSubtitle =>
+      'Outfits and little things Mochi has earned';
+
+  @override
+  String get mascotRoomIntro =>
+      'Mochi collects gifts as you show up for yourself. Nothing is ever taken away, so come back whenever you like.';
+
+  @override
+  String get mascotRoomEmptyTitle => 'Mochi\'s room is waiting';
+
+  @override
+  String get mascotRoomEmptyBody =>
+      'Your first gift arrives with a 3-day streak. There is no rush.';
+
+  @override
+  String get mascotSlotOutfit => 'Outfit';
+
+  @override
+  String get mascotSlotFloor => 'Floor';
+
+  @override
+  String get mascotSlotShelf => 'Shelf';
+
+  @override
+  String get mascotSlotWindow => 'Window';
+
+  @override
+  String get mascotSlotWall => 'Wall';
+
+  @override
+  String get mascotSlotOther => 'Room';
+
+  @override
+  String get mascotItemOn => 'In use. Tap to take off.';
+
+  @override
+  String get mascotItemTapToUse => 'Tap to use';
+
+  @override
+  String mascotItemLockedStreak(int days) {
+    return 'Reach a $days-day streak';
+  }
+
+  @override
+  String mascotItemLockedJourney(String journey) {
+    return 'Finish the $journey journey';
+  }
+
+  @override
+  String get mascotItemLockedOther => 'Keep showing up to earn this';
+
+  @override
+  String get mascotPremiumTag => 'Premium';
+
+  @override
+  String get mascotPremiumNote =>
+      'Mochi keeps this gift. Using it is part of Premium.';
+
+  @override
+  String mascotItemSemantics(String name, String status) {
+    return '$name, $status';
+  }
 }

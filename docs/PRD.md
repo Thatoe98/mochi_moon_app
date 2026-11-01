@@ -344,11 +344,11 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 ### 6.23 Mochi grows with you (some items Premium)
 
 - [ ] The mascot earns outfits and room items at streak milestones (3, 7, 14, 30, 60, 100 days) and at journey and quest milestones.
-- [ ] A simple Room screen (Me → Mochi's room) shows Mochi, the equipped outfit, and placed room items; she can equip one outfit and place items in fixed slots (no free drag, to keep it simple and accessible).
-- [ ] Items come from `mascot_items.json` (§8.4): each has an id, a slot, an unlock rule and a `premium` flag. Free items are earned; Premium items are earned too but equipping needs Premium.
-- [ ] **No punishment:** missed days never remove items or make Mochi sad. A streak break shows nothing negative.
-- [ ] Inventory is stored locally and in `users/{uid}/state/mascot`.
-- [ ] Every item image has a semantic label.
+- [x] A simple Room screen (Me → Mochi's room) shows Mochi, the equipped outfit, and placed room items; she can equip one outfit and place items in fixed slots (no free drag, to keep it simple and accessible).
+- [x] Items come from `mascot_items.json` (§8.4): each has an id, a slot, an unlock rule and a `premium` flag. Free items are earned; Premium items are earned too but equipping needs Premium.
+- [x] **No punishment:** missed days never remove items or make Mochi sad. A streak break shows nothing negative.
+- [x] Inventory is stored locally and in `users/{uid}/state/mascot`.
+- [x] Every item image has a semantic label.
 
 ### 6.24 Weekly letter from Mochi (Premium, AI)
 
@@ -916,7 +916,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Tiny kindness quests (§6.20) — *Q1 + Q2 done 2026-11-01. Only 18 starter quests; the 120-quest launch set, the weekly-letter aggregate and mascot milestones come later.*
 - [ ] Self-love journeys, 1 free (§6.21) — *Q3 done 2026-11-01: schema, loader, progress model, drift table (schema v6), Firestore sync, one starter journey (Confidence, 7 days, en + my). *Q4 done 2026-11-01: Me → Journeys list, journey page, day screen (3 gated cards, quest, private reflection), Premium lock via `hasPremiumProvider`, completion share image. Completing a day counts toward the streak; the mascot unlock on completion is Q6; the other three scripts are L2; the paywall itself is unbuilt.*
 - [x] Letter to future me with unlock notification (§6.22) — *Q5 done 2026-11-02: Me → Letters (write, seal with confirm, list, read once open, delete), local notification on the unlock day with generic text, drift table (schema v7), Firestore sync. Clock-change limitation documented in §6.22.*
-- [ ] Mochi grows with you: items and room (§6.23) — *Q6 done 2026-11-02: `mascot_items.json` (12 starter items, English names only), unlock engine (streak 3/7/14/30/60/100 and journey finish; items are only added), drift `mascot_inventory` (schema v8), Firestore sync to `state/mascot`, equip with the Premium check. Open: Burmese names (the translate tool does not cover `mascot_items.json` yet), quest-count unlocks, the 24 launch items and their art (`ill_mascot_*` files do not exist), and the Room screen (Q7).*
+- [ ] Mochi grows with you: items and room (§6.23) — *Q6 done 2026-11-02: `mascot_items.json` (12 starter items, English names only), unlock engine (streak 3/7/14/30/60/100 and journey finish; items are only added), drift `mascot_inventory` (schema v8), Firestore sync to `state/mascot`, equip with the Premium check. Open: Burmese names (the translate tool does not cover `mascot_items.json` yet), quest-count unlocks, the 24 launch items and their art (`ill_mascot_*` files do not exist), Q7 done 2026-11-02: Me → Mochi's room screen (one item per slot, locked hints, Premium note, TalkBack labels, 1.3x text). Not built: an unlock celebration and item art (icons stand in).*
 - [ ] Mood insights, Premium (§6.18)
 - [ ] Weekly letter from Mochi, Premium: server endpoint and app (§6.24, §8.2)
 - [ ] Monthly glow recap (§6.25)

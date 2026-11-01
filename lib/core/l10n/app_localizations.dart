@@ -3409,6 +3409,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We could not find that letter.'**
   String get letterNotFound;
+
+  /// No description provided for @mascotRoomTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi\'s room'**
+  String get mascotRoomTitle;
+
+  /// No description provided for @mascotRoomMeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Outfits and little things Mochi has earned'**
+  String get mascotRoomMeSubtitle;
+
+  /// No description provided for @mascotRoomIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi collects gifts as you show up for yourself. Nothing is ever taken away, so come back whenever you like.'**
+  String get mascotRoomIntro;
+
+  /// No description provided for @mascotRoomEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi\'s room is waiting'**
+  String get mascotRoomEmptyTitle;
+
+  /// No description provided for @mascotRoomEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your first gift arrives with a 3-day streak. There is no rush.'**
+  String get mascotRoomEmptyBody;
+
+  /// No description provided for @mascotSlotOutfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Outfit'**
+  String get mascotSlotOutfit;
+
+  /// No description provided for @mascotSlotFloor.
+  ///
+  /// In en, this message translates to:
+  /// **'Floor'**
+  String get mascotSlotFloor;
+
+  /// No description provided for @mascotSlotShelf.
+  ///
+  /// In en, this message translates to:
+  /// **'Shelf'**
+  String get mascotSlotShelf;
+
+  /// No description provided for @mascotSlotWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Window'**
+  String get mascotSlotWindow;
+
+  /// No description provided for @mascotSlotWall.
+  ///
+  /// In en, this message translates to:
+  /// **'Wall'**
+  String get mascotSlotWall;
+
+  /// No description provided for @mascotSlotOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get mascotSlotOther;
+
+  /// No description provided for @mascotItemOn.
+  ///
+  /// In en, this message translates to:
+  /// **'In use. Tap to take off.'**
+  String get mascotItemOn;
+
+  /// No description provided for @mascotItemTapToUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to use'**
+  String get mascotItemTapToUse;
+
+  /// No description provided for @mascotItemLockedStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach a {days}-day streak'**
+  String mascotItemLockedStreak(int days);
+
+  /// No description provided for @mascotItemLockedJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish the {journey} journey'**
+  String mascotItemLockedJourney(String journey);
+
+  /// No description provided for @mascotItemLockedOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep showing up to earn this'**
+  String get mascotItemLockedOther;
+
+  /// No description provided for @mascotPremiumTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get mascotPremiumTag;
+
+  /// No description provided for @mascotPremiumNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi keeps this gift. Using it is part of Premium.'**
+  String get mascotPremiumNote;
+
+  /// No description provided for @mascotItemSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, {status}'**
+  String mascotItemSemantics(String name, String status);
 }
 
 class _AppLocalizationsDelegate
