@@ -1760,6 +1760,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hardDayButton => 'Hard day?';
 
   @override
+  String get journeyHardDayLink => 'Having a hard day? Open the hard-day kit';
+
+  @override
   String get hardDayTitle => 'A hard day';
 
   @override

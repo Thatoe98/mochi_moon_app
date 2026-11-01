@@ -3002,6 +3002,12 @@ abstract class AppLocalizations {
   /// **'Hard day?'**
   String get hardDayButton;
 
+  /// No description provided for @journeyHardDayLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Having a hard day? Open the hard-day kit'**
+  String get journeyHardDayLink;
+
   /// No description provided for @hardDayTitle.
   ///
   /// In en, this message translates to:

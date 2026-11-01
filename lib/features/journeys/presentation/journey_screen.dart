@@ -130,6 +130,13 @@ class _Body extends ConsumerWidget {
           const SizedBox(height: AppSpacing.md),
         ],
         action,
+        if (journey.id == 'healing') ...[
+          const SizedBox(height: AppSpacing.sm),
+          TextButton(
+            onPressed: () => context.push(AppRoutes.hardDay),
+            child: Text(l10n.journeyHardDayLink),
+          ),
+        ],
       ],
     );
   }

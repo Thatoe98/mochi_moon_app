@@ -1771,6 +1771,9 @@ class AppLocalizationsMy extends AppLocalizations {
   String get hardDayButton => 'ဒီနေ့ ခက်ခဲနေလား။';
 
   @override
+  String get journeyHardDayLink => 'Having a hard day? Open the hard-day kit';
+
+  @override
   String get hardDayTitle => 'ခက်ခဲတဲ့နေ့လေး';
 
   @override

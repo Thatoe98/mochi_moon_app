@@ -107,6 +107,384 @@
           }
         }
       ]
+    },
+    {
+      "id": "healing",
+      "days": 14,
+      "premium": true,
+      "title": {
+        "en": "Healing after a breakup"
+      },
+      "summary": {
+        "en": "Fourteen soft days to be gentle with your heart. There is no deadline and no right pace."
+      },
+      "illustrationId": "ill_journey_healing",
+      "daysPlan": [
+        {
+          "day": 1,
+          "quoteIds": [
+            "q_0009",
+            "q_0010",
+            "q_0011"
+          ],
+          "questId": "qst_007",
+          "reflection": {
+            "en": "How are you feeling right now, in one honest sentence?"
+          }
+        },
+        {
+          "day": 2,
+          "quoteIds": [
+            "q_0012",
+            "q_0020",
+            "q_0019"
+          ],
+          "questId": "qst_008",
+          "reflection": {
+            "en": "What is one small thing that made today a little easier?"
+          }
+        },
+        {
+          "day": 3,
+          "quoteIds": [
+            "q_0018",
+            "q_0001",
+            "q_0002"
+          ],
+          "questId": "qst_017",
+          "reflection": {
+            "en": "What do you need most today: rest, company, or space?"
+          }
+        },
+        {
+          "day": 4,
+          "quoteIds": [
+            "q_0004",
+            "q_0009",
+            "q_0010"
+          ],
+          "questId": "qst_070",
+          "reflection": {
+            "en": "Write down something you are allowed to feel, without fixing it."
+          }
+        },
+        {
+          "day": 5,
+          "quoteIds": [
+            "q_0011",
+            "q_0012",
+            "q_0020"
+          ],
+          "questId": "qst_072",
+          "reflection": {
+            "en": "What is one kind thing you would say to a friend in your place?"
+          }
+        },
+        {
+          "day": 6,
+          "quoteIds": [
+            "q_0019",
+            "q_0018",
+            "q_0001"
+          ],
+          "questId": "qst_073",
+          "reflection": {
+            "en": "What is something good that is still yours?"
+          }
+        },
+        {
+          "day": 7,
+          "quoteIds": [
+            "q_0002",
+            "q_0004",
+            "q_0009"
+          ],
+          "questId": "qst_075",
+          "reflection": {
+            "en": "What did your heart teach you this week?"
+          }
+        },
+        {
+          "day": 8,
+          "quoteIds": [
+            "q_0010",
+            "q_0011",
+            "q_0012"
+          ],
+          "questId": "qst_076",
+          "reflection": {
+            "en": "What does a gentle morning look like for you right now?"
+          }
+        },
+        {
+          "day": 9,
+          "quoteIds": [
+            "q_0020",
+            "q_0019",
+            "q_0018"
+          ],
+          "questId": "qst_078",
+          "reflection": {
+            "en": "Who or what makes you feel safe? Write a few words about them."
+          }
+        },
+        {
+          "day": 10,
+          "quoteIds": [
+            "q_0001",
+            "q_0002",
+            "q_0004"
+          ],
+          "questId": "qst_079",
+          "reflection": {
+            "en": "What is one thing you are learning about what you need?"
+          }
+        },
+        {
+          "day": 11,
+          "quoteIds": [
+            "q_0009",
+            "q_0010",
+            "q_0011"
+          ],
+          "questId": "qst_081",
+          "reflection": {
+            "en": "Name one way you have been brave lately, however small."
+          }
+        },
+        {
+          "day": 12,
+          "quoteIds": [
+            "q_0012",
+            "q_0020",
+            "q_0019"
+          ],
+          "questId": "qst_082",
+          "reflection": {
+            "en": "What would you like to let go of a little today?"
+          }
+        },
+        {
+          "day": 13,
+          "quoteIds": [
+            "q_0018",
+            "q_0001",
+            "q_0002"
+          ],
+          "questId": "qst_084",
+          "reflection": {
+            "en": "What are you looking forward to, even if it is tiny?"
+          }
+        },
+        {
+          "day": 14,
+          "quoteIds": [
+            "q_0004",
+            "q_0009",
+            "q_0010"
+          ],
+          "questId": "qst_085",
+          "reflection": {
+            "en": "Write yourself a short note of thanks for the way you carried yourself through these days."
+          }
+        }
+      ]
+    },
+    {
+      "id": "calm_work",
+      "days": 7,
+      "premium": true,
+      "title": {
+        "en": "Exam and work calm"
+      },
+      "summary": {
+        "en": "Seven calm days for busy weeks: small steps, real breaks, and no pressure to be perfect."
+      },
+      "illustrationId": "ill_journey_calm_work",
+      "daysPlan": [
+        {
+          "day": 1,
+          "quoteIds": [
+            "q_0013",
+            "q_0018",
+            "q_0014"
+          ],
+          "questId": "qst_010",
+          "reflection": {
+            "en": "What is weighing on you most right now, and what is one small step?"
+          }
+        },
+        {
+          "day": 2,
+          "quoteIds": [
+            "q_0019",
+            "q_0015",
+            "q_0020"
+          ],
+          "questId": "qst_012",
+          "reflection": {
+            "en": "What helps you feel steady when things are busy?"
+          }
+        },
+        {
+          "day": 3,
+          "quoteIds": [
+            "q_0006",
+            "q_0013",
+            "q_0018"
+          ],
+          "questId": "qst_017",
+          "reflection": {
+            "en": "What is one thing you can let be good enough today?"
+          }
+        },
+        {
+          "day": 4,
+          "quoteIds": [
+            "q_0014",
+            "q_0019",
+            "q_0015"
+          ],
+          "questId": "qst_106",
+          "reflection": {
+            "en": "Write down three things that are going fine."
+          }
+        },
+        {
+          "day": 5,
+          "quoteIds": [
+            "q_0020",
+            "q_0006",
+            "q_0013"
+          ],
+          "questId": "qst_020",
+          "reflection": {
+            "en": "How do you want to feel at the end of today?"
+          }
+        },
+        {
+          "day": 6,
+          "quoteIds": [
+            "q_0018",
+            "q_0014",
+            "q_0019"
+          ],
+          "questId": "qst_109",
+          "reflection": {
+            "en": "What is one thing you did well this week, even if nobody saw it?"
+          }
+        },
+        {
+          "day": 7,
+          "quoteIds": [
+            "q_0015",
+            "q_0020",
+            "q_0006"
+          ],
+          "questId": "qst_024",
+          "reflection": {
+            "en": "What will you do to keep your calm going after this journey?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "body_kindness",
+      "days": 7,
+      "premium": true,
+      "title": {
+        "en": "Body kindness"
+      },
+      "summary": {
+        "en": "Seven days of thanking your body and treating it with care, just as it is."
+      },
+      "illustrationId": "ill_journey_body_kindness",
+      "daysPlan": [
+        {
+          "day": 1,
+          "quoteIds": [
+            "q_0016",
+            "q_0017",
+            "q_0002"
+          ],
+          "questId": "qst_013",
+          "reflection": {
+            "en": "What is one thing your body did for you today?"
+          }
+        },
+        {
+          "day": 2,
+          "quoteIds": [
+            "q_0004",
+            "q_0020",
+            "q_0001"
+          ],
+          "questId": "qst_018",
+          "reflection": {
+            "en": "What does your body ask for when it is tired?"
+          }
+        },
+        {
+          "day": 3,
+          "quoteIds": [
+            "q_0003",
+            "q_0016",
+            "q_0017"
+          ],
+          "questId": "qst_089",
+          "reflection": {
+            "en": "Which part of your body would you like to thank today, and why?"
+          }
+        },
+        {
+          "day": 4,
+          "quoteIds": [
+            "q_0002",
+            "q_0004",
+            "q_0020"
+          ],
+          "questId": "qst_092",
+          "reflection": {
+            "en": "What feels good to wear, eat or do for yourself right now?"
+          }
+        },
+        {
+          "day": 5,
+          "quoteIds": [
+            "q_0001",
+            "q_0003",
+            "q_0016"
+          ],
+          "questId": "qst_095",
+          "reflection": {
+            "en": "Write a kind sentence about your body that you would say to someone you love."
+          }
+        },
+        {
+          "day": 6,
+          "quoteIds": [
+            "q_0017",
+            "q_0002",
+            "q_0004"
+          ],
+          "questId": "qst_098",
+          "reflection": {
+            "en": "What is one habit that makes your body feel looked after?"
+          }
+        },
+        {
+          "day": 7,
+          "quoteIds": [
+            "q_0020",
+            "q_0001",
+            "q_0003"
+          ],
+          "questId": "qst_101",
+          "reflection": {
+            "en": "How would you like to treat your body from today on?"
+          }
+        }
+      ]
     }
   ]
 }
