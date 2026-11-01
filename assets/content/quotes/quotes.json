@@ -5960,6 +5960,2556 @@
       ],
       "illustrationId": null,
       "premium": false
+    },
+    {
+      "id": "q_0351",
+      "text": {
+        "en": "I am allowed to be proud of the little things I love about myself."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0352",
+      "text": {
+        "en": "I wake up and choose to be gentle with myself."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0353",
+      "text": {
+        "en": "I light up the room just by being me."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0354",
+      "text": {
+        "en": "I am worth celebrating on ordinary days."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0355",
+      "text": {
+        "en": "I give myself room to bloom."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0356",
+      "text": {
+        "en": "I deserve the kindest words, and I start with my own."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0357",
+      "text": {
+        "en": "I am not too much, and I am not too little."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0358",
+      "text": {
+        "en": "I let myself be cherished."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0359",
+      "text": {
+        "en": "I take a moment to enjoy being me."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0360",
+      "text": {
+        "en": "I am allowed to fill my cup first."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0361",
+      "text": {
+        "en": "I thank myself for all the quiet things I do each day."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0362",
+      "text": {
+        "en": "I am a soft place to land for myself."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0363",
+      "text": {
+        "en": "I treat my heart like something precious."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0364",
+      "text": {
+        "en": "I stand beside myself, always."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0365",
+      "text": {
+        "en": "I let myself have what feels good and kind."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0366",
+      "text": {
+        "en": "I am proud of my heart, and the way it keeps trying."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0367",
+      "text": {
+        "en": "I am allowed to love how I look today."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0368",
+      "text": {
+        "en": "I follow what makes me feel alive."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0369",
+      "text": {
+        "en": "I forgive myself, and I welcome myself back."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0370",
+      "text": {
+        "en": "I remember that I am doing my best."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0371",
+      "text": {
+        "en": "I enjoy being exactly who I am right now."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0372",
+      "text": {
+        "en": "I take good care of the girl I am."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0373",
+      "text": {
+        "en": "I deserve a little joy every day."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0374",
+      "text": {
+        "en": "I am allowed to take compliments in."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0375",
+      "text": {
+        "en": "I hold myself in warm regard."
+      },
+      "author": null,
+      "category": "self_love",
+      "moods": [
+        "happy",
+        "in_love"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0376",
+      "text": {
+        "en": "I trust myself to handle whatever today brings."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0377",
+      "text": {
+        "en": "I am allowed to take the lead."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0378",
+      "text": {
+        "en": "I walk with my head high and my heart open."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0379",
+      "text": {
+        "en": "I can be proud and humble at once."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0380",
+      "text": {
+        "en": "I give my ideas room to grow."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0381",
+      "text": {
+        "en": "I deserve to be listened to."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0382",
+      "text": {
+        "en": "I am brave enough for the next small thing."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0383",
+      "text": {
+        "en": "I stop waiting to feel ready and begin."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0384",
+      "text": {
+        "en": "I know more than I give myself credit for."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0385",
+      "text": {
+        "en": "I bring my own colour into everything I do."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0386",
+      "text": {
+        "en": "I let go of fear of getting it wrong."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0387",
+      "text": {
+        "en": "I can introduce myself with a smile."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0388",
+      "text": {
+        "en": "I am proud of how I have grown."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0389",
+      "text": {
+        "en": "I take a deep breath and speak my truth."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0390",
+      "text": {
+        "en": "I do not have to prove anything to anyone."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0391",
+      "text": {
+        "en": "I believe that I can learn this."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0392",
+      "text": {
+        "en": "I let my quiet confidence show."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0393",
+      "text": {
+        "en": "I give myself a pep talk, like I would a friend."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0394",
+      "text": {
+        "en": "I try, and trying is enough for today."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0395",
+      "text": {
+        "en": "I stand in my own power, softly and surely."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0396",
+      "text": {
+        "en": "I am allowed to take a compliment and keep it."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0397",
+      "text": {
+        "en": "I choose to back myself."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0398",
+      "text": {
+        "en": "I move toward what I want, one small step at a time."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0399",
+      "text": {
+        "en": "I am worthy of the opportunities in front of me."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "happy",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0400",
+      "text": {
+        "en": "I am capable, kind and still growing."
+      },
+      "author": null,
+      "category": "confidence",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0401",
+      "text": {
+        "en": "I allow myself to heal at a gentle pace."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0402",
+      "text": {
+        "en": "I am not behind. My heart is simply taking its time."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0403",
+      "text": {
+        "en": "I give myself soft places to rest."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0404",
+      "text": {
+        "en": "I let the tears come when they need to."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0405",
+      "text": {
+        "en": "I do not have to hold it together all the time."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0406",
+      "text": {
+        "en": "I am allowed to have good days, too."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0407",
+      "text": {
+        "en": "I take care of my heart the way I would a small bird."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0408",
+      "text": {
+        "en": "I let myself be comforted."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0409",
+      "text": {
+        "en": "I am learning to feel safe with myself again."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0410",
+      "text": {
+        "en": "I set down what I do not need to carry."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0411",
+      "text": {
+        "en": "I celebrate the days I got out of bed and tried."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0412",
+      "text": {
+        "en": "I let myself lean on the people who care."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0413",
+      "text": {
+        "en": "I breathe, and I let my body soften."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0414",
+      "text": {
+        "en": "I know that my feelings are allowed to change."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0415",
+      "text": {
+        "en": "I let go of the need to be okay right away."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0416",
+      "text": {
+        "en": "I welcome a quiet evening and a warm drink."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0417",
+      "text": {
+        "en": "I make my space soft and my days slow."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0418",
+      "text": {
+        "en": "I look back on how far I have come and say thank you."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0419",
+      "text": {
+        "en": "I am worth the time it takes to heal."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0420",
+      "text": {
+        "en": "I let hope visit me, even in small ways."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0421",
+      "text": {
+        "en": "I treat myself as someone worth taking care of."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0422",
+      "text": {
+        "en": "I forgive myself for needing more rest."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0423",
+      "text": {
+        "en": "I find little reasons to smile along the way."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0424",
+      "text": {
+        "en": "I let love in, slowly and gently."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "calm",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0425",
+      "text": {
+        "en": "I am coming home to myself, one day at a time."
+      },
+      "author": null,
+      "category": "healing",
+      "moods": [
+        "sad",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0426",
+      "text": {
+        "en": "I breathe in slowly and let my body soften."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0427",
+      "text": {
+        "en": "I let my thoughts settle like snow."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0428",
+      "text": {
+        "en": "I find ease in this present moment."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0429",
+      "text": {
+        "en": "I let go of the need to rush."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0430",
+      "text": {
+        "en": "I give myself a quiet minute, and I take it."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0431",
+      "text": {
+        "en": "I feel my feet on the ground and my breath in my chest."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0432",
+      "text": {
+        "en": "I make room for stillness in my day."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0433",
+      "text": {
+        "en": "I allow myself to simply be."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0434",
+      "text": {
+        "en": "I let calm fill the space around me."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0435",
+      "text": {
+        "en": "I breathe out, and my shoulders drop."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0436",
+      "text": {
+        "en": "I choose peace, one breath at a time."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0437",
+      "text": {
+        "en": "I am steady, like a tree in a soft breeze."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0438",
+      "text": {
+        "en": "I release what I cannot hold."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0439",
+      "text": {
+        "en": "I rest my mind the way I rest my body."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0440",
+      "text": {
+        "en": "I let the day's noise fade to something soft."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0441",
+      "text": {
+        "en": "I take it one moment at a time."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0442",
+      "text": {
+        "en": "I come back to my breath, and it welcomes me."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0443",
+      "text": {
+        "en": "I remember that this feeling will pass."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0444",
+      "text": {
+        "en": "I let myself slow down on purpose."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0445",
+      "text": {
+        "en": "I find calm in simple things: a warm cup, a soft light."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0446",
+      "text": {
+        "en": "I trust that I can handle this moment."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0447",
+      "text": {
+        "en": "I let my eyes rest and my mind follow."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0448",
+      "text": {
+        "en": "I give myself the gift of a slow breath."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0449",
+      "text": {
+        "en": "I let my heart beat easy."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0450",
+      "text": {
+        "en": "I am quiet inside, and that is enough."
+      },
+      "author": null,
+      "category": "calm",
+      "moods": [
+        "calm",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0451",
+      "text": {
+        "en": "I start my day with one clear and gentle goal."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0452",
+      "text": {
+        "en": "I focus on learning, not on being perfect."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0453",
+      "text": {
+        "en": "I take it page by page, and that is enough."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0454",
+      "text": {
+        "en": "I let myself ask for what I need to do my best."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0455",
+      "text": {
+        "en": "I am proud that I keep showing up."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0456",
+      "text": {
+        "en": "I make my work space a kind place to be."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0457",
+      "text": {
+        "en": "I trust that my effort adds up."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0458",
+      "text": {
+        "en": "I am allowed to be tired and still be doing well."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0459",
+      "text": {
+        "en": "I take a deep breath before I begin."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0460",
+      "text": {
+        "en": "I do not have to do everything today."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0461",
+      "text": {
+        "en": "I let myself make progress at my own speed."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0462",
+      "text": {
+        "en": "I forgive myself for the day I did not get much done."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0463",
+      "text": {
+        "en": "I treat my mind with respect, and give it rest."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0464",
+      "text": {
+        "en": "I celebrate what I have understood today."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0465",
+      "text": {
+        "en": "I keep going gently, and I keep going kindly."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0466",
+      "text": {
+        "en": "I am allowed to say, I need a break."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0467",
+      "text": {
+        "en": "I trust my preparation and my own mind."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0468",
+      "text": {
+        "en": "I put the work down when the day is done."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0469",
+      "text": {
+        "en": "I know that rest helps me learn."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0470",
+      "text": {
+        "en": "I do one thing, and I do it with care."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0471",
+      "text": {
+        "en": "I let my good enough be good enough."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0472",
+      "text": {
+        "en": "I give myself a little treat for my effort."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0473",
+      "text": {
+        "en": "I believe that I can get through this task."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "tired",
+        "calm"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0474",
+      "text": {
+        "en": "I am more than my results."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0475",
+      "text": {
+        "en": "I end my work day with gratitude."
+      },
+      "author": null,
+      "category": "study_work",
+      "moods": [
+        "anxious",
+        "tired"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0476",
+      "text": {
+        "en": "I give my body the rest it asks for."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0477",
+      "text": {
+        "en": "I wear what feels soft and comfortable today."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0478",
+      "text": {
+        "en": "I thank my legs for carrying me, and my arms for holding."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0479",
+      "text": {
+        "en": "I take a slow breath and feel my body relax."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0480",
+      "text": {
+        "en": "I look after myself in small, caring ways."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0481",
+      "text": {
+        "en": "I enjoy a meal without rules or guilt."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0482",
+      "text": {
+        "en": "I let my body be exactly as it is today."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0483",
+      "text": {
+        "en": "I sip some water and send my body a thank you."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0484",
+      "text": {
+        "en": "I let go of the voice that criticises, and listen to the one that cares."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0485",
+      "text": {
+        "en": "I take a walk just to feel the air."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0486",
+      "text": {
+        "en": "I let my body rest in a comfy, cosy place."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0487",
+      "text": {
+        "en": "I find joy in how my body moves."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0488",
+      "text": {
+        "en": "I am more than a number or a reflection."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0489",
+      "text": {
+        "en": "I treat myself to a little pampering today."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0490",
+      "text": {
+        "en": "I let my body be strong and soft at the same time."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0491",
+      "text": {
+        "en": "I keep my body warm, fed and rested."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0492",
+      "text": {
+        "en": "I appreciate my hands, my eyes, my smile."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0493",
+      "text": {
+        "en": "I do not owe anyone a different body."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0494",
+      "text": {
+        "en": "I allow myself to feel good in my skin."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0495",
+      "text": {
+        "en": "I show my body love through gentle care."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0496",
+      "text": {
+        "en": "I listen when my body says slow down."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0497",
+      "text": {
+        "en": "I let myself dance a little, just because."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0498",
+      "text": {
+        "en": "I am grateful for the days my body has carried me through."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "calm",
+        "happy"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0499",
+      "text": {
+        "en": "I give my body a gentle hug."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "sad",
+        "anxious"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
+    },
+    {
+      "id": "q_0500",
+      "text": {
+        "en": "I welcome my body home each day."
+      },
+      "author": null,
+      "category": "body_kindness",
+      "moods": [
+        "tired",
+        "sad"
+      ],
+      "signs": [
+        "all"
+      ],
+      "illustrationId": null,
+      "premium": false
     }
   ]
 }
