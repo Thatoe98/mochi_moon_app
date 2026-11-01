@@ -89,6 +89,18 @@ class _Room extends ConsumerWidget {
       return l10n.mascotItemLockedOther;
     }
 
+    // The outfit she is wearing, if it has art, otherwise Mochi as she was.
+    String headerArt() {
+      final worn = state.equipped[outfitSlot];
+      for (final item in items) {
+        if (item.id == worn) {
+          return AppIllustrations.forMascotItem(item.illustrationId) ??
+              AppIllustrations.onboardingWelcome;
+        }
+      }
+      return AppIllustrations.onboardingWelcome;
+    }
+
     final slots = <String>{
       ..._slotOrder,
       for (final item in items)
@@ -105,7 +117,7 @@ class _Room extends ConsumerWidget {
               width: 200,
               height: 200,
               child: MochiIllustration(
-                asset: AppIllustrations.onboardingWelcome,
+                asset: headerArt(),
                 semanticLabel: l10n.mascotRoomTitle,
               ),
             ),
@@ -177,6 +189,7 @@ class _ItemTile extends StatelessWidget {
         : premiumLocked
         ? l10n.mascotPremiumNote
         : l10n.mascotItemTapToUse;
+    final art = AppIllustrations.forMascotItem(item.illustrationId);
     final tappable = owned && (worn || !premiumLocked);
     return Semantics(
       container: true,
@@ -190,15 +203,24 @@ class _ItemTile extends StatelessWidget {
         child: ListTile(
           minTileHeight: AppSpacing.minTouchTarget,
           enabled: owned,
-          leading: Icon(
-            !owned
-                ? Icons.lock_outline_rounded
-                : worn
-                ? Icons.check_circle_rounded
-                : item.isOutfit
-                ? Icons.checkroom_rounded
-                : Icons.chair_alt_rounded,
-          ),
+          leading: art != null && owned
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: MochiIllustration(asset: art, semanticLabel: name),
+                  ),
+                )
+              : Icon(
+                  !owned
+                      ? Icons.lock_outline_rounded
+                      : worn
+                      ? Icons.check_circle_rounded
+                      : item.isOutfit
+                      ? Icons.checkroom_rounded
+                      : Icons.chair_alt_rounded,
+                ),
           title: Text(owned ? name : '?'),
           subtitle: Text(status),
           trailing: item.premium

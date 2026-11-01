@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
@@ -58,6 +59,20 @@ class _MoodScreenState extends ConsumerState<MoodScreen> {
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
+              if (todays != null) ...[
+                Center(
+                  child: SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: MochiIllustration(
+                      asset: AppIllustrations.forMood(todays.id),
+                      semanticLabel: todays.label(l10n),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+              ],
               MoodChips(
                 selected: todays,
                 onSelected: (mood) => ref.read(setTodayMoodProvider)(mood),

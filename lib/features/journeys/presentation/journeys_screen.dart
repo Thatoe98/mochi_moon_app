@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/journey.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/journeys/application/journey_providers.dart';
 import 'package:mochi_moon/features/journeys/domain/journey_progress.dart';
@@ -81,10 +82,23 @@ class _JourneyTile extends StatelessWidget {
         : journey.premium
         ? l10n.journeyPremiumTag
         : l10n.journeyFreeTag;
+    final cover = AppIllustrations.forJourney(journey.illustrationId);
     return Card(
       child: ListTile(
         minTileHeight: AppSpacing.minTouchTarget,
-        leading: Icon(locked ? Icons.lock_rounded : Icons.route_rounded),
+        leading: cover != null && !locked
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  width: 48,
+                  height: 48,
+                  child: MochiIllustration(
+                    asset: cover,
+                    semanticLabel: journey.titleFor(lang),
+                  ),
+                ),
+              )
+            : Icon(locked ? Icons.lock_rounded : Icons.route_rounded),
         title: Text(journey.titleFor(lang)),
         subtitle: Text(
           [

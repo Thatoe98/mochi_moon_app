@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/content/journey.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/journeys/application/journey_providers.dart';
@@ -93,6 +94,20 @@ class _Body extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
+        if (AppIllustrations.forJourney(journey.illustrationId)
+            case final cover?) ...[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: SizedBox(
+              height: 220,
+              child: MochiIllustration(
+                asset: cover,
+                semanticLabel: journey.titleFor(lang),
+              ),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+        ],
         Text(journey.titleFor(lang), style: theme.textTheme.headlineMedium),
         const SizedBox(height: AppSpacing.sm),
         Text(journey.summaryFor(lang), style: theme.textTheme.bodyLarge),

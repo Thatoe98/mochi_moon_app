@@ -37,6 +37,44 @@ abstract final class AppIllustrations {
   static String forCard(String category, String? illustrationId) =>
       ownCardArt[illustrationId] ?? forCategory(category);
 
+  static const _mascotItems = {
+    'ill_mascot_ribbon_01',
+    'ill_mascot_scarf_01',
+    'ill_mascot_plant_01',
+    'ill_mascot_lamp_01',
+    'ill_mascot_flower_crown_01',
+    'ill_mascot_window_01',
+    'ill_mascot_star_cape_01',
+    'ill_mascot_poster_01',
+    'ill_mascot_rug_01',
+    'ill_mascot_golden_01',
+    'ill_mascot_fairy_lights_01',
+    'ill_mascot_sparkle_jacket_01',
+  };
+
+  static const _journeyCovers = {
+    'ill_journey_confidence',
+    'ill_journey_healing',
+    'ill_journey_calm_work',
+    'ill_journey_body_kindness',
+  };
+
+  /// The picture of a mascot item, or null when the id has no bundled art.
+  static String? forMascotItem(String illustrationId) =>
+      _mascotItems.contains(illustrationId)
+      ? 'assets/illustrations/$illustrationId.webp'
+      : null;
+
+  /// The cover of a journey, or null when it has none yet.
+  static String? forJourney(String illustrationId) =>
+      _journeyCovers.contains(illustrationId)
+      ? 'assets/illustrations/$illustrationId.webp'
+      : null;
+
+  /// Mochi's face for a stored mood id (`happy`, `in_love`, ...).
+  static String forMood(String moodId) =>
+      'assets/illustrations/ill_mood_$moodId.webp';
+
   static const List<String> all = [
     onboardingWelcome,
     onboardingSave,
