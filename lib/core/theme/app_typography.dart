@@ -1,14 +1,14 @@
-// TODO(fonts): drop this ignore once the font families below are non-null.
-// ignore_for_file: avoid_redundant_argument_values
 
 import 'package:flutter/material.dart';
 
 /// Bundled font families. Font files are declared in `pubspec.yaml` once added
 /// to `assets/fonts/`; until then the platform default is used.
 abstract final class AppFonts {
-  // TODO(fonts): bundle Fredoka (display) and Nunito (body), see PRD M0.
-  static const String? display = null;
-  static const String? body = null;
+  /// Bundled rounded display font (assets/fonts, OFL 1.1).
+  static const String display = 'Fredoka';
+
+  /// Bundled body font (assets/fonts, OFL 1.1).
+  static const String body = 'Nunito';
 
   /// Glyph coverage for Burmese regardless of the active locale.
   /// Noto Sans Thai is added when Thai ships (deferred).

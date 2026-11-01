@@ -191,7 +191,7 @@ Hours are rough focused-work estimates. "Dep" lists tasks that must be done firs
 
 ### M6 — Launch (67 h, mostly content and owner work)
 
-**L1 — Bundle fonts** (3 h) · Dep: owner picks fonts
+**L1 — Bundle fonts** (3 h) · Dep: owner picks fonts. **Done 2026-11-02 for English:** owner let me pick; Fredoka (display) and Nunito (body), both OFL, bundled. Noto Sans Myanmar/Thai wait for post-launch Burmese/Thai.
 - Rounded display font, Nunito, Noto Sans Myanmar (and Thai later) in `assets/fonts`, `pubspec.yaml`, theme `fontFamilyFallback`; check the share image in en/my. Fixes the M0 and §6.4 gaps.
 
 **L2 — Journey scripts** (8 h) · Dep: Q3. Four journeys (7/14/7/7 days) in en, then my via the tool; owner reviews tone.

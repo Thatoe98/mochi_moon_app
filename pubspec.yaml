@@ -62,7 +62,16 @@ flutter:
     - assets/illustrations/
     - assets/lottie/
     - assets/fonts/MochiSymbols-OFL.txt
+    - assets/fonts/OFL-Fredoka.txt
+    - assets/fonts/OFL-Nunito.txt
   fonts:
+    # Rounded display font and body font (both OFL 1.1, variable weight).
+    - family: Fredoka
+      fonts:
+        - asset: assets/fonts/Fredoka.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito.ttf
     # Planet and zodiac glyphs only (Noto Sans Symbols and Symbols 2, OFL 1.1),
     # so they look the same on every phone and never turn into emoji.
     - family: Mochi Symbols
