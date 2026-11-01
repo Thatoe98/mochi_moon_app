@@ -21,8 +21,8 @@ void main() {
 
   test('loads the launch quotes with unique ids', () async {
     final quotes = await repo.loadQuotes();
-    expect(quotes, hasLength(200));
-    expect(quotes.map((q) => q.id).toSet(), hasLength(200));
+    expect(quotes, hasLength(350));
+    expect(quotes.map((q) => q.id).toSet(), hasLength(350));
     expect(quotes.every((q) => q.textFor('en').isNotEmpty), isTrue);
   });
 

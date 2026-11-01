@@ -50,6 +50,18 @@ abstract final class AppIllustrations {
     'ill_mascot_golden_01',
     'ill_mascot_fairy_lights_01',
     'ill_mascot_sparkle_jacket_01',
+    'ill_mascot_cozy_blanket_01',
+    'ill_mascot_heart_cushion_01',
+    'ill_mascot_reading_glasses_01',
+    'ill_mascot_tea_set_01',
+    'ill_mascot_meadow_dress_01',
+    'ill_mascot_heart_mirror_01',
+    'ill_mascot_beret_01',
+    'ill_mascot_books_01',
+    'ill_mascot_moon_pajamas_01',
+    'ill_mascot_cloud_pillow_01',
+    'ill_mascot_pearl_wings_01',
+    'ill_mascot_telescope_01',
   };
 
   static const _journeyCovers = {

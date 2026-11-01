@@ -202,7 +202,7 @@ Hours are rough focused-work estimates. "Dep" lists tasks that must be done firs
 
 **L5 — Mascot art and items** (8 h) · Dep: Q6. 24 items (12 outfits, 12 room items) with names, unlock rules and semantic labels.
 
-**L6 — Quotes (500) and illustrations (60–100)** (20 h) · existing launch item; includes the 6 mood icons and the 4 journey covers. **Progress 2026-11-02:** the 6 mood icons, the 4 journey covers and the 12 mascot item pictures are generated and wired in; quotes are at 200 of 500 (30 new per category, English only, owner to read for tone); illustrations are at about 42 of 60–100.
+**L6 — Quotes (500) and illustrations (60–100)** (20 h) · existing launch item; includes the 6 mood icons and the 4 journey covers. **Progress 2026-11-02:** the 6 mood icons, the 4 journey covers and the 12 mascot item pictures are generated and wired in; quotes are at 350 of 500 (English only, owner to read for tone); mascot items are at 24 of 24 with art. **Owner decision 2026-11-02: no illustration per quote.** Quotes use the shared category art; only overall illustrations (screens, themes, mascot) are generated, so the 60–100 per-quote target no longer applies.
 
 **L7 — Translation run and native review** (5 h) · Dep: L2–L5. Run the tool, record unreviewed status in PRD §12, hand to the reviewer.
 

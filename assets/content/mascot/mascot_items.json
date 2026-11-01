@@ -1,41 +1,317 @@
 {
   "version": 1,
   "items": [
-    { "id": "outfit_ribbon_01", "slot": "outfit", "premium": false,
-      "name": { "en": "Soft ribbon" },
-      "unlock": { "type": "streak", "value": 3 }, "illustrationId": "ill_mascot_ribbon_01" },
-    { "id": "outfit_scarf_01", "slot": "outfit", "premium": false,
-      "name": { "en": "Cozy scarf" },
-      "unlock": { "type": "streak", "value": 7 }, "illustrationId": "ill_mascot_scarf_01" },
-    { "id": "room_plant_01", "slot": "floor", "premium": false,
-      "name": { "en": "Little leafy plant" },
-      "unlock": { "type": "streak", "value": 7 }, "illustrationId": "ill_mascot_plant_01" },
-    { "id": "room_lamp_01", "slot": "shelf", "premium": false,
-      "name": { "en": "Moon glow lamp" },
-      "unlock": { "type": "streak", "value": 14 }, "illustrationId": "ill_mascot_lamp_01" },
-    { "id": "outfit_flower_crown_01", "slot": "outfit", "premium": true,
-      "name": { "en": "Flower crown" },
-      "unlock": { "type": "streak", "value": 14 }, "illustrationId": "ill_mascot_flower_crown_01" },
-    { "id": "room_window_01", "slot": "window", "premium": false,
-      "name": { "en": "Starry window" },
-      "unlock": { "type": "streak", "value": 30 }, "illustrationId": "ill_mascot_window_01" },
-    { "id": "outfit_star_cape_01", "slot": "outfit", "premium": true,
-      "name": { "en": "Star cape" },
-      "unlock": { "type": "streak", "value": 30 }, "illustrationId": "ill_mascot_star_cape_01" },
-    { "id": "room_poster_01", "slot": "wall", "premium": false,
-      "name": { "en": "Cloud poster" },
-      "unlock": { "type": "streak", "value": 60 }, "illustrationId": "ill_mascot_poster_01" },
-    { "id": "room_rug_01", "slot": "floor", "premium": true,
-      "name": { "en": "Fluffy lavender rug" },
-      "unlock": { "type": "streak", "value": 60 }, "illustrationId": "ill_mascot_rug_01" },
-    { "id": "outfit_golden_01", "slot": "outfit", "premium": true,
-      "name": { "en": "Golden glow outfit" },
-      "unlock": { "type": "streak", "value": 100 }, "illustrationId": "ill_mascot_golden_01" },
-    { "id": "room_fairy_lights_01", "slot": "wall", "premium": true,
-      "name": { "en": "Fairy lights" },
-      "unlock": { "type": "streak", "value": 100 }, "illustrationId": "ill_mascot_fairy_lights_01" },
-    { "id": "outfit_sparkle_jacket_01", "slot": "outfit", "premium": false,
-      "name": { "en": "Sparkle jacket" },
-      "unlock": { "type": "journey", "value": "confidence" }, "illustrationId": "ill_mascot_sparkle_jacket_01" }
+    {
+      "id": "outfit_ribbon_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Soft ribbon"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 3
+      },
+      "illustrationId": "ill_mascot_ribbon_01"
+    },
+    {
+      "id": "outfit_scarf_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Cozy scarf"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 7
+      },
+      "illustrationId": "ill_mascot_scarf_01"
+    },
+    {
+      "id": "room_plant_01",
+      "slot": "floor",
+      "premium": false,
+      "name": {
+        "en": "Little leafy plant"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 7
+      },
+      "illustrationId": "ill_mascot_plant_01"
+    },
+    {
+      "id": "room_lamp_01",
+      "slot": "shelf",
+      "premium": false,
+      "name": {
+        "en": "Moon glow lamp"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 14
+      },
+      "illustrationId": "ill_mascot_lamp_01"
+    },
+    {
+      "id": "outfit_flower_crown_01",
+      "slot": "outfit",
+      "premium": true,
+      "name": {
+        "en": "Flower crown"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 14
+      },
+      "illustrationId": "ill_mascot_flower_crown_01"
+    },
+    {
+      "id": "room_window_01",
+      "slot": "window",
+      "premium": false,
+      "name": {
+        "en": "Starry window"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 30
+      },
+      "illustrationId": "ill_mascot_window_01"
+    },
+    {
+      "id": "outfit_star_cape_01",
+      "slot": "outfit",
+      "premium": true,
+      "name": {
+        "en": "Star cape"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 30
+      },
+      "illustrationId": "ill_mascot_star_cape_01"
+    },
+    {
+      "id": "room_poster_01",
+      "slot": "wall",
+      "premium": false,
+      "name": {
+        "en": "Cloud poster"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 60
+      },
+      "illustrationId": "ill_mascot_poster_01"
+    },
+    {
+      "id": "room_rug_01",
+      "slot": "floor",
+      "premium": true,
+      "name": {
+        "en": "Fluffy lavender rug"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 60
+      },
+      "illustrationId": "ill_mascot_rug_01"
+    },
+    {
+      "id": "outfit_golden_01",
+      "slot": "outfit",
+      "premium": true,
+      "name": {
+        "en": "Golden glow outfit"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 100
+      },
+      "illustrationId": "ill_mascot_golden_01"
+    },
+    {
+      "id": "room_fairy_lights_01",
+      "slot": "wall",
+      "premium": true,
+      "name": {
+        "en": "Fairy lights"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 100
+      },
+      "illustrationId": "ill_mascot_fairy_lights_01"
+    },
+    {
+      "id": "outfit_sparkle_jacket_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Sparkle jacket"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "confidence"
+      },
+      "illustrationId": "ill_mascot_sparkle_jacket_01"
+    },
+    {
+      "id": "outfit_cozy_blanket_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Healing blanket"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "healing"
+      },
+      "illustrationId": "ill_mascot_cozy_blanket_01"
+    },
+    {
+      "id": "room_heart_cushion_01",
+      "slot": "floor",
+      "premium": false,
+      "name": {
+        "en": "Patchwork heart cushion"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "healing"
+      },
+      "illustrationId": "ill_mascot_heart_cushion_01"
+    },
+    {
+      "id": "outfit_reading_glasses_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Study glasses and sweater"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "calm_work"
+      },
+      "illustrationId": "ill_mascot_reading_glasses_01"
+    },
+    {
+      "id": "room_tea_set_01",
+      "slot": "shelf",
+      "premium": false,
+      "name": {
+        "en": "Moon tea set"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "calm_work"
+      },
+      "illustrationId": "ill_mascot_tea_set_01"
+    },
+    {
+      "id": "outfit_meadow_dress_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Meadow dress"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "body_kindness"
+      },
+      "illustrationId": "ill_mascot_meadow_dress_01"
+    },
+    {
+      "id": "room_heart_mirror_01",
+      "slot": "wall",
+      "premium": false,
+      "name": {
+        "en": "Heart mirror"
+      },
+      "unlock": {
+        "type": "journey",
+        "value": "body_kindness"
+      },
+      "illustrationId": "ill_mascot_heart_mirror_01"
+    },
+    {
+      "id": "outfit_beret_01",
+      "slot": "outfit",
+      "premium": false,
+      "name": {
+        "en": "Little beret"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 3
+      },
+      "illustrationId": "ill_mascot_beret_01"
+    },
+    {
+      "id": "room_books_01",
+      "slot": "shelf",
+      "premium": false,
+      "name": {
+        "en": "Cozy book stack"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 7
+      },
+      "illustrationId": "ill_mascot_books_01"
+    },
+    {
+      "id": "outfit_moon_pajamas_01",
+      "slot": "outfit",
+      "premium": true,
+      "name": {
+        "en": "Moon pajamas"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 14
+      },
+      "illustrationId": "ill_mascot_moon_pajamas_01"
+    },
+    {
+      "id": "room_cloud_pillow_01",
+      "slot": "floor",
+      "premium": true,
+      "name": {
+        "en": "Cloud pillow"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 30
+      },
+      "illustrationId": "ill_mascot_cloud_pillow_01"
+    },
+    {
+      "id": "outfit_pearl_wings_01",
+      "slot": "outfit",
+      "premium": true,
+      "name": {
+        "en": "Pearl wings"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 60
+      },
+      "illustrationId": "ill_mascot_pearl_wings_01"
+    },
+    {
+      "id": "room_telescope_01",
+      "slot": "window",
+      "premium": true,
+      "name": {
+        "en": "Star telescope"
+      },
+      "unlock": {
+        "type": "streak",
+        "value": 100
+      },
+      "illustrationId": "ill_mascot_telescope_01"
+    }
   ]
 }
