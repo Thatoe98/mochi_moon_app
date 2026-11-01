@@ -693,7 +693,7 @@ Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generatin
   { "id": "qst_001", "text": { "en": "Drink a glass of water slowly.", "my": "..." },
     "focusAreas": ["self_love", "calm"], "premium": false } ] }
 ```
-Launch target: 120 quests (20 per focus area), none about health outcomes, money, or others' bodies.
+Launch target: 120 quests (20 per focus area), none about health outcomes, money, or others' bodies. *Done 2026-11-02: 120 English quests (20–24 per focus area, all free). The 102 new ones have no Burmese text (post-launch). The owner should read them for tone.*
 
 `assets/content/journeys/journeys.json`
 ```json

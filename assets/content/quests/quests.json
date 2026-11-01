@@ -209,6 +209,1026 @@
         "body_kindness"
       ],
       "premium": false
+    },
+    {
+      "id": "qst_019",
+      "text": {
+        "en": "Unclench your jaw and drop your shoulders. Stay like that for three breaths."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_020",
+      "text": {
+        "en": "Make yourself a warm drink and drink it without a screen."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_021",
+      "text": {
+        "en": "Name five things you can see right now, then four you can hear."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_022",
+      "text": {
+        "en": "Light a candle or switch on a soft lamp and sit with it for a minute."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_023",
+      "text": {
+        "en": "Close your eyes for one minute and notice the sounds around you."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_024",
+      "text": {
+        "en": "Put one hand on your heart and breathe slowly until it feels a little quieter."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_025",
+      "text": {
+        "en": "Step outside, or open a window, and take one deep breath of fresh air."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_026",
+      "text": {
+        "en": "Write down one worry, then write one small kind thing you can do about it."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_027",
+      "text": {
+        "en": "Wash your hands slowly and feel the water."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_028",
+      "text": {
+        "en": "Do one thing at a time for the next ten minutes."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_029",
+      "text": {
+        "en": "Listen to one calm song all the way through."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_030",
+      "text": {
+        "en": "Let your eyes rest on something green or blue for a minute."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_031",
+      "text": {
+        "en": "Slow your steps while you walk to the next place you go."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_032",
+      "text": {
+        "en": "Breathe out for longer than you breathe in, four times."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_033",
+      "text": {
+        "en": "Put away one thing that has been nagging at you."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_034",
+      "text": {
+        "en": "Wrap yourself in a soft blanket or sweater for a few minutes."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_035",
+      "text": {
+        "en": "Whisper to yourself: it is okay to slow down."
+      },
+      "focusAreas": [
+        "calm"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_036",
+      "text": {
+        "en": "Write yourself a two-line love note and keep it somewhere you will find it."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_037",
+      "text": {
+        "en": "Look in the mirror and say one thing you appreciate about yourself."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_038",
+      "text": {
+        "en": "Do something today that is only for you, even if it takes five minutes."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_039",
+      "text": {
+        "en": "Forgive yourself for one small thing from this week."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_040",
+      "text": {
+        "en": "Treat yourself the way you would treat your best friend today."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_041",
+      "text": {
+        "en": "Put on an outfit that makes you feel like you."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_042",
+      "text": {
+        "en": "Give yourself permission to rest without earning it first."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_043",
+      "text": {
+        "en": "Write down three things that make you, you."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_044",
+      "text": {
+        "en": "Take a photo of something that made you smile today."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_045",
+      "text": {
+        "en": "Say no to one thing that you do not have the energy for."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_046",
+      "text": {
+        "en": "Spend a few minutes on a hobby you love."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_047",
+      "text": {
+        "en": "Remember a time you were proud of yourself and let yourself feel it again."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_048",
+      "text": {
+        "en": "Compliment yourself in your head the next time you pass a mirror."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_049",
+      "text": {
+        "en": "Make your favourite snack and enjoy it slowly."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_050",
+      "text": {
+        "en": "Say thank you to yourself for getting through today."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_051",
+      "text": {
+        "en": "Choose one thing on your list and let it wait until tomorrow."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_052",
+      "text": {
+        "en": "Tell yourself: I am doing my best, and my best is enough."
+      },
+      "focusAreas": [
+        "self_love"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_053",
+      "text": {
+        "en": "Stand tall with your shoulders back for one minute and breathe."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_054",
+      "text": {
+        "en": "Share one opinion today, even a small one, like which song to play."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_055",
+      "text": {
+        "en": "Write down three things you are good at."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_056",
+      "text": {
+        "en": "Introduce yourself to someone new, or say hello first."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_057",
+      "text": {
+        "en": "Accept a compliment today with just a smile and a thank you."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_058",
+      "text": {
+        "en": "Try one small thing you have been putting off, for five minutes only."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_059",
+      "text": {
+        "en": "Ask for something you need, kindly and clearly."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_060",
+      "text": {
+        "en": "Recall a fear you once got through and remind yourself of it."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_061",
+      "text": {
+        "en": "Choose the thing you actually want to eat or do, and say so."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_062",
+      "text": {
+        "en": "Say \"I'm not sure yet, let me think\" instead of agreeing right away."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_063",
+      "text": {
+        "en": "Notice one thing you handled well today and say it out loud."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_064",
+      "text": {
+        "en": "Look up when you walk, and let yourself take up your space."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_065",
+      "text": {
+        "en": "Write down one thing you will be brave about this week."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_066",
+      "text": {
+        "en": "Say your name and one thing you love about yourself, as if introducing a friend."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_067",
+      "text": {
+        "en": "Let a mistake from today be a lesson, then let it go."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_068",
+      "text": {
+        "en": "Wear something that makes you feel strong."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_069",
+      "text": {
+        "en": "Tell yourself: I can do hard things, one small step at a time."
+      },
+      "focusAreas": [
+        "confidence"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_070",
+      "text": {
+        "en": "Let yourself cry or sigh if you need to. Feelings are allowed to move."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_071",
+      "text": {
+        "en": "Write a few lines about how you feel, then close the page and breathe."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_072",
+      "text": {
+        "en": "Reach out to one person who feels safe and say hi."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_073",
+      "text": {
+        "en": "Do one small thing that helps you feel looked after, like a shower or a snack."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_074",
+      "text": {
+        "en": "Put a photo or reminder that hurts out of sight for now."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_075",
+      "text": {
+        "en": "Tell yourself: healing is not a straight line, and today is allowed to be slow."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_076",
+      "text": {
+        "en": "Go outside for a short walk and let the air do some of the work."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_077",
+      "text": {
+        "en": "Make your bed or tidy one spot, so your space feels a bit softer."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_078",
+      "text": {
+        "en": "Write down one thing you are learning about what you need."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_079",
+      "text": {
+        "en": "Choose a comforting show, book or song and give yourself that time."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_080",
+      "text": {
+        "en": "Drink some water and eat something small, even if you are not hungry."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_081",
+      "text": {
+        "en": "Let one feeling be here for a minute without trying to fix it."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_082",
+      "text": {
+        "en": "Say to yourself: I am allowed to take up space with how I feel."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_083",
+      "text": {
+        "en": "Put on clean, cosy clothes that feel good on your skin."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_084",
+      "text": {
+        "en": "Write down one thing you are grateful for today, however small."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_085",
+      "text": {
+        "en": "Give yourself an early night, if you can."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_086",
+      "text": {
+        "en": "Remind yourself of one good thing that is still yours."
+      },
+      "focusAreas": [
+        "healing"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_087",
+      "text": {
+        "en": "Thank your body for one thing it did for you today."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_088",
+      "text": {
+        "en": "Drink a full glass of water and notice how it feels."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_089",
+      "text": {
+        "en": "Stretch your neck and shoulders gently for one minute."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_090",
+      "text": {
+        "en": "Wear something comfortable that feels kind to your body."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_091",
+      "text": {
+        "en": "Take a short walk and notice how your feet feel on the ground."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_092",
+      "text": {
+        "en": "Rest your eyes away from every screen for five minutes."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_093",
+      "text": {
+        "en": "Moisturise your hands or face and take your time."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_094",
+      "text": {
+        "en": "Eat one meal slowly, and notice what you enjoy about it."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_095",
+      "text": {
+        "en": "Rest if your body asks you to, and do not call it lazy."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_096",
+      "text": {
+        "en": "Dance to one song in your room, just for fun."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_097",
+      "text": {
+        "en": "Sit or lie in a comfy position for a few minutes and relax your muscles."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_098",
+      "text": {
+        "en": "Hug yourself for ten seconds."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_099",
+      "text": {
+        "en": "Give yourself a soft, kind word about your body."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_100",
+      "text": {
+        "en": "Unfollow or mute one account that makes you feel bad about yourself."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_101",
+      "text": {
+        "en": "Take a warm shower or wash your face with care."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_102",
+      "text": {
+        "en": "Stand up and roll your shoulders back three times."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_103",
+      "text": {
+        "en": "Say to your body: thank you for carrying me."
+      },
+      "focusAreas": [
+        "body_kindness"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_104",
+      "text": {
+        "en": "Write down the three most important things for today, and only those."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_105",
+      "text": {
+        "en": "Take a real break before you feel tired: stand up and stretch."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_106",
+      "text": {
+        "en": "Tidy your workspace for two minutes."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_107",
+      "text": {
+        "en": "Start with the smallest task on your list and just do five minutes."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_108",
+      "text": {
+        "en": "Say to yourself: I do not need to be perfect, I only need to begin."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_109",
+      "text": {
+        "en": "Close extra tabs and focus on one thing for twenty minutes."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_110",
+      "text": {
+        "en": "Reward yourself with something small when you finish a task."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_111",
+      "text": {
+        "en": "Ask a classmate or colleague one question you have been wondering about."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_112",
+      "text": {
+        "en": "Write down one thing you have learned recently."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_113",
+      "text": {
+        "en": "Take three slow breaths before you open a hard message or document."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_114",
+      "text": {
+        "en": "Set a timer for fifteen minutes and work gently until it rings."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_115",
+      "text": {
+        "en": "Plan one thing you will look forward to after work or study."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_116",
+      "text": {
+        "en": "Drink water and refill your bottle for your next stretch of work."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_117",
+      "text": {
+        "en": "Say \"that is enough for today\" and stop when you have done your main thing."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_118",
+      "text": {
+        "en": "Break one big task into three tiny steps and write them down."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_119",
+      "text": {
+        "en": "Notice one small win from today before you finish."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
+    },
+    {
+      "id": "qst_120",
+      "text": {
+        "en": "Tell yourself: I am learning, and learning takes time."
+      },
+      "focusAreas": [
+        "study_work"
+      ],
+      "premium": false
     }
   ]
 }

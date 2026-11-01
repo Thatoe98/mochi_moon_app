@@ -196,7 +196,7 @@ Hours are rough focused-work estimates. "Dep" lists tasks that must be done firs
 
 **L2 — Journey scripts** (8 h) · Dep: Q3. Four journeys (7/14/7/7 days) in en, then my via the tool; owner reviews tone.
 
-**L3 — Quests** (4 h) · Dep: Q1. 120 quests in en, then my.
+**L3 — Quests** (4 h) · Dep: Q1. 120 quests in en. **Done 2026-11-02** (English only; Burmese is post-launch).
 
 **L4 — Breathing and hard-day copy** (3 h) · Dep: P16, P17. **The owner verifies helpline names and numbers for each locale from official sources**; until then they stay `TODO_CONTENT`.
 
