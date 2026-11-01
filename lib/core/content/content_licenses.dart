@@ -14,9 +14,8 @@ void registerContentLicenses() {
     );
   });
   LicenseRegistry.addLicense(() async* {
-    yield LicenseEntryWithLineBreaks(
-      ['Planet and zodiac glyphs (from Noto Sans Symbols and Symbols 2)'],
-      await rootBundle.loadString('assets/fonts/MochiSymbols-OFL.txt'),
-    );
+    yield LicenseEntryWithLineBreaks([
+      'Planet and zodiac glyphs (from Noto Sans Symbols and Symbols 2)',
+    ], await rootBundle.loadString('assets/fonts/MochiSymbols-OFL.txt'));
   });
 }

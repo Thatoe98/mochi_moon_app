@@ -25,7 +25,9 @@ Future<ProviderContainer> _start({
       journalRepositoryProvider.overrideWithValue(local),
       journalRemoteProvider.overrideWithValue(remote),
       authRepositoryProvider.overrideWithValue(
-        FakeAuthRepository(signedIn: signedIn ? const AuthUser(uid: _uid) : null),
+        FakeAuthRepository(
+          signedIn: signedIn ? const AuthUser(uid: _uid) : null,
+        ),
       ),
     ],
   );

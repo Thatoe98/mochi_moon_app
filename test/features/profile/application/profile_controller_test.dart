@@ -202,16 +202,21 @@ void main() {
       expect(remote.stored[_uid], nameOnly);
     });
 
-    test('a nameless local profile does not overwrite the remote one', () async {
-      final local = FakeProfileRepository(const UserProfile());
-      final remote = FakeProfileRemote({_uid: _complete});
-      final container = _container(local: local, remote: remote);
+    test(
+      'a nameless local profile does not overwrite the remote one',
+      () async {
+        final local = FakeProfileRepository(const UserProfile());
+        final remote = FakeProfileRemote({_uid: _complete});
+        final container = _container(local: local, remote: remote);
 
-      await container.read(profileControllerProvider.notifier).reconcile(_uid);
+        await container
+            .read(profileControllerProvider.notifier)
+            .reconcile(_uid);
 
-      expect(local.profile, _complete);
-      expect(remote.upserts, isEmpty);
-    });
+        expect(local.profile, _complete);
+        expect(remote.upserts, isEmpty);
+      },
+    );
 
     test('with nothing anywhere it returns null', () async {
       final container = _container(

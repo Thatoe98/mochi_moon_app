@@ -108,6 +108,54 @@ abstract class _$LanguageController extends $AsyncNotifier<AppLanguage> {
   }
 }
 
+/// Burmese ships after launch, so v1 is English only. Flip this to bring the
+/// language picker's behavior back (the picker widgets and `app_my.arb` stay).
+
+@ProviderFor(burmeseEnabled)
+final burmeseEnabledProvider = BurmeseEnabledProvider._();
+
+/// Burmese ships after launch, so v1 is English only. Flip this to bring the
+/// language picker's behavior back (the picker widgets and `app_my.arb` stay).
+
+final class BurmeseEnabledProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  /// Burmese ships after launch, so v1 is English only. Flip this to bring the
+  /// language picker's behavior back (the picker widgets and `app_my.arb` stay).
+  BurmeseEnabledProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'burmeseEnabledProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$burmeseEnabledHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return burmeseEnabled(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$burmeseEnabledHash() => r'4abf562471ad0252163675b5dca48fb385611d44';
+
 /// The locale the app is forced into, or null to follow the device.
 
 @ProviderFor(appLocale)
@@ -152,22 +200,22 @@ final class AppLocaleProvider
   }
 }
 
-String _$appLocaleHash() => r'611f20f52e294d138334bcbb7f9739c3f9152ed8';
+String _$appLocaleHash() => r'478d3c69799741131b7f3c986d53b430d2665238';
 
-/// The language code content and notifications use: the user's choice, else
-/// Burmese when the device uses it, else English.
+/// The language code content and notifications use: English at launch. With
+/// Burmese on, the user's choice, else Burmese when the device uses it.
 
 @ProviderFor(effectiveLanguage)
 final effectiveLanguageProvider = EffectiveLanguageProvider._();
 
-/// The language code content and notifications use: the user's choice, else
-/// Burmese when the device uses it, else English.
+/// The language code content and notifications use: English at launch. With
+/// Burmese on, the user's choice, else Burmese when the device uses it.
 
 final class EffectiveLanguageProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  /// The language code content and notifications use: the user's choice, else
-  /// Burmese when the device uses it, else English.
+  /// The language code content and notifications use: English at launch. With
+  /// Burmese on, the user's choice, else Burmese when the device uses it.
   EffectiveLanguageProvider._()
     : super(
         from: null,
@@ -201,4 +249,4 @@ final class EffectiveLanguageProvider
   }
 }
 
-String _$effectiveLanguageHash() => r'3596091a8ea377f9ecccf6f4c24c09a58608ef11';
+String _$effectiveLanguageHash() => r'272ce8ae441ce1a8f2c6ea4f51899d50bcd61902';

@@ -10,17 +10,15 @@ class ThaiColorsSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final lang = Localizations.localeOf(context).languageCode;
-    final loaded = ref.watch(showThaiColorsProvider(lang));
+    if (!ref.watch(inThailandProvider)) return const SizedBox.shrink();
+    final loaded = ref.watch(showThaiColorsProvider);
     return SwitchListTile(
       secondary: const Icon(Icons.palette_rounded),
       title: Text(l10n.thaiColorsSettingTitle),
       subtitle: Text(l10n.thaiColorsSettingSubtitle),
       value: loaded.value ?? false,
       onChanged: loaded.hasValue
-          ? (on) => ref
-                .read(showThaiColorsProvider(lang).notifier)
-                .set(enabled: on)
+          ? (on) => ref.read(showThaiColorsProvider.notifier).set(enabled: on)
           : null,
     );
   }

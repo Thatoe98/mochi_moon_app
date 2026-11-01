@@ -77,9 +77,8 @@ MoonPhase moonPhase(DateTime utc) {
   );
 }
 
-double _elongation(DateTime utc) => normalizeDegrees(
-  longitudeAt(Body.moon, utc) - longitudeAt(Body.sun, utc),
-);
+double _elongation(DateTime utc) =>
+    normalizeDegrees(longitudeAt(Body.moon, utc) - longitudeAt(Body.sun, utc));
 
 /// Each phase spans 45 degrees centred on a multiple of 45, so new moon is
 /// [337.5, 360) and [0, 22.5).

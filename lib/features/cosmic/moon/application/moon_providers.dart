@@ -7,5 +7,4 @@ part 'moon_providers.g.dart';
 /// What the Moon looks like right now. The engine needs no network and only a
 /// few milliseconds, so it runs on the main isolate.
 @riverpod
-MoonPhase moonNow(Ref ref) =>
-    moonPhase(ref.watch(clockProvider)().toUtc());
+MoonPhase moonNow(Ref ref) => moonPhase(ref.watch(clockProvider)().toUtc());

@@ -28,7 +28,9 @@ List<_Golden> _loadGolden() {
   return [
     for (final entry in json['retrogrades'] as List<dynamic>)
       (
-        body: Body.values.byName((entry as Map<String, dynamic>)['body'] as String),
+        body: Body.values.byName(
+          (entry as Map<String, dynamic>)['body'] as String,
+        ),
         preShadowStart: DateTime.parse(entry['preShadowStart'] as String),
         retrogradeStart: DateTime.parse(entry['retrogradeStart'] as String),
         retrogradeEnd: DateTime.parse(entry['retrogradeEnd'] as String),

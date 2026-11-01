@@ -9,7 +9,10 @@ import '../support/fake_app_language.dart';
 
 ProviderContainer _container(FakeAppLanguageRepository repository) {
   final container = ProviderContainer(
-    overrides: [appLanguageRepositoryProvider.overrideWithValue(repository)],
+    overrides: [
+      appLanguageRepositoryProvider.overrideWithValue(repository),
+      burmeseEnabledProvider.overrideWithValue(true),
+    ],
   );
   addTearDown(container.dispose);
   return container;

@@ -24,17 +24,24 @@ class LanguageController extends _$LanguageController {
   }
 }
 
+/// Burmese ships after launch, so v1 is English only. Flip this to bring the
+/// language picker's behavior back (the picker widgets and `app_my.arb` stay).
+@Riverpod(keepAlive: true)
+bool burmeseEnabled(Ref ref) => false;
+
 /// The locale the app is forced into, or null to follow the device.
 @Riverpod(keepAlive: true)
 Locale? appLocale(Ref ref) {
+  if (!ref.watch(burmeseEnabledProvider)) return const Locale('en');
   final code = ref.watch(languageControllerProvider).value?.code;
   return code == null ? null : Locale(code);
 }
 
-/// The language code content and notifications use: the user's choice, else
-/// Burmese when the device uses it, else English.
+/// The language code content and notifications use: English at launch. With
+/// Burmese on, the user's choice, else Burmese when the device uses it.
 @Riverpod(keepAlive: true)
 String effectiveLanguage(Ref ref) {
+  if (!ref.watch(burmeseEnabledProvider)) return 'en';
   final code = ref.watch(languageControllerProvider).value?.code;
   if (code != null) return code;
   return PlatformDispatcher.instance.locale.languageCode == 'my' ? 'my' : 'en';

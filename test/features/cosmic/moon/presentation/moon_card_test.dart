@@ -113,11 +113,7 @@ void main() {
       for (final lit in [0.0, 0.1, 0.5, 0.9, 1.0]) {
         await tester.pumpWidget(
           MaterialApp(
-            home: MoonGlyph(
-              illumination: lit,
-              isWaxing: waxing,
-              size: 64,
-            ),
+            home: MoonGlyph(illumination: lit, isWaxing: waxing, size: 64),
           ),
         );
         expect(tester.takeException(), isNull);

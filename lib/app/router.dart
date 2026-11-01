@@ -23,7 +23,6 @@ import 'package:mochi_moon/features/me/presentation/me_screen.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_screen.dart';
 import 'package:mochi_moon/features/onboarding/application/onboarding_providers.dart';
 import 'package:mochi_moon/features/onboarding/domain/onboarding_repository.dart';
-import 'package:mochi_moon/features/onboarding/presentation/language_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/profile_setup_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/sample_cards_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart';
@@ -61,7 +60,6 @@ abstract final class AppRoutes {
   static const partnerEdit = '/me/partners/edit';
   static const partnerResult = '/me/partners/result';
   static const welcome = '/welcome';
-  static const welcomeHello = '/welcome/hello';
   static const welcomeCards = '/welcome/cards';
   static const welcomeProfile = '/welcome/profile';
 }
@@ -90,12 +88,8 @@ GoRouter router(Ref ref) {
     routes: [
       GoRoute(
         path: AppRoutes.welcome,
-        builder: (context, state) => const LanguageScreen(),
+        builder: (context, state) => const WelcomeScreen(),
         routes: [
-          GoRoute(
-            path: 'hello',
-            builder: (context, state) => const WelcomeScreen(),
-          ),
           GoRoute(
             path: 'cards',
             builder: (context, state) => const SampleCardsScreen(),

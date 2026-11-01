@@ -116,95 +116,92 @@ final class ThaiColorsSettingRepositoryProvider
 String _$thaiColorsSettingRepositoryHash() =>
     r'ce13f7156a26f7c6d625d1ae0634dc63532ce233';
 
-/// The user's choice on the Thai colors switch for [lang], falling back to
-/// the default for that language.
+/// True when the phone's region is Thailand. The Thai lucky colors are only
+/// for people from Thailand.
+
+@ProviderFor(inThailand)
+final inThailandProvider = InThailandProvider._();
+
+/// True when the phone's region is Thailand. The Thai lucky colors are only
+/// for people from Thailand.
+
+final class InThailandProvider extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  /// True when the phone's region is Thailand. The Thai lucky colors are only
+  /// for people from Thailand.
+  InThailandProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'inThailandProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$inThailandHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return inThailand(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$inThailandHash() => r'05fa773bd08b53408b93f29a3a92a2515982966e';
+
+/// The user's choice on the Thai colors switch, falling back to the default.
+/// Always false outside Thailand.
 
 @ProviderFor(ShowThaiColors)
-final showThaiColorsProvider = ShowThaiColorsFamily._();
+final showThaiColorsProvider = ShowThaiColorsProvider._();
 
-/// The user's choice on the Thai colors switch for [lang], falling back to
-/// the default for that language.
+/// The user's choice on the Thai colors switch, falling back to the default.
+/// Always false outside Thailand.
 final class ShowThaiColorsProvider
     extends $AsyncNotifierProvider<ShowThaiColors, bool> {
-  /// The user's choice on the Thai colors switch for [lang], falling back to
-  /// the default for that language.
-  ShowThaiColorsProvider._({
-    required ShowThaiColorsFamily super.from,
-    required String super.argument,
-  }) : super(
-         retry: null,
-         name: r'showThaiColorsProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+  /// The user's choice on the Thai colors switch, falling back to the default.
+  /// Always false outside Thailand.
+  ShowThaiColorsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'showThaiColorsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$showThaiColorsHash();
 
-  @override
-  String toString() {
-    return r'showThaiColorsProvider'
-        ''
-        '($argument)';
-  }
-
   @$internal
   @override
   ShowThaiColors create() => ShowThaiColors();
-
-  @override
-  bool operator ==(Object other) {
-    return other is ShowThaiColorsProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
 }
 
-String _$showThaiColorsHash() => r'043f564446fcb817e1bc5ddf504a0d6ba9b942b7';
+String _$showThaiColorsHash() => r'cb763e83fef21763f0fb96cc6783bafea3ab7433';
 
-/// The user's choice on the Thai colors switch for [lang], falling back to
-/// the default for that language.
-
-final class ShowThaiColorsFamily extends $Family
-    with
-        $ClassFamilyOverride<
-          ShowThaiColors,
-          AsyncValue<bool>,
-          bool,
-          FutureOr<bool>,
-          String
-        > {
-  ShowThaiColorsFamily._()
-    : super(
-        retry: null,
-        name: r'showThaiColorsProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  /// The user's choice on the Thai colors switch for [lang], falling back to
-  /// the default for that language.
-
-  ShowThaiColorsProvider call(String lang) =>
-      ShowThaiColorsProvider._(argument: lang, from: this);
-
-  @override
-  String toString() => r'showThaiColorsProvider';
-}
-
-/// The user's choice on the Thai colors switch for [lang], falling back to
-/// the default for that language.
+/// The user's choice on the Thai colors switch, falling back to the default.
+/// Always false outside Thailand.
 
 abstract class _$ShowThaiColors extends $AsyncNotifier<bool> {
-  late final _$args = ref.$arg as String;
-  String get lang => _$args;
-
-  FutureOr<bool> build(String lang);
+  FutureOr<bool> build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
@@ -217,7 +214,7 @@ abstract class _$ShowThaiColors extends $AsyncNotifier<bool> {
               Object?,
               Object?
             >;
-    return element.handleCreate(ref, () => build(_$args));
+    return element.handleCreate(ref, build);
   }
 }
 

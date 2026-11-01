@@ -7,7 +7,8 @@ class DriftJournalRepository implements JournalRepository {
 
   final AppDatabase _db;
 
-  SimpleSelectStatement<$JournalCacheTable, JournalCacheData> get _newestFirst =>
+  SimpleSelectStatement<$JournalCacheTable, JournalCacheData>
+  get _newestFirst =>
       _db.select(_db.journalCache)
         ..orderBy([(t) => OrderingTerm.desc(t.savedAt)]);
 

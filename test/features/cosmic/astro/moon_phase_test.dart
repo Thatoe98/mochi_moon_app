@@ -94,12 +94,16 @@ void main() {
     test('quarters are half lit', () {
       // About a week after new moon is the first quarter, and a week after
       // full moon the last.
-      final first = moonPhase(newMoons.first.add(const Duration(days: 7, hours: 9)));
+      final first = moonPhase(
+        newMoons.first.add(const Duration(days: 7, hours: 9)),
+      );
       expect(first.name, MoonPhaseName.firstQuarter);
       expect(first.illumination, closeTo(0.5, 0.1));
       expect(first.isWaxing, isTrue);
 
-      final last = moonPhase(fullMoons.first.add(const Duration(days: 7, hours: 9)));
+      final last = moonPhase(
+        fullMoons.first.add(const Duration(days: 7, hours: 9)),
+      );
       expect(last.name, MoonPhaseName.lastQuarter);
       expect(last.illumination, closeTo(0.5, 0.1));
       expect(last.isWaxing, isFalse);
@@ -148,10 +152,7 @@ void main() {
       final phase = moonPhase(utc);
       expect(phase.elongation, inInclusiveRange(0, 360));
       expect(phase.elongation, lessThan(360));
-      expect(
-        phase.moonSign,
-        planetPositions(utc)[Body.moon.index].sign,
-      );
+      expect(phase.moonSign, planetPositions(utc)[Body.moon.index].sign);
       expect(phase.moonSign, signOfLongitude(longitudeAt(Body.moon, utc)));
     });
   });

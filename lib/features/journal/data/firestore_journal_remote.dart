@@ -23,9 +23,10 @@ class FirestoreJournalRemote implements JournalRemote {
 
   @override
   Future<void> put(String uid, JournalEntry entry) => _guard(
-    () => _journal(uid).doc(entry.quoteId).set({
-      'savedAt': Timestamp.fromDate(entry.savedAt),
-    }),
+    () =>
+        _journal(uid)
+            .doc(entry.quoteId)
+            .set({'savedAt': Timestamp.fromDate(entry.savedAt)}),
   );
 
   @override

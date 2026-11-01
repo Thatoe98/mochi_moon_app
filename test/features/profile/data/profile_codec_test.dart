@@ -49,12 +49,11 @@ void main() {
     expect(
       profileFromMap({
         'displayName': 'Mochi',
-        'profile': {'focusAreas': ['calm']},
+        'profile': {
+          'focusAreas': ['calm'],
+        },
       }),
-      const UserProfile(
-        displayName: 'Mochi',
-        focusAreas: [FocusArea.calm],
-      ),
+      const UserProfile(displayName: 'Mochi', focusAreas: [FocusArea.calm]),
     );
   });
 

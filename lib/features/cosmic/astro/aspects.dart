@@ -10,11 +10,7 @@ enum AspectType {
   trine(angle: 120, orb: 6, value: 1),
   opposition(angle: 180, orb: 8, value: -0.3);
 
-  AspectType({
-    required this.angle,
-    required this.orb,
-    required this.value,
-  });
+  AspectType({required this.angle, required this.orb, required this.value});
 
   /// Exact angle between the two bodies, in degrees.
   final double angle;

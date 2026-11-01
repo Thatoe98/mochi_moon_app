@@ -30,9 +30,11 @@ ProviderContainer _container({
   UserProfile? profile,
   FakeThaiColorsSettingRepository? thai,
   DateTime? now,
+  bool thailand = false,
 }) {
   final container = ProviderContainer(
     overrides: [
+      inThailandProvider.overrideWithValue(thailand),
       profileRepositoryProvider.overrideWithValue(
         FakeProfileRepository(profile),
       ),
@@ -42,9 +44,7 @@ ProviderContainer _container({
       thaiColorsSettingRepositoryProvider.overrideWithValue(
         thai ?? FakeThaiColorsSettingRepository(),
       ),
-      clockProvider.overrideWithValue(
-        () => now ?? DateTime(2026, 10, 29, 12),
-      ),
+      clockProvider.overrideWithValue(() => now ?? DateTime(2026, 10, 29, 12)),
     ],
   );
   addTearDown(container.dispose);
@@ -94,10 +94,7 @@ void main() {
           birthDate: DateTime(1998, 11, 8),
         ),
       );
-      expect(
-        await _load(container, userSunSignProvider),
-        ZodiacSign.scorpio,
-      );
+      expect(await _load(container, userSunSignProvider), ZodiacSign.scorpio);
     });
 
     test('reads the birth time in the zone of the birthplace', () async {
@@ -171,28 +168,33 @@ void main() {
   });
 
   group('showThaiColors', () {
-    test('is off for English and on for Thai until the user chooses', () async {
-      final container = _container();
-      expect(await _load(container, showThaiColorsProvider('en')), isFalse);
-      expect(await _load(container, showThaiColorsProvider('th')), isTrue);
+    test('is always off outside Thailand, even after choosing it', () async {
+      final container = _container(
+        thai: FakeThaiColorsSettingRepository(saved: true),
+      );
+      expect(await _load(container, showThaiColorsProvider), isFalse);
     });
 
-    test("keeps the user's choice over the language default", () async {
+    test('is on in Thailand until the user chooses', () async {
+      final container = _container(thailand: true);
+      expect(await _load(container, showThaiColorsProvider), isTrue);
+    });
+
+    test("keeps the user's choice over the default in Thailand", () async {
       final container = _container(
+        thailand: true,
         thai: FakeThaiColorsSettingRepository(saved: false),
       );
-      expect(await _load(container, showThaiColorsProvider('th')), isFalse);
+      expect(await _load(container, showThaiColorsProvider), isFalse);
     });
 
     test('saves a choice', () async {
       final thai = FakeThaiColorsSettingRepository();
-      final container = _container(thai: thai);
-      await _load(container, showThaiColorsProvider('en'));
-      await container
-          .read(showThaiColorsProvider('en').notifier)
-          .set(enabled: true);
-      expect(thai.saved, isTrue);
-      expect(container.read(showThaiColorsProvider('en')).value, isTrue);
+      final container = _container(thailand: true, thai: thai);
+      await _load(container, showThaiColorsProvider);
+      await container.read(showThaiColorsProvider.notifier).set(enabled: false);
+      expect(thai.saved, isFalse);
+      expect(container.read(showThaiColorsProvider).value, isFalse);
     });
   });
 }

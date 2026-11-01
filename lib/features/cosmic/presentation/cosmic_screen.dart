@@ -84,7 +84,7 @@ class _TodayView extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final reading = today.reading;
-    final showThai = ref.watch(showThaiColorsProvider(lang)).value ?? false;
+    final showThai = ref.watch(showThaiColorsProvider).value ?? false;
     final date = englishDates.formatMediumDate(today.date);
 
     return ListView(

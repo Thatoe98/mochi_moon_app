@@ -64,7 +64,10 @@ void main() {
         checkBurmese('Pick up to 3 cards today', 'ယနေ့ ကတ် ၃ ကတ်'),
         contains('uses Burmese digits; write 0-9'),
       );
-      expect(checkBurmese('Pick up to 3 cards today', 'ယနေ့ ကတ် 3 ကတ်'), isEmpty);
+      expect(
+        checkBurmese('Pick up to 3 cards today', 'ယနေ့ ကတ် 3 ကတ်'),
+        isEmpty,
+      );
     });
 
     test('rejects Zawgyi', () {

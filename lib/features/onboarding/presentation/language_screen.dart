@@ -79,7 +79,7 @@ class LanguageScreen extends ConsumerWidget {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: loaded.hasValue
-                      ? () => context.go(AppRoutes.welcomeHello)
+                      ? () => context.go(AppRoutes.welcomeCards)
                       : null,
                   child: Text(l10n.languageFirstContinue),
                 ),

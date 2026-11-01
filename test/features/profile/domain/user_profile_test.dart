@@ -62,8 +62,10 @@ void main() {
 
     test('a birth time or place without a birth date is not valid', () {
       expect(
-        const UserProfile(displayName: 'Mochi', birthMinutes: 60)
-            .isValidFor(today),
+        const UserProfile(
+          displayName: 'Mochi',
+          birthMinutes: 60,
+        ).isValidFor(today),
         isFalse,
       );
     });
@@ -118,17 +120,16 @@ void main() {
     test('has an account profile with a name alone', () {
       expect(const UserProfile().hasAccountProfile, isFalse);
       expect(const UserProfile(displayName: '  ').hasAccountProfile, isFalse);
-      expect(
-        const UserProfile(displayName: 'Mochi').hasAccountProfile,
-        isTrue,
-      );
+      expect(const UserProfile(displayName: 'Mochi').hasAccountProfile, isTrue);
     });
 
     test('has birth data only with a birth date', () {
       expect(const UserProfile(displayName: 'Mochi').hasBirthData, isFalse);
       expect(
-        UserProfile(displayName: 'Mochi', birthDate: DateTime(1998))
-            .hasBirthData,
+        UserProfile(
+          displayName: 'Mochi',
+          birthDate: DateTime(1998),
+        ).hasBirthData,
         isTrue,
       );
     });

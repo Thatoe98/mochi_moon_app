@@ -2,18 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/features/cosmic/astro/birth_time.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-DateTime _utc(
-  String tzId,
-  int y,
-  int m,
-  int d, {
-  int? hour,
-  int minute = 0,
-}) => birthInstantUtc(
-  birthDate: DateTime(y, m, d),
-  tzId: tzId,
-  birthMinutes: hour == null ? null : hour * 60 + minute,
-);
+DateTime _utc(String tzId, int y, int m, int d, {int? hour, int minute = 0}) =>
+    birthInstantUtc(
+      birthDate: DateTime(y, m, d),
+      tzId: tzId,
+      birthMinutes: hour == null ? null : hour * 60 + minute,
+    );
 
 void main() {
   group('birthInstantUtc', () {
@@ -84,19 +78,39 @@ void main() {
 
     test('resolves a clock time skipped by daylight saving', () {
       // 02:30 did not exist in New York on 2024-03-10.
-      final instant = _utc('America/New_York', 2024, 3, 10, hour: 2, minute: 30);
+      final instant = _utc(
+        'America/New_York',
+        2024,
+        3,
+        10,
+        hour: 2,
+        minute: 30,
+      );
       expect(
         instant,
-        isIn([DateTime.utc(2024, 3, 10, 6, 30), DateTime.utc(2024, 3, 10, 7, 30)]),
+        isIn([
+          DateTime.utc(2024, 3, 10, 6, 30),
+          DateTime.utc(2024, 3, 10, 7, 30),
+        ]),
       );
     });
 
     test('resolves a clock time repeated by daylight saving', () {
       // 01:30 happened twice in New York on 2024-11-03.
-      final instant = _utc('America/New_York', 2024, 11, 3, hour: 1, minute: 30);
+      final instant = _utc(
+        'America/New_York',
+        2024,
+        11,
+        3,
+        hour: 1,
+        minute: 30,
+      );
       expect(
         instant,
-        isIn([DateTime.utc(2024, 11, 3, 5, 30), DateTime.utc(2024, 11, 3, 6, 30)]),
+        isIn([
+          DateTime.utc(2024, 11, 3, 5, 30),
+          DateTime.utc(2024, 11, 3, 6, 30),
+        ]),
       );
     });
 

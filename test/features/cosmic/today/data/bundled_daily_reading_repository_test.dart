@@ -122,11 +122,9 @@ void main() {
 
     test('falls back to English and says so', () async {
       final content = _FakeContent({'en': english});
-      final reading = await BundledDailyReadingRepository(content).readingFor(
-        sign: ZodiacSign.aries,
-        date: DateTime(2026, 3),
-        lang: 'my',
-      );
+      final reading = await BundledDailyReadingRepository(
+        content,
+      ).readingFor(sign: ZodiacSign.aries, date: DateTime(2026, 3), lang: 'my');
       expect(content.asked, ['my', 'en']);
       expect(reading.lang, 'en');
       expect(reading.isFallback, isTrue);

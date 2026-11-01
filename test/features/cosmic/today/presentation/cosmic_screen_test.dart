@@ -49,8 +49,10 @@ Widget _host({
   Locale? locale,
   double textScale = 1,
   bool premium = true,
+  bool thailand = false,
 }) => ProviderScope(
   overrides: [
+    inThailandProvider.overrideWithValue(thailand),
     profileRepositoryProvider.overrideWithValue(FakeProfileRepository(profile)),
     contentRepositoryProvider.overrideWithValue(
       AssetContentRepository(bundle: DiskBundle()),
@@ -179,6 +181,24 @@ void main() {
     expect(find.text('Thai colors'), findsNothing);
   });
 
+  testWidgets('hides the Thai colors outside Thailand even when saved on', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(
+        profile: _scorpio,
+        thai: FakeThaiColorsSettingRepository(saved: true),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await _scrollTo(
+      tester,
+      find.text('For entertainment and self-reflection'),
+      300,
+    );
+    expect(find.text('Thai colors'), findsNothing);
+  });
+
   testWidgets('shows the birthday and day colors when switched on', (
     tester,
   ) async {
@@ -187,6 +207,7 @@ void main() {
       _host(
         profile: _scorpio,
         thai: FakeThaiColorsSettingRepository(saved: true),
+        thailand: true,
       ),
     );
     await tester.pumpAndSettle();
@@ -239,6 +260,7 @@ void main() {
       _host(
         profile: _scorpio,
         thai: FakeThaiColorsSettingRepository(saved: true),
+        thailand: true,
         textScale: 1.3,
       ),
     );
@@ -292,6 +314,7 @@ void main() {
         _host(
           profile: _scorpio,
           thai: FakeThaiColorsSettingRepository(saved: true),
+          thailand: true,
         ),
       );
       await tester.pumpAndSettle();

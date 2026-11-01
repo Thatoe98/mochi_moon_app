@@ -22,7 +22,10 @@ class _Host extends ConsumerWidget {
 }
 
 Widget _host(FakeAppLanguageRepository repository) => ProviderScope(
-  overrides: [appLanguageRepositoryProvider.overrideWithValue(repository)],
+  overrides: [
+    appLanguageRepositoryProvider.overrideWithValue(repository),
+    burmeseEnabledProvider.overrideWithValue(true),
+  ],
   child: const _Host(),
 );
 

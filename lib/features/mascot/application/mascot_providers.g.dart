@@ -187,15 +187,15 @@ final class MascotEarnerProvider
   }
 }
 
-String _$mascotEarnerHash() => r'879825ae6a1195ef0559a649ee92973d97eaced4';
+String _$mascotEarnerHash() => r'118373c312a7ff42d8f16a1783474123048cac1a';
 
-/// Puts [item] on Mochi, or does nothing when she does not own it or it needs
+/// Puts `item` on Mochi, or does nothing when she does not own it or it needs
 /// Premium. Returns whether it was equipped.
 
 @ProviderFor(equipMascotItem)
 final equipMascotItemProvider = EquipMascotItemProvider._();
 
-/// Puts [item] on Mochi, or does nothing when she does not own it or it needs
+/// Puts `item` on Mochi, or does nothing when she does not own it or it needs
 /// Premium. Returns whether it was equipped.
 
 final class EquipMascotItemProvider
@@ -206,7 +206,7 @@ final class EquipMascotItemProvider
           Future<bool> Function(MascotItem item)
         >
     with $Provider<Future<bool> Function(MascotItem item)> {
-  /// Puts [item] on Mochi, or does nothing when she does not own it or it needs
+  /// Puts `item` on Mochi, or does nothing when she does not own it or it needs
   /// Premium. Returns whether it was equipped.
   EquipMascotItemProvider._()
     : super(
@@ -245,12 +245,12 @@ final class EquipMascotItemProvider
 
 String _$equipMascotItemHash() => r'1a85b6dd069afb36f393e5d139f83397f8819dd5';
 
-/// Takes whatever is in [slot] off.
+/// Takes whatever is in `slot` off.
 
 @ProviderFor(unequipMascotSlot)
 final unequipMascotSlotProvider = UnequipMascotSlotProvider._();
 
-/// Takes whatever is in [slot] off.
+/// Takes whatever is in `slot` off.
 
 final class UnequipMascotSlotProvider
     extends
@@ -260,7 +260,7 @@ final class UnequipMascotSlotProvider
           Future<void> Function(String slot)
         >
     with $Provider<Future<void> Function(String slot)> {
-  /// Takes whatever is in [slot] off.
+  /// Takes whatever is in `slot` off.
   UnequipMascotSlotProvider._()
     : super(
         from: null,

@@ -30,7 +30,6 @@ import 'package:mochi_moon/features/settings/application/announcements_providers
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
-import 'package:mochi_moon/features/settings/domain/app_language.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
 import '../features/auth/support/fake_auth_repository.dart';
@@ -357,17 +356,13 @@ void main() {
         ..resetDevicePixelRatio();
     });
 
-    testWidgets('a new user starts at the language screen', (tester) async {
+    testWidgets('a new user starts at the welcome, in English only', (
+      tester,
+    ) async {
       await tester.pumpWidget(_app(onboarded: false));
       await tester.pumpAndSettle();
 
-      expect(find.text('Choose your language'), findsOneWidget);
-      expect(find.text('Welcome to Mochi Moon'), findsNothing);
-      expect(find.text('Deck'), findsNothing, reason: 'no tab bar yet');
-
-      await tester.tap(find.text('Continue'));
-      await tester.pumpAndSettle();
-
+      expect(find.text('Choose your language'), findsNothing);
       expect(find.text('Welcome to Mochi Moon'), findsOneWidget);
       expect(find.text('Try 3 cards'), findsOneWidget);
       expect(find.text('Deck'), findsNothing, reason: 'no tab bar yet');
@@ -394,22 +389,8 @@ void main() {
           .go(AppRoutes.journal);
       await tester.pumpAndSettle();
 
-      expect(find.text('Choose your language'), findsOneWidget);
+      expect(find.text('Welcome to Mochi Moon'), findsOneWidget);
       expect(find.text('Nothing saved yet'), findsNothing);
-    });
-
-    testWidgets('choosing Burmese on the first screen applies at once', (
-      tester,
-    ) async {
-      final language = FakeAppLanguageRepository();
-      await tester.pumpWidget(_app(onboarded: false, language: language));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('မြန်မာ'));
-      await tester.pumpAndSettle();
-
-      expect(language.saved, AppLanguage.burmese);
-      expect(find.text('Choose your language'), findsNothing);
     });
 
     testWidgets('welcome, three cards, sign-in, profile, then the deck', (
@@ -421,8 +402,6 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Continue'));
-      await tester.pumpAndSettle();
       await tester.tap(find.text('Try 3 cards'));
       await tester.pump();
       await tester.pump();

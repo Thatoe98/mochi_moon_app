@@ -73,7 +73,8 @@ abstract class UserProfile with _$UserProfile {
   /// either no birth data at all or a real birth date with a birthplace
   /// whenever a birth time is given (PRD §6.1).
   bool isValidFor(DateTime today) {
-    if (!hasAccountProfile || displayName.trim().length > maxDisplayNameLength) {
+    if (!hasAccountProfile ||
+        displayName.trim().length > maxDisplayNameLength) {
       return false;
     }
     final date = birthDate;

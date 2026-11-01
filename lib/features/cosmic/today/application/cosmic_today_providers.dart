@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/network/network_providers.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
@@ -43,14 +45,22 @@ DailyReadingRepository dailyReadingRepository(Ref ref) {
 ThaiColorsSettingRepository thaiColorsSettingRepository(Ref ref) =>
     PrefsThaiColorsSettingRepository(SharedPreferencesAsync());
 
-/// The user's choice on the Thai colors switch for [lang], falling back to
-/// the default for that language.
+/// True when the phone's region is Thailand. The Thai lucky colors are only
+/// for people from Thailand.
+@Riverpod(keepAlive: true)
+bool inThailand(Ref ref) =>
+    PlatformDispatcher.instance.locale.countryCode == 'TH';
+
+/// The user's choice on the Thai colors switch, falling back to the default.
+/// Always false outside Thailand.
 @riverpod
 class ShowThaiColors extends _$ShowThaiColors {
   @override
-  Future<bool> build(String lang) async {
+  Future<bool> build() async {
+    final here = ref.watch(inThailandProvider);
+    if (!here) return false;
     final saved = await ref.watch(thaiColorsSettingRepositoryProvider).load();
-    return saved ?? thaiColorsDefaultFor(lang);
+    return saved ?? thaiColorsDefaultFor(inThailand: here);
   }
 
   Future<void> set({required bool enabled}) async {

@@ -21,10 +21,19 @@ void main() {
     });
   }
 
-  test('the new moon is about intentions, the full moon about thanks', () async {
-    final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+  test(
+    'the new moon is about intentions, the full moon about thanks',
+    () async {
+      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
 
-    expect(moonAffirmation(l10n, MoonPhaseName.newMoon), contains('intention'));
-    expect(moonAffirmation(l10n, MoonPhaseName.fullMoon), contains('grateful'));
-  });
+      expect(
+        moonAffirmation(l10n, MoonPhaseName.newMoon),
+        contains('intention'),
+      );
+      expect(
+        moonAffirmation(l10n, MoonPhaseName.fullMoon),
+        contains('grateful'),
+      );
+    },
+  );
 }

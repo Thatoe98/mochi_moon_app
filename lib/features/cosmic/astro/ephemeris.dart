@@ -56,8 +56,7 @@ List<Placement> planetPositions(DateTime utc) {
 }
 
 /// Apparent geocentric ecliptic longitude of [body] at [utc], in [0, 360).
-double longitudeAt(Body body, DateTime utc) =>
-    _longitude(body, julianDay(utc));
+double longitudeAt(Body body, DateTime utc) => _longitude(body, julianDay(utc));
 
 /// Degrees per day [body]'s longitude is changing at [utc].
 double speedAt(Body body, DateTime utc) => _speed(body, julianDay(utc));
@@ -66,8 +65,7 @@ double speedAt(Body body, DateTime utc) => _speed(body, julianDay(utc));
 double _longitude(Body body, double jde) {
   final radians = switch (body) {
     Body.sun => solar.apparentVSOP87(_earth, jde).lon,
-    Body.moon =>
-      moon_position.position(jde).lon + am.nutation(jde).dPsi,
+    Body.moon => moon_position.position(jde).lon + am.nutation(jde).dPsi,
     _ => _planetLongitude(body, jde),
   };
   return normalizeDegrees(am.toDeg(radians));
@@ -96,8 +94,7 @@ double _planetLongitude(Body body, double jde) {
         planet.range * math.cos(planet.lat) * math.sin(planet.lon) -
         earth.range * math.cos(earth.lat) * math.sin(earth.lon);
     final z =
-        planet.range * math.sin(planet.lat) -
-        earth.range * math.sin(earth.lat);
+        planet.range * math.sin(planet.lat) - earth.range * math.sin(earth.lat);
     longitude = math.atan2(y, x);
     lightTimeDays = am.lightTime(math.sqrt(x * x + y * y + z * z));
   }
