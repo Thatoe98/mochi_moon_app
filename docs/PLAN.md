@@ -187,7 +187,7 @@ Hours are rough focused-work estimates. "Dep" lists tasks that must be done firs
 - Tests: logger drops unknown params; no event carries text; consent off logs nothing.
 
 **Q13 — Strings and Burmese for M5b** (3 h) · Dep: Q1–Q12
-- Same as P18.
+- **Postponed to after launch (owner, 2026-11-02): v1 is English-only. Skip this item.** Only check that every new string is in `app_en.arb`. Burmese later = P18 steps (translate tool, native review).
 
 ### M6 — Launch (67 h, mostly content and owner work)
 
