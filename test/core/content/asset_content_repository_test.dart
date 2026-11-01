@@ -19,10 +19,10 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final repo = AssetContentRepository(bundle: _DiskBundle());
 
-  test('loads the 20 sample quotes with unique ids', () async {
+  test('loads the launch quotes with unique ids', () async {
     final quotes = await repo.loadQuotes();
-    expect(quotes, hasLength(20));
-    expect(quotes.map((q) => q.id).toSet(), hasLength(20));
+    expect(quotes, hasLength(200));
+    expect(quotes.map((q) => q.id).toSet(), hasLength(200));
     expect(quotes.every((q) => q.textFor('en').isNotEmpty), isTrue);
   });
 
