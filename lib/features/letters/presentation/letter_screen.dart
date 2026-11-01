@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
@@ -33,6 +37,27 @@ class LetterScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Logs `letter_opened` once, when an unlocked letter is first shown.
+class _LogOpened extends ConsumerStatefulWidget {
+  const _LogOpened();
+
+  @override
+  ConsumerState<_LogOpened> createState() => _LogOpenedState();
+}
+
+class _LogOpenedState extends ConsumerState<_LogOpened> {
+  @override
+  void initState() {
+    super.initState();
+    unawaited(
+      ref.read(analyticsLoggerProvider).log(AnalyticsEvent.letterOpened),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => const SizedBox.shrink();
 }
 
 class _Body extends ConsumerWidget {
@@ -80,9 +105,10 @@ class _Body extends ConsumerWidget {
           style: theme.textTheme.labelLarge,
         ),
         const SizedBox(height: AppSpacing.md),
-        if (open)
-          SelectableText(letter.body, style: theme.textTheme.bodyLarge)
-        else
+        if (open) ...[
+          const _LogOpened(),
+          SelectableText(letter.body, style: theme.textTheme.bodyLarge),
+        ] else
           Row(
             children: [
               const Icon(Icons.lock_clock_rounded),

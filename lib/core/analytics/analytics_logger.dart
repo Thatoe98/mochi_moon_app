@@ -14,12 +14,12 @@ class AnalyticsLogger {
     AnalyticsEvent event, {
     Map<String, String> params = const {},
   }) async {
-    if (!_consented()) return;
-    final allowed = {
-      for (final entry in params.entries)
-        if (event.allowedParams.contains(entry.key)) entry.key: entry.value,
-    };
     try {
+      if (!_consented()) return;
+      final allowed = {
+        for (final entry in params.entries)
+          if (event.allowedParams.contains(entry.key)) entry.key: entry.value,
+      };
       await _sink.record(event.eventName, allowed);
     } on Object catch (error) {
       // Analytics must never break the app; log only the type, not the data.

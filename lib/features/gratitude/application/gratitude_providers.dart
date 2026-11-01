@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
@@ -40,12 +44,11 @@ int gratitudeCountToday(Ref ref) {
 @riverpod
 Future<GratitudeRejection?> Function(String text) addGratitude(Ref ref) =>
     (text) async {
+      final analytics = ref.read(analyticsLoggerProvider);
       final repository = ref.read(gratitudeRepositoryProvider);
       final now = ref.read(clockProvider)();
-      final rejection = checkGratitude(
-        text,
-        countToday: gratitudeCountOn(await repository.entries(), now),
-      );
+      final countToday = gratitudeCountOn(await repository.entries(), now);
+      final rejection = checkGratitude(text, countToday: countToday);
       if (rejection != null) return rejection;
       await repository.add(
         GratitudeNote(
@@ -53,6 +56,13 @@ Future<GratitudeRejection?> Function(String text) addGratitude(Ref ref) =>
           day: now,
           body: text.trim(),
           createdAt: now,
+        ),
+      );
+      // Only the count goes out, never the text she wrote.
+      unawaited(
+        analytics.log(
+          AnalyticsEvent.gratitudeAdded,
+          params: {'count': '${countToday + 1}'},
         ),
       );
       return null;

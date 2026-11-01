@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
@@ -54,7 +56,7 @@ class WeeklyLetterCard extends ConsumerWidget {
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton(
-                onPressed: () => _open(context, view),
+                onPressed: () => _open(context, ref, view),
                 child: Text(l10n.weeklyLetterOpen),
               ),
             ),
@@ -64,7 +66,10 @@ class WeeklyLetterCard extends ConsumerWidget {
     );
   }
 
-  void _open(BuildContext context, WeeklyLetterView view) {
+  void _open(BuildContext context, WidgetRef ref, WeeklyLetterView view) {
+    unawaited(
+      ref.read(analyticsLoggerProvider).log(AnalyticsEvent.weeklyLetterViewed),
+    );
     final l10n = AppLocalizations.of(context);
     unawaited(
       showDialog<void>(

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
@@ -61,6 +63,9 @@ class RitualController extends _$RitualController {
     final deck = await ref.read(deckProvider.future);
     final cards = deck.cards.skip(deck.position).take(ritualCardCount).toList();
     await _go(RitualState(phase: RitualPhase.mood, cards: cards));
+    unawaited(
+      ref.read(analyticsLoggerProvider).log(AnalyticsEvent.ritualStarted),
+    );
   }
 
   /// Leaves the mood step. Her mood, if she picked one, is stored by the
@@ -112,6 +117,9 @@ class RitualController extends _$RitualController {
     if (current == null || current.phase != RitualPhase.gratitude) return;
     await ref.read(deckProvider.notifier).completeRitualDay();
     state = const AsyncData(RitualState(phase: RitualPhase.finished));
+    unawaited(
+      ref.read(analyticsLoggerProvider).log(AnalyticsEvent.ritualCompleted),
+    );
   }
 
   Future<void> _go(RitualState next) async {

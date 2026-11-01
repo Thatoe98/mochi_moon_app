@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
@@ -52,10 +56,15 @@ Mood? todayMood(Ref ref) {
 
 /// Stores the given mood as today's mood; the last choice of the day wins.
 @riverpod
-Future<void> Function(Mood mood) setTodayMood(Ref ref) =>
-    (mood) => ref
-        .read(moodRepositoryProvider)
-        .set(DayMood(day: ref.read(clockProvider)(), mood: mood));
+Future<void> Function(Mood mood) setTodayMood(Ref ref) => (mood) async {
+  final analytics = ref.read(analyticsLoggerProvider);
+  await ref
+      .read(moodRepositoryProvider)
+      .set(DayMood(day: ref.read(clockProvider)(), mood: mood));
+  unawaited(
+    analytics.log(AnalyticsEvent.moodLogged, params: {'mood': mood.id}),
+  );
+};
 
 /// Keeps the moods in Firestore in step with the device while someone is
 /// signed in. The device wins: days only Firestore has are added here, and

@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/journey.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
@@ -57,6 +61,7 @@ Future<ResolvedJourneyDay?> journeyDay(
 @Riverpod(keepAlive: true)
 Future<void> Function(String journeyId) startJourneyAction(Ref ref) =>
     (journeyId) async {
+      final analytics = ref.read(analyticsLoggerProvider);
       final journeys = await ref.read(journeysProvider.future);
       final all = await ref.read(journeyRepositoryProvider).watchAll().first;
       if (!canStartJourney(all)) return;
@@ -65,6 +70,12 @@ Future<void> Function(String journeyId) startJourneyAction(Ref ref) =>
         await ref
             .read(journeyRepositoryProvider)
             .save(startJourney(journey, ref.read(clockProvider)()));
+        unawaited(
+          analytics.log(
+            AnalyticsEvent.journeyStarted,
+            params: {'journeyId': journeyId},
+          ),
+        );
         return;
       }
     };
@@ -74,6 +85,7 @@ Future<void> Function(String journeyId) startJourneyAction(Ref ref) =>
 @Riverpod(keepAlive: true)
 Future<void> Function(String journeyId, {String? reflection})
 completeJourneyDay(Ref ref) => (journeyId, {reflection}) async {
+  final analytics = ref.read(analyticsLoggerProvider);
   final journeys = await ref.read(journeysProvider.future);
   final all = await ref.read(journeyRepositoryProvider).watchAll().first;
   final now = ref.read(clockProvider)();
@@ -86,7 +98,22 @@ completeJourneyDay(Ref ref) => (journeyId, {reflection}) async {
         totalDays: journey.days,
         reflection: reflection,
       );
-      if (next != run) await ref.read(journeyRepositoryProvider).save(next);
+      if (next == run) continue;
+      await ref.read(journeyRepositoryProvider).save(next);
+      unawaited(
+        analytics.log(
+          AnalyticsEvent.journeyDayCompleted,
+          params: {'journeyId': journeyId, 'day': '${run.currentDay}'},
+        ),
+      );
+      if (next.isFinished) {
+        unawaited(
+          analytics.log(
+            AnalyticsEvent.journeyCompleted,
+            params: {'journeyId': journeyId},
+          ),
+        );
+      }
     }
   }
 };

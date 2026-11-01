@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/features/cosmic/unlock/domain/unlock_state.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/places/application/places_providers.dart';
@@ -85,6 +89,9 @@ class CosmicUnlock extends _$CosmicUnlock {
               birthPlace: answers.birthPlace,
             ),
           );
+      unawaited(
+        ref.read(analyticsLoggerProvider).log(AnalyticsEvent.cosmicUnlocked),
+      );
     } on Object {
       state = state.copyWith(saving: false);
       rethrow;

@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
@@ -27,6 +31,7 @@ class _GratitudeScreenState extends ConsumerState<GratitudeScreen> {
 
   void _open(List<GratitudeNote> entries) {
     final today = ref.read(clockProvider)();
+    unawaited(ref.read(analyticsLoggerProvider).log(AnalyticsEvent.jarOpened));
     setState(() {
       _opened = shuffledPast(entries, today);
       _position = 0;

@@ -124,6 +124,41 @@ void main() {
   });
 
   group('AnalyticsEvent', () {
+    test('no event can carry text she wrote, birth data or names', () {
+      // Every param is a count, a day, a stored id or a mood id.
+      const allowed = {
+        'source',
+        'direction',
+        'count',
+        'mood',
+        'journeyId',
+        'day',
+        'unlockDays',
+        'itemId',
+        'mode',
+        'productId',
+        'type',
+      };
+      final used = {for (final e in AnalyticsEvent.values) ...e.allowedParams};
+      expect(used.difference(allowed), isEmpty);
+    });
+
+    test('the new feature events log, dropping any unlisted param', () async {
+      final sink = RecordingAnalyticsSink();
+      final container = _container(consent: true, sink: sink);
+      await container.read(analyticsConsentControllerProvider.future);
+
+      await container
+          .read(analyticsLoggerProvider)
+          .log(
+            AnalyticsEvent.gratitudeAdded,
+            params: {'count': '2', 'text': 'my private line'},
+          );
+
+      expect(sink.recorded.single.$1, 'gratitude_added');
+      expect(sink.recorded.single.$2, {'count': '2'});
+    });
+
     test('event names are unique snake_case', () {
       final names = AnalyticsEvent.values.map((e) => e.eventName).toList();
       expect(names.toSet(), hasLength(names.length));

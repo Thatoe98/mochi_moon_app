@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
@@ -63,6 +67,7 @@ Future<OwnCardRejection?> Function(
   String? editId,
 })
 saveOwnCard(Ref ref) => (text, illustrationId, {editId}) async {
+  final analytics = ref.read(analyticsLoggerProvider);
   final repository = ref.read(ownCardRepositoryProvider);
   final isPremium = ref.read(hasPremiumProvider);
   final now = ref.read(clockProvider)();
@@ -87,6 +92,9 @@ saveOwnCard(Ref ref) => (text, illustrationId, {editId}) async {
           createdAt: now,
         ),
   );
+  if (edited == null) {
+    unawaited(analytics.log(AnalyticsEvent.customCardCreated));
+  }
   return null;
 };
 

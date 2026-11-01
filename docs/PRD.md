@@ -288,7 +288,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [x] Each entry drops a paper star into the jar with a short fill animation; the jar fills visibly with the count of entries (capped for display).
 - [x] "Open the jar" shows random past entries one at a time, never one from today first; an empty jar shows the mascot and an invitation.
 - [x] She can delete an entry. Entries are stored locally first and synced to `users/{uid}/gratitude` (§8.1). *(a delete made while offline is not queued: the Firestore copy comes back with the next sync)*
-- [x] **Entries are private (§10):** never sent to the AI API or to analytics. *(no analytics event carries text; the gratitude events of §11 are not wired yet)*
+- [x] **Entries are private (§10):** never sent to the AI API or to analytics. *(no analytics event carries text; `gratitude_added` sends only the count)*
 - [x] The jar is also reachable from the hard-day kit (§6.26).
 
 ### 6.17 My own cards (3 free, unlimited Premium)
@@ -919,8 +919,8 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [ ] Mochi grows with you: items and room (§6.23) — *Q6 done 2026-11-02: `mascot_items.json` (12 starter items, English names only), unlock engine (streak 3/7/14/30/60/100 and journey finish; items are only added), drift `mascot_inventory` (schema v8), Firestore sync to `state/mascot`, equip with the Premium check. Open: Burmese names (the translate tool does not cover `mascot_items.json` yet), quest-count unlocks, the 24 launch items and their art (`ill_mascot_*` files do not exist), Q7 done 2026-11-02: Me → Mochi's room screen (one item per slot, locked hints, Premium note, TalkBack labels, 1.3x text). Not built: an unlock celebration and item art (icons stand in).*
 - [ ] Mood insights, Premium (§6.18)
 - [x] Weekly letter from Mochi, Premium: server endpoint and app (§6.24, §8.2) — *Q9 server + Q10 app done 2026-11-01; the `weekly_letter_viewed` event waits for Q12.*
-- [ ] Monthly glow recap (§6.25)
-- [ ] Analytics events for the new features (§11)
+- [x] Monthly glow recap (§6.25) — *done: Me → Monthly glow (`/me/recap`) and a Today card on days 1–3 of the month; counts, top mood and last saved bundled card are worked out on the device, the share image is drawn on the device in the light theme and holds no text she wrote; a welcome-back variant when she did not show up; logs `recap_shared`.*
+- [x] Analytics events for the new features (§11) — *done: every §11 event is wired (ritual, gratitude count only, jar, own card, mood id, breathe, quests, journeys, letters, mascot unlock, weekly letter, recap, cosmic unlock). Params are ids, counts and days only; `AnalyticsLogger` drops unlisted params and does nothing without consent. Still a no-op sink until `firebase_analytics` is approved.*
 
 ### M6 — Launch
 - [ ] Content: 500 quotes and 60–100 illustrations in all shipped languages, human-reviewed

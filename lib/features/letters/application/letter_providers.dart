@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
@@ -64,6 +66,7 @@ Future<SealOutcome> Function(String text, int unlockDays) sealLetterAction(
 ) => (text, unlockDays) async {
   final rejection = checkLetter(text, unlockDays: unlockDays);
   if (rejection != null) return SealOutcome(rejection: rejection);
+  final analytics = ref.read(analyticsLoggerProvider);
   final scheduler = ref.read(reminderSchedulerProvider);
   final repository = ref.read(letterRepositoryProvider);
   final now = ref.read(clockProvider)();
@@ -76,6 +79,12 @@ Future<SealOutcome> Function(String text, int unlockDays) sealLetterAction(
   }
   await repository.add(
     sealLetter(id: newLetterId(), text: text, unlockDays: unlockDays, now: now),
+  );
+  unawaited(
+    analytics.log(
+      AnalyticsEvent.letterSealed,
+      params: {'unlockDays': '$unlockDays'},
+    ),
   );
   return SealOutcome(reminderOn: allowed);
 };

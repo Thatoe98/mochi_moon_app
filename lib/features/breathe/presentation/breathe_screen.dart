@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
@@ -12,14 +15,14 @@ enum _Stage { intro, running, finished }
 /// Breathe with Mochi (PRD §6.19): a one-minute box breathing session. Works
 /// offline with no account, and needs no permission. With reduce motion on,
 /// Mochi stays still and the cue text plus the progress ring carry the rhythm.
-class BreatheScreen extends StatefulWidget {
+class BreatheScreen extends ConsumerStatefulWidget {
   const BreatheScreen({super.key});
 
   @override
-  State<BreatheScreen> createState() => _BreatheScreenState();
+  ConsumerState<BreatheScreen> createState() => _BreatheScreenState();
 }
 
-class _BreatheScreenState extends State<BreatheScreen>
+class _BreatheScreenState extends ConsumerState<BreatheScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   _Stage _stage = _Stage.intro;
@@ -35,6 +38,11 @@ class _BreatheScreenState extends State<BreatheScreen>
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed && mounted) {
               setState(() => _stage = _Stage.finished);
+              unawaited(
+                ref
+                    .read(analyticsLoggerProvider)
+                    .log(AnalyticsEvent.breatheCompleted),
+              );
             }
           });
   }

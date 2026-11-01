@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/mascot_item.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
@@ -35,6 +39,7 @@ Stream<MascotState> mascotState(Ref ref) =>
 /// app root.
 @Riverpod(keepAlive: true)
 Future<void> mascotEarner(Ref ref) async {
+  final analytics = ref.read(analyticsLoggerProvider);
   final items = await ref.watch(mascotItemsProvider.future);
   final state = await ref.watch(mascotStateProvider.future);
   final streak = ref.watch(deckProvider).value?.streak ?? 0;
@@ -53,6 +58,14 @@ Future<void> mascotEarner(Ref ref) async {
   await ref
       .read(mascotRepositoryProvider)
       .grant(earned, ref.read(clockProvider)());
+  for (final item in earned) {
+    unawaited(
+      analytics.log(
+        AnalyticsEvent.mascotItemUnlocked,
+        params: {'itemId': item},
+      ),
+    );
+  }
 }
 
 /// Puts `item` on Mochi, or does nothing when she does not own it or it needs

@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/core/analytics/analytics_event.dart';
+import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quest.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
@@ -89,6 +93,7 @@ TodayQuest? todayQuest(Ref ref) {
 /// Marks today's quest done.
 @riverpod
 Future<void> Function() completeQuest(Ref ref) => () async {
+  final analytics = ref.read(analyticsLoggerProvider);
   final current = ref.read(todayQuestProvider);
   if (current == null || current.done) return;
   final dateKey = questDateKey(ref.read(clockProvider)());
@@ -108,11 +113,15 @@ Future<void> Function() completeQuest(Ref ref) => () async {
   await log.add(dateKey);
   // Nobody may be listening any more once the save has landed.
   if (ref.mounted) ref.invalidate(questDoneDaysProvider);
+  if (ref.mounted) {
+    unawaited(analytics.log(AnalyticsEvent.questCompleted));
+  }
 };
 
 /// Trades today's quest for the other pick, once a day.
 @riverpod
 Future<void> Function() swapQuest(Ref ref) => () async {
+  final analytics = ref.read(analyticsLoggerProvider);
   final current = ref.read(todayQuestProvider);
   final quests = ref.read(questsProvider).value;
   if (current == null || quests == null || !current.canSwap) return;
@@ -125,6 +134,7 @@ Future<void> Function() swapQuest(Ref ref) => () async {
       .save(
         QuestDay(date: questDateKey(now), questId: other.id, swapped: true),
       );
+  unawaited(analytics.log(AnalyticsEvent.questSwapped));
 };
 
 /// Keeps the quest state in Firestore in step with the device while someone
