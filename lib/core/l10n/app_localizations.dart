@@ -1658,6 +1658,24 @@ abstract class AppLocalizations {
   /// **'A longer, gentler read about your personality, feelings, love life, work and everyday habits.'**
   String get chartReportCardBody;
 
+  /// No description provided for @compatReportCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your full compatibility reading'**
+  String get compatReportCardTitle;
+
+  /// No description provided for @compatReportCardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A longer, gentler read about how you two connect: feelings, talking, romance and growing together.'**
+  String get compatReportCardBody;
+
+  /// No description provided for @compatReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your compatibility reading'**
+  String get compatReportTitle;
+
   /// No description provided for @reportTitle.
   ///
   /// In en, this message translates to:

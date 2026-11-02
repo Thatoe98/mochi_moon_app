@@ -43,6 +43,16 @@ Widget _app({
         builder: (context, state) => PartnerResultScreen(partnerId: id),
       ),
       GoRoute(
+        path: AppRoutes.paywall,
+        builder: (context, state) =>
+            Text('paywall ${state.uri.queryParameters['source']}'),
+      ),
+      GoRoute(
+        path: AppRoutes.partnerReport,
+        builder: (context, state) =>
+            Text('report ${state.uri.queryParameters['id']}'),
+      ),
+      GoRoute(
         path: AppRoutes.partnerEdit,
         builder: (context, state) =>
             Text('edit ${state.uri.queryParameters['id']}'),
@@ -101,6 +111,32 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Premium'), findsNothing);
+  });
+
+  testWidgets('free: the full report card is locked and opens the paywall', (
+    tester,
+  ) async {
+    _tallView(tester);
+    await tester.pumpWidget(_app(profile: _profile, premium: false));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your full compatibility reading'), findsOneWidget);
+    expect(find.byIcon(Icons.lock_rounded), findsWidgets);
+    await tester.tap(find.text('Your full compatibility reading'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('paywall compat_report'), findsOneWidget);
+  });
+
+  testWidgets('Premium: the full report card opens the report', (tester) async {
+    _tallView(tester);
+    await tester.pumpWidget(_app(profile: _profile));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Your full compatibility reading'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('report a'), findsOneWidget);
   });
 
   testWidgets('shows a loading state first', (tester) async {

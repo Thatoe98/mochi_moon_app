@@ -941,6 +941,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'A longer, gentler read about your personality, feelings, love life, work and everyday habits.';
 
   @override
+  String get compatReportCardTitle => 'Your full compatibility reading';
+
+  @override
+  String get compatReportCardBody =>
+      'A longer, gentler read about how you two connect: feelings, talking, romance and growing together.';
+
+  @override
+  String get compatReportTitle => 'Your compatibility reading';
+
+  @override
   String get reportTitle => 'Your full reading';
 
   @override

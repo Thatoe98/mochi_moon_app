@@ -26,6 +26,7 @@ import 'package:mochi_moon/features/onboarding/domain/onboarding_repository.dart
 import 'package:mochi_moon/features/onboarding/presentation/profile_setup_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/sample_cards_screen.dart';
 import 'package:mochi_moon/features/onboarding/presentation/welcome_screen.dart';
+import 'package:mochi_moon/features/partners/presentation/compat_report_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_edit_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/partners/presentation/partners_screen.dart';
@@ -62,6 +63,7 @@ abstract final class AppRoutes {
   static const partners = '/me/partners';
   static const partnerEdit = '/me/partners/edit';
   static const partnerResult = '/me/partners/result';
+  static const partnerReport = '/me/partners/result/report';
   static const paywall = '/paywall';
   static const welcome = '/welcome';
   static const welcomeCards = '/welcome/cards';
@@ -256,6 +258,14 @@ GoRouter router(Ref ref) {
                         builder: (context, state) => PartnerResultScreen(
                           partnerId: state.uri.queryParameters['id'],
                         ),
+                        routes: [
+                          GoRoute(
+                            path: 'report',
+                            builder: (context, state) => CompatReportScreen(
+                              partnerId: state.uri.queryParameters['id'],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

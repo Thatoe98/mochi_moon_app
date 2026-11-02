@@ -13,6 +13,7 @@ import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
 import 'package:mochi_moon/features/cosmic/unlock/presentation/cosmic_locked_view.dart';
 import 'package:mochi_moon/features/partners/application/compatibility_providers.dart';
 import 'package:mochi_moon/features/partners/domain/compatibility_band.dart';
+import 'package:mochi_moon/features/partners/presentation/compat_report_card.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_labels.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_meter.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
@@ -162,6 +163,8 @@ class _Result extends ConsumerWidget {
             ],
           ),
         ),
+        const SizedBox(height: AppSpacing.lg),
+        CompatReportCard(partnerId: compat.partner.id, locked: !premium),
         const SizedBox(height: AppSpacing.lg),
         Text(
           l10n.cosmicDisclaimer,

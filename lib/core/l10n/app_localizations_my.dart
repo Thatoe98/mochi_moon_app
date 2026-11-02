@@ -949,6 +949,16 @@ class AppLocalizationsMy extends AppLocalizations {
       'ကိုယ့်ရဲ့ ပင်ကိုယ်စရိုက်၊ ခံစားချက်တွေ၊ အချစ်ရေး၊ အလုပ်နဲ့ နေ့စဉ်အလေ့အကျင့်လေးတွေအကြောင်း ပိုရှည်ပြီး နူးညံ့တဲ့ ဖတ်ရှုချက်လေးပါ။';
 
   @override
+  String get compatReportCardTitle => 'Your full compatibility reading';
+
+  @override
+  String get compatReportCardBody =>
+      'A longer, gentler read about how you two connect: feelings, talking, romance and growing together.';
+
+  @override
+  String get compatReportTitle => 'Your compatibility reading';
+
+  @override
   String get reportTitle => 'အပြည့်အစုံဖတ်ရှုချက်';
 
   @override

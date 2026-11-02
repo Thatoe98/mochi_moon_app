@@ -28,13 +28,13 @@ class NatalReportScreen extends ConsumerWidget {
     final Widget body;
     final shown = report.value;
     if (shown != null) {
-      body = _ReportView(
+      body = ReportView(
         report: shown,
         interrupted: report.hasError,
         onRetry: retry,
       );
     } else if (report.hasError) {
-      body = _FailureView(error: report.error!, onRetry: retry);
+      body = ReportFailureView(error: report.error!, onRetry: retry);
     } else if (report.hasValue) {
       // The stream gave null: there is no birth date to read from.
       body = CosmicLockedView(
@@ -55,9 +55,14 @@ class NatalReportScreen extends ConsumerWidget {
   }
 }
 
-/// Nothing to show yet and the report could not be asked for.
-class _FailureView extends StatelessWidget {
-  const _FailureView({required this.error, required this.onRetry});
+/// Nothing to show yet and the report could not be asked for. Shared with the
+/// compatibility report.
+class ReportFailureView extends StatelessWidget {
+  const ReportFailureView({
+    required this.error,
+    required this.onRetry,
+    super.key,
+  });
 
   final Object error;
   final VoidCallback onRetry;
@@ -101,11 +106,13 @@ class _FailureView extends StatelessWidget {
   }
 }
 
-class _ReportView extends StatelessWidget {
-  const _ReportView({
+/// The parts of a report so far. Shared with the compatibility report.
+class ReportView extends StatelessWidget {
+  const ReportView({
     required this.report,
     required this.interrupted,
     required this.onRetry,
+    super.key,
   });
 
   final NatalReport report;
@@ -166,6 +173,11 @@ const _icons = <String, IconData>{
   'growth': Icons.spa_rounded,
   'gentle_edges': Icons.cloud_rounded,
   'self_love_ritual': Icons.self_improvement_rounded,
+  // The compatibility report.
+  'emotional': Icons.nightlight_round,
+  'communication': Icons.chat_bubble_rounded,
+  'romance': Icons.favorite_rounded,
+  'growing': Icons.spa_rounded,
 };
 
 class _SectionCard extends StatelessWidget {

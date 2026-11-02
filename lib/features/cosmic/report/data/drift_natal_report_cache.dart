@@ -5,6 +5,7 @@ import 'package:mochi_moon/features/cosmic/report/data/natal_report_codec.dart';
 import 'package:mochi_moon/features/cosmic/report/domain/natal_report.dart';
 
 const _type = 'natal';
+const _compatType = 'compat';
 
 /// The finished natal report kept on the device (PRD §8.6), one per language.
 /// Each is saved with the key of the chart it was written for, so editing the
@@ -15,14 +16,21 @@ class DriftNatalReportCache {
   final AppDatabase _db;
   final DateTime Function() _now;
 
-  static String _id(String lang) => '$_type:$lang';
+  /// A compatibility report is kept per partner ([partnerId]); the natal one
+  /// has none.
+  static String _id(String lang, String? partnerId) =>
+      partnerId == null ? '$_type:$lang' : '$_compatType:$partnerId:$lang';
 
   /// The saved report for [lang] if it was written for [key]; null when there
   /// is none, it is for another chart, or the row is damaged.
-  Future<NatalReport?> find({required String lang, required String key}) async {
+  Future<NatalReport?> find({
+    required String lang,
+    required String key,
+    String? partnerId,
+  }) async {
     final row = await (_db.select(
       _db.cachedReports,
-    )..where((t) => t.reportId.equals(_id(lang)))).getSingleOrNull();
+    )..where((t) => t.reportId.equals(_id(lang, partnerId)))).getSingleOrNull();
     if (row == null) return null;
     try {
       final decoded = jsonDecode(row.json);
@@ -37,12 +45,16 @@ class DriftNatalReportCache {
     }
   }
 
-  Future<void> put({required String key, required NatalReport report}) => _db
+  Future<void> put({
+    required String key,
+    required NatalReport report,
+    String? partnerId,
+  }) => _db
       .into(_db.cachedReports)
       .insertOnConflictUpdate(
         CachedReportsCompanion.insert(
-          reportId: _id(report.lang),
-          type: _type,
+          reportId: _id(report.lang, partnerId),
+          type: partnerId == null ? _type : _compatType,
           lang: report.lang,
           version: report.version,
           json: jsonEncode({'key': key, 'report': natalReportToJson(report)}),
