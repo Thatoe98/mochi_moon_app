@@ -655,6 +655,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get widgetThemeMidnight => 'Midnight';
 
   @override
+  String get themeModeTitle => 'Light or dark';
+
+  @override
+  String get themeModeSystem => 'Phone';
+
+  @override
+  String get themeModeLight => 'Light';
+
+  @override
+  String get themeModeDark => 'Dark';
+
+  @override
   String get reduceMotionTitle => 'Reduce motion';
 
   @override

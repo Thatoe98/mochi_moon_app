@@ -1172,6 +1172,30 @@ abstract class AppLocalizations {
   /// **'Midnight'**
   String get widgetThemeMidnight;
 
+  /// Me tab: choose light mode, dark mode, or follow the phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Light or dark'**
+  String get themeModeTitle;
+
+  /// No description provided for @themeModeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get themeModeSystem;
+
+  /// No description provided for @themeModeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeModeLight;
+
+  /// No description provided for @themeModeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeModeDark;
+
   /// No description provided for @reduceMotionTitle.
   ///
   /// In en, this message translates to:

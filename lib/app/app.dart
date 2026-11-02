@@ -20,6 +20,7 @@ import 'package:mochi_moon/features/settings/application/announcements_providers
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 import 'package:mochi_moon/features/settings/application/reduce_motion_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
+import 'package:mochi_moon/features/settings/application/theme_mode_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 
 class MochiMoonApp extends ConsumerWidget {
@@ -56,6 +57,7 @@ class MochiMoonApp extends ConsumerWidget {
       onGenerateTitle: (context) => AppLocalizations.of(context).appName,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
+      themeMode: ref.watch(appThemeModeProvider),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: ref.watch(appLocaleProvider),

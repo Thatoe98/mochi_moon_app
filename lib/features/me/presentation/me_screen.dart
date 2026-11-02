@@ -17,6 +17,7 @@ import 'package:mochi_moon/features/settings/presentation/analytics_section.dart
 import 'package:mochi_moon/features/settings/presentation/announcements_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reduce_motion_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reminder_section.dart';
+import 'package:mochi_moon/features/settings/presentation/theme_mode_section.dart';
 
 /// Profile, Premium and settings. The features live on the Explore tab.
 class MeScreen extends ConsumerWidget {
@@ -95,6 +96,7 @@ class MeScreen extends ConsumerWidget {
               ReminderSection(),
               ThaiColorsSection(),
               WidgetThemeSection(),
+              ThemeModeSection(),
               ReduceMotionSection(),
             ],
           ),
