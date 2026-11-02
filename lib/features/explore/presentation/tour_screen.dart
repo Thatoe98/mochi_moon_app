@@ -85,7 +85,7 @@ class _TourScreenState extends ConsumerState<TourScreen> {
                   padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Column(
                     children: [
-                      const SizedBox(height: AppSpacing.lg),
+                      const SizedBox(height: AppSpacing.xxl * 2),
                       IconBadge(
                         icon: _icons[index],
                         color: accents[index],
@@ -96,7 +96,7 @@ class _TourScreenState extends ConsumerState<TourScreen> {
                         header: true,
                         child: Text(
                           titles[index],
-                          style: theme.textTheme.headlineSmall,
+                          style: theme.textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),
                       ),
