@@ -1004,7 +1004,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 2. App: the natal report and weekly letter clients map 402 to a soft paywall invitation (`server_402`); tests. *(done: natal screen shows the invitation; the weekly card is Premium-only and hides on error; its free teaser link comes with item 13.)*
 - [x] 3. A shared `PremiumPreview` soft-lock widget (`core/widgets/`) and one `free_limits.dart` (deck 5, own cards 1, sealed letters 1, partners 1, mood months 2); widget tests incl. TalkBack labels. *(done: `core/widgets/premium_preview.dart`, `core/premium/free_limits.dart`; each limit is wired to it in its own item below.)*
 - [x] 4. Deck: `deck_history` records where a card was read (drift migration plus migration test); the limit counts ritual and deck cards only; `dailyCardLimitProvider` follows `hasPremiumProvider`; the limit card gets the gentle upsell (`deck_limit`); tests for day 1 (3 sample cards, then a full ritual) and a journey day. *(done, drift schema 9: `deck_history.source`; Premium deals at most 50 cards at a time so the deck stays a short list.)*
-- [ ] 5. Own cards: free limit 1; over-limit cards stay readable, deletable and in the rotation; tests.
+- [x] 5. Own cards: free limit 1; over-limit cards stay readable, deletable and in the rotation; tests. *(done: `ownCardFreeLimit` follows `FreeLimits.ownCards`; lapse test keeps three cards in the pool.)*
 - [ ] 6. Letters: one sealed letter at a time free; tests.
 - [ ] 7. Quests: the swap is Premium; tests.
 - [ ] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests.

@@ -52,7 +52,7 @@ void main() {
     await tester.pump();
 
     expect(find.text('No cards of your own yet'), findsOneWidget);
-    expect(find.text('3 free cards left'), findsOneWidget);
+    expect(find.text('1 free card left'), findsOneWidget);
   });
 
   testWidgets('writing a card saves it with the picked picture', (
@@ -91,14 +91,10 @@ void main() {
     expect(field.controller!.text.length, 140);
   });
 
-  testWidgets('the fourth card explains the limit instead of opening', (
+  testWidgets('the second card explains the limit instead of opening', (
     tester,
   ) async {
-    final repo = FakeOwnCardRepository([
-      _card('a', 1),
-      _card('b', 2),
-      _card('c', 3),
-    ]);
+    final repo = FakeOwnCardRepository([_card('a', 1)]);
     await tester.pumpWidget(_app(repo));
     await tester.pump();
 
@@ -106,11 +102,11 @@ void main() {
     await tester.tap(find.text('Write a card'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Your three free cards are in use'), findsOneWidget);
+    expect(find.text('Your free card is in use'), findsOneWidget);
     expect(find.byType(TextField), findsNothing);
   });
 
-  testWidgets('Premium can keep writing past three', (tester) async {
+  testWidgets('Premium can keep writing past the first', (tester) async {
     final repo = FakeOwnCardRepository([
       _card('a', 1),
       _card('b', 2),

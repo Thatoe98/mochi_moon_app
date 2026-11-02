@@ -2921,13 +2921,13 @@ abstract class AppLocalizations {
   /// No description provided for @ownCardsLimitTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your three free cards are in use'**
+  /// **'Your free card is in use'**
   String get ownCardsLimitTitle;
 
   /// No description provided for @ownCardsLimitBody.
   ///
   /// In en, this message translates to:
-  /// **'Free accounts keep three cards of their own. Premium lets you write as many as you like. You can also delete a card to make room.'**
+  /// **'Free accounts keep one card of their own. Premium lets you write as many as you like. You can also delete your card to make room.'**
   String get ownCardsLimitBody;
 
   /// No description provided for @ownCardsLimitOk.

@@ -35,9 +35,9 @@ void main() {
       expect(_check('hi', art: ' '), OwnCardRejection.noIllustration);
     });
 
-    test('free users get three cards, the fourth is refused', () {
-      expect(_check('x', count: 2), isNull);
-      expect(_check('x', count: 3), OwnCardRejection.limitReached);
+    test('free users get one card, the second is refused', () {
+      expect(_check('x'), isNull);
+      expect(_check('x', count: 1), OwnCardRejection.limitReached);
     });
 
     test('Premium has no limit', () {
@@ -45,7 +45,7 @@ void main() {
     });
 
     test('editing is never refused for the limit', () {
-      expect(_check('x', count: 3, isNew: false), isNull);
+      expect(_check('x', count: 1, isNew: false), isNull);
     });
   });
 

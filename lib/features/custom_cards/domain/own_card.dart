@@ -2,10 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/core/premium/free_limits.dart';
 
 /// Free users keep this many cards of their own; Premium has no limit
 /// (PRD §6.17).
-const ownCardFreeLimit = 3;
+const int ownCardFreeLimit = FreeLimits.ownCards;
 
 /// At most this many characters on a card (PRD §6.17, matched by the rules).
 const ownCardMaxLength = 140;

@@ -1717,11 +1717,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'That card could not be saved. Please try again.';
 
   @override
-  String get ownCardsLimitTitle => 'Your three free cards are in use';
+  String get ownCardsLimitTitle => 'Your free card is in use';
 
   @override
   String get ownCardsLimitBody =>
-      'Free accounts keep three cards of their own. Premium lets you write as many as you like. You can also delete a card to make room.';
+      'Free accounts keep one card of their own. Premium lets you write as many as you like. You can also delete your card to make room.';
 
   @override
   String get ownCardsLimitOk => 'OK';

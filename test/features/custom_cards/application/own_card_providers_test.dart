@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
@@ -80,16 +81,14 @@ void main() {
       expect(local.all, isEmpty);
     });
 
-    test('free: the fourth card is refused', () async {
+    test('free: the second card is refused', () async {
       final local = FakeOwnCardRepository();
       final container = _container(local: local);
       final save = container.read(saveOwnCardProvider);
 
       expect(await save('one', 'moon_01'), isNull);
-      expect(await save('two', 'moon_01'), isNull);
-      expect(await save('three', 'moon_01'), isNull);
-      expect(await save('four', 'moon_01'), OwnCardRejection.limitReached);
-      expect(local.all, hasLength(3));
+      expect(await save('two', 'moon_01'), OwnCardRejection.limitReached);
+      expect(local.all, hasLength(1));
     });
 
     test('Premium: no limit', () async {
@@ -104,11 +103,7 @@ void main() {
     });
 
     test('deleting a card frees a slot', () async {
-      final local = FakeOwnCardRepository([
-        _card('a', 1),
-        _card('b', 2),
-        _card('c', 3),
-      ]);
+      final local = FakeOwnCardRepository([_card('a', 1)]);
       final container = _container(local: local);
       await container.listen(authUserProvider.future, (_, _) {}).read();
 
@@ -116,14 +111,14 @@ void main() {
         await container.read(saveOwnCardProvider)('new', 'moon_01'),
         OwnCardRejection.limitReached,
       );
-      await container.read(deleteOwnCardProvider)('b');
+      await container.read(deleteOwnCardProvider)('a');
       expect(
         await container.read(saveOwnCardProvider)('new', 'moon_01'),
         isNull,
       );
     });
 
-    test('editing at the limit works and keeps id and date', () async {
+    test('editing past the limit works and keeps id and date', () async {
       final local = FakeOwnCardRepository([
         _card('a', 1),
         _card('b', 2),
@@ -160,13 +155,46 @@ void main() {
     });
   });
 
+  group('after Premium ends (PRD 6.13 lapse rule)', () {
+    test(
+      'cards over the free limit stay in the pool and can be deleted',
+      () async {
+        final local = FakeOwnCardRepository([
+          _card('a', 1),
+          _card('b', 2),
+          _card('c', 3),
+        ]);
+        final container = ProviderContainer(
+          overrides: [
+            ownCardRepositoryProvider.overrideWithValue(local),
+            ownCardRemoteProvider.overrideWithValue(null),
+            hasPremiumProvider.overrideWithValue(false),
+            quotesProvider.overrideWith((ref) async => []),
+          ],
+        );
+        addTearDown(container.dispose);
+
+        final pool = await container.read(cardPoolProvider.future);
+        expect(pool.map((q) => q.id), ['own_c', 'own_b', 'own_a']);
+        expect(container.read(ownCardSlotsLeftProvider), 0);
+        expect(
+          await container.read(saveOwnCardProvider)('new', 'moon_01'),
+          OwnCardRejection.limitReached,
+        );
+
+        await container.read(deleteOwnCardProvider)('b');
+        expect(local.all.map((c) => c.id), ['c', 'a']);
+      },
+    );
+  });
+
   group('ownCardSlotsLeft', () {
     test('counts down for a free user', () async {
       final local = FakeOwnCardRepository([_card('a', 1)]);
       final container = _container(local: local);
       await container.listen(ownCardsProvider.future, (_, _) {}).read();
 
-      expect(container.read(ownCardSlotsLeftProvider), 2);
+      expect(container.read(ownCardSlotsLeftProvider), 0);
     });
 
     test('is null for Premium', () {
