@@ -109,6 +109,44 @@ final class PurchaseCatalogProvider
 
 String _$purchaseCatalogHash() => r'ae459b522e0d16b90448ffafc554825a45dcd5c7';
 
+/// The store's price for one compatibility report credit; null if unknown.
+
+@ProviderFor(reportCreditPrice)
+final reportCreditPriceProvider = ReportCreditPriceProvider._();
+
+/// The store's price for one compatibility report credit; null if unknown.
+
+final class ReportCreditPriceProvider
+    extends $FunctionalProvider<AsyncValue<String?>, String?, FutureOr<String?>>
+    with $FutureModifier<String?>, $FutureProvider<String?> {
+  /// The store's price for one compatibility report credit; null if unknown.
+  ReportCreditPriceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'reportCreditPriceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$reportCreditPriceHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<String?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<String?> create(Ref ref) {
+    return reportCreditPrice(ref);
+  }
+}
+
+String _$reportCreditPriceHash() => r'f3c0b65468851c5bb5d55a1832b5df6035c76266';
+
 /// The plans with store prices.
 
 @ProviderFor(planOffers)

@@ -11,6 +11,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/partners/application/compatibility_providers.dart';
 import 'package:mochi_moon/features/partners/application/partner_providers.dart';
 import 'package:mochi_moon/features/partners/domain/partner.dart';
+import 'package:mochi_moon/features/partners/presentation/compat_report_card.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_meter.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
@@ -34,6 +35,7 @@ Widget _app({
   bool failing = false,
   bool loading = false,
   bool premium = true,
+  int credits = 0,
 }) {
   final router = GoRouter(
     initialLocation: '/result',
@@ -62,6 +64,7 @@ Widget _app({
   return ProviderScope(
     overrides: [
       hasPremiumProvider.overrideWithValue(premium),
+      reportCreditsProvider.overrideWithValue(credits),
       profileRepositoryProvider.overrideWithValue(
         FakeProfileRepository(profile),
       ),
@@ -126,6 +129,27 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('paywall compat_report'), findsOneWidget);
+  });
+
+  testWidgets('free with a report credit: the card is open', (tester) async {
+    _tallView(tester);
+    await tester.pumpWidget(
+      _app(profile: _profile, premium: false, credits: 1),
+    );
+    await tester.pumpAndSettle();
+
+    // The details stay Premium; only the report card is open.
+    expect(
+      find.descendant(
+        of: find.byType(CompatReportCard),
+        matching: find.byIcon(Icons.lock_rounded),
+      ),
+      findsNothing,
+    );
+    await tester.tap(find.text('Your full compatibility reading'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('report a'), findsOneWidget);
   });
 
   testWidgets('Premium: the full report card opens the report', (tester) async {

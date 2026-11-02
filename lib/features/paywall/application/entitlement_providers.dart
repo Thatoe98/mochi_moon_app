@@ -22,6 +22,12 @@ Stream<Entitlement> entitlement(Ref ref) {
   return FirestoreEntitlementRemote().watch(user.uid);
 }
 
+/// How many one-off compatibility report credits she has (PRD §6.13); the
+/// server counts them. Zero until known.
+@Riverpod(keepAlive: true)
+int reportCredits(Ref ref) =>
+    ref.watch(entitlementProvider).value?.reportCredits ?? 0;
+
 /// Whether the user has Premium (PRD §6.12).
 ///
 /// True only when the server's entitlement says so; until it is known it is

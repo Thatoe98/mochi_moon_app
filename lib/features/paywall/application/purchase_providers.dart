@@ -28,6 +28,11 @@ PurchaseCatalog purchaseCatalog(Ref ref) {
   return catalog;
 }
 
+/// The store's price for one compatibility report credit; null if unknown.
+@riverpod
+Future<String?> reportCreditPrice(Ref ref) =>
+    ref.watch(purchaseCatalogProvider).reportCreditPrice();
+
 /// The plans with store prices.
 @riverpod
 Future<List<PlanOffer>> planOffers(Ref ref) =>

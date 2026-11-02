@@ -55,6 +55,54 @@ final class EntitlementProvider
 
 String _$entitlementHash() => r'76976075bbde7ede6055bf1aa59e722304f6b6d0';
 
+/// How many one-off compatibility report credits she has (PRD §6.13); the
+/// server counts them. Zero until known.
+
+@ProviderFor(reportCredits)
+final reportCreditsProvider = ReportCreditsProvider._();
+
+/// How many one-off compatibility report credits she has (PRD §6.13); the
+/// server counts them. Zero until known.
+
+final class ReportCreditsProvider extends $FunctionalProvider<int, int, int>
+    with $Provider<int> {
+  /// How many one-off compatibility report credits she has (PRD §6.13); the
+  /// server counts them. Zero until known.
+  ReportCreditsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'reportCreditsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$reportCreditsHash();
+
+  @$internal
+  @override
+  $ProviderElement<int> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  int create(Ref ref) {
+    return reportCredits(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int>(value),
+    );
+  }
+}
+
+String _$reportCreditsHash() => r'01cd8cd22a06dbfc57f0a07b87e24c82c9dea1fb';
+
 /// Whether the user has Premium (PRD §6.12).
 ///
 /// True only when the server's entitlement says so; until it is known it is

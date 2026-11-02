@@ -30,6 +30,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   PremiumPlan _selected = PremiumPlan.yearly;
   bool _restoring = false;
   bool _buying = false;
+  bool get _forReport => widget.source == 'compat_report';
 
   @override
   void initState() {
@@ -70,6 +71,18 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     }
   }
 
+  Future<void> _buyReport() async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _buying = true);
+    final result = await ref.read(purchaseCatalogProvider).buyReportCredit();
+    if (!mounted) return;
+    setState(() => _buying = false);
+    if (result != BuyResult.started) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.paywallBuyFailed)));
+    }
+  }
+
   Future<void> _manage() async {
     final l10n = AppLocalizations.of(context);
     final messenger = ScaffoldMessenger.of(context);
@@ -91,6 +104,18 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         context.pop();
       }
     });
+    // A bought report credit also closes the paywall: she goes back to the
+    // reading she came for.
+    ref.listen(reportCreditsProvider, (previous, next) {
+      if (_forReport && next > (previous ?? 0) && context.canPop()) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(l10n.paywallReportAdded)));
+        context.pop();
+      }
+    });
+    final reportPrice = _forReport
+        ? ref.watch(reportCreditPriceProvider).value
+        : null;
     final offers = ref.watch(planOffersProvider).value ?? const <PlanOffer>[];
     final canPurchase = ref.watch(purchaseCatalogProvider).canPurchase;
 
@@ -209,6 +234,19 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               l10n.paywallUnavailable,
               style: theme.textTheme.bodyMedium,
               textAlign: TextAlign.center,
+            ),
+          ],
+          if (_forReport) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              l10n.paywallReportNote,
+              style: theme.textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            OutlinedButton(
+              onPressed: reportPrice != null && !_buying ? _buyReport : null,
+              child: Text(l10n.paywallReportButton(reportPrice ?? '…')),
             ),
           ],
           TextButton(

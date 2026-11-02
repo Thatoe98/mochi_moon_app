@@ -2430,4 +2430,17 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get paywallWelcome =>
       'Welcome to Mochi Premium. Thank you for being kind to yourself.';
+
+  @override
+  String get paywallReportNote =>
+      'Only want the compatibility reading? You can buy just that, once, with no subscription.';
+
+  @override
+  String paywallReportButton(String price) {
+    return 'One compatibility reading · $price';
+  }
+
+  @override
+  String get paywallReportAdded =>
+      'Your compatibility reading is ready to open.';
 }

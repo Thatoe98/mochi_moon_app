@@ -771,5 +771,13 @@
   "paywallFinePrint": "Subscriptions renew until you cancel them in Google Play. Prices are set by the store.",
   "paywallSeePremium": "See Premium",
   "paywallBuyFailed": "We could not start the purchase. Please try again in a moment.",
-  "paywallWelcome": "Welcome to Mochi Premium. Thank you for being kind to yourself."
+  "paywallWelcome": "Welcome to Mochi Premium. Thank you for being kind to yourself.",
+  "paywallReportNote": "Only want the compatibility reading? You can buy just that, once, with no subscription.",
+  "paywallReportButton": "One compatibility reading · {price}",
+  "@paywallReportButton": {
+    "placeholders": {
+      "price": {"type": "String"}
+    }
+  },
+  "paywallReportAdded": "Your compatibility reading is ready to open."
 }

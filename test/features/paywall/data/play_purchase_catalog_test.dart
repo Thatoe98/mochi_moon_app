@@ -40,9 +40,13 @@ ProductDetails _product(PremiumPlan plan, String price) => ProductDetails(
   currencyCode: 'USD',
 );
 
-PurchaseDetails _purchase(PurchaseStatus status, {String token = 'tok'}) {
+PurchaseDetails _purchase(
+  PurchaseStatus status, {
+  String token = 'tok',
+  String? product,
+}) {
   return PurchaseDetails(
-    productID: PremiumPlan.monthly.productId,
+    productID: product ?? PremiumPlan.monthly.productId,
     verificationData: PurchaseVerificationData(
       localVerificationData: token,
       serverVerificationData: token,
@@ -140,6 +144,76 @@ void main() {
     await Future<void>.delayed(Duration.zero);
 
     expect(verifier.tokens, hasLength(1));
+    verifyNever(() => store.completePurchase(any()));
+  });
+
+  test(
+    'the report credit has a store price and is bought as a consumable',
+    () async {
+      when(() => store.queryProductDetails(any())).thenAnswer(
+        (_) async => ProductDetailsResponse(
+          productDetails: [
+            ProductDetails(
+              id: reportCreditProductId,
+              title: 'Report',
+              description: '',
+              price: r'$1.99',
+              rawPrice: 1.99,
+              currencyCode: 'USD',
+            ),
+          ],
+          notFoundIDs: const [],
+        ),
+      );
+      when(
+        () => store.buyConsumable(purchaseParam: any(named: 'purchaseParam')),
+      ).thenAnswer((_) async => true);
+      final catalog = build(_Verifier());
+
+      expect(await catalog.reportCreditPrice(), r'$1.99');
+      expect(await catalog.buyReportCredit(), BuyResult.started);
+      verify(
+        () => store.buyConsumable(purchaseParam: any(named: 'purchaseParam')),
+      ).called(1);
+    },
+  );
+
+  test('without a store price the report credit cannot be bought', () async {
+    final catalog = build(_Verifier());
+    expect(await catalog.reportCreditPrice(), isNull);
+    expect(await catalog.buyReportCredit(), BuyResult.unavailable);
+    verifyNever(
+      () => store.buyConsumable(purchaseParam: any(named: 'purchaseParam')),
+    );
+  });
+
+  test(
+    'a report credit is completed only after the server counts it',
+    () async {
+      final verifier = _Verifier();
+      build(verifier);
+      final purchase = _purchase(
+        PurchaseStatus.purchased,
+        token: 'credit-token',
+        product: reportCreditProductId,
+      );
+      stream.add([purchase]);
+      await Future<void>.delayed(Duration.zero);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(verifier.tokens, ['credit-token']);
+      verify(() => store.completePurchase(purchase)).called(1);
+    },
+  );
+
+  test('a report credit the server refuses is not completed', () async {
+    build(_Verifier(accept: false));
+    stream.add([
+      _purchase(PurchaseStatus.purchased, product: reportCreditProductId),
+    ]);
+    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(Duration.zero);
+
     verifyNever(() => store.completePurchase(any()));
   });
 

@@ -1,3 +1,6 @@
+/// The Google Play id of the one-off compatibility report credit (PRD §6.13).
+const reportCreditProductId = 'mochi_compat_report';
+
 /// The Premium plans on offer (PRD §6.13).
 enum PremiumPlan {
   yearly('mochi_premium_yearly', hasTrial: true),
@@ -55,6 +58,14 @@ abstract interface class PurchaseCatalog {
   /// Opens the store's purchase sheet for [plan].
   Future<BuyResult> buy(PremiumPlan plan);
 
+  /// The store's price for one compatibility report credit, or null while it
+  /// cannot be reached.
+  Future<String?> reportCreditPrice();
+
+  /// Opens the store's purchase sheet for one report credit. It is a
+  /// consumable: the server counts it, then it can be bought again.
+  Future<BuyResult> buyReportCredit();
+
   /// Asks the store to re-deliver earlier purchases. Returns true when
   /// Premium was found.
   Future<bool> restore();
@@ -74,6 +85,12 @@ class UnavailablePurchaseCatalog implements PurchaseCatalog {
 
   @override
   Future<BuyResult> buy(PremiumPlan plan) async => BuyResult.unavailable;
+
+  @override
+  Future<String?> reportCreditPrice() async => null;
+
+  @override
+  Future<BuyResult> buyReportCredit() async => BuyResult.unavailable;
 
   @override
   Future<bool> restore() async => false;

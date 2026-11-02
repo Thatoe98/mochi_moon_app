@@ -90,6 +90,7 @@ class _Result extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final premium = ref.watch(hasPremiumProvider);
+    final credits = ref.watch(reportCreditsProvider);
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final synastry = compat.synastry;
@@ -164,7 +165,10 @@ class _Result extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
-        CompatReportCard(partnerId: compat.partner.id, locked: !premium),
+        CompatReportCard(
+          partnerId: compat.partner.id,
+          locked: !premium && credits == 0,
+        ),
         const SizedBox(height: AppSpacing.lg),
         Text(
           l10n.cosmicDisclaimer,

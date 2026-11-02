@@ -4135,6 +4135,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to Mochi Premium. Thank you for being kind to yourself.'**
   String get paywallWelcome;
+
+  /// No description provided for @paywallReportNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Only want the compatibility reading? You can buy just that, once, with no subscription.'**
+  String get paywallReportNote;
+
+  /// No description provided for @paywallReportButton.
+  ///
+  /// In en, this message translates to:
+  /// **'One compatibility reading · {price}'**
+  String paywallReportButton(String price);
+
+  /// No description provided for @paywallReportAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Your compatibility reading is ready to open.'**
+  String get paywallReportAdded;
 }
 
 class _AppLocalizationsDelegate

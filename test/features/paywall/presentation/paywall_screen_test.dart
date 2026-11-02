@@ -14,6 +14,16 @@ class _FakeCatalog implements PurchaseCatalog {
   int restoreCalls = 0;
   final bought = <PremiumPlan>[];
   BuyResult buyResult = BuyResult.started;
+  int creditBuys = 0;
+
+  @override
+  Future<String?> reportCreditPrice() async => 'STORE-REPORT';
+
+  @override
+  Future<BuyResult> buyReportCredit() async {
+    creditBuys++;
+    return buyResult;
+  }
 
   @override
   bool get canPurchase => canBuy;
@@ -37,15 +47,15 @@ class _FakeCatalog implements PurchaseCatalog {
   }
 }
 
-Widget _app(PurchaseCatalog catalog) => ProviderScope(
+Widget _app(PurchaseCatalog catalog, {String source = 'test'}) => ProviderScope(
   overrides: [
     purchaseCatalogProvider.overrideWithValue(catalog),
     hasPremiumProvider.overrideWithValue(false),
   ],
-  child: const MaterialApp(
+  child: MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
-    home: PaywallScreen(source: 'test'),
+    home: PaywallScreen(source: source),
   ),
 );
 
@@ -73,6 +83,32 @@ void main() {
     expect(journeys.dy, lessThan(letter.dy));
     expect(letter.dy, lessThan(also.dy));
     expect(find.text('Venus and Mars retrograde alerts'), findsOneWidget);
+  });
+
+  testWidgets('only the report paywall offers a single reading', (
+    tester,
+  ) async {
+    tall(tester);
+    await tester.pumpWidget(_app(_FakeCatalog()));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('One compatibility reading'), findsNothing);
+  });
+
+  testWidgets('the report paywall sells one reading at the store price', (
+    tester,
+  ) async {
+    tall(tester);
+    final catalog = _FakeCatalog();
+    await tester.pumpWidget(_app(catalog, source: 'compat_report'));
+    await tester.pumpAndSettle();
+
+    final label = find.text('One compatibility reading · STORE-REPORT');
+    await tester.ensureVisible(label);
+    await tester.tap(label);
+    await tester.pumpAndSettle();
+
+    expect(catalog.creditBuys, 1);
+    expect(catalog.bought, isEmpty);
   });
 
   testWidgets('shows store prices, trial note and a close button', (

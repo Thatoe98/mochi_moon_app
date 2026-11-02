@@ -25,6 +25,7 @@ class PlayPurchaseCatalog implements PurchaseCatalog {
   final _chosen = <PremiumPlan, ChosenOffer>{};
   StreamSubscription<List<PurchaseDetails>>? _subscription;
   Completer<bool>? _restoreWaiting;
+  ProductDetails? _credit;
   bool _available = false;
 
   /// Starts listening for purchases. Call once at app start so a purchase
@@ -92,6 +93,40 @@ class PlayPurchaseCatalog implements PurchaseCatalog {
     }
   }
 
+  Future<ProductDetails?> _creditDetails() async {
+    if (_credit != null) return _credit;
+    try {
+      if (!await _store.isAvailable()) return null;
+      final response = await _store.queryProductDetails({
+        reportCreditProductId,
+      });
+      for (final d in response.productDetails) {
+        if (d.id == reportCreditProductId) return _credit = d;
+      }
+    } on Object {
+      // No price while the store cannot be reached.
+    }
+    return null;
+  }
+
+  @override
+  Future<String?> reportCreditPrice() async => (await _creditDetails())?.price;
+
+  @override
+  Future<BuyResult> buyReportCredit() async {
+    final details = await _creditDetails();
+    if (details == null) return BuyResult.unavailable;
+    try {
+      // Consumed by completePurchase, only after the server has counted it.
+      final started = await _store.buyConsumable(
+        purchaseParam: PurchaseParam(productDetails: details),
+      );
+      return started ? BuyResult.started : BuyResult.failed;
+    } on Object {
+      return BuyResult.failed;
+    }
+  }
+
   @override
   Future<bool> restore() async {
     try {
@@ -110,7 +145,10 @@ class PlayPurchaseCatalog implements PurchaseCatalog {
   }
 
   Future<void> _handle(List<PurchaseDetails> purchases) async {
-    final ours = {for (final plan in PremiumPlan.values) plan.productId};
+    final ours = {
+      for (final plan in PremiumPlan.values) plan.productId,
+      reportCreditProductId,
+    };
     for (final purchase in purchases) {
       if (!ours.contains(purchase.productID)) continue;
       try {
