@@ -3302,6 +3302,24 @@ abstract class AppLocalizations {
   /// **'Write a letter'**
   String get lettersWrite;
 
+  /// No description provided for @lettersLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your free letter is still sealed'**
+  String get lettersLimitTitle;
+
+  /// No description provided for @lettersLimitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Free accounts can keep one letter sealed at a time. Once it opens, you can write another. Premium lets you seal as many as you like.'**
+  String get lettersLimitBody;
+
+  /// No description provided for @lettersLimitOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get lettersLimitOk;
+
   /// No description provided for @letterSealedUntil.
   ///
   /// In en, this message translates to:

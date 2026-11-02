@@ -1005,7 +1005,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 3. A shared `PremiumPreview` soft-lock widget (`core/widgets/`) and one `free_limits.dart` (deck 5, own cards 1, sealed letters 1, partners 1, mood months 2); widget tests incl. TalkBack labels. *(done: `core/widgets/premium_preview.dart`, `core/premium/free_limits.dart`; each limit is wired to it in its own item below.)*
 - [x] 4. Deck: `deck_history` records where a card was read (drift migration plus migration test); the limit counts ritual and deck cards only; `dailyCardLimitProvider` follows `hasPremiumProvider`; the limit card gets the gentle upsell (`deck_limit`); tests for day 1 (3 sample cards, then a full ritual) and a journey day. *(done, drift schema 9: `deck_history.source`; Premium deals at most 50 cards at a time so the deck stays a short list.)*
 - [x] 5. Own cards: free limit 1; over-limit cards stay readable, deletable and in the rotation; tests. *(done: `ownCardFreeLimit` follows `FreeLimits.ownCards`; lapse test keeps three cards in the pool.)*
-- [ ] 6. Letters: one sealed letter at a time free; tests.
+- [x] 6. Letters: one sealed letter at a time free; tests. *(done: `sealedLettersLeft`, `LetterRejection.limitReached`, a gentle dialog with `letters` source; opened letters free the slot.)*
 - [ ] 7. Quests: the swap is Premium; tests.
 - [ ] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests.
 - [ ] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests.

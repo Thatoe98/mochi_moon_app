@@ -272,6 +272,58 @@ final class FutureLetterFamily extends $Family
   String toString() => r'futureLetterProvider';
 }
 
+/// How many more letters she can seal right now: null means no limit
+/// (Premium). Free accounts keep [FreeLimits.sealedLetters] sealed at a time;
+/// a letter that has opened no longer uses the slot.
+
+@ProviderFor(sealedLettersLeft)
+final sealedLettersLeftProvider = SealedLettersLeftProvider._();
+
+/// How many more letters she can seal right now: null means no limit
+/// (Premium). Free accounts keep [FreeLimits.sealedLetters] sealed at a time;
+/// a letter that has opened no longer uses the slot.
+
+final class SealedLettersLeftProvider
+    extends $FunctionalProvider<int?, int?, int?>
+    with $Provider<int?> {
+  /// How many more letters she can seal right now: null means no limit
+  /// (Premium). Free accounts keep [FreeLimits.sealedLetters] sealed at a time;
+  /// a letter that has opened no longer uses the slot.
+  SealedLettersLeftProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'sealedLettersLeftProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$sealedLettersLeftHash();
+
+  @$internal
+  @override
+  $ProviderElement<int?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  int? create(Ref ref) {
+    return sealedLettersLeft(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int?>(value),
+    );
+  }
+}
+
+String _$sealedLettersLeftHash() => r'455d64583ef2d366da34417894d3ae78d82e40ff';
+
 /// Seals a letter written now. Asks for notification permission first, the
 /// same way the daily reminder does, so the letter can announce itself.
 
@@ -329,7 +381,7 @@ final class SealLetterActionProvider
   }
 }
 
-String _$sealLetterActionHash() => r'e9a189b9243b4c840dc8d04d05f318219374a1ed';
+String _$sealLetterActionHash() => r'0f7d66b747ed2387a9fa497112941be049950675';
 
 /// Deletes a letter here, its notification and, when signed in, its copy in
 /// Firestore. If Firestore cannot be reached the copy there comes back with

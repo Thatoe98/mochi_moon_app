@@ -5,6 +5,7 @@ import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/letters/application/letter_providers.dart';
 import 'package:mochi_moon/features/letters/domain/future_letter.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
 import '../../auth/support/fake_auth_repository.dart';
@@ -19,10 +20,12 @@ ProviderContainer _container(
   FakeLetterRemote? remote,
   FakeReminderScheduler? scheduler,
   bool signedIn = false,
+  bool premium = false,
 }) {
   final container = ProviderContainer(
     overrides: [
       letterRepositoryProvider.overrideWithValue(repo),
+      hasPremiumProvider.overrideWithValue(premium),
       letterRemoteProvider.overrideWithValue(remote),
       letterSchedulerProvider.overrideWithValue(
         notifier ?? FakeLetterNotifier(),
@@ -44,6 +47,52 @@ ProviderContainer _container(
 }
 
 void main() {
+  test('free: a second letter is refused while one is sealed', () async {
+    final repo = FakeLetterRepository();
+    final seal = _container(repo).read(sealLetterActionProvider);
+
+    expect((await seal('one', 30)).rejection, isNull);
+    expect((await seal('two', 30)).rejection, LetterRejection.limitReached);
+    expect(repo.all, hasLength(1));
+  });
+
+  test('free: an opened letter no longer uses the slot', () async {
+    final repo = FakeLetterRepository([
+      sealLetter(id: 'old', text: 'x', unlockDays: 30, now: DateTime(2026, 9)),
+    ]);
+    final outcome = await _container(repo)
+        .read(sealLetterActionProvider)('new', 30);
+
+    expect(outcome.rejection, isNull);
+    expect(repo.all, hasLength(2));
+  });
+
+  test('Premium seals as many as she likes', () async {
+    final repo = FakeLetterRepository();
+    final seal = _container(repo, premium: true).read(sealLetterActionProvider);
+
+    for (var i = 0; i < 3; i++) {
+      expect((await seal('letter $i', 30)).rejection, isNull);
+    }
+    expect(repo.all, hasLength(3));
+  });
+
+  test('after Premium ends her extra sealed letters stay', () async {
+    final repo = FakeLetterRepository([
+      for (var i = 0; i < 3; i++)
+        sealLetter(id: 'l$i', text: 'x', unlockDays: 90, now: _now),
+    ]);
+    final container = _container(repo);
+    await container.listen(futureLettersProvider.future, (_, _) {}).read();
+
+    expect(container.read(sealedLettersLeftProvider), 0);
+    expect(await repo.letters(), hasLength(3));
+    expect(
+      (await container.read(sealLetterActionProvider)('more', 30)).rejection,
+      LetterRejection.limitReached,
+    );
+  });
+
   test(
     'sealing stores the letter and asks for notification permission',
     () async {

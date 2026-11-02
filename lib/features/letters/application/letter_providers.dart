@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/analytics/analytics_event.dart';
 import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/premium/free_limits.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
@@ -14,6 +15,7 @@ import 'package:mochi_moon/features/letters/data/firestore_letter_remote.dart';
 import 'package:mochi_moon/features/letters/data/local_notifications_letter_notifier.dart';
 import 'package:mochi_moon/features/letters/domain/future_letter.dart';
 import 'package:mochi_moon/features/letters/domain/letter_repository.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -46,6 +48,17 @@ Future<FutureLetter?> futureLetter(Ref ref, String letterId) async {
   return null;
 }
 
+/// How many more letters she can seal right now: null means no limit
+/// (Premium). Free accounts keep [FreeLimits.sealedLetters] sealed at a time;
+/// a letter that has opened no longer uses the slot.
+@riverpod
+int? sealedLettersLeft(Ref ref) {
+  if (ref.watch(hasPremiumProvider)) return null;
+  final letters = ref.watch(futureLettersProvider).value ?? const [];
+  final sealed = sealedCount(letters, ref.watch(clockProvider)());
+  return (FreeLimits.sealedLetters - sealed).clamp(0, FreeLimits.sealedLetters);
+}
+
 /// What happened when she sealed a letter.
 @immutable
 class SealOutcome {
@@ -70,6 +83,12 @@ Future<SealOutcome> Function(String text, int unlockDays) sealLetterAction(
   final scheduler = ref.read(reminderSchedulerProvider);
   final repository = ref.read(letterRepositoryProvider);
   final now = ref.read(clockProvider)();
+  // Counted from the store so two quick taps cannot pass the free limit.
+  if (!ref.read(hasPremiumProvider) &&
+      sealedCount(await repository.letters(), now) >=
+          FreeLimits.sealedLetters) {
+    return const SealOutcome(rejection: LetterRejection.limitReached);
+  }
   var allowed = false;
   try {
     allowed =

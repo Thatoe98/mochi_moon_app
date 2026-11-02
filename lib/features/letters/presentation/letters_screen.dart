@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -37,7 +39,9 @@ class LettersScreen extends ConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             FilledButton.icon(
-              onPressed: () => context.push('${AppRoutes.letters}/write'),
+              onPressed: () => ref.read(sealedLettersLeftProvider) == 0
+                  ? showLettersLimit(context)
+                  : context.push('${AppRoutes.letters}/write'),
               icon: const Icon(Icons.edit_rounded),
               label: Text(l10n.lettersWrite),
             ),
@@ -79,4 +83,30 @@ class LettersScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Tells her the free letter is still sealed. She can see Premium, or wait:
+/// the slot comes back when the letter opens. Nothing she wrote is touched.
+Future<void> showLettersLimit(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
+  return showDialog<void>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(l10n.lettersLimitTitle),
+      content: Text(l10n.lettersLimitBody),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l10n.lettersLimitOk),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            unawaited(context.push('${AppRoutes.paywall}?source=letters'));
+          },
+          child: Text(l10n.paywallSeePremium),
+        ),
+      ],
+    ),
+  );
 }

@@ -8,6 +8,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/letters/application/letter_providers.dart';
 import 'package:mochi_moon/features/letters/domain/future_letter.dart';
+import 'package:mochi_moon/features/letters/presentation/letters_screen.dart';
 
 /// Writes and seals a letter (PRD §6.22). Sealing asks once more, because a
 /// sealed letter cannot be read or changed until its day.
@@ -63,6 +64,9 @@ class _WriteLetterScreenState extends ConsumerState<WriteLetterScreen> {
     if (!mounted) return;
     if (outcome.rejection != null) {
       setState(() => _saving = false);
+      if (outcome.rejection == LetterRejection.limitReached) {
+        await showLettersLimit(context);
+      }
       return;
     }
     if (!outcome.reminderOn) {

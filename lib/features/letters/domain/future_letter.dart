@@ -52,7 +52,7 @@ class FutureLetter {
 }
 
 /// Why a letter was not sealed.
-enum LetterRejection { empty, tooLong, badDelay }
+enum LetterRejection { empty, tooLong, badDelay, limitReached }
 
 /// Checks a letter before it is sealed. Null means it can be.
 LetterRejection? checkLetter(String text, {required int unlockDays}) {
@@ -64,6 +64,11 @@ LetterRejection? checkLetter(String text, {required int unlockDays}) {
   }
   return null;
 }
+
+/// How many letters are still sealed at [now]. Opened letters are always
+/// readable and never use the free slot (PRD §6.22).
+int sealedCount(Iterable<FutureLetter> letters, DateTime now) =>
+    letters.where((letter) => !letter.isOpen(now)).length;
 
 /// The moment a letter written at [writtenAt] opens: [unlockDays] calendar days
 /// later, at [letterUnlockHour].

@@ -1952,6 +1952,16 @@ class AppLocalizationsMy extends AppLocalizations {
   String get lettersWrite => 'စာတစ်စောင် ရေးမယ်';
 
   @override
+  String get lettersLimitTitle => 'Your free letter is still sealed';
+
+  @override
+  String get lettersLimitBody =>
+      'Free accounts can keep one letter sealed at a time. Once it opens, you can write another. Premium lets you seal as many as you like.';
+
+  @override
+  String get lettersLimitOk => 'OK';
+
+  @override
   String letterSealedUntil(String date) {
     return '$date အထိ ပိတ်ထားပါတယ်';
   }
