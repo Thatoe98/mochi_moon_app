@@ -172,7 +172,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             header: true,
             child: Text(
               l10n.paywallAlsoTitle,
-              style: theme.textTheme.titleSmall,
+              style: theme.textTheme.titleMedium,
             ),
           ),
           for (final benefit in [
