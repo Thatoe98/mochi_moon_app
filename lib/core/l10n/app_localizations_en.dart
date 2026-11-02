@@ -163,6 +163,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get moodPreviousMonth => 'Previous month';
 
   @override
+  String moodHistoryLocked(String month) {
+    return 'Mood calendar for $month';
+  }
+
+  @override
   String get moodNextMonth => 'Next month';
 
   @override

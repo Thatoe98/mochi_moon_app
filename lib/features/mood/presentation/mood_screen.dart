@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/core/premium/free_limits.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
@@ -12,6 +13,7 @@ import 'package:mochi_moon/features/mood/presentation/mood_calendar.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_chips.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_insights_card.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_labels.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// Me → Mood: set today's mood and look back over the month (PRD §6.18).
 class MoodScreen extends ConsumerStatefulWidget {
@@ -81,6 +83,13 @@ class _MoodScreenState extends ConsumerState<MoodScreen> {
               MoodCalendar(
                 moods: entries,
                 today: today,
+                // The current and previous month are free (PRD §6.18).
+                lockedBefore: ref.watch(hasPremiumProvider)
+                    ? null
+                    : DateTime(
+                        today.year,
+                        today.month - (FreeLimits.moodMonths - 1),
+                      ),
                 selectedDay: picked,
                 onDayTap: (day) => setState(() => _selected = day),
               ),

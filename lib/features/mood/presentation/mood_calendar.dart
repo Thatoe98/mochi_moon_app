@@ -2,18 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/premium_preview.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_labels.dart';
 
 /// A month grid with one coloured dot per day that has a mood (PRD §6.18).
 /// Days without a mood are simply empty. Tapping a day tells [onDayTap]; the
 /// calendar can go back as far as she likes but not past the current month.
+///
+/// Months before [lockedBefore] show as a soft Premium preview (PRD §6.13):
+/// she can still page back to them and see that they are there, but the days
+/// are blurred and not tappable. Nothing is deleted.
 class MoodCalendar extends StatefulWidget {
   const MoodCalendar({
     required this.moods,
     required this.today,
     required this.selectedDay,
     required this.onDayTap,
+    this.lockedBefore,
     super.key,
   });
 
@@ -21,6 +27,9 @@ class MoodCalendar extends StatefulWidget {
   final DateTime today;
   final DateTime? selectedDay;
   final ValueChanged<DateTime> onDayTap;
+
+  /// The first month that is free; earlier months are locked. Null: none.
+  final DateTime? lockedBefore;
 
   @override
   State<MoodCalendar> createState() => _MoodCalendarState();
@@ -31,6 +40,12 @@ class _MoodCalendarState extends State<MoodCalendar> {
 
   bool get _isCurrentMonth =>
       _month.year == widget.today.year && _month.month == widget.today.month;
+
+  bool get _isLocked {
+    final limit = widget.lockedBefore;
+    if (limit == null) return false;
+    return _month.isBefore(DateTime(limit.year, limit.month));
+  }
 
   void _move(int months) =>
       setState(() => _month = DateTime(_month.year, _month.month + months));
@@ -79,6 +94,13 @@ class _MoodCalendarState extends State<MoodCalendar> {
         ),
     ];
 
+    final grid = GridView.count(
+      crossAxisCount: 7,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: cells,
+    );
+
     return Column(
       children: [
         Row(
@@ -106,12 +128,16 @@ class _MoodCalendarState extends State<MoodCalendar> {
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
-        GridView.count(
-          crossAxisCount: 7,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          children: cells,
-        ),
+        if (_isLocked)
+          PremiumPreview(
+            source: 'mood_history',
+            semanticLabel: l10n.moodHistoryLocked(
+              DateFormat.yMMMM(locale).format(_month),
+            ),
+            child: IgnorePointer(child: grid),
+          )
+        else
+          grid,
       ],
     );
   }

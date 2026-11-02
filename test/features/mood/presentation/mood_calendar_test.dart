@@ -10,6 +10,7 @@ Widget _app({
   List<DayMood> moods = const [],
   ValueChanged<DateTime>? onDayTap,
   double textScale = 1,
+  DateTime? lockedBefore,
 }) => MaterialApp(
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
@@ -24,6 +25,7 @@ Widget _app({
         moods: moods,
         today: _today,
         selectedDay: null,
+        lockedBefore: lockedBefore,
         onDayTap: onDayTap ?? (_) {},
       ),
     ),
@@ -31,6 +33,47 @@ Widget _app({
 );
 
 void main() {
+  group('locked months (PRD 6.18)', () {
+    final free = DateTime(2026, 9);
+
+    Future<void> back(WidgetTester tester, int times) async {
+      for (var i = 0; i < times; i++) {
+        await tester.tap(find.byTooltip('Previous month'));
+        await tester.pump();
+      }
+    }
+
+    testWidgets('this and last month are open', (tester) async {
+      final taps = <DateTime>[];
+      await tester.pumpWidget(_app(lockedBefore: free, onDayTap: taps.add));
+      await back(tester, 1);
+
+      expect(find.text('September 2026'), findsOneWidget);
+      expect(find.text('Premium'), findsNothing);
+      await tester.tap(find.text('3'));
+      expect(taps, [DateTime(2026, 9, 3)]);
+    });
+
+    testWidgets('older months are a soft preview with a lock chip', (
+      tester,
+    ) async {
+      final taps = <DateTime>[];
+      await tester.pumpWidget(_app(lockedBefore: free, onDayTap: taps.add));
+      await back(tester, 2);
+
+      expect(find.text('August 2026'), findsOneWidget);
+      expect(find.text('Premium'), findsOneWidget);
+      expect(taps, isEmpty);
+    });
+
+    testWidgets('with no limit every month is open', (tester) async {
+      await tester.pumpWidget(_app());
+      await back(tester, 6);
+
+      expect(find.text('Premium'), findsNothing);
+    });
+  });
+
   testWidgets('shows the current month and a dot only for logged days', (
     tester,
   ) async {

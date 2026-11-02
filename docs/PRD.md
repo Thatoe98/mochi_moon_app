@@ -1007,7 +1007,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 5. Own cards: free limit 1; over-limit cards stay readable, deletable and in the rotation; tests. *(done: `ownCardFreeLimit` follows `FreeLimits.ownCards`; lapse test keeps three cards in the pool.)*
 - [x] 6. Letters: one sealed letter at a time free; tests. *(done: `sealedLettersLeft`, `LetterRejection.limitReached`, a gentle dialog with `letters` source; opened letters free the slot.)*
 - [x] 7. Quests: the swap is Premium; tests. *(done: free users see "Try another" with a lock and it opens `quest_swap`; `swapQuest` does nothing without Premium.)*
-- [ ] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests.
+- [x] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests. — *Done: `MoodCalendar.lockedBefore` shows older months inside `PremiumPreview` (`mood_history`), days not tappable, nothing deleted.*
 - [ ] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests.
 - [ ] 10. Chart: no aspect lines for free users, a signs-only list, and the new Premium aspects list with degrees and houses; tests.
 - [ ] 11. Compatibility: sub-scores and aspects behind preview; partner limit source; tests.

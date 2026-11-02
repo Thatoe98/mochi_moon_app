@@ -12,11 +12,11 @@ import 'package:mochi_moon/features/paywall/application/entitlement_providers.da
 
 import '../support/fake_mood.dart';
 
-Widget _app(FakeMoodRepository repo) => ProviderScope(
+Widget _app(FakeMoodRepository repo, {bool premium = false}) => ProviderScope(
   overrides: [
     moodRepositoryProvider.overrideWithValue(repo),
     ritualDaySetProvider.overrideWith((ref) => Stream.value(<DateTime>{})),
-    hasPremiumProvider.overrideWithValue(false),
+    hasPremiumProvider.overrideWithValue(premium),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
   ],
   child: const MaterialApp(
@@ -61,6 +61,30 @@ void main() {
     await tester.pump();
 
     expect(repo.moodOf(DateTime(2026, 10, 28)), Mood.happy);
+  });
+
+  testWidgets('a free user sees older months locked', (tester) async {
+    await tester.pumpWidget(_app(FakeMoodRepository()));
+    await tester.pump();
+    for (var i = 0; i < 2; i++) {
+      await tester.tap(find.byTooltip('Previous month'));
+      await tester.pump();
+    }
+
+    expect(find.text('August 2026'), findsOneWidget);
+    expect(find.text('Premium'), findsOneWidget);
+  });
+
+  testWidgets('Premium sees every month', (tester) async {
+    await tester.pumpWidget(_app(FakeMoodRepository(), premium: true));
+    await tester.pump();
+    for (var i = 0; i < 2; i++) {
+      await tester.tap(find.byTooltip('Previous month'));
+      await tester.pump();
+    }
+
+    expect(find.text('August 2026'), findsOneWidget);
+    expect(find.text('Premium'), findsNothing);
   });
 
   testWidgets('tapping a day says what the mood was, or that none was set', (

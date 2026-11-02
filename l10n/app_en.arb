@@ -46,6 +46,14 @@
   "moodScreenTitle": "Your moods",
   "moodMeSubtitle": "Check in and see your month",
   "moodPreviousMonth": "Previous month",
+  "moodHistoryLocked": "Mood calendar for {month}",
+  "@moodHistoryLocked": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
   "moodNextMonth": "Next month",
   "moodDayNone": "No mood saved for this day.",
   "moodDayValue": "{date}: {mood}",

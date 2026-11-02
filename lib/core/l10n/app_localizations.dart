@@ -350,6 +350,12 @@ abstract class AppLocalizations {
   /// **'Previous month'**
   String get moodPreviousMonth;
 
+  /// No description provided for @moodHistoryLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood calendar for {month}'**
+  String moodHistoryLocked(String month);
+
   /// No description provided for @moodNextMonth.
   ///
   /// In en, this message translates to:
