@@ -2248,6 +2248,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paywallRestore => 'Restore purchases';
 
   @override
+  String get paywallManage => 'Manage subscription in Google Play';
+
+  @override
+  String get paywallManageFailed =>
+      'We could not open Google Play. You can manage subscriptions there under Payments and subscriptions.';
+
+  @override
+  String get mePremiumTitle => 'Mochi Moon Premium';
+
+  @override
+  String get mePremiumSubtitleFree => 'Journeys, weekly letter and more';
+
+  @override
+  String get mePremiumSubtitleActive =>
+      'You have Premium. Manage it in Google Play.';
+
+  @override
   String get paywallRestoreFound => 'Welcome back, your Premium is restored.';
 
   @override

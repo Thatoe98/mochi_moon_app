@@ -3812,6 +3812,36 @@ abstract class AppLocalizations {
   /// **'Restore purchases'**
   String get paywallRestore;
 
+  /// No description provided for @paywallManage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage subscription in Google Play'**
+  String get paywallManage;
+
+  /// No description provided for @paywallManageFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not open Google Play. You can manage subscriptions there under Payments and subscriptions.'**
+  String get paywallManageFailed;
+
+  /// No description provided for @mePremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Moon Premium'**
+  String get mePremiumTitle;
+
+  /// No description provided for @mePremiumSubtitleFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Journeys, weekly letter and more'**
+  String get mePremiumSubtitleFree;
+
+  /// No description provided for @mePremiumSubtitleActive.
+  ///
+  /// In en, this message translates to:
+  /// **'You have Premium. Manage it in Google Play.'**
+  String get mePremiumSubtitleActive;
+
   /// No description provided for @paywallRestoreFound.
   ///
   /// In en, this message translates to:

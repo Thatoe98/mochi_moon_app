@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/utils/url_opener.dart';
 import 'package:mochi_moon/features/auth/presentation/delete_account_section.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/thai_colors_section.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
+import 'package:mochi_moon/features/paywall/domain/play_links.dart';
 import 'package:mochi_moon/features/settings/presentation/analytics_section.dart';
 import 'package:mochi_moon/features/settings/presentation/announcements_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reduce_motion_section.dart';
@@ -12,16 +18,43 @@ import 'package:mochi_moon/features/settings/presentation/reminder_section.dart'
 
 /// Hub for the journal today; profile, premium and settings join it later
 /// (PRD M2/M4).
-class MeScreen extends StatelessWidget {
+class MeScreen extends ConsumerWidget {
   const MeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final premium = ref.watch(hasPremiumProvider);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.mePlaceholderTitle)),
       body: ListView(
         children: [
+          ListTile(
+            minTileHeight: AppSpacing.minTouchTarget,
+            leading: const Icon(Icons.workspace_premium_rounded),
+            title: Text(l10n.mePremiumTitle),
+            subtitle: Text(
+              premium
+                  ? l10n.mePremiumSubtitleActive
+                  : l10n.mePremiumSubtitleFree,
+            ),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () async {
+              if (!premium) {
+                unawaited(context.push('${AppRoutes.paywall}?source=me'));
+                return;
+              }
+              final messenger = ScaffoldMessenger.of(context);
+              final opened = await ref.read(urlOpenerProvider)(
+                manageSubscriptionUrl,
+              );
+              if (!opened) {
+                messenger.showSnackBar(
+                  SnackBar(content: Text(l10n.paywallManageFailed)),
+                );
+              }
+            },
+          ),
           ListTile(
             minTileHeight: AppSpacing.minTouchTarget,
             leading: const Icon(Icons.person_rounded),

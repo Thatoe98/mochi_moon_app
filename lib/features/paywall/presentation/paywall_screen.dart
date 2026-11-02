@@ -7,9 +7,11 @@ import 'package:mochi_moon/core/analytics/analytics_event.dart';
 import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/utils/url_opener.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/paywall/application/purchase_providers.dart';
+import 'package:mochi_moon/features/paywall/domain/play_links.dart';
 import 'package:mochi_moon/features/paywall/domain/purchase_catalog.dart';
 
 /// Premium offer (PRD §6.13). The close button is there from the first frame;
@@ -66,6 +68,14 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     if (result != BuyResult.started) {
       messenger.showSnackBar(SnackBar(content: Text(l10n.paywallBuyFailed)));
     }
+  }
+
+  Future<void> _manage() async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final opened = await ref.read(urlOpenerProvider)(manageSubscriptionUrl);
+    if (!mounted || opened) return;
+    messenger.showSnackBar(SnackBar(content: Text(l10n.paywallManageFailed)));
   }
 
   @override
@@ -181,6 +191,10 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           TextButton(
             onPressed: _restoring ? null : _restore,
             child: Text(l10n.paywallRestore),
+          ),
+          TextButton(
+            onPressed: _manage,
+            child: Text(l10n.paywallManage),
           ),
           Text(
             l10n.paywallFinePrint,
