@@ -27,6 +27,7 @@ dependencies:
   google_sign_in: ^7.2.0
   home_widget: ^0.10.0
   in_app_purchase: ^3.3.1
+  in_app_purchase_android: ^0.5.5
   intl: ^0.20.3
   json_annotation: ^4.12.0
   lat_lng_to_timezone: ^0.2.0

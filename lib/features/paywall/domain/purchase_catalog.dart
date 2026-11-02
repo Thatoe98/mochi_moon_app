@@ -21,6 +21,27 @@ class PlanOffer {
   final String? price;
 }
 
+/// How starting a purchase went. The result of a purchase itself comes later:
+/// the server checks it and writes the entitlement (PRD §6.13).
+enum BuyResult {
+  /// The store's purchase sheet was opened.
+  started,
+
+  /// The store cannot sell right now (offline, plan not found).
+  unavailable,
+
+  /// The store refused to start the purchase.
+  failed,
+}
+
+/// Sends a purchase to the server, which asks Google Play whether it is real
+/// and then writes `entitlement` to Firestore (PRD §8.2).
+abstract interface class PurchaseVerifier {
+  /// True when the server accepted the purchase. Only then is the purchase
+  /// acknowledged to the store.
+  Future<bool> verify({required String productId, required String token});
+}
+
 /// What the paywall needs from the store. The real Google Play Billing
 /// implementation arrives with the server-side purchase check; until then the
 /// app uses [UnavailablePurchaseCatalog].
@@ -30,6 +51,9 @@ abstract interface class PurchaseCatalog {
 
   /// Whether buying is possible right now.
   bool get canPurchase;
+
+  /// Opens the store's purchase sheet for [plan].
+  Future<BuyResult> buy(PremiumPlan plan);
 
   /// Asks the store to re-deliver earlier purchases. Returns true when
   /// Premium was found.
@@ -47,6 +71,9 @@ class UnavailablePurchaseCatalog implements PurchaseCatalog {
   Future<List<PlanOffer>> offers() async => [
     for (final plan in PremiumPlan.values) PlanOffer(plan: plan),
   ];
+
+  @override
+  Future<BuyResult> buy(PremiumPlan plan) async => BuyResult.unavailable;
 
   @override
   Future<bool> restore() async => false;

@@ -3835,6 +3835,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See Premium'**
   String get paywallSeePremium;
+
+  /// No description provided for @paywallBuyFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not start the purchase. Please try again in a moment.'**
+  String get paywallBuyFailed;
+
+  /// No description provided for @paywallWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Mochi Premium. Thank you for being kind to yourself.'**
+  String get paywallWelcome;
 }
 
 class _AppLocalizationsDelegate

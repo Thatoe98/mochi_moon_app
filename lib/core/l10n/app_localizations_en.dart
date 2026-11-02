@@ -2259,4 +2259,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get paywallSeePremium => 'See Premium';
+
+  @override
+  String get paywallBuyFailed =>
+      'We could not start the purchase. Please try again in a moment.';
+
+  @override
+  String get paywallWelcome =>
+      'Welcome to Mochi Premium. Thank you for being kind to yourself.';
 }

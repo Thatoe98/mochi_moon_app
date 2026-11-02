@@ -8,6 +8,7 @@ import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/paywall/application/purchase_providers.dart';
 import 'package:mochi_moon/features/paywall/domain/purchase_catalog.dart';
 
@@ -26,6 +27,7 @@ class PaywallScreen extends ConsumerStatefulWidget {
 class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   PremiumPlan _selected = PremiumPlan.yearly;
   bool _restoring = false;
+  bool _buying = false;
 
   @override
   void initState() {
@@ -54,10 +56,32 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     );
   }
 
+  Future<void> _buy() async {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _buying = true);
+    final result = await ref.read(purchaseCatalogProvider).buy(_selected);
+    if (!mounted) return;
+    setState(() => _buying = false);
+    if (result != BuyResult.started) {
+      messenger.showSnackBar(SnackBar(content: Text(l10n.paywallBuyFailed)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    // The purchase finishes on the server; the paywall closes when the
+    // entitlement says she has Premium.
+    ref.listen(hasPremiumProvider, (previous, next) {
+      if (next && previous == false && context.canPop()) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.paywallWelcome)));
+        context.pop();
+      }
+    });
     final offers = ref.watch(planOffersProvider).value ?? const <PlanOffer>[];
     final canPurchase = ref.watch(purchaseCatalogProvider).canPurchase;
 
@@ -139,7 +163,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           planTile(PremiumPlan.monthly, l10n.paywallMonthly, null),
           const SizedBox(height: AppSpacing.md),
           FilledButton(
-            onPressed: canPurchase ? () {} : null,
+            onPressed: canPurchase && !_buying ? _buy : null,
             child: Text(
               _selected.hasTrial
                   ? l10n.paywallStartTrial

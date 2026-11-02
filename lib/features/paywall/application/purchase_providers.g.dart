@@ -8,21 +8,72 @@ part of 'purchase_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// The store behind the paywall. Overridden in tests; swap the body for the
-/// Google Play implementation when billing is connected.
+/// The server check for a purchase.
+
+@ProviderFor(purchaseVerifier)
+final purchaseVerifierProvider = PurchaseVerifierProvider._();
+
+/// The server check for a purchase.
+
+final class PurchaseVerifierProvider
+    extends
+        $FunctionalProvider<
+          PurchaseVerifier,
+          PurchaseVerifier,
+          PurchaseVerifier
+        >
+    with $Provider<PurchaseVerifier> {
+  /// The server check for a purchase.
+  PurchaseVerifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'purchaseVerifierProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$purchaseVerifierHash();
+
+  @$internal
+  @override
+  $ProviderElement<PurchaseVerifier> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  PurchaseVerifier create(Ref ref) {
+    return purchaseVerifier(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PurchaseVerifier value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PurchaseVerifier>(value),
+    );
+  }
+}
+
+String _$purchaseVerifierHash() => r'72c4d499d5547c947913fd2eb30dab38d7b79035';
+
+/// The store behind the paywall: Google Play on Android, nothing elsewhere
+/// (iOS is not a release target yet). Overridden in tests.
 
 @ProviderFor(purchaseCatalog)
 final purchaseCatalogProvider = PurchaseCatalogProvider._();
 
-/// The store behind the paywall. Overridden in tests; swap the body for the
-/// Google Play implementation when billing is connected.
+/// The store behind the paywall: Google Play on Android, nothing elsewhere
+/// (iOS is not a release target yet). Overridden in tests.
 
 final class PurchaseCatalogProvider
     extends
         $FunctionalProvider<PurchaseCatalog, PurchaseCatalog, PurchaseCatalog>
     with $Provider<PurchaseCatalog> {
-  /// The store behind the paywall. Overridden in tests; swap the body for the
-  /// Google Play implementation when billing is connected.
+  /// The store behind the paywall: Google Play on Android, nothing elsewhere
+  /// (iOS is not a release target yet). Overridden in tests.
   PurchaseCatalogProvider._()
     : super(
         from: null,
@@ -56,7 +107,7 @@ final class PurchaseCatalogProvider
   }
 }
 
-String _$purchaseCatalogHash() => r'67883f42d4961b781fef47c061d5825b3d1387de';
+String _$purchaseCatalogHash() => r'ae459b522e0d16b90448ffafc554825a45dcd5c7';
 
 /// The plans with store prices.
 

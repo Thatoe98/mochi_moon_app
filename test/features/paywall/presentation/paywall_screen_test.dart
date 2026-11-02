@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/paywall/application/purchase_providers.dart';
 import 'package:mochi_moon/features/paywall/domain/purchase_catalog.dart';
 import 'package:mochi_moon/features/paywall/presentation/paywall_screen.dart';
@@ -11,6 +12,8 @@ class _FakeCatalog implements PurchaseCatalog {
 
   final bool canBuy;
   int restoreCalls = 0;
+  final bought = <PremiumPlan>[];
+  BuyResult buyResult = BuyResult.started;
 
   @override
   bool get canPurchase => canBuy;
@@ -22,6 +25,12 @@ class _FakeCatalog implements PurchaseCatalog {
   ];
 
   @override
+  Future<BuyResult> buy(PremiumPlan plan) async {
+    bought.add(plan);
+    return buyResult;
+  }
+
+  @override
   Future<bool> restore() async {
     restoreCalls++;
     return false;
@@ -29,7 +38,10 @@ class _FakeCatalog implements PurchaseCatalog {
 }
 
 Widget _app(PurchaseCatalog catalog) => ProviderScope(
-  overrides: [purchaseCatalogProvider.overrideWithValue(catalog)],
+  overrides: [
+    purchaseCatalogProvider.overrideWithValue(catalog),
+    hasPremiumProvider.overrideWithValue(false),
+  ],
   child: const MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
@@ -94,5 +106,32 @@ void main() {
 
     expect(catalog.restoreCalls, 1);
     expect(find.textContaining('could not find'), findsOneWidget);
+  });
+
+  testWidgets('the buy button starts the selected plan', (tester) async {
+    tall(tester);
+    final catalog = _FakeCatalog();
+    await tester.pumpWidget(_app(catalog));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Monthly'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Subscribe'));
+    await tester.pumpAndSettle();
+
+    expect(catalog.bought, [PremiumPlan.monthly]);
+    expect(find.textContaining('could not start'), findsNothing);
+  });
+
+  testWidgets('a purchase that cannot start says so', (tester) async {
+    tall(tester);
+    final catalog = _FakeCatalog()..buyResult = BuyResult.failed;
+    await tester.pumpWidget(_app(catalog));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Start free trial'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('could not start'), findsOneWidget);
   });
 }
