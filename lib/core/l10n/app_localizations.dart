@@ -3812,6 +3812,24 @@ abstract class AppLocalizations {
   /// **'Restore purchases'**
   String get paywallRestore;
 
+  /// No description provided for @aboutPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get aboutPrivacy;
+
+  /// No description provided for @aboutTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get aboutTerms;
+
+  /// No description provided for @aboutLinkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not open that page. Please try again later.'**
+  String get aboutLinkFailed;
+
   /// No description provided for @paywallManage.
   ///
   /// In en, this message translates to:

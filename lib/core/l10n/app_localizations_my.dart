@@ -2266,6 +2266,16 @@ class AppLocalizationsMy extends AppLocalizations {
   String get paywallRestore => 'Restore purchases';
 
   @override
+  String get aboutPrivacy => 'Privacy policy';
+
+  @override
+  String get aboutTerms => 'Terms of use';
+
+  @override
+  String get aboutLinkFailed =>
+      'We could not open that page. Please try again later.';
+
+  @override
   String get paywallManage => 'Manage subscription in Google Play';
 
   @override
