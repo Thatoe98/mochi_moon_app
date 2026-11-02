@@ -1712,6 +1712,18 @@ abstract class AppLocalizations {
   /// **'Premium opens the long, gentle reading of your chart. Your free chart stays just as it is.'**
   String get reportPremiumBody;
 
+  /// No description provided for @premiumPreviewChip.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get premiumPreviewChip;
+
+  /// No description provided for @premiumPreviewSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'{what}. Part of Premium. Opens the Premium page.'**
+  String premiumPreviewSemantics(String what);
+
   /// No description provided for @reportPremiumAction.
   ///
   /// In en, this message translates to:

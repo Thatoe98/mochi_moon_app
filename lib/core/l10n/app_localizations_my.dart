@@ -980,6 +980,14 @@ class AppLocalizationsMy extends AppLocalizations {
       'Premium opens the long, gentle reading of your chart. Your free chart stays just as it is.';
 
   @override
+  String get premiumPreviewChip => 'Premium';
+
+  @override
+  String premiumPreviewSemantics(String what) {
+    return '$what. Part of Premium. Opens the Premium page.';
+  }
+
+  @override
   String get reportPremiumAction => 'See Premium';
 
   @override

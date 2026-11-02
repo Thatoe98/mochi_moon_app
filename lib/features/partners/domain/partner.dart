@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mochi_moon/core/premium/free_limits.dart';
 import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 
 part 'partner.freezed.dart';
@@ -7,7 +8,7 @@ part 'partner.freezed.dart';
 const maxPartnerNicknameLength = 30;
 
 /// Most partners a Free user can save (PRD §6.12).
-const freePartnerLimit = 1;
+const int freePartnerLimit = FreeLimits.partners;
 
 /// Most partners a Premium user can save (PRD §6.12).
 const premiumPartnerLimit = 5;
