@@ -1006,7 +1006,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 4. Deck: `deck_history` records where a card was read (drift migration plus migration test); the limit counts ritual and deck cards only; `dailyCardLimitProvider` follows `hasPremiumProvider`; the limit card gets the gentle upsell (`deck_limit`); tests for day 1 (3 sample cards, then a full ritual) and a journey day. *(done, drift schema 9: `deck_history.source`; Premium deals at most 50 cards at a time so the deck stays a short list.)*
 - [x] 5. Own cards: free limit 1; over-limit cards stay readable, deletable and in the rotation; tests. *(done: `ownCardFreeLimit` follows `FreeLimits.ownCards`; lapse test keeps three cards in the pool.)*
 - [x] 6. Letters: one sealed letter at a time free; tests. *(done: `sealedLettersLeft`, `LetterRejection.limitReached`, a gentle dialog with `letters` source; opened letters free the slot.)*
-- [ ] 7. Quests: the swap is Premium; tests.
+- [x] 7. Quests: the swap is Premium; tests. *(done: free users see "Try another" with a lock and it opens `quest_swap`; `swapQuest` does nothing without Premium.)*
 - [ ] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests.
 - [ ] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests.
 - [ ] 10. Chart: no aspect lines for free users, a signs-only list, and the new Premium aspects list with degrees and houses; tests.

@@ -10,6 +10,7 @@ import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/letters/application/weekly_letter_providers.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 import 'package:mochi_moon/features/quests/data/drift_quest_repository.dart';
@@ -118,13 +119,16 @@ Future<void> Function() completeQuest(Ref ref) => () async {
   }
 };
 
-/// Trades today's quest for the other pick, once a day.
+/// Trades today's quest for the other pick, once a day. Premium only (PRD
+/// §6.20); a free user is sent to the paywall by the card and this does
+/// nothing, so a stray call cannot swap.
 @riverpod
 Future<void> Function() swapQuest(Ref ref) => () async {
   final analytics = ref.read(analyticsLoggerProvider);
   final current = ref.read(todayQuestProvider);
   final quests = ref.read(questsProvider).value;
   if (current == null || quests == null || !current.canSwap) return;
+  if (!ref.read(hasPremiumProvider)) return;
   final now = ref.read(clockProvider)();
   final focus = _focusIds(ref.read(profileControllerProvider).value);
   final other = dailyQuest(quests, now, focusAreas: focus, swapped: true);

@@ -6,6 +6,7 @@ import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/auth/domain/auth_repository.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/letters/application/weekly_letter_providers.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/quests/application/quest_providers.dart';
 import 'package:mochi_moon/features/quests/domain/quest_day.dart';
@@ -25,10 +26,12 @@ ProviderContainer _container(
   DateTime Function()? clock,
   FakeQuestRemote? remote,
   bool signedIn = false,
+  bool premium = true,
 }) {
   final container = ProviderContainer(
     overrides: [
       questRepositoryProvider.overrideWithValue(repo),
+      hasPremiumProvider.overrideWithValue(premium),
       questDoneLogProvider.overrideWithValue(FakeQuestDoneLog()),
       questRemoteProvider.overrideWithValue(remote),
       profileRepositoryProvider.overrideWithValue(FakeProfileRepository()),
@@ -84,7 +87,19 @@ void main() {
     expect(repo.saved?.done, isTrue);
   });
 
-  test('swaps once to a different quest, and not again', () async {
+  test('a free user cannot swap', () async {
+    final repo = FakeQuestRepository();
+    final container = _container(repo, premium: false);
+    final before = await _today(container);
+
+    await container.read(swapQuestProvider)();
+    await pumpEventQueue();
+
+    expect(container.read(todayQuestProvider)!.quest.id, before!.quest.id);
+    expect(repo.saved, isNull);
+  });
+
+  test('Premium swaps once to a different quest, and not again', () async {
     final repo = FakeQuestRepository();
     final container = _container(repo);
     final before = await _today(container);
