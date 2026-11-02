@@ -122,6 +122,9 @@ Future<({int status, String body})> _dartIoPost(
   }
 }
 
+/// The real HTTP post, for other tools that talk to OpenAI.
+const HttpPost dartIoPost = _dartIoPost;
+
 class OpenAiChat {
   OpenAiChat(
     this.settings, {
