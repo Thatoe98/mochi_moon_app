@@ -1,5 +1,6 @@
 import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/quote.dart';
+import 'package:mochi_moon/features/widget_bridge/domain/widget_theme.dart';
 
 /// How many days ahead the widget is stocked. The native side picks the entry
 /// for the current date, so the widget changes at midnight without the app.
@@ -24,7 +25,10 @@ class WidgetDay {
 abstract interface class WidgetPublisher {
   /// Replaces what the widget shows with [days] and refreshes it. The widget
   /// is also refreshed at the start of every day after the first.
-  Future<void> publish(List<WidgetDay> days);
+  Future<void> publish(
+    List<WidgetDay> days, {
+    WidgetTheme theme = WidgetTheme.cream,
+  });
 }
 
 /// The widget's days from today on, one per local date, in [lang].

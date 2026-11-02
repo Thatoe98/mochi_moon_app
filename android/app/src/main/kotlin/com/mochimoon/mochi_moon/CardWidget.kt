@@ -21,6 +21,9 @@ private const val DECK_URI = "mochimoon://widget/deck"
 /** Key under which Dart stores the JSON list of days (see home_widget_publisher.dart). */
 private const val DAYS_KEY = "days"
 
+/** Key under which Dart stores the widget theme id (see widget_theme.dart). */
+private const val THEME_KEY = "theme"
+
 /**
  * Shows today's card: the short text and a thumbnail. Dart stocks the next two
  * weeks, so choosing today's entry here is all it takes to change at midnight.
@@ -33,6 +36,7 @@ abstract class CardWidget(private val layout: Int) : HomeWidgetProvider() {
         widgetData: SharedPreferences,
     ) {
         val today = todayEntry(widgetData)
+        val theme = widgetData.getString(THEME_KEY, null)
         for (id in appWidgetIds) {
             val views = RemoteViews(context.packageName, layout)
             views.setTextViewText(
@@ -48,6 +52,8 @@ abstract class CardWidget(private val layout: Int) : HomeWidgetProvider() {
                 views.setViewVisibility(R.id.widget_thumbnail, View.GONE)
             }
 
+            applyTheme(context, views, theme)
+
             views.setOnClickPendingIntent(
                 R.id.widget_root,
                 HomeWidgetLaunchIntent.getActivity(
@@ -58,6 +64,18 @@ abstract class CardWidget(private val layout: Int) : HomeWidgetProvider() {
             )
             appWidgetManager.updateAppWidget(id, views)
         }
+    }
+
+    /** Cream is the layout's own look; the Premium themes swap the background and text color. */
+    private fun applyTheme(context: Context, views: RemoteViews, theme: String?) {
+        val (background, text) = when (theme) {
+            "lavender" -> R.drawable.widget_background_lavender to R.color.widget_text_lavender
+            "peach" -> R.drawable.widget_background_peach to R.color.widget_text_peach
+            "midnight" -> R.drawable.widget_background_midnight to R.color.widget_text_midnight
+            else -> return
+        }
+        views.setInt(R.id.widget_root, "setBackgroundResource", background)
+        views.setTextColor(R.id.widget_text, context.getColor(text))
     }
 
     private class Entry(val text: String, val imagePath: String?)

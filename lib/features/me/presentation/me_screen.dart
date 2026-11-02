@@ -9,6 +9,7 @@ import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/utils/url_opener.dart';
 import 'package:mochi_moon/features/auth/presentation/delete_account_section.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/thai_colors_section.dart';
+import 'package:mochi_moon/features/me/presentation/widget_theme_section.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/paywall/domain/play_links.dart';
 import 'package:mochi_moon/features/settings/presentation/analytics_section.dart';
@@ -145,6 +146,7 @@ class MeScreen extends ConsumerWidget {
           ),
           const ReminderSection(),
           const ThaiColorsSection(),
+          const WidgetThemeSection(),
           const ReduceMotionSection(),
           const AnnouncementsSection(),
           const AnalyticsSection(),

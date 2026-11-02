@@ -5,4 +5,11 @@
     <color name="widget_text">#3E2A4F</color>
     <!-- The flat lavender of art/source/app_icon.jpg, behind the adaptive icon. -->
     <color name="ic_launcher_background">#C7B3EB</color>
+    <!-- Premium widget themes (PRD 6.5); mirror lib/core/theme/widget_theme_colors.dart. -->
+    <color name="widget_background_lavender">#E6DCF7</color>
+    <color name="widget_background_peach">#FFE3D6</color>
+    <color name="widget_background_midnight">#2E2240</color>
+    <color name="widget_text_lavender">#3E2A4F</color>
+    <color name="widget_text_peach">#4A2C3A</color>
+    <color name="widget_text_midnight">#F5EEFF</color>
 </resources>

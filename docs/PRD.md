@@ -145,10 +145,11 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [x] Uses the system share sheet (`share_plus`). No social SDKs.
 - [ ] Rendering works in all three scripts with correct fonts. — *blocked on bundling fonts (M0 leftover); Burmese renders through the `Noto Sans Myanmar` fallback once bundled*
 
-### 6.5 Home-screen widget (Free default theme; extra themes Premium, later)
+### 6.5 Home-screen widget (Free default theme; extra themes Premium)
 
-Extra widget themes are Premium but are not built; they are listed under "Later" (§12). The default theme stays free.
+The default (cream) theme is free. Lavender, peach and midnight are Premium, picked in Me → Widget style (paywall source `widget_theme`). If Premium lapses the widget goes back to cream and her choice is kept.
 
+- [x] Premium widget themes (lavender, peach, midnight). — *done 2026-11-03; the choice is saved on the device, the theme id goes to the Kotlin widget with the days; not yet seen on a device*
 - [x] Android widget (2×2 and 4×2) shows today's card text (short form) and a thumbnail. — *the thumbnail is the card's theme art (decoded before capture, not yet seen on a device); English only; builds and is unit-tested but not yet seen on a device*
 - [x] Updates at local midnight and whenever the deck is opened. — *the app stocks the next 14 days on each open; midnight refreshes are scheduled with `home_widget` (inexact, may drift a few minutes); a 1-hour system refresh is the safety net*
 - [x] Tapping opens the Deck at today's card. — *the launch intent carries `mochimoon://widget/deck`; the deck deals the card of the day first unless it was already completed today*
@@ -285,7 +286,7 @@ The retrograde status, the banner, the calendar, the tips and the Moon card are 
 | Mochi §6.23 | Free items earned; Premium items need Premium | Unchanged | — |
 | Weekly letter §6.24 | Premium, app-only check | Premium, server-enforced | Per-call AI cost |
 | Monthly glow recap §6.25 | Free | Free | Sharing and growth |
-| Widget §6.5 | Free | Default theme free; extra themes Premium (not built) | Collection |
+| Widget §6.5 | Free | Default theme free; extra themes Premium | Collection |
 | Cosmic Today §6.7 | Most blocks free | Headline, text, first lucky color, energy card, Thai colors free; second color, love line, lucky number, avoid, personal text, sign chooser Premium | Depth |
 | Retrogrades and Moon §6.8 | Free, all alerts free | Status, calendar, tips, Moon card and Mercury alerts free; Venus and Mars alerts Premium | Depth |
 | Birth chart §6.11 | Wheel, list, Big 3 free | Wheel without aspect lines, Big 3, signs-only list free; aspect lines, degrees, houses, aspects list and natal report Premium | Depth and AI cost |
@@ -294,7 +295,7 @@ The retrograde status, the banner, the calendar, the tips and the Moon card are 
 
 All quotes are free to read (§8.3): Premium means more cards per day and personal ranking, not exclusive quotes.
 
-Premium unlocks, in this order on the paywall (self-love value first): unlimited deck and the For You deck, all self-love journeys (§6.21), the weekly letter from Mochi (§6.24), mood history and insights (§6.18), unlimited own cards (§6.17) and sealed letters (§6.22), the daily quest swap (§6.20), Mochi's premium outfits and room items (§6.23), then the astrology extras: love line, lucky number, things to avoid, second lucky color, the sign chooser, personalized Today, full placements and aspects, the full natal report, compatibility sub-scores and aspects, up to 5 partners, full compatibility reports, Venus and Mars retrograde alerts, and widget themes (later).
+Premium unlocks, in this order on the paywall (self-love value first): unlimited deck and the For You deck, all self-love journeys (§6.21), the weekly letter from Mochi (§6.24), mood history and insights (§6.18), unlimited own cards (§6.17) and sealed letters (§6.22), the daily quest swap (§6.20), Mochi's premium outfits and room items (§6.23), then the astrology extras: love line, lucky number, things to avoid, second lucky color, the sign chooser, personalized Today, full placements and aspects, the full natal report, compatibility sub-scores and aspects, up to 5 partners, full compatibility reports, Venus and Mars retrograde alerts, and widget themes.
 
 **Soft previews.** A locked item never disappears. It shows a soft preview (blurred content or its first line) with a small lock chip; one tap opens the paywall with the right `source`. One shared widget (`PremiumPreview`) does this, with a TalkBack label that says what is locked. The preview text is not a pressure message.
 
@@ -320,6 +321,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 | Compatibility report | The full report (Premium or one-off) | `compat_report` |
 | Partners, 2nd partner | Up to 5 partners | `partners` |
 | Retrogrades, Venus or Mars switch | Venus and Mars alerts | `retro_alerts` |
+| Me, Widget style, a Premium theme | Lavender, peach and midnight widget themes | `widget_theme` |
 | Today, once after the ritual on day 2 or 3 | The trial offer | `trial_offer` |
 | Me, Premium tile | — | `me` |
 | Server answers 402 `premium_required` | — | `server_402` |
@@ -1016,7 +1018,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 14. Trial offer after the day 2–3 ritual (once, dismissible, skipped on hard-day days and for Premium); tests. — *Done: `trialOfferDue` (pure), `TrialOffer` notifier, `TrialOfferCard` on the finished Today screen (`trial_offer`), shown/dismissed analytics; "shown" and "hard-day opened today" live in shared_preferences.*
 - [x] 15. Guard test: the ritual, the hard-day kit, breathing and Help never show a paywall or lock. — *Done: `expectNoPaywall` runs on every ritual step, the hard-day kit (which holds the Help resources) and breathing.*
 - [x] 16. Lapse tests: a Premium user goes free and nothing she made disappears. — *Done: own cards, sealed letters and Venus/Mars alerts have lapse tests beside their providers; `test/features/paywall/lapse_test.dart` adds partners, older mood months and an equipped Premium outfit.*
-- [ ] 17. As each is built later (`/daily/personal`, the compatibility endpoint and credit, For You, widget themes): gated on the server from day one. *(17.1 done 2026-11-02: server `POST /reports/compatibility` and owner-only `GET /reports/compatibility/{id}`, Premium-only (402), cached, 5/hour on new jobs, 5 sections, placements and scores only. Not deployed yet. 17.2 done 2026-11-02: app "full compatibility reading" card on the partner result (locked for free users, source `compat_report`), report screen with parts arriving one by one, saved per partner on the device, 402 becomes a soft Premium invitation. 17.3 done 2026-11-02: server `POST /daily/personal` (Premium, 402 first, one note per day and language, 6 new notes a day at most) and the app block "Just for you today" on Cosmic Today (locked preview for free users; for Premium it is left out if the note cannot be written; only placements and transits are sent). Server not deployed yet. 17.4 done 2026-11-02 (server committed, not deployed; the Play product `mochi_compat_report` is not created yet, so the purchase itself is untested): `POST /purchases/verify` accepts `mochi_compat_report`, pays one credit once per purchase token (restores never pay twice) and returns `reportCredits`; `POST /reports/compatibility` takes Premium or one credit, spends it only when a new report starts and gives it back if the report fails; a repeat of a report she already has costs nothing. App: the report card opens with a credit, and the compat paywall offers "One compatibility reading" at the store price (consumable, completed only after the server counts it). Deferred: refunds of voided credit purchases (RTDN) and a credit lost if the server restarts mid-report. 17.5 done 2026-11-02 (step A, then step B on-device ranking, Deck switch and progress; tests added): `tool/embed_quotes.dart` (dev-time, quote texts only) wrote a 128-dim int8 `embedding` for all 500 quotes and six `moodCentroids` into `quotes.json`. For You ranks fully on the device, so it has no server call and no server-side Premium check; the gate is the app's Premium check. Next: 17.6 widget themes.)*
+- [x] 17. As each is built later (`/daily/personal`, the compatibility endpoint and credit, For You, widget themes): gated on the server from day one. *(17.1 done 2026-11-02: server `POST /reports/compatibility` and owner-only `GET /reports/compatibility/{id}`, Premium-only (402), cached, 5/hour on new jobs, 5 sections, placements and scores only. Not deployed yet. 17.2 done 2026-11-02: app "full compatibility reading" card on the partner result (locked for free users, source `compat_report`), report screen with parts arriving one by one, saved per partner on the device, 402 becomes a soft Premium invitation. 17.3 done 2026-11-02: server `POST /daily/personal` (Premium, 402 first, one note per day and language, 6 new notes a day at most) and the app block "Just for you today" on Cosmic Today (locked preview for free users; for Premium it is left out if the note cannot be written; only placements and transits are sent). Server not deployed yet. 17.4 done 2026-11-02 (server committed, not deployed; the Play product `mochi_compat_report` is not created yet, so the purchase itself is untested): `POST /purchases/verify` accepts `mochi_compat_report`, pays one credit once per purchase token (restores never pay twice) and returns `reportCredits`; `POST /reports/compatibility` takes Premium or one credit, spends it only when a new report starts and gives it back if the report fails; a repeat of a report she already has costs nothing. App: the report card opens with a credit, and the compat paywall offers "One compatibility reading" at the store price (consumable, completed only after the server counts it). Deferred: refunds of voided credit purchases (RTDN) and a credit lost if the server restarts mid-report. 17.5 done 2026-11-02 (step A, then step B on-device ranking, Deck switch and progress; tests added): `tool/embed_quotes.dart` (dev-time, quote texts only) wrote a 128-dim int8 `embedding` for all 500 quotes and six `moodCentroids` into `quotes.json`. For You ranks fully on the device, so it has no server call and no server-side Premium check; the gate is the app's Premium check. 17.6 done 2026-11-03: widget themes (cream free; lavender, peach, midnight Premium) with a Me-tab picker, source `widget_theme`; no server call, so the gate is the app's Premium check.)*
 
 ### M5 — Self-love expansion (v1.1)
 
@@ -1058,7 +1060,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [ ] Listen mode (TTS) for accessibility
 - [ ] Placidus houses option
 - [ ] More mascot outfits and seasonal decks
-- [ ] Extra home-screen widget themes, Premium (§6.5)
+- [x] Extra home-screen widget themes, Premium (§6.5) — *done 2026-11-03 as M4b item 17.6*
 
 ---
 

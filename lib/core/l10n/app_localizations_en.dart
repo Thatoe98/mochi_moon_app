@@ -640,6 +640,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'I rest, I soften, and I make room for a fresh start.';
 
   @override
+  String get widgetThemeTitle => 'Widget style';
+
+  @override
+  String get widgetThemeCream => 'Cream';
+
+  @override
+  String get widgetThemeLavender => 'Lavender';
+
+  @override
+  String get widgetThemePeach => 'Peach';
+
+  @override
+  String get widgetThemeMidnight => 'Midnight';
+
+  @override
   String get reduceMotionTitle => 'Reduce motion';
 
   @override

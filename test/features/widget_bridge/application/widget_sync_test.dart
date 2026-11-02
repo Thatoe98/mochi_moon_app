@@ -7,6 +7,7 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/application/widget_providers.dart';
 import 'package:mochi_moon/features/widget_bridge/domain/widget_day.dart';
+import 'package:mochi_moon/features/widget_bridge/domain/widget_theme.dart';
 
 import '../../custom_cards/support/fake_own_cards.dart';
 import '../support/fake_widget_publisher.dart';
@@ -19,8 +20,10 @@ const _quote = Quote(
 
 class _FailingPublisher implements WidgetPublisher {
   @override
-  Future<void> publish(List<WidgetDay> days) =>
-      Future.error(Exception('no widget host'));
+  Future<void> publish(
+    List<WidgetDay> days, {
+    WidgetTheme theme = WidgetTheme.cream,
+  }) => Future.error(Exception('no widget host'));
 }
 
 ProviderContainer _container({

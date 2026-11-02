@@ -643,6 +643,21 @@ class AppLocalizationsMy extends AppLocalizations {
       'ငါ အနားယူတယ်၊ စိတ်ကို ပျော့ပျောင်းစေတယ်၊ အသစ်စဖို့ နေရာလေး ဖန်တီးတယ်။';
 
   @override
+  String get widgetThemeTitle => 'Widget style';
+
+  @override
+  String get widgetThemeCream => 'Cream';
+
+  @override
+  String get widgetThemeLavender => 'Lavender';
+
+  @override
+  String get widgetThemePeach => 'Peach';
+
+  @override
+  String get widgetThemeMidnight => 'Midnight';
+
+  @override
   String get reduceMotionTitle => 'လှုပ်ရှားမှု လျှော့မယ်';
 
   @override

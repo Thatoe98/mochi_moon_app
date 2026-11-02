@@ -1142,6 +1142,36 @@ abstract class AppLocalizations {
   /// **'I rest, I soften, and I make room for a fresh start.'**
   String get moonAffirmationWaningCrescent;
 
+  /// Me tab: picker for the home-screen widget's look.
+  ///
+  /// In en, this message translates to:
+  /// **'Widget style'**
+  String get widgetThemeTitle;
+
+  /// No description provided for @widgetThemeCream.
+  ///
+  /// In en, this message translates to:
+  /// **'Cream'**
+  String get widgetThemeCream;
+
+  /// No description provided for @widgetThemeLavender.
+  ///
+  /// In en, this message translates to:
+  /// **'Lavender'**
+  String get widgetThemeLavender;
+
+  /// No description provided for @widgetThemePeach.
+  ///
+  /// In en, this message translates to:
+  /// **'Peach'**
+  String get widgetThemePeach;
+
+  /// No description provided for @widgetThemeMidnight.
+  ///
+  /// In en, this message translates to:
+  /// **'Midnight'**
+  String get widgetThemeMidnight;
+
   /// No description provided for @reduceMotionTitle.
   ///
   /// In en, this message translates to:

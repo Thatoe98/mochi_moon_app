@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/features/widget_bridge/data/home_widget_publisher.dart';
 import 'package:mochi_moon/features/widget_bridge/domain/widget_day.dart';
+import 'package:mochi_moon/features/widget_bridge/domain/widget_theme.dart';
 
 final _days = [
   WidgetDay(
@@ -117,5 +118,17 @@ void main() {
     expect(rendered, isEmpty);
     expect(named('saveWidgetData'), isEmpty);
     expect(named('updateWidget'), isEmpty);
+  });
+
+  test('stores the theme and redraws when only the theme changes', () async {
+    final publisher = HomeWidgetPublisher(renderThumbnail: render);
+    await publisher.publish(_days);
+    expect(stored['theme'], 'cream');
+    calls.clear();
+
+    await publisher.publish(_days, theme: WidgetTheme.midnight);
+
+    expect(stored['theme'], 'midnight');
+    expect(named('updateWidget'), hasLength(widgetProviders.length));
   });
 }

@@ -93,4 +93,4 @@ final class WidgetSyncProvider
   }
 }
 
-String _$widgetSyncHash() => r'77b0de899192e6494b780af62d412bfc3651c445';
+String _$widgetSyncHash() => r'a24a0271f3119c47e84672b0912235e3782d88f9';

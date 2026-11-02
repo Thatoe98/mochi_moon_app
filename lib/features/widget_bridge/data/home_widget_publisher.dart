@@ -6,6 +6,7 @@ import 'package:home_widget/home_widget.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/features/widget_bridge/data/widget_thumbnail.dart';
 import 'package:mochi_moon/features/widget_bridge/domain/widget_day.dart';
+import 'package:mochi_moon/features/widget_bridge/domain/widget_theme.dart';
 
 /// Fully qualified names of the Android providers (2x2 and 4x2).
 const widgetProviders = [
@@ -15,6 +16,7 @@ const widgetProviders = [
 
 const _daysKey = 'days';
 const _signatureKey = 'days_signature';
+const _themeKey = 'theme';
 
 /// Renders the thumbnail for [key], a card of [category], and returns the
 /// saved file's path.
@@ -64,9 +66,13 @@ class HomeWidgetPublisher implements WidgetPublisher {
   final ThumbnailRenderer _renderThumbnail;
 
   @override
-  Future<void> publish(List<WidgetDay> days) async {
+  Future<void> publish(
+    List<WidgetDay> days, {
+    WidgetTheme theme = WidgetTheme.cream,
+  }) async {
     // Nothing to show, or nothing new since the last run: leave it be.
     final signature = jsonEncode([
+      theme.id,
       for (final day in days)
         [_isoDate(day.date), day.quoteId, day.category, day.text],
     ]);
@@ -93,6 +99,7 @@ class HomeWidgetPublisher implements WidgetPublisher {
           },
       ]),
     );
+    await HomeWidget.saveWidgetData<String>(_themeKey, theme.id);
     await HomeWidget.saveWidgetData<String>(_signatureKey, signature);
 
     for (final provider in widgetProviders) {
