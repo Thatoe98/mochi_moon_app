@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:mochi_moon/core/content/card_of_the_day.dart';
+import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/premium/free_limits.dart';
@@ -15,6 +16,8 @@ import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/domain/deck_counters.dart';
 import 'package:mochi_moon/features/deck/domain/deck_planner.dart';
 import 'package:mochi_moon/features/deck/domain/deck_repository.dart';
+import 'package:mochi_moon/features/for_you/application/for_you_providers.dart';
+import 'package:mochi_moon/features/for_you/domain/for_you_ranker.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -111,6 +114,8 @@ class DeckState {
     required this.completedToday,
     required this.streak,
     required this.canUndo,
+    this.savedCount = 0,
+    this.forYouActive = false,
   });
 
   final List<Quote> cards;
@@ -118,6 +123,12 @@ class DeckState {
   final int completedToday;
   final int streak;
   final bool canUndo;
+
+  /// Right-swipes so far, for the For You progress (PRD §6.9).
+  final int savedCount;
+
+  /// True when this deal is ranked by the For You vector.
+  final bool forYouActive;
 
   int get remaining => cards.length - position;
 
@@ -130,12 +141,15 @@ class DeckState {
     int? completedToday,
     int? streak,
     bool? canUndo,
+    int? savedCount,
   }) => DeckState(
     cards: cards ?? this.cards,
     position: position ?? this.position,
     completedToday: completedToday ?? this.completedToday,
     streak: streak ?? this.streak,
     canUndo: canUndo ?? this.canUndo,
+    savedCount: savedCount ?? this.savedCount,
+    forYouActive: forYouActive,
   );
 }
 
@@ -168,12 +182,27 @@ class Deck extends _$Deck {
     _last = null;
 
     final byId = {for (final q in quotes) q.id: q};
-    final plan = planDeck(
-      quoteIds: byId.keys.toList(),
-      history: _history,
-      now: now,
-      random: ref.watch(randomProvider),
-    );
+    final random = ref.watch(randomProvider);
+    List<String>? ranked;
+    if (ref.watch(forYouSelectedProvider) && ref.watch(hasPremiumProvider)) {
+      final centroids = await ref.watch(moodCentroidsProvider.future);
+      final mood = _mood != null && _moodDay == _day ? _mood : null;
+      ranked = rankForYou(
+        quotes: quotes,
+        history: _history,
+        now: now,
+        random: random,
+        moodCentroid: mood == null ? null : decodeEmbedding(centroids[mood.id]),
+      );
+    }
+    final plan =
+        ranked ??
+        planDeck(
+          quoteIds: byId.keys.toList(),
+          history: _history,
+          now: now,
+          random: random,
+        );
     final pinned = _pinCardOfTheDay(plan, quotes, now);
     final completed = completedOnDay(_history, now);
     final left = limit == null
@@ -182,13 +211,15 @@ class Deck extends _$Deck {
     final dealt = [for (final id in pinned.take(left)) byId[id]!];
 
     return DeckState(
-      cards: _mood != null && _moodDay == _day
+      cards: ranked == null && _mood != null && _moodDay == _day
           ? reorderForMood(dealt, 0, _mood!.id)
           : dealt,
       position: 0,
       completedToday: completed,
       streak: currentStreak(_history, now, ritualDays: _ritualDays),
       canUndo: false,
+      savedCount: savedCount(_history),
+      forYouActive: ranked != null,
     );
   }
 
@@ -217,6 +248,11 @@ class Deck extends _$Deck {
     _moodDay = today;
     final current = state.value;
     if (current == null) return;
+    // The ranked deck already leans toward the mood when it is dealt.
+    if (current.forYouActive) {
+      ref.invalidateSelf();
+      return;
+    }
     final cards = reorderForMood(current.cards, current.position, mood.id);
     if (!identical(cards, current.cards)) {
       state = AsyncData(current.copyWith(cards: cards));
@@ -280,6 +316,7 @@ class Deck extends _$Deck {
         completedToday: completedOnDay(_history, now),
         streak: currentStreak(_history, now, ritualDays: _ritualDays),
         canUndo: true,
+        savedCount: savedCount(_history),
       ),
     );
   }
@@ -301,6 +338,7 @@ class Deck extends _$Deck {
         completedToday: completedOnDay(_history, now),
         streak: currentStreak(_history, now, ritualDays: _ritualDays),
         canUndo: false,
+        savedCount: savedCount(_history),
       ),
     );
   }

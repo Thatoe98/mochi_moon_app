@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/content/asset_content_repository.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/content/sign_info.dart';
+import 'package:mochi_moon/features/for_you/domain/for_you_ranker.dart';
 
 /// Serves the real asset files from disk so the shipped JSON is validated.
 class _DiskBundle extends CachingAssetBundle {
@@ -25,6 +26,28 @@ void main() {
     expect(quotes.map((q) => q.id).toSet(), hasLength(500));
     expect(quotes.every((q) => q.textFor('en').isNotEmpty), isTrue);
   });
+
+  test(
+    'every quote has a 128-dim embedding and each mood a centroid',
+    () async {
+      final quotes = await repo.loadQuotes();
+      for (final q in quotes) {
+        expect(decodeEmbedding(q.embedding), hasLength(128), reason: q.id);
+      }
+      final centroids = await repo.loadMoodCentroids();
+      expect(centroids.keys.toSet(), {
+        'happy',
+        'calm',
+        'tired',
+        'sad',
+        'anxious',
+        'in_love',
+      });
+      for (final c in centroids.values) {
+        expect(decodeEmbedding(c), hasLength(128));
+      }
+    },
+  );
 
   test(
     'loads the quests with unique ids, English text and known areas',

@@ -10,6 +10,9 @@ import 'package:mochi_moon/core/content/sign_info.dart';
 abstract interface class ContentRepository {
   Future<List<Quote>> loadQuotes();
 
+  /// Base64 int8 mood centroids by mood id, for the For You deck (PRD §7.2).
+  Future<Map<String, String>> loadMoodCentroids();
+
   Future<List<Quest>> loadQuests();
 
   Future<List<Journey>> loadJourneys();

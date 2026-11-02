@@ -16,6 +16,10 @@ abstract class Quote with _$Quote {
     String? author,
     String? illustrationId,
     @Default(false) bool premium,
+
+    /// Base64 int8 vector, 128 dims, for the For You deck (PRD §7.2). Her own
+    /// cards have none.
+    String? embedding,
   }) = _Quote;
 
   const Quote._();

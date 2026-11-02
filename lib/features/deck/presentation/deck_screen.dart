@@ -14,6 +14,8 @@ import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
 import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
+import 'package:mochi_moon/features/for_you/application/for_you_providers.dart';
+import 'package:mochi_moon/features/for_you/domain/for_you_ranker.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
@@ -71,6 +73,14 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
     }
   }
 
+  void _selectMode({required bool forYou}) {
+    if (forYou && !ref.read(hasPremiumProvider)) {
+      unawaited(context.push('${AppRoutes.paywall}?source=for_you'));
+      return;
+    }
+    ref.read(forYouSelectedProvider.notifier).select(value: forYou);
+  }
+
   Future<void> _undoFromLimitCard() async {
     setState(() => _undoing = true);
     await ref.read(deckProvider.notifier).undo();
@@ -81,6 +91,14 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final deck = ref.watch(deckProvider);
+    final deckState = deck.value;
+    final learning =
+        ref.watch(forYouSelectedProvider) &&
+            ref.watch(hasPremiumProvider) &&
+            deckState != null &&
+            !deckState.forYouActive
+        ? deckState
+        : null;
 
     // A new deal (a new day, or a retry) must not inherit unlocked cards: the
     // read-aloud timer applies again.
@@ -109,6 +127,12 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
             selected: ref.watch(todayMoodProvider),
             onSelected: (mood) => ref.read(setTodayMoodProvider)(mood),
           ),
+          _ModeToggle(
+            forYou: ref.watch(forYouSelectedProvider),
+            premium: ref.watch(hasPremiumProvider),
+            onSelected: _selectMode,
+          ),
+          if (learning != null) _ForYouProgress(saved: learning.savedCount),
           Expanded(
             child: deck.when(
               loading: () => const LoadingView(),
@@ -189,6 +213,86 @@ class _MoodCheckIn extends StatelessWidget {
             onSelected: onSelected,
             scrollable: true,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Switches between the normal deck and the For You deck (PRD §6.9). The
+/// For You side carries a lock for free users and opens the paywall.
+class _ModeToggle extends StatelessWidget {
+  const _ModeToggle({
+    required this.forYou,
+    required this.premium,
+    required this.onSelected,
+  });
+
+  final bool forYou;
+  final bool premium;
+  final void Function({required bool forYou}) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        0,
+      ),
+      child: Semantics(
+        label: l10n.deckModeSemantics,
+        child: SegmentedButton<bool>(
+          showSelectedIcon: false,
+          segments: [
+            ButtonSegment(value: false, label: Text(l10n.deckModeAll)),
+            ButtonSegment(
+              value: true,
+              icon: premium ? null : const Icon(Icons.lock_outline_rounded),
+              label: Text(l10n.deckModeForYou),
+            ),
+          ],
+          selected: {forYou && premium},
+          onSelectionChanged: (value) => onSelected(forYou: value.first),
+        ),
+      ),
+    );
+  }
+}
+
+/// "Mochi is learning what you love" until there are enough right-swipes.
+class _ForYouProgress extends StatelessWidget {
+  const _ForYouProgress({required this.saved});
+
+  final int saved;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.sm,
+        AppSpacing.lg,
+        0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.forYouProgress(saved.clamp(0, forYouMinSaved)),
+            style: theme.textTheme.titleSmall,
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          LinearProgressIndicator(
+            value: saved.clamp(0, forYouMinSaved) / forYouMinSaved,
+            semanticsLabel: l10n.forYouProgress(saved.clamp(0, forYouMinSaved)),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(l10n.forYouProgressHint, style: theme.textTheme.bodySmall),
         ],
       ),
     );

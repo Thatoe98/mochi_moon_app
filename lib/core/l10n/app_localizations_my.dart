@@ -78,6 +78,24 @@ class AppLocalizationsMy extends AppLocalizations {
   String get deckLimitTitle => 'တောက်ပနေပြီ ✨';
 
   @override
+  String get deckModeAll => 'All cards';
+
+  @override
+  String get deckModeForYou => 'For You';
+
+  @override
+  String get deckModeSemantics => 'Choose which cards to swipe';
+
+  @override
+  String forYouProgress(int count) {
+    return 'Mochi is learning what you love — $count/10';
+  }
+
+  @override
+  String get forYouProgressHint =>
+      'Save cards with \"This is me\" and your For You deck will start to fit you.';
+
+  @override
   String get deckLimitPremiumNote =>
       'Premium keeps the deck open all day, whenever you want more.';
 

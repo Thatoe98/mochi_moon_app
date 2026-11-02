@@ -16,7 +16,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Quote {
 
- String get id; Map<String, String> get text; String get category; List<String> get moods; List<String> get signs; String? get author; String? get illustrationId; bool get premium;
+ String get id; Map<String, String> get text; String get category; List<String> get moods; List<String> get signs; String? get author; String? get illustrationId; bool get premium;/// Base64 int8 vector, 128 dims, for the For You deck (PRD §7.2). Her own
+/// cards have none.
+ String? get embedding;
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +32,20 @@ $QuoteCopyWith<Quote> get copyWith => _$QuoteCopyWithImpl<Quote>(this as Quote, 
 @override
 bool operator ==(Object other) {
   final _this = this as Quote;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Quote&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.text, _this.text)&&(identical(other.category, _this.category) || other.category == _this.category)&&const DeepCollectionEquality().equals(other.moods, _this.moods)&&const DeepCollectionEquality().equals(other.signs, _this.signs)&&(identical(other.author, _this.author) || other.author == _this.author)&&(identical(other.illustrationId, _this.illustrationId) || other.illustrationId == _this.illustrationId)&&(identical(other.premium, _this.premium) || other.premium == _this.premium));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Quote&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.text, _this.text)&&(identical(other.category, _this.category) || other.category == _this.category)&&const DeepCollectionEquality().equals(other.moods, _this.moods)&&const DeepCollectionEquality().equals(other.signs, _this.signs)&&(identical(other.author, _this.author) || other.author == _this.author)&&(identical(other.illustrationId, _this.illustrationId) || other.illustrationId == _this.illustrationId)&&(identical(other.premium, _this.premium) || other.premium == _this.premium)&&(identical(other.embedding, _this.embedding) || other.embedding == _this.embedding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Quote;
-  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.text),_this.category,const DeepCollectionEquality().hash(_this.moods),const DeepCollectionEquality().hash(_this.signs),_this.author,_this.illustrationId,_this.premium);
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.text),_this.category,const DeepCollectionEquality().hash(_this.moods),const DeepCollectionEquality().hash(_this.signs),_this.author,_this.illustrationId,_this.premium,_this.embedding);
 }
 
 @override
 String toString() {
   final _this = this as Quote;
-  return 'Quote(id: ${_this.id}, text: ${_this.text}, category: ${_this.category}, moods: ${_this.moods}, signs: ${_this.signs}, author: ${_this.author}, illustrationId: ${_this.illustrationId}, premium: ${_this.premium})';
+  return 'Quote(id: ${_this.id}, text: ${_this.text}, category: ${_this.category}, moods: ${_this.moods}, signs: ${_this.signs}, author: ${_this.author}, illustrationId: ${_this.illustrationId}, premium: ${_this.premium}, embedding: ${_this.embedding})';
 }
 
 
@@ -54,7 +56,7 @@ abstract mixin class $QuoteCopyWith<$Res>  {
   factory $QuoteCopyWith(Quote value, $Res Function(Quote) _then) = _$QuoteCopyWithImpl;
 @useResult
 $Res call({
- String id, Map<String, String> text, String category, List<String> moods, List<String> signs, String? author, String? illustrationId, bool premium
+ String id, Map<String, String> text, String category, List<String> moods, List<String> signs, String? author, String? illustrationId, bool premium, String? embedding
 });
 
 
@@ -71,7 +73,7 @@ class _$QuoteCopyWithImpl<$Res>
 
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? category = null,Object? moods = null,Object? signs = null,Object? author = freezed,Object? illustrationId = freezed,Object? premium = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? category = null,Object? moods = null,Object? signs = null,Object? author = freezed,Object? illustrationId = freezed,Object? premium = null,Object? embedding = freezed,}) {
   return _then(Quote(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
@@ -81,7 +83,8 @@ as List<String>,signs: null == signs ? _self.signs : signs // ignore: cast_nulla
 as List<String>,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String?,illustrationId: freezed == illustrationId ? _self.illustrationId : illustrationId // ignore: cast_nullable_to_non_nullable
 as String?,premium: null == premium ? _self.premium : premium // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,embedding: freezed == embedding ? _self.embedding : embedding // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -166,10 +169,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Map<String, String> text,  String category,  List<String> moods,  List<String> signs,  String? author,  String? illustrationId,  bool premium)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Map<String, String> text,  String category,  List<String> moods,  List<String> signs,  String? author,  String? illustrationId,  bool premium,  String? embedding)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Quote() when $default != null:
-return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that.author,_that.illustrationId,_that.premium);case _:
+return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that.author,_that.illustrationId,_that.premium,_that.embedding);case _:
   return orElse();
 
 }
@@ -187,10 +190,10 @@ return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Map<String, String> text,  String category,  List<String> moods,  List<String> signs,  String? author,  String? illustrationId,  bool premium)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Map<String, String> text,  String category,  List<String> moods,  List<String> signs,  String? author,  String? illustrationId,  bool premium,  String? embedding)  $default,) {final _that = this;
 switch (_that) {
 case _Quote():
-return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that.author,_that.illustrationId,_that.premium);case _:
+return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that.author,_that.illustrationId,_that.premium,_that.embedding);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -207,10 +210,10 @@ return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Map<String, String> text,  String category,  List<String> moods,  List<String> signs,  String? author,  String? illustrationId,  bool premium)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Map<String, String> text,  String category,  List<String> moods,  List<String> signs,  String? author,  String? illustrationId,  bool premium,  String? embedding)?  $default,) {final _that = this;
 switch (_that) {
 case _Quote() when $default != null:
-return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that.author,_that.illustrationId,_that.premium);case _:
+return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that.author,_that.illustrationId,_that.premium,_that.embedding);case _:
   return null;
 
 }
@@ -222,7 +225,7 @@ return $default(_that.id,_that.text,_that.category,_that.moods,_that.signs,_that
 @JsonSerializable()
 
 class _Quote extends Quote {
-  const _Quote({required this.id, required  Map<String, String> text, required this.category,  List<String> moods = const <String>[],  List<String> signs = const <String>['all'], this.author, this.illustrationId, this.premium = false}): _text = text,_moods = moods,_signs = signs,super._();
+  const _Quote({required this.id, required  Map<String, String> text, required this.category,  List<String> moods = const <String>[],  List<String> signs = const <String>['all'], this.author, this.illustrationId, this.premium = false, this.embedding}): _text = text,_moods = moods,_signs = signs,super._();
   factory _Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);
 
 @override final  String id;
@@ -251,6 +254,9 @@ class _Quote extends Quote {
 @override final  String? author;
 @override final  String? illustrationId;
 @override@JsonKey() final  bool premium;
+/// Base64 int8 vector, 128 dims, for the For You deck (PRD §7.2). Her own
+/// cards have none.
+@override final  String? embedding;
 
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
@@ -265,18 +271,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Quote&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.text, _text)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.moods, _moods)&&const DeepCollectionEquality().equals(other.signs, _signs)&&(identical(other.author, author) || other.author == author)&&(identical(other.illustrationId, illustrationId) || other.illustrationId == illustrationId)&&(identical(other.premium, premium) || other.premium == premium));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Quote&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.text, _text)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.moods, _moods)&&const DeepCollectionEquality().equals(other.signs, _signs)&&(identical(other.author, author) || other.author == author)&&(identical(other.illustrationId, illustrationId) || other.illustrationId == illustrationId)&&(identical(other.premium, premium) || other.premium == premium)&&(identical(other.embedding, embedding) || other.embedding == embedding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_text),category,const DeepCollectionEquality().hash(_moods),const DeepCollectionEquality().hash(_signs),author,illustrationId,premium);
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_text),category,const DeepCollectionEquality().hash(_moods),const DeepCollectionEquality().hash(_signs),author,illustrationId,premium,embedding);
 }
 
 @override
 String toString() {
-    return 'Quote(id: $id, text: $text, category: $category, moods: $moods, signs: $signs, author: $author, illustrationId: $illustrationId, premium: $premium)';
+    return 'Quote(id: $id, text: $text, category: $category, moods: $moods, signs: $signs, author: $author, illustrationId: $illustrationId, premium: $premium, embedding: $embedding)';
 }
 
 
@@ -287,7 +293,7 @@ abstract mixin class _$QuoteCopyWith<$Res> implements $QuoteCopyWith<$Res> {
   factory _$QuoteCopyWith(_Quote value, $Res Function(_Quote) _then) = __$QuoteCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Map<String, String> text, String category, List<String> moods, List<String> signs, String? author, String? illustrationId, bool premium
+ String id, Map<String, String> text, String category, List<String> moods, List<String> signs, String? author, String? illustrationId, bool premium, String? embedding
 });
 
 
@@ -304,7 +310,7 @@ class __$QuoteCopyWithImpl<$Res>
 
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? category = null,Object? moods = null,Object? signs = null,Object? author = freezed,Object? illustrationId = freezed,Object? premium = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? category = null,Object? moods = null,Object? signs = null,Object? author = freezed,Object? illustrationId = freezed,Object? premium = null,Object? embedding = freezed,}) {
   return _then(_Quote(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self._text : text // ignore: cast_nullable_to_non_nullable
@@ -314,7 +320,8 @@ as List<String>,signs: null == signs ? _self._signs : signs // ignore: cast_null
 as List<String>,author: freezed == author ? _self.author : author // ignore: cast_nullable_to_non_nullable
 as String?,illustrationId: freezed == illustrationId ? _self.illustrationId : illustrationId // ignore: cast_nullable_to_non_nullable
 as String?,premium: null == premium ? _self.premium : premium // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,embedding: freezed == embedding ? _self.embedding : embedding // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

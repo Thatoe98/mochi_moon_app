@@ -43,6 +43,13 @@ class AssetContentRepository implements ContentRepository {
   }
 
   @override
+  Future<Map<String, String>> loadMoodCentroids() async {
+    final json = await _loadJson(quotesPath);
+    final raw = json['moodCentroids'] as Map<String, dynamic>? ?? const {};
+    return {for (final e in raw.entries) e.key: e.value as String};
+  }
+
+  @override
   Future<List<Journey>> loadJourneys() async {
     final json = await _loadJson(journeysPath);
     return (json['journeys'] as List<dynamic>)

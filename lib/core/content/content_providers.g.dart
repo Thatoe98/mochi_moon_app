@@ -95,6 +95,47 @@ final class QuotesProvider
 
 String _$quotesHash() => r'781638bd6366711c350c886879f2ca9b2f8d0550';
 
+@ProviderFor(moodCentroids)
+final moodCentroidsProvider = MoodCentroidsProvider._();
+
+final class MoodCentroidsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Map<String, String>>,
+          Map<String, String>,
+          FutureOr<Map<String, String>>
+        >
+    with
+        $FutureModifier<Map<String, String>>,
+        $FutureProvider<Map<String, String>> {
+  MoodCentroidsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'moodCentroidsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$moodCentroidsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Map<String, String>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Map<String, String>> create(Ref ref) {
+    return moodCentroids(ref);
+  }
+}
+
+String _$moodCentroidsHash() => r'4f97a3372de37141cf92083a07247301fdb1ac93';
+
 @ProviderFor(quests)
 final questsProvider = QuestsProvider._();
 

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
@@ -41,8 +42,10 @@ Widget app({
   double textScale = 1,
   bool premium = false,
   GoRouter? router,
+  List<Override> overrides = const [],
 }) => ProviderScope(
   overrides: [
+    ...overrides,
     deckRepositoryProvider.overrideWithValue(repo),
     moodRepositoryProvider.overrideWithValue(moods ?? FakeMoodRepository()),
     moodRemoteProvider.overrideWithValue(null),
@@ -432,6 +435,62 @@ void main() {
         tester.widget<Image>(find.byType(Image)).semanticLabel,
         contains('Mochi the moon bunny'),
       );
+    });
+
+    testWidgets('For You: a free user is sent to the paywall', (tester) async {
+      final opened = <String?>[];
+      final router = GoRouter(
+        routes: [
+          GoRoute(path: '/', builder: (context, state) => const DeckScreen()),
+          GoRoute(
+            path: AppRoutes.paywall,
+            builder: (context, state) {
+              opened.add(state.uri.queryParameters['source']);
+              return const Scaffold(body: Text('paywall'));
+            },
+          ),
+        ],
+      );
+      addTearDown(router.dispose);
+      await tester.pumpWidget(app(repo: FakeDeckRepository(), router: router));
+      await load(tester);
+      expect(find.textContaining('learning'), findsNothing);
+      await tester.tap(find.text('For You'));
+      await tester.pumpAndSettle();
+      expect(opened, ['for_you']);
+    });
+
+    testWidgets('For You: Premium sees how close Mochi is to learning', (
+      tester,
+    ) async {
+      final repo = FakeDeckRepository([
+        for (var i = 0; i < 6; i++)
+          DeckEvent(
+            id: i,
+            quoteId: 'old$i',
+            action: DeckAction.saved,
+            at: DateTime(2026, 10, 20),
+          ),
+      ]);
+      await tester.pumpWidget(
+        app(
+          repo: repo,
+          premium: true,
+          overrides: [
+            moodCentroidsProvider.overrideWith((ref) async => const {}),
+          ],
+        ),
+      );
+      await load(tester);
+      await tester.tap(find.text('For You'));
+      await tester.pump();
+      await tester.pump();
+      expect(
+        find.text('Mochi is learning what you love — 6/10'),
+        findsOneWidget,
+      );
+      // The normal deck keeps going meanwhile.
+      expect(find.byType(QuoteCard), findsWidgets);
     });
 
     testWidgets('a free user sees a gentle Premium note and it opens the '

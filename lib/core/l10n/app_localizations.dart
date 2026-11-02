@@ -188,6 +188,36 @@ abstract class AppLocalizations {
   /// **'You\'re glowing ✨'**
   String get deckLimitTitle;
 
+  /// No description provided for @deckModeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All cards'**
+  String get deckModeAll;
+
+  /// No description provided for @deckModeForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'For You'**
+  String get deckModeForYou;
+
+  /// No description provided for @deckModeSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose which cards to swipe'**
+  String get deckModeSemantics;
+
+  /// No description provided for @forYouProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi is learning what you love — {count}/10'**
+  String forYouProgress(int count);
+
+  /// No description provided for @forYouProgressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Save cards with \"This is me\" and your For You deck will start to fit you.'**
+  String get forYouProgressHint;
+
   /// No description provided for @deckLimitPremiumNote.
   ///
   /// In en, this message translates to:

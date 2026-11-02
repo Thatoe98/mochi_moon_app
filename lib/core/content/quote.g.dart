@@ -19,6 +19,7 @@ _Quote _$QuoteFromJson(Map<String, dynamic> json) => _Quote(
   author: json['author'] as String?,
   illustrationId: json['illustrationId'] as String?,
   premium: json['premium'] as bool? ?? false,
+  embedding: json['embedding'] as String?,
 );
 
 Map<String, dynamic> _$QuoteToJson(_Quote instance) => <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$QuoteToJson(_Quote instance) => <String, dynamic>{
   'author': instance.author,
   'illustrationId': instance.illustrationId,
   'premium': instance.premium,
+  'embedding': instance.embedding,
 };

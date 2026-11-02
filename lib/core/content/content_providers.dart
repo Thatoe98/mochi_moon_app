@@ -18,6 +18,10 @@ Future<List<Quote>> quotes(Ref ref) =>
     ref.watch(contentRepositoryProvider).loadQuotes();
 
 @Riverpod(keepAlive: true)
+Future<Map<String, String>> moodCentroids(Ref ref) =>
+    ref.watch(contentRepositoryProvider).loadMoodCentroids();
+
+@Riverpod(keepAlive: true)
 Future<List<Quest>> quests(Ref ref) =>
     ref.watch(contentRepositoryProvider).loadQuests();
 

@@ -46,6 +46,9 @@ class _FakeContent implements ContentRepository {
   Future<List<Quote>> loadQuotes() => throw UnimplementedError();
 
   @override
+  Future<Map<String, String>> loadMoodCentroids() => throw UnimplementedError();
+
+  @override
   Future<List<Quest>> loadQuests() => throw UnimplementedError();
 
   @override
