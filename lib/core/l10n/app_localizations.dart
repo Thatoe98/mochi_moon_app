@@ -1940,6 +1940,12 @@ abstract class AppLocalizations {
   /// **'Romance, emotional and communication scores, and the aspects between you'**
   String get compatDetailsLocked;
 
+  /// No description provided for @retroAlertPremiumNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Part of Premium'**
+  String get retroAlertPremiumNote;
+
   /// No description provided for @chartNoTimeTitle.
   ///
   /// In en, this message translates to:

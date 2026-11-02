@@ -5,6 +5,9 @@ import 'package:mochi_moon/features/cosmic/retrograde/domain/retrograde_status.d
 /// Planets that can send a heads-up (PRD §6.6).
 const List<Body> retrogradeAlertBodies = mainRetrogradeBodies;
 
+/// Alerts that need Premium (PRD 6.6, M4b): Mercury stays free.
+const Set<Body> premiumRetrogradeAlertBodies = {Body.venus, Body.mars};
+
 /// Mercury is on until the user says otherwise; Venus and Mars are off.
 const Set<Body> defaultRetrogradeAlertPlanets = {Body.mercury};
 

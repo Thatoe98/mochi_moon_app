@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_alerts_section.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
 import '../../../settings/support/fake_reminder.dart';
@@ -18,8 +21,10 @@ Widget _host(
   FakeRetrogradeAlertScheduler alerts,
   FakeReminderScheduler permission, {
   double textScale = 1,
+  bool premium = true,
 }) => ProviderScope(
   overrides: [
+    hasPremiumProvider.overrideWithValue(premium),
     retrogradeAlertSettingsRepositoryProvider.overrideWithValue(repository),
     retrogradeAlertSchedulerProvider.overrideWithValue(alerts),
     reminderSchedulerProvider.overrideWithValue(permission),
@@ -55,6 +60,69 @@ void main() {
     repository = FakeRetrogradeAlertSettingsRepository();
     alerts = FakeRetrogradeAlertScheduler();
     permission = FakeReminderScheduler();
+  });
+
+  testWidgets('free: Venus and Mars show locked and stay off', (tester) async {
+    await tester.pumpWidget(
+      _host(repository, alerts, permission, premium: false),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.lock_rounded), findsNWidgets(2));
+    expect(_on(tester, 'Mercury'), isTrue);
+    expect(_on(tester, 'Venus'), isFalse);
+    expect(_on(tester, 'Mars'), isFalse);
+  });
+
+  testWidgets('free: tapping Venus opens the paywall, no permission asked', (
+    tester,
+  ) async {
+    final sources = <String?>[];
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const Scaffold(
+            body: SingleChildScrollView(child: RetrogradeAlertsSection()),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.paywall,
+          builder: (context, state) {
+            sources.add(state.uri.queryParameters['source']);
+            return const Scaffold(body: Text('paywall'));
+          },
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          hasPremiumProvider.overrideWithValue(false),
+          retrogradeAlertSettingsRepositoryProvider.overrideWithValue(
+            repository,
+          ),
+          retrogradeAlertSchedulerProvider.overrideWithValue(alerts),
+          reminderSchedulerProvider.overrideWithValue(permission),
+          reminderLanguageProvider.overrideWithValue('en'),
+          clockProvider.overrideWithValue(() => DateTime(2026, 10, 29, 12)),
+          retrogradeCalendarSourceProvider.overrideWithValue(fakeCalendar),
+        ],
+        child: MaterialApp.router(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: router,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(_switchFor('Venus'));
+    await tester.pumpAndSettle();
+
+    expect(sources, ['retro_alerts']);
+    expect(permission.permissionRequests, 0);
   });
 
   testWidgets('shows Mercury on and Venus and Mars off', (tester) async {

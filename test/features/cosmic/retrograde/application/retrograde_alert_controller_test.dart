@@ -5,6 +5,7 @@ import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_ale
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/domain/retrograde_alerts.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
 import '../../../settings/support/fake_reminder.dart';
@@ -17,9 +18,11 @@ ProviderContainer _container({
   required FakeReminderScheduler permission,
   String lang = 'en',
   RetrogradeCalendarSource source = fakeCalendar,
+  bool premium = true,
 }) {
   final container = ProviderContainer(
     overrides: [
+      hasPremiumProvider.overrideWithValue(premium),
       retrogradeAlertSettingsRepositoryProvider.overrideWithValue(repository),
       retrogradeAlertSchedulerProvider.overrideWithValue(alerts),
       reminderSchedulerProvider.overrideWithValue(permission),
@@ -46,13 +49,42 @@ void main() {
   ProviderContainer container0({
     String lang = 'en',
     RetrogradeCalendarSource source = fakeCalendar,
+    bool premium = true,
   }) => _container(
+    premium: premium,
     repository: repository,
     alerts: alerts,
     permission: permission,
     lang: lang,
     source: source,
   );
+
+  test('free: Venus cannot be turned on and nothing is scheduled', () async {
+    permission.granted = true;
+    final container = container0(premium: false);
+    final controller = container.read(
+      retrogradeAlertControllerProvider.notifier,
+    );
+
+    expect(await controller.setEnabled(Body.venus, on: true), isFalse);
+    expect(await container.read(retrogradeAlertControllerProvider.future), {
+      Body.mercury,
+    });
+  });
+
+  test('after a lapse Venus is not scheduled but her choice is kept', () async {
+    permission.granted = true;
+    repository.saved = {Body.mercury, Body.venus};
+    final container = container0(premium: false);
+
+    await container.read(retrogradeAlertControllerProvider.notifier).resync();
+
+    expect(alerts.scheduled!.every((a) => a.body == Body.mercury), isTrue);
+    expect(await container.read(retrogradeAlertControllerProvider.future), {
+      Body.mercury,
+      Body.venus,
+    });
+  });
 
   test('Mercury is on by default', () async {
     final container = container0();

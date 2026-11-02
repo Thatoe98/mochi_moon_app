@@ -1112,6 +1112,9 @@ class AppLocalizationsMy extends AppLocalizations {
       'Romance, emotional and communication scores, and the aspects between you';
 
   @override
+  String get retroAlertPremiumNote => 'Part of Premium';
+
+  @override
   String get chartNoTimeTitle => 'မွေးချိန် ထည့်ပါ';
 
   @override

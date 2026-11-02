@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_alert_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/domain/retrograde_alerts.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_labels.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 
 /// One switch per planet for the retrograde heads-ups (PRD §6.6).
@@ -18,6 +23,7 @@ class RetrogradeAlertsSection extends ConsumerWidget {
     final theme = Theme.of(context);
     final loaded = ref.watch(retrogradeAlertControllerProvider);
     final planets = loaded.value ?? defaultRetrogradeAlertPlanets;
+    final premium = ref.watch(hasPremiumProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,14 +50,27 @@ class RetrogradeAlertsSection extends ConsumerWidget {
           ),
         ),
         for (final body in retrogradeAlertBodies)
-          SwitchListTile(
-            secondary: const Icon(Icons.nightlight_round),
-            title: Text(retrogradePlanetLabel(l10n, body)),
-            value: planets.contains(body),
-            onChanged: loaded.hasValue
-                ? (on) => _toggle(context, ref, body, on: on)
-                : null,
-          ),
+          if (!premium && premiumRetrogradeAlertBodies.contains(body))
+            // Venus and Mars alerts are Premium: shown off and locked, one
+            // tap opens the paywall. Her saved choice is kept.
+            SwitchListTile(
+              secondary: const Icon(Icons.lock_rounded),
+              title: Text(retrogradePlanetLabel(l10n, body)),
+              subtitle: Text(l10n.retroAlertPremiumNote),
+              value: false,
+              onChanged: (_) => unawaited(
+                context.push('${AppRoutes.paywall}?source=retro_alerts'),
+              ),
+            )
+          else
+            SwitchListTile(
+              secondary: const Icon(Icons.nightlight_round),
+              title: Text(retrogradePlanetLabel(l10n, body)),
+              value: planets.contains(body),
+              onChanged: loaded.hasValue
+                  ? (on) => _toggle(context, ref, body, on: on)
+                  : null,
+            ),
       ],
     );
   }

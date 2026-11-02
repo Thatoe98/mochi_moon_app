@@ -8,6 +8,7 @@ import 'package:mochi_moon/features/cosmic/retrograde/data/prefs_retrograde_aler
 import 'package:mochi_moon/features/cosmic/retrograde/domain/retrograde_alerts.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_labels.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/settings/application/reminder_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +35,11 @@ class RetrogradeAlertController extends _$RetrogradeAlertController {
   /// Turns [body]'s alerts on or off. Turning on asks the system for
   /// permission first; returns false, leaving it off, when that is refused.
   Future<bool> setEnabled(Body body, {required bool on}) async {
+    if (on &&
+        premiumRetrogradeAlertBodies.contains(body) &&
+        !ref.read(hasPremiumProvider)) {
+      return false;
+    }
     if (on && !await ref.read(reminderSchedulerProvider).requestPermission()) {
       return false;
     }
@@ -53,7 +59,12 @@ class RetrogradeAlertController extends _$RetrogradeAlertController {
   /// the next stations are always scheduled.
   Future<void> resync() async => await _apply(await future);
 
-  Future<void> _apply(Set<Body> planets) async {
+  /// Schedules [saved] minus the Premium planets when she is not Premium.
+  /// Her choice stays saved, so it comes back if Premium does.
+  Future<void> _apply(Set<Body> saved) async {
+    final planets = ref.read(hasPremiumProvider)
+        ? saved
+        : saved.difference(premiumRetrogradeAlertBodies);
     final scheduler = ref.read(retrogradeAlertSchedulerProvider);
     if (planets.isEmpty ||
         !await ref.read(reminderSchedulerProvider).hasPermission()) {
@@ -100,7 +111,10 @@ class RetrogradeAlertController extends _$RetrogradeAlertController {
 /// root.
 @Riverpod(keepAlive: true)
 Future<void> retrogradeAlertSync(Ref ref) async {
-  ref.watch(reminderLanguageProvider);
+  // A change of Premium re-plans too: a lapse stops Venus and Mars alerts.
+  ref
+    ..watch(reminderLanguageProvider)
+    ..watch(hasPremiumProvider);
   try {
     await ref.read(retrogradeAlertControllerProvider.notifier).resync();
   } on Object {
