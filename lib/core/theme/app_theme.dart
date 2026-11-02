@@ -75,6 +75,13 @@ abstract final class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: scheme.surfaceContainerHighest,
         indicatorColor: scheme.primaryContainer,
+        iconTheme: WidgetStateProperty.resolveWith(
+          (states) => IconThemeData(
+            color: states.contains(WidgetState.selected)
+                ? scheme.onPrimaryContainer
+                : scheme.onSurfaceVariant,
+          ),
+        ),
       ),
     );
   }
