@@ -1015,7 +1015,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 13. Paywall: the new 3 bullets and benefit order; every entry point wired with its `source`; analytics sources. — *Done: bullets are cards/For You, journeys, weekly letter, then an "Also in Premium" list; `mood_insights`, `weekly_letter`, `mascot_item` and `natal_report` (locked card, always visible) are wired. `for_you` and `compat_report` wait for item 17 (those screens do not exist yet).*
 - [x] 14. Trial offer after the day 2–3 ritual (once, dismissible, skipped on hard-day days and for Premium); tests. — *Done: `trialOfferDue` (pure), `TrialOffer` notifier, `TrialOfferCard` on the finished Today screen (`trial_offer`), shown/dismissed analytics; "shown" and "hard-day opened today" live in shared_preferences.*
 - [x] 15. Guard test: the ritual, the hard-day kit, breathing and Help never show a paywall or lock. — *Done: `expectNoPaywall` runs on every ritual step, the hard-day kit (which holds the Help resources) and breathing.*
-- [ ] 16. Lapse tests: a Premium user goes free and nothing she made disappears.
+- [x] 16. Lapse tests: a Premium user goes free and nothing she made disappears. — *Done: own cards, sealed letters and Venus/Mars alerts have lapse tests beside their providers; `test/features/paywall/lapse_test.dart` adds partners, older mood months and an equipped Premium outfit.*
 - [ ] 17. As each is built later (`/daily/personal`, the compatibility endpoint and credit, For You, widget themes): gated on the server from day one.
 
 ### M5 — Self-love expansion (v1.1)
