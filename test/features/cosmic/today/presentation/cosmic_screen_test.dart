@@ -7,12 +7,15 @@ import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_theme.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
+import 'package:mochi_moon/features/cosmic/astro/natal_chart.dart';
 import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
 import 'package:mochi_moon/features/cosmic/presentation/cosmic_screen.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
+import 'package:mochi_moon/features/cosmic/today/application/personal_note_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/daily_reading.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/daily_reading_repository.dart';
+import 'package:mochi_moon/features/cosmic/today/domain/personal_note.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
@@ -22,6 +25,36 @@ import '../../../../support/disk_bundle.dart';
 import '../../../profile/support/fake_profile.dart';
 import '../../retrograde/support/periods.dart';
 import '../support/fake_thai_colors_setting.dart';
+
+class _FakeNotes implements PersonalNoteRepository {
+  _FakeNotes({this.fail = false});
+
+  final bool fail;
+  int calls = 0;
+
+  @override
+  Future<PersonalNote?> cached({
+    required DateTime date,
+    required String lang,
+  }) async => null;
+
+  @override
+  Future<PersonalNote> note({
+    required NatalChart chart,
+    required DateTime date,
+    required String lang,
+  }) async {
+    calls++;
+    if (fail) throw const NetworkFailure();
+    return const PersonalNote(
+      date: '2026-10-29',
+      lang: 'en',
+      version: 1,
+      title: 'A tender day',
+      body: 'Go gently with yourself today.',
+    );
+  }
+}
 
 class _FailingReadings implements DailyReadingRepository {
   int calls = 0;
@@ -50,6 +83,7 @@ Widget _host({
   double textScale = 1,
   bool premium = true,
   bool thailand = false,
+  PersonalNoteRepository? notes,
 }) => ProviderScope(
   overrides: [
     inThailandProvider.overrideWithValue(thailand),
@@ -63,6 +97,7 @@ Widget _host({
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 29, 12)),
     retrogradeCalendarSourceProvider.overrideWithValue(fakeCalendar),
     hasPremiumProvider.overrideWithValue(premium),
+    personalNoteRepositoryProvider.overrideWithValue(notes ?? _FakeNotes()),
     if (readings != null)
       dailyReadingRepositoryProvider.overrideWithValue(readings),
   ],
@@ -162,8 +197,10 @@ void main() {
     expect(find.text('Your depth is a superpower'), findsOneWidget);
     expect(find.text("Today's energy"), findsOneWidget);
     expect(find.text('Berry'), findsOneWidget);
-    // Love, second lucky color, lucky number and things to avoid.
-    expect(find.text('Premium'), findsNWidgets(4));
+    // The personal note, love, second lucky color, lucky number and avoid.
+    expect(find.text('Premium'), findsNWidgets(5));
+    expect(find.text('Just for you today'), findsOneWidget);
+    expect(find.text('Go gently with yourself today.'), findsNothing);
     // The titles stay, so nothing disappears.
     expect(find.text('Love'), findsOneWidget);
     expect(find.text('Things to avoid'), findsOneWidget);
@@ -178,6 +215,45 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Premium'), findsNothing);
+  });
+
+  testWidgets('Premium: the personal note is shown', (tester) async {
+    tester.view
+      ..physicalSize = const Size(800, 3000)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final notes = _FakeNotes();
+    await tester.pumpWidget(_host(profile: _scorpio, notes: notes));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Just for you today'), findsOneWidget);
+    expect(find.text('A tender day'), findsOneWidget);
+    expect(find.text('Go gently with yourself today.'), findsOneWidget);
+    expect(notes.calls, 1);
+  });
+
+  testWidgets('free: no note is asked for', (tester) async {
+    final notes = _FakeNotes();
+    await tester.pumpWidget(
+      _host(profile: _scorpio, premium: false, notes: notes),
+    );
+    await tester.pumpAndSettle();
+    expect(notes.calls, 0);
+  });
+
+  testWidgets('Premium: when the note cannot be written it is left out', (
+    tester,
+  ) async {
+    tester.view
+      ..physicalSize = const Size(800, 3000)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      _host(profile: _scorpio, notes: _FakeNotes(fail: true)),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Just for you today'), findsNothing);
+    expect(find.text('Your depth is a superpower'), findsOneWidget);
   });
 
   testWidgets('shows the Moon card with a birth date', (tester) async {

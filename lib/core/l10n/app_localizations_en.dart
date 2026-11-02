@@ -517,6 +517,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cosmicEnergyTitle => 'Today\'s energy';
 
   @override
+  String get cosmicPersonalTitle => 'Just for you today';
+
+  @override
+  String get cosmicPersonalTeaser =>
+      'A little note written from your own chart and today\'s sky, to help you go gently or shine a bit more.';
+
+  @override
   String get cosmicLoveTitle => 'Love';
 
   @override

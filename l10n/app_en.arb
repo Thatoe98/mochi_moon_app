@@ -164,6 +164,8 @@
   "cosmicMoonIn": "Moon in {sign}",
   "@cosmicMoonIn": { "placeholders": { "sign": { "type": "String" } } },
   "cosmicEnergyTitle": "Today's energy",
+  "cosmicPersonalTitle": "Just for you today",
+  "cosmicPersonalTeaser": "A little note written from your own chart and today's sky, to help you go gently or shine a bit more.",
   "cosmicLoveTitle": "Love",
   "cosmicLuckyColorsTitle": "Lucky colors",
   "cosmicLuckyNumberTitle": "Lucky number",

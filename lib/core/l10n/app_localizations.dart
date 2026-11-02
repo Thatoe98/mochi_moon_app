@@ -932,6 +932,18 @@ abstract class AppLocalizations {
   /// **'Today\'s energy'**
   String get cosmicEnergyTitle;
 
+  /// No description provided for @cosmicPersonalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Just for you today'**
+  String get cosmicPersonalTitle;
+
+  /// No description provided for @cosmicPersonalTeaser.
+  ///
+  /// In en, this message translates to:
+  /// **'A little note written from your own chart and today\'s sky, to help you go gently or shine a bit more.'**
+  String get cosmicPersonalTeaser;
+
   /// No description provided for @cosmicLoveTitle.
   ///
   /// In en, this message translates to:

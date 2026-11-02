@@ -17,6 +17,7 @@ import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/application/retrograde_providers.dart';
 import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_button.dart';
 import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_providers.dart';
+import 'package:mochi_moon/features/cosmic/today/application/personal_note_providers.dart';
 import 'package:mochi_moon/features/cosmic/today/domain/cosmic_today.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/color_swatch_tile.dart';
 import 'package:mochi_moon/features/cosmic/unlock/presentation/cosmic_locked_view.dart';
@@ -123,6 +124,7 @@ class _TodayView extends ConsumerWidget {
             Text(reading.body, style: theme.textTheme.bodyLarge),
           ],
         ),
+        _PersonalBlock(lang: lang, premium: premium),
         _Block(
           title: l10n.cosmicEnergyTitle,
           children: [Text(reading.energy, style: theme.textTheme.bodyLarge)],
@@ -193,6 +195,49 @@ class _TodayView extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// The note written for her chart and today's sky (PRD §6.7). Free users see
+/// a locked preview; a Premium user sees it once written, and nothing if it
+/// cannot be written (no made-up text stands in).
+class _PersonalBlock extends ConsumerWidget {
+  const _PersonalBlock({required this.lang, required this.premium});
+
+  final String lang;
+  final bool premium;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    if (!premium) {
+      return _Block(
+        title: l10n.cosmicPersonalTitle,
+        locked: true,
+        children: [
+          Text(l10n.cosmicPersonalTeaser, style: theme.textTheme.bodyLarge),
+        ],
+      );
+    }
+    final note = ref.watch(personalNoteProvider(lang));
+    return note.when(
+      loading: () => _Block(
+        title: l10n.cosmicPersonalTitle,
+        children: const [LinearProgressIndicator()],
+      ),
+      error: (error, stack) => const SizedBox.shrink(),
+      data: (value) => value == null
+          ? const SizedBox.shrink()
+          : _Block(
+              title: l10n.cosmicPersonalTitle,
+              children: [
+                Text(value.title, style: theme.textTheme.titleLarge),
+                const SizedBox(height: AppSpacing.sm),
+                Text(value.body, style: theme.textTheme.bodyLarge),
+              ],
+            ),
     );
   }
 }

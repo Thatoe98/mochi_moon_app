@@ -173,7 +173,7 @@ Shows for the user's local date. **M4b (2026-11-02) rebalance:** the free page i
 | Love line | — | ✓ |
 | Lucky number | — | ✓ |
 | Things to avoid (3 short items) | — | ✓ |
-| Personalized text based on transits to her natal chart (`POST /daily/personal`, not built) | — | ✓ |
+| Personalized text based on transits to her natal chart (`POST /daily/personal`) | — | ✓ |
 | Today's energy card (daily mix, §6.10) | ✓ | ✓ |
 | Thai birthday color + today's Thai day color (toggle, Thailand phones only) | ✓ | ✓ |
 | Read another sign's page (sign chooser, a row of 12 chips above the art; the user's own sign is marked "(you)") | — | ✓ |
@@ -682,7 +682,7 @@ Base: `https://api.<domain>/v1`. Auth: `Authorization: Bearer <Firebase ID token
 | Method | Path | Access | Purpose |
 | --- | --- | --- | --- |
 | GET | `/daily?sign=scorpio&date=2026-10-27&lang=th` | Signed-in | Daily sign reading |
-| POST | `/daily/personal` | Premium (server-enforced; not built) | Transit-personalized daily text from placements |
+| POST | `/daily/personal` | Premium (server-enforced) | Transit-personalized daily text from placements |
 | POST | `/reports/natal` | Premium (server-enforced) | Full natal report |
 | GET | `/reports/natal/{reportId}` | Signed-in, owner of the report | Poll or re-read her own existing report; stays allowed after a lapse |
 | POST | `/reports/compatibility` | Premium or 1 credit (server-enforced; not built) | Full compatibility report |
@@ -1008,7 +1008,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 6. Letters: one sealed letter at a time free; tests. *(done: `sealedLettersLeft`, `LetterRejection.limitReached`, a gentle dialog with `letters` source; opened letters free the slot.)*
 - [x] 7. Quests: the swap is Premium; tests. *(done: free users see "Try another" with a lock and it opens `quest_swap`; `swapQuest` does nothing without Premium.)*
 - [x] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests. — *Done: `MoodCalendar.lockedBefore` shows older months inside `PremiumPreview` (`mood_history`), days not tappable, nothing deleted.*
-- [x] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests. — *Done: love, second color, lucky number and avoid sit behind `PremiumPreview` (`cosmic_today`); free users get a locked sign-chooser icon (`sign_chooser`). The personal text is not built yet (item 17).*
+- [x] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests. — *Done: love, second color, lucky number and avoid sit behind `PremiumPreview` (`cosmic_today`); free users get a locked sign-chooser icon (`sign_chooser`). The personal text is built (item 17.3).*
 - [x] 10. Chart: no aspect lines for free users, a signs-only list, and the new Premium aspects list with degrees and houses; tests. — *Done: `ChartWheel.showAspects`, `PlacementsList.detailed` (a blurred sample row), new `AspectsList` (top 10, plain words); all `chart_details`. The aspects list for Premium is also new. Wheel test for the bare wheel is covered by the screen tests.*
 - [x] 11. Compatibility: sub-scores and aspects behind preview; partner limit source; tests. — *Done: sub-scores and aspects are one `compat_details` preview for free users; a free user at the partner limit gets a lock button that opens the paywall with `partners`. The full report (`compat_report`) waits for item 17.*
 - [x] 12. Retrograde alerts: Venus and Mars are Premium (locked switches, nothing scheduled for free users); tests. — *Done: free users see Venus and Mars locked (`retro_alerts`); only Premium planets are dropped from scheduling and her saved choice is kept; a change of Premium re-plans the alerts.*
@@ -1016,7 +1016,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 14. Trial offer after the day 2–3 ritual (once, dismissible, skipped on hard-day days and for Premium); tests. — *Done: `trialOfferDue` (pure), `TrialOffer` notifier, `TrialOfferCard` on the finished Today screen (`trial_offer`), shown/dismissed analytics; "shown" and "hard-day opened today" live in shared_preferences.*
 - [x] 15. Guard test: the ritual, the hard-day kit, breathing and Help never show a paywall or lock. — *Done: `expectNoPaywall` runs on every ritual step, the hard-day kit (which holds the Help resources) and breathing.*
 - [x] 16. Lapse tests: a Premium user goes free and nothing she made disappears. — *Done: own cards, sealed letters and Venus/Mars alerts have lapse tests beside their providers; `test/features/paywall/lapse_test.dart` adds partners, older mood months and an equipped Premium outfit.*
-- [ ] 17. As each is built later (`/daily/personal`, the compatibility endpoint and credit, For You, widget themes): gated on the server from day one. *(17.1 done 2026-11-02: server `POST /reports/compatibility` and owner-only `GET /reports/compatibility/{id}`, Premium-only (402), cached, 5/hour on new jobs, 5 sections, placements and scores only. Not deployed yet. 17.2 done 2026-11-02: app "full compatibility reading" card on the partner result (locked for free users, source `compat_report`), report screen with parts arriving one by one, saved per partner on the device, 402 becomes a soft Premium invitation. Next: 17.3 `/daily/personal`, 17.4 credit, 17.5 For You, 17.6 widget themes.)*
+- [ ] 17. As each is built later (`/daily/personal`, the compatibility endpoint and credit, For You, widget themes): gated on the server from day one. *(17.1 done 2026-11-02: server `POST /reports/compatibility` and owner-only `GET /reports/compatibility/{id}`, Premium-only (402), cached, 5/hour on new jobs, 5 sections, placements and scores only. Not deployed yet. 17.2 done 2026-11-02: app "full compatibility reading" card on the partner result (locked for free users, source `compat_report`), report screen with parts arriving one by one, saved per partner on the device, 402 becomes a soft Premium invitation. 17.3 done 2026-11-02: server `POST /daily/personal` (Premium, 402 first, one note per day and language, 6 new notes a day at most) and the app block "Just for you today" on Cosmic Today (locked preview for free users; for Premium it is left out if the note cannot be written; only placements and transits are sent). Server not deployed yet. Next: 17.4 credit, 17.5 For You, 17.6 widget themes.)*
 
 ### M5 — Self-love expansion (v1.1)
 
