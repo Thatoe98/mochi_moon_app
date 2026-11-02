@@ -8,6 +8,7 @@ import 'package:mochi_moon/features/cosmic/chart/application/chart_providers.dar
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_glyphs.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_screen.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_wheel.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/profile/domain/birth_place.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
@@ -45,8 +46,10 @@ Widget _host({
   double textScale = 1,
   ThemeData? theme,
   bool failing = false,
+  bool premium = false,
 }) => ProviderScope(
   overrides: [
+    hasPremiumProvider.overrideWithValue(premium),
     profileRepositoryProvider.overrideWithValue(FakeProfileRepository(profile)),
     if (failing)
       natalChartProvider.overrideWith((ref) => throw Exception('boom')),
@@ -91,10 +94,18 @@ void main() {
 
   testWidgets('offers the full reading to Premium users', (tester) async {
     _tallView(tester);
-    await tester.pumpWidget(_host(profile: _withTime));
+    await tester.pumpWidget(_host(profile: _withTime, premium: true));
     await tester.pumpAndSettle();
 
     expect(find.text('Your full reading'), findsOneWidget);
+  });
+
+  testWidgets('hides the full reading from free users', (tester) async {
+    _tallView(tester);
+    await tester.pumpWidget(_host(profile: _withTime));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your full reading'), findsNothing);
   });
 
   testWidgets('shows an error with a way to retry', (tester) async {
