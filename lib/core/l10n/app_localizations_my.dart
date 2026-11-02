@@ -2305,21 +2305,62 @@ class AppLocalizationsMy extends AppLocalizations {
   String get recapTodayOpen => 'See it';
 
   @override
+  String get trialOfferTitle => 'Mochi Premium, if you would like it';
+
+  @override
+  String get trialOfferBody =>
+      'You can try Premium free for 7 days. Billing only starts after the 7 days, and you can cancel any time in Google Play.';
+
+  @override
+  String get trialOfferOpen => 'Tell me more';
+
+  @override
+  String get trialOfferDismiss => 'Not now';
+
+  @override
   String get paywallClose => 'Close';
 
   @override
   String get paywallTitle => 'Mochi Premium';
 
   @override
-  String get paywallBenefitJourneys =>
-      'Every self-love journey, at your own pace';
+  String get paywallBenefitCards => 'Unlimited cards and the For You deck';
 
   @override
-  String get paywallBenefitLetter => 'A warm weekly letter from Mochi';
+  String get paywallBenefitJourneys => 'Every self-love journey';
 
   @override
-  String get paywallBenefitCards =>
-      'Write as many cards of your own as you like';
+  String get paywallBenefitLetter => 'A weekly letter from Mochi';
+
+  @override
+  String get paywallAlsoTitle => 'Also in Premium';
+
+  @override
+  String get paywallAlsoOwnCards => 'As many cards of your own as you like';
+
+  @override
+  String get paywallAlsoLetters => 'Seal more than one letter to future you';
+
+  @override
+  String get paywallAlsoMood => 'Your whole mood history and insights';
+
+  @override
+  String get paywallAlsoQuests => 'Swap your daily kindness quest';
+
+  @override
+  String get paywallAlsoCosmic =>
+      'The full Cosmic Today, with love, lucky number and what to avoid';
+
+  @override
+  String get paywallAlsoChart =>
+      'Your birth chart in full, with a long written reading';
+
+  @override
+  String get paywallAlsoCompat =>
+      'Love compatibility in depth, with up to 5 partners';
+
+  @override
+  String get paywallAlsoRetro => 'Venus and Mars retrograde alerts';
 
   @override
   String get paywallYearly => 'Yearly';

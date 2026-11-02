@@ -26,6 +26,8 @@ import 'package:mochi_moon/features/journeys/application/journey_providers.dart'
 import 'package:mochi_moon/features/letters/application/letter_providers.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
+import 'package:mochi_moon/features/paywall/application/trial_offer_providers.dart';
 import 'package:mochi_moon/features/quests/application/quest_providers.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
@@ -38,6 +40,8 @@ import '../../gratitude/support/fake_gratitude.dart';
 import '../../journeys/support/fake_journey.dart';
 import '../../letters/support/fake_letter.dart';
 import '../../mood/support/fake_mood.dart';
+import '../../paywall/support/expect_no_paywall.dart';
+import '../../paywall/support/fake_trial_offer.dart';
 import '../../quests/support/fake_quest.dart';
 import '../support/fake_ritual_progress.dart';
 
@@ -89,8 +93,13 @@ Widget _app(
   bool reduceMotion = false,
   double textScale = 1,
   Future<CosmicToday?> Function() cosmic = _noBirthData,
+  FakeTrialOfferRepository? trial,
 }) => ProviderScope(
   overrides: [
+    trialOfferRepositoryProvider.overrideWithValue(
+      trial ?? FakeTrialOfferRepository(),
+    ),
+    hasPremiumProvider.overrideWithValue(false),
     cosmicTodayProvider('en').overrideWith((ref) => cosmic()),
     deckRepositoryProvider.overrideWithValue(repo),
     ritualProgressRepositoryProvider.overrideWithValue(
@@ -265,6 +274,26 @@ void main() {
       expect(find.text('1 day of self-love'), findsOneWidget);
     });
 
+    testWidgets('shows no paywall, lock or upsell on any step', (tester) async {
+      await tester.pumpWidget(_app(FakeDeckRepository()));
+      await tester.pumpAndSettle();
+      await _start(tester);
+      expectNoPaywall(tester); // mood
+
+      await tester.tap(find.text('Calm'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Next'));
+      await _load(tester);
+      expectNoPaywall(tester); // cards
+      await _readAndSkip(tester);
+      expectNoPaywall(tester);
+      await _readAndSkip(tester);
+      await _readAndSkip(tester);
+
+      expect(find.text('Step 3 of 4'), findsOneWidget);
+      expectNoPaywall(tester); // gratitude
+    });
+
     testWidgets('the timer gate holds in the ritual', (tester) async {
       final repo = FakeDeckRepository();
       await tester.pumpWidget(_app(repo));
@@ -382,6 +411,56 @@ void main() {
         ),
         findsNothing,
       );
+    });
+  });
+
+  group('the trial offer', () {
+    Future<FakeDeckRepository> pumpWithDays(
+      WidgetTester tester,
+      int days, {
+      bool finished = true,
+      FakeTrialOfferRepository? trial,
+    }) async {
+      final repo = FakeDeckRepository();
+      // Not finished: today is not a ritual day yet, only the days before.
+      final first = finished ? 0 : 1;
+      for (var i = 0; i < days; i++) {
+        await repo.markRitualDay(_today.subtract(Duration(days: first + i)));
+      }
+      await tester.pumpWidget(_app(repo, trial: trial));
+      await tester.pumpAndSettle();
+      return repo;
+    }
+
+    testWidgets('shows after the ritual on her 2nd day', (tester) async {
+      await pumpWithDays(tester, 2);
+
+      expect(find.text('Your ritual is done'), findsOneWidget);
+      expect(find.text('Tell me more'), findsOneWidget);
+    });
+
+    testWidgets('does not show on her first day', (tester) async {
+      await pumpWithDays(tester, 1);
+
+      expect(find.text('Your ritual is done'), findsOneWidget);
+      expect(find.text('Tell me more'), findsNothing);
+    });
+
+    testWidgets('does not show before the ritual is done', (tester) async {
+      await pumpWithDays(tester, 2, finished: false);
+
+      expect(find.text('Begin my ritual'), findsOneWidget);
+      expect(find.text('Tell me more'), findsNothing);
+    });
+
+    testWidgets('does not show after a hard-day kit visit today', (
+      tester,
+    ) async {
+      final trial = FakeTrialOfferRepository()
+        ..hardDay = DateTime(_today.year, _today.month, _today.day);
+      await pumpWithDays(tester, 2, trial: trial);
+
+      expect(find.text('Tell me more'), findsNothing);
     });
   });
 

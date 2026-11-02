@@ -7,6 +7,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/letters/presentation/weekly_letter_card.dart';
+import 'package:mochi_moon/features/paywall/presentation/trial_offer_card.dart';
 import 'package:mochi_moon/features/quests/presentation/quest_card.dart';
 import 'package:mochi_moon/features/recap/presentation/recap_today_card.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
@@ -63,6 +64,7 @@ class TodayScreen extends ConsumerWidget {
                   reward: const CosmicRewardCard(),
                 ),
               ),
+              const TrialOfferCard(),
               const RecapTodayCard(),
               const WeeklyLetterCard(),
               const QuestCard(),

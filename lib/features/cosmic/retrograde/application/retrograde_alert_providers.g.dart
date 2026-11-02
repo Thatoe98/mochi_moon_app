@@ -144,7 +144,7 @@ final class RetrogradeAlertControllerProvider
 }
 
 String _$retrogradeAlertControllerHash() =>
-    r'3fcebbee8b6f423a47b8caa8144509377e6b4212';
+    r'2359c01a48dec67380ae0a5ba8eb47166ba238d7';
 
 /// The planets the user wants a heads-up for, kept in sync with what is
 /// scheduled. Notification permission comes from the reminder scheduler, the
@@ -214,4 +214,4 @@ final class RetrogradeAlertSyncProvider
 }
 
 String _$retrogradeAlertSyncHash() =>
-    r'e38f573382a756cd7561c5dda61a2ea66a47a3fa';
+    r'62aa5738c0032cc8d5bb4718026bbea4aa916099';

@@ -100,12 +100,13 @@ void main() {
     expect(find.text('Your full reading'), findsOneWidget);
   });
 
-  testWidgets('hides the full reading from free users', (tester) async {
+  testWidgets('shows the full reading locked to free users', (tester) async {
     _tallView(tester);
     await tester.pumpWidget(_host(profile: _withTime, premium: false));
     await tester.pumpAndSettle();
 
-    expect(find.text('Your full reading'), findsNothing);
+    expect(find.text('Your full reading'), findsOneWidget);
+    expect(find.byIcon(Icons.lock_rounded), findsWidgets);
   });
 
   testWidgets('free: signs only, aspects and details are a soft preview', (

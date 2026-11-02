@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mochi_moon/app/router.dart';
@@ -6,9 +8,12 @@ import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 
 /// The Premium door at the top of the birth chart: opens the long reading
-/// (PRD §6.11).
+/// (PRD §6.11). When [locked] (free users) it shows a lock and opens the
+/// paywall instead, so the reading never disappears from the chart.
 class FullReadingCard extends StatelessWidget {
-  const FullReadingCard({super.key});
+  const FullReadingCard({this.locked = false, super.key});
+
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,11 @@ class FullReadingCard extends StatelessWidget {
         borderRadius: AppRadii.cardRadius,
         child: InkWell(
           borderRadius: AppRadii.cardRadius,
-          onTap: () => context.push(AppRoutes.chartReport),
+          onTap: () => locked
+              ? unawaited(
+                  context.push('${AppRoutes.paywall}?source=natal_report'),
+                )
+              : unawaited(context.push(AppRoutes.chartReport)),
           child: ConstrainedBox(
             constraints: const BoxConstraints(
               minHeight: AppSpacing.minTouchTarget,
@@ -58,7 +67,7 @@ class FullReadingCard extends StatelessWidget {
                     ),
                   ),
                   Icon(
-                    Icons.chevron_right_rounded,
+                    locked ? Icons.lock_rounded : Icons.chevron_right_rounded,
                     color: colors.onPrimaryContainer,
                   ),
                 ],

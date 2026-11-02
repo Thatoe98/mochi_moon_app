@@ -158,14 +158,38 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           ),
           const SizedBox(height: AppSpacing.md),
           for (final benefit in [
+            l10n.paywallBenefitCards,
             l10n.paywallBenefitJourneys,
             l10n.paywallBenefitLetter,
-            l10n.paywallBenefitCards,
           ])
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.favorite_rounded),
               title: Text(benefit),
+            ),
+          const SizedBox(height: AppSpacing.sm),
+          Semantics(
+            header: true,
+            child: Text(
+              l10n.paywallAlsoTitle,
+              style: theme.textTheme.titleSmall,
+            ),
+          ),
+          for (final benefit in [
+            l10n.paywallAlsoOwnCards,
+            l10n.paywallAlsoLetters,
+            l10n.paywallAlsoMood,
+            l10n.paywallAlsoQuests,
+            l10n.paywallAlsoCosmic,
+            l10n.paywallAlsoChart,
+            l10n.paywallAlsoCompat,
+            l10n.paywallAlsoRetro,
+          ])
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              dense: true,
+              leading: const Icon(Icons.check_rounded),
+              title: Text(benefit, style: theme.textTheme.bodyMedium),
             ),
           const SizedBox(height: AppSpacing.sm),
           planTile(PremiumPlan.yearly, l10n.paywallYearly, l10n.paywallTrial),

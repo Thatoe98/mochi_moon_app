@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
@@ -43,6 +45,50 @@ Future<void> _pump(
 }
 
 void main() {
+  testWidgets('the invitation opens the paywall with its source', (
+    tester,
+  ) async {
+    String? source;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          moodRepositoryProvider.overrideWithValue(
+            FakeMoodRepository(_days(Mood.calm, 20)),
+          ),
+          ritualDaySetProvider.overrideWith(
+            (ref) => Stream.value(<DateTime>{}),
+          ),
+          hasPremiumProvider.overrideWithValue(false),
+        ],
+        child: MaterialApp.router(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: GoRouter(
+            routes: [
+              GoRoute(
+                path: '/',
+                builder: (context, state) =>
+                    const Scaffold(body: MoodInsightsCard()),
+              ),
+              GoRoute(
+                path: AppRoutes.paywall,
+                builder: (context, state) {
+                  source = state.uri.queryParameters['source'];
+                  return const Text('paywall');
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('See Premium'));
+    await tester.pumpAndSettle();
+    expect(source, 'mood_insights');
+  });
+
   testWidgets('free users see the Premium invitation and no numbers', (
     tester,
   ) async {

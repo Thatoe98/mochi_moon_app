@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/journey.dart';
 import 'package:mochi_moon/core/content/mascot_item.dart';
@@ -190,14 +194,22 @@ class _ItemTile extends StatelessWidget {
         ? l10n.mascotPremiumNote
         : l10n.mascotItemTapToUse;
     final art = AppIllustrations.forMascotItem(item.illustrationId);
+    // A Premium item she owns but cannot wear opens the paywall.
+    final opensPaywall = owned && premiumLocked && !worn;
     final tappable = owned && (worn || !premiumLocked);
+    void openPaywall() =>
+        unawaited(context.push('${AppRoutes.paywall}?source=mascot_item'));
     return Semantics(
       container: true,
-      button: tappable,
+      button: tappable || opensPaywall,
       selected: worn,
       label: l10n.mascotItemSemantics(name, status),
       excludeSemantics: true,
-      onTap: tappable ? onTap : null,
+      onTap: tappable
+          ? onTap
+          : opensPaywall
+          ? openPaywall
+          : null,
       child: Card(
         color: worn ? scheme.primaryContainer : null,
         child: ListTile(
@@ -226,7 +238,11 @@ class _ItemTile extends StatelessWidget {
           trailing: item.premium
               ? Chip(label: Text(l10n.mascotPremiumTag))
               : null,
-          onTap: tappable ? onTap : null,
+          onTap: tappable
+              ? onTap
+              : opensPaywall
+              ? openPaywall
+              : null,
         ),
       ),
     );

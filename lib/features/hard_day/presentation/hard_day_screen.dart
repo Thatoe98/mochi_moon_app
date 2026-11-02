@@ -10,6 +10,7 @@ import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/hard_day/application/hard_day_providers.dart';
+import 'package:mochi_moon/features/paywall/application/trial_offer_providers.dart';
 import 'package:mochi_moon/features/settings/application/language_providers.dart';
 
 /// The calm "Hard day?" button on Today and the Deck (PRD §6.26).
@@ -42,6 +43,7 @@ class _HardDayScreenState extends ConsumerState<HardDayScreen> {
   @override
   void initState() {
     super.initState();
+    unawaited(ref.read(noteHardDayOpenedProvider)());
     unawaited(
       ref
           .read(analyticsLoggerProvider)

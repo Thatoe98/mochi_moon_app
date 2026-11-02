@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/letters/application/weekly_letter_providers.dart';
@@ -44,6 +46,45 @@ Future<void> _pump(
 }
 
 void main() {
+  testWidgets('the invitation opens the paywall with its source', (
+    tester,
+  ) async {
+    String? source;
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          hasPremiumProvider.overrideWithValue(false),
+          clockProvider.overrideWithValue(() => _sunday),
+        ],
+        child: MaterialApp.router(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: GoRouter(
+            routes: [
+              GoRoute(
+                path: '/',
+                builder: (context, state) =>
+                    const Scaffold(body: WeeklyLetterCard()),
+              ),
+              GoRoute(
+                path: AppRoutes.paywall,
+                builder: (context, state) {
+                  source = state.uri.queryParameters['source'];
+                  return const Text('paywall');
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('See Premium'));
+    await tester.pumpAndSettle();
+    expect(source, 'weekly_letter');
+  });
+
   testWidgets('a free user sees the invitation on Sunday', (tester) async {
     await _pump(tester, premium: false, now: _sunday);
 

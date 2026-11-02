@@ -237,12 +237,16 @@ final class CompleteQuestProvider
 
 String _$completeQuestHash() => r'801e29dff0c0996ca8d76768522b06eb85175ba1';
 
-/// Trades today's quest for the other pick, once a day.
+/// Trades today's quest for the other pick, once a day. Premium only (PRD
+/// §6.20); a free user is sent to the paywall by the card and this does
+/// nothing, so a stray call cannot swap.
 
 @ProviderFor(swapQuest)
 final swapQuestProvider = SwapQuestProvider._();
 
-/// Trades today's quest for the other pick, once a day.
+/// Trades today's quest for the other pick, once a day. Premium only (PRD
+/// §6.20); a free user is sent to the paywall by the card and this does
+/// nothing, so a stray call cannot swap.
 
 final class SwapQuestProvider
     extends
@@ -252,7 +256,9 @@ final class SwapQuestProvider
           Future<void> Function()
         >
     with $Provider<Future<void> Function()> {
-  /// Trades today's quest for the other pick, once a day.
+  /// Trades today's quest for the other pick, once a day. Premium only (PRD
+  /// §6.20); a free user is sent to the paywall by the card and this does
+  /// nothing, so a stray call cannot swap.
   SwapQuestProvider._()
     : super(
         from: null,
@@ -287,7 +293,7 @@ final class SwapQuestProvider
   }
 }
 
-String _$swapQuestHash() => r'2633bc74b08db10cab8152222725f6cd707662b6';
+String _$swapQuestHash() => r'f878c6cf9cc316dbf032cd37706be0f35cdcb2f5';
 
 /// Keeps the quest state in Firestore in step with the device while someone
 /// is signed in. The device wins when its day is the same or newer. A failed

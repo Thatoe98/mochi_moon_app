@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/analytics/analytics_event.dart';
 import 'package:mochi_moon/core/analytics/analytics_providers.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
@@ -35,6 +37,15 @@ class WeeklyLetterCard extends ConsumerWidget {
           Text(l10n.weeklyLetterTeaser, style: theme.textTheme.bodyLarge),
           const SizedBox(height: AppSpacing.sm),
           Text(l10n.weeklyLetterPremiumBody, style: theme.textTheme.bodyMedium),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton(
+              onPressed: () => unawaited(
+                context.push('${AppRoutes.paywall}?source=weekly_letter'),
+              ),
+              child: Text(l10n.paywallSeePremium),
+            ),
+          ),
         ],
       );
     }

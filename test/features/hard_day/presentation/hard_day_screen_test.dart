@@ -8,6 +8,10 @@ import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
+import 'package:mochi_moon/features/paywall/application/trial_offer_providers.dart';
+
+import '../../paywall/support/expect_no_paywall.dart';
+import '../../paywall/support/fake_trial_offer.dart';
 
 class _RecordingSink implements AnalyticsSink {
   final events = <(String, Map<String, String>)>[];
@@ -17,8 +21,15 @@ class _RecordingSink implements AnalyticsSink {
       events.add((name, params));
 }
 
-Widget _app(_RecordingSink sink, {List<Quote>? quotes}) => ProviderScope(
+Widget _app(
+  _RecordingSink sink, {
+  List<Quote>? quotes,
+  FakeTrialOfferRepository? trial,
+}) => ProviderScope(
   overrides: [
+    trialOfferRepositoryProvider.overrideWithValue(
+      trial ?? FakeTrialOfferRepository(),
+    ),
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 31, 12)),
     analyticsSinkProvider.overrideWithValue(sink),
     analyticsConsentControllerProvider.overrideWith(_Consent.new),
@@ -68,6 +79,22 @@ void main() {
     TestWidgetsFlutterBinding.instance.platformDispatcher.views.first
       ..resetPhysicalSize()
       ..resetDevicePixelRatio();
+  });
+
+  testWidgets('shows no paywall, lock or upsell', (tester) async {
+    await tester.pumpWidget(_app(_RecordingSink()));
+    await tester.pumpAndSettle();
+    expectNoPaywall(tester);
+  });
+
+  testWidgets('opening the kit is noted for today, so no offer shows', (
+    tester,
+  ) async {
+    final trial = FakeTrialOfferRepository();
+    await tester.pumpWidget(_app(_RecordingSink(), trial: trial));
+    await tester.pumpAndSettle();
+
+    expect(trial.hardDay, DateTime(2026, 10, 31));
   });
 
   testWidgets('shows breathing, a comforting card, the jar and Help', (

@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/features/breathe/presentation/breathe_screen.dart';
 
+import '../../paywall/support/expect_no_paywall.dart';
+
 Widget _app({bool reduceMotion = false}) => ProviderScope(
   child: MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -48,6 +50,14 @@ void main() {
     TestWidgetsFlutterBinding.instance.platformDispatcher.views.first
       ..resetPhysicalSize()
       ..resetDevicePixelRatio();
+  });
+
+  testWidgets('shows no paywall, lock or upsell', (tester) async {
+    await _open(tester);
+    expectNoPaywall(tester);
+    await tester.tap(find.text('Begin'));
+    await tester.pump(const Duration(seconds: 2));
+    expectNoPaywall(tester);
   });
 
   testWidgets('shows the intro, then the cues in order', (tester) async {

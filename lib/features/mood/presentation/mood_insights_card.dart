@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
@@ -66,6 +70,16 @@ class MoodInsightsCard extends ConsumerWidget {
               const SizedBox(height: AppSpacing.sm),
               Text(line, style: theme.textTheme.bodyLarge),
             ],
+            if (!premium)
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: TextButton(
+                  onPressed: () => unawaited(
+                    context.push('${AppRoutes.paywall}?source=mood_insights'),
+                  ),
+                  child: Text(l10n.paywallSeePremium),
+                ),
+              ),
           ],
         ),
       ),

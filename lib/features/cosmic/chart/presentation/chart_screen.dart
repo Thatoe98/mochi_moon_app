@@ -87,7 +87,7 @@ class _ChartView extends ConsumerWidget {
           ),
         PlacementsList(chart: chart, detailed: premium),
         AspectsList(chart: chart, locked: !premium),
-        if (premium) const FullReadingCard(),
+        FullReadingCard(locked: !premium),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
           child: Text(

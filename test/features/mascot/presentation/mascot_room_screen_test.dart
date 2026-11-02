@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/mascot_item.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
@@ -37,8 +39,12 @@ const _items = [
 
 void main() {
   late FakeMascotRepository repo;
+  String? paywallSource;
 
-  setUp(() => repo = FakeMascotRepository());
+  setUp(() {
+    repo = FakeMascotRepository();
+    paywallSource = null;
+  });
 
   Future<void> pump(WidgetTester tester, {bool premium = false}) async {
     tester.view.physicalSize = const Size(800, 3000);
@@ -51,10 +57,24 @@ void main() {
           mascotItemsProvider.overrideWith((ref) async => _items),
           hasPremiumProvider.overrideWithValue(premium),
         ],
-        child: const MaterialApp(
+        child: MaterialApp.router(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: MascotRoomScreen(),
+          routerConfig: GoRouter(
+            routes: [
+              GoRoute(
+                path: '/',
+                builder: (context, state) => const MascotRoomScreen(),
+              ),
+              GoRoute(
+                path: AppRoutes.paywall,
+                builder: (context, state) {
+                  paywallSource = state.uri.queryParameters['source'];
+                  return const Text('paywall');
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -100,6 +120,7 @@ void main() {
     await tester.tap(find.text('Flower crown'));
     await tester.pumpAndSettle();
     expect(repo.state.equipped, isEmpty);
+    expect(paywallSource, 'mascot_item');
   });
 
   testWidgets('with Premium the same gift can be worn', (tester) async {

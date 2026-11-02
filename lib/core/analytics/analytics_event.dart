@@ -15,6 +15,8 @@ enum AnalyticsEvent {
   compatCreated('compat_created', {'mode'}),
   paywallViewed('paywall_viewed', {'source'}),
   trialStarted('trial_started'),
+  trialOfferShown('trial_offer_shown'),
+  trialOfferDismissed('trial_offer_dismissed'),
   purchaseCompleted('purchase_completed', {'productId'}),
   widgetAdded('widget_added'),
   notificationOpened('notification_opened', {'type'}),

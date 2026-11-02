@@ -3872,6 +3872,30 @@ abstract class AppLocalizations {
   /// **'See it'**
   String get recapTodayOpen;
 
+  /// No description provided for @trialOfferTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mochi Premium, if you would like it'**
+  String get trialOfferTitle;
+
+  /// No description provided for @trialOfferBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can try Premium free for 7 days. Billing only starts after the 7 days, and you can cancel any time in Google Play.'**
+  String get trialOfferBody;
+
+  /// No description provided for @trialOfferOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell me more'**
+  String get trialOfferOpen;
+
+  /// No description provided for @trialOfferDismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get trialOfferDismiss;
+
   /// No description provided for @paywallClose.
   ///
   /// In en, this message translates to:
@@ -3884,23 +3908,77 @@ abstract class AppLocalizations {
   /// **'Mochi Premium'**
   String get paywallTitle;
 
+  /// No description provided for @paywallBenefitCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited cards and the For You deck'**
+  String get paywallBenefitCards;
+
   /// No description provided for @paywallBenefitJourneys.
   ///
   /// In en, this message translates to:
-  /// **'Every self-love journey, at your own pace'**
+  /// **'Every self-love journey'**
   String get paywallBenefitJourneys;
 
   /// No description provided for @paywallBenefitLetter.
   ///
   /// In en, this message translates to:
-  /// **'A warm weekly letter from Mochi'**
+  /// **'A weekly letter from Mochi'**
   String get paywallBenefitLetter;
 
-  /// No description provided for @paywallBenefitCards.
+  /// No description provided for @paywallAlsoTitle.
   ///
   /// In en, this message translates to:
-  /// **'Write as many cards of your own as you like'**
-  String get paywallBenefitCards;
+  /// **'Also in Premium'**
+  String get paywallAlsoTitle;
+
+  /// No description provided for @paywallAlsoOwnCards.
+  ///
+  /// In en, this message translates to:
+  /// **'As many cards of your own as you like'**
+  String get paywallAlsoOwnCards;
+
+  /// No description provided for @paywallAlsoLetters.
+  ///
+  /// In en, this message translates to:
+  /// **'Seal more than one letter to future you'**
+  String get paywallAlsoLetters;
+
+  /// No description provided for @paywallAlsoMood.
+  ///
+  /// In en, this message translates to:
+  /// **'Your whole mood history and insights'**
+  String get paywallAlsoMood;
+
+  /// No description provided for @paywallAlsoQuests.
+  ///
+  /// In en, this message translates to:
+  /// **'Swap your daily kindness quest'**
+  String get paywallAlsoQuests;
+
+  /// No description provided for @paywallAlsoCosmic.
+  ///
+  /// In en, this message translates to:
+  /// **'The full Cosmic Today, with love, lucky number and what to avoid'**
+  String get paywallAlsoCosmic;
+
+  /// No description provided for @paywallAlsoChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Your birth chart in full, with a long written reading'**
+  String get paywallAlsoChart;
+
+  /// No description provided for @paywallAlsoCompat.
+  ///
+  /// In en, this message translates to:
+  /// **'Love compatibility in depth, with up to 5 partners'**
+  String get paywallAlsoCompat;
+
+  /// No description provided for @paywallAlsoRetro.
+  ///
+  /// In en, this message translates to:
+  /// **'Venus and Mars retrograde alerts'**
+  String get paywallAlsoRetro;
 
   /// No description provided for @paywallYearly.
   ///

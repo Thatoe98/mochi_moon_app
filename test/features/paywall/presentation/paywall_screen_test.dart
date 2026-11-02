@@ -56,6 +56,25 @@ void main() {
     addTearDown(tester.view.reset);
   }
 
+  testWidgets('leads with the three self-love bullets, then the rest', (
+    tester,
+  ) async {
+    tall(tester);
+    await tester.pumpWidget(_app(_FakeCatalog()));
+    await tester.pumpAndSettle();
+
+    final cards = tester.getTopLeft(
+      find.text('Unlimited cards and the For You deck'),
+    );
+    final journeys = tester.getTopLeft(find.text('Every self-love journey'));
+    final letter = tester.getTopLeft(find.text('A weekly letter from Mochi'));
+    final also = tester.getTopLeft(find.text('Also in Premium'));
+    expect(cards.dy, lessThan(journeys.dy));
+    expect(journeys.dy, lessThan(letter.dy));
+    expect(letter.dy, lessThan(also.dy));
+    expect(find.text('Venus and Mars retrograde alerts'), findsOneWidget);
+  });
+
   testWidgets('shows store prices, trial note and a close button', (
     tester,
   ) async {
