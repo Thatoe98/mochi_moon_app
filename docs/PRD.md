@@ -251,7 +251,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 **AC**
 - [ ] Prices come from Play Billing (localized currency); never hardcoded.
-- [ ] Purchases are verified server-side (`POST /v1/purchases/verify`), which writes `entitlement` to Firestore; the app reads entitlement from Firestore only.
+- [ ] Purchases are verified server-side (`POST /v1/purchases/verify`), which writes `entitlement` to Firestore; the app reads entitlement from Firestore only. — *App side done 2026-11-02: `hasPremiumProvider` reads `users/{uid}.entitlement` (`features/paywall/`), false until known or without an account; debug builds can pass `--dart-define=PREMIUM_OVERRIDE=true` to try Premium screens. The server verify endpoint is still to do.*
 - [ ] Restore purchases button. Clear trial terms and a link to manage subscriptions in Play.
 - [x] Paywall shows: mascot, 3 benefit bullets (journeys, weekly letter, unlimited cards first), yearly plan preselected with trial, monthly option, close button visible immediately. *Built 2026-11-02 as `features/paywall/presentation/paywall_screen.dart` at `/paywall?source=...`; prices come from a `PurchaseCatalog` interface (stub `UnavailablePurchaseCatalog` until Play Billing is connected, so the buy button is off and says so); Restore button; logs `paywall_viewed {source}`. Entry points: locked journey, own-card limit dialog. Still open: real Play Billing, server `POST /v1/purchases/verify`, entitlement from Firestore, a manage-subscriptions link, `hasPremiumProvider` stays true.*
 
@@ -295,7 +295,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 
 - [x] She writes an affirmation (max 140 characters) and picks one illustration from the bundled set (§8.4). The card has the same layout and timer gate as a bundled card; its category is `self_love`.
 - [x] A custom card joins the deck rotation (and the ritual) and can be chosen as the home-screen widget card. (P15: it joins the card pool used by the deck, ritual, journal and widget rotation; the widget thumbnail uses the category art. Choosing one specific card for the widget is not built.)
-- [ ] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot. (P14/P15: limit, Premium override and freed slot are done. The 4th card shows an explanation dialog; the real paywall screen does not exist yet, so this stays open.)
+- [x] Free users can keep 3 custom cards; the 4th opens the paywall. Premium has no limit. Deleting a card frees a slot. (P14/P15: limit, Premium override and freed slot are done. The 4th card shows an explanation dialog; the real paywall screen does not exist yet, so this stays open.)
 - [x] She can edit and delete her cards. Stored locally first, synced to `users/{uid}/customCards`. (P14/P15: storage, sync and the Me → My own cards screens are done. Deleting while offline is not queued; the card returns on the next sync.)
 - [x] **Private (§10):** the text never goes to the AI API, analytics, or the For You embeddings server. Custom cards get no embedding; the For You deck ignores them for ranking. (P14: `OwnCard.toQuote()` carries no mood, sign or embedding; the For You ranking must skip ids starting `own_`.)
 - [x] Shareable as an image like any card (§6.4).
@@ -907,7 +907,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Daily mood check-in stored per date (§6.18, month view) — *done 2026-10-31: Deck check-in, Me → Mood, Firestore sync of `moods/{date}`; the ritual's mood step comes with the ritual flow*
 - [x] Daily ritual on Today with streak and cosmic reward (§6.15)
 - [x] Gratitude and wins jar (§6.16) — *done 2026-10-31 (P13); the hard-day kit link comes with P17*
-- [ ] My own cards, 3 free (§6.17) (done except the paywall on the 4th card)
+- [x] My own cards, 3 free (§6.17)
 - [x] Breathe with Mochi (§6.19) — *done 2026-10-31 (P16, with the hard-day link in P17)*
 - [x] Hard-day kit with `TODO_CONTENT` helplines (§6.26) — *done 2026-10-31 (P17)*
 - [x] Strings and Burmese for M5a — *checked 2026-10-31 (P18): all 492 keys of `app_en.arb` have a Burmese string in `app_my.arb` with matching placeholders, and the translate tool reports nothing left to translate. Generated per feature with `tool/translate_content.dart`. **Unreviewed machine translation:** a native reviewer must approve the M5a strings (ritual, gratitude, own cards, mood, breathe, hard-day) before they count as shipped. Thai is not generated.*

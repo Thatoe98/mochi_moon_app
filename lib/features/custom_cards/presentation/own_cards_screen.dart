@@ -74,8 +74,8 @@ class OwnCardsScreen extends ConsumerWidget {
   }
 }
 
-/// Tells her the free cards are used. There is no paywall screen yet, so this
-/// explains the choice; deleting a card makes room.
+/// Tells her the free cards are used. She can see Premium or keep the cards
+/// she has; deleting a card makes room.
 Future<void> _showLimit(BuildContext context) {
   final l10n = AppLocalizations.of(context);
   return showDialog<void>(

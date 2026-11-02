@@ -1,12 +1,34 @@
+import 'package:flutter/foundation.dart';
+import 'package:mochi_moon/features/auth/application/auth_providers.dart';
+import 'package:mochi_moon/features/paywall/data/firestore_entitlement_remote.dart';
+import 'package:mochi_moon/features/paywall/domain/entitlement.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'entitlement_providers.g.dart';
 
+/// Debug builds only: `--dart-define=PREMIUM_OVERRIDE=true` turns Premium on
+/// without a purchase so Premium screens can be tried. Release builds ignore
+/// it.
+const _premiumOverride = bool.fromEnvironment('PREMIUM_OVERRIDE');
+
+/// The signed-in user's entitlement from Firestore (PRD §6.13). Without an
+/// account or without Firebase it is [Entitlement.none].
+@Riverpod(keepAlive: true)
+Stream<Entitlement> entitlement(Ref ref) {
+  final user = ref.watch(authUserProvider).value;
+  if (user == null || !ref.watch(firebaseReadyProvider)) {
+    return Stream.value(Entitlement.none);
+  }
+  return FirestoreEntitlementRemote().watch(user.uid);
+}
+
 /// Whether the user has Premium (PRD §6.12).
 ///
-/// Always true until Google Play Billing and the server entitlement exist
-/// (M4), so Premium features can be built and tried now. Switch this to the
-/// real entitlement then; nothing else has to change.
-// TODO(Thatoe98): read the real entitlement in M4.
+/// True only when the server's entitlement says so; until it is known it is
+/// false.
 @Riverpod(keepAlive: true)
-bool hasPremium(Ref ref) => true;
+bool hasPremium(Ref ref) {
+  if (kDebugMode && _premiumOverride) return true;
+  final value = ref.watch(entitlementProvider).value;
+  return value?.isPremiumAt(DateTime.now()) ?? false;
+}
