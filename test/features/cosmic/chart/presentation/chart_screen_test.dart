@@ -46,7 +46,7 @@ Widget _host({
   double textScale = 1,
   ThemeData? theme,
   bool failing = false,
-  bool premium = false,
+  bool premium = true,
 }) => ProviderScope(
   overrides: [
     hasPremiumProvider.overrideWithValue(premium),
@@ -94,7 +94,7 @@ void main() {
 
   testWidgets('offers the full reading to Premium users', (tester) async {
     _tallView(tester);
-    await tester.pumpWidget(_host(profile: _withTime, premium: true));
+    await tester.pumpWidget(_host(profile: _withTime));
     await tester.pumpAndSettle();
 
     expect(find.text('Your full reading'), findsOneWidget);
@@ -102,10 +102,39 @@ void main() {
 
   testWidgets('hides the full reading from free users', (tester) async {
     _tallView(tester);
-    await tester.pumpWidget(_host(profile: _withTime));
+    await tester.pumpWidget(_host(profile: _withTime, premium: false));
     await tester.pumpAndSettle();
 
     expect(find.text('Your full reading'), findsNothing);
+  });
+
+  testWidgets('free: signs only, aspects and details are a soft preview', (
+    tester,
+  ) async {
+    _tallView(tester);
+    await tester.pumpWidget(_host(profile: _withTime, premium: false));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your Big 3'), findsOneWidget);
+    // Only the blurred sample row carries degrees.
+    expect(find.text('Scorpio 15°25′'), findsOneWidget);
+    expect(find.text('Cancer 8°48′'), findsNothing);
+    expect(find.text('Scorpio'), findsWidgets);
+    // Degrees and houses, and the aspects list.
+    expect(find.text('Premium'), findsNWidgets(2));
+    expect(find.text('How your planets talk to each other'), findsOneWidget);
+  });
+
+  testWidgets('Premium: degrees, houses and the aspects list are open', (
+    tester,
+  ) async {
+    _tallView(tester);
+    await tester.pumpWidget(_host(profile: _withTime));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Premium'), findsNothing);
+    expect(find.text('Scorpio 15\u00b025\u2032'), findsOneWidget);
+    expect(find.text('How your planets talk to each other'), findsOneWidget);
   });
 
   testWidgets('shows an error with a way to retry', (tester) async {

@@ -1069,6 +1069,37 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String chartRowLabelSign(String body, String sign) {
+    return '$body in $sign';
+  }
+
+  @override
+  String get chartDetailsLocked => 'Degrees and houses';
+
+  @override
+  String get chartAspectsTitle => 'How your planets talk to each other';
+
+  @override
+  String chartAspectRow(String a, String kind, String b) {
+    return '$a $kind $b';
+  }
+
+  @override
+  String get chartAspectConjunction => 'blends with';
+
+  @override
+  String get chartAspectSextile => 'supports';
+
+  @override
+  String get chartAspectTrine => 'flows with';
+
+  @override
+  String get chartAspectSquare => 'pushes against';
+
+  @override
+  String get chartAspectOpposition => 'balances with';
+
+  @override
   String get chartNoTimeTitle => 'Add your birth time';
 
   @override

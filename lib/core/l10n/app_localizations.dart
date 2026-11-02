@@ -1880,6 +1880,60 @@ abstract class AppLocalizations {
   /// **'{body} in {sign}, {degrees}'**
   String chartRowLabel(String body, String sign, String degrees);
 
+  /// No description provided for @chartRowLabelSign.
+  ///
+  /// In en, this message translates to:
+  /// **'{body} in {sign}'**
+  String chartRowLabelSign(String body, String sign);
+
+  /// No description provided for @chartDetailsLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Degrees and houses'**
+  String get chartDetailsLocked;
+
+  /// No description provided for @chartAspectsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How your planets talk to each other'**
+  String get chartAspectsTitle;
+
+  /// No description provided for @chartAspectRow.
+  ///
+  /// In en, this message translates to:
+  /// **'{a} {kind} {b}'**
+  String chartAspectRow(String a, String kind, String b);
+
+  /// No description provided for @chartAspectConjunction.
+  ///
+  /// In en, this message translates to:
+  /// **'blends with'**
+  String get chartAspectConjunction;
+
+  /// No description provided for @chartAspectSextile.
+  ///
+  /// In en, this message translates to:
+  /// **'supports'**
+  String get chartAspectSextile;
+
+  /// No description provided for @chartAspectTrine.
+  ///
+  /// In en, this message translates to:
+  /// **'flows with'**
+  String get chartAspectTrine;
+
+  /// No description provided for @chartAspectSquare.
+  ///
+  /// In en, this message translates to:
+  /// **'pushes against'**
+  String get chartAspectSquare;
+
+  /// No description provided for @chartAspectOpposition.
+  ///
+  /// In en, this message translates to:
+  /// **'balances with'**
+  String get chartAspectOpposition;
+
   /// No description provided for @chartNoTimeTitle.
   ///
   /// In en, this message translates to:

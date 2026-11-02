@@ -89,9 +89,12 @@ class WheelPalette {
 /// The wheel is a picture: the placements list carries the same facts for
 /// screen readers.
 class ChartWheel extends StatelessWidget {
-  const ChartWheel({required this.chart, super.key});
+  const ChartWheel({required this.chart, this.showAspects = true, super.key});
 
   final NatalChart chart;
+
+  /// Aspect lines are Premium (PRD 6.11); free users get the bare wheel.
+  final bool showAspects;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +111,7 @@ class ChartWheel extends StatelessWidget {
           child: CustomPaint(
             painter: ChartWheelPainter(
               chart: chart,
-              aspects: natalAspects(chart),
+              aspects: showAspects ? natalAspects(chart) : const [],
               palette: palette,
             ),
           ),

@@ -7,6 +7,7 @@ import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/astro/natal_chart.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/chart/application/chart_providers.dart';
+import 'package:mochi_moon/features/cosmic/chart/presentation/aspects_list.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/big_three_card.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_labels.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/chart_wheel.dart';
@@ -50,11 +51,12 @@ class _ChartView extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final rising = chart.ascendantSign;
+    final premium = ref.watch(hasPremiumProvider);
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.md),
       children: [
         if (!chart.timeKnown) const _NoTimeBanner(),
-        ChartWheel(chart: chart),
+        ChartWheel(chart: chart, showAspects: premium),
         const SizedBox(height: AppSpacing.md),
         Semantics(
           header: true,
@@ -83,8 +85,9 @@ class _ChartView extends ConsumerWidget {
               style: theme.textTheme.bodyMedium,
             ),
           ),
-        PlacementsList(chart: chart),
-        if (ref.watch(hasPremiumProvider)) const FullReadingCard(),
+        PlacementsList(chart: chart, detailed: premium),
+        AspectsList(chart: chart, locked: !premium),
+        if (premium) const FullReadingCard(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
           child: Text(

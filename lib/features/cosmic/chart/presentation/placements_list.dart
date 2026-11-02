@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/premium_preview.dart';
 import 'package:mochi_moon/features/cosmic/astro/natal_chart.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/astro/zodiac.dart';
@@ -12,9 +13,13 @@ import 'package:mochi_moon/features/cosmic/presentation/zodiac_labels.dart';
 /// Rx when retrograde. The Ascendant and Midheaven follow when the birth time
 /// is known (PRD §6.11).
 class PlacementsList extends StatelessWidget {
-  const PlacementsList({required this.chart, super.key});
+  const PlacementsList({required this.chart, this.detailed = true, super.key});
 
   final NatalChart chart;
+
+  /// Degrees and houses are Premium (PRD 6.11). Without them the rows show
+  /// the sign only, with a soft preview of what Premium adds.
+  final bool detailed;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,7 @@ class PlacementsList extends StatelessWidget {
           house: chart.houseOf(placement.body),
           retrograde: placement.isRetrograde,
           approximate: placement.body == Body.moon && chart.moonIsApproximate,
+          detailed: detailed,
         ),
       if (ascendant != null)
         _PlacementRow(
@@ -40,6 +46,7 @@ class PlacementsList extends StatelessWidget {
           sign: chart.ascendantSign!,
           degreeInSign: degreeInSign(ascendant),
           house: 1,
+          detailed: detailed,
         ),
       if (midheaven != null)
         _PlacementRow(
@@ -48,6 +55,7 @@ class PlacementsList extends StatelessWidget {
           sign: chart.midheavenSign!,
           degreeInSign: degreeInSign(midheaven),
           house: chart.houseOfSign(chart.midheavenSign!),
+          detailed: detailed,
         ),
     ];
 
@@ -68,6 +76,20 @@ class PlacementsList extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.sm),
             ...rows,
+            if (!detailed)
+              PremiumPreview(
+                source: 'chart_details',
+                semanticLabel: l10n.chartDetailsLocked,
+                child: IgnorePointer(
+                  child: _PlacementRow(
+                    glyph: bodyGlyph(chart.placements.first.body),
+                    name: bodyLabel(l10n, chart.placements.first.body),
+                    sign: chart.placements.first.sign,
+                    degreeInSign: chart.placements.first.degreeInSign,
+                    house: chart.houseOf(chart.placements.first.body),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -84,6 +106,7 @@ class _PlacementRow extends StatelessWidget {
     this.house,
     this.retrograde = false,
     this.approximate = false,
+    this.detailed = true,
   });
 
   final String glyph;
@@ -93,6 +116,7 @@ class _PlacementRow extends StatelessWidget {
   final int? house;
   final bool retrograde;
   final bool approximate;
+  final bool detailed;
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +124,17 @@ class _PlacementRow extends StatelessWidget {
     final theme = Theme.of(context);
     final signName = zodiacSignLabel(l10n, sign);
     final degrees = formatDegrees(degreeInSign);
-    final houseText = house == null ? null : l10n.chartHouse(house!);
+    final houseText = !detailed || house == null
+        ? null
+        : l10n.chartHouse(house!);
+    final shownDegrees = detailed ? ' $degrees' : '';
 
     // One announcement per row instead of a stop for every piece of it.
     final spoken = [
-      l10n.chartRowLabel(name, signName, degrees),
+      if (detailed)
+        l10n.chartRowLabel(name, signName, degrees)
+      else
+        l10n.chartRowLabelSign(name, signName),
       ?houseText,
       if (retrograde) l10n.chartRetrograde,
       if (approximate) l10n.chartApproximate,
@@ -130,8 +160,8 @@ class _PlacementRow extends StatelessWidget {
                   Text(name, style: theme.textTheme.bodyLarge),
                   Text(
                     approximate
-                        ? '$signName $degrees (${l10n.chartApproximate})'
-                        : '$signName $degrees',
+                        ? '$signName$shownDegrees (${l10n.chartApproximate})'
+                        : '$signName$shownDegrees',
                     style: theme.textTheme.bodyMedium,
                   ),
                 ],
