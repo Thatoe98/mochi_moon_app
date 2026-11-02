@@ -35,6 +35,11 @@ Widget _app(PartnerRepository repository, {bool premium = true}) {
             Text('edit ${state.uri.queryParameters['id'] ?? 'new'}'),
       ),
       GoRoute(
+        path: AppRoutes.paywall,
+        builder: (context, state) =>
+            Text('paywall ${state.uri.queryParameters['source']}'),
+      ),
+      GoRoute(
         path: AppRoutes.partnerResult,
         builder: (context, state) =>
             Text('result ${state.uri.queryParameters['id']}'),
@@ -140,11 +145,15 @@ void main() {
     await tester.pumpAndSettle();
 
     final add = tester.widget<FilledButton>(find.byType(FilledButton));
-    expect(add.onPressed, isNull);
+    expect(add.onPressed, isNotNull);
+    expect(find.byIcon(Icons.lock_rounded), findsOneWidget);
     expect(
       find.text('Free includes 1 partner. Premium keeps up to 5.'),
       findsOneWidget,
     );
+    await tester.tap(find.byType(FilledButton));
+    await tester.pumpAndSettle();
+    expect(find.text('paywall partners'), findsOneWidget);
   });
 
   testWidgets('Premium at five partners cannot add a sixth', (tester) async {

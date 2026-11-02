@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -104,8 +106,18 @@ class PartnersScreen extends ConsumerWidget {
                     FilledButton.icon(
                       onPressed: canAdd
                           ? () => context.push(AppRoutes.partnerEdit)
-                          : null,
-                      icon: const Icon(Icons.add_rounded),
+                          : hasPremium
+                          ? null
+                          : () => unawaited(
+                              context.push(
+                                '${AppRoutes.paywall}?source=partners',
+                              ),
+                            ),
+                      icon: Icon(
+                        canAdd || hasPremium
+                            ? Icons.add_rounded
+                            : Icons.lock_rounded,
+                      ),
                       label: Text(l10n.partnersAdd),
                     ),
                   ],

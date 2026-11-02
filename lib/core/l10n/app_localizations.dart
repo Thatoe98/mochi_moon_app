@@ -1934,6 +1934,12 @@ abstract class AppLocalizations {
   /// **'balances with'**
   String get chartAspectOpposition;
 
+  /// No description provided for @compatDetailsLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Romance, emotional and communication scores, and the aspects between you'**
+  String get compatDetailsLocked;
+
   /// No description provided for @chartNoTimeTitle.
   ///
   /// In en, this message translates to:

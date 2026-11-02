@@ -1100,6 +1100,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chartAspectOpposition => 'balances with';
 
   @override
+  String get compatDetailsLocked =>
+      'Romance, emotional and communication scores, and the aspects between you';
+
+  @override
   String get chartNoTimeTitle => 'Add your birth time';
 
   @override

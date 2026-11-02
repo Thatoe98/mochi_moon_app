@@ -5,6 +5,7 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
+import 'package:mochi_moon/core/widgets/premium_preview.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/astro/placement.dart';
 import 'package:mochi_moon/features/cosmic/astro/synastry.dart';
@@ -14,6 +15,7 @@ import 'package:mochi_moon/features/partners/application/compatibility_providers
 import 'package:mochi_moon/features/partners/domain/compatibility_band.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_labels.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_meter.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// How the user's chart and a partner's meet (PRD §6.12), worked out on the
 /// device.
@@ -79,13 +81,14 @@ class PartnerResultScreen extends ConsumerWidget {
   }
 }
 
-class _Result extends StatelessWidget {
+class _Result extends ConsumerWidget {
   const _Result({required this.compat});
 
   final Compatibility compat;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final premium = ref.watch(hasPremiumProvider);
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final synastry = compat.synastry;
@@ -127,27 +130,38 @@ class _Result extends StatelessWidget {
           ),
         ],
         const SizedBox(height: AppSpacing.lg),
-        for (final themeKind in SynastryTheme.values)
-          _ThemeBar(
-            label: synastryThemeLabel(l10n, themeKind),
-            score: synastry.scoreOf(themeKind),
+        // Sub-scores and aspects are Premium (PRD 6.12): free users see them
+        // as one soft preview.
+        _maybeLocked(
+          locked: !premium,
+          label: l10n.compatDetailsLocked,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final themeKind in SynastryTheme.values)
+                _ThemeBar(
+                  label: synastryThemeLabel(l10n, themeKind),
+                  score: synastry.scoreOf(themeKind),
+                ),
+              if (supportive.isEmpty && growth.isEmpty) ...[
+                const SizedBox(height: AppSpacing.lg),
+                Text(l10n.compatQuiet, style: theme.textTheme.bodyMedium),
+              ],
+              if (supportive.isNotEmpty)
+                _AspectSection(
+                  title: l10n.compatFlowTitle,
+                  aspects: supportive,
+                  name: name,
+                ),
+              if (growth.isNotEmpty)
+                _AspectSection(
+                  title: l10n.compatGrowTitle,
+                  aspects: growth,
+                  name: name,
+                ),
+            ],
           ),
-        if (supportive.isEmpty && growth.isEmpty) ...[
-          const SizedBox(height: AppSpacing.lg),
-          Text(l10n.compatQuiet, style: theme.textTheme.bodyMedium),
-        ],
-        if (supportive.isNotEmpty)
-          _AspectSection(
-            title: l10n.compatFlowTitle,
-            aspects: supportive,
-            name: name,
-          ),
-        if (growth.isNotEmpty)
-          _AspectSection(
-            title: l10n.compatGrowTitle,
-            aspects: growth,
-            name: name,
-          ),
+        ),
         const SizedBox(height: AppSpacing.lg),
         Text(
           l10n.cosmicDisclaimer,
@@ -251,3 +265,15 @@ class _AspectSection extends StatelessWidget {
     );
   }
 }
+
+Widget _maybeLocked({
+  required bool locked,
+  required String label,
+  required Widget child,
+}) => locked
+    ? PremiumPreview(
+        source: 'compat_details',
+        semanticLabel: label,
+        child: IgnorePointer(child: child),
+      )
+    : child;

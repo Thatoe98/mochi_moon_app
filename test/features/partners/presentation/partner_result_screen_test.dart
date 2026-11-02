@@ -13,6 +13,7 @@ import 'package:mochi_moon/features/partners/application/partner_providers.dart'
 import 'package:mochi_moon/features/partners/domain/partner.dart';
 import 'package:mochi_moon/features/partners/presentation/compatibility_meter.dart';
 import 'package:mochi_moon/features/partners/presentation/partner_result_screen.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/profile/application/profile_providers.dart';
 import 'package:mochi_moon/features/profile/domain/user_profile.dart';
 
@@ -32,6 +33,7 @@ Widget _app({
   List<Partner>? partners,
   bool failing = false,
   bool loading = false,
+  bool premium = true,
 }) {
   final router = GoRouter(
     initialLocation: '/result',
@@ -49,6 +51,7 @@ Widget _app({
   );
   return ProviderScope(
     overrides: [
+      hasPremiumProvider.overrideWithValue(premium),
       profileRepositoryProvider.overrideWithValue(
         FakeProfileRepository(profile),
       ),
@@ -81,6 +84,25 @@ void _tallView(WidgetTester tester) {
 }
 
 void main() {
+  testWidgets('free: the overall score is open, details are a preview', (
+    tester,
+  ) async {
+    _tallView(tester);
+    await tester.pumpWidget(_app(profile: _profile, premium: false));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(CompatibilityMeter), findsOneWidget);
+    expect(find.text('Premium'), findsOneWidget);
+  });
+
+  testWidgets('Premium: no lock on the details', (tester) async {
+    _tallView(tester);
+    await tester.pumpWidget(_app(profile: _profile));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Premium'), findsNothing);
+  });
+
   testWidgets('shows a loading state first', (tester) async {
     _tallView(tester);
     await tester.pumpWidget(_app(profile: _profile, loading: true));
