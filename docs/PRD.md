@@ -67,7 +67,7 @@ Bottom navigation (4 tabs):
 3. **Cosmic** — a locked state ("Unlock your cosmic side") until birth data is given, then Today, Retrogrades, Moon, Birth chart, Love match and the Premium natal report. Everything in §6.7–§6.12.
 4. **Me** — Journal, gratitude jar (§6.16), mood calendar (§6.18), journeys (§6.21), letters (§6.22, §6.24), Mochi's room (§6.23), monthly recap (§6.25), profile, partners, Premium, settings.
 
-Paywall is a modal route reachable from locked items.
+Paywall is a modal route reachable from locked items (§6.13 lists every entry point) and from one dismissible trial offer (§6.13). It is never reachable from inside the ritual, the hard-day kit, breathing or Help.
 
 ---
 
@@ -109,7 +109,7 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [x] **Profile astro fields are nullable.** `birthDate`, `birthTime`, `place`, `sunSign`, `moonSign`, `moonApproximate` and `risingSign` may all be absent, in Firestore and in the local profile. `timeKnown` only matters with a birth date.
 - [ ] **Migration for existing users:** nothing is erased. A profile that already has birth data keeps it and its derived signs and skips the Cosmic unlock. A profile with a name but no birth date is now complete. The app must accept Firestore documents without `profile.birthDate` (the codec already returns empty fields instead of failing). The security rules do not validate the `profile` map, so they need no change for this, and the local drift `ProfileCache` stores the same JSON map, so it needs no migration. Tests: a name-only profile, a legacy full profile, and a Firestore document missing the signs.
 
-### 6.2 Self-love deck (Free with daily limit)
+### 6.2 Self-love deck (Free: 5 new cards a day; Premium unlimited)
 
 **User stories**
 - As a user, I see one illustrated affirmation card at a time and must read it aloud before swiping.
@@ -120,7 +120,9 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - **Timer gate:** lock duration = `max(3.0, wordCount / 2.5)` seconds, capped at 8 s. The ring fills while locked; card swipes and the action buttons are disabled until full. A gentle haptic + sparkle plays when unlocked. A small hint under the ring reads "Read it out loud ✨" (localized).
 - Swipe right → saved to Journal, heart animation. Swipe left → next. Swipe up → share sheet (§6.4). Undo the last swipe (1 level).
 - Deck source order: For You ranking (§6.9) if enough history, otherwise focus-area weighted random without repeats in 30 days.
-- **Free limit:** 10 new cards per local day. Cards read inside the daily ritual (§6.15) count toward the same 10. After that, show a friendly "You're glowing — come back tomorrow" card with a premium upsell. Journal and reshares stay unlimited.
+- **Free limit (M4b, 2026-11-02; was 10):** 5 new cards per local day, **ritual and deck cards only**. Cards read inside the daily ritual (§6.15) count toward the same 5 (ritual 3, then 2 more in the deck). The 3 onboarding sample cards, cards read on a journey day (§6.21) and the hard-day kit's cards do **not** use up the 5, but they still count for the streak. After the limit, show a friendly "You're glowing — come back tomorrow" card with a gentle Premium invitation (`deck_limit`, no countdown, no guilt copy). Premium has no limit. Journal and reshares stay unlimited.
+- If fewer than 3 cards are left when the ritual starts, the ritual uses what is left and still completes (§6.15).
+- *Code today: `dailyCardLimitProvider` returns 10 for everyone and `deck_history` does not record where a card was read; M4b items 4 changes both.*
 - Mood check-in (optional) at the top: 6 emoji moods (happy, calm, tired, sad, anxious, in love). Choosing one re-ranks the next cards. v1.1: the choice is also stored as the day's mood (§6.18). *Built (P9): the Deck has the check-in; a mood she already chose today re-ranks the deck when she opens it.*
 - Her own cards (§6.17) join the rotation.
 
@@ -144,7 +146,9 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 - [x] Uses the system share sheet (`share_plus`). No social SDKs.
 - [ ] Rendering works in all three scripts with correct fonts. — *blocked on bundling fonts (M0 leftover); Burmese renders through the `Noto Sans Myanmar` fallback once bundled*
 
-### 6.5 Home-screen widget (Free)
+### 6.5 Home-screen widget (Free default theme; extra themes Premium, later)
+
+Extra widget themes are Premium but are not built; they are listed under "Later" (§12). The default theme stays free.
 
 - [x] Android widget (2×2 and 4×2) shows today's card text (short form) and a thumbnail. — *the thumbnail is the card's theme art (decoded before capture, not yet seen on a device); English only; builds and is unit-tested but not yet seen on a device*
 - [x] Updates at local midnight and whenever the deck is opened. — *the app stocks the next 14 days on each open; midnight refreshes are scheduled with `home_widget` (inexact, may drift a few minutes); a 1-hour system refresh is the safety net*
@@ -153,24 +157,29 @@ Each feature lists user stories and acceptance criteria (AC). "Free" and "Premiu
 ### 6.6 Notifications (Free)
 
 - [x] Daily reminder at the chosen time with today's card first line (scheduled locally). — *set from a tile on the Me tab until onboarding exists; the next 14 days are scheduled and rebuilt on each app open; inexact alarms, so it can drift a few minutes*
-- [x] Retrograde alerts: 1 day before a station and on the station day, scheduled locally from the computed calendar (§9.5) for Mercury (default on), Venus and Mars (default off).
+- [x] Retrograde alerts: 1 day before a station and on the station day, scheduled locally from the computed calendar (§9.5) for Mercury (default on), Venus and Mars (default off). — *M4b: **Mercury alerts stay free; Venus and Mars alerts are Premium** (`retro_alerts`). A free user sees those two switches locked with a soft preview and nothing is scheduled for them. If Premium lapses, the two switches turn off and are shown locked again; her choice is kept so it comes back on re-subscribing.*
 - [x] FCM topic `announcements` for rare app news (default on, can be turned off). — *done: an "App news" switch on the Me tab (on by default, saved locally as `announcements`) joins or leaves the `announcements` topic through `firebase_messaging`, and the app matches the topic to the switch on every open, so a change made offline is retried. Without Firebase (an early dev build) the choice is saved and no topic is touched. Not yet tried on a device: nothing sends to the topic until the owner's Firebase project does (a server or console message to `/topics/announcements`). Burmese is machine-translated and unreviewed.*
 - [x] Android 13+ notification permission requested after onboarding with a pre-prompt explaining why. — *pre-prompt and request are in place, triggered from the Me tile; moving the trigger to the end of onboarding is part of the onboarding item*
 
-### 6.7 Cosmic — Today (Free; personalized layer Premium)
+### 6.7 Cosmic — Today (Free: headline, text, one lucky color; depth and personal layer Premium)
 
-Shows for the user's local date:
+Shows for the user's local date. **M4b (2026-11-02) rebalance:** the free page is a short, pretty daily reading; depth is Premium. Locked blocks show a soft preview (the first line, or a blurred block, with a lock chip) and never disappear; one tap opens the paywall with source `cosmic_today` (`sign_chooser` for the chooser).
 
 | Block | Free | Premium |
 | --- | --- | --- |
-| Headline + daily text for her sun sign | ✓ | — |
-| Personalized text based on transits to her natal chart | — | ✓ |
-| Lucky color(s) | ✓ | — |
-| Lucky number | ✓ | — |
-| Things to avoid (3 short items) | ✓ | — |
-| Today's energy card (daily mix, §6.10) | ✓ | — |
-| Thai birthday color + today's Thai day color (toggle) | ✓ | — |
+| Headline + daily text for her sun sign | ✓ | ✓ |
+| Moon card (§6.8) | ✓ | ✓ |
+| Lucky color #1 (from the sign palette) | ✓ | ✓ |
+| Lucky color #2 (from the Moon's element) | — | ✓ |
+| Love line | — | ✓ |
+| Lucky number | — | ✓ |
+| Things to avoid (3 short items) | — | ✓ |
+| Personalized text based on transits to her natal chart (`POST /daily/personal`, not built) | — | ✓ |
+| Today's energy card (daily mix, §6.10) | ✓ | ✓ |
+| Thai birthday color + today's Thai day color (toggle, Thailand phones only) | ✓ | ✓ |
 | Read another sign's page (sign chooser, a row of 12 chips above the art; the user's own sign is marked "(you)") | — | ✓ |
+
+The ritual's cosmic reward card (§6.15) shows the energy line and the first lucky color to everyone; it carries no upsell. The locked blocks are gated in the app only: `GET /daily` is nightly cached content with no per-call cost (§8.2).
 
 **Lucky colors**
 - Each sign has a palette of 4–6 named colors in `signs.json`.
@@ -184,7 +193,9 @@ Shows for the user's local date:
 - [x] Every reading block shows the note "For entertainment and self-reflection". — *checked: it shows on Cosmic Today, Retrogrades, the birth chart, the compatibility result and About, each with a widget test. Premium report screens (M4) must add it too.*
 - [x] Changing app language refetches in the new language.
 
-### 6.8 Cosmic — Retrogrades and Moon (Free)
+### 6.8 Cosmic — Retrogrades and Moon (Free; Venus and Mars alerts Premium)
+
+The retrograde status, the banner, the calendar, the tips and the Moon card are free. Mercury alerts are free; Venus and Mars alerts are Premium (§6.6).
 
 **Retrogrades**
 - [x] ~~Status card~~ replaced (owner decision, 2026-10-29): an always-visible "Retrogrades" button opens the Retrogrades screen; since 2026-10-30 it is a full-width banner pinned under the Cosmic app bar so it is easy to see. The card appeared only after the ~2 s calendar scan and vanished again when scrolled away. The scan now runs once per session (`retrogradePeriodsProvider` is kept alive) and starts when the Cosmic tab opens, so the screen opens with it ready.
@@ -208,11 +219,12 @@ Shows for the user's local date:
 - [ ] A card on Cosmic → Today combining the server's per-sign "energy" line with a matching affirmation (selected by tag/embedding match on-device).
 - [ ] Tapping it opens the card in the deck flow (timer applies).
 
-### 6.11 Birth chart (Big 3 Free; full reading Premium)
+### 6.11 Birth chart (wheel, Big 3 and signs Free; details and full reading Premium)
 
 **Display**
-- Chart wheel (CustomPainter): zodiac ring, Whole Sign houses (if time known), planet glyphs at their degrees, aspect lines (major aspects only).
-- Placements list: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, plus Ascendant and MC if time known. Each row: glyph, sign, degree (e.g. 12°34′), house, ℞ if retrograde.
+- Chart wheel (CustomPainter): zodiac ring, Whole Sign houses (if time known), planet glyphs at their degrees, aspect lines (major aspects only). **M4b: free users see the wheel without aspect lines; Premium draws them** (`chart_details`).
+- Placements list: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, plus Ascendant and MC if time known. **Free rows: glyph, sign, ℞ if retrograde. Premium rows add the degree (e.g. 12°34′) and the house**; locked degree and house cells show a soft preview.
+- Premium also gets a plain-language **aspects list** (deferred in §12 M3; it is built as part of M4b).
 
 **Readings**
 - Free: Big 3 cards (Sun, Moon, Rising) with short bundled texts.
@@ -223,14 +235,15 @@ Shows for the user's local date:
 - [ ] Editing birth data recomputes everything and invalidates cached reports. — *on the device the chart, Cosmic Today and compatibility follow a saved edit (tested); invalidating server-side cached reports waits for the Readings API in M4.*
 - [x] Golden tests pass (§9.7). — *`golden_charts.json` holds 32 charts (both hemispheres, DST, pre-1970, sign cusps, Bangkok and Yangon, 69.6°N, unknown time); signs of all bodies and the Ascendant match, planets within 0.5° and the Sun within 0.3° (`natal_chart_test.dart`).*
 
-### 6.12 Love compatibility (score Free; full report Premium or one-off purchase)
+### 6.12 Love compatibility (overall score Free; sub-scores, aspects and 5 partners Premium; full report Premium or one-off purchase)
 
-**Input:** partner nickname + birth date (required), birth time and place (optional). Up to 5 saved partners (Free: 1).
+**Input:** partner nickname + birth date (required), birth time and place (optional). Up to 5 saved partners (Free: 1; the 2nd opens the paywall, source `partners`).
 
 **Output**
-- Overall score 35–98% with a cute meter and a one-line summary.
-- Three sub-scores: Romance, Emotional, Communication.
-- Top 3 supportive aspects and top 2 growth aspects in plain language (bundled short texts per aspect type).
+- Overall score 35–98% with a cute meter and a one-line summary. **Free.**
+- Three sub-scores: Romance, Emotional, Communication. **Premium** (`compat_details`; free users see them blurred with a lock chip).
+- Top 3 supportive aspects and top 2 growth aspects in plain language (bundled short texts per aspect type). **Premium** (`compat_details`).
+- If Premium lapses, saved partners stay listed and keep their overall score; adding a new one is blocked above the free limit.
 - Premium / one-off: full AI compatibility report (§8.2) with sections: Your chemistry, How you love, How you talk, Where you grow, A gentle tip.
 
 **AC**
@@ -247,12 +260,82 @@ Shows for the user's local date:
 | `mochi_premium_yearly` | Auto-renewing subscription | 7-day free trial |
 | `mochi_compat_report` | Consumable (one report credit) | Unlocks one full compatibility report |
 
-Premium unlocks, in this order on the paywall (self-love value first): unlimited deck, all self-love journeys (§6.21), the weekly letter from Mochi (§6.24), mood insights (§6.18), unlimited own cards (§6.17), Mochi's premium outfits and room items (§6.23), then the astrology extras: For You deck, personalized Today, full natal report, full compatibility reports, up to 5 partners, all widget themes.
+**Free/Premium rebalance (M4b, 2026-11-02).** The free tier was too generous (Play median download-to-paid is under 1%), so Premium must feel clearly worth it. Free keeps the daily habit and every safety feature; Premium is depth, personalization, collection and AI.
+
+**Principles (apply to every decision and every future feature)**
+1. The daily ritual (§6.15) stays fully usable for free. The habit itself is never paywalled.
+2. Safety is always free: the hard-day kit, the breathing inside it and the Help section (§6.26). No paywall or upsell appears inside them, and the trial offer is not shown on a day she opened the kit.
+3. Never take away what she made. Saved Journal cards, gratitude entries, written and sealed letters, own cards, partners, mood days, journey progress and a saved natal report stay readable and deletable even when she is over a free limit (for example after Premium lapses). Limits block only creating **new** ones. Over-limit own cards stay in her rotation; saved partners stay listed with their overall score; a cached report stays readable; an equipped Premium outfit stays equipped until she changes it.
+4. Upsells are gentle and follow the tone rules: no guilt, no countdown pressure, no "you're missing out" copy.
+5. AI that costs money per call is Premium, and **the server enforces it** (§8.2), not only the app.
+
+**What is Free and what is Premium**
+
+| Feature | Before | After | Reason |
+| --- | --- | --- | --- |
+| Daily ritual §6.15 | Free | Free, unchanged | The habit is never paywalled |
+| Deck §6.2 | 10 a day, all sources count | 5 a day (ritual and deck only); Premium unlimited | Depth; day 1 and journeys never run short |
+| Journal §6.3 | Unlimited | Unlimited | Saving what she loves |
+| Mood check-in and calendar §6.18 | All history free | Current and previous calendar month free; older months soft preview; insights Premium | Depth; her data is kept |
+| Gratitude jar §6.16 | Free | Free | Habit and hard-day use |
+| Own cards §6.17 | 3 free | 1 free; Premium unlimited | Collection |
+| Breathe §6.19, hard-day kit §6.26 | Free | Always free, no upsell inside | Safety |
+| Quests §6.20 | Quest and 1 swap free | Quest free; swap Premium | Small personalization perk |
+| Journeys §6.21 | 1 free | 1 free (Confidence), the other three Premium | Unchanged |
+| Letter to future me §6.22 | Unlimited | 1 sealed letter at a time free; Premium unlimited; opened letters are always readable | Collection |
+| Mochi §6.23 | Free items earned; Premium items need Premium | Unchanged | — |
+| Weekly letter §6.24 | Premium, app-only check | Premium, server-enforced | Per-call AI cost |
+| Monthly glow recap §6.25 | Free | Free | Sharing and growth |
+| Widget §6.5 | Free | Default theme free; extra themes Premium (not built) | Collection |
+| Cosmic Today §6.7 | Most blocks free | Headline, text, first lucky color, energy card, Thai colors free; second color, love line, lucky number, avoid, personal text, sign chooser Premium | Depth |
+| Retrogrades and Moon §6.8 | Free, all alerts free | Status, calendar, tips, Moon card and Mercury alerts free; Venus and Mars alerts Premium | Depth |
+| Birth chart §6.11 | Wheel, list, Big 3 free | Wheel without aspect lines, Big 3, signs-only list free; aspect lines, degrees, houses, aspects list and natal report Premium | Depth and AI cost |
+| Compatibility §6.12 | Score, sub-scores, aspects free; 1 partner | Overall score and summary, 1 partner free; sub-scores, aspects, up to 5 partners Premium; full report Premium or `mochi_compat_report` | Depth and AI cost |
+| For You deck §6.9 | Premium | Premium | — |
+
+All quotes are free to read (§8.3): Premium means more cards per day and personal ranking, not exclusive quotes.
+
+Premium unlocks, in this order on the paywall (self-love value first): unlimited deck and the For You deck, all self-love journeys (§6.21), the weekly letter from Mochi (§6.24), mood history and insights (§6.18), unlimited own cards (§6.17) and sealed letters (§6.22), the daily quest swap (§6.20), Mochi's premium outfits and room items (§6.23), then the astrology extras: love line, lucky number, things to avoid, second lucky color, the sign chooser, personalized Today, full placements and aspects, the full natal report, compatibility sub-scores and aspects, up to 5 partners, full compatibility reports, Venus and Mars retrograde alerts, and widget themes (later).
+
+**Soft previews.** A locked item never disappears. It shows a soft preview (blurred content or its first line) with a small lock chip; one tap opens the paywall with the right `source`. One shared widget (`PremiumPreview`) does this, with a TalkBack label that says what is locked. The preview text is not a pressure message.
+
+**Paywall entry points** (each logs `paywall_viewed {source}`, §11)
+
+| Place | What is locked | `source` |
+| --- | --- | --- |
+| Deck limit card | More cards today | `deck_limit` |
+| Deck "For You" | The For You deck | `for_you` |
+| Journeys list or page | Journeys after Confidence | `journey` |
+| Own cards, 2nd card | Unlimited own cards | `own_cards` |
+| Letters, 2nd sealed letter | Unlimited sealed letters | `letters` |
+| Quest card, swap | The daily swap | `quest_swap` |
+| Mood calendar, older month | Full history | `mood_history` |
+| Mood insights card | Insights | `mood_insights` |
+| Mochi's room, Premium item | Premium outfits and items | `mascot_item` |
+| Weekly letter teaser (Sundays) | The weekly letter | `weekly_letter` |
+| Cosmic Today locked blocks | Love, number, avoid, 2nd color, personal text | `cosmic_today` |
+| Sign chooser icon | Other signs | `sign_chooser` |
+| Chart: wheel aspects, list degrees, houses, aspects list | Chart details | `chart_details` |
+| Chart: natal report card | The full reading | `natal_report` |
+| Compatibility details | Sub-scores, aspects | `compat_details` |
+| Compatibility report | The full report (Premium or one-off) | `compat_report` |
+| Partners, 2nd partner | Up to 5 partners | `partners` |
+| Retrogrades, Venus or Mars switch | Venus and Mars alerts | `retro_alerts` |
+| Today, once after the ritual on day 2 or 3 | The trial offer | `trial_offer` |
+| Me, Premium tile | — | `me` |
+| Server answers 402 `premium_required` | — | `server_402` |
+
+The paywall is **never** opened from the ritual flow, the hard-day kit, breathing, Help or onboarding.
+
+**Trial offer (owner decision, 2026-11-02).** Shown once, as a dismissible card or sheet on Today, right after she finishes the ritual on her 2nd or 3rd active day (ritual days). It is not shown at the end of onboarding, never on a day she opened the hard-day kit, never to a Premium user, and not again once dismissed or seen (a flag in `shared_preferences`; logs `trial_offer_shown` and `trial_offer_dismissed`). The copy says what the 7 days include and when billing starts, with no countdown and no "last chance" wording. Dismissing it costs nothing.
+
+**No grandfathering.** The app is not launched, so there are no existing users to protect. Testers' data that exceeds a new limit simply follows the lapse rule above (principle 3).
 
 **AC**
 - [x] Prices come from Play Billing (localized currency); never hardcoded. — *Done 2026-11-02: `PlayPurchaseCatalog` (`features/paywall/data/`, `in_app_purchase`) reads the store price (the recurring phase, not the free trial phase) and picks the trial offer for yearly. Not tried on a device yet: it needs the two products in Play Console. `in_app_purchase_android` was added as a direct dependency (it is the platform half of `in_app_purchase`, already in the build) to read offer details.*
 - [ ] Purchases are verified server-side (`POST /v1/purchases/verify`), which writes `entitlement` to Firestore; the app reads entitlement from Firestore only. — *App side done 2026-11-02: `hasPremiumProvider` reads `users/{uid}.entitlement` (`features/paywall/`), false until known or without an account; debug builds can pass `--dart-define=PREMIUM_OVERRIDE=true` to try Premium screens. Server side built 2026-11-02 in `mochi-moon-api` (commits 254176c, cbc0e9f): `POST /v1/purchases/verify` asks Google Play, acknowledges, and writes the entitlement; `POST /v1/purchases/notifications` (Pub/Sub push) keeps it right on renewal, lapse and cancellation. NOT deployed or tried against Play: waiting on the owner's Play developer account (identity verification pending), the Play service account (`PLAY_PACKAGE_NAME`, `PLAY_SERVICE_ACCOUNT_FILE`), and the Pub/Sub topic and push subscription (`RTDN_AUDIENCE`, `RTDN_SERVICE_ACCOUNT_EMAIL`). Box stays open until a real test purchase works.*
 - [ ] Restore purchases button. Clear trial terms and a link to manage subscriptions in Play. — *Restore and trial terms done 2026-11-02. A purchase is sent to `POST /purchases/verify` as `{productId, purchaseToken}` and acknowledged to Play only after the server accepts it; until that endpoint exists, nothing is acknowledged (Play refunds unacknowledged purchases after 3 days). Manage-subscription link done 2026-11-02 (`url_launcher`, owner-approved): a button on the paywall and a "Mochi Moon Premium" tile on Me (free → paywall, Premium → the Play subscriptions page). Open: the compat-report credit product.*
+- [ ] **(M4b)** The paywall's 3 bullets read, self-love value first: "Unlimited cards and the For You deck", "Every self-love journey", "A weekly letter from Mochi"; the full benefit list follows in the order above. Every entry point in the table logs its `source`.
 - [x] Paywall shows: mascot, 3 benefit bullets (journeys, weekly letter, unlimited cards first), yearly plan preselected with trial, monthly option, close button visible immediately. *Built 2026-11-02 as `features/paywall/presentation/paywall_screen.dart` at `/paywall?source=...`; prices come from a `PurchaseCatalog` interface (stub `UnavailablePurchaseCatalog` until Play Billing is connected, so the buy button is off and says so); Restore button; logs `paywall_viewed {source}`. Entry points: locked journey, own-card limit dialog. Still open: real Play Billing, server `POST /v1/purchases/verify`, entitlement from Firestore, a manage-subscriptions link, `hasPremiumProvider` stays true.*
 
 ### 6.14 Settings and account
@@ -274,7 +357,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 **AC**
 - [x] Today is the home tab and shows the ritual's state: not started, in progress (step n of 4), or done for today.
 - [x] The 3 ritual cards use the same timer gate and swipe rules as the Deck; a swipe before the ring is full is cancelled.
-- [x] Ritual cards count toward the 10 new cards per day free limit (§6.2). If fewer than 3 are left, the ritual uses what is left and still completes; Premium has no limit.
+- [ ] **(M4b)** Ritual cards count toward the 5 new cards per day free limit (§6.2; was 10). If fewer than 3 are left, the ritual uses what is left and still completes; Premium has no limit. The ritual itself never shows a paywall or upsell. The one trial offer (§6.13) appears on Today only after it is finished on her 2nd or 3rd active day.
 - [x] Completing the ritual stores one `ritual_days` row for the local date and updates the streak. The streak counts a day when the ritual is completed **or** at least 1 deck card is completed. A missed day shows no guilt copy. *Streak rule built (P10, 2026-10-31): `currentStreak` counts ritual days and card days; the `ritual_days` table is read and written through the deck repository (`markRitualDay`); the ritual flow that calls it is P11 (built 2026-10-31).* — *`today_screen_test` runs the ritual end to end; the gratitude step is a quiet placeholder until the jar (§6.16, P13).*
 - [x] The mood step stores the day's mood (§6.18). Skipping it stores nothing.
 - [x] Leaving mid-ritual and coming back the same day resumes at the same step.
@@ -291,7 +374,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [x] **Entries are private (§10):** never sent to the AI API or to analytics. *(no analytics event carries text; `gratitude_added` sends only the count)*
 - [x] The jar is also reachable from the hard-day kit (§6.26).
 
-### 6.17 My own cards (3 free, unlimited Premium)
+### 6.17 My own cards (1 free, unlimited Premium)
+
+*M4b (2026-11-02): the free limit goes from 3 to 1 (`ownCardFreeLimit`). Cards she already has above the limit stay readable, editable, deletable and in the rotation; only creating a new one is blocked (§6.13 principle 3). The paywall source is `own_cards`.*
 
 - [x] She writes an affirmation (max 140 characters) and picks one illustration from the bundled set (§8.4). The card has the same layout and timer gate as a bundled card; its category is `self_love`.
 - [x] A custom card joins the deck rotation (and the ritual) and can be chosen as the home-screen widget card. (P15: it joins the card pool used by the deck, ritual, journal and widget rotation; the widget thumbnail uses the category art. Choosing one specific card for the widget is not built.)
@@ -300,7 +385,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [x] **Private (§10):** the text never goes to the AI API, analytics, or the For You embeddings server. Custom cards get no embedding; the For You deck ignores them for ranking. (P14: `OwnCard.toQuote()` carries no mood, sign or embedding; the For You ranking must skip ids starting `own_`.)
 - [x] Shareable as an image like any card (§6.4).
 
-### 6.18 Mood calendar (month view Free, insights Premium)
+### 6.18 Mood calendar (this and last month Free; older history and insights Premium)
+
+- [ ] **(M4b)** Check-in stays free. The calendar shows the **current and the previous calendar month** in full. Earlier months show a soft preview (blurred dots and a gentle invitation, source `mood_history`). Nothing is deleted or hidden from the monthly recap, which uses last month. If Premium lapses, older months go back to the soft preview; the data stays and returns with Premium.
 
 - [x] The mood check-in (ritual or Deck) stores **one mood per local date** (the last choice wins). She can also set or change today's mood from Me → Mood.
 - [x] Month calendar: one colored mood dot per day, previous and next month, tap a day to see its mood; unlogged days are empty without any warning style.
@@ -316,7 +403,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [ ] Reachable from Today, the hard-day kit, and Me. Finishing shows a gentle line and offers the next step; leaving early is fine. *(Today and Me done 2026-10-31 (P16); the hard-day kit link is done in P17.)*
 - [ ] Breathing copy lives in `breathing.json` (§8.3), in en and my. *(Deferred: the copy is in `app_en.arb` / `app_my.arb` instead, so the translation tool covers it; `breathing.json` is not used. Burmese is machine-translated and unreviewed.)*
 
-### 6.20 Tiny kindness quests (Free)
+### 6.20 Tiny kindness quests (daily quest Free; swap Premium)
+
+- [ ] **(M4b)** One quest a day is free. The once-a-day **swap is Premium** (source `quest_swap`); a free user sees the swap button locked with a soft preview. A swap already made today stays made if Premium lapses.
 
 - [x] One small daily task picked from the bundled `quests.json`, matched to her focus areas, chosen deterministically from the date so it is stable all day. *(Q1: `dailyQuest` in `features/quests/domain`; 18 starter quests, the launch set of 120 is still to write.)*
 - [x] She can mark it done or **swap it once** per day for another quest. *(Q2: the quest card on Today.)*
@@ -334,7 +423,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [ ] Journey scripts are in `journeys.json` (§8.3) in en and my. Healing after a breakup follows the style guide: no predictions, no promises about the ex, no clinical language, and shows the hard-day kit link.
 - [x] Progress is saved to `users/{uid}/journeyProgress/{journeyId}`. *(Q3: local drift table + sync; her reflections stay private.)*
 
-### 6.22 Letter to future me (Free)
+### 6.22 Letter to future me (1 sealed letter at a time Free; unlimited Premium)
+
+- [ ] **(M4b)** A free user can have **one sealed letter at a time**; writing a second while one is still sealed opens the paywall (source `letters`). Once a letter is opened or deleted she can seal another. Opened letters are always readable and deletable, and a lapse never hides a sealed one.
 
 - [x] She writes a note (max 1,000 characters), chooses to unlock it in 30, 90 or 365 days, and seals it. A sealed letter cannot be read or edited before its date; it can be deleted.
 - [x] A local notification fires on the unlock date (permission handled like the reminder, §6.6). Opening the letter shows it with its written date.
@@ -353,7 +444,7 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 ### 6.24 Weekly letter from Mochi (Premium, AI)
 
 - [x] Every Sunday (local) a short, warm letter (80–150 words) about her week appears on Today and in Me → Letters, with a notification if she allowed it. *Q10 done 2026-11-01: the card stays all week (the letter for the last finished week); the notification is Sunday 18:00 local for the next 4 Sundays (ids 3000+), only while Premium and permission are granted, and its text never carries the letter. An empty week with nothing saved shows no card and makes no call.*
-- [x] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers. *Q9 done 2026-11-01 (API repo `mochi-moon-api`, e35ac50): strict schema (ids and counts only, any other field is a 400), one letter cached per user, week and language, 3 new letters per week (cached repeats are free), account deletion erases letters. Deployed to the VPS 2026-11-01. Premium is not checked until purchase verification exists.*
+- [x] The letter is generated on the server by `POST /v1/letters/weekly` (§8.2) from **aggregates only**: mood counts, ritual days completed, quests completed, current journey id and day, focus areas, and `lang`. **Never** her gratitude entries, letters, custom cards, journal, or reflection answers. *Q9 done 2026-11-01 (API repo `mochi-moon-api`, e35ac50): strict schema (ids and counts only, any other field is a 400), one letter cached per user, week and language, 3 new letters per week (cached repeats are free), account deletion erases letters. Deployed to the VPS 2026-11-01. Premium is not checked yet: the 402 check is M4b item 1 (launch blocker).*
 - [x] Cached per week per language on the device and server; offline shows the last letter or a bundled fallback. *Q10: the device cache reuses the `cached_reports` table (type `weekly_letter`, id `weekly_letter:<lang>:<weekStart>`) instead of a separate `weekly_letters` table, so there is no schema migration. Finished quests are counted from a small on-device day log (`quest_done_days`, last 21 dates) because the quest record keeps only the latest day.*
 - [x] Style guide (§7.1) applies: warm, no predictions about health, death, pregnancy, money or legal outcomes, no fear language, no absolute claims, no clinical language.
 - [x] If she has fewer than 2 active days in the week, the letter is a gentle "fresh start" letter that does not mention the gap negatively. *Server side done (Q9); the validator also bans blame words such as missed, gap, behind.*
@@ -366,7 +457,9 @@ Premium unlocks, in this order on the paywall (self-love value first): unlimited
 - [ ] The recap never shows her written text (gratitude, letters, own cards).
 - [ ] If she did not show up at all last month, the recap is replaced by a warm "welcome back" card instead of an empty page.
 
-### 6.26 Hard-day kit (Free)
+### 6.26 Hard-day kit (always Free)
+
+- [ ] **(M4b, safety rule)** The kit, its breathing session, its comforting cards, the wins jar link and the Help section never show a paywall, a lock chip or an upsell, and the kit's cards do not use up the daily card limit. A guard test proves it (§12 M4b).
 
 - [x] One calm button, "Hard day?", on Today and on the Deck opens a kit with: a 1-minute breathing session (§6.19), 3 comforting cards from the `calm`/`healing` categories, a way to open the wins jar (§6.16), and a **Help** section.
 - [x] The Help section shows a clear note that the app is not a substitute for professional help, and if she is in danger she should contact local emergency services or someone she trusts.
@@ -590,12 +683,22 @@ Base: `https://api.<domain>/v1`. Auth: `Authorization: Bearer <Firebase ID token
 | Method | Path | Access | Purpose |
 | --- | --- | --- | --- |
 | GET | `/daily?sign=scorpio&date=2026-10-27&lang=th` | Signed-in | Daily sign reading |
-| POST | `/daily/personal` | Premium | Transit-personalized daily text from placements |
-| POST | `/reports/natal` | Premium | Full natal report |
-| POST | `/reports/compatibility` | Premium or 1 credit | Full compatibility report |
-| POST | `/letters/weekly` | Premium | Weekly letter from Mochi, from aggregates only |
+| POST | `/daily/personal` | Premium (server-enforced; not built) | Transit-personalized daily text from placements |
+| POST | `/reports/natal` | Premium (server-enforced) | Full natal report |
+| GET | `/reports/natal/{reportId}` | Signed-in, owner of the report | Poll or re-read her own existing report; stays allowed after a lapse |
+| POST | `/reports/compatibility` | Premium or 1 credit (server-enforced; not built) | Full compatibility report |
+| POST | `/letters/weekly` | Premium (server-enforced) | Weekly letter from Mochi, from aggregates only |
 | POST | `/purchases/verify` | Signed-in | Verify Play purchase, write entitlement |
 | DELETE | `/account` | Signed-in | Delete all user data and the Auth user |
+
+**Premium is enforced on the server (M4b, launch blocker)**
+- [ ] Every Premium endpoint above reads `users/{uid}.entitlement` with the Firebase Admin SDK and allows the call only when `premium` is true and `expiresAt` is in the future. Otherwise it returns **HTTP 402** `{ "error": { "code": "premium_required", "message": "..." } }`, before any model call, any rate-limit count and any cache lookup, so AI costs cannot be abused with a modified app. A cached repeat still needs Premium.
+- [ ] `POST /reports/compatibility` is allowed with Premium **or** one `reportCredits`; the credit is spent only when a new report is generated, never on a cached repeat or a failed generation.
+- [ ] `GET /reports/natal/{reportId}` returns her own existing report without Premium (principle 3, §6.13); creating a new one needs Premium.
+- [ ] pytest covers a free user, an expired user and a Premium user for each Premium endpoint, and that the 402 body carries no request data.
+- [ ] The app maps a 402 to a soft paywall invitation (source `server_402`), never to an error screen.
+- `GET /daily` is gated **in the app only**: its Premium fields (`love`, `avoid`, `luckyNumber`) are nightly cached content with no per-call cost, so a server check adds nothing. `POST /purchases/verify` and `DELETE /account` need only sign-in.
+- Testing Premium against the server needs a real entitlement: use Play license testers (free test purchases). There is no server backdoor or debug bypass. The app's `PREMIUM_OVERRIDE` flag only unlocks screens on the device.
 
 **`GET /daily` response**
 
@@ -632,7 +735,7 @@ Base: `https://api.<domain>/v1`. Auth: `Authorization: Bearer <Firebase ID token
 
 `midheaven` is sent like `ascendant`; both and every `house` are left out when `timeKnown` is false. Any other field (a birth date, for example) is rejected with 400.
 
-Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generating" | "ready" | "failed", "total": 13, "sections": [ { "key": "overview", "title": "...", "body": "..." } ] }`. The call returns at once: **202** while the server writes the parts in the background, **200** when the report is ready (sending the same chart again finds the same report, no new cost). `GET /reports/natal/{reportId}` returns the same shape; the app polls it every ~3 s and shows the parts as they arrive (`sections` is always an unbroken run from the first). A failed report keeps its finished parts, and posting again writes only the missing ones. 5 new reports an hour per user (429). Reports are kept in the server's SQLite database, owner-only, and erased with the account. The server does not check Premium until purchase verification exists (M4).
+Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generating" | "ready" | "failed", "total": 13, "sections": [ { "key": "overview", "title": "...", "body": "..." } ] }`. The call returns at once: **202** while the server writes the parts in the background, **200** when the report is ready (sending the same chart again finds the same report, no new cost). `GET /reports/natal/{reportId}` returns the same shape; the app polls it every ~3 s and shows the parts as they arrive (`sections` is always an unbroken run from the first). A failed report keeps its finished parts, and posting again writes only the missing ones. 5 new reports an hour per user (429). Reports are kept in the server's SQLite database, owner-only, and erased with the account. The server checks Premium (see "Premium is enforced on the server" above; built in M4b).
 
 **`POST /reports/compatibility` request:** `{ "lang", "partnerId", "a": <placements block>, "b": <placements block>, "score": { "overall", "romance", "emotional", "communication" }, "topAspects": [...] }`.
 
@@ -650,7 +753,7 @@ Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generatin
 }
 ```
 
-`journey` is `null` when she has none running. Response: `{ "weekStart": "2026-11-01", "lang": "en", "version": 1, "title": "string", "body": "string (80–150 words)", "generatedBy": "ai" }`. The server checks Premium (once purchase verification exists), caches one letter per user per `weekStart` and `lang`, and serves the same one on repeat calls with no new cost. Rate limit: 3 requests per week per user (429). Logs never contain the request body.
+`journey` is `null` when she has none running. Response: `{ "weekStart": "2026-11-01", "lang": "en", "version": 1, "title": "string", "body": "string (80–150 words)", "generatedBy": "ai" }`. The server checks Premium (402 `premium_required`, M4b), caches one letter per user per `weekStart` and `lang`, and serves the same one on repeat calls with no new cost. Rate limit: 3 requests per week per user (429). Logs never contain the request body.
 
 **Rate limits:** 60 requests/min per user; report endpoints 5/hour per user; weekly letter 3/week per user.
 
@@ -682,7 +785,7 @@ Response: `{ "reportId": "...", "lang": "en", "version": 1, "status": "generatin
 ```
 
 - Categories: `self_love`, `confidence`, `healing`, `study_work`, `body_kindness`, `calm`.
-- Launch target: 500 quotes (≥ 150 free), all three languages.
+- Launch target: 500 quotes, all three languages. *M4b: every quote is free to read (`premium: false`); Premium means more cards per day and the For You ranking (§6.13), not exclusive quotes. The old "≥ 150 free" target no longer applies.*
 - Authors: only original (null) or public-domain authors.
 
 **Self-love content files** (all loaded through `ContentRepository`; every text has `en` and `my`, `th` later; unreviewed machine translation is flagged like the quotes):
@@ -839,9 +942,10 @@ Whole Sign: house 1 = Ascendant's sign; house *n* = sign `(ascSign + n − 1) mo
 
 ## 11. Analytics events (only after consent)
 
-`onboarding_started`, `onboarding_completed`, `sign_in_success`, `card_completed`, `card_swiped {direction}`, `card_shared`, `daily_limit_reached`, `mood_selected {mood}`, `cosmic_today_viewed`, `chart_viewed`, `compat_created {mode}`, `paywall_viewed {source}`, `trial_started`, `purchase_completed {productId}`, `widget_added`, `notification_opened {type}`, `account_deleted`.
+`onboarding_started`, `onboarding_completed`, `sign_in_success`, `card_completed`, `card_swiped {direction}`, `card_shared`, `daily_limit_reached`, `mood_selected {mood}`, `cosmic_today_viewed`, `chart_viewed`, `compat_created {mode}`, `paywall_viewed {source}`, `trial_started`, `purchase_completed {productId}`, `trial_offer_shown`, `trial_offer_dismissed`, `widget_added`, `notification_opened {type}`, `account_deleted`.
 
 v1.1 events: `ritual_started`, `ritual_completed`, `gratitude_added {count}`, `jar_opened`, `custom_card_created`, `mood_logged {mood}`, `breathe_completed`, `quest_completed`, `quest_swapped`, `journey_started {journeyId}`, `journey_day_completed {journeyId, day}`, `journey_completed {journeyId}`, `letter_sealed {unlockDays}`, `letter_opened`, `mascot_item_unlocked {itemId}`, `weekly_letter_viewed`, `recap_shared`, `hard_day_opened {source}`, `cosmic_unlocked`.
+`paywall_viewed {source}` takes one of these values (M4b, table in §6.13): `deck_limit`, `for_you`, `journey`, `own_cards`, `letters`, `quest_swap`, `mood_history`, `mood_insights`, `mascot_item`, `weekly_letter`, `cosmic_today`, `sign_chooser`, `chart_details`, `natal_report`, `compat_details`, `compat_report`, `partners`, `retro_alerts`, `trial_offer`, `me`, `server_402`. Never any other text.
 Never include birth data, partner names, quote text, or anything she wrote (gratitude, letters, own cards, reflections) in event params.
 
 ---
@@ -894,6 +998,27 @@ Tick items as they're completed (Claude Code: update this list at the end of eac
 - [ ] For You deck with embeddings (§7.2); daily mix card
 - [ ] Analytics with consent, Crashlytics
 
+### M4b — Free/Premium rebalance (2026-11-02; rules in §6.13)
+
+PRD edits are done. The app is not launched, so no grandfathering is needed. Items run in this safe order; the first is a launch blocker.
+- [ ] 1. Server: an entitlement check helper (Admin SDK read of `users/{uid}.entitlement`); 402 `premium_required` on `POST /reports/natal` and `POST /letters/weekly`; `GET /reports/natal/{id}` stays open to the owner; pytest for free, expired and Premium users; deploy with the owner's go-ahead (§8.2).
+- [ ] 2. App: the natal report and weekly letter clients map 402 to a soft paywall invitation (`server_402`); tests.
+- [ ] 3. A shared `PremiumPreview` soft-lock widget (`core/widgets/`) and one `free_limits.dart` (deck 5, own cards 1, sealed letters 1, partners 1, mood months 2); widget tests incl. TalkBack labels.
+- [ ] 4. Deck: `deck_history` records where a card was read (drift migration plus migration test); the limit counts ritual and deck cards only; `dailyCardLimitProvider` follows `hasPremiumProvider`; the limit card gets the gentle upsell (`deck_limit`); tests for day 1 (3 sample cards, then a full ritual) and a journey day.
+- [ ] 5. Own cards: free limit 1; over-limit cards stay readable, deletable and in the rotation; tests.
+- [ ] 6. Letters: one sealed letter at a time free; tests.
+- [ ] 7. Quests: the swap is Premium; tests.
+- [ ] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests.
+- [ ] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests.
+- [ ] 10. Chart: no aspect lines for free users, a signs-only list, and the new Premium aspects list with degrees and houses; tests.
+- [ ] 11. Compatibility: sub-scores and aspects behind preview; partner limit source; tests.
+- [ ] 12. Retrograde alerts: Venus and Mars are Premium (locked switches, nothing scheduled for free users); tests.
+- [ ] 13. Paywall: the new 3 bullets and benefit order; every entry point wired with its `source`; analytics sources.
+- [ ] 14. Trial offer after the day 2–3 ritual (once, dismissible, skipped on hard-day days and for Premium); tests.
+- [ ] 15. Guard test: the ritual, the hard-day kit, breathing and Help never show a paywall or lock.
+- [ ] 16. Lapse tests: a Premium user goes free and nothing she made disappears.
+- [ ] 17. As each is built later (`/daily/personal`, the compatibility endpoint and credit, For You, widget themes): gated on the server from day one.
+
 ### M5 — Self-love expansion (v1.1)
 
 Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. Nothing in M5 is built. Order of risk is in `docs/PLAN.md`.
@@ -907,7 +1032,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [x] Daily mood check-in stored per date (§6.18, month view) — *done 2026-10-31: Deck check-in, Me → Mood, Firestore sync of `moods/{date}`; the ritual's mood step comes with the ritual flow*
 - [x] Daily ritual on Today with streak and cosmic reward (§6.15)
 - [x] Gratitude and wins jar (§6.16) — *done 2026-10-31 (P13); the hard-day kit link comes with P17*
-- [x] My own cards, 3 free (§6.17)
+- [x] My own cards, 3 free (§6.17; M4b lowers the free limit to 1)
 - [x] Breathe with Mochi (§6.19) — *done 2026-10-31 (P16, with the hard-day link in P17)*
 - [x] Hard-day kit with `TODO_CONTENT` helplines (§6.26) — *done 2026-10-31 (P17)*
 - [x] Strings and Burmese for M5a — *checked 2026-10-31 (P18): all 492 keys of `app_en.arb` have a Burmese string in `app_my.arb` with matching placeholders, and the translate tool reports nothing left to translate. Generated per feature with `tool/translate_content.dart`. **Unreviewed machine translation:** a native reviewer must approve the M5a strings (ritual, gratitude, own cards, mood, breathe, hard-day) before they count as shipped. Thai is not generated.*
@@ -934,6 +1059,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - [ ] Listen mode (TTS) for accessibility
 - [ ] Placidus houses option
 - [ ] More mascot outfits and seasonal decks
+- [ ] Extra home-screen widget themes, Premium (§6.5)
 
 ---
 
@@ -945,5 +1071,8 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 - Helpline sources and wording per locale for the hard-day kit (the owner verifies every name and number before launch).
 - Mascot item art: who draws the 24 launch items and in what style.
 - Do existing test users see the new onboarding, or only new installs? (Suggested: only new installs; existing profiles keep their birth data.)
-- Whether the free journey is Confidence, and the price anchors once the paywall leads with self-love.
+- Price anchors once the paywall leads with self-love. (The free journey is Confidence: decided.)
+- M4b: how to test Premium end to end against the server (suggested: Play license testers, no server backdoor).
+- M4b: confirm that own cards above the free limit stay in the rotation after a lapse (principle 3 says yes).
+- M4b: confirm that the "Today's energy" daily mix card (§6.10) and Thai colors stay free.
 - Whether to register a Play **organization** account (needs business verification but skips the closed-testing requirement) or a personal one.
