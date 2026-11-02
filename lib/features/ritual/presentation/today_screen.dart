@@ -5,6 +5,7 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
+import 'package:mochi_moon/features/explore/presentation/tour_prompt_card.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/letters/presentation/weekly_letter_card.dart';
 import 'package:mochi_moon/features/paywall/presentation/trial_offer_card.dart';
@@ -13,6 +14,7 @@ import 'package:mochi_moon/features/recap/presentation/recap_today_card.dart';
 import 'package:mochi_moon/features/ritual/application/ritual_providers.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
 import 'package:mochi_moon/features/ritual/presentation/cosmic_reward_card.dart';
+import 'package:mochi_moon/features/ritual/presentation/quick_tiles.dart';
 import 'package:mochi_moon/features/ritual/presentation/ritual_steps.dart';
 
 /// The home tab (PRD §5, §6.15): today's 2-minute self-love ritual. It shows
@@ -28,33 +30,28 @@ class TodayScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.todayTitle),
-        actions: [
-          const HardDayButton(source: 'today'),
-          IconButton(
-            tooltip: l10n.breatheTitle,
-            icon: const Icon(Icons.self_improvement_rounded),
-            onPressed: () => context.push(AppRoutes.breathe),
-          ),
-        ],
+        actions: const [HardDayButton(source: 'today')],
       ),
       body: ritual.when(
         loading: () => const LoadingView(),
         error: (_, _) =>
             ErrorView(onRetry: () => ref.invalidate(ritualControllerProvider)),
         data: (state) => switch (state.phase) {
-          RitualPhase.notStarted => Column(
-            children: [
-              Expanded(
-                child: RitualIntro(
+          RitualPhase.notStarted => SingleChildScrollView(
+            child: Column(
+              children: [
+                const TourPromptCard(),
+                RitualIntro(
                   streak: streak,
                   onStart: ref.read(ritualControllerProvider.notifier).start,
                   onBrowseDeck: () => context.go(AppRoutes.deck),
                 ),
-              ),
-              const RecapTodayCard(),
-              const WeeklyLetterCard(),
-              const QuestCard(),
-            ],
+                const QuickTiles(),
+                const RecapTodayCard(),
+                const WeeklyLetterCard(),
+                const QuestCard(),
+              ],
+            ),
           ),
           RitualPhase.finished => Column(
             children: [

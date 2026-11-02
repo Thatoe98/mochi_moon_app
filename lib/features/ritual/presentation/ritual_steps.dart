@@ -8,7 +8,6 @@ import 'package:mochi_moon/core/theme/app_radii.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/widgets/mochi_illustration.dart';
 import 'package:mochi_moon/core/widgets/sparkle.dart';
-import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/deck/presentation/gated_card_deck.dart';
 import 'package:mochi_moon/features/deck/presentation/share_quote.dart';
@@ -70,21 +69,52 @@ class RitualIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return EmptyState(
-      title: streak > 0 ? l10n.todayStreak(streak) : l10n.todayNoStreak,
-      body: l10n.ritualIntroBody,
-      illustration: AppIllustrations.emptyDeck,
-      illustrationLabel: l10n.illustrationEmptyDeck,
-      action: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FilledButton(onPressed: onStart, child: Text(l10n.ritualStart)),
-          const SizedBox(height: AppSpacing.sm),
-          TextButton(
-            onPressed: onBrowseDeck,
-            child: Text(l10n.ritualBrowseDeck),
-          ),
-        ],
+    final theme = Theme.of(context);
+    return Card(
+      margin: const EdgeInsets.all(AppSpacing.md),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 150,
+              child: MochiIllustration(
+                asset: AppIllustrations.emptyDeck,
+                semanticLabel: l10n.illustrationEmptyDeck,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            Semantics(
+              header: true,
+              child: Text(
+                streak > 0 ? l10n.todayStreak(streak) : l10n.todayNoStreak,
+                style: theme.textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              l10n.ritualIntroBody,
+              style: theme.textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AppSpacing.md),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: onStart,
+                child: Text(l10n.ritualStart),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            TextButton(
+              onPressed: onBrowseDeck,
+              child: Text(l10n.ritualBrowseDeck),
+            ),
+          ],
+        ),
       ),
     );
   }

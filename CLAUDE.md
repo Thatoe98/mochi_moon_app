@@ -16,7 +16,7 @@ Two pillars:
 1. **Self-love** — the daily ritual (mood → 3 cards → gratitude line → streak), the swipe deck of illustrated affirmation cards (each locked for a short read-aloud timer, ≥ 3 s), the gratitude and wins jar, her own cards, mood calendar, breathing, tiny kindness quests, self-love journeys, letters to future me, Mochi's room, the weekly letter and the hard-day kit.
 2. **Cosmic you** (supporting) — Western (tropical) astrology: daily sign guidance, lucky colors, things to avoid, retrograde tracker, moon phase, birth chart, and love compatibility. Birth data is asked for the first time she opens the Cosmic tab, not in onboarding.
 
-Tabs: Today, Deck, Cosmic, Me. Spec: `docs/PRD.md` §5 and §6.15 onward.
+Tabs: Today, Deck, Explore, Cosmic, Me (Explore added 2026-11-03, PRD §5). Spec: `docs/PRD.md` §5 and §6.15 onward.
 
 Mascot: a moon bunny. Tone: soft, warm, encouraging, never fatalistic.
 

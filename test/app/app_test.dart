@@ -14,6 +14,7 @@ import 'package:mochi_moon/features/cosmic/today/application/cosmic_today_provid
 import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
+import 'package:mochi_moon/features/explore/application/tips_providers.dart';
 import 'package:mochi_moon/features/gratitude/application/gratitude_providers.dart';
 import 'package:mochi_moon/features/journal/application/journal_providers.dart';
 import 'package:mochi_moon/features/journeys/application/journey_providers.dart';
@@ -38,6 +39,7 @@ import '../features/cosmic/retrograde/support/periods.dart';
 import '../features/cosmic/today/support/fake_thai_colors_setting.dart';
 import '../features/custom_cards/support/fake_own_cards.dart';
 import '../features/deck/support/fake_deck_repository.dart';
+import '../features/explore/support/fake_tips_repository.dart';
 import '../features/gratitude/support/fake_gratitude.dart';
 import '../features/journal/support/fake_journal_repository.dart';
 import '../features/journeys/support/fake_journey.dart';
@@ -71,6 +73,7 @@ Widget _app({
 }) => ProviderScope(
   overrides: [
     initialOnboardingCompleteProvider.overrideWithValue(onboarded),
+    tipsRepositoryProvider.overrideWithValue(FakeTipsRepository()),
     onboardingRepositoryProvider.overrideWithValue(
       FakeOnboardingRepository(complete: onboarded),
     ),
@@ -221,12 +224,14 @@ void main() {
     expect(find.text('I am enough.'), findsOneWidget);
   });
 
-  testWidgets('has four tabs: Today, Deck, Cosmic and Me', (tester) async {
+  testWidgets('has five tabs: Today, Deck, Explore, Cosmic and Me', (
+    tester,
+  ) async {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
 
     final bar = find.byType(NavigationBar);
-    for (final label in ['Today', 'Deck', 'Cosmic', 'Me']) {
+    for (final label in ['Today', 'Deck', 'Explore', 'Cosmic', 'Me']) {
       expect(
         find.descendant(of: bar, matching: find.text(label)),
         findsOneWidget,
@@ -268,7 +273,7 @@ void main() {
     expect(find.text('Nothing here yet'), findsOneWidget);
   });
 
-  testWidgets('bottom tabs navigate between Deck, Cosmic and Me', (
+  testWidgets('bottom tabs navigate between Explore, Cosmic and Me', (
     tester,
   ) async {
     await tester.pumpWidget(_app());
@@ -278,18 +283,24 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Unlock your cosmic side'), findsOneWidget);
 
-    await tester.tap(find.text('Me'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
     expect(find.text('Your journal'), findsOneWidget);
+
+    await tester.tap(find.text('Me'));
+    await tester.pumpAndSettle();
+    expect(find.text('Edit profile'), findsOneWidget);
   });
 
   testWidgets('Me opens the journal', (tester) async {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Me'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Your journal'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Let's go"));
     await tester.pumpAndSettle();
 
     expect(find.text('Nothing saved yet'), findsOneWidget);
@@ -299,9 +310,12 @@ void main() {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Me'));
+    await tester.tap(find.text('Explore'));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Partners'));
     await tester.tap(find.text('Partners'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text("Let's go"));
     await tester.pumpAndSettle();
 
     expect(find.text('No partners yet'), findsOneWidget);

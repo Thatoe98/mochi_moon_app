@@ -31,6 +31,11 @@ class ShellScaffold extends StatelessWidget {
             label: l10n.tabDeck,
           ),
           NavigationDestination(
+            icon: const Icon(Icons.grid_view_outlined),
+            selectedIcon: const Icon(Icons.grid_view_rounded),
+            label: l10n.tabExplore,
+          ),
+          NavigationDestination(
             icon: const Icon(Icons.nightlight_outlined),
             selectedIcon: const Icon(Icons.nightlight),
             label: l10n.tabCosmic,

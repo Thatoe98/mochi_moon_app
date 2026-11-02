@@ -7,6 +7,7 @@ import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/utils/url_opener.dart';
+import 'package:mochi_moon/core/widgets/section_header.dart';
 import 'package:mochi_moon/features/auth/presentation/delete_account_section.dart';
 import 'package:mochi_moon/features/cosmic/today/presentation/thai_colors_section.dart';
 import 'package:mochi_moon/features/me/presentation/widget_theme_section.dart';
@@ -17,8 +18,7 @@ import 'package:mochi_moon/features/settings/presentation/announcements_section.
 import 'package:mochi_moon/features/settings/presentation/reduce_motion_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reminder_section.dart';
 
-/// Hub for the journal today; profile, premium and settings join it later
-/// (PRD M2/M4).
+/// Profile, Premium and settings. The features live on the Explore tab.
 class MeScreen extends ConsumerWidget {
   const MeScreen({super.key});
 
@@ -30,138 +30,93 @@ class MeScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.mePlaceholderTitle)),
       body: ListView(
         children: [
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.workspace_premium_rounded),
-            title: Text(l10n.mePremiumTitle),
-            subtitle: Text(
-              premium
-                  ? l10n.mePremiumSubtitleActive
-                  : l10n.mePremiumSubtitleFree,
-            ),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () async {
-              if (!premium) {
-                unawaited(context.push('${AppRoutes.paywall}?source=me'));
-                return;
-              }
-              final messenger = ScaffoldMessenger.of(context);
-              final opened = await ref.read(urlOpenerProvider)(
-                manageSubscriptionUrl,
-              );
-              if (!opened) {
-                messenger.showSnackBar(
-                  SnackBar(content: Text(l10n.paywallManageFailed)),
-                );
-              }
-            },
+          _Group(
+            children: [
+              ListTile(
+                minTileHeight: AppSpacing.minTouchTarget,
+                leading: const Icon(Icons.workspace_premium_rounded),
+                title: Text(l10n.mePremiumTitle),
+                subtitle: Text(
+                  premium
+                      ? l10n.mePremiumSubtitleActive
+                      : l10n.mePremiumSubtitleFree,
+                ),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () async {
+                  if (!premium) {
+                    unawaited(context.push('${AppRoutes.paywall}?source=me'));
+                    return;
+                  }
+                  final messenger = ScaffoldMessenger.of(context);
+                  final opened = await ref.read(urlOpenerProvider)(
+                    manageSubscriptionUrl,
+                  );
+                  if (!opened) {
+                    messenger.showSnackBar(
+                      SnackBar(content: Text(l10n.paywallManageFailed)),
+                    );
+                  }
+                },
+              ),
+            ],
           ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.person_rounded),
-            title: Text(l10n.meProfileTitle),
-            subtitle: Text(l10n.meProfileSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.profileEdit),
+          SectionHeader(l10n.meSectionYou),
+          _Group(
+            children: [
+              ListTile(
+                minTileHeight: AppSpacing.minTouchTarget,
+                leading: const Icon(Icons.person_rounded),
+                title: Text(l10n.meProfileTitle),
+                subtitle: Text(l10n.meProfileSubtitle),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => context.push(AppRoutes.profileEdit),
+              ),
+              ListTile(
+                minTileHeight: AppSpacing.minTouchTarget,
+                leading: const Icon(Icons.lightbulb_rounded),
+                title: Text(l10n.tourTitle),
+                subtitle: Text(l10n.tourMeSubtitle),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => context.push(AppRoutes.tour),
+              ),
+              ListTile(
+                minTileHeight: AppSpacing.minTouchTarget,
+                leading: const Icon(Icons.info_rounded),
+                title: Text(l10n.aboutTitle),
+                subtitle: Text(l10n.meAboutSubtitle),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () => context.push(AppRoutes.about),
+              ),
+            ],
           ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.favorite_rounded),
-            title: Text(l10n.journalTitle),
-            subtitle: Text(l10n.meJournalSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.journal),
+          SectionHeader(l10n.meSectionLook),
+          const _Group(
+            children: [
+              ReminderSection(),
+              ThaiColorsSection(),
+              WidgetThemeSection(),
+              ReduceMotionSection(),
+            ],
           ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.mail_rounded),
-            title: Text(l10n.lettersTitle),
-            subtitle: Text(l10n.lettersMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.letters),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.auto_awesome_rounded),
-            title: Text(l10n.recapTitle),
-            subtitle: Text(l10n.recapMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.recap),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.cottage_rounded),
-            title: Text(l10n.mascotRoomTitle),
-            subtitle: Text(l10n.mascotRoomMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.mascotRoom),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.route_rounded),
-            title: Text(l10n.journeysTitle),
-            subtitle: Text(l10n.journeysMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.journeys),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.local_florist_rounded),
-            title: Text(l10n.gratitudeTitle),
-            subtitle: Text(l10n.gratitudeMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.gratitude),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.edit_note_rounded),
-            title: Text(l10n.ownCardsTitle),
-            subtitle: Text(l10n.ownCardsMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.ownCards),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.self_improvement_rounded),
-            title: Text(l10n.breatheTitle),
-            subtitle: Text(l10n.breatheMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.breathe),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.mood_rounded),
-            title: Text(l10n.moodScreenTitle),
-            subtitle: Text(l10n.moodMeSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.mood),
-          ),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.people_alt_rounded),
-            title: Text(l10n.partnersTitle),
-            subtitle: Text(l10n.mePartnersSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.partners),
-          ),
-          const ReminderSection(),
-          const ThaiColorsSection(),
-          const WidgetThemeSection(),
-          const ReduceMotionSection(),
-          const AnnouncementsSection(),
-          const AnalyticsSection(),
-          ListTile(
-            minTileHeight: AppSpacing.minTouchTarget,
-            leading: const Icon(Icons.info_rounded),
-            title: Text(l10n.aboutTitle),
-            subtitle: Text(l10n.meAboutSubtitle),
-            trailing: const Icon(Icons.chevron_right_rounded),
-            onTap: () => context.push(AppRoutes.about),
-          ),
-          const Divider(),
+          SectionHeader(l10n.meSectionPrivacy),
+          const _Group(children: [AnnouncementsSection(), AnalyticsSection()]),
           const DeleteAccountSection(),
         ],
       ),
     );
   }
+}
+
+/// A rounded card holding a few related rows.
+class _Group extends StatelessWidget {
+  const _Group({required this.children});
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) => Card(
+    margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+    clipBehavior: Clip.antiAlias,
+    child: Column(children: children),
+  );
 }

@@ -9,6 +9,8 @@ import 'package:mochi_moon/features/cosmic/retrograde/presentation/retrograde_sc
 import 'package:mochi_moon/features/cosmic/unlock/presentation/unlock_screen.dart';
 import 'package:mochi_moon/features/custom_cards/presentation/own_cards_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
+import 'package:mochi_moon/features/explore/presentation/explore_screen.dart';
+import 'package:mochi_moon/features/explore/presentation/tour_screen.dart';
 import 'package:mochi_moon/features/gratitude/presentation/gratitude_screen.dart';
 import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/journal/presentation/journal_screen.dart';
@@ -42,6 +44,8 @@ part 'router.g.dart';
 abstract final class AppRoutes {
   static const today = '/today';
   static const deck = '/deck';
+  static const explore = '/explore';
+  static const tour = '/tour';
   static const cosmic = '/cosmic';
   static const retrogrades = '/cosmic/retrogrades';
   static const chart = '/cosmic/chart';
@@ -99,6 +103,10 @@ GoRouter router(Ref ref) {
         ),
       ),
       GoRoute(
+        path: AppRoutes.tour,
+        builder: (context, state) => const TourScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.welcome,
         builder: (context, state) => const WelcomeScreen(),
         routes: [
@@ -129,6 +137,14 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: AppRoutes.deck,
                 builder: (context, state) => const DeckScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.explore,
+                builder: (context, state) => const ExploreScreen(),
               ),
             ],
           ),

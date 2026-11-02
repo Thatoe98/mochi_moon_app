@@ -2476,4 +2476,148 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get paywallReportAdded =>
       'Your compatibility reading is ready to open.';
+
+  @override
+  String get tabExplore => 'Explore';
+
+  @override
+  String get exploreTitle => 'Explore Mochi';
+
+  @override
+  String get exploreGroupFeelBetter => 'Feel better';
+
+  @override
+  String get exploreGroupGrow => 'Grow';
+
+  @override
+  String get exploreGroupCollection => 'My collection';
+
+  @override
+  String get exploreGroupLove => 'Love';
+
+  @override
+  String get exploreHardDaySubtitle =>
+      'Gentle help for a heavy day, always free.';
+
+  @override
+  String get exploreShowIntro => 'Show intro';
+
+  @override
+  String get exploreIntroGo => 'Let\'s go';
+
+  @override
+  String get exploreIntroBreathe =>
+      'Slow, gentle breaths with Mochi. Follow the circle as it grows and shrinks. One calm minute is plenty.';
+
+  @override
+  String get exploreIntroMood =>
+      'Tap how you feel today and your calendar fills with color. Any patterns are found only on your phone.';
+
+  @override
+  String get exploreIntroGratitude =>
+      'Write one small good thing. Your jar fills up, and it is only ever yours.';
+
+  @override
+  String get exploreIntroJourneys =>
+      'Seven or fourteen days of one tiny step a day. Confidence is free to begin.';
+
+  @override
+  String get exploreIntroOwnCards =>
+      'Write affirmations in your own words. Mochi mixes them into your deck, and only you see them.';
+
+  @override
+  String get exploreIntroLetters =>
+      'Write a letter to future you. It stays sealed until the day you choose.';
+
+  @override
+  String get exploreIntroJournal =>
+      'Every card you mark as This is me lands here, so you can come back to the words that fit.';
+
+  @override
+  String get exploreIntroMascotRoom =>
+      'Dress Mochi and decorate the cozy room with the treats you earn.';
+
+  @override
+  String get exploreIntroRecap =>
+      'A cute look back at your month. Share it if you want to, or keep it just for you.';
+
+  @override
+  String get exploreIntroPartners =>
+      'See how Western zodiac signs fit together. Just for fun and self-reflection.';
+
+  @override
+  String get quickBreathe => 'Breathe';
+
+  @override
+  String get quickGratitude => 'Gratitude';
+
+  @override
+  String get quickMood => 'Mood';
+
+  @override
+  String get quickHardDay => 'Hard day';
+
+  @override
+  String get tourPromptTitle => 'New here?';
+
+  @override
+  String get tourPromptBody => 'Take a 30-second tour of how Mochi works.';
+
+  @override
+  String get tourPromptStart => 'Show me';
+
+  @override
+  String get tourPromptDismiss => 'Not now';
+
+  @override
+  String get tourTitle => 'How Mochi works';
+
+  @override
+  String get tourMeSubtitle => 'A quick tour of the app';
+
+  @override
+  String get tourSkip => 'Skip';
+
+  @override
+  String get tourNext => 'Next';
+
+  @override
+  String get tourDone => 'Got it';
+
+  @override
+  String get tourPage1Title => 'Your 2-minute ritual';
+
+  @override
+  String get tourPage1Body =>
+      'Each day: pick your mood, read three cards, and write one grateful line. That is the whole ritual, and it grows your streak.';
+
+  @override
+  String get tourPage2Title => 'Cards made for you';
+
+  @override
+  String get tourPage2Body =>
+      'Hold each card for a few calm seconds, then tap This is me on the ones that fit. They are saved in your journal.';
+
+  @override
+  String get tourPage3Title => 'Explore Mochi\'s world';
+
+  @override
+  String get tourPage3Body =>
+      'Breathing, mood, journeys, letters and Mochi\'s room all live in the Explore tab. A Hard day button is always one tap away on Today.';
+
+  @override
+  String get tourPage4Title => 'A little cosmic sparkle';
+
+  @override
+  String get tourPage4Body =>
+      'The Cosmic tab adds your sign\'s daily note, the moon and your birth chart. For fun and self-reflection.';
+
+  @override
+  String get meSectionYou => 'You';
+
+  @override
+  String get meSectionLook => 'Reminders and look';
+
+  @override
+  String get meSectionPrivacy => 'Notifications and privacy';
 }

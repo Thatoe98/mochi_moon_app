@@ -4213,6 +4213,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your compatibility reading is ready to open.'**
   String get paywallReportAdded;
+
+  /// Bottom tab: the grid of all self-love features.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get tabExplore;
+
+  /// Explore tab title.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Mochi'**
+  String get exploreTitle;
+
+  /// Explore group title.
+  ///
+  /// In en, this message translates to:
+  /// **'Feel better'**
+  String get exploreGroupFeelBetter;
+
+  /// Explore group title.
+  ///
+  /// In en, this message translates to:
+  /// **'Grow'**
+  String get exploreGroupGrow;
+
+  /// Explore group title.
+  ///
+  /// In en, this message translates to:
+  /// **'My collection'**
+  String get exploreGroupCollection;
+
+  /// Explore group title.
+  ///
+  /// In en, this message translates to:
+  /// **'Love'**
+  String get exploreGroupLove;
+
+  /// Explore tile subtitle for the hard-day kit.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle help for a heavy day, always free.'**
+  String get exploreHardDaySubtitle;
+
+  /// Screen reader action on an Explore tile that shows its intro again.
+  ///
+  /// In en, this message translates to:
+  /// **'Show intro'**
+  String get exploreShowIntro;
+
+  /// Button on a feature intro sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s go'**
+  String get exploreIntroGo;
+
+  /// Intro sheet body for Breathe.
+  ///
+  /// In en, this message translates to:
+  /// **'Slow, gentle breaths with Mochi. Follow the circle as it grows and shrinks. One calm minute is plenty.'**
+  String get exploreIntroBreathe;
+
+  /// Intro sheet body for Mood.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap how you feel today and your calendar fills with color. Any patterns are found only on your phone.'**
+  String get exploreIntroMood;
+
+  /// Intro sheet body for Gratitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Write one small good thing. Your jar fills up, and it is only ever yours.'**
+  String get exploreIntroGratitude;
+
+  /// Intro sheet body for Journeys.
+  ///
+  /// In en, this message translates to:
+  /// **'Seven or fourteen days of one tiny step a day. Confidence is free to begin.'**
+  String get exploreIntroJourneys;
+
+  /// Intro sheet body for Own cards.
+  ///
+  /// In en, this message translates to:
+  /// **'Write affirmations in your own words. Mochi mixes them into your deck, and only you see them.'**
+  String get exploreIntroOwnCards;
+
+  /// Intro sheet body for Letters.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a letter to future you. It stays sealed until the day you choose.'**
+  String get exploreIntroLetters;
+
+  /// Intro sheet body for the Journal.
+  ///
+  /// In en, this message translates to:
+  /// **'Every card you mark as This is me lands here, so you can come back to the words that fit.'**
+  String get exploreIntroJournal;
+
+  /// Intro sheet body for Mochi's room.
+  ///
+  /// In en, this message translates to:
+  /// **'Dress Mochi and decorate the cozy room with the treats you earn.'**
+  String get exploreIntroMascotRoom;
+
+  /// Intro sheet body for the monthly recap.
+  ///
+  /// In en, this message translates to:
+  /// **'A cute look back at your month. Share it if you want to, or keep it just for you.'**
+  String get exploreIntroRecap;
+
+  /// Intro sheet body for Partners.
+  ///
+  /// In en, this message translates to:
+  /// **'See how Western zodiac signs fit together. Just for fun and self-reflection.'**
+  String get exploreIntroPartners;
+
+  /// Today quick tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathe'**
+  String get quickBreathe;
+
+  /// Today quick tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Gratitude'**
+  String get quickGratitude;
+
+  /// Today quick tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood'**
+  String get quickMood;
+
+  /// Today quick tile label.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard day'**
+  String get quickHardDay;
+
+  /// Today card that offers the tour.
+  ///
+  /// In en, this message translates to:
+  /// **'New here?'**
+  String get tourPromptTitle;
+
+  /// Today tour prompt body.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a 30-second tour of how Mochi works.'**
+  String get tourPromptBody;
+
+  /// Button on the tour prompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Show me'**
+  String get tourPromptStart;
+
+  /// Dismiss on the tour prompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get tourPromptDismiss;
+
+  /// Tour screen title and the Me tile.
+  ///
+  /// In en, this message translates to:
+  /// **'How Mochi works'**
+  String get tourTitle;
+
+  /// Me tile subtitle for replaying the tour.
+  ///
+  /// In en, this message translates to:
+  /// **'A quick tour of the app'**
+  String get tourMeSubtitle;
+
+  /// Skip the tour.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tourSkip;
+
+  /// Next tour page.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tourNext;
+
+  /// Finish the tour.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get tourDone;
+
+  /// Tour page 1 title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your 2-minute ritual'**
+  String get tourPage1Title;
+
+  /// Tour page 1 body.
+  ///
+  /// In en, this message translates to:
+  /// **'Each day: pick your mood, read three cards, and write one grateful line. That is the whole ritual, and it grows your streak.'**
+  String get tourPage1Body;
+
+  /// Tour page 2 title.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards made for you'**
+  String get tourPage2Title;
+
+  /// Tour page 2 body.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold each card for a few calm seconds, then tap This is me on the ones that fit. They are saved in your journal.'**
+  String get tourPage2Body;
+
+  /// Tour page 3 title.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Mochi\'s world'**
+  String get tourPage3Title;
+
+  /// Tour page 3 body.
+  ///
+  /// In en, this message translates to:
+  /// **'Breathing, mood, journeys, letters and Mochi\'s room all live in the Explore tab. A Hard day button is always one tap away on Today.'**
+  String get tourPage3Body;
+
+  /// Tour page 4 title.
+  ///
+  /// In en, this message translates to:
+  /// **'A little cosmic sparkle'**
+  String get tourPage4Title;
+
+  /// Tour page 4 body.
+  ///
+  /// In en, this message translates to:
+  /// **'The Cosmic tab adds your sign\'s daily note, the moon and your birth chart. For fun and self-reflection.'**
+  String get tourPage4Body;
+
+  /// Me tab group title.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get meSectionYou;
+
+  /// Me tab group title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders and look'**
+  String get meSectionLook;
+
+  /// Me tab group title.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications and privacy'**
+  String get meSectionPrivacy;
 }
 
 class _AppLocalizationsDelegate
