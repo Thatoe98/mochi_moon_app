@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/network/readings_api.dart';
@@ -69,16 +71,30 @@ class _FailureView extends StatelessWidget {
         l10n.stateErrorTitle,
         l10n.reportUnavailableBody,
       ),
+      ReadingsApiException(isPremiumRequired: true) => (
+        l10n.reportPremiumTitle,
+        l10n.reportPremiumBody,
+      ),
       ReadingsApiException(status: 429) => (
         l10n.stateErrorTitle,
         l10n.reportBusyBody,
       ),
       _ => (l10n.stateErrorTitle, l10n.stateErrorBody),
     };
+    final premiumRequired = switch (error) {
+      ReadingsApiException(isPremiumRequired: true) => true,
+      _ => false,
+    };
     return EmptyState(
       title: title,
       body: body,
-      action: error is UnavailableFailure
+      action: premiumRequired
+          ? FilledButton(
+              onPressed: () =>
+                  context.push('${AppRoutes.paywall}?source=server_402'),
+              child: Text(l10n.reportPremiumAction),
+            )
+          : error is UnavailableFailure
           ? null
           : FilledButton(onPressed: onRetry, child: Text(l10n.stateRetry)),
     );

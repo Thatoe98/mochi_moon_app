@@ -965,6 +965,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your full reading needs a connection the first time. Once it is written, it is saved on your phone.';
 
   @override
+  String get reportPremiumTitle => 'Your full reading is part of Premium';
+
+  @override
+  String get reportPremiumBody =>
+      'Premium opens the long, gentle reading of your chart. Your free chart stays just as it is.';
+
+  @override
+  String get reportPremiumAction => 'See Premium';
+
+  @override
   String get reportUnavailableBody =>
       'The full reading is not available in this version yet.';
 

@@ -1700,6 +1700,24 @@ abstract class AppLocalizations {
   /// **'Your full reading needs a connection the first time. Once it is written, it is saved on your phone.'**
   String get reportOfflineBody;
 
+  /// No description provided for @reportPremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your full reading is part of Premium'**
+  String get reportPremiumTitle;
+
+  /// No description provided for @reportPremiumBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium opens the long, gentle reading of your chart. Your free chart stays just as it is.'**
+  String get reportPremiumBody;
+
+  /// No description provided for @reportPremiumAction.
+  ///
+  /// In en, this message translates to:
+  /// **'See Premium'**
+  String get reportPremiumAction;
+
   /// No description provided for @reportUnavailableBody.
   ///
   /// In en, this message translates to:

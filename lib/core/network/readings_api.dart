@@ -12,6 +12,9 @@ class ReadingsApiException implements Exception {
 
   bool get isNotFound => status == 404;
 
+  /// The server wants Premium for this call (PRD §8.2, M4b).
+  bool get isPremiumRequired => status == 402 && code == 'premium_required';
+
   @override
   String toString() => 'ReadingsApiException($status, $code)';
 }

@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/network/readings_api.dart';
@@ -192,6 +194,54 @@ void main() {
       expect(find.text('Try again'), button ? findsOneWidget : findsNothing);
     });
   }
+
+  testWidgets('a 402 becomes a soft invitation to Premium', (tester) async {
+    _tallView(tester);
+    final opened = <String>[];
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const NatalReportScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.paywall,
+          builder: (context, state) {
+            opened.add(state.uri.queryParameters['source']!);
+            return const Scaffold(body: Text('paywall'));
+          },
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          natalChartProvider.overrideWith((ref) async => _chart),
+          natalReportRepositoryProvider.overrideWithValue(repository),
+        ],
+        child: MaterialApp.router(
+          theme: AppTheme.light,
+          routerConfig: router,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
+      ),
+    );
+    await _listen(tester);
+
+    repository.controller.addError(
+      const ReadingsApiException(status: 402, code: 'premium_required'),
+    );
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('Your full reading is part of Premium'), findsOneWidget);
+    expect(find.text('Try again'), findsNothing);
+    await tester.tap(find.text('See Premium'));
+    await tester.pumpAndSettle();
+    expect(opened, ['server_402']);
+  });
 
   testWidgets('asks for a birth date when there is none', (tester) async {
     await tester.pumpWidget(_host(repository, noBirthDate: true));

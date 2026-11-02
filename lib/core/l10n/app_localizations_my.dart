@@ -973,6 +973,16 @@ class AppLocalizationsMy extends AppLocalizations {
       'အပြည့်အစုံဖတ်ရှုချက်ကို ပထမဆုံးအကြိမ် ရယူဖို့ အင်တာနက်ချိတ်ဆက်မှု လိုပါတယ်။ ရေးပြီးသွားရင် ဖုန်းထဲမှာ သိမ်းထားပေးမှာပါ။';
 
   @override
+  String get reportPremiumTitle => 'Your full reading is part of Premium';
+
+  @override
+  String get reportPremiumBody =>
+      'Premium opens the long, gentle reading of your chart. Your free chart stays just as it is.';
+
+  @override
+  String get reportPremiumAction => 'See Premium';
+
+  @override
   String get reportUnavailableBody =>
       'ဒီဗားရှင်းမှာ အပြည့်အစုံဖတ်ရှုချက်ကို မရနိုင်သေးပါဘူး။';
 

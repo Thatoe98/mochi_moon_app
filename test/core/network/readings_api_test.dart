@@ -70,6 +70,23 @@ void main() {
     );
   });
 
+  test('recognizes a 402 premium_required answer', () async {
+    final (:api, adapter: _) = _api(
+      handler: (_) async => errorResponse(402, 'premium_required'),
+    );
+
+    await expectLater(
+      api.postJson('letters/weekly', {}),
+      throwsA(
+        isA<ReadingsApiException>().having(
+          (e) => e.isPremiumRequired,
+          'isPremiumRequired',
+          isTrue,
+        ),
+      ),
+    );
+  });
+
   test('an error answer without the usual body still has its status', () async {
     final (:api, adapter: _) = _api(
       handler: (_) async => ResponseBody.fromString('oops', 502),
