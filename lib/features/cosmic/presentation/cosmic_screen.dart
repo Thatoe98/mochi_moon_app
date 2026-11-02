@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
 import 'package:mochi_moon/core/theme/app_spacing.dart';
 import 'package:mochi_moon/core/utils/english_dates.dart';
+import 'package:mochi_moon/core/widgets/premium_preview.dart';
 import 'package:mochi_moon/core/widgets/state_views.dart';
 import 'package:mochi_moon/features/cosmic/chart/presentation/birth_chart_button.dart';
 import 'package:mochi_moon/features/cosmic/moon/presentation/moon_card.dart';
@@ -34,8 +39,17 @@ class CosmicScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.cosmicTitle),
         actions: [
-          if (shown != null && ref.watch(hasPremiumProvider))
-            SignPickerButton(shown: shown),
+          if (shown != null)
+            if (ref.watch(hasPremiumProvider))
+              SignPickerButton(shown: shown)
+            else
+              IconButton(
+                tooltip: l10n.cosmicSignPickerLockedLabel,
+                icon: const Icon(Icons.lock_rounded),
+                onPressed: () => unawaited(
+                  context.push('${AppRoutes.paywall}?source=sign_chooser'),
+                ),
+              ),
           const SizedBox(width: AppSpacing.sm),
         ],
       ),
@@ -84,6 +98,7 @@ class _TodayView extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final reading = today.reading;
+    final premium = ref.watch(hasPremiumProvider);
     final showThai = ref.watch(showThaiColorsProvider).value ?? false;
     final date = englishDates.formatMediumDate(today.date);
 
@@ -114,6 +129,7 @@ class _TodayView extends ConsumerWidget {
         ),
         _Block(
           title: l10n.cosmicLoveTitle,
+          locked: !premium,
           children: [Text(reading.love, style: theme.textTheme.bodyLarge)],
         ),
         _Block(
@@ -123,20 +139,26 @@ class _TodayView extends ConsumerWidget {
               name: today.luckyColors.sign.name,
               hex: today.luckyColors.sign.hex,
             ),
-            ColorSwatchTile(
-              name: today.luckyColors.moon.name,
-              hex: today.luckyColors.moon.hex,
+            _lock(
+              locked: !premium,
+              label: l10n.cosmicLuckyColorsTitle,
+              child: ColorSwatchTile(
+                name: today.luckyColors.moon.name,
+                hex: today.luckyColors.moon.hex,
+              ),
             ),
           ],
         ),
         _Block(
           title: l10n.cosmicLuckyNumberTitle,
+          locked: !premium,
           children: [
             Text('${today.luckyNumber}', style: theme.textTheme.headlineMedium),
           ],
         ),
         _Block(
           title: l10n.cosmicAvoidTitle,
+          locked: !premium,
           children: [
             for (final item in reading.avoid)
               Padding(
@@ -177,9 +199,12 @@ class _TodayView extends ConsumerWidget {
 
 /// A card with an optional heading.
 class _Block extends StatelessWidget {
-  const _Block({required this.children, this.title});
+  const _Block({required this.children, this.title, this.locked = false});
 
   final String? title;
+
+  /// Free users see the content as a soft Premium preview (PRD §6.7).
+  final bool locked;
   final List<Widget> children;
 
   @override
@@ -201,7 +226,17 @@ class _Block extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
               ],
-              ...children,
+              if (locked)
+                _lock(
+                  locked: true,
+                  label: title ?? '',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: children,
+                  ),
+                )
+              else
+                ...children,
             ],
           ),
         ),
@@ -209,3 +244,16 @@ class _Block extends StatelessWidget {
     );
   }
 }
+
+/// Wraps [child] in the soft Premium lock when [locked].
+Widget _lock({
+  required bool locked,
+  required String label,
+  required Widget child,
+}) => locked
+    ? PremiumPreview(
+        source: 'cosmic_today',
+        semanticLabel: label,
+        child: IgnorePointer(child: child),
+      )
+    : child;

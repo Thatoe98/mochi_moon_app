@@ -1610,6 +1610,12 @@ abstract class AppLocalizations {
   /// **'Choose a sign to read'**
   String get cosmicSignPickerLabel;
 
+  /// No description provided for @cosmicSignPickerLockedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Read other signs, part of Premium'**
+  String get cosmicSignPickerLockedLabel;
+
   /// No description provided for @cosmicSignPickerYou.
   ///
   /// In en, this message translates to:

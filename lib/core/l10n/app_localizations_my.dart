@@ -920,6 +920,9 @@ class AppLocalizationsMy extends AppLocalizations {
   String get cosmicSignPickerLabel => 'ဖတ်ရှုဖို့ ရာသီခွင်တစ်ခု ရွေးပါ';
 
   @override
+  String get cosmicSignPickerLockedLabel => 'Read other signs, part of Premium';
+
+  @override
   String cosmicSignPickerYou(String sign) {
     return '$sign (ကိုယ်တိုင်)';
   }

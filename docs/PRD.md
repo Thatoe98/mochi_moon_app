@@ -1008,7 +1008,7 @@ PRD edits are done. The app is not launched, so no grandfathering is needed. Ite
 - [x] 6. Letters: one sealed letter at a time free; tests. *(done: `sealedLettersLeft`, `LetterRejection.limitReached`, a gentle dialog with `letters` source; opened letters free the slot.)*
 - [x] 7. Quests: the swap is Premium; tests. *(done: free users see "Try another" with a lock and it opens `quest_swap`; `swapQuest` does nothing without Premium.)*
 - [x] 8. Mood calendar: the current and previous month free, older months soft preview; the recap is unaffected; tests. — *Done: `MoodCalendar.lockedBefore` shows older months inside `PremiumPreview` (`mood_history`), days not tappable, nothing deleted.*
-- [ ] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests.
+- [x] 9. Cosmic Today: second color, love line, lucky number and avoid behind `PremiumPreview`; the ritual reward card unchanged; tests. — *Done: love, second color, lucky number and avoid sit behind `PremiumPreview` (`cosmic_today`); free users get a locked sign-chooser icon (`sign_chooser`). The personal text is not built yet (item 17).*
 - [ ] 10. Chart: no aspect lines for free users, a signs-only list, and the new Premium aspects list with degrees and houses; tests.
 - [ ] 11. Compatibility: sub-scores and aspects behind preview; partner limit source; tests.
 - [ ] 12. Retrograde alerts: Venus and Mars are Premium (locked switches, nothing scheduled for free users); tests.

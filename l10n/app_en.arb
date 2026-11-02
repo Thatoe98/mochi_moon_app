@@ -297,6 +297,7 @@
   "accountDeleteFinalBody": "This is your last chance. Everything will be erased for good and Mochi Moon will start over as if you had just installed it.",
   "accountDeleteFinalAction": "Yes, erase everything",
   "cosmicSignPickerLabel": "Choose a sign to read",
+  "cosmicSignPickerLockedLabel": "Read other signs, part of Premium",
   "cosmicSignPickerYou": "{sign} (you)",
   "@cosmicSignPickerYou": {
     "placeholders": { "sign": { "type": "String" } }

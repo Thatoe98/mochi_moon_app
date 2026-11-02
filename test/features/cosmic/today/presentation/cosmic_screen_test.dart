@@ -149,6 +149,37 @@ void main() {
     expect(find.text('For entertainment and self-reflection'), findsOneWidget);
   });
 
+  testWidgets('free: depth is a soft preview, the reading stays open', (
+    tester,
+  ) async {
+    tester.view
+      ..physicalSize = const Size(800, 3000)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(_host(profile: _scorpio, premium: false));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Your depth is a superpower'), findsOneWidget);
+    expect(find.text("Today's energy"), findsOneWidget);
+    expect(find.text('Berry'), findsOneWidget);
+    // Love, second lucky color, lucky number and things to avoid.
+    expect(find.text('Premium'), findsNWidgets(4));
+    // The titles stay, so nothing disappears.
+    expect(find.text('Love'), findsOneWidget);
+    expect(find.text('Things to avoid'), findsOneWidget);
+  });
+
+  testWidgets('Premium: no locks on the page', (tester) async {
+    tester.view
+      ..physicalSize = const Size(800, 3000)
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(_host(profile: _scorpio));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Premium'), findsNothing);
+  });
+
   testWidgets('shows the Moon card with a birth date', (tester) async {
     await tester.pumpWidget(_host(profile: _scorpio));
     await tester.pumpAndSettle();
@@ -345,6 +376,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byTooltip('Choose a sign to read'), findsNothing);
+      expect(find.byTooltip('Read other signs, part of Premium'), findsOne);
       expect(artLabel(tester), contains('Scorpio'));
     });
 

@@ -912,6 +912,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cosmicSignPickerLabel => 'Choose a sign to read';
 
   @override
+  String get cosmicSignPickerLockedLabel => 'Read other signs, part of Premium';
+
+  @override
   String cosmicSignPickerYou(String sign) {
     return '$sign (you)';
   }
