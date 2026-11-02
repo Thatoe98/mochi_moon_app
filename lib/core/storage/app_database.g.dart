@@ -866,8 +866,18 @@ class $DeckHistoryTable extends DeckHistory
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   @override
-  List<GeneratedColumn> get $columns => [id, quoteId, action, at];
+  late final GeneratedColumn<String> source = GeneratedColumn<String>(
+    'source',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('deck'),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, quoteId, action, at, source];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -904,6 +914,12 @@ class $DeckHistoryTable extends DeckHistory
     } else if (isInserting) {
       context.missing(_atMeta);
     }
+    if (data.containsKey('source')) {
+      context.handle(
+        _sourceMeta,
+        source.isAcceptableOrUnknown(data['source']!, _sourceMeta),
+      );
+    }
     return context;
   }
 
@@ -929,6 +945,10 @@ class $DeckHistoryTable extends DeckHistory
         DriftSqlType.dateTime,
         data['${effectivePrefix}at'],
       )!,
+      source: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source'],
+      )!,
     );
   }
 
@@ -943,11 +963,15 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
   final String quoteId;
   final String action;
   final DateTime at;
+
+  /// Where the card was read (`DeckSource.name`); see PRD §6.2.
+  final String source;
   const DeckHistoryData({
     required this.id,
     required this.quoteId,
     required this.action,
     required this.at,
+    required this.source,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -956,6 +980,7 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
     map['quote_id'] = Variable<String>(quoteId);
     map['action'] = Variable<String>(action);
     map['at'] = Variable<DateTime>(at);
+    map['source'] = Variable<String>(source);
     return map;
   }
 
@@ -965,6 +990,7 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
       quoteId: Value(quoteId),
       action: Value(action),
       at: Value(at),
+      source: Value(source),
     );
   }
 
@@ -978,6 +1004,7 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
       quoteId: serializer.fromJson<String>(json['quoteId']),
       action: serializer.fromJson<String>(json['action']),
       at: serializer.fromJson<DateTime>(json['at']),
+      source: serializer.fromJson<String>(json['source']),
     );
   }
   @override
@@ -988,6 +1015,7 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
       'quoteId': serializer.toJson<String>(quoteId),
       'action': serializer.toJson<String>(action),
       'at': serializer.toJson<DateTime>(at),
+      'source': serializer.toJson<String>(source),
     };
   }
 
@@ -996,11 +1024,13 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
     String? quoteId,
     String? action,
     DateTime? at,
+    String? source,
   }) => DeckHistoryData(
     id: id ?? this.id,
     quoteId: quoteId ?? this.quoteId,
     action: action ?? this.action,
     at: at ?? this.at,
+    source: source ?? this.source,
   );
   DeckHistoryData copyWithCompanion(DeckHistoryCompanion data) {
     return DeckHistoryData(
@@ -1008,6 +1038,7 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
       quoteId: data.quoteId.present ? data.quoteId.value : this.quoteId,
       action: data.action.present ? data.action.value : this.action,
       at: data.at.present ? data.at.value : this.at,
+      source: data.source.present ? data.source.value : this.source,
     );
   }
 
@@ -1017,13 +1048,14 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
           ..write('id: $id, ')
           ..write('quoteId: $quoteId, ')
           ..write('action: $action, ')
-          ..write('at: $at')
+          ..write('at: $at, ')
+          ..write('source: $source')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, quoteId, action, at);
+  int get hashCode => Object.hash(id, quoteId, action, at, source);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1031,7 +1063,8 @@ class DeckHistoryData extends DataClass implements Insertable<DeckHistoryData> {
           other.id == this.id &&
           other.quoteId == this.quoteId &&
           other.action == this.action &&
-          other.at == this.at);
+          other.at == this.at &&
+          other.source == this.source);
 }
 
 class DeckHistoryCompanion extends UpdateCompanion<DeckHistoryData> {
@@ -1039,17 +1072,20 @@ class DeckHistoryCompanion extends UpdateCompanion<DeckHistoryData> {
   final Value<String> quoteId;
   final Value<String> action;
   final Value<DateTime> at;
+  final Value<String> source;
   const DeckHistoryCompanion({
     this.id = const Value.absent(),
     this.quoteId = const Value.absent(),
     this.action = const Value.absent(),
     this.at = const Value.absent(),
+    this.source = const Value.absent(),
   });
   DeckHistoryCompanion.insert({
     this.id = const Value.absent(),
     required String quoteId,
     required String action,
     required DateTime at,
+    this.source = const Value.absent(),
   }) : quoteId = Value(quoteId),
        action = Value(action),
        at = Value(at);
@@ -1058,12 +1094,14 @@ class DeckHistoryCompanion extends UpdateCompanion<DeckHistoryData> {
     Expression<String>? quoteId,
     Expression<String>? action,
     Expression<DateTime>? at,
+    Expression<String>? source,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (quoteId != null) 'quote_id': quoteId,
       if (action != null) 'action': action,
       if (at != null) 'at': at,
+      if (source != null) 'source': source,
     });
   }
 
@@ -1072,12 +1110,14 @@ class DeckHistoryCompanion extends UpdateCompanion<DeckHistoryData> {
     Value<String>? quoteId,
     Value<String>? action,
     Value<DateTime>? at,
+    Value<String>? source,
   }) {
     return DeckHistoryCompanion(
       id: id ?? this.id,
       quoteId: quoteId ?? this.quoteId,
       action: action ?? this.action,
       at: at ?? this.at,
+      source: source ?? this.source,
     );
   }
 
@@ -1096,6 +1136,9 @@ class DeckHistoryCompanion extends UpdateCompanion<DeckHistoryData> {
     if (at.present) {
       map['at'] = Variable<DateTime>(at.value);
     }
+    if (source.present) {
+      map['source'] = Variable<String>(source.value);
+    }
     return map;
   }
 
@@ -1105,7 +1148,8 @@ class DeckHistoryCompanion extends UpdateCompanion<DeckHistoryData> {
           ..write('id: $id, ')
           ..write('quoteId: $quoteId, ')
           ..write('action: $action, ')
-          ..write('at: $at')
+          ..write('at: $at, ')
+          ..write('source: $source')
           ..write(')'))
         .toString();
   }
@@ -5900,6 +5944,7 @@ typedef $$DeckHistoryTableCreateCompanionBuilder =
       required String quoteId,
       required String action,
       required DateTime at,
+      Value<String> source,
     });
 typedef $$DeckHistoryTableUpdateCompanionBuilder =
     DeckHistoryCompanion Function({
@@ -5907,6 +5952,7 @@ typedef $$DeckHistoryTableUpdateCompanionBuilder =
       Value<String> quoteId,
       Value<String> action,
       Value<DateTime> at,
+      Value<String> source,
     });
 
 class $$DeckHistoryTableFilterComposer
@@ -5935,6 +5981,11 @@ class $$DeckHistoryTableFilterComposer
 
   ColumnFilters<DateTime> get at => $composableBuilder(
     column: $table.at,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get source => $composableBuilder(
+    column: $table.source,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -5967,6 +6018,11 @@ class $$DeckHistoryTableOrderingComposer
     column: $table.at,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get source => $composableBuilder(
+    column: $table.source,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$DeckHistoryTableAnnotationComposer
@@ -5989,6 +6045,9 @@ class $$DeckHistoryTableAnnotationComposer
 
   GeneratedColumn<DateTime> get at =>
       $composableBuilder(column: $table.at, builder: (column) => column);
+
+  GeneratedColumn<String> get source =>
+      $composableBuilder(column: $table.source, builder: (column) => column);
 }
 
 class $$DeckHistoryTableTableManager
@@ -6026,11 +6085,13 @@ class $$DeckHistoryTableTableManager
                 Value<String> quoteId = const Value.absent(),
                 Value<String> action = const Value.absent(),
                 Value<DateTime> at = const Value.absent(),
+                Value<String> source = const Value.absent(),
               }) => DeckHistoryCompanion(
                 id: id,
                 quoteId: quoteId,
                 action: action,
                 at: at,
+                source: source,
               ),
           createCompanionCallback:
               ({
@@ -6038,11 +6099,13 @@ class $$DeckHistoryTableTableManager
                 required String quoteId,
                 required String action,
                 required DateTime at,
+                Value<String> source = const Value.absent(),
               }) => DeckHistoryCompanion.insert(
                 id: id,
                 quoteId: quoteId,
                 action: action,
                 at: at,
+                source: source,
               ),
           withReferenceMapper: (p0) => p0
               .map(

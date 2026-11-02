@@ -9,8 +9,13 @@ abstract interface class DeckRepository {
   Stream<List<DeckEvent>> watchHistory();
 
   /// Records a completed card. A [DeckAction.saved] card also lands in the
-  /// journal. Returns the new event.
-  Future<DeckEvent> record(String quoteId, DeckAction action, DateTime at);
+  /// journal. [source] says where it was read (PRD §6.2). Returns the new event.
+  Future<DeckEvent> record(
+    String quoteId,
+    DeckAction action,
+    DateTime at, {
+    DeckSource source = DeckSource.deck,
+  });
 
   /// Reverts [event], including its journal entry when it was saved.
   Future<void> undo(DeckEvent event);

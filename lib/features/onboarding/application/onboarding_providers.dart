@@ -91,6 +91,7 @@ class SampleDeck extends _$SampleDeck {
           current.cards[current.position].id,
           action,
           ref.read(clockProvider)(),
+          source: DeckSource.sample,
         );
     state = AsyncData(
       current.copyWith(position: current.position + 1, canUndo: true),

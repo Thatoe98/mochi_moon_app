@@ -197,7 +197,7 @@ final class SampleDeckProvider
   SampleDeck create() => SampleDeck();
 }
 
-String _$sampleDeckHash() => r'b1e22d32d943e055b5a054ce2b8e031620ab2330';
+String _$sampleDeckHash() => r'89a41d076d854fe06641618e9eede09fff2d7e17';
 
 /// The three cards shown before sign-in. Swipes go through the deck
 /// repository like any other, so a saved sample card is already in the journal.

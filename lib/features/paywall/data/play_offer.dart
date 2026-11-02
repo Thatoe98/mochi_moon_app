@@ -55,7 +55,8 @@ ChosenOffer? chooseOffer(List<ProductDetails> entries, {required bool trial}) {
   }
   final sorted = [...entries]
     ..sort(
-      (a, b) => (_phasesOf(a)?.length ?? 1).compareTo(_phasesOf(b)?.length ?? 1),
+      (a, b) =>
+          (_phasesOf(a)?.length ?? 1).compareTo(_phasesOf(b)?.length ?? 1),
     );
   return build(sorted.first);
 }

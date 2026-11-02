@@ -19,6 +19,7 @@
   "deckCardsLeft": "{count, plural, =1{1 card left today} other{{count} cards left today}}",
   "@deckCardsLeft": { "placeholders": { "count": { "type": "int" } } },
   "deckLimitTitle": "You're glowing ✨",
+  "deckLimitPremiumNote": "Premium keeps the deck open all day, whenever you want more.",
   "deckLimitBody": "You've finished today's cards. Come back tomorrow for more.",
   "deckActionSkip": "Next card",
   "deckActionSave": "This is me",

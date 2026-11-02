@@ -242,16 +242,22 @@ final class RandomProvider extends $FunctionalProvider<Random, Random, Random>
 
 String _$randomHash() => r'83ff04d9c2bda3b7d29c4393f76230f33f8c6839';
 
-/// Cards per day on the free plan. Premium (M4) overrides this.
+/// New cards a day from the ritual and the deck (PRD §6.2): five on the free
+/// plan, none (null) with Premium. Sample, journey-day and hard-day cards do
+/// not use it up.
 
 @ProviderFor(dailyCardLimit)
 final dailyCardLimitProvider = DailyCardLimitProvider._();
 
-/// Cards per day on the free plan. Premium (M4) overrides this.
+/// New cards a day from the ritual and the deck (PRD §6.2): five on the free
+/// plan, none (null) with Premium. Sample, journey-day and hard-day cards do
+/// not use it up.
 
-final class DailyCardLimitProvider extends $FunctionalProvider<int, int, int>
-    with $Provider<int> {
-  /// Cards per day on the free plan. Premium (M4) overrides this.
+final class DailyCardLimitProvider extends $FunctionalProvider<int?, int?, int?>
+    with $Provider<int?> {
+  /// New cards a day from the ritual and the deck (PRD §6.2): five on the free
+  /// plan, none (null) with Premium. Sample, journey-day and hard-day cards do
+  /// not use it up.
   DailyCardLimitProvider._()
     : super(
         from: null,
@@ -268,24 +274,24 @@ final class DailyCardLimitProvider extends $FunctionalProvider<int, int, int>
 
   @$internal
   @override
-  $ProviderElement<int> $createElement($ProviderPointer pointer) =>
+  $ProviderElement<int?> $createElement($ProviderPointer pointer) =>
       $ProviderElement(pointer);
 
   @override
-  int create(Ref ref) {
+  int? create(Ref ref) {
     return dailyCardLimit(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(int value) {
+  Override overrideWithValue(int? value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<int>(value),
+      providerOverride: $SyncValueProvider<int?>(value),
     );
   }
 }
 
-String _$dailyCardLimitHash() => r'9c65c58451c8b88609843282b190c106f55b6c5b';
+String _$dailyCardLimitHash() => r'f3ab5fff07f45359226f31def5eee5483f2d1e73';
 
 @ProviderFor(Deck)
 final deckProvider = DeckProvider._();
@@ -310,7 +316,7 @@ final class DeckProvider extends $AsyncNotifierProvider<Deck, DeckState> {
   Deck create() => Deck();
 }
 
-String _$deckHash() => r'63452176d94a5e11cd4a25d5b2f6667d4db91be1';
+String _$deckHash() => r'c80964e66c1106411c63f7aa4f7cf25ddce986d6';
 
 abstract class _$Deck extends $AsyncNotifier<DeckState> {
   FutureOr<DeckState> build();

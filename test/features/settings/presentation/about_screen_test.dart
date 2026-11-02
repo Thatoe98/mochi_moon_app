@@ -132,10 +132,7 @@ void main() {
     testWidgets('say so when the page cannot be opened', (tester) async {
       tall(tester);
       await tester.pumpWidget(
-        _app(
-          baseUrl: 'https://api.example.com',
-          opener: (_) async => false,
-        ),
+        _app(baseUrl: 'https://api.example.com', opener: (_) async => false),
       );
       await tester.pumpAndSettle();
 

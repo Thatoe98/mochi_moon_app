@@ -95,7 +95,12 @@ class RitualController extends _$RitualController {
     final quote = current.cards[current.position];
     await ref
         .read(deckRepositoryProvider)
-        .record(quote.id, action, ref.read(clockProvider)());
+        .record(
+          quote.id,
+          action,
+          ref.read(clockProvider)(),
+          source: DeckSource.ritual,
+        );
     // The deck deals again without the card, with the new count and streak.
     ref.invalidate(deckProvider);
     final position = current.position + 1;

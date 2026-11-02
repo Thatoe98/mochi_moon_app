@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
@@ -16,6 +18,7 @@ import 'package:mochi_moon/features/hard_day/presentation/hard_day_screen.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
 import 'package:mochi_moon/features/mood/presentation/mood_chips.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 /// The home tab: a swipe deck where each card stays locked until the timer
 /// ring has filled (PRD §6.2).
@@ -138,6 +141,7 @@ class _DeckScreenState extends ConsumerState<DeckScreen>
       }
       return _LimitCard(
         onUndo: deck.canUndo && !_undoing ? _undoFromLimitCard : null,
+        showPremiumNote: !ref.watch(hasPremiumProvider),
       );
     }
 
@@ -222,9 +226,12 @@ class _StreakBadge extends StatelessWidget {
 
 /// Shown once the day's cards are done.
 class _LimitCard extends StatelessWidget {
-  const _LimitCard({required this.onUndo});
+  const _LimitCard({required this.onUndo, required this.showPremiumNote});
 
   final VoidCallback? onUndo;
+
+  /// Free users get one gentle line about Premium (PRD §6.13, `deck_limit`).
+  final bool showPremiumNote;
 
   @override
   Widget build(BuildContext context) {
@@ -239,6 +246,22 @@ class _LimitCard extends StatelessWidget {
             illustrationLabel: l10n.illustrationEmptyDeck,
           ),
         ),
+        if (showPremiumNote) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            child: Text(
+              l10n.deckLimitPremiumNote,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          TextButton(
+            onPressed: () => unawaited(
+              context.push('${AppRoutes.paywall}?source=deck_limit'),
+            ),
+            child: Text(l10n.paywallSeePremium),
+          ),
+        ],
         TextButton.icon(
           onPressed: onUndo,
           icon: const Icon(Icons.undo_rounded),

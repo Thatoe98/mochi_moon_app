@@ -67,6 +67,15 @@ int completedOnDay(List<DeckEvent> history, DateTime now) {
   return history.where((e) => _day(e.at) == today).length;
 }
 
+/// Cards of the local day of [now] that use up the free daily limit: ritual
+/// and deck cards only (PRD §6.2).
+int limitedOnDay(List<DeckEvent> history, DateTime now) {
+  final today = _day(now);
+  return history
+      .where((e) => e.source.countsTowardLimit && _day(e.at) == today)
+      .length;
+}
+
 /// Consecutive local days with at least one completed card or a finished
 /// daily ritual ([ritualDays], local days), ending today. A streak that
 /// reached yesterday stays alive until today ends.

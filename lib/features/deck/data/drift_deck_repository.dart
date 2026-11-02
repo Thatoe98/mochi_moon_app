@@ -23,7 +23,12 @@ class DriftDeckRepository implements DeckRepository {
       _oldestFirst.watch().map((rows) => rows.map(_toEvent).toList());
 
   @override
-  Future<DeckEvent> record(String quoteId, DeckAction action, DateTime at) {
+  Future<DeckEvent> record(
+    String quoteId,
+    DeckAction action,
+    DateTime at, {
+    DeckSource source = DeckSource.deck,
+  }) {
     return _db.transaction(() async {
       final row = await _db
           .into(_db.deckHistory)
@@ -32,6 +37,7 @@ class DriftDeckRepository implements DeckRepository {
               quoteId: quoteId,
               action: action.name,
               at: at,
+              source: Value(source.name),
             ),
           );
       if (action == DeckAction.saved) {
@@ -102,5 +108,6 @@ class DriftDeckRepository implements DeckRepository {
     quoteId: row.quoteId,
     action: DeckAction.values.byName(row.action),
     at: row.at,
+    source: DeckSource.values.asNameMap()[row.source] ?? DeckSource.deck,
   );
 }

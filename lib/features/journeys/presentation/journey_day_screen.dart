@@ -75,7 +75,12 @@ class _DayState extends ConsumerState<_Day> {
   Future<void> _onAction(DeckAction action, Quote quote) async {
     await ref
         .read(deckRepositoryProvider)
-        .record(quote.id, action, ref.read(clockProvider)());
+        .record(
+          quote.id,
+          action,
+          ref.read(clockProvider)(),
+          source: DeckSource.journey,
+        );
     // The card counts toward the streak and the day's limit.
     ref.invalidate(deckProvider);
     if (mounted) setState(() => _position++);

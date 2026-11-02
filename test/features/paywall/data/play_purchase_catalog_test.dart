@@ -22,7 +22,10 @@ class _Verifier implements PurchaseVerifier {
   final tokens = <String>[];
 
   @override
-  Future<bool> verify({required String productId, required String token}) async {
+  Future<bool> verify({
+    required String productId,
+    required String token,
+  }) async {
     tokens.add(token);
     return accept;
   }
@@ -39,16 +42,15 @@ ProductDetails _product(PremiumPlan plan, String price) => ProductDetails(
 
 PurchaseDetails _purchase(PurchaseStatus status, {String token = 'tok'}) {
   return PurchaseDetails(
-      productID: PremiumPlan.monthly.productId,
-      verificationData: PurchaseVerificationData(
-        localVerificationData: token,
-        serverVerificationData: token,
-        source: 'google_play',
-      ),
-      transactionDate: null,
-      status: status,
-    )
-    ..pendingCompletePurchase = true;
+    productID: PremiumPlan.monthly.productId,
+    verificationData: PurchaseVerificationData(
+      localVerificationData: token,
+      serverVerificationData: token,
+      source: 'google_play',
+    ),
+    transactionDate: null,
+    status: status,
+  )..pendingCompletePurchase = true;
 }
 
 PricingPhaseWrapper _phase(int micros, String text) => PricingPhaseWrapper(
@@ -88,12 +90,11 @@ void main() {
 
   tearDown(() => stream.close());
 
-  PlayPurchaseCatalog build(PurchaseVerifier verifier) =>
-      PlayPurchaseCatalog(
-        store: store,
-        verifier: verifier,
-        restoreTimeout: const Duration(milliseconds: 200),
-      )..start();
+  PlayPurchaseCatalog build(PurchaseVerifier verifier) => PlayPurchaseCatalog(
+    store: store,
+    verifier: verifier,
+    restoreTimeout: const Duration(milliseconds: 200),
+  )..start();
 
   test('prices come from the store', () async {
     final catalog = build(_Verifier());
@@ -210,15 +211,18 @@ void main() {
       return GooglePlayProductDetails.fromProductDetails(wrapper);
     }
 
-    test('a trial plan takes the free-start offer and shows the real price', () {
-      final entries = all([
-        [_phase(29990000, r'$29.99')],
-        [_phase(0, 'Free'), _phase(29990000, r'$29.99')],
-      ]);
-      final choice = chooseOffer(entries, trial: true)!;
-      expect(choice.token, 'token-1');
-      expect(choice.price, r'$29.99');
-    });
+    test(
+      'a trial plan takes the free-start offer and shows the real price',
+      () {
+        final entries = all([
+          [_phase(29990000, r'$29.99')],
+          [_phase(0, 'Free'), _phase(29990000, r'$29.99')],
+        ]);
+        final choice = chooseOffer(entries, trial: true)!;
+        expect(choice.token, 'token-1');
+        expect(choice.price, r'$29.99');
+      },
+    );
 
     test('a plan without a trial takes the simplest offer', () {
       final entries = all([
@@ -231,7 +235,12 @@ void main() {
 
     test('no entries means no offer', () {
       expect(chooseOffer(const [], trial: true), isNull);
-      expect(entry([[_phase(1, 'x')]]).offerToken, 'token-0');
+      expect(
+        entry([
+          [_phase(1, 'x')],
+        ]).offerToken,
+        'token-0',
+      );
     });
   });
 }

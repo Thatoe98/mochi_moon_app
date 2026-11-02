@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mochi_moon/core/content/card_of_the_day.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/errors/app_failure.dart';
+import 'package:mochi_moon/core/premium/free_limits.dart';
 import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/auth/application/auth_providers.dart';
 import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
@@ -15,6 +16,7 @@ import 'package:mochi_moon/features/deck/domain/deck_counters.dart';
 import 'package:mochi_moon/features/deck/domain/deck_planner.dart';
 import 'package:mochi_moon/features/deck/domain/deck_repository.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'deck_providers.g.dart';
@@ -90,9 +92,15 @@ DateTime Function() clock(Ref ref) => DateTime.now;
 @Riverpod(keepAlive: true)
 Random random(Ref ref) => Random();
 
-/// Cards per day on the free plan. Premium (M4) overrides this.
+/// New cards a day from the ritual and the deck (PRD §6.2): five on the free
+/// plan, none (null) with Premium. Sample, journey-day and hard-day cards do
+/// not use it up.
 @Riverpod(keepAlive: true)
-int dailyCardLimit(Ref ref) => 10;
+int? dailyCardLimit(Ref ref) =>
+    ref.watch(hasPremiumProvider) ? null : FreeLimits.deckCardsPerDay;
+
+/// Premium has no daily limit; the deck still deals this many cards at a time.
+const premiumDealSize = 50;
 
 /// Today's deck: [cards] is fixed for the session and [position] is how many
 /// of them have been completed.
@@ -168,7 +176,9 @@ class Deck extends _$Deck {
     );
     final pinned = _pinCardOfTheDay(plan, quotes, now);
     final completed = completedOnDay(_history, now);
-    final left = (limit - completed).clamp(0, plan.length);
+    final left = limit == null
+        ? plan.length.clamp(0, premiumDealSize)
+        : (limit - limitedOnDay(_history, now)).clamp(0, plan.length);
     final dealt = [for (final id in pinned.take(left)) byId[id]!];
 
     return DeckState(

@@ -99,6 +99,10 @@ void main() {
               'INSERT INTO profile_cache (id, json, updated_at) '
               '''VALUES (0, '{"displayName":"Mochi"}', 1792000000)''',
             )
+            ..execute(
+              'CREATE TABLE deck_history (id INTEGER PRIMARY KEY AUTOINCREMENT, '
+              'quote_id TEXT NOT NULL, action TEXT NOT NULL, at INTEGER NOT NULL)',
+            )
             ..execute('PRAGMA user_version = 3');
         },
       ),
@@ -158,4 +162,31 @@ void main() {
     expect(await v3.select(v3.ritualDays).get(), hasLength(1));
     expect(await v3.select(v3.ritualProgress).get(), hasLength(1));
   });
+
+  test(
+    'upgrading from version 8 adds the card source and keeps history',
+    () async {
+      final v8 = AppDatabase(
+        NativeDatabase.memory(
+          setup: (raw) {
+            raw
+              ..execute(
+                'CREATE TABLE deck_history (id INTEGER PRIMARY KEY AUTOINCREMENT, '
+                'quote_id TEXT NOT NULL, action TEXT NOT NULL, at INTEGER NOT NULL)',
+              )
+              ..execute(
+                'INSERT INTO deck_history (quote_id, action, at) '
+                "VALUES ('q_0001', 'saved', 1792000000)",
+              )
+              ..execute('PRAGMA user_version = 8');
+          },
+        ),
+      );
+      addTearDown(v8.close);
+
+      final rows = await v8.select(v8.deckHistory).get();
+      expect(rows.single.quoteId, 'q_0001');
+      expect(rows.single.source, 'deck');
+    },
+  );
 }

@@ -27,13 +27,15 @@ class FakeDeckRepository implements DeckRepository {
   Future<DeckEvent> record(
     String quoteId,
     DeckAction action,
-    DateTime at,
-  ) async {
+    DateTime at, {
+    DeckSource source = DeckSource.deck,
+  }) async {
     final event = DeckEvent(
       id: _nextId++,
       quoteId: quoteId,
       action: action,
       at: at,
+      source: source,
     );
     events.add(event);
     _changes.add(null);

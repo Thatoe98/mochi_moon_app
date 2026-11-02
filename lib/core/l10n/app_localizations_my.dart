@@ -78,6 +78,10 @@ class AppLocalizationsMy extends AppLocalizations {
   String get deckLimitTitle => 'တောက်ပနေပြီ ✨';
 
   @override
+  String get deckLimitPremiumNote =>
+      'Premium keeps the deck open all day, whenever you want more.';
+
+  @override
   String get deckLimitBody =>
       'ဒီနေ့အတွက် ကတ်တွေ ဖတ်ပြီးပါပြီ။ နောက်ထပ်ကတ်တွေအတွက် မနက်ဖြန် ပြန်လာခဲ့နော်။';
 

@@ -32,6 +32,9 @@ class DeckHistory extends Table {
   TextColumn get quoteId => text()();
   TextColumn get action => text()();
   DateTimeColumn get at => dateTime()();
+
+  /// Where the card was read (`DeckSource.name`); see PRD §6.2.
+  TextColumn get source => text().withDefault(const Constant('deck'))();
 }
 
 /// Local copy of saved cards ("This is me"), synced with Firestore later.

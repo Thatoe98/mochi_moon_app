@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mochi_moon/app/router.dart';
 import 'package:mochi_moon/core/content/content_providers.dart';
 import 'package:mochi_moon/core/content/quote.dart';
 import 'package:mochi_moon/core/l10n/app_localizations.dart';
@@ -14,6 +16,7 @@ import 'package:mochi_moon/features/deck/presentation/deck_screen.dart';
 import 'package:mochi_moon/features/deck/presentation/quote_card.dart';
 import 'package:mochi_moon/features/mood/application/mood_providers.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 import '../../custom_cards/support/fake_own_cards.dart';
 import '../../mood/support/fake_mood.dart';
@@ -36,6 +39,8 @@ Widget app({
   int limit = 10,
   bool reduceMotion = false,
   double textScale = 1,
+  bool premium = false,
+  GoRouter? router,
 }) => ProviderScope(
   overrides: [
     deckRepositoryProvider.overrideWithValue(repo),
@@ -45,23 +50,48 @@ Widget app({
     clockProvider.overrideWithValue(() => DateTime(2026, 10, 28, 12)),
     randomProvider.overrideWithValue(Random(1)),
     dailyCardLimitProvider.overrideWithValue(limit),
+    hasPremiumProvider.overrideWithValue(premium),
     ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
     quotesProvider.overrideWith(
       (ref) => loadQuotes?.call() ?? Future.value(quotes(3)),
     ),
   ],
-  child: MaterialApp(
-    localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-    builder: (context, child) => MediaQuery(
-      data: MediaQuery.of(context).copyWith(
-        disableAnimations: reduceMotion,
-        textScaler: TextScaler.linear(textScale),
-      ),
-      child: child!,
-    ),
-    home: const DeckScreen(),
+  child: router == null
+      ? MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          builder: (context, child) => _scaled(
+            context,
+            child,
+            reduceMotion: reduceMotion,
+            textScale: textScale,
+          ),
+          home: const DeckScreen(),
+        )
+      : MaterialApp.router(
+          routerConfig: router,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          builder: (context, child) => _scaled(
+            context,
+            child,
+            reduceMotion: reduceMotion,
+            textScale: textScale,
+          ),
+        ),
+);
+
+Widget _scaled(
+  BuildContext context,
+  Widget? child, {
+  required bool reduceMotion,
+  required double textScale,
+}) => MediaQuery(
+  data: MediaQuery.of(context).copyWith(
+    disableAnimations: reduceMotion,
+    textScaler: TextScaler.linear(textScale),
   ),
+  child: child!,
 );
 
 /// Not pumpAndSettle: the ring is an animation and would run out the timer.
@@ -402,6 +432,58 @@ void main() {
         tester.widget<Image>(find.byType(Image)).semanticLabel,
         contains('Mochi the moon bunny'),
       );
+    });
+
+    testWidgets('a free user sees a gentle Premium note and it opens the '
+        'paywall', (tester) async {
+      final opened = <String?>[];
+      final router = GoRouter(
+        routes: [
+          GoRoute(path: '/', builder: (context, state) => const DeckScreen()),
+          GoRoute(
+            path: AppRoutes.paywall,
+            builder: (context, state) {
+              opened.add(state.uri.queryParameters['source']);
+              return const Scaffold(body: Text('paywall'));
+            },
+          ),
+        ],
+      );
+      addTearDown(router.dispose);
+      final repo = FakeDeckRepository();
+      await tester.pumpWidget(app(repo: repo, limit: 1, router: router));
+      await load(tester);
+      await tester.pump(lock);
+      await tester.tap(find.byTooltip('This is me'));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text(
+          'Premium keeps the deck open all day, whenever you want more.',
+        ),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('See Premium'));
+      await tester.pumpAndSettle();
+      expect(opened, ['deck_limit']);
+    });
+
+    testWidgets('a Premium user sees no upsell on the glowing card', (
+      tester,
+    ) async {
+      final repo = FakeDeckRepository([
+        DeckEvent(
+          id: 1,
+          quoteId: 'q0',
+          action: DeckAction.skipped,
+          at: DateTime(2026, 10, 28, 8),
+        ),
+      ]);
+      await tester.pumpWidget(app(repo: repo, limit: 1, premium: true));
+      await tester.pumpAndSettle();
+
+      expect(find.text("You're glowing ✨"), findsOneWidget);
+      expect(find.text('See Premium'), findsNothing);
     });
 
     testWidgets('starts on the glowing card when today is already done', (

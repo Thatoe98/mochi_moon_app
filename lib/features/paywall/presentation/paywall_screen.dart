@@ -86,9 +86,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     // entitlement says she has Premium.
     ref.listen(hasPremiumProvider, (previous, next) {
       if (next && previous == false && context.canPop()) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(l10n.paywallWelcome)));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(l10n.paywallWelcome)));
         context.pop();
       }
     });
@@ -192,10 +191,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             onPressed: _restoring ? null : _restore,
             child: Text(l10n.paywallRestore),
           ),
-          TextButton(
-            onPressed: _manage,
-            child: Text(l10n.paywallManage),
-          ),
+          TextButton(onPressed: _manage, child: Text(l10n.paywallManage)),
           Text(
             l10n.paywallFinePrint,
             style: theme.textTheme.bodySmall,

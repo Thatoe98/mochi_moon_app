@@ -9,6 +9,7 @@ import 'package:mochi_moon/features/custom_cards/application/own_card_providers.
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
 import 'package:mochi_moon/features/mood/domain/mood.dart';
+import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 
 import '../../custom_cards/support/fake_own_cards.dart';
 import '../support/fake_deck_repository.dart';
@@ -21,7 +22,8 @@ void main() {
 
   ProviderContainer makeContainer({
     FakeDeckRepository? repo,
-    int limit = 10,
+    int? limit = 10,
+    bool? premium,
     int quoteCount = 20,
     List<String> sadIds = const [],
     DateTime Function()? clock,
@@ -31,7 +33,8 @@ void main() {
         deckRepositoryProvider.overrideWithValue(repo ?? FakeDeckRepository()),
         clockProvider.overrideWithValue(clock ?? () => now),
         randomProvider.overrideWithValue(Random(1)),
-        dailyCardLimitProvider.overrideWithValue(limit),
+        if (premium == null) dailyCardLimitProvider.overrideWithValue(limit),
+        if (premium != null) hasPremiumProvider.overrideWithValue(premium),
         ownCardRepositoryProvider.overrideWithValue(FakeOwnCardRepository()),
         quotesProvider.overrideWith(
           (ref) async => [
@@ -326,5 +329,83 @@ void main() {
 
     expect(repo.events, hasLength(1));
     expect(container.read(deckProvider).requireValue.isDone, isTrue);
+  });
+
+  group('free daily limit (PRD 6.2)', () {
+    FakeDeckRepository repoWith(Map<DeckSource, int> counts) {
+      final repo = FakeDeckRepository();
+      var id = 0;
+      for (final MapEntry(:key, :value) in counts.entries) {
+        for (var i = 0; i < value; i++) {
+          repo.events.add(
+            DeckEvent(
+              id: ++id,
+              quoteId: 'old${key.name}$i',
+              action: DeckAction.skipped,
+              at: now,
+              source: key,
+            ),
+          );
+        }
+      }
+      return repo;
+    }
+
+    test('a free user gets five cards a day', () async {
+      final container = makeContainer(premium: false);
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards, hasLength(5));
+    });
+
+    test('day one: three sample cards and a full ritual leave two', () async {
+      final container = makeContainer(
+        premium: false,
+        repo: repoWith({DeckSource.sample: 3, DeckSource.ritual: 3}),
+      );
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards, hasLength(2));
+      expect(state.completedToday, 6);
+    });
+
+    test('a journey day card does not use up the limit', () async {
+      final container = makeContainer(
+        premium: false,
+        repo: repoWith({DeckSource.journey: 1}),
+      );
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards, hasLength(5));
+      expect(state.completedToday, 1);
+    });
+
+    test('deck and ritual cards use it up', () async {
+      final container = makeContainer(
+        premium: false,
+        repo: repoWith({DeckSource.deck: 2, DeckSource.ritual: 3}),
+      );
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards, isEmpty);
+      expect(state.isDone, isTrue);
+    });
+
+    test('Premium has no daily limit', () async {
+      final container = makeContainer(
+        premium: true,
+        repo: repoWith({DeckSource.deck: 8}),
+      );
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards, hasLength(20));
+    });
+
+    test('Premium deals at most one batch at a time', () async {
+      final container = makeContainer(premium: true, quoteCount: 120);
+      final state = await container.read(deckProvider.future);
+
+      expect(state.cards, hasLength(premiumDealSize));
+    });
   });
 }

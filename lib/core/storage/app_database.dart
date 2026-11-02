@@ -31,7 +31,7 @@ class AppDatabase extends _$AppDatabase {
     : super(executor ?? driftDatabase(name: 'mochi_moon'));
 
   @override
-  int get schemaVersion => 8;
+  int get schemaVersion => 9;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -50,6 +50,7 @@ class AppDatabase extends _$AppDatabase {
       if (from < 6) await m.createTable(journeyProgressEntries);
       if (from < 7) await m.createTable(futureLetterEntries);
       if (from < 8) await m.createTable(mascotInventory);
+      if (from < 9) await m.addColumn(deckHistory, deckHistory.source);
     },
   );
 }

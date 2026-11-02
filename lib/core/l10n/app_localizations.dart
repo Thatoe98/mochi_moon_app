@@ -188,6 +188,12 @@ abstract class AppLocalizations {
   /// **'You\'re glowing ✨'**
   String get deckLimitTitle;
 
+  /// No description provided for @deckLimitPremiumNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium keeps the deck open all day, whenever you want more.'**
+  String get deckLimitPremiumNote;
+
   /// No description provided for @deckLimitBody.
   ///
   /// In en, this message translates to:
