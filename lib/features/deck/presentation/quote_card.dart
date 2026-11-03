@@ -26,62 +26,93 @@ class QuoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final titleStyle = theme.textTheme.titleLarge;
+    // Room for about one and a half lines of the affirmation, so a short
+    // screen never squeezes the words down to nothing.
+    final lineHeight =
+        MediaQuery.textScalerOf(
+          context,
+        ).scale(titleStyle?.fontSize ?? AppSpacing.lg) *
+        (titleStyle?.height ?? 1.3);
+    final minTextArea = AppSpacing.md * 2 + lineHeight * 1.5;
+
     return Card(
       clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          Expanded(
-            flex: 11,
-            child: QuoteIllustration(
-              category: category,
-              illustrationId: illustrationId,
-            ),
-          ),
-          Expanded(
-            flex: 9,
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              child: Column(
-                children: [
-                  Expanded(
-                    // A long affirmation shrinks to fit rather than hiding words.
-                    child: LayoutBuilder(
-                      builder: (context, constraints) => Center(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: SizedBox(
-                            width: constraints.maxWidth,
-                            child: Text(
-                              text,
-                              style: theme.textTheme.titleLarge,
-                              textAlign: TextAlign.center,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final proportional =
+              constraints.maxHeight * _textShare / (_artShare + _textShare);
+          // The chip only stays when the text keeps its room beside it.
+          final showChip =
+              categoryLabel != null &&
+              proportional >=
+                  minTextArea + AppSpacing.sm + _compactChipHeight;
+          final textArea = proportional < minTextArea
+              ? minTextArea
+              : proportional;
+          return Column(
+            children: [
+              Expanded(
+                child: QuoteIllustration(
+                  category: category,
+                  illustrationId: illustrationId,
+                ),
+              ),
+              SizedBox(
+                height: textArea,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        // A long affirmation shrinks to fit rather than
+                        // hiding words.
+                        child: LayoutBuilder(
+                          builder: (context, textConstraints) => Center(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: SizedBox(
+                                width: textConstraints.maxWidth,
+                                child: Text(
+                                  text,
+                                  style: titleStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                      if (showChip) ...[
+                        const SizedBox(height: AppSpacing.sm),
+                        Chip(
+                          label: Text(categoryLabel!),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: AppRadii.chipRadius,
+                          ),
+                          visualDensity: VisualDensity.compact,
+                          side: BorderSide.none,
+                          backgroundColor: theme.colorScheme.primaryContainer,
+                        ),
+                      ],
+                    ],
                   ),
-                  if (categoryLabel != null) ...[
-                    const SizedBox(height: AppSpacing.sm),
-                    Chip(
-                      label: Text(categoryLabel!),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: AppRadii.chipRadius,
-                      ),
-                      visualDensity: VisualDensity.compact,
-                      side: BorderSide.none,
-                      backgroundColor: theme.colorScheme.primaryContainer,
-                    ),
-                  ],
-                ],
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
 }
+
+// The art and text share the card 11 : 9 when there is room.
+const double _artShare = 11;
+const double _textShare = 9;
+
+// Height of the compact category chip, to decide whether it still fits.
+const double _compactChipHeight = 32;
 
 /// The theme art for a card of [category], with its TalkBack label.
 class QuoteIllustration extends StatelessWidget {
