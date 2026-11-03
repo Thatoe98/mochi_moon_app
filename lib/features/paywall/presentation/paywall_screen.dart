@@ -128,28 +128,55 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
 
     Widget planTile(PremiumPlan plan, String title, String? note) {
       final selected = _selected == plan;
-      final detail = [?note, ?priceOf(plan)].join(' · ');
-      return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-          side: BorderSide(
-            color: selected
-                ? theme.colorScheme.primary
-                : theme.colorScheme.outlineVariant,
-            width: selected ? 2 : 1,
+      final price = priceOf(plan);
+      return Expanded(
+        child: Card(
+          margin: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+            side: BorderSide(
+              color: selected
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.outlineVariant,
+              width: selected ? 2 : 1,
+            ),
           ),
-        ),
-        child: ListTile(
-          selected: selected,
-          minTileHeight: 64,
-          onTap: () => setState(() => _selected = plan),
-          leading: Icon(
-            selected
-                ? Icons.radio_button_checked_rounded
-                : Icons.radio_button_unchecked_rounded,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(24),
+            onTap: () => setState(() => _selected = plan),
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.sm),
+              child: Row(
+                children: [
+                  Icon(
+                    selected
+                        ? Icons.radio_button_checked_rounded
+                        : Icons.radio_button_unchecked_rounded,
+                    color: selected ? theme.colorScheme.primary : null,
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(title, style: theme.textTheme.titleSmall),
+                        if (price != null)
+                          Text(price, style: theme.textTheme.bodySmall),
+                        if (note != null)
+                          Text(
+                            note,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          title: Text(title),
-          subtitle: detail.isEmpty ? null : Text(detail),
         ),
       );
     }
@@ -165,101 +192,191 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          SizedBox(
-            height: 180,
-            child: MochiIllustration(
-              asset: AppIllustrations.onboardingWelcome,
-              semanticLabel: l10n.paywallTitle,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                ),
+                children: [
+                  SizedBox(
+                    height: 110,
+                    child: MochiIllustration(
+                      asset: AppIllustrations.onboardingWelcome,
+                      semanticLabel: l10n.paywallTitle,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    l10n.paywallTitle,
+                    style: theme.textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  for (final benefit in [
+                    l10n.paywallBenefitCards,
+                    l10n.paywallBenefitJourneys,
+                    l10n.paywallBenefitLetter,
+                  ])
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.xs,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.favorite_rounded,
+                            size: 20,
+                            color: theme.colorScheme.primary,
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                          Expanded(
+                            child: Text(
+                              benefit,
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      l10n.paywallAlsoTitle,
+                      style: theme.textTheme.titleSmall,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Wrap(
+                    spacing: AppSpacing.xs,
+                    children: [
+                      for (final benefit in [
+                        l10n.paywallAlsoOwnCards,
+                        l10n.paywallAlsoLetters,
+                        l10n.paywallAlsoMood,
+                        l10n.paywallAlsoQuests,
+                        l10n.paywallAlsoCosmic,
+                        l10n.paywallAlsoChart,
+                        l10n.paywallAlsoCompat,
+                        l10n.paywallAlsoRetro,
+                      ])
+                        Chip(
+                          avatar: const Icon(Icons.check_rounded, size: 16),
+                          label: Text(
+                            benefit,
+                            style: theme.textTheme.bodySmall,
+                          ),
+                          visualDensity: VisualDensity.compact,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                        ),
+                    ],
+                  ),
+                  if (_forReport) ...[
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      l10n.paywallReportNote,
+                      style: theme.textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    OutlinedButton(
+                      onPressed:
+                          reportPrice != null && !_buying ? _buyReport : null,
+                      child: Text(
+                        l10n.paywallReportButton(reportPrice ?? '…'),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            l10n.paywallTitle,
-            style: theme.textTheme.headlineMedium,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          for (final benefit in [
-            l10n.paywallBenefitCards,
-            l10n.paywallBenefitJourneys,
-            l10n.paywallBenefitLetter,
-          ])
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.favorite_rounded),
-              title: Text(benefit),
-            ),
-          const SizedBox(height: AppSpacing.sm),
-          Semantics(
-            header: true,
-            child: Text(
-              l10n.paywallAlsoTitle,
-              style: theme.textTheme.titleMedium,
-            ),
-          ),
-          for (final benefit in [
-            l10n.paywallAlsoOwnCards,
-            l10n.paywallAlsoLetters,
-            l10n.paywallAlsoMood,
-            l10n.paywallAlsoQuests,
-            l10n.paywallAlsoCosmic,
-            l10n.paywallAlsoChart,
-            l10n.paywallAlsoCompat,
-            l10n.paywallAlsoRetro,
-          ])
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              dense: true,
-              leading: const Icon(Icons.check_rounded),
-              title: Text(benefit, style: theme.textTheme.bodyMedium),
-            ),
-          const SizedBox(height: AppSpacing.sm),
-          planTile(PremiumPlan.yearly, l10n.paywallYearly, l10n.paywallTrial),
-          planTile(PremiumPlan.monthly, l10n.paywallMonthly, null),
-          const SizedBox(height: AppSpacing.md),
-          FilledButton(
-            onPressed: canPurchase && !_buying ? _buy : null,
-            child: Text(
-              _selected.hasTrial
-                  ? l10n.paywallStartTrial
-                  : l10n.paywallSubscribe,
-            ),
-          ),
-          if (!canPurchase) ...[
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              l10n.paywallUnavailable,
-              style: theme.textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                AppSpacing.sm,
+                AppSpacing.md,
+                AppSpacing.xs,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        planTile(
+                          PremiumPlan.yearly,
+                          l10n.paywallYearly,
+                          l10n.paywallTrial,
+                        ),
+                        const SizedBox(width: AppSpacing.sm),
+                        planTile(
+                          PremiumPlan.monthly,
+                          l10n.paywallMonthly,
+                          null,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: canPurchase && !_buying ? _buy : null,
+                      child: Text(
+                        _selected.hasTrial
+                            ? l10n.paywallStartTrial
+                            : l10n.paywallSubscribe,
+                      ),
+                    ),
+                  ),
+                  if (!canPurchase)
+                    Padding(
+                      padding: const EdgeInsets.only(top: AppSpacing.xs),
+                      child: Text(
+                        l10n.paywallUnavailable,
+                        style: theme.textTheme.bodySmall,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: TextButton(
+                          onPressed: _restoring ? null : _restore,
+                          child: Text(
+                            l10n.paywallRestore,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: TextButton(
+                          onPressed: _manage,
+                          child: Text(
+                            l10n.paywallManage,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    l10n.paywallFinePrint,
+                    style: theme.textTheme.bodySmall,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ],
-          if (_forReport) ...[
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              l10n.paywallReportNote,
-              style: theme.textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            OutlinedButton(
-              onPressed: reportPrice != null && !_buying ? _buyReport : null,
-              child: Text(l10n.paywallReportButton(reportPrice ?? '…')),
-            ),
-          ],
-          TextButton(
-            onPressed: _restoring ? null : _restore,
-            child: Text(l10n.paywallRestore),
-          ),
-          TextButton(onPressed: _manage, child: Text(l10n.paywallManage)),
-          Text(
-            l10n.paywallFinePrint,
-            style: theme.textTheme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-        ],
+        ),
       ),
     );
   }
