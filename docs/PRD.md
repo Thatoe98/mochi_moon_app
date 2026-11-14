@@ -1057,7 +1057,7 @@ Audit on 2026-10-31: M0–M4 are as ticked above, with the font item unticked. N
 ### M6 — Launch
 - [ ] Content: 500 quotes and 60–100 illustrations in all shipped languages, human-reviewed — *2026-11-02: 500 English quotes are in (84/84/84/83/83/82 over the six categories). Illustrations: the 54 overall ones are enough for launch (owner decision: no more for now; never one per quote). Still open: human review, and Burmese after launch.*
 - [ ] Content for the new features in en and my (th when a reviewer exists): 4 journey scripts, 120 quests, breathing copy, hard-day copy with verified helplines, 24 mascot items, mood icons
-- [ ] Store listing leading with the daily ritual, journeys and affirmations (astrology mentioned after), screenshots in en/my (th later), privacy policy, Data safety form
+- [ ] Store listing leading with the daily ritual, journeys and affirmations (astrology mentioned after), screenshots in en/my (th later), privacy policy, Data safety form. English description drafted in `docs/store_listing.md` (2026-11-14); owner still pastes it into Play Console, then screenshots, policy and Data safety remain.
 - [ ] Closed test with ≥ 15 testers for 14+ days (Google Play requires 12 for 14 days on new personal accounts)
 
 ### Later
