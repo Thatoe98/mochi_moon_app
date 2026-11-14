@@ -7,8 +7,30 @@ import 'package:mochi_moon/core/utils/url_opener.dart';
 import 'package:mochi_moon/features/me/presentation/me_screen.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/paywall/domain/play_links.dart';
+import 'package:mochi_moon/features/review/application/review_providers.dart';
+import 'package:mochi_moon/features/review/domain/review_repositories.dart';
 
-Widget _app({required bool premium, required UrlOpener opener}) {
+class _FakeReviewService implements ReviewService {
+  _FakeReviewService({required this.opens});
+
+  final bool opens;
+  int listingOpened = 0;
+
+  @override
+  Future<void> requestReview() async {}
+
+  @override
+  Future<bool> openStoreListing() async {
+    listingOpened++;
+    return opens;
+  }
+}
+
+Widget _app({
+  required bool premium,
+  required UrlOpener opener,
+  ReviewService? review,
+}) {
   final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (_, _) => const MeScreen()),
@@ -23,6 +45,7 @@ Widget _app({required bool premium, required UrlOpener opener}) {
     overrides: [
       hasPremiumProvider.overrideWithValue(premium),
       urlOpenerProvider.overrideWithValue(opener),
+      if (review != null) reviewServiceProvider.overrideWithValue(review),
     ],
     child: MaterialApp.router(
       routerConfig: router,
@@ -63,6 +86,31 @@ void main() {
     await tester.pumpAndSettle();
     expect(opened, [manageSubscriptionUrl]);
     expect(find.textContaining('PAYWALL'), findsNothing);
+  });
+
+  testWidgets('the Rate row opens the Play listing', (tester) async {
+    tall(tester);
+    final service = _FakeReviewService(opens: true);
+    await tester.pumpWidget(
+      _app(premium: false, opener: (_) async => true, review: service),
+    );
+    await tester.tap(find.text('Rate Mochi Moon'));
+    await tester.pumpAndSettle();
+    expect(service.listingOpened, 1);
+    expect(find.textContaining('could not open Google Play'), findsNothing);
+  });
+
+  testWidgets('the Rate row says so when Play cannot be opened', (
+    tester,
+  ) async {
+    tall(tester);
+    final service = _FakeReviewService(opens: false);
+    await tester.pumpWidget(
+      _app(premium: false, opener: (_) async => true, review: service),
+    );
+    await tester.tap(find.text('Rate Mochi Moon'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('could not open Google Play'), findsOneWidget);
   });
 
   testWidgets('says so when the link cannot be opened', (tester) async {

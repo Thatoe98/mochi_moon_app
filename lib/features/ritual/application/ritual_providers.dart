@@ -6,6 +6,7 @@ import 'package:mochi_moon/core/storage/app_database.dart';
 import 'package:mochi_moon/features/custom_cards/application/own_card_providers.dart';
 import 'package:mochi_moon/features/deck/application/deck_providers.dart';
 import 'package:mochi_moon/features/deck/domain/deck_action.dart';
+import 'package:mochi_moon/features/review/application/review_providers.dart';
 import 'package:mochi_moon/features/ritual/data/drift_ritual_progress_repository.dart';
 import 'package:mochi_moon/features/ritual/domain/ritual_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -125,6 +126,8 @@ class RitualController extends _$RitualController {
     unawaited(
       ref.read(analyticsLoggerProvider).log(AnalyticsEvent.ritualCompleted),
     );
+    // A kind moment to ask for a rating; the policy decides if it is one.
+    unawaited(ref.read(maybeAskForReviewProvider)());
   }
 
   Future<void> _go(RitualState next) async {

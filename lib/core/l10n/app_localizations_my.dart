@@ -1373,6 +1373,17 @@ class AppLocalizationsMy extends AppLocalizations {
       'ဖတ်ရှုချက်တွေ ဘယ်လိုလုပ်ဆောင်လဲ၊ Open-source လိုင်စင်များ';
 
   @override
+  String get meRateTitle => 'Mochi Moon ကို အဆင့်သတ်မှတ်မယ်';
+
+  @override
+  String get meRateSubtitle =>
+      'ကြင်နာတဲ့ review လေးတစ်ခုက တခြားသူတွေလည်း Mochi Moon ကို ရှာတွေ့ဖို့ ကူညီပေးပါတယ်';
+
+  @override
+  String get meRateFailed =>
+      'Google Play ကို ဖွင့်လို့မရပါဘူး။ အဲဒီမှာရှိတဲ့ Mochi Moon စာမျက်နှာကနေ rating ပေးနိုင်ပါတယ်။';
+
+  @override
   String get aboutTitle => 'အကြောင်း';
 
   @override

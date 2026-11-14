@@ -13,6 +13,7 @@ import 'package:mochi_moon/features/cosmic/today/presentation/thai_colors_sectio
 import 'package:mochi_moon/features/me/presentation/widget_theme_section.dart';
 import 'package:mochi_moon/features/paywall/application/entitlement_providers.dart';
 import 'package:mochi_moon/features/paywall/domain/play_links.dart';
+import 'package:mochi_moon/features/review/application/review_providers.dart';
 import 'package:mochi_moon/features/settings/presentation/analytics_section.dart';
 import 'package:mochi_moon/features/settings/presentation/announcements_section.dart';
 import 'package:mochi_moon/features/settings/presentation/reduce_motion_section.dart';
@@ -87,6 +88,24 @@ class MeScreen extends ConsumerWidget {
                 subtitle: Text(l10n.meAboutSubtitle),
                 trailing: const Icon(Icons.chevron_right_rounded),
                 onTap: () => context.push(AppRoutes.about),
+              ),
+              ListTile(
+                minTileHeight: AppSpacing.minTouchTarget,
+                leading: const Icon(Icons.star_rounded),
+                title: Text(l10n.meRateTitle),
+                subtitle: Text(l10n.meRateSubtitle),
+                trailing: const Icon(Icons.chevron_right_rounded),
+                onTap: () async {
+                  final messenger = ScaffoldMessenger.of(context);
+                  final opened = await ref
+                      .read(reviewServiceProvider)
+                      .openStoreListing();
+                  if (!opened) {
+                    messenger.showSnackBar(
+                      SnackBar(content: Text(l10n.meRateFailed)),
+                    );
+                  }
+                },
               ),
             ],
           ),

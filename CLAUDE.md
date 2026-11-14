@@ -50,6 +50,7 @@ Mascot: a moon bunny. Tone: soft, warm, encouraging, never fatalistic.
 | Share | `share_plus` + `RepaintBoundary` image capture |
 | Purchases | `in_app_purchase` (Google Play Billing) |
 | Links | `url_launcher` (open the privacy policy, terms and Play subscription page; owner-approved 2026-11-02) |
+| Ratings | `in_app_review` (MIT; Play in-app review prompt and the Rate row on the Me tab; owner-approved 2026-11-14) |
 | Animation | `lottie` (or `rive` if a feature calls for it) |
 | Localization | `flutter_localizations` + `intl` + ARB files (gen-l10n) |
 | HTTP | `dio` |

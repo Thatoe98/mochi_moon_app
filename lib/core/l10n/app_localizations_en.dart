@@ -1361,6 +1361,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meAboutSubtitle => 'How readings work, and open-source licenses';
 
   @override
+  String get meRateTitle => 'Rate Mochi Moon';
+
+  @override
+  String get meRateSubtitle => 'A kind review helps other girls find her';
+
+  @override
+  String get meRateFailed =>
+      'We could not open Google Play. You can rate Mochi Moon from her page there.';
+
+  @override
   String get aboutTitle => 'About';
 
   @override

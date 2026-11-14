@@ -2360,6 +2360,24 @@ abstract class AppLocalizations {
   /// **'How readings work, and open-source licenses'**
   String get meAboutSubtitle;
 
+  /// No description provided for @meRateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Mochi Moon'**
+  String get meRateTitle;
+
+  /// No description provided for @meRateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A kind review helps other girls find her'**
+  String get meRateSubtitle;
+
+  /// No description provided for @meRateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not open Google Play. You can rate Mochi Moon from her page there.'**
+  String get meRateFailed;
+
   /// No description provided for @aboutTitle.
   ///
   /// In en, this message translates to:
