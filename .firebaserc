@@ -1,6 +1,7 @@
 {
   "projects": {
     "default": "mochi-moon-dev",
-    "dev": "mochi-moon-dev"
+    "dev": "mochi-moon-dev",
+    "prod": "mochi-moon-prod"
   }
 }
